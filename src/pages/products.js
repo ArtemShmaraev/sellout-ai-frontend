@@ -15,12 +15,16 @@ import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
 import {fetchProductsPage} from "@/http/productsApi";
+import {useRouter} from "next/router";
 
-export const getStaticProps = async () => {
-    const products = await fetchProductsPage(1)
+export const getServerSideProps = async (context) => {
+    const page = context.query.page || 1
+    const products = await fetchProductsPage(page)
     return { props: { products } }
 }
 const Products = ({products}) => {
+    const router = useRouter()
+    const page = Number(router.query.page) || 1
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
@@ -71,7 +75,7 @@ const Products = ({products}) => {
                     }
                     <ProductList products={products.results}/>
                 </div>
-                <PageSwitch/>
+                <PageSwitch currentPage={page}/>
                 <BuyoutModal/>
                 <Recommendations/>
                 <Viewed/>

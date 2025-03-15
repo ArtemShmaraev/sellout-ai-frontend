@@ -16,7 +16,9 @@ const ProductList = ({products}) => {
             {/*<ProductCard/>*/}
             {/*<ProductCard/>*/}
             {products.map(el =>
-                <ProductCard model={el.model} key={el.id}/>
+                <ProductCard model={el.model}
+                             brands={el.brands}
+                             key={el.id}/>
             )}
 
         </div>

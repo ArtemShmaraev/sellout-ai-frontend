@@ -8,8 +8,20 @@ import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
 
 
-const ProductCard = ({model}) => {
+const ProductCard = ({model, brands,}) => {
     const [isHovered, setIsHovered] = useState(false);
+    const brandsDisplay = (brands) => {
+        if (!brands) {
+            return 'No brand'
+        }
+        if (brands.length > 1) {
+            let str = ''
+            brands.forEach(el => str += `X ${el.name}`)
+            return str
+        }
+        return brands[0].name
+    }
+
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -36,8 +48,8 @@ const ProductCard = ({model}) => {
                 src={isHovered ? shoe2 : shoe} alt="shoe"/>
             <div className={s.text_block}>
                 <div className={s.tag}>Tag</div>
-                <div className={s.brand}>Brand</div>
-                <div className={s.name}>{model || 'Модель'}</div>
+                <div className={s.brand}>{brandsDisplay(brands)}</div>
+                <div className={s.name}>{model || 'No model'}</div>
                 <div className={s.price}>От 300$</div>
             </div>
         </div>
