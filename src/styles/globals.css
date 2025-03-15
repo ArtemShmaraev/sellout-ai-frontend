@@ -17,3 +17,20 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+.slider {
+    margin-top: 15px;
+    width: 260px;
+    height: 4px;
+    background: #cbcbcb;
+    border-radius: 7px;
+}
+.slider .thumb {
+    width: 20px;
+    height: 20px;
+    cursor: grab;
+    background: #ffffff;
+    border: 2px solid #cbcbcb;
+    outline: none;
+    border-radius: 50px;
+    top: -7px;
+}

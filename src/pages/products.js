@@ -14,9 +14,13 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
+import {fetchProductsPage} from "@/http/productsApi";
 
-
-const Products = () => {
+export const getStaticProps = async () => {
+    const products = await fetchProductsPage(1)
+    return { props: { products } }
+}
+const Products = ({products}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
@@ -65,7 +69,7 @@ const Products = () => {
                     {isOpen &&
                         <FilterDropdowns/>
                     }
-                    <ProductList/>
+                    <ProductList products={products.results}/>
                 </div>
                 <PageSwitch/>
                 <BuyoutModal/>

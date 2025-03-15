@@ -8,7 +8,7 @@ import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
 
 
-const ProductCard = () => {
+const ProductCard = ({model}) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -37,7 +37,7 @@ const ProductCard = () => {
             <div className={s.text_block}>
                 <div className={s.tag}>Tag</div>
                 <div className={s.brand}>Brand</div>
-                <div className={s.name}>Name</div>
+                <div className={s.name}>{model || 'Модель'}</div>
                 <div className={s.price}>От 300$</div>
             </div>
         </div>

@@ -6,8 +6,8 @@ export const Context = createContext(null);
 
 export function AppWrapper({ children }) {
     let sharedState = {
-        desktop: desktopStore,
-        products: productStore,
+        desktopStore,
+        productStore,
     }
     return (
         <Context.Provider value={sharedState}>

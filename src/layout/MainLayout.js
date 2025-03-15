@@ -3,11 +3,11 @@ import {useContext, useEffect} from "react";
 import {Context} from "@/context/AppWrapper";
 
 const MainLayout = ({children}) => {
-    const {desktop} = useContext(Context)
+    const {desktopStore} = useContext(Context)
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1000) {
-            desktop.setIsDesktop(false)
+            desktopStore.setIsDesktop(false)
         }
     }, [])
     return (
