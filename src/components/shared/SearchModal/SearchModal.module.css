@@ -1,0 +1,21 @@
+.toggle_btn {
+    outline: none;
+    background: transparent;
+    border: none;
+    margin: 0 10px;
+}
+.close {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.search_modal {
+    position: absolute;
+    z-index: 5;
+    top: 40px;
+    left: 0;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+}

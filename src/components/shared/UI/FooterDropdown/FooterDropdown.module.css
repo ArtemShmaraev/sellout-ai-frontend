@@ -1,0 +1,12 @@
+.dropdown {
+    margin-bottom: 15px;
+}
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.toggle h4 {
+    font-size: 18px;
+    color: white;
+}

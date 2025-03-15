@@ -1,0 +1,32 @@
+.all {
+    display: flex;
+    flex-direction: column;
+}
+.megamenu {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    width: 100vw;
+    background: white;
+    padding: 30px;
+}
+.h_text {
+    margin-bottom: 20px;
+}
+.img_col {
+    display: flex;
+    flex-direction: column;
+}
+.pic_block {
+    display: flex;
+    justify-content: flex-end;
+}
+.black_area {
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 90vh;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 110px;
+}

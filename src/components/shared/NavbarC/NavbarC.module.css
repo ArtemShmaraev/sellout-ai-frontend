@@ -1,0 +1,58 @@
+.header {
+    background: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 10;
+}
+.row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.block {
+    display: flex;
+    align-items: center;
+}
+.block1 {
+    display: flex;
+    align-items: center;
+    margin-left: -11px;
+}
+.links {
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+    transition: 0.3s;
+}
+.links:hover {
+    color: #8d8d8d;
+}
+.logo {
+    font-size: 40px;
+    transform: translateX(-25%);
+    user-select: none;
+    text-align: center;
+}
+.icons {
+    width: 25px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.name {
+    transform: translateX(10px);
+}
+.truck {
+    margin-left: 5px;
+}
+
+@media (max-width: 1000px) {
+    .logo {
+        font-size: 26px;
+        transform: translateX(0);
+    }
+    .icons {
+        width: 20px;
+    }
+}

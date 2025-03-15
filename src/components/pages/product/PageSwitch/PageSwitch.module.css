@@ -1,0 +1,29 @@
+.container {
+    margin: 20px 0;
+}
+.previous {
+    color: #E6E6E6;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+.previous:hover {
+    color: #E6E6E6;
+}
+.page {
+    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 10px;
+}
+.next {
+    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+.next:hover {
+    color: black;
+}

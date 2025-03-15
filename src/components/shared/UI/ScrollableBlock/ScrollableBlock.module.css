@@ -1,0 +1,56 @@
+.scrollableBlock {
+    position: relative;
+    overflow: hidden;
+}
+
+.scrollableContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+}
+.scrollableContainer::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollableContainer {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.left {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 7px;
+    color: #333;
+    font-size: 24px;
+    left: 0;
+    outline: none;
+}
+
+.right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 7px;
+    color: #333;
+    font-size: 24px;
+    right: 0;
+    outline: none;
+}
+
+@media (max-width: 1000px) {
+    .left, .right {
+        border: none;
+        background: transparent;
+    }
+}

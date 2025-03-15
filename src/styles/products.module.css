@@ -1,0 +1,98 @@
+.border {
+    border: 2px solid #222222;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+}
+.border:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.filter_toggle {
+    border: 2px solid #222222;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.filter_icon {
+    margin-right: 5px;
+    transform: translateY(4px);
+}
+.modal {
+    position: fixed;
+    z-index: 2;
+    top: 50px;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    padding: 15px;
+}
+.modal_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.modal_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.modal_text {
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.number {
+    color: white;
+    background: black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin-right: 10px;
+    line-height: 20px;
+}
+.modal_btn {
+    border: 2px solid #222222;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+}
+.modal_btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.results {
+    width: 100%;
+    background: black;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+    margin-top: 70%;
+}
+@media (max-width: 1000px) {
+    .border, .filter_toggle {
+        border: none;
+    }
+    .modal_btn {
+        padding: 5px;
+        font-size: 14px;
+    }
+}

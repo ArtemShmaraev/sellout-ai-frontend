@@ -1,0 +1,105 @@
+.toggle_btn {
+    outline: none;
+    border: none;
+    background: transparent;
+    margin: 0 10px;
+}
+.list_icon {
+    width: 20px;
+}
+.sidebar {
+    position: absolute;
+    z-index: 6;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    padding: 20px 0 0 0;
+    overflow-y: scroll;
+}
+.sidebar_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+}
+.auth_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 20px;
+    margin-top: 15px;
+    width: 100%;
+}
+.person_block {
+    display: flex;
+    align-items: center;
+}
+.person_icon {
+    width: 20px;
+    margin-right: 10px;
+}
+.section_container {
+    padding: 0 20px;
+}
+.back_btn {
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+.back_icon {
+    transform: rotate(180deg);
+    margin-right: 10px;
+}
+.section_block {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 20px;
+}
+.section_block:hover {
+    background: #e3e3e3;
+}
+.col {
+    margin: 20px 0;
+}
+.truck {
+    margin-left: 7px;
+}
+.sale {
+    color: #b61212;
+}
+.sidebar_footer {
+    background: black;
+    height: 100%;
+    margin-top: 10px;
+    padding: 4px 20px;
+}
+.sidebar h4 {
+    font-size: 18px;
+}
+.sidebar_text {
+    color: #c4c0c0;
+    display: block;
+    margin: 10px 0;
+}
+.sidebar_links{
+    text-decoration: none;
+    color: #c4c0c0;
+    display: block;
+    margin: 10px 0;
+}
+.sidebar_links:hover {
+    color: #9a9999;
+}
+.icons_block {
+    display: flex;
+    margin: 20px 0;
+}
+.icon {
+    width: 30px;
+    margin-right: 50px;
+    cursor: pointer;
+}

@@ -1,0 +1,40 @@
+.dropdown {
+    width: 280px;
+    user-select: none;
+    color: #222222;
+    background: transparent;
+
+}
+.dropdown_toggle {
+    cursor: pointer;
+}
+.dropdown_toggle_text {
+    margin: 5px 5px 5px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hr {
+    border: 1px solid #222222;
+    width: 100%;
+}
+.dropdown_items_block {
+    background: white;
+    width: 280px;
+}
+.dropdown_item {
+    cursor: pointer;
+    background: white;
+    transition: 0.3s;
+    width: 280px;
+}
+.dropdown_item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.dropdown_text {
+    margin: 5px 5px 5px 40px;
+    display: flex;
+}
+.label {
+    color: #222222;
+}

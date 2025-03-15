@@ -1,0 +1,57 @@
+.card {
+    width: 300px;
+    margin: 0 0 0 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.icons_block {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+.sale {
+    background: #E6E6E6;
+    user-select: none;
+    padding: 3px;
+    border-radius: 7px;
+    margin-right: 5px;
+}
+.truck {
+    margin-right: 5px;
+    user-select: none;
+}
+.like {
+    cursor: pointer;
+}
+.img {
+    height: 180px;
+    width: 250px;
+    align-self: center;
+}
+.text_block {
+
+}
+.tag {
+    color: #727272;
+    outline: none;
+    border: none;
+}
+.brand {
+    font-weight: 700;
+    color: #222222;
+    outline: none;
+    border: none;
+}
+.name {
+    color: #222222;
+    outline: none;
+    border: none;
+}
+.price {
+    color: #222222;
+    margin-top: 26px;
+    outline: none;
+    border: none;
+}

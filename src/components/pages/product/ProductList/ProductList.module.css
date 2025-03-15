@@ -1,0 +1,10 @@
+.product_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+@media (max-width: 1000px) {
+    .product_list {
+        justify-content: space-between;
+    }
+}

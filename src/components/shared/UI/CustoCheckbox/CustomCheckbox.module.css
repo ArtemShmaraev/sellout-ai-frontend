@@ -1,0 +1,26 @@
+.checkbox {
+    width: 17px;
+    height: 17px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 700;
+}
+.label {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+}
+.block {
+    display: flex;
+    align-items: center;
+}
+.color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    margin-right: 5px;
+}

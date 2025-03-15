@@ -1,0 +1,23 @@
+.toggle_btn {
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    background: transparent;
+    font-size: 16px;
+    color: #727272;
+    transition: 0.3s;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+.toggle_btn:hover {
+    color: #444444;
+}
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+.icon {
+    margin: 0 10px;
+    width: 20px;
+}
