@@ -12,6 +12,6 @@ export async function fetchProductsPage(query) {
         }
     })
     console.log(allQuery)
-    const {data} = await $host.get(`product?${allQuery}`)
+    const {data} = await $host.get(`product/products/?${allQuery}`)
     return data
 }

@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import s from '../styles/products.module.css'
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
@@ -16,6 +16,7 @@ import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
 import {fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
+import {Context} from "@/context/AppWrapper";
 
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
@@ -28,7 +29,9 @@ const Products = ({products}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
+    const {filterStore} = useContext(Context)
     useEffect(() => {
+        filterStore.dfsPath(filterStore.filters, [])
         const width = window.innerWidth
         if (width <= 1000) {
             setIsDesktop(false)

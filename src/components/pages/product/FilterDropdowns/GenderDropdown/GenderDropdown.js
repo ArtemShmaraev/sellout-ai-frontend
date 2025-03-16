@@ -14,40 +14,23 @@ const GenderDropdown = () => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-    const handleClick = (item) => {
-        item[2] = !item[2]
+    const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
         if (query.gender) {
             delete query.gender
         }
-        if (filterStore.checkedGenders.length > 1) {
-            query.gender = [...filterStore.checkedGenders]
+        if (filterStore.checkedGendersQuery.length > 1) {
+            query.gender = [...filterStore.checkedGendersQuery]
         } else {
-            query.gender = filterStore.checkedGenders[0]
+            query.gender = filterStore.checkedGendersQuery[0]
         }
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
-    const getNewAddress1 = () => {
-        const currentAddress = router.asPath
-        const regex1 = /price_min=\d+/g
-        const regex2 = /price_max=\d+/g
-        let newAddress = currentAddress
-        if (newAddress.includes('price_min')) {
-            newAddress = newAddress.replace(regex1, `price_min=${filterStore.price[0]}`)
-        } else {
-            newAddress += `&price_min=${filterStore.price[0]}&`
-        }
-        if (newAddress.includes('price_max')) {
-            newAddress = newAddress.replace(regex2, `price_max=${filterStore.price[1]}`)
-        } else {
-            newAddress += `price_max=${filterStore.price[1]}&`
-        }
-        if (!newAddress.includes('products?')){
-            newAddress = newAddress.replace('products', 'products?page=1&')
-        }
-        return newAddress
+    const handleClick = (item) => {
+        filterStore.toggleFilter(item)
+        reloadPage()
     }
     return (
         <div>
@@ -70,7 +53,7 @@ const GenderDropdown = () => {
                         {
                             filterStore.gender.map(item =>
                                 <div
-                                    key={item[0]}
+                                    key={item.query}
                                     className={s.dropdown_item}
                                 >
                                     <div className={s.dropdown_text} onClick={(e) => {
@@ -78,8 +61,8 @@ const GenderDropdown = () => {
                                         handleClick(item)
                                     }}>
                                         <CustomCheckbox
-                                            labelText={item[0]}
-                                            checked={item[2]}
+                                            labelText={item.text}
+                                            checked={item.state}
                                         />
                                     </div>
                                 </div>

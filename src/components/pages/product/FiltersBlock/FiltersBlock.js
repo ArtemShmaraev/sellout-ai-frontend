@@ -1,60 +1,46 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import s from './FiltersBlock.module.css'
 import ScrollableBlock2 from "@/components/shared/UI/ScrollableBlock2/ScrollableBlock2";
+import {Context} from "@/context/AppWrapper";
+import close from '@/static/icons/x-lg.svg'
+import Image from "next/image";
+import {observer} from "mobx-react-lite";
+import {useRouter} from "next/router";
 
 const FiltersBlock = () => {
+    const {filterStore} = useContext(Context)
+    const router = useRouter()
+    const reloadPage = () => {
+        const {pathname} = router
+        const query = {...router.query}
+        if (query.gender) {
+            delete query.gender
+        }
+        if (filterStore.checkedGendersQuery.length > 1) {
+            query.gender = [...filterStore.checkedGendersQuery]
+        } else {
+            query.gender = filterStore.checkedGendersQuery[0]
+        }
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
+    }
     return (
         <ScrollableBlock2>
-            <div className={s.border}>Big <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div className={s.border}>Small <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div className={s.border}>Cock <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div className={s.border}>Big <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div className={s.border}>Small <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div className={s.border}>Cock <span className={s.cross}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         className="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
-                </span>
-            </div>
+            {filterStore.activeFilters.map(el =>
+                <div className={s.border}>
+                    {el.text}
+                    <span className={s.cross}>
+                        <Image src={close} alt=''
+                               onClick={() => {
+                                   filterStore.toggleFilter(el)
+                                   reloadPage()
+                               }}
+                        />
+                    </span>
+                </div>
+            )}
         </ScrollableBlock2>
     );
 };
 
-export default FiltersBlock;
+export default observer(FiltersBlock);
