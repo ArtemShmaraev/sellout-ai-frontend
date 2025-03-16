@@ -33,6 +33,7 @@ const Products = ({products, categories}) => {
     const {filterStore} = useContext(Context)
     useEffect(() => {
         filterStore.dfsPath(filterStore.filters, [])
+        filterStore.fillCat(categories)
         const width = window.innerWidth
         if (width <= 1000) {
             setIsDesktop(false)

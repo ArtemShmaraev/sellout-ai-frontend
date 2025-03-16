@@ -59,10 +59,37 @@ class FilterStore {
     }
     fillCategories(categories) {
         categories.forEach(el => this.dfsCategory(el, this.filters.category))
+        console.log(this.filters.category)
     }
-   findPath(d, path = []) {
-
+    dfsCategory(node, level) {
+        if (node.hasOwnProperty('subcategories')) {
+            node.subcategories.forEach(el => {
+                console.log(el.name)
+                level[node.name] = this.dfsCategory(el, level[el.name])
+            })
+        }
+        return {
+            text: node.name,
+            state: false
+        }
    }
+   fillCat(categories) {
+        this.cat_dfs(this.filters.category, categories)
+        console.log(this.filters.category)
+   }
+    cat_dfs(d, node) {
+        for (let cat of node) {
+            if ("subcategories" in cat) {
+                d[cat["name"]] = {};
+                this.cat_dfs(d[cat["name"]], cat["subcategories"]);
+            } else {
+                d[cat["name"]] = {};
+                d[cat["name"]]["text"] = cat["name"];
+                d[cat["name"]]["query"] = cat["name"];
+                d[cat["name"]]["status"] = false;
+            }
+        }
+    }
     get gender() {
         const arr = []
         for (const key in this.filters.gender) {
