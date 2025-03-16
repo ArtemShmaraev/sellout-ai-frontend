@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import s from './ShoesDropdown.module.css'
+import s from './SubcategoryDropdown.module.css'
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
-const ShoesDropdown = () => {
+const SubcategoryDropdown = () => {
     const categories = [
         'Adidas',
         'Nike',
@@ -68,4 +68,4 @@ const ShoesDropdown = () => {
     )
 };
 
-export default ShoesDropdown;
+export default SubcategoryDropdown;

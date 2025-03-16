@@ -14,15 +14,16 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
-import {fetchProductsPage} from "@/http/productsApi";
+import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
-    return { props: { products } }
+    const categories = await fetchFilter('tree_cat')
+    return { props: {products, categories} }
 }
-const Products = ({products}) => {
+const Products = ({products, categories}) => {
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const totalProducts = Number(products.count) || 1

@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 class FilterStore {
     constructor() {
         this._allFilters = {
+            category: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -56,6 +57,12 @@ class FilterStore {
             this._activeFilters.splice(ind, 1)
         }
     }
+    fillCategories(categories) {
+        categories.forEach(el => this.dfsCategory(el, this.filters.category))
+    }
+   findPath(d, path = []) {
+
+   }
     get gender() {
         const arr = []
         for (const key in this.filters.gender) {

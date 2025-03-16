@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './CategoryDropdown.module.css'
-import ShoesDropdown from "./ShoesDropdown/ShoesDropdown";
+import SubcategoryDropdown from "@/components/pages/product/FilterDropdowns/CategoryDropdown/SubcategoryDropdown/SubcategoryDropdown";
 import Arrow from '@/components/shared/UI/Arrow/Arrow';
 
 const CategoryDropdown = () => {
@@ -43,7 +43,7 @@ const CategoryDropdown = () => {
                                     key={item}
                                     className={s.dropdown_item}
                                 >
-                                    <ShoesDropdown/>
+                                    <SubcategoryDropdown/>
                                 </div>
                             )
                         }

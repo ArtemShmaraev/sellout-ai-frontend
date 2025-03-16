@@ -15,3 +15,7 @@ export async function fetchProductsPage(query) {
     const {data} = await $host.get(`product/products/?${allQuery}`)
     return data
 }
+export async function fetchFilter(filter) {
+    const {data} = await $host.get(`product/${filter}`)
+    return data
+}
