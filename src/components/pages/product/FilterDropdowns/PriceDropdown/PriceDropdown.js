@@ -15,31 +15,21 @@ const PriceDropdown = () => {
     const {filterStore} = useContext(Context)
     const handleFrom = (e) => {
         filterStore.setPriceFrom(e.target.value)
-        router.push(getNewAddress(), undefined, {scroll: false})
+        const {pathname} = router
+        const query = {...router.query}
+        query.price_min = filterStore.price[0]
+        query.price_max = filterStore.price[1]
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
     }
     const handleTo = (e) => {
         filterStore.setPriceTo(e.target.value)
-        router.push(getNewAddress(), undefined, {scroll: false})
-    }
-    const getNewAddress = () => {
-        const currentAddress = router.asPath
-        const regex1 = /price_min=\d+/g
-        const regex2 = /price_max=\d+/g
-        let newAddress = currentAddress
-        if (newAddress.includes('price_min')) {
-            newAddress = newAddress.replace(regex1, `price_min=${filterStore.price[0]}`)
-        } else {
-            newAddress += `&price_min=${filterStore.price[0]}&`
-        }
-        if (newAddress.includes('price_max')) {
-            newAddress = newAddress.replace(regex2, `price_max=${filterStore.price[1]}`)
-        } else {
-            newAddress += `price_max=${filterStore.price[1]}&`
-        }
-        if (!newAddress.includes('products?')){
-            newAddress = newAddress.replace('products', 'products?page=1&')
-        }
-        return newAddress
+        const {pathname} = router
+        const query = {...router.query}
+        query.price_min = filterStore.price[0]
+        query.price_max = filterStore.price[1]
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
     }
     return (
         <div>

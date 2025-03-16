@@ -5,6 +5,7 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
+import products from "@/pages/products";
 
 const GenderDropdown = () => {
     const {filterStore} = useContext(Context)
@@ -15,15 +16,18 @@ const GenderDropdown = () => {
     };
     const handleClick = (item) => {
         item[2] = !item[2]
-        router.push(getNewAddress(), undefined, {scroll: false})
-    }
-    const getNewAddress = () => {
-        const checked = filterStore.checkedGenders
-        let newAddress = router.asPath
-        for (let i = 0; i < checked.length; i++) {
-            newAddress += `&gender=${checked[i]}`
+        const {pathname} = router
+        const query = {...router.query}
+        if (query.gender) {
+            delete query.gender
         }
-        return newAddress
+        if (filterStore.checkedGenders.length > 1) {
+            query.gender = [...filterStore.checkedGenders]
+        } else {
+            query.gender = filterStore.checkedGenders[0]
+        }
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
     }
     const getNewAddress1 = () => {
         const currentAddress = router.asPath

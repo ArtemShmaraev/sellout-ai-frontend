@@ -14,14 +14,20 @@ const PageSwitch = ({currentPage, totalProducts}) => {
         e.preventDefault()
         e.stopPropagation()
         if (currentPage !== 1) {
-            router.push(`/products?page=${currentPage-1}&${filterStore.getAllQuery(router)}`)
+            const {pathname} = router
+            const query = {...router.query}
+            query.page = currentPage-1
+            router.push({pathname, query}, undefined, {scroll: false})
         }
     }
     const nextPage = (e) => {
         e.preventDefault()
         e.stopPropagation()
         if (currentPage < getTotalPages(totalProducts)) {
-            router.push(`/products?page=${currentPage+1}&${filterStore.getAllQuery(router)}`)
+            const {pathname} = router
+            const query = {...router.query}
+            query.page = currentPage+1
+            router.push({pathname, query}, undefined, {scroll: false})
         }
     }
     return (
