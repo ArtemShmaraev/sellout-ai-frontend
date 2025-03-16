@@ -23,6 +23,7 @@
     width: 280px;
 }
 .dropdown_item {
+    padding: 5px 0;
     cursor: pointer;
     background: white;
     transition: 0.3s;

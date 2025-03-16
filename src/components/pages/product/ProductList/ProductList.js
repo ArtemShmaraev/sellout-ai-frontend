@@ -18,6 +18,7 @@ const ProductList = ({products}) => {
             {products.map(el =>
                 <ProductCard model={el.model}
                              brands={el.brands}
+                             colorway={el.colorway}
                              key={el.id}/>
             )}
 

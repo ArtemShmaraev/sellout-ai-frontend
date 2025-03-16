@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './CustomCheckbox.module.css'
 
 const CustomCheckbox = ({reversed = false,
@@ -9,7 +9,6 @@ const CustomCheckbox = ({reversed = false,
                             checked = false,
 }
 ) => {
-    const [isChecked, setIsChecked] = useState(checked)
     return (
         <div
             className={s.block}
@@ -17,10 +16,9 @@ const CustomCheckbox = ({reversed = false,
         >
             <div
                 className={s.checkbox}
-                onClick={() => setIsChecked(!isChecked)}
 
             >
-                {isChecked &&
+                {checked &&
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          className="bi bi-check-lg" viewBox="0 0 16 16">
                         <path
@@ -29,7 +27,6 @@ const CustomCheckbox = ({reversed = false,
                 }
             </div>
             <div
-                onClick={() => setIsChecked(!isChecked)}
                 className={`${s.label} ${labelClass}`}
             >
                 {

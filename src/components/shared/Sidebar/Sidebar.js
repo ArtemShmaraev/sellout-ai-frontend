@@ -133,9 +133,9 @@ const Sidebar = () => {
                         <div className={s.col}>
                             <h4 className='text-white'>Мы в социальных сетях:</h4>
                             <div className={s.icons_block}>
-                                <Image src={tg} alt="" className={s.icon}/>
-                                <Image src={tg} alt="" className={s.icon}/>
-                                <Image src={tg} alt="" className={s.icon}/>
+                                <Image src={tg} width={30} alt="" className={s.icon}/>
+                                <Image src={tg} width={30} alt="" className={s.icon}/>
+                                <Image src={tg} width={30} alt="" className={s.icon}/>
                             </div>
                         </div>
                         <div className={s.col}>

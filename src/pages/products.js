@@ -18,13 +18,13 @@ import {fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
-    const page = context.query.page || 1
-    const products = await fetchProductsPage(page)
+    const products = await fetchProductsPage(context.query)
     return { props: { products } }
 }
 const Products = ({products}) => {
     const router = useRouter()
     const page = Number(router.query.page) || 1
+    const totalProducts = Number(products.count) || 1
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
@@ -75,7 +75,7 @@ const Products = ({products}) => {
                     }
                     <ProductList products={products.results}/>
                 </div>
-                <PageSwitch currentPage={page}/>
+                <PageSwitch currentPage={page} totalProducts={totalProducts}/>
                 <BuyoutModal/>
                 <Recommendations/>
                 <Viewed/>

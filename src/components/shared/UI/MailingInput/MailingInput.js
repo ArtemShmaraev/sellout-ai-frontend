@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import s from './MailingInput.module.css'
-import icon from "../../static/icons/arrow-right.svg";
+import icon from "@/static/icons/arrow-right.svg";
+import Image from 'next/image'
 
 const MailingInput = () => {
     const [email, setEmail] = useState('');
@@ -24,7 +25,7 @@ const MailingInput = () => {
                     placeholder='Ваш e-mail'
                     className={s.mailing}
                 />
-                <img
+                <Image
                     className={s.icon}
                     src={icon}
                     alt="search"

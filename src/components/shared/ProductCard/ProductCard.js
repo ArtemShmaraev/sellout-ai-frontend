@@ -8,15 +8,17 @@ import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
 
 
-const ProductCard = ({model, brands,}) => {
+const ProductCard = ({model, brands, colorway}) => {
     const [isHovered, setIsHovered] = useState(false);
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
         }
         if (brands.length > 1) {
-            let str = ''
-            brands.forEach(el => str += `X ${el.name}`)
+            let str = brands[0].name
+            for (let i = 1; i < brands.length; i++) {
+                str += ` x ${brands[i].name}`
+            }
             return str
         }
         return brands[0].name
@@ -47,9 +49,9 @@ const ProductCard = ({model, brands,}) => {
                 className={s.img}
                 src={isHovered ? shoe2 : shoe} alt="shoe"/>
             <div className={s.text_block}>
-                <div className={s.tag}>Tag</div>
-                <div className={s.brand}>{brandsDisplay(brands)}</div>
-                <div className={s.name}>{model || 'No model'}</div>
+                <div className={s.tag}>{brandsDisplay(brands)}</div>
+                <div className={s.brand}>{model || 'No model'}</div>
+                <div className={s.name}>{colorway}</div>
                 <div className={s.price}>От 300$</div>
             </div>
         </div>
