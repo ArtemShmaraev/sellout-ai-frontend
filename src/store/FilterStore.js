@@ -44,6 +44,11 @@ class FilterStore {
             }
         }
         this.dfsPath(this.filters, [])
+        this._activeFilters = this._activeFilters.filter((obj, index) => {
+            return this._activeFilters.findIndex((o) => {
+                return JSON.stringify(o) === JSON.stringify(obj);
+            }) === index;
+        });
     }
     dfsActivate(d, queryValue) {
         if (!d.hasOwnProperty('query')) {
@@ -100,6 +105,15 @@ class FilterStore {
             }
         }
     }
+    get checkedCategory() {
+        const checkedCat = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'category') {
+                checkedCat.push(this.activeFilters[key].query)
+            }
+        }
+        return checkedCat
+    }
     get gender() {
         const arr = []
         for (const key in this.filters.gender) {
@@ -128,24 +142,6 @@ class FilterStore {
     get price() {
         return this._allFilters.price
     }
-    setActiveFilters() {
-        const activeFilters = []
-
-        this.gender.forEach(el => {
-            if (el[2]) {
-                activeFilters.push(el)
-            }
-        })
-
-        this._activeFilters = activeFilters
-    }
-    removeActiveFilter(filter) {
-        const type = filter[3][0]
-        const position = filter[3][1]
-        this._allFilters[type][position][2] = false
-        this.setActiveFilters()
-    }
-
 }
 
 export const filterStore = new FilterStore()

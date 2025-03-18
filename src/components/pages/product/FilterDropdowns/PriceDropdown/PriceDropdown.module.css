@@ -1,5 +1,5 @@
 .dropdown {
-    width: 280px;
+    width: 300px;
     user-select: none;
     color: #222222;
     background: transparent;
@@ -20,7 +20,7 @@
 }
 .dropdown_items_block {
     background: white;
-    width: 280px;
+    width: 300px;
 }
 .dropdown_item {
     cursor: pointer;

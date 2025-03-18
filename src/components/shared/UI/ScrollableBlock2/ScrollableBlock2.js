@@ -1,11 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './ScrollableBlock2.module.css'
+import {Context} from "@/context/AppWrapper";
 
 const ScrollableBlock2 = ({children}) => {
     const [isShown, setIsShown] = useState(false)
     const scrollableContainerRef = useRef(null);
     const [scroll, setIsScroll] = useState(400)
-
+    const {filterStore} = useContext(Context)
     useEffect(() => {
         if (window.innerWidth <= 1000) {
             setIsScroll(100)
@@ -14,7 +15,7 @@ const ScrollableBlock2 = ({children}) => {
             const { scrollWidth, clientWidth } = scrollableContainerRef.current;
             setIsShown(scrollWidth > clientWidth);
         }
-    }, []);
+    }, [filterStore.activeFilters]);
 
     const scrollLeft = () => {
         if (scrollableContainerRef.current) {

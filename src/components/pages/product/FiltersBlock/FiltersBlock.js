@@ -21,6 +21,14 @@ const FiltersBlock = () => {
         } else {
             query.gender = filterStore.checkedGendersQuery[0]
         }
+        if (query.category) {
+            delete query.category
+        }
+        if (filterStore.checkedCategory.length > 1) {
+            query.category = [...filterStore.checkedCategory]
+        } else {
+            query.category = filterStore.checkedCategory[0]
+        }
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

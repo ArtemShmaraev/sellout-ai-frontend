@@ -1,0 +1,28 @@
+.dropdown_toggle {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 7px 0;
+}
+.dropdown_toggle:hover {
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0.05);
+}
+.dropdown_toggle_text {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.dropdown_item {
+    margin: 5px;
+    cursor: pointer;
+    padding: 7px 0;
+}
+.dropdown_item:hover {
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0.05);
+}
+.dropdown_item_text {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}

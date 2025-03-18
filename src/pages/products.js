@@ -50,7 +50,6 @@ const Products = ({products, categories}) => {
     return (
         <MainLayout>
             <Container style={{marginTop: '150px'}}>
-                <Dropdown/>
                 <BigPicture/>
                 <BreadcrumbC/>
                 {isDesktop && <Row className='d-flex justify-content-lg-between align-items-center'>

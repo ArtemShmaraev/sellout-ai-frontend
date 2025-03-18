@@ -1,9 +1,8 @@
 .dropdown {
-    width: 280px;
     user-select: none;
     color: #222222;
     background: transparent;
-
+    width: 300px;
 }
 .dropdown_toggle {
     cursor: pointer;
@@ -19,22 +18,4 @@
     transition: 0.3s;
     background: rgba(0, 0, 0, 0.05);
 }
-.hr {
-    border: 1px solid #222222;
-    width: 100%;
-}
-.dropdown_items_block {
-    background: white;
-    width: 280px;
-}
-.dropdown_item {
-    cursor: pointer;
-    background: white;
-    transition: 0.3s;
-}
-.dropdown_item:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
-.dropdown_text {
-    margin: 5px 5px 5px 20px;
-}
+
