@@ -1,5 +1,7 @@
 import React, {useRef} from 'react';
 import s from './ScrollableBlock.module.css'
+import arrow from '@/static/icons/chevron-right.svg'
+import Image from "next/image";
 
 const ScrollableBlock = ({children}) => {
     const scrollableContainerRef = useRef(null);
@@ -25,13 +27,13 @@ const ScrollableBlock = ({children}) => {
     return (
         <div className={s.scrollableBlock}>
             <button className={s.left} onClick={scrollLeft}>
-                &lt;
+                <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
             </button>
             <div className={s.scrollableContainer} ref={scrollableContainerRef}>
                 {children}
             </div>
             <button className={s.right} onClick={scrollRight}>
-                &gt;
+                <Image src={arrow} alt=''/>
             </button>
         </div>
     );

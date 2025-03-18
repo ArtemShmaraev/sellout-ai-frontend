@@ -3,8 +3,8 @@ import {makeAutoObservable} from "mobx";
 class FilterStore {
     constructor() {
         this._allFilters = {
-            categories: {},
-            lines: {},
+            category: {},
+            line: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -36,7 +36,7 @@ class FilterStore {
     deactivateFilters(d) {
         for (const key in d) {
             if (d.hasOwnProperty('state')) {
-                d[key] = false
+                d['state'] = false
             } else {
                 this.deactivateFilters(d[key])
             }
@@ -101,7 +101,7 @@ class FilterStore {
         }
     }
    fillCat(categories) {
-        this.cat_dfs(this.filters.categories, categories)
+        this.cat_dfs(this.filters.category, categories)
    }
     cat_dfs(d, node) {
         for (let cat of node) {
@@ -111,7 +111,7 @@ class FilterStore {
             } else {
                 d[cat["name"]] = {};
                 d[cat["name"]]["text"] = cat["name"];
-                d[cat["name"]]["query"] = cat["name"];
+                d[cat["name"]]["query"] = cat["eng_name"];
                 d[cat["name"]]["state"] = false;
             }
         }
@@ -119,14 +119,14 @@ class FilterStore {
     get checkedCategory() {
         const checkedCat = []
         for (const key in this.activeFilters) {
-            if (this.activeFilters[key].path[0] === 'categories') {
+            if (this.activeFilters[key].path[0] === 'category') {
                 checkedCat.push(this.activeFilters[key].query)
             }
         }
         return checkedCat
     }
     fillLines(lines) {
-        this.line_dfs(this.filters.lines, lines)
+        this.line_dfs(this.filters.line, lines)
     }
     line_dfs(d, node) {
         for (let line of node) {
@@ -136,7 +136,7 @@ class FilterStore {
             } else {
                 d[line["name"]] = {};
                 d[line["name"]]["text"] = line["name"];
-                d[line["name"]]["query"] = line["name"];
+                d[line["name"]]["query"] = line["eng_name"];
                 d[line["name"]]["state"] = false;
             }
         }
@@ -144,7 +144,7 @@ class FilterStore {
     get checkedLine() {
         const checkedCat = []
         for (const key in this.activeFilters) {
-            if (this.activeFilters[key].path[0] === 'lines') {
+            if (this.activeFilters[key].path[0] === 'line') {
                 checkedCat.push(this.activeFilters[key].query)
             }
         }

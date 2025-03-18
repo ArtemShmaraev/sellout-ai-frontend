@@ -3,6 +3,15 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+.nothing {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 22px;
+}
 @media (max-width: 1000px) {
     .product_list {
         justify-content: space-between;

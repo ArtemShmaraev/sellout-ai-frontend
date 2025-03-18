@@ -16,7 +16,7 @@ const NavbarC = () => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
-        if (width <= 1000) {
+        if (width <= 1200) {
             setIsDesktop(false)
         }
     }, [isDesktop])

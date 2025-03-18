@@ -17,7 +17,6 @@ import Image from "next/image";
 import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
-import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
 import {observer} from "mobx-react-lite";
 
 export const getServerSideProps = async (context) => {
@@ -39,7 +38,7 @@ const Products = ({products, categories, lines}) => {
         filterStore.fillLines(lines)
         filterStore.reactivateFilters(router.query)
         const width = window.innerWidth
-        if (width <= 1000) {
+        if (width <= 1200) {
             setIsDesktop(false)
         }
     }, [isDesktop])
@@ -50,17 +49,29 @@ const Products = ({products, categories, lines}) => {
             setModalOpen(!modalOpen)
         }
     }
+    const clearFilters = () => {
+        filterStore.deactivateFilters(filterStore.filters)
+        router.push('/products')
+    }
     return (
         <MainLayout>
             <Container style={{marginTop: '150px'}}>
                 <BigPicture/>
                 <BreadcrumbC/>
-                {isDesktop && <Row className='d-flex justify-content-lg-between align-items-center'>
+                {isDesktop && <Row className={s.filter_sort_row}>
                     <Col lg={10} className='d-flex'>
                         <button className={s.border + ' fw-bold'}
                                 onClick={() => setIsOpen(!isOpen)}
                         >Фильтры
                         </button>
+                        {filterStore.activeFilters.length !== 0 &&
+                            <button
+                                className={s.border}
+                                onClick={clearFilters}
+                            >
+                                Сбросить фильтры
+                            </button>
+                        }
                         <FiltersBlock/>
                     </Col>
                     <Col lg={2} className='mt-lg-0 mt-2 d-flex justify-content-lg-end'>
@@ -78,7 +89,7 @@ const Products = ({products, categories, lines}) => {
                         <SortDropdown/>
                     </div>
                 }
-                <div className='d-flex mt-5'>
+                <div className={s.product_list_row}>
                     {isOpen &&
                         <FilterDropdowns/>
                     }
@@ -101,7 +112,7 @@ const Products = ({products, categories, lines}) => {
                                         <div className={s.number}>{filterStore.activeFilters.length}</div>
                                     </div>
                                     <button className={s.modal_btn}
-                                            onClick={() => filterStore.deactivateFilters(filterStore.filters)}
+                                            onClick={clearFilters}
                                     >Сбросить все</button>
                                 </div>
                                 <svg onClick={handleClick}

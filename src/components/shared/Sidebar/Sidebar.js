@@ -32,7 +32,7 @@ const Sidebar = () => {
                     <AuthModal>
                         <div className={s.auth_block}>
                             <div className={s.person_block}>
-                                <Image src={person} alt="" className={s.person_icon}/>
+                                <Image width={25} src={person} alt="" className={s.person_icon}/>
                                 <div>Denis</div>
                             </div>
                             <div>

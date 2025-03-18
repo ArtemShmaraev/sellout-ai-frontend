@@ -7,6 +7,7 @@
     cursor: pointer;
     outline: none;
     transition: 0.3s;
+    white-space: nowrap;
 }
 .border:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -29,14 +30,30 @@
     margin-right: 5px;
     transform: translateY(4px);
 }
+.filter_sort_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 110px;
+    z-index: 6;
+}
+.product_list_row {
+    display: flex;
+    position: relative;
+}
 .modal {
     position: fixed;
-    z-index: 2;
+    z-index: 7;
     top: 50px;
+    left: 0;
     background: white;
     width: 100vw;
     height: 100vh;
-    padding: 15px;
+    padding: 15px 15px 150px 15px;
+    overflow-y: scroll;
 }
 .modal_container {
     display: flex;
@@ -78,7 +95,7 @@
     background: rgba(0, 0, 0, 0.05);
 }
 .results {
-    width: 100%;
+    width: 90%;
     background: black;
     color: white;
     outline: none;
@@ -86,6 +103,8 @@
     padding: 10px;
     border-radius: 7px;
     margin-top: 70%;
+    position: fixed;
+    bottom: 20px;
 }
 @media (max-width: 1000px) {
     .border, .filter_toggle {

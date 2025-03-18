@@ -44,7 +44,7 @@ const BrandDropdown = () => {
                             </div>
                         </div>
                     </div>
-                    <Dropdown filter={filterStore.filters.lines} />
+                    <Dropdown filter={filterStore.filters.line} />
                 </div>
             )}
         </div>

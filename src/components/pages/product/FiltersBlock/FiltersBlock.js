@@ -25,23 +25,23 @@ const FiltersBlock = () => {
         }
 
 
-        if (query.categories) {
-            delete query.categories
+        if (query.category) {
+            delete query.category
         }
         if (filterStore.checkedCategory.length > 1) {
-            query.categories = [...filterStore.checkedCategory]
+            query.category = [...filterStore.checkedCategory]
         } else {
-            query.categories = filterStore.checkedCategory[0]
+            query.category = filterStore.checkedCategory[0]
         }
 
 
-        if (query.lines) {
-            delete query.lines
+        if (query.line) {
+            delete query.line
         }
         if (filterStore.checkedLine.length > 1) {
-            query.lines = [...filterStore.checkedLine]
+            query.line = [...filterStore.checkedLine]
         } else {
-            query.lines = filterStore.checkedLine[0]
+            query.line = filterStore.checkedLine[0]
         }
 
 

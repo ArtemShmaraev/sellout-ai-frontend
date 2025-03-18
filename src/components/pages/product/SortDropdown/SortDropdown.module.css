@@ -5,6 +5,7 @@
     user-select: none;
     color: #222222;
     background: transparent;
+    margin-right: -10px;
 }
 .dropdown_toggle {
     cursor: pointer;

@@ -4,6 +4,7 @@ import {Container, Modal} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
 import RadioGroup from "../UI/RadioGroup/RadioGroup";
 import CustomCheckbox from "../UI/CustoCheckbox/CustomCheckbox";
+import Image from 'next/image'
 
 const AuthModal = ({children}) => {
     const [show, setShow] = useState(false);
@@ -36,7 +37,7 @@ const AuthModal = ({children}) => {
                    >
                 <Modal.Body className='pt-4'>
                     <div className={s.close_block}>
-                        <img src={close} alt="" style={{cursor: 'pointer'}} onClick={handleClose}/>
+                        <Image src={close} alt="" style={{cursor: 'pointer'}} onClick={handleClose}/>
                     </div>
                     <div className={s.mode_block}>
                         <button
