@@ -18,13 +18,15 @@ import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
+import {observer} from "mobx-react-lite";
 
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
     const categories = await fetchFilter('tree_cat')
-    return { props: {products, categories} }
+    const lines = await fetchFilter('tree_line')
+    return { props: {products, categories, lines} }
 }
-const Products = ({products, categories}) => {
+const Products = ({products, categories, lines}) => {
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const totalProducts = Number(products.count) || 1
@@ -34,6 +36,7 @@ const Products = ({products, categories}) => {
     const {filterStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
+        filterStore.fillLines(lines)
         filterStore.reactivateFilters(router.query)
         const width = window.innerWidth
         if (width <= 1000) {
@@ -95,9 +98,11 @@ const Products = ({products, categories}) => {
                                 <div className={s.modal_header}>
                                     <div className='d-flex align-items-center'>
                                         <div className={s.modal_text}>Фильтры</div>
-                                        <div className={s.number}>3</div>
+                                        <div className={s.number}>{filterStore.activeFilters.length}</div>
                                     </div>
-                                    <button className={s.modal_btn}>Сбросить все</button>
+                                    <button className={s.modal_btn}
+                                            onClick={() => filterStore.deactivateFilters(filterStore.filters)}
+                                    >Сбросить все</button>
                                 </div>
                                 <svg onClick={handleClick}
                                      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill=""
@@ -119,4 +124,4 @@ const Products = ({products, categories}) => {
     );
 };
 
-export default Products;
+export default observer(Products);

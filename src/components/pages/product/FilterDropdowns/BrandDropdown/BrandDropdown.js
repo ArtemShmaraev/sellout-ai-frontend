@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './BrandDropdown.module.css'
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
+import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
+import {Context} from "@/context/AppWrapper";
 
 const BrandDropdown = () => {
-    const sorts = [
-        'Gucci',
-        'Balenciaga',
-        'Prada'
-    ]
+    const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const toggleDropdown = () => {
@@ -45,22 +43,8 @@ const BrandDropdown = () => {
                                 <SearchInput/>
                             </div>
                         </div>
-                        {
-                            sorts.map(item =>
-                                <div
-                                    onClick={() => selectItem(item)}
-                                    key={item}
-                                    className={s.dropdown_item}
-                                >
-                                    <div className={s.dropdown_text} onClick={(e) => e.stopPropagation()}>
-                                        <CustomCheckbox
-                                            labelText={item}
-                                        />
-                                    </div>
-                                </div>
-                            )
-                        }
                     </div>
+                    <Dropdown filter={filterStore.filters.lines} />
                 </div>
             )}
         </div>

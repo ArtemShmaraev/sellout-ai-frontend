@@ -1,6 +1,7 @@
 .dropdown_toggle {
     cursor: pointer;
     font-weight: 700;
+    font-size: 15px;
     padding: 7px 0;
 }
 .dropdown_toggle:hover {
@@ -13,6 +14,7 @@
     justify-content: space-between;
 }
 .dropdown_item {
+    font-size: 13px;
     margin: 5px;
     cursor: pointer;
     padding: 7px 0;

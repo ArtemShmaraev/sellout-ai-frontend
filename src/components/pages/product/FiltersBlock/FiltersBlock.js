@@ -13,6 +13,8 @@ const FiltersBlock = () => {
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
+
+
         if (query.gender) {
             delete query.gender
         }
@@ -21,14 +23,28 @@ const FiltersBlock = () => {
         } else {
             query.gender = filterStore.checkedGendersQuery[0]
         }
-        if (query.category) {
-            delete query.category
+
+
+        if (query.categories) {
+            delete query.categories
         }
         if (filterStore.checkedCategory.length > 1) {
-            query.category = [...filterStore.checkedCategory]
+            query.categories = [...filterStore.checkedCategory]
         } else {
-            query.category = filterStore.checkedCategory[0]
+            query.categories = filterStore.checkedCategory[0]
         }
+
+
+        if (query.lines) {
+            delete query.lines
+        }
+        if (filterStore.checkedLine.length > 1) {
+            query.lines = [...filterStore.checkedLine]
+        } else {
+            query.lines = filterStore.checkedLine[0]
+        }
+
+
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

@@ -28,7 +28,7 @@ const CategoryDropdown = () => {
                 </div>
             </div>
             {isOpen && (
-                <Dropdown filter={filterStore.filters.category} />
+                <Dropdown filter={filterStore.filters.categories} />
             )}
         </div>
     )

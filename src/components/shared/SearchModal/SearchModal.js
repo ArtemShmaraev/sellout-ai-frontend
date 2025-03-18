@@ -12,7 +12,7 @@ const SearchModal = () => {
             <button className={s.toggle_btn}
                     onClick={() => setIsOpen(!isOpen)}
             >
-                <Image src={search} alt=""/>
+                <Image width={20} src={search} alt=""/>
             </button>
             {isOpen &&
                 <div className={s.search_modal}>

@@ -3,7 +3,8 @@ import {makeAutoObservable} from "mobx";
 class FilterStore {
     constructor() {
         this._allFilters = {
-            category: {},
+            categories: {},
+            lines: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -31,6 +32,16 @@ class FilterStore {
     }
     get activeFilters() {
         return this._activeFilters
+    }
+    deactivateFilters(d) {
+        for (const key in d) {
+            if (d.hasOwnProperty('state')) {
+                d[key] = false
+            } else {
+                this.deactivateFilters(d[key])
+            }
+        }
+        this.activeFilters.length = 0
     }
     reactivateFilters(query) {
         for (const key in query) {
@@ -90,7 +101,7 @@ class FilterStore {
         }
     }
    fillCat(categories) {
-        this.cat_dfs(this.filters.category, categories)
+        this.cat_dfs(this.filters.categories, categories)
    }
     cat_dfs(d, node) {
         for (let cat of node) {
@@ -108,7 +119,32 @@ class FilterStore {
     get checkedCategory() {
         const checkedCat = []
         for (const key in this.activeFilters) {
-            if (this.activeFilters[key].path[0] === 'category') {
+            if (this.activeFilters[key].path[0] === 'categories') {
+                checkedCat.push(this.activeFilters[key].query)
+            }
+        }
+        return checkedCat
+    }
+    fillLines(lines) {
+        this.line_dfs(this.filters.lines, lines)
+    }
+    line_dfs(d, node) {
+        for (let line of node) {
+            if ("children" in line) {
+                d[line["name"]] = {};
+                this.line_dfs(d[line["name"]], line["children"]);
+            } else {
+                d[line["name"]] = {};
+                d[line["name"]]["text"] = line["name"];
+                d[line["name"]]["query"] = line["name"];
+                d[line["name"]]["state"] = false;
+            }
+        }
+    }
+    get checkedLine() {
+        const checkedCat = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'lines') {
                 checkedCat.push(this.activeFilters[key].query)
             }
         }

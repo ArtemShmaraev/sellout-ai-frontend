@@ -19,14 +19,28 @@ const DropdownCategory = ({ category, level = 0 }) => {
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-        if (query.category) {
-            delete query.category
+
+
+        if (query.categories) {
+            delete query.categories
         }
         if (filterStore.checkedCategory.length > 1) {
-            query.category = [...filterStore.checkedCategory]
+            query.categories = [...filterStore.checkedCategory]
         } else {
-            query.category = filterStore.checkedCategory[0]
+            query.categories = filterStore.checkedCategory[0]
         }
+
+
+        if (query.lines) {
+            delete query.lines
+        }
+        if (filterStore.checkedLine.length > 1) {
+            query.lines = [...filterStore.checkedLine]
+        } else {
+            query.lines = filterStore.checkedLine[0]
+        }
+
+
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
@@ -41,7 +55,7 @@ const DropdownCategory = ({ category, level = 0 }) => {
             for (const key in category) {
                 if (!category[key].hasOwnProperty('text')) {
                     dropdowns.push(
-                        <div key={key} style={{ marginLeft: `${20 * level}px` }}>
+                        <div key={key} style={{ marginLeft: `${15 * level}px` }}>
                             <div onClick={() => handleToggle(key)}
                                  className={s.dropdown_toggle}
                             >
@@ -60,7 +74,7 @@ const DropdownCategory = ({ category, level = 0 }) => {
                         >
                             <div
                                 key={key}
-                                style={{ marginLeft: `${20 * level}px` }}
+                                style={{ marginLeft: `${15 * level}px` }}
                                 className={s.dropdown_item_text}
                             >
                                 <CustomCheckbox labelText={category[key].text} checked={category[key].state}/>
@@ -72,7 +86,7 @@ const DropdownCategory = ({ category, level = 0 }) => {
             return dropdowns;
         }
         return (
-            <div style={{ marginLeft: `${20 * level}px`, color: 'red' }}>
+            <div style={{ marginLeft: `${15 * level}px`, color: 'red' }}>
                 {category.text}
             </div>
         );
