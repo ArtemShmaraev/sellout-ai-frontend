@@ -32,6 +32,33 @@ class FilterStore {
     get activeFilters() {
         return this._activeFilters
     }
+    reactivateFilters(query) {
+        for (const key in query) {
+            if (key === 'page' || key === 'price') continue
+            if (Array.isArray(query[key])) {
+                query[key].forEach(el => {
+                    this.dfsActivate(this.filters[key], el)
+                })
+            } else {
+                this.dfsActivate(this.filters[key], query[key])
+            }
+        }
+        this.dfsPath(this.filters, [])
+    }
+    dfsActivate(d, queryValue) {
+        if (!d.hasOwnProperty('query')) {
+            for (const key in d) {
+                this.dfsActivate(d[key], queryValue)
+            }
+        } else {
+            if (d.query === queryValue) {
+                if (!d.state) {
+                    d.state = true
+                    this._activeFilters.push(d)
+                }
+            }
+        }
+    }
     dfsPath(d, path) {
         for (const key in d) {
             if (key === 'price') continue
@@ -57,25 +84,8 @@ class FilterStore {
             this._activeFilters.splice(ind, 1)
         }
     }
-    fillCategories(categories) {
-        categories.forEach(el => this.dfsCategory(el, this.filters.category))
-        console.log(this.filters.category)
-    }
-    dfsCategory(node, level) {
-        if (node.hasOwnProperty('subcategories')) {
-            node.subcategories.forEach(el => {
-                console.log(el.name)
-                level[node.name] = this.dfsCategory(el, level[el.name])
-            })
-        }
-        return {
-            text: node.name,
-            state: false
-        }
-   }
    fillCat(categories) {
         this.cat_dfs(this.filters.category, categories)
-        console.log(this.filters.category)
    }
     cat_dfs(d, node) {
         for (let cat of node) {
@@ -86,7 +96,7 @@ class FilterStore {
                 d[cat["name"]] = {};
                 d[cat["name"]]["text"] = cat["name"];
                 d[cat["name"]]["query"] = cat["name"];
-                d[cat["name"]]["status"] = false;
+                d[cat["name"]]["state"] = false;
             }
         }
     }

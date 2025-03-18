@@ -17,6 +17,7 @@ import Image from "next/image";
 import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
+import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
 
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
@@ -32,8 +33,8 @@ const Products = ({products, categories}) => {
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore} = useContext(Context)
     useEffect(() => {
-        filterStore.dfsPath(filterStore.filters, [])
         filterStore.fillCat(categories)
+        filterStore.reactivateFilters(router.query)
         const width = window.innerWidth
         if (width <= 1000) {
             setIsDesktop(false)
@@ -49,6 +50,7 @@ const Products = ({products, categories}) => {
     return (
         <MainLayout>
             <Container style={{marginTop: '150px'}}>
+                <Dropdown/>
                 <BigPicture/>
                 <BreadcrumbC/>
                 {isDesktop && <Row className='d-flex justify-content-lg-between align-items-center'>

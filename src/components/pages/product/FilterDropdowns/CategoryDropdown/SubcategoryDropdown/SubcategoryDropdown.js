@@ -3,7 +3,7 @@ import s from './SubcategoryDropdown.module.css'
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
-const SubcategoryDropdown = () => {
+const SubcategoryDropdown = ({}) => {
     const categories = [
         'Adidas',
         'Nike',
