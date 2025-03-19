@@ -5,6 +5,7 @@ class FilterStore {
         this._allFilters = {
             category: {},
             line: {},
+            color: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -45,7 +46,8 @@ class FilterStore {
     }
     reactivateFilters(query) {
         for (const key in query) {
-            if (key === 'page' || key === 'price' || key === 'ordering') continue
+            if (key === 'page' || key === 'price' || key === 'ordering'
+                || key === 'price_min' || key === 'price_max') continue
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     this.dfsActivate(this.filters[key], el)
@@ -165,6 +167,32 @@ class FilterStore {
             }
         }
         return checkedGenders
+    }
+    fillColors(colors) {
+        colors.forEach(el => {
+            this.filters.color[el.name] = {
+                text: el.russian_name,
+                query: el.name,
+                hex: el.hex,
+                state: false
+            }
+        })
+    }
+    get color() {
+        const arr = []
+        for (const key in this.filters.color) {
+            arr.push({...this.filters.color[key]})
+        }
+        return arr
+    }
+    get checkedColorsQuery() {
+        const checkedColors = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'color') {
+                checkedColors.push(this.activeFilters[key].query)
+            }
+        }
+        return checkedColors
     }
     setPriceFrom(from) {
         this._allFilters.price[0] = from

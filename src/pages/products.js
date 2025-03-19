@@ -23,9 +23,10 @@ export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
-    return { props: {products, categories, lines} }
+    const colors = await fetchFilter('colors')
+    return { props: {products, categories, lines, colors} }
 }
-const Products = ({products, categories, lines}) => {
+const Products = ({products, categories, lines, colors}) => {
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const totalProducts = Number(products.count) || 1
@@ -36,6 +37,7 @@ const Products = ({products, categories, lines}) => {
     useEffect(() => {
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
+        filterStore.fillColors(colors)
         filterStore.reactivateFilters(router.query)
         const width = window.innerWidth
         if (width <= 1200) {
@@ -64,7 +66,7 @@ const Products = ({products, categories, lines}) => {
                                 onClick={() => setIsOpen(!isOpen)}
                         >Фильтры
                         </button>
-                        {filterStore.activeFilters.length !== 0 &&
+                        {filterStore.activeFilters.length !== 0 || router.query.price_min &&
                             <button
                                 className={s.border}
                                 onClick={clearFilters}

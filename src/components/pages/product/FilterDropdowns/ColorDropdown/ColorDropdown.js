@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './ColorDropdown.module.css'
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
+import {Context} from "@/context/AppWrapper";
+import {useRouter} from "next/router";
 
 const ColorDropdown = () => {
+    const {filterStore} = useContext(Context)
+    const router = useRouter()
     const gender = [
         'Красный',
         'Красный',
@@ -13,6 +17,24 @@ const ColorDropdown = () => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    const reloadPage = () => {
+        const {pathname} = router
+        const query = {...router.query}
+        if (query.color) {
+            delete query.gender
+        }
+        if (filterStore.checkedColorsQuery.length > 1) {
+            query.color = [...filterStore.checkedColorsQuery]
+        } else {
+            query.color = filterStore.checkedColorsQuery[0]
+        }
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
+    }
+    const handleClick = (item) => {
+        filterStore.toggleFilter(item)
+        reloadPage()
+    }
 
     return (
         <div>
@@ -33,15 +55,19 @@ const ColorDropdown = () => {
                 <div>
                     <div className={s.dropdown_items_block}>
                         {
-                            gender.map(item =>
+                            filterStore.color.map(item =>
                                 <div
-                                    key={item}
+                                    key={item.query}
                                     className={s.dropdown_item}
                                 >
-                                    <div className={s.dropdown_text} onClick={(e) => e.stopPropagation()}>
+                                    <div className={s.dropdown_text} onClick={(e) => {
+                                        e.stopPropagation()
+                                        handleClick(item)
+                                    }}>
                                         <CustomCheckbox
-                                            labelText={item}
-                                            color={'red'}
+                                            labelText={item.text}
+                                            checked={item.state}
+                                            color={item.hex}
                                         />
                                     </div>
                                 </div>
