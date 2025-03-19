@@ -10,40 +10,25 @@ import {useRouter} from "next/router";
 const FiltersBlock = () => {
     const {filterStore} = useContext(Context)
     const router = useRouter()
+    const changeQuery = (query, filterName, filterArr) => {
+        if (query[filterName]) {
+            delete query[filterName]
+        }
+        if (filterArr.length > 1) {
+            query[filterName] = [...filterArr]
+        }
+        if (filterArr.length === 1) {
+            query[filterName] = filterArr[0]
+        }
+    }
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
 
-
-        if (query.gender) {
-            delete query.gender
-        }
-        if (filterStore.checkedGendersQuery.length > 1) {
-            query.gender = [...filterStore.checkedGendersQuery]
-        } else {
-            query.gender = filterStore.checkedGendersQuery[0]
-        }
-
-
-        if (query.category) {
-            delete query.category
-        }
-        if (filterStore.checkedCategory.length > 1) {
-            query.category = [...filterStore.checkedCategory]
-        } else {
-            query.category = filterStore.checkedCategory[0]
-        }
-
-
-        if (query.line) {
-            delete query.line
-        }
-        if (filterStore.checkedLine.length > 1) {
-            query.line = [...filterStore.checkedLine]
-        } else {
-            query.line = filterStore.checkedLine[0]
-        }
-
+        changeQuery(query, 'gender', filterStore.checkedGendersQuery)
+        changeQuery(query, 'category', filterStore.checkedCategory)
+        changeQuery(query, 'line', filterStore.checkedLine)
+        changeQuery(query, 'color', filterStore.checkedColorsQuery)
 
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})

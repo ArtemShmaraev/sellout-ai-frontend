@@ -16,31 +16,22 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
             [key]: !prevState[key],
         }));
     };
+    const changeQuery = (query, filterName, filterArr) => {
+        if (query[filterName]) {
+            delete query[filterName]
+        }
+        if (filterArr.length > 1) {
+            query[filterName] = [...filterArr]
+        }
+        if (filterArr.length === 1) {
+            query[filterName] = filterArr[0]
+        }
+    }
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-
-
-        if (query.category) {
-            delete query.categories
-        }
-        if (filterStore.checkedCategory.length > 1) {
-            query.category = [...filterStore.checkedCategory]
-        } else {
-            query.category = filterStore.checkedCategory[0]
-        }
-
-
-        if (query.line) {
-            delete query.line
-        }
-        if (filterStore.checkedLine.length > 1) {
-            query.line = [...filterStore.checkedLine]
-        } else {
-            query.line = filterStore.checkedLine[0]
-        }
-
-
+        changeQuery(query, 'category', filterStore.checkedCategory)
+        changeQuery(query, 'line', filterStore.checkedLine)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

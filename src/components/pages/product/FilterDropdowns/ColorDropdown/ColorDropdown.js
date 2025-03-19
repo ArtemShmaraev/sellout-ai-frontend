@@ -17,17 +17,21 @@ const ColorDropdown = () => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    const changeQuery = (query, filterName, filterArr) => {
+        if (query[filterName]) {
+            delete query[filterName]
+        }
+        if (filterArr.length > 1) {
+            query[filterName] = [...filterArr]
+        }
+        if (filterArr.length === 1) {
+            query[filterName] = filterArr[0]
+        }
+    }
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-        if (query.color) {
-            delete query.gender
-        }
-        if (filterStore.checkedColorsQuery.length > 1) {
-            query.color = [...filterStore.checkedColorsQuery]
-        } else {
-            query.color = filterStore.checkedColorsQuery[0]
-        }
+        changeQuery(query, 'color', filterStore.checkedColorsQuery)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
