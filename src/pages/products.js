@@ -55,7 +55,7 @@ const Products = ({products, categories, lines}) => {
     }
     return (
         <MainLayout>
-            <Container style={{marginTop: '150px'}}>
+            <Container style={{marginTop: '150px'}} className={s.cont}>
                 <BigPicture/>
                 <BreadcrumbC/>
                 {isDesktop && <Row className={s.filter_sort_row}>

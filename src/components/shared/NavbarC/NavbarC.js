@@ -11,8 +11,14 @@ import Sidebar from "../Sidebar/Sidebar";
 import SearchModal from "../SearchModal/SearchModal";
 import AuthModal from "..//AuthModal/AuthModal";
 import Image from "next/image";
+import logo from '@/static/img/sellout_logo.svg'
+import {useRouter} from "next/router";
 
 const NavbarC = () => {
+    const router = useRouter()
+    const goToMainPage = () => {
+        router.push('/')
+    }
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
@@ -40,7 +46,7 @@ const NavbarC = () => {
                         }
                     </div>
                     <div className={s.block}>
-                        <h1 className={s.logo}>SELLOUT</h1>
+                        <Image className={s.logo} alt='' src={logo} height={50} onClick={goToMainPage}/>
                     </div>
                     <div className={s.block}>
                         <Image width={25} src={like} alt="" className={s.icons}/>

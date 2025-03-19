@@ -31,9 +31,10 @@
 }
 .logo {
     font-size: 40px;
-    transform: translateX(-25%);
+    transform: translate(-25%, -5px);
     user-select: none;
     text-align: center;
+    cursor: pointer;
 }
 .icons {
     width: 25px;
@@ -50,7 +51,7 @@
 @media (max-width: 1000px) {
     .logo {
         font-size: 26px;
-        transform: translateX(0);
+        transform: translateX(13px);
     }
     .icons {
         width: 20px;

@@ -136,7 +136,7 @@ class FilterStore {
             } else {
                 d[line["name"]] = {};
                 d[line["name"]]["text"] = line["name"];
-                d[line["name"]]["query"] = line["eng_name"];
+                d[line["name"]]["query"] = line["name"];
                 d[line["name"]]["state"] = false;
             }
         }
