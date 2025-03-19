@@ -55,12 +55,12 @@ const DropdownCategory = ({ category, level = 0 }) => {
             for (const key in category) {
                 if (!category[key].hasOwnProperty('text')) {
                     dropdowns.push(
-                        <div key={key} style={{ marginLeft: `${10 * level}px` }}>
+                        <div key={key}>
                             <div onClick={() => handleToggle(key)}
                                  className={s.dropdown_toggle}
                             >
                                 <div className={s.dropdown_toggle_text}>
-                                    {key}
+                                    <div style={{ transform: `translateX(${10 * level}px)` }}>{key}</div>
                                     <Arrow isOpen={isOpen[key]}/>
                                 </div>
                             </div>

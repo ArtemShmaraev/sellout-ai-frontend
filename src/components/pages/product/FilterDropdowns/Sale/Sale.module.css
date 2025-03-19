@@ -5,7 +5,7 @@
     color: #b61212;
 }
 .sale {
-    width: 280px;
+    min-width: 300px;
     transition: 0.3s;
     padding: 7px 0;
 }

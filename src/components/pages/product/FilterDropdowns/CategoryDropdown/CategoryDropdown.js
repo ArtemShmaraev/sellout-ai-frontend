@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import s from './CategoryDropdown.module.css'
 import SubcategoryDropdown from "@/components/pages/product/FilterDropdowns/CategoryDropdown/SubcategoryDropdown/SubcategoryDropdown";
 import Arrow from '@/components/shared/UI/Arrow/Arrow';
@@ -8,6 +8,7 @@ import {Context} from "@/context/AppWrapper";
 const CategoryDropdown = () => {
     const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null)
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -16,6 +17,7 @@ const CategoryDropdown = () => {
         <div>
             <div className={s.dropdown}
                  style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
+                 ref={ref}
             >
                 <div
                     onClick={() => toggleDropdown()}
