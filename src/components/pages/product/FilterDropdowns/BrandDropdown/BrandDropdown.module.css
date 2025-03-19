@@ -29,9 +29,13 @@
     background: rgba(0, 0, 0, 0.05);
 }
 .dropdown_text {
-    margin: 5px 5px 5px 20px;
+    margin: 5px 5px 5px 10px;
     display: flex;
 }
 .dropdown_input {
     background: white;
+}
+.scroll {
+    max-height: 30vh;
+    overflow-y: scroll;
 }

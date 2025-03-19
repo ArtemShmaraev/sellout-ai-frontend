@@ -21,7 +21,7 @@ const Sidebar = () => {
             <button className={s.toggle_btn}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-                <Image width={25} src={list} alt="" className={s.list_icon}/>
+                <Image width={30} src={list} alt="" className={s.list_icon}/>
             </button>
             {isMenuOpen &&
                 <div className={s.sidebar}>

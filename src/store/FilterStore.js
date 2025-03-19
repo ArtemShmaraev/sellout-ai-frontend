@@ -45,7 +45,7 @@ class FilterStore {
     }
     reactivateFilters(query) {
         for (const key in query) {
-            if (key === 'page' || key === 'price') continue
+            if (key === 'page' || key === 'price' || key === 'ordering') continue
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     this.dfsActivate(this.filters[key], el)

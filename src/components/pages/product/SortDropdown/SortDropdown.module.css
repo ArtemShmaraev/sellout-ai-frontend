@@ -8,8 +8,12 @@
     margin-right: -10px;
 }
 .dropdown_toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     text-align: center;
+    height: 45px;
 }
 .dropdown:hover {
     background: rgba(0, 0, 0, 0.05);

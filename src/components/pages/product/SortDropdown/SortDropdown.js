@@ -2,18 +2,27 @@ import React, {useEffect, useRef, useState} from 'react';
 import s from './SortDropdown.module.css'
 import sort from '@/static/icons/sort-alpha-down.svg'
 import Image from "next/image";
+import {useRouter} from "next/router";
 
 const SortDropdown = () => {
     const sorts = [
-        'Наши рекомендации',
-        'По популярности',
-        'По новизне',
-        'По возрастанию цены',
-        'По убыванию цены'
+        ['По популярности'],
+        ['Случайная подборка'],
+        ['По новизне', '-release_date'],
+        ['По возрастанию цены', 'min_price'],
+        ['По убыванию цены', '-min_price']
     ]
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
+    const sortBy = (sort) => {
+        const query = {...router.query}
+        const {path} = router
+        query.ordering = sort
+        query.page = 1
+        router.push({path, query}, undefined, {scroll: false})
+    }
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -56,12 +65,15 @@ const SortDropdown = () => {
                         {
                             sorts.map(item =>
                                 <div
-                                    onClick={() => selectItem(item)}
-                                    key={item}
+                                    onClick={() => {
+                                        selectItem(item[0])
+                                        sortBy(item[1])
+                                    }}
+                                    key={item[0]}
                                     className={s.dropdown_item}
                                 >
                                     <div className={s.dropdown_text}>
-                                        {item}
+                                        {item[0]}
                                     </div>
                                 </div>
                             )

@@ -8,7 +8,7 @@ import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
 
 
-const ProductCard = ({model, brands, colorway}) => {
+const ProductCard = ({model, brands, colorway, price}) => {
     const [isHovered, setIsHovered] = useState(false);
     const brandsDisplay = (brands) => {
         if (!brands) {
@@ -52,7 +52,7 @@ const ProductCard = ({model, brands, colorway}) => {
                 <div className={s.tag}>{brandsDisplay(brands)}</div>
                 <div className={s.brand}>{model || 'No model'}</div>
                 <div className={s.name}>{colorway}</div>
-                <div className={s.price}>От 300$</div>
+                <div className={s.price}>От {price}</div>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 
-const DropdownCategory = ({ category, level = 0 }) => {
+const DropdownCategory = ({ category, level = 0 , brand = false}) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState({});
     const {filterStore} = useContext(Context)

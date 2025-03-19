@@ -3,9 +3,9 @@ import s from './SearchInput.module.css'
 import icon from '@/static/icons/search.svg'
 import Image from "next/image";
 
-const SearchInput = () => {
+const SearchInput = ({w100}) => {
     return (
-        <div className={s.input}>
+        <div className={s.input} style={w100 && {width: '100%'}}>
             <input
                 type="text"
                 onClick={(e) => {
@@ -14,6 +14,7 @@ const SearchInput = () => {
                 }}
                 placeholder='Поиск'
                 className={s.search}
+                style={w100 && {width: '100%'}}
             />
             <Image
                 className={s.icon}

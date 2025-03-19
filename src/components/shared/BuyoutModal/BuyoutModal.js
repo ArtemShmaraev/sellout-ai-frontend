@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import s from './BuyoutModal.module.css'
 import {Col, Container, Form, Modal, Row} from "react-bootstrap";
+import close from '@/static/icons/x-lg.svg'
+import Image from 'next/image'
 
 const BuyoutModal = () => {
     const [isSend, setIsSend] = useState(false)
@@ -36,12 +38,8 @@ const BuyoutModal = () => {
             >
                 {!isSend ?
                     <Modal.Body className='p-4'>
-                        <div className='d-flex justify-content-end' onClick={handleClose}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 className="bi bi-x-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                            </svg>
+                        <div className='d-flex justify-content-end'>
+                            <Image src={close} alt='' className={s.close} onClick={handleClose}/>
                         </div>
                         <Modal.Header className='mb-3'>
                             <p className={s.title}>Не смогли найти на нашей платформе то, что искали?
@@ -68,7 +66,7 @@ const BuyoutModal = () => {
                             </Col>
                             <Col lg={12}>
                                 <input type="text"
-                                       placeholder={'Ссылка на товар'}
+                                       placeholder={'Ссылка на товар, бренд, магазин и.т.д.'}
                                        className={s.input}
                                 />
                             </Col>
@@ -84,22 +82,16 @@ const BuyoutModal = () => {
                                 className={s.textarea}
                             />
                             </Col>
-                            <Col lg={12}>
-                                <p className={s.description}>Нажимая кнопку попку похуй <a href="">Ссылка</a></p>
-                            </Col>
                             <Col lg={12} className='d-flex justify-content-center'>
-                                <button onClick={() => setIsSend(true)} className={s.toggle_btn}>Отправить</button>
+                                <button onClick={() => setIsSend(true)} className={s.send}>Отправить</button>
                             </Col>
+                            <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="">обработку персональных данных</a></p>
                         </Row>
                     </Modal.Body>
                     :
                     <Modal.Body className='p-4'>
-                        <div className='d-flex justify-content-end' onClick={handleClose}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 className="bi bi-x-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                            </svg>
+                        <div className='d-flex justify-content-end'>
+                            <Image src={close} alt='' className={s.close} onClick={handleClose}/>
                         </div>
                         <p className={s.title}>Спасибо за оставленную заявку!
                             Мы постараемся связаться с Вами как можно скорее!</p>

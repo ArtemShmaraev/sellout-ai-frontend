@@ -20,6 +20,19 @@
 .toggle_btn:hover {
     background: #383f48;
 }
+.send {
+    background: #222222;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    transition: 0.3s;
+    width: 100%;
+}
+.send:hover {
+    background: #383f48;
+}
 .title {
     font-size: 20px;
     font-weight: 700;
@@ -51,7 +64,9 @@
     color: #727272;
     text-align: center;
 }
-
+.close {
+    cursor: pointer;
+}
 @media (max-width: 1000px) {
     .toggle_btn {
         margin-top: 10px;

@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react';
 import s from './BrandDropdown.module.css'
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
-import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
 import {Context} from "@/context/AppWrapper";
@@ -34,17 +33,17 @@ const BrandDropdown = () => {
                 </div>
             </div>
             {isOpen && (
-                <div>
+                <div className={s.scroll}>
                     <div className={s.dropdown_items_block}>
                         <div
                             className={s.dropdown_input}
                         >
                             <div className={s.dropdown_text}>
-                                <SearchInput/>
+                                <SearchInput w100={true}/>
                             </div>
                         </div>
                     </div>
-                    <Dropdown filter={filterStore.filters.line} />
+                    <Dropdown filter={filterStore.filters.line} brand={true}/>
                 </div>
             )}
         </div>
