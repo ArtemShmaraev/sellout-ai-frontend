@@ -53,6 +53,7 @@ const PriceDropdown = () => {
                             <label htmlFor="From">От</label>
                             <input type="number" id='From'
                                    className={s.dropdown_input}
+                                   defaultValue={filterStore.minMaxPrice[0]}
                                    value={filterStore.price[0]}
                                    onChange={(e) => handleFrom(e)}
                             />
@@ -61,21 +62,22 @@ const PriceDropdown = () => {
                             <label htmlFor="To">До</label>
                             <input type="number" id='To'
                                    className={s.dropdown_input}
+                                   defaultValue={filterStore.minMaxPrice[1]}
                                    value={filterStore.price[1]}
                                    onChange={(e) => handleTo(e)}
                             />
                         </div>
                     </div>
-                    <RangeSlider min={100} max={1000000} values={filterStore.price}/>
+                    <RangeSlider min={filterStore.minMaxPrice[0]} max={filterStore.minMaxPrice[1]} values={filterStore.price}/>
                     <div
                         style={{width: '270px'}}
                         className='d-flex justify-content-between mt-2'
                     >
                         <div>
-                            От 100 Р
+                            От {filterStore.minMaxPrice[0]} Р
                         </div>
                         <div>
-                            До 100 000 Р
+                            До {filterStore.minMaxPrice[1]} Р
                         </div>
                     </div>
                 </div>

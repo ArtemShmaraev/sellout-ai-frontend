@@ -7,12 +7,14 @@ const CustomCheckbox = ({reversed = false,
                             imgSrc = '',
                             color = '',
                             checked = false,
+    spaceBetween = false
 }
 ) => {
     return (
         <div
-            className={s.block}
-            style={reversed ? {flexDirection: 'row-reverse'} : {flexDirection: "row"}}
+            className={spaceBetween ? s.block_between : s.block}
+            style={
+            reversed ? {flexDirection: 'row-reverse'} : {flexDirection: "row"}}
         >
             <div
                 className={s.checkbox}

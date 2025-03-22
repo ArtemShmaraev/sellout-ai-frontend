@@ -10,17 +10,22 @@ const RangeSlider = ({min, max, values}) => {
     const {filterStore} = useContext(Context);
     const handleChange = (newValues) => {
         filterStore.setPriceBoth(newValues);
+    };
+    const handleAfterChange = () => {
         const {pathname} = router
         const query = {...router.query}
         query.price_min = filterStore.price[0]
         query.price_max = filterStore.price[1]
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
+        filterStore.handleScrollTo()
     };
+
     return (
         <Slider
             className='slider'
             onChange={handleChange}
+            onAfterChange={handleAfterChange}
             value={values}
             min={min}
             max={max}

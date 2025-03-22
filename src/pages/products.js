@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import s from '../styles/products.module.css'
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
@@ -27,6 +27,7 @@ export const getServerSideProps = async (context) => {
     return { props: {products, categories, lines, colors} }
 }
 const Products = ({products, categories, lines, colors}) => {
+    const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const totalProducts = Number(products.count) || 1
@@ -39,11 +40,14 @@ const Products = ({products, categories, lines, colors}) => {
         filterStore.fillLines(lines)
         filterStore.fillColors(colors)
         filterStore.reactivateFilters(router.query)
+        filterStore.setMinPrice(products.min_price)
+        filterStore.setMaxPrice(products.max_price)
+        filterStore.setRef(productListRef)
         const width = window.innerWidth
         if (width <= 1200) {
             setIsDesktop(false)
         }
-    }, [isDesktop])
+    }, [products])
     const handleClick = () => {
         if (isDesktop) {
             setIsOpen(!isOpen)
@@ -53,20 +57,21 @@ const Products = ({products, categories, lines, colors}) => {
     }
     const clearFilters = () => {
         filterStore.deactivateFilters(filterStore.filters)
-        router.push('/products')
+        router.push('/products', undefined, {scroll: false})
+        filterStore.handleScrollTo()
     }
     return (
         <MainLayout>
             <Container style={{marginTop: '150px'}} className={s.cont}>
                 <BigPicture/>
-                <BreadcrumbC/>
+                <div ref={productListRef}></div>
                 {isDesktop && <Row className={s.filter_sort_row}>
                     <Col lg={10} className='d-flex'>
                         <button className={s.border + ' fw-bold'}
                                 onClick={() => setIsOpen(!isOpen)}
                         >Фильтры
                         </button>
-                        {filterStore.activeFilters.length !== 0 || router.query.price_min &&
+                        {(filterStore.activeFilters.length !== 0 || router.query.price_min) &&
                             <button
                                 className={s.border}
                                 onClick={clearFilters}
@@ -93,7 +98,7 @@ const Products = ({products, categories, lines, colors}) => {
                 }
                 <div className={s.product_list_row}>
                     {isOpen &&
-                        <FilterDropdowns/>
+                        <FilterDropdowns plRef={productListRef}/>
                     }
                     <ProductList products={products.results}/>
                 </div>

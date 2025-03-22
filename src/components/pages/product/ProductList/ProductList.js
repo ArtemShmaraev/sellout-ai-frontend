@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 
 const ProductList = ({products}) => {
     return (
-        <>
+        <div className={s.container}>
             <div className={s.product_list}>
                 {/*<AdminCard/>*/}
                 {/*<ProductCard/>*/}
@@ -31,7 +31,7 @@ const ProductList = ({products}) => {
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 };
 

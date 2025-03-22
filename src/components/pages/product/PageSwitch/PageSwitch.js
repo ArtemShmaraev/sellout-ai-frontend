@@ -18,6 +18,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
             const query = {...router.query}
             query.page = currentPage-1
             router.push({pathname, query}, undefined, {scroll: false})
+            filterStore.handleScrollTo()
         }
     }
     const nextPage = (e) => {
@@ -28,6 +29,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
             const query = {...router.query}
             query.page = currentPage+1
             router.push({pathname, query}, undefined, {scroll: false})
+            filterStore.handleScrollTo()
         }
     }
     return (

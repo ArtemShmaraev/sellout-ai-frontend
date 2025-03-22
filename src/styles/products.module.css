@@ -106,6 +106,7 @@
     position: fixed;
     bottom: 20px;
     opacity: 0.85;
+    z-index: 4;
 }
 @media (max-width: 1200px) {
     .border, .filter_toggle {
@@ -115,6 +116,9 @@
         padding: 5px;
         font-size: 14px;
     }
+}
+
+@media (max-width: 600px) {
     .cont {
         margin: 0;
         padding: 15px;

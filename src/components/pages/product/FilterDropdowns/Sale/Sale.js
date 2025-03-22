@@ -9,6 +9,7 @@ const Sale = () => {
                 labelText={'Скидка'}
                 reversed={true}
                 labelClass={s.text}
+                spaceBetween={true}
             />
         </div>
     );

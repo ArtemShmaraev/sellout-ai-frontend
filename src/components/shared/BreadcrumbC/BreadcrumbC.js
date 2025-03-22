@@ -4,7 +4,7 @@ import s from './BreadcrumbC.module.css'
 const BreadcrumbC = () => {
     return (
         <p className={s.breadcrumb}>
-            Denis obsos {'>'} Denis Huylo {'>'} Denis Pidoras
+            Dinis obsos {'>'} Denis Huylo {'>'} Denis Pidoras {'>'} Снимаю любую порчу с читавшего
         </p>
     );
 };

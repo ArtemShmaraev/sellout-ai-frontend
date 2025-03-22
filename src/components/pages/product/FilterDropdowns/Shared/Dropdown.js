@@ -1,12 +1,8 @@
-import React, {useContext, useState} from "react";
-import {Context} from "@/context/AppWrapper";
 import DropdownCategory from "@/components/pages/product/FilterDropdowns/Shared/DropdownCategory";
 
-const Dropdown = ({filter, brand}) => {
-    const {filterStore} = useContext(Context)
-
+const Dropdown = ({filter, brand, width}) => {
     return (
-        <div style={{width: '300px'}}>
+        <div style={{ width: `${width}px` }}>
             <DropdownCategory category={filter} level={1} brand={brand}/>
         </div>
     );

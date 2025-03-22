@@ -51,7 +51,7 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
                                  className={s.dropdown_toggle}
                             >
                                 <div className={s.dropdown_toggle_text}>
-                                    <div style={{ transform: `translateX(${10 * level}px)` }}>{key}</div>
+                                    <div style={{ transform: `translateX(${15 * level}px)` }}>{key}</div>
                                     <Arrow isOpen={isOpen[key]}/>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
                         >
                             <div
                                 key={key}
-                                style={{ marginLeft: `${10 * level}px` }}
+                                style={{ marginLeft: `${15 * level}px` }}
                                 className={s.dropdown_item_text}
                             >
                                 <CustomCheckbox labelText={category[key].text} checked={category[key].state}/>
@@ -77,7 +77,7 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
             return dropdowns;
         }
         return (
-            <div style={{ marginLeft: `${10 * level}px`, color: 'red' }}>
+            <div style={{ marginLeft: `${15 * level}px`, color: 'red' }}>
                 {category.text}
             </div>
         );

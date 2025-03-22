@@ -2,6 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 class FilterStore {
     constructor() {
+        this._ref = null
         this._allFilters = {
             category: {},
             line: {},
@@ -23,7 +24,8 @@ class FilterStore {
                     state: false
                 },
             },
-            price: [100, 1000000]
+            price: [null, null],
+            minMaxPrice: [null, null]
         }
         this._activeFilters = []
         makeAutoObservable(this)
@@ -43,6 +45,8 @@ class FilterStore {
             }
         }
         this.activeFilters.length = 0
+        this.price[0] = this.minMaxPrice[0]
+        this.price[1] = this.minMaxPrice[1]
     }
     reactivateFilters(query) {
         for (const key in query) {
@@ -101,6 +105,7 @@ class FilterStore {
             let ind = this._activeFilters.indexOf(item)
             this._activeFilters.splice(ind, 1)
         }
+        this.handleScrollTo()
     }
    fillCat(categories) {
         this.cat_dfs(this.filters.category, categories)
@@ -138,7 +143,7 @@ class FilterStore {
             } else {
                 d[line["name"]] = {};
                 d[line["name"]]["text"] = line["name"];
-                d[line["name"]]["query"] = line["name"];
+                d[line["name"]]["query"] = line["full_eng_name"];
                 d[line["name"]]["state"] = false;
             }
         }
@@ -206,6 +211,32 @@ class FilterStore {
     get price() {
         return this._allFilters.price
     }
+    setMinPrice(price) {
+        this._allFilters.minMaxPrice[0] = price
+    }
+    setMaxPrice(price) {
+        this._allFilters.minMaxPrice[1] = price
+    }
+    get minMaxPrice() {
+        return this._allFilters.minMaxPrice
+    }
+    setRef(ref) {
+        this._ref = ref
+    }
+    get ref() {
+        return this._ref
+    }
+    handleScrollTo() {
+        const position = this.ref.current.offsetTop - 100;
+        const currentScroll = window.scrollTop || document.documentElement.scrollTop
+
+        if (currentScroll > position) {
+            window.scrollTo({
+                top: position,
+                behavior: 'smooth',
+            });
+        }
+    };
 }
 
 export const filterStore = new FilterStore()

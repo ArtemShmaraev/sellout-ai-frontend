@@ -36,6 +36,6 @@
     background: white;
 }
 .scroll {
-    max-height: 40vh;
+    max-height: 400px;
     overflow-y: scroll;
 }

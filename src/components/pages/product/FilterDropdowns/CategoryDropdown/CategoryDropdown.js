@@ -8,20 +8,22 @@ import {Context} from "@/context/AppWrapper";
 const CategoryDropdown = () => {
     const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
-    const ref = useRef(null)
+    const toggleRef  = useRef(null)
     const toggleDropdown = () => {
+        if (!isOpen) setDropdownWidth(toggleRef.current.offsetWidth);
         setIsOpen(!isOpen);
     };
+    const [dropdownWidth, setDropdownWidth] = useState(0);
 
     return (
         <div>
             <div className={s.dropdown}
                  style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
-                 ref={ref}
             >
                 <div
                     onClick={() => toggleDropdown()}
                     className={s.dropdown_toggle}
+                    ref={toggleRef}
                 >
                     <div className={s.dropdown_toggle_text}>
                         Категории
@@ -30,7 +32,7 @@ const CategoryDropdown = () => {
                 </div>
             </div>
             {isOpen && (
-                <Dropdown filter={filterStore.filters.category} />
+                <Dropdown filter={filterStore.filters.category} width={dropdownWidth}/>
             )}
         </div>
     )

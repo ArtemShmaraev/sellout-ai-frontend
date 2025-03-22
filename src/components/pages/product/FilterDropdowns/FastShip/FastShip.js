@@ -5,12 +5,13 @@ import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox"
 
 const FastShip = () => {
     return (
-        <div className={s.sale + ' d-flex align-items-center'}>
+        <div className={s.sale}>
             <CustomCheckbox
                 labelText={'Мгновенная доставка'}
                 reversed={true}
                 labelClass={s.text}
                 imgSrc={icon}
+                spaceBetween={true}
             />
         </div>
     );
