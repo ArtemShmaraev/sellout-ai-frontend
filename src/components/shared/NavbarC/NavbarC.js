@@ -75,7 +75,7 @@ const NavbarC = () => {
                             <p href="" className={s.links} style={{color: '#b61212'}}>Скидки</p>
                         </div>
                         <div>
-                            <SearchInput/>
+                            <SearchModal isDesktop={isDesktop}/>
                         </div>
                     </div>
                 }

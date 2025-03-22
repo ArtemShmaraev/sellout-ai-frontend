@@ -19,3 +19,11 @@ export async function fetchFilter(filter) {
     const {data} = await $host.get(`product/${filter}`)
     return data
 }
+export async function updateProduct(id, body) {
+    const {data} = await $host.put(`product/update/${id}`, body)
+    return data
+}
+export async function deleteProduct(id) {
+    const {data} = await $host.delete(`product/update/${id}`)
+    return data
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './CustomCheckbox.module.css'
+import {observer} from "mobx-react-lite";
 
 const CustomCheckbox = ({reversed = false,
                             labelText,
@@ -43,4 +44,4 @@ const CustomCheckbox = ({reversed = false,
     );
 };
 
-export default CustomCheckbox;
+export default observer(CustomCheckbox);

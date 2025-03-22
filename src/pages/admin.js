@@ -23,9 +23,15 @@ export const getServerSideProps = async (context) => {
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
-    return { props: {products, categories, lines, colors} }
+    const brandsArr = await fetchFilter('brands')
+    const categoriesArr = await fetchFilter('categories')
+    const linesArr = await fetchFilter('lines')
+    return { props: {products, categories, lines, colors, brandsArr,
+        categoriesArr, linesArr} }
 }
-const Products = ({products, categories, lines, colors}) => {
+
+const Admin = ({products, categories, lines, colors, brandsArr, categoriesArr,
+                   linesArr}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -33,7 +39,7 @@ const Products = ({products, categories, lines, colors}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
-    const {filterStore} = useContext(Context)
+    const {filterStore, adminStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
@@ -42,6 +48,9 @@ const Products = ({products, categories, lines, colors}) => {
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)
         filterStore.setRef(productListRef)
+        adminStore.setBrand(brandsArr)
+        adminStore.setCategories(categoriesArr)
+        adminStore.setLines(linesArr)
         const width = window.innerWidth
         if (width <= 1200) {
             setIsDesktop(false)
@@ -99,7 +108,9 @@ const Products = ({products, categories, lines, colors}) => {
                     {isOpen &&
                         <FilterDropdowns plRef={productListRef}/>
                     }
-                    <ProductList products={products.results} isAdmin={false}/>
+                    <ProductList products={products.results}
+                                 isAdmin={true}
+                    />
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
                 <BuyoutModal/>
@@ -141,4 +152,4 @@ const Products = ({products, categories, lines, colors}) => {
     );
 };
 
-export default observer(Products);
+export default observer(Admin);

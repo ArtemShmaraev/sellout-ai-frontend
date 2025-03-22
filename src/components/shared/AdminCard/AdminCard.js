@@ -1,32 +1,89 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from "./AdminCard.module.css";
-import truck from "@/static/icons/truck.svg";
-import re from "@/static/icons/arrow-return-left.svg";
-import like from "@/static/icons/heart.svg";
 import shoe from "@/static/img/shoe.png";
+import cross from '@/static/icons/x-lg.svg'
 import ScrollableBDropdown from "@/components/shared/UI/ScrollableBDropdown/ScrollableBDropdown";
 import {Carousel} from "react-bootstrap";
 import Image from "next/image";
+import {Context} from "@/context/AppWrapper";
+import {observer} from "mobx-react-lite";
+import {deleteProduct, updateProduct} from "@/http/productsApi";
+import {useRouter} from "next/router";
 
-const AdminCard = () => {
-    const [tag, setTag] = useState('Tag')
-    const [name, setName] = useState('Name')
-    const [price, setPrice] = useState('300$')
+const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
+    const router = useRouter()
+    const {adminStore} = useContext(Context)
+    const [disabled, setDisabled] = useState(adminStore.submitDisabled)
+    const brandsDisplay = (brands) => {
+        if (!brands) {
+            return 'No brand'
+        }
+        if (brands.length > 1) {
+            let str = brands[0].name
+            for (let i = 1; i < brands.length; i++) {
+                str += ` x ${brands[i].name}`
+            }
+            return str
+        }
+        return brands[0].name
+    }
+    const lineDisplay = () => {
+        if (lines.length === 1) {
+            return lines[0].name
+        }
+        if (lines.length > 1) {
+            let str = lines[0].name
+            for (let i = 1; i < lines.length; i++) {
+                str += `, ${lines[i].name}`
+            }
+            return str
+        }
+    }
+    const categoryDisplay = () => {
+        if (categories.length === 1) {
+            return categories[0].name
+        }
+        if (categories.length > 1) {
+            let str = categories[0].name
+            for (let i = 1; i < categories.length; i++) {
+                str += `, ${categories[i].name}`
+            }
+            return str
+        }
+    }
+    const [brand, setBrands] = useState(brandsDisplay(brands))
+    const edit = () => {
+        adminStore.checkActiveBrands(brands)
+        adminStore.checkActiveCategories(categories)
+        adminStore.checkActiveLines(lines)
+        adminStore.clickEdit()
+        setDisabled(false)
+    }
+    const submit = async () => {
+        // const data = adminStore.getAllData2()
+        // await updateProduct(id, data).then(() => console.log('ok'))
+        //
+        // adminStore.clearAll()
+        // const {path, query} = router
+        // router.push({path, query}, undefined, {scroll: false})
+        adminStore.clickEdit()
+        adminStore.clickSubmit()
+        setDisabled(true)
+    }
+    const removeProduct = () => {
+        deleteProduct(id).then(() => console.log('ok'))
+    }
     return (
         <div className={s.card}>
             <div className={s.icons_block}>
-                <div style={{display: 'flex'}}>
-                    <div className={s.sale}>-20%</div>
-                    <Image src={truck} alt="shippment" className={s.truck}/>
-                    <Image src={re} alt="shippment" className={s.truck}/>
-                </div>
-                <div className='d-flex align-items-center'>
-                    <Image src={like} alt="like" className={s.like}/>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                         className="bi bi-x-lg" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
-                        <path
-                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                    </svg>
+                <button
+                    onClick={edit}
+                    disabled={adminStore.editDisabled}
+                >Редактировать</button>
+                <div className='d-flex align-items-center justify-content-between'
+                     onClick={removeProduct}
+                >
+                    <Image src={cross} alt='' className={s.like}/>
                 </div>
             </div>
             <Carousel
@@ -44,41 +101,41 @@ const AdminCard = () => {
                 </Carousel.Item>
             </Carousel>
             <div className='d-flex justify-content-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                     className="bi bi-x-lg" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
-                    <path
-                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                </svg>
+                <Image src={cross} alt='' className={s.like}/>
             </div>
             <div className={s.text_block}>
-                <input
+                <div
                     className={s.tag}
-                    value={tag}
-                    onChange={(e) => setTag(e.target.value)}
-                />
+                >{brand}</div>
 
-                <ScrollableBDropdown toggleText={'Бренд'} isSearch={true}/>
+                <ScrollableBDropdown toggleText={'Бренд'} isSearch={true} data={adminStore.brands}/>
                 <input
                     className={s.name}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    defaultValue={model}
+                    onChange={(e) => adminStore.setModel(e.target.value)}
                 />
                 <input
-                    className={s.price}
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    className={s.name}
+                    defaultValue={colorway}
+                    onChange={(e) => adminStore.setColorway(e.target.value)}
                 />
-                <div className='d-flex justify-content-between mb-1'>
-                    <ScrollableBDropdown toggleText={'Категория'}/>
-                    <ScrollableBDropdown toggleText={'Линейка'}/>
+                <div>От {price}</div>
+                <div className='d-flex justify-content-between mb-1 flex-wrap'>
+                    <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>
+                    <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
+                    <div>
+                        <div>Категория: {categoryDisplay()}</div>
+                        <div>Линейка: {lineDisplay()}</div>
+                    </div>
                 </div>
-                <div className='d-flex justify-content-between'>
-                    <ScrollableBDropdown toggleText={'Пол'}/>
-                    <ScrollableBDropdown toggleText={'Размер'}/>
+                <div className='d-flex justify-content-center my-3'>
+                    <button onClick={submit} disabled={disabled}>
+                        Применить
+                    </button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default AdminCard;
+export default observer(AdminCard);
