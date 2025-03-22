@@ -10,14 +10,16 @@ import s from './FilterDropdowns.module.css'
 
 const FilterDropdowns = () => {
     return (
-        <div className={s.container}>
-            <CategoryDropdown/>
-            <BrandDropdown/>
-            <GenderDropdown/>
-            <ColorDropdown/>
-            <PriceDropdown/>
-            <FastShip/>
-            <Sale/>
+        <div>
+            <div className={s.container}>
+                <CategoryDropdown/>
+                <BrandDropdown/>
+                <GenderDropdown/>
+                <ColorDropdown/>
+                <PriceDropdown/>
+                <FastShip/>
+                <Sale/>
+            </div>
         </div>
     );
 };

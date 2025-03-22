@@ -2,9 +2,22 @@
     width: 317px;
     position: sticky;
     top: 160px;
+    z-index: 3;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    max-height: 500px;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
+.container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
 }
 @media (max-width: 1200px) {
     .container {
         width: 100%;
+        max-height: fit-content;
+        overflow-y: auto;
     }
 }
