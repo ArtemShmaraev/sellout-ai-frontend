@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import s from './TextModal.module.css'
 import {Modal} from "react-bootstrap";
-import close from "../../static/icons/x-lg.svg";
+import close from "@/static/icons/x-lg.svg";
+import Image from 'next/image'
 
 const TextModal = ({children, title, img}) => {
     const [show, setShow] = useState(false);
@@ -24,7 +25,7 @@ const TextModal = ({children, title, img}) => {
                 className={s.toggle_btn}
                 onClick={handleShow}
             >
-                <img src={img} alt="" className={s.icon}/>
+                <Image src={img} alt="" className={s.icon}/>
                 {title}
             </button>
             <Modal
@@ -35,7 +36,7 @@ const TextModal = ({children, title, img}) => {
             >
                 <Modal.Body>
                     <div className={s.close}>
-                        <img src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
+                        <Image src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
                     </div>
                     <div className='text-center'>
                         {children}

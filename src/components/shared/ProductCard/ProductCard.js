@@ -6,13 +6,20 @@ import like from '@/static/icons/heart.svg'
 import truck from '@/static/icons/truck.svg'
 import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
+import {useRouter} from "next/router";
 
 
-const ProductCard = ({model, brands, colorway, price}) => {
+const ProductCard = ({model, brands, colorway, price, id, isReturn, isFastShip, isSale}) => {
+    const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
+        }
+        for (let i = 0; i < brands.length; i++) {
+            if (brands[i].name === 'Yeezy') {
+                return 'Adidas Yeezy'
+            }
         }
         if (brands.length > 1) {
             let str = brands[0].name
@@ -34,12 +41,12 @@ const ProductCard = ({model, brands, colorway, price}) => {
     };
 
     return (
-        <div className={s.card}>
+        <div className={s.card} onClick={() => router.push(`products/${id}`)}>
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div className={s.sale}>-20%</div>
-                    <Image src={truck} alt="shippment" className={s.truck}/>
-                    <Image src={re} alt="shippment" className={s.truck}/>
+                    {isSale && <div className={s.sale}>-20%</div>}
+                    {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
+                    {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                 </div>
                 <Image src={like} alt="like" className={s.like}/>
             </div>

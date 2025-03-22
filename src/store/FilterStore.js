@@ -179,7 +179,7 @@ class FilterStore {
                 this.line_dfs(d[line["name"]], line["children"]);
             } else {
                 d[line["name"]] = {};
-                d[line["name"]]["text"] = line["name"];
+                d[line["name"]]["text"] = line["view_name"];
                 d[line["name"]]["query"] = line["full_eng_name"];
                 d[line["name"]]["is_all"] = line["is_all"];
                 d[line["name"]]["state"] = false;

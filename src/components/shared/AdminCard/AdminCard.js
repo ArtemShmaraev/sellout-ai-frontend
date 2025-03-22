@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import s from "./AdminCard.module.css";
 import shoe from "@/static/img/shoe.png";
+import shoe2 from "@/static/img/shoe2.png";
 import cross from '@/static/icons/x-lg.svg'
 import ScrollableBDropdown from "@/components/shared/UI/ScrollableBDropdown/ScrollableBDropdown";
 import {Carousel} from "react-bootstrap";
@@ -10,7 +11,7 @@ import {observer} from "mobx-react-lite";
 import {deleteProduct, updateProduct} from "@/http/productsApi";
 import {useRouter} from "next/router";
 
-const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
+const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainLine}) => {
     const router = useRouter()
     const {adminStore} = useContext(Context)
     const [disabled, setDisabled] = useState(adminStore.submitDisabled)
@@ -73,6 +74,8 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
     }
     const removeProduct = () => {
         deleteProduct(id).then((data) => console.log(data))
+        const {path, query} = router
+        router.push({path, query}, undefined, {scroll: false})
     }
     return (
         <div className={s.card}>
@@ -91,6 +94,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
                 variant='dark'
                 indicators={false}
                 interval={null}
+                slide={false}
             >
                 <Carousel.Item>
                     <Image className={s.img}
@@ -98,7 +102,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
                 </Carousel.Item>
                 <Carousel.Item>
                     <Image className={s.img}
-                         src={shoe} alt="shoe"/>
+                         src={shoe2} alt="shoe"/>
                 </Carousel.Item>
             </Carousel>
             <div className='d-flex justify-content-center'>
@@ -126,7 +130,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
                     <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
                     <div>
                         <div>Категория: {categoryDisplay()}</div>
-                        <div>Линейка: {lineDisplay()}</div>
+                        <div>Линейка: {mainLine}</div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-center my-3'>

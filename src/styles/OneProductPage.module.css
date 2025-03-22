@@ -1,0 +1,156 @@
+.container {
+    margin-top: 150px;
+}
+.photo {
+    width: 100%;
+}
+.brand {
+    font-size: 15px;
+    color: #727272;
+}
+.model {
+    font-weight: 700;
+    font-size: 20px;
+}
+.color {
+    font-size: 14px;
+    margin-bottom: 42px;
+}
+.price_default {
+    font-size: 16px;
+}
+.price_sale {
+    font-size: 19px;
+    color: #b61212;
+    margin-right: 7px;
+}
+.icons {
+    margin: 0 7px;
+}
+.modals_block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.btn_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 10px 0;
+}
+.btn_black {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    background: black;
+    color: white;
+    min-height: 40px;
+    width: 49%;
+}
+.btn_white {
+    border: 1px solid black;
+    outline: none;
+    border-radius: 7px;
+    background: white;
+    color: black;
+    min-height: 40px;
+    width: 49%;
+}
+.btn_black2 {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    background: black;
+    color: white;
+    min-height: 40px;
+    width: 32%;
+}
+.how {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+.cart_btn {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    background: black;
+    color: white;
+    min-height: 40px;
+    width: 64%;
+}
+.fav_btn {
+    border: 1px solid black;
+    outline: none;
+    border-radius: 7px;
+    background: white;
+    color: black;
+    min-height: 40px;
+    width: 34%;
+}
+.icon_block {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+}
+.link_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 15px 0;
+}
+.link {
+    color: #9a9999;
+}
+.link:hover {
+    color: #9a9999;
+}
+.more {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.more_color {
+    font-size: 14px;
+}
+.description {
+    margin: 20px 0 20px 0;
+}
+.characteristics_title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.characteristics {
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 15px;
+}
+.characteristics_text {
+    margin: 5px;
+    font-weight: 400;
+    font-size: 15px;
+}
+.more_btn {
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+    background: none;
+    border: none;
+}
+.more_text {
+    margin-right: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        margin-top: 80px;
+    }
+    .color {
+        margin-bottom: 20px;
+    }
+    .modals_block {
+
+    }
+}

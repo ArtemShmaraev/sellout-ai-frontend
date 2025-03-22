@@ -1,0 +1,32 @@
+.toggle_btn {
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    background: transparent;
+    font-size: 14px;
+    color: #727272;
+    transition: 0.3s;
+}
+.toggle_btn:hover {
+    color: #444444;
+}
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+.text {
+    margin: 30px 0;
+    font-size: 14px;
+}
+.icons {
+    margin: 0 5px;
+}
+.small_text {
+    font-size: 12px;
+}
+.link {
+    color: #9a9999;
+}
+.link:hover {
+    color: #9a9999;
+}

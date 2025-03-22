@@ -98,7 +98,7 @@ class AdminStore {
             arr.push(
                 {
                     id: el.id,
-                    name: el.name,
+                    name: el.view_name,
                     state: false
                 }
             )

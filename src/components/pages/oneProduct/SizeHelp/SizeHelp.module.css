@@ -1,0 +1,46 @@
+.toggle_btn {
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    background: transparent;
+    font-size: 14px;
+    color: #727272;
+    transition: 0.3s;
+    margin-top: 64px;
+}
+.toggle_btn:hover {
+    color: #444444;
+}
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+.ruller {
+    width: 50px;
+    margin-bottom: 20px;
+}
+.header {
+    font-size: 16px;
+    font-weight: 700;
+}
+.text {
+    font-size: 14px;
+}
+.photo {
+    height: 80px;
+}
+.description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.link {
+    color: black;
+}
+.link:hover {
+    color: black;
+}
+@media (max-width: 1000px) {
+    .toggle_btn {
+        margin-top: 20px;
+    }
+}

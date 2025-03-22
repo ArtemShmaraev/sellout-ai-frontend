@@ -1,0 +1,29 @@
+.dropdown {
+    margin: 0 10px;
+}
+.toggle_btn {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #727272;
+    background: transparent;
+}
+.btn_block {
+    display: flex;
+    text-align: start;
+    justify-content: space-between;
+    color: #727272;
+}
+.text_block {
+    font-size: 14px;
+    margin-left: 30px;
+}
+.text {
+    margin: 5px 0;
+}
+.link {
+    color: #9a9999;
+}
+.link:hover {
+    color: #9a9999;
+}

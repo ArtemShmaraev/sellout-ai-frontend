@@ -12,9 +12,13 @@ const ProductList = ({products, isAdmin}) => {
                 ?
                     products.map(el =>
                         <ProductCard model={el.model}
+                                     id={el.id}
                                      brands={el.brands}
                                      colorway={el.colorway}
                                      price={el.min_price_product_unit}
+                                     isFastShip={el.is_fast_shipping}
+                                     isReturn={el.is_return}
+                                     isSale={el.is_sale}
                                      key={el.id}/>
                     )
                     :
@@ -25,6 +29,7 @@ const ProductList = ({products, isAdmin}) => {
                                    colorway={el.colorway}
                                    categories={el.categories}
                                    lines={el.lines}
+                                   mainLine={el.main_line}
                                    price={el.min_price_product_unit}
                                    key={el.id}/>
                     )
