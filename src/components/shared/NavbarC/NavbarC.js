@@ -13,6 +13,7 @@ import AuthModal from "..//AuthModal/AuthModal";
 import Image from "next/image";
 import logo from '@/static/img/sellout_logo.svg'
 import {useRouter} from "next/router";
+import ElasticSearchModal from "@/components/shared/ElasticSearchModal/ElasticSearchModal";
 
 const NavbarC = () => {
     const router = useRouter()
@@ -75,7 +76,7 @@ const NavbarC = () => {
                             <p href="" className={s.links} style={{color: '#b61212'}}>Скидки</p>
                         </div>
                         <div>
-                            <SearchModal isDesktop={isDesktop}/>
+                            <ElasticSearchModal/>
                         </div>
                     </div>
                 }

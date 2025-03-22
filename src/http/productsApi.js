@@ -20,7 +20,7 @@ export async function fetchFilter(filter) {
     return data
 }
 export async function updateProduct(id, body) {
-    const {data} = await $host.put(`product/update/${id}`, body)
+    const {data} = await $host.post(`product/update/${id}`, body)
     return data
 }
 export async function deleteProduct(id) {

@@ -38,15 +38,18 @@ class FilterStore {
     }
     deactivateFilters(d) {
         for (const key in d) {
-            if (d.hasOwnProperty('state')) {
-                d['state'] = false
-            } else {
-                this.deactivateFilters(d[key])
+            if (key === 'path') continue
+            if (d[key] && typeof d[key] === 'object') {
+                if (d[key].hasOwnProperty('state')) {
+                    d[key]['state'] = false;
+                } else {
+                    this.deactivateFilters(d[key]);
+                }
             }
         }
-        this.activeFilters.length = 0
-        this.price[0] = this.minMaxPrice[0]
-        this.price[1] = this.minMaxPrice[1]
+        this._activeFilters = [];
+        this._allFilters.price[0] = this._allFilters.minMaxPrice[0];
+        this._allFilters.price[1] = this._allFilters.minMaxPrice[1];
     }
     reactivateFilters(query) {
         for (const key in query) {
@@ -99,13 +102,46 @@ class FilterStore {
             d = d[key]
         })
         d.state = !d.state
+        this.toggleAll(item)
         if (d.state) {
-            this._activeFilters = [...this._activeFilters, item]
+            this._activeFilters.push(item)
         } else {
             let ind = this._activeFilters.indexOf(item)
             this._activeFilters.splice(ind, 1)
         }
         this.handleScrollTo()
+    }
+    toggleAll(item) {
+        if (item.hasOwnProperty('is_all')) {
+            const deactivateList = []
+            const obj = this.findObj(this.filters, item.path[item.path.length - 2], item.path)
+            if (item.is_all) {
+                for (const key in obj) {
+                    if (obj[key].hasOwnProperty('state') && !obj[key]['is_all']) {
+                        obj[key]['state'] = false
+                        deactivateList.push(obj[key])
+                    }
+                }
+            }
+            if (!item.is_all) {
+                for (const key in obj) {
+                    if (obj[key].hasOwnProperty('state') && obj[key]['is_all']) {
+                        obj[key]['state'] = false
+                        deactivateList.push(obj[key])
+                    }
+                }
+            }
+            for (let i = 0; i < deactivateList.length; i++) {
+                this._activeFilters = this._activeFilters.filter(el => el.query !== deactivateList[i].query)
+            }
+        }
+    }
+    findObj(d, searched, path, currInd = 0) {
+        if (d.hasOwnProperty(searched)) {
+            return d[searched]
+        } else {
+            return this.findObj(d[path[currInd]], searched, path, currInd + 1)
+        }
     }
    fillCat(categories) {
         this.cat_dfs(this.filters.category, categories)
@@ -119,6 +155,7 @@ class FilterStore {
                 d[cat["name"]] = {};
                 d[cat["name"]]["text"] = cat["name"];
                 d[cat["name"]]["query"] = cat["eng_name"];
+                d[cat["name"]]["is_all"] = cat["is_all"];
                 d[cat["name"]]["state"] = false;
             }
         }
@@ -144,6 +181,7 @@ class FilterStore {
                 d[line["name"]] = {};
                 d[line["name"]]["text"] = line["name"];
                 d[line["name"]]["query"] = line["full_eng_name"];
+                d[line["name"]]["is_all"] = line["is_all"];
                 d[line["name"]]["state"] = false;
             }
         }

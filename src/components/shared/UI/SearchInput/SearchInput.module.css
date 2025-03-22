@@ -1,6 +1,6 @@
 .input {
     position: relative;
-    z-index: 6;
+    z-index: 2;
 }
 .search {
     width: 200px;

@@ -25,7 +25,7 @@ export const getServerSideProps = async (context) => {
     const colors = await fetchFilter('colors')
     const brandsArr = await fetchFilter('brands')
     const categoriesArr = await fetchFilter('categories')
-    const linesArr = await fetchFilter('lines')
+    const linesArr = await fetchFilter('line_no_child')
     return { props: {products, categories, lines, colors, brandsArr,
         categoriesArr, linesArr} }
 }

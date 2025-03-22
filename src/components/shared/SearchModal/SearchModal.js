@@ -5,7 +5,7 @@ import close from '@/static/icons/x-lg.svg'
 import SearchInput from "../UI/SearchInput/SearchInput";
 import Image from "next/image";
 
-const SearchModal = ({isDesktop}) => {
+const SearchModal = () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
         <>

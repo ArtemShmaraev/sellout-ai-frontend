@@ -1,0 +1,42 @@
+.toggle_btn {
+    width: 200px;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    outline: none;
+    position: relative;
+    z-index: 7;
+    font-style: italic;
+    font-size: 14px;
+    color: #9a9999;
+    background: white;
+    padding: 5px;
+}
+.btn_text {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+}
+.search_block {
+    background: white;
+    height: 50vh;
+    padding: 20px 0;
+}
+.close_block {
+    display: flex;
+    justify-content: flex-end;
+}
+.icon {
+    cursor: pointer;
+}
+.main_block {
+    width: 50%;
+}

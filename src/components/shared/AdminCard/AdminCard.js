@@ -60,18 +60,19 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price}) => {
         setDisabled(false)
     }
     const submit = async () => {
-        // const data = adminStore.getAllData2()
-        // await updateProduct(id, data).then(() => console.log('ok'))
-        //
-        // adminStore.clearAll()
-        // const {path, query} = router
-        // router.push({path, query}, undefined, {scroll: false})
+        const data = adminStore.getAllData()
+        console.log(data)
+        await updateProduct(id, data).then((data) => console.log(data))
+
+        adminStore.clearAll()
+        const {path, query} = router
+        router.push({path, query}, undefined, {scroll: false})
         adminStore.clickEdit()
         adminStore.clickSubmit()
         setDisabled(true)
     }
     const removeProduct = () => {
-        deleteProduct(id).then(() => console.log('ok'))
+        deleteProduct(id).then((data) => console.log(data))
     }
     return (
         <div className={s.card}>

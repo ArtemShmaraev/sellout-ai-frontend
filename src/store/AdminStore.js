@@ -167,7 +167,6 @@ class AdminStore {
         if (this.colorway) {
             d.colorway = this.colorway
         }
-        console.log(JSON.stringify(d))
         return JSON.stringify(d)
     }
     getAllData2() {
