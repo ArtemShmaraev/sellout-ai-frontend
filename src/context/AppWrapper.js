@@ -3,6 +3,7 @@ import {productStore} from "@/store/ProductsStore";
 import {desktopStore} from "@/store/DesktopStore";
 import {filterStore} from "@/store/FilterStore";
 import {adminStore} from "@/store/AdminStore";
+import {userStore} from "@/store/UserStore";
 
 export const Context = createContext(null);
 
@@ -11,7 +12,8 @@ export function AppWrapper({ children }) {
         desktopStore,
         productStore,
         filterStore,
-        adminStore
+        adminStore,
+        userStore
     }
     return (
         <Context.Provider value={sharedState}>

@@ -97,6 +97,10 @@
 .forget_pass:hover {
     color: #343434;
 }
+.validate {
+    margin: 0;
+    color: #b61212;
+}
 @media (max-width: 1000px) {
     .toggle_btn {
         width: 100%;

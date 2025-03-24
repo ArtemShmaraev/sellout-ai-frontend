@@ -27,7 +27,7 @@ export async function deleteProduct(id) {
     const {data} = await $host.delete(`product/update/${id}`)
     return data
 }
-export async function fetchOneProduct(id) {
-    const {data} = await $host.get(`product/products/${id}`)
+export async function fetchOneProduct(slug) {
+    const {data} = await $host.get(`product/slug/${slug}`)
     return data
 }

@@ -25,7 +25,17 @@ class FilterStore {
                 },
             },
             price: [null, null],
-            minMaxPrice: [null, null]
+            minMaxPrice: [null, null],
+            is_fast_ship: {
+                text: 'Мгновенная доставка',
+                query: 'is_fast_ship',
+                state: false,
+            },
+            is_sale: {
+                text: 'Скидка',
+                query: 'is_sale',
+                state: false,
+            },
         }
         this._activeFilters = []
         makeAutoObservable(this)
@@ -54,7 +64,8 @@ class FilterStore {
     reactivateFilters(query) {
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
-                || key === 'price_min' || key === 'price_max') continue
+                || key === 'price_min' || key === 'price_max' || key === 'is_collab'
+                || key === 'brand') continue
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     this.dfsActivate(this.filters[key], el)

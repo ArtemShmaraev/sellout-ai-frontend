@@ -62,9 +62,8 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
     }
     const submit = async () => {
         const data = adminStore.getAllData()
-        console.log(data)
         await updateProduct(id, data).then((data) => console.log(data))
-
+        //TODO убрать console.log
         adminStore.clearAll()
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
@@ -74,6 +73,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
     }
     const removeProduct = () => {
         deleteProduct(id).then((data) => console.log(data))
+        //TODO убрать console.log
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
     }

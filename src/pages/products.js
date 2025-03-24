@@ -38,6 +38,7 @@ const Products = ({products, categories, lines, colors}) => {
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
         filterStore.fillColors(colors)
+        filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)

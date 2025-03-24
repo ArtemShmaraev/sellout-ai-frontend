@@ -17,15 +17,17 @@ import Recommendations from "@/components/shared/Recommendations/Recommendations
 import Image from 'next/image'
 import {fetchOneProduct} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
+import {useRouter} from "next/router";
 
 export const getServerSideProps = async ({params}) => {
-    const product = await fetchOneProduct(params.id)
+    const product = await fetchOneProduct(params.slug)
     return { props: {product} }
 }
 
 const OneProductPage = ({product}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
+    const router = useRouter()
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
@@ -44,6 +46,21 @@ const OneProductPage = ({product}) => {
         }
         return brands[0].name
     }
+    const clickBrand = (brands) => {
+        const query = {}
+        if (brands.length > 1) {
+            query.brand = []
+            for (let i = 0; i < brands.length; i++) {
+                query.brand.push(brands[i].name)
+            }
+        } else {
+            query.line = brands[0].name
+        }
+        router.push({
+            pathname: '/products',
+            query: query
+        })
+    }
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1000) {
@@ -57,7 +74,9 @@ const OneProductPage = ({product}) => {
                     <Col lg={7}>
                         {!isDesktop &&
                             <>
-                                <div className={s.brand}>{brandsDisplay(product.brands)}</div>
+                                <a className={s.brand}
+                                   onClick={() => clickBrand(product.brands)}
+                                >{brandsDisplay(product.brands)}</a>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div
@@ -171,7 +190,9 @@ const OneProductPage = ({product}) => {
                     <Col lg={5}>
                         {isDesktop &&
                             <>
-                                <div className={s.brand}>{brandsDisplay(product.brands)}</div>
+                                <a className={s.brand}
+                                   onClick={() => clickBrand(product.brands)}
+                                >{brandsDisplay(product.brands)}</a>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div

@@ -9,7 +9,7 @@ import Image from 'next/image'
 import {useRouter} from "next/router";
 
 
-const ProductCard = ({model, brands, colorway, price, id, isReturn, isFastShip, isSale}) => {
+const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale}) => {
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
     const brandsDisplay = (brands) => {
@@ -41,7 +41,7 @@ const ProductCard = ({model, brands, colorway, price, id, isReturn, isFastShip, 
     };
 
     return (
-        <div className={s.card} onClick={() => router.push(`products/${id}`)}>
+        <div className={s.card} onClick={() => router.push(`products/${slug}`)}>
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>-20%</div>}
