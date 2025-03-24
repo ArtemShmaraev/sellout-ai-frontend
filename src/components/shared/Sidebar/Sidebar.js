@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './Sidebar.module.css'
 import list from '@/static/icons/list.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -8,10 +8,13 @@ import truck from '@/static/icons/truck.svg'
 import tg from "@/static/icons/telegram.png";
 import AuthModal from "../AuthModal/AuthModal";
 import Image from "next/image";
+import {Context} from "@/context/AppWrapper";
+import {observer} from "mobx-react-lite";
 
 const Sidebar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSectionOpen, setIsSectionOpen] = useState(false)
+    const {userStore} = useContext(Context)
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
@@ -33,7 +36,7 @@ const Sidebar = () => {
                         <div className={s.auth_block}>
                             <div className={s.person_block}>
                                 <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                <div>Denis</div>
+                                <div>{userStore.isLogged ? userStore.firstName : 'Войдите'}</div>
                             </div>
                             <div>
                                 <Image src={arrow} alt=""/>
@@ -159,4 +162,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default observer(Sidebar);

@@ -1,9 +1,66 @@
 import MainLayout from "@/layout/MainLayout";
+import {Container} from "react-bootstrap";
+import BigPicture from "@/components/shared/BigPicture/BigPicture";
+import ProductCard from "@/components/shared/ProductCard/ProductCard";
+import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
+import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
+import s from '@/styles/Home.module.css'
 
 export default function Home() {
   return (
     <MainLayout>
-      hui
+        <Container style={{marginTop: '150px', marginBottom: '100px'}}>
+            <BigPicture/>
+            <BigPicture reversed={true}/>
+            <div className={s.big_pict_block}>
+                <BigPicture vertical={true}/>
+                <BigPicture vertical={true}/>
+            </div>
+            <hr className={s.hr}/>
+            <div className={s.collections}>
+                <div className='d-flex justify-content-between align-items-center'>
+                    <p className={s.title}>Кроссовки</p>
+                    <a href="" className={s.link}>Посмотреть все</a>
+                </div>
+                <ScrollableBlock>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                </ScrollableBlock>
+            </div>
+            <hr className={s.hr}/>
+            <div className={s.collections}>
+                <div className='d-flex justify-content-between align-items-center'>
+                    <p className={s.title}>Хуевки</p>
+                    <a href="" className={s.link}>Посмотреть все</a>
+                </div>
+                <ScrollableBlock>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                </ScrollableBlock>
+            </div>
+            <hr className={s.hr}/>
+            <BuyoutModal/>
+        </Container>
     </MainLayout>
   )
 }

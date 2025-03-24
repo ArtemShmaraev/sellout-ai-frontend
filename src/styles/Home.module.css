@@ -1,0 +1,26 @@
+.big_pict_block {
+    display: flex;
+}
+.collections {
+
+}
+.hr {
+    margin: 70px 0;
+}
+.title {
+    font-size: 20px;
+    margin-left: 25px;
+}
+.link {
+    text-decoration: underline;
+    font-size: 14px;
+    color: #888888;
+}
+.link:hover {
+    color: #464646;
+}
+@media (max-width: 1000px) {
+    .big_pict_block {
+        flex-wrap: wrap;
+    }
+}

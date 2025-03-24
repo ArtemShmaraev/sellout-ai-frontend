@@ -31,7 +31,7 @@
 }
 .logo {
     font-size: 40px;
-    transform: translate(-25%, -5px);
+    transform: translate(-5%, -5px);
     user-select: none;
     text-align: center;
     cursor: pointer;

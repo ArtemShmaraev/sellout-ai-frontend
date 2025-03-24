@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container} from "react-bootstrap";
 import s from './NavbarC.module.css'
 import like from '@/static/icons/heart.svg'
 import person from '@/static/icons/person-circle.svg'
 import cart from '@/static/icons/bag.svg'
 import truck from '@/static/icons/truck.svg'
-import SearchInput from "../UI/SearchInput/SearchInput";
 import Megamenu from "../UI/Megamenu/Megamenu";
 import Sidebar from "../Sidebar/Sidebar";
 import SearchModal from "../SearchModal/SearchModal";
@@ -14,8 +13,11 @@ import Image from "next/image";
 import logo from '@/static/img/sellout_logo.svg'
 import {useRouter} from "next/router";
 import ElasticSearchModal from "@/components/shared/ElasticSearchModal/ElasticSearchModal";
+import {Context} from "@/context/AppWrapper";
+import {observer} from "mobx-react-lite";
 
 const NavbarC = () => {
+    const {userStore} = useContext(Context)
     const router = useRouter()
     const goToMainPage = () => {
         router.push('/')
@@ -47,14 +49,14 @@ const NavbarC = () => {
                         }
                     </div>
                     <div className={s.block}>
-                        <Image className={s.logo} alt='' src={logo} height={isDesktop ? 50 : 40} onClick={goToMainPage}/>
+                        <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 30} onClick={goToMainPage}/>
                     </div>
                     <div className={s.block}>
                         <Image width={25} src={like} alt="" className={s.icons}/>
                         {isDesktop &&
                             <AuthModal>
                                 <Image width={25} src={person} alt="" className={s.icons}/>
-                                <div className={s.name}>Денис</div>
+                                <div className={s.name}>{userStore.isLogged ? userStore.firstName : 'Войдите'}</div>
                             </AuthModal>
                         }
                         <Image width={25} src={cart} alt="" className={s.icons}/>
@@ -85,4 +87,4 @@ const NavbarC = () => {
     );
 };
 
-export default NavbarC;
+export default observer(NavbarC);

@@ -19,11 +19,13 @@ const AuthModal = ({children}) => {
     const [lastName, setLastName] = useState('')
     const [isMailingList, setIsMailingList] = useState(true)
 
+    const [emailBusy, setEmailBusy] = useState(false)
+    const [wrong, setWrong] = useState(false)
     const [validEmail, setValidEmail] = useState(true);
 
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        setValidEmail(emailRegex.test(email));
+        return emailRegex.test(email);
     };
 
     useEffect(() => {
@@ -39,10 +41,11 @@ const AuthModal = ({children}) => {
         setShow(true)
     };
     const reg = async () => {
-        validateEmail()
-        if (!validEmail) {
+        if (!validateEmail()) {
+            setValidEmail(false);
             return false
         }
+        setValidEmail(true);
         const data = {
             username: email,
             password: password,
@@ -51,17 +54,40 @@ const AuthModal = ({children}) => {
             gender: userStore.gender,
             is_mailing_list: isMailingList
         }
-        console.log(JSON.stringify(data))
-        const tokens = await registration(JSON.stringify(data))
-        console.log(tokens)
+        try {
+            const res = await registration(JSON.stringify(data))
+            setEmailBusy(false)
+            userStore.setIsLogged(true)
+            userStore.setUsername(res.username)
+            userStore.setFirstName(res.first_name)
+            userStore.setLastName(res.last_name)
+            userStore.setAccessToken(res.access_token)
+            setShow(false)
+        } catch (e) {
+            setEmailBusy(true)
+        }
     }
     const log = async () => {
+        if (!validateEmail()) {
+            setValidEmail(false);
+            return false
+        }
+        setValidEmail(true);
         const data = {
             username: email,
             password: password,
         }
-        const tokens = await login(JSON.stringify(data))
-        console.log(tokens)
+        try {
+            const res = await login(JSON.stringify(data))
+            setWrong(false)
+            userStore.setIsLogged(true)
+            userStore.setUsername(res.username)
+            userStore.setFirstName(res.first_name)
+            userStore.setLastName(res.last_name)
+            setShow(false)
+        } catch (e) {
+            setWrong(true)
+        }
     }
     return (
         <div>
@@ -110,6 +136,9 @@ const AuthModal = ({children}) => {
                                     {!validEmail &&
                                         <p className={s.validate}>Некорректный формат почты</p>
                                     }
+                                    {emailBusy &&
+                                        <p className={s.validate}>Пользователь с таким email уже существует</p>
+                                    }
                                     <p className={s.description}>Вам придёт письмо-подтверждение</p>
                                 </div>
                                 <div className={s.input_block}>
@@ -154,6 +183,9 @@ const AuthModal = ({children}) => {
                                            value={email}
                                            onChange={(e) => setEmail(e.target.value)}
                                     />
+                                    {!validEmail &&
+                                        <p className={s.validate}>Некорректный формат почты</p>
+                                    }
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
@@ -162,7 +194,10 @@ const AuthModal = ({children}) => {
                                            onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <button className={s.reg_btn}>Зарегистрироваться</button>
+                                <button className={s.reg_btn} onClick={log}>Войти</button>
+                                {wrong &&
+                                    <p className={s.validate}>Неверный логин или пароль</p>
+                                }
                                 <div className='d-flex justify-content-center'>
                                     <a href="" className={s.forget_pass}>Забыли пароль?</a>
                                 </div>

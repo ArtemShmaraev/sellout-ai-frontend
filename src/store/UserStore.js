@@ -2,13 +2,21 @@ import {makeAutoObservable} from "mobx";
 
 class UserStore {
     constructor() {
+        this._isLogged = false
         this._username = ''
         this._firstName = ''
         this._lastName = ''
         this._address = ''
         this._post = ''
         this._gender = 'female'
+        this._accessToken = ''
         makeAutoObservable(this)
+    }
+    get isLogged() {
+        return this._isLogged
+    }
+    setIsLogged(bool) {
+        return this._isLogged = bool
     }
     get username() {
         return this._username
@@ -45,6 +53,12 @@ class UserStore {
     }
     setGender(gender) {
         this._gender = gender
+    }
+    get accessToken() {
+        return this._accessToken
+    }
+    setAccessToken(token) {
+        this._accessToken = token
     }
 }
 

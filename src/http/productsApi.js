@@ -12,6 +12,7 @@ export async function fetchProductsPage(query) {
         }
     })
     console.log(allQuery)
+    //TODO delete log
     const {data} = await $host.get(`product/products/?${allQuery}`)
     return data
 }
