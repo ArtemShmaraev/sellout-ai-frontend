@@ -10,7 +10,20 @@
     background: black;
     border-radius: 50%;
     cursor: pointer;
+
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+.scroll_btn.visible {
+    opacity: 1;
 }
 .icon {
     color: white;
+}
+
+@media (max-width: 600px) {
+    .scroll_btn {
+        bottom: 20px;
+        right: 20px;
+    }
 }
