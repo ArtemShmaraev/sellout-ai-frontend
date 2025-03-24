@@ -30,7 +30,7 @@ const ScrollUp = () => {
 
     return (
         <div className={cn(s.scroll_btn, { [s.visible]: visible })} onClick={click}>
-            <Image width={30} src={arrow} alt='' className={s.icon}/>
+            <Image width={25} src={arrow} alt='' className={s.icon}/>
         </div>
     );
 };

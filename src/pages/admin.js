@@ -65,7 +65,7 @@ const Admin = ({products, categories, lines, colors, brandsArr, categoriesArr,
     }
     const clearFilters = () => {
         filterStore.deactivateFilters(filterStore.filters)
-        router.push('/products', undefined, {scroll: false})
+        router.push('/admin', undefined, {scroll: false})
         filterStore.handleScrollTo()
     }
     return (

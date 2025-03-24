@@ -1,0 +1,79 @@
+.alphabet_block {
+    position: sticky;
+    top: 90px;
+    background: white;
+    padding: 20px 0;
+}
+.alphabet {
+    display: flex;
+}
+.letter {
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    width: 100%;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+/*.letter:hover {*/
+/*    background: #E6E6E6;*/
+/*}*/
+.letter:disabled {
+    opacity: 0.5;
+}
+.main_block {
+    display: flex;
+}
+.search_block {
+    position: sticky;
+    top: 140px;
+    width: 300px;
+    padding-top: 10px;
+    padding-right: 30px;
+}
+.big_letter {
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+}
+.brands_block {
+    display: flex;
+    flex-wrap: wrap;
+}
+.brand {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 20px 0;
+}
+.brand_link {
+    text-decoration: none;
+    color: black;
+}
+.like {
+    cursor: pointer;
+    margin: 0 10px;
+}
+.auth_btn {
+    outline: none;
+    border: none;
+    background: black;
+    color: white;
+    margin: 10px 0;
+    padding: 6px;
+    border-radius: 7px;
+}
+.link {
+    color: #9a9999;
+}
+.text {
+    margin-top: 20px;
+}
+@media (max-width: 600px) {
+    .cont {
+        margin: 0;
+        padding: 15px;
+    }
+}

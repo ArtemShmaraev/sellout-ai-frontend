@@ -22,6 +22,26 @@ const NavbarC = () => {
     const goToMainPage = () => {
         router.push('/')
     }
+    const goToFastShip = () => {
+        const query = {}
+        query.is_fast_ship = 'is_fast_ship'
+        router.push(
+            {
+                pathname: '/products',
+                query: query
+            }
+        )
+    }
+    const goToSale = () => {
+        const query = {}
+        query.is_sale = 'is_sale'
+        router.push(
+            {
+                pathname: '/products',
+                query: query
+            }
+        )
+    }
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
@@ -71,11 +91,15 @@ const NavbarC = () => {
                             <Megamenu className={s.links}>Обувь</Megamenu>
                             <Megamenu className={s.links}>Одежда</Megamenu>
                             <Megamenu className={s.links}>Аксессуары</Megamenu>
-                            <p href="" className={s.links}>
+                            <p href="" className={s.links}
+                               onClick={goToFastShip}
+                            >
                                 Мгновенная доставка
                                 <Image src={truck} alt="" className={s.truck}/>
                             </p>
-                            <p href="" className={s.links} style={{color: '#b61212'}}>Скидки</p>
+                            <p href="" className={s.links} style={{color: '#b61212'}}
+                               onClick={goToSale}
+                            >Скидки</p>
                         </div>
                         <div>
                             <ElasticSearchModal/>

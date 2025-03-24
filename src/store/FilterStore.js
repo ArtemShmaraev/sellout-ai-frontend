@@ -269,6 +269,20 @@ class FilterStore {
     get minMaxPrice() {
         return this._allFilters.minMaxPrice
     }
+    get checkedSale() {
+        if (this.filters.is_sale.state) {
+            return [this.filters.is_sale.query]
+        } else {
+            return []
+        }
+    }
+    get checkedFastShip() {
+        if (this.filters.is_fast_ship.state) {
+            return [this.filters.is_fast_ship.query]
+        } else {
+            return []
+        }
+    }
     setRef(ref) {
         this._ref = ref
     }
