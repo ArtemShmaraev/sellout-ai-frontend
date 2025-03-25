@@ -5,6 +5,7 @@ import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
+import React from "react";
 
 export default function Home() {
   return (
@@ -23,18 +24,17 @@ export default function Home() {
                     <a href="" className={s.link}>Посмотреть все</a>
                 </div>
                 <ScrollableBlock>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
                 </ScrollableBlock>
             </div>
             <hr className={s.hr}/>
@@ -44,18 +44,17 @@ export default function Home() {
                     <a href="" className={s.link}>Посмотреть все</a>
                 </div>
                 <ScrollableBlock>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
+                    <ProductCard smallCard={true}/>
                 </ScrollableBlock>
             </div>
             <hr className={s.hr}/>

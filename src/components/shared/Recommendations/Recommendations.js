@@ -9,18 +9,17 @@ const Recommendations = () => {
             <hr/>
             <p className={s.title}>Рекомендации</p>
             <ScrollableBlock>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
             </ScrollableBlock>
             <hr/>
         </>

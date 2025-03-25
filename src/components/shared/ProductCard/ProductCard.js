@@ -14,7 +14,7 @@ import {Context} from "@/context/AppWrapper";
 
 
 const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
-                         id, inWishlist}) => {
+                         id, inWishlist, smallCard}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
@@ -60,7 +60,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         setIsInWishlist(false)
     }
     return (
-        <div className={s.card} onClick={() => router.push(`products/${slug}`)}>
+        <div className={smallCard ? s.sm_card : s.card} onClick={() => router.push(`products/${slug}`)}>
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>-20%</div>}
@@ -77,7 +77,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
             <Image
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                className={s.img}
+                className={smallCard ? s.sm_img : s.img}
                 src={isHovered ? shoe2 : shoe} alt="shoe"/>
             <div className={s.text_block}>
                 <div className={s.tag}>{brandsDisplay(brands)}</div>

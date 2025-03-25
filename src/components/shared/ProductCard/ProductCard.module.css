@@ -53,6 +53,21 @@
     color: #222222;
     margin-top: auto;
 }
+.sm_card {
+    width: 210px;
+    height: 270px;
+    margin: 0 0 0 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+.sm_img {
+    height: 100px;
+    width: 150px;
+    align-self: center;
+}
 
 @media (max-width: 1200px) {
     .card {

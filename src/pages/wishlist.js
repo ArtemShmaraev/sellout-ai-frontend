@@ -9,6 +9,7 @@ import React, {useContext} from "react";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {useRouter} from "next/router";
+import {observer} from "mobx-react-lite";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -48,7 +49,7 @@ const Wishlist = ({wishlist}) => {
             <Container style={{marginTop: '130px'}}>
                 <h3>Избранное</h3>
                 {
-                    wishlist.length &&
+                    wishlist.length > 0 &&
                     <p>{formOfWord(wishlist.length)}</p>
                 }
                 <div className={s.wishlist_cont}>
@@ -93,4 +94,4 @@ const Wishlist = ({wishlist}) => {
     );
 };
 
-export default Wishlist;
+export default observer(Wishlist);

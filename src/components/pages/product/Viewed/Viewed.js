@@ -8,16 +8,17 @@ const Viewed = () => {
         <div>
             <p className={s.title}>Ранее просмотренные</p>
             <ScrollableBlock>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
+                <ProductCard smallCard={true}/>
             </ScrollableBlock>
             <hr/>
         </div>
