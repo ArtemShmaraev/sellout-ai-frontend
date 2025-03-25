@@ -45,6 +45,9 @@ const NavbarC = () => {
             }
         )
     }
+    const goToAccount = () => {
+        router.push('/account')
+    }
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
@@ -77,9 +80,17 @@ const NavbarC = () => {
                     <div className={s.block}>
                         <Image width={25} src={like} alt="" className={s.icons} onClick={goToWishlist}/>
                         {isDesktop &&
+                        userStore.isLogged
+                            ?
+                            <div onClick={goToAccount} className={s.auth_block}>
+                                <Image width={25} src={person} alt="" className={s.icons}/>
+                                <div className={s.name}>{userStore.firstName}</div>
+                            </div>
+                            :
+                            isDesktop &&
                             <AuthModal>
                                 <Image width={25} src={person} alt="" className={s.icons}/>
-                                <div className={s.name}>{userStore.isLogged ? userStore.firstName : 'Войдите'}</div>
+                                <div className={s.name}>Войдите</div>
                             </AuthModal>
                         }
                         <Image width={25} src={cart} alt="" className={s.icons}/>

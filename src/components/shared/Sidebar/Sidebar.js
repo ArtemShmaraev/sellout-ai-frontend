@@ -10,14 +10,20 @@ import AuthModal from "../AuthModal/AuthModal";
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
+import {useRouter} from "next/router";
 
 const Sidebar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSectionOpen, setIsSectionOpen] = useState(false)
     const {userStore} = useContext(Context)
+    const router = useRouter()
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
+    }
+    const goToAccount = () => {
+        handleClose()
+        router.push('/account')
     }
     return (
         <>
@@ -32,17 +38,32 @@ const Sidebar = () => {
                         <h2>SELLOUT</h2>
                         <Image src={close} alt="" onClick={handleClose}/>
                     </div>
-                    <AuthModal>
-                        <div className={s.auth_block}>
-                            <div className={s.person_block}>
-                                <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                <div>{userStore.isLogged ? userStore.firstName : 'Войдите'}</div>
+                    {
+                        userStore.isLogged
+                        ?
+                            <div className={s.auth_block} onClick={goToAccount}>
+                                <div className={s.person_block}>
+                                    <Image width={25} src={person} alt="" className={s.person_icon}/>
+                                    <div>{userStore.firstName}</div>
+                                </div>
+                                <div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
                             </div>
-                            <div>
-                                <Image src={arrow} alt=""/>
-                            </div>
-                        </div>
-                    </AuthModal>
+                            :
+                            <AuthModal>
+                                <div className={s.auth_block}>
+                                    <div className={s.person_block}>
+                                        <Image width={25} src={person} alt="" className={s.person_icon}/>
+                                        <div>Войдите'</div>
+                                    </div>
+                                    <div>
+                                        <Image src={arrow} alt=""/>
+                                    </div>
+                                </div>
+                            </AuthModal>
+
+                    }
                     <hr/>
                     {
                         !isSectionOpen

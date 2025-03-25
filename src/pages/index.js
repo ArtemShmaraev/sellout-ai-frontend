@@ -17,7 +17,6 @@ export default function Home() {
                 <BigPicture vertical={true}/>
                 <BigPicture vertical={true}/>
             </div>
-            <hr className={s.hr}/>
             <div className={s.collections}>
                 <div className='d-flex justify-content-between align-items-center'>
                     <p className={s.title}>Кроссовки</p>
@@ -37,7 +36,6 @@ export default function Home() {
                     <ProductCard smallCard={true}/>
                 </ScrollableBlock>
             </div>
-            <hr className={s.hr}/>
             <div className={s.collections}>
                 <div className='d-flex justify-content-between align-items-center'>
                     <p className={s.title}>Хуевки</p>

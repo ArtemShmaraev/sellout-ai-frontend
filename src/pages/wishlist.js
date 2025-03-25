@@ -10,6 +10,7 @@ import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
+import Recommendations from "@/components/shared/Recommendations/Recommendations";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -89,6 +90,7 @@ const Wishlist = ({wishlist}) => {
                             </div>
                     }
                 </div>
+                <Recommendations/>
             </Container>
         </MainLayout>
     );
