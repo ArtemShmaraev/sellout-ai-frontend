@@ -1,22 +1,24 @@
-import {$host} from "@/http/index";
+import {$authHost, $host} from "@/http/index";
+import Cookies from 'js-cookie'
 
 export async function registration(body) {
     const {data} = await $host.post(`user/register`, body)
-    console.log(data)
-    //TODO delete log
+    Cookies.set('access_token', data.access)
+    Cookies.set('refresh_token', data.refresh)
     return data
 }
 export async function login(body) {
     const {data} = await $host.post(`user/login`, body)
-    console.log(data)
-    //TODO delete log
+    Cookies.set('access_token', data.access)
+    Cookies.set('refresh_token', data.refresh)
     return data
 }
-export async function checkAuth(token) {
-    const {data} = await $host.post('user/token/verify/', token)
+export async function checkAuth() {
+    const {data} = await $authHost.post('user/token/verify/')
     return data
 }
 export async function refreshToken(token) {
-    const {data} = await $host.post('user/token/refresh/', token)
+    const {data} = await $authHost.post('user/token/refresh/', token)
+    Cookies.set('access_token', data.access)
     return data
 }

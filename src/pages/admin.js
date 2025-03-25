@@ -57,7 +57,7 @@ const Admin = ({products, categories, lines, colors, collections, brandsArr, cat
         if (width <= 1200) {
             setIsDesktop(false)
         }
-    }, [products])
+    }, [])
     const handleClick = () => {
         if (isDesktop) {
             setIsOpen(!isOpen)

@@ -6,6 +6,7 @@ import {adminStore} from "@/store/AdminStore";
 import {userStore} from "@/store/UserStore";
 import {refreshToken} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
+import Cookies from 'js-cookie';
 
 export const Context = createContext(null);
 
@@ -18,29 +19,25 @@ export default function AppWrapper({ children }) {
         userStore
     }
     useEffect(() => {
-        const token = localStorage.getItem('refresh_token');
-        const data = {
-            refresh: token
-        }
-        console.log(JSON.stringify(data), '\nok')
+        const token = Cookies.get('refresh_token')
+        const refreshObj = JSON.stringify({refresh: token})
+        console.log(refreshObj)
         if (token) {
-            refreshToken(JSON.stringify(data))
-                .then((res) => {
-                    const {access} = res
-                    const data = jwtDecode(access)
-                    userStore.setIsLogged(true)
-                    userStore.setId(data.user_id)
-                    userStore.setUsername(data.username)
-                    userStore.setFirstName(data.first_name)
-                    userStore.setLastName(data.last_name)
-                    userStore.setAccessToken(data.access)
-            }).catch((e) => {
-                console.log(e.message)
-                //TODO delete log
-                userStore.setIsLogged(false)
+            refreshToken(refreshObj).then((data) => {
+                // Save the new token
+                Cookies.set('access_token', data.access)
+                // Decode token to get user data
+                const userData = jwtDecode(data.access)
+                // Set user data in userStore
+                userStore.setIsLogged(true)
+                userStore.setId(userData.id)
+                userStore.setUsername(userData.username)
+                userStore.setFirstName(userData.first_name)
+                userStore.setLastName(userData.last_name)
+
             })
         }
-    }, []);
+    }, [])
 
     return (
         <Context.Provider value={sharedState}>
