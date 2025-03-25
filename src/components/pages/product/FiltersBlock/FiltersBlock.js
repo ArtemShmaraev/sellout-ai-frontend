@@ -28,6 +28,7 @@ const FiltersBlock = () => {
         changeQuery(query, 'gender', filterStore.checkedGendersQuery)
         changeQuery(query, 'category', filterStore.checkedCategory)
         changeQuery(query, 'line', filterStore.checkedLine)
+        changeQuery(query, 'collection', filterStore.checkedCollectionsQuery)
         changeQuery(query, 'color', filterStore.checkedColorsQuery)
         changeQuery(query, 'is_fast_ship', filterStore.checkedFastShip)
         changeQuery(query, 'is_sale', filterStore.checkedSale)

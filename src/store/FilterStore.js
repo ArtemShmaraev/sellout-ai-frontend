@@ -6,6 +6,7 @@ class FilterStore {
         this._allFilters = {
             category: {},
             line: {},
+            collection: {},
             color: {},
             gender: {
                 M: {
@@ -159,9 +160,9 @@ class FilterStore {
    }
     cat_dfs(d, node) {
         for (let cat of node) {
-            if ("subcategories" in cat) {
+            if ("children" in cat) {
                 d[cat["name"]] = {};
-                this.cat_dfs(d[cat["name"]], cat["subcategories"]);
+                this.cat_dfs(d[cat["name"]], cat["children"]);
             } else {
                 d[cat["name"]] = {};
                 d[cat["name"]]["text"] = cat["name"];
@@ -205,6 +206,31 @@ class FilterStore {
             }
         }
         return checkedCat
+    }
+    get collections() {
+        const arr = []
+        for (const key in this.filters.collection) {
+            arr.push({...this.filters.collection[key]})
+        }
+        return arr
+    }
+    fillCollections(collection) {
+        collection.forEach(el => {
+            this.filters.collection[el.name] = {
+                text: el.name,
+                query: el.query_name,
+                state: false
+            }
+        })
+    }
+    get checkedCollectionsQuery() {
+        const arr = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'collection') {
+                arr.push(this.activeFilters[key].query)
+            }
+        }
+        return arr
     }
     get gender() {
         const arr = []

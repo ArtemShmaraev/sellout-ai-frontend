@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
-import s from './ColorDropdown.module.css'
+import s from './CollectionsDropdown.module.css'
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import {useRouter} from "next/router";
 
-const ColorDropdown = () => {
+const CollectionsDropdown = () => {
     const {filterStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ const ColorDropdown = () => {
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-        changeQuery(query, 'color', filterStore.checkedColorsQuery)
+        changeQuery(query, 'collection', filterStore.checkedCollectionsQuery)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
@@ -45,7 +45,7 @@ const ColorDropdown = () => {
                     className={s.dropdown_toggle}
                 >
                     <div className={s.dropdown_toggle_text}>
-                        Цвет
+                        Коллаборации
                         <Arrow isOpen={isOpen}/>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ const ColorDropdown = () => {
                 <div>
                     <div className={s.dropdown_items_block}>
                         {
-                            filterStore.color.map(item =>
+                            filterStore.collections.map(item =>
                                 <div
                                     key={item.query}
                                     className={s.dropdown_item}
@@ -66,7 +66,6 @@ const ColorDropdown = () => {
                                         <CustomCheckbox
                                             labelText={item.text}
                                             checked={item.state}
-                                            color={item.hex}
                                         />
                                     </div>
                                 </div>
@@ -79,4 +78,4 @@ const ColorDropdown = () => {
     )
 };
 
-export default ColorDropdown;
+export default CollectionsDropdown;

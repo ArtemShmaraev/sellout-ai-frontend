@@ -12,3 +12,11 @@ export async function login(body) {
     //TODO delete log
     return data
 }
+export async function checkAuth(token) {
+    const {data} = await $host.post('user/token/verify/', token)
+    return data
+}
+export async function refreshToken(token) {
+    const {data} = await $host.post('user/token/refresh/', token)
+    return data
+}

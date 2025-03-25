@@ -7,6 +7,7 @@ import PriceDropdown from "./PriceDropdown/PriceDropdown";
 import FastShip from "./FastShip/FastShip";
 import Sale from "./Sale/Sale";
 import s from './FilterDropdowns.module.css'
+import CollectionsDropdown from "@/components/pages/product/FilterDropdowns/CollectionsDropdown/CollectionsDropdown";
 
 const FilterDropdowns = () => {
     return (
@@ -14,6 +15,7 @@ const FilterDropdowns = () => {
             <div className={s.container}>
                 <CategoryDropdown/>
                 <BrandDropdown/>
+                <CollectionsDropdown/>
                 <GenderDropdown/>
                 <ColorDropdown/>
                 <PriceDropdown/>

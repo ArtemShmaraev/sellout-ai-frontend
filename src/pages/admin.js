@@ -23,14 +23,15 @@ export const getServerSideProps = async (context) => {
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
+    const collections = await fetchFilter('collections')
     const brandsArr = await fetchFilter('brands')
     const categoriesArr = await fetchFilter('categories')
     const linesArr = await fetchFilter('line_no_child')
-    return { props: {products, categories, lines, colors, brandsArr,
+    return { props: {products, categories, lines, colors, collections, brandsArr,
         categoriesArr, linesArr} }
 }
 
-const Admin = ({products, categories, lines, colors, brandsArr, categoriesArr,
+const Admin = ({products, categories, lines, colors, collections, brandsArr, categoriesArr,
                    linesArr}) => {
     const productListRef = useRef(null)
     const router = useRouter()
@@ -44,6 +45,7 @@ const Admin = ({products, categories, lines, colors, brandsArr, categoriesArr,
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
         filterStore.fillColors(colors)
+        filterStore.fillCollections(collections)
         filterStore.reactivateFilters(router.query)
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)

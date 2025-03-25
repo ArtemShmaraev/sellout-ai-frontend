@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 class UserStore {
     constructor() {
         this._isLogged = false
+        this._id = null
         this._username = ''
         this._firstName = ''
         this._lastName = ''
@@ -17,6 +18,12 @@ class UserStore {
     }
     setIsLogged(bool) {
         return this._isLogged = bool
+    }
+    get id() {
+        return this._id
+    }
+    setId(id) {
+        this._id = id
     }
     get username() {
         return this._username
