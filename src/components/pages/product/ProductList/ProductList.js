@@ -12,6 +12,7 @@ const ProductList = ({products, isAdmin}) => {
                 ?
                     products.map(el =>
                         <ProductCard model={el.model}
+                                     id={el.id}
                                      slug={el.slug}
                                      brands={el.brands}
                                      colorway={el.colorway}
@@ -19,6 +20,7 @@ const ProductList = ({products, isAdmin}) => {
                                      isFastShip={el.is_fast_shipping}
                                      isReturn={el.is_return}
                                      isSale={el.is_sale}
+                                     inWishlist={el.in_wishlist}
                                      key={el.id}/>
                     )
                     :

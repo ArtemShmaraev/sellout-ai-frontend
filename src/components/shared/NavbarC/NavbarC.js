@@ -22,6 +22,9 @@ const NavbarC = () => {
     const goToMainPage = () => {
         router.push('/')
     }
+    const goToWishlist = () => {
+        router.push('/wishlist')
+    }
     const goToFastShip = () => {
         const query = {}
         query.is_fast_ship = 'is_fast_ship'
@@ -72,7 +75,7 @@ const NavbarC = () => {
                         <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 30} onClick={goToMainPage}/>
                     </div>
                     <div className={s.block}>
-                        <Image width={25} src={like} alt="" className={s.icons}/>
+                        <Image width={25} src={like} alt="" className={s.icons} onClick={goToWishlist}/>
                         {isDesktop &&
                             <AuthModal>
                                 <Image width={25} src={person} alt="" className={s.icons}/>

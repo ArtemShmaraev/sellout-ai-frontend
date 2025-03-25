@@ -17,9 +17,13 @@ import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
+import {parse} from "cookie";
 
 export const getServerSideProps = async (context) => {
-    const products = await fetchProductsPage(context.query)
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    console.log(token)
+    const products = await fetchProductsPage(context.query, token)
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')

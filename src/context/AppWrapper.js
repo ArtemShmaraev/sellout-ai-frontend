@@ -21,7 +21,6 @@ export default function AppWrapper({ children }) {
     useEffect(() => {
         const token = Cookies.get('refresh_token')
         const refreshObj = JSON.stringify({refresh: token})
-        console.log(refreshObj)
         if (token) {
             refreshToken(refreshObj).then((data) => {
                 // Save the new token
@@ -30,7 +29,7 @@ export default function AppWrapper({ children }) {
                 const userData = jwtDecode(data.access)
                 // Set user data in userStore
                 userStore.setIsLogged(true)
-                userStore.setId(userData.id)
+                userStore.setId(userData.user_id)
                 userStore.setUsername(userData.username)
                 userStore.setFirstName(userData.first_name)
                 userStore.setLastName(userData.last_name)

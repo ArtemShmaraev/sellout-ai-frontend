@@ -1,6 +1,6 @@
 import {$host} from "@/http/index";
 
-export async function fetchProductsPage(query) {
+export async function fetchProductsPage(query, token = '') {
     let allQuery = ''
     Object.keys(query).forEach(key => {
         if (typeof query[key] === "object") {
@@ -13,8 +13,15 @@ export async function fetchProductsPage(query) {
     })
     console.log(allQuery)
     //TODO delete log
-    const {data} = await $host.get(`product/products/?${allQuery}`)
-    return data
+    if (!token) {
+        const {data} = await $host.get(`product/products/?${allQuery}`)
+        return data
+    } else {
+        const {data} = await $host.get(`product/products/?${allQuery}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    }
 }
 export async function fetchFilter(filter) {
     const {data} = await $host.get(`product/${filter}`)

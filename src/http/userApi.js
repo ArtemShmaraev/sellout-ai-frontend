@@ -14,11 +14,11 @@ export async function login(body) {
     return data
 }
 export async function checkAuth() {
-    const {data} = await $authHost.post('user/token/verify/')
+    const {data} = await $host.post('user/token/verify/')
     return data
 }
 export async function refreshToken(token) {
-    const {data} = await $authHost.post('user/token/refresh/', token)
+    const {data} = await $host.post('user/token/refresh/', token)
     Cookies.set('access_token', data.access)
     return data
 }

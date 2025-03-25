@@ -1,17 +1,24 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './ProductCard.module.css'
 import shoe from '@/static/img/shoe.png'
 import shoe2 from '@/static/img/shoe2.png'
 import like from '@/static/icons/heart.svg'
+import like_fill from '@/static/icons/heart-fill.svg'
 import truck from '@/static/icons/truck.svg'
 import re from '@/static/icons/arrow-return-left.svg'
 import Image from 'next/image'
 import {useRouter} from "next/router";
+import Cookies from 'js-cookie'
+import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
+import {Context} from "@/context/AppWrapper";
 
 
-const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale}) => {
+const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
+                         id, inWishlist}) => {
+    const {userStore} = useContext(Context)
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
+    const [isInWishlist, setIsInWishlist] = useState(inWishlist)
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
@@ -40,6 +47,18 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         setIsHovered(false);
     };
 
+    const addToWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await addToWishlist(userId, id, token)
+        setIsInWishlist(true)
+    }
+    const deleteFromWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await removeFromWishlist(userId, id, token)
+        setIsInWishlist(false)
+    }
     return (
         <div className={s.card} onClick={() => router.push(`products/${slug}`)}>
             <div className={s.icons_block}>
@@ -48,7 +67,12 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                 </div>
-                <Image src={like} alt="like" className={s.like}/>
+                <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                       onClick={(e) => {
+                           e.stopPropagation()
+                           isInWishlist ? deleteFromWL() : addToWL()
+                       }}
+                />
             </div>
             <Image
                 onMouseEnter={handleMouseEnter}
