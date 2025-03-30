@@ -38,6 +38,7 @@
 }
 .size_block {
     display: flex;
+    align-items: center;
 }
 .price {
     font-weight: 700;

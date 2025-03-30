@@ -92,6 +92,7 @@
 .icon_block {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 12px;
 }
 .link_block {

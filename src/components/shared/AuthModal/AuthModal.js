@@ -8,7 +8,7 @@ import Image from 'next/image'
 import {userStore} from "@/store/UserStore";
 import {login, registration} from "@/http/userApi";
 
-const AuthModal = ({children}) => {
+const AuthModal = ({children, fromWishlist = false}) => {
     const [show, setShow] = useState(false);
     const [isReg, setIsReg] = useState(true)
     const [isDesktop, setIsDesktop] = useState(true)
@@ -113,6 +113,12 @@ const AuthModal = ({children}) => {
                     <div className={s.close_block}>
                         <Image src={close} alt="" style={{cursor: 'pointer'}} onClick={handleClose}/>
                     </div>
+                    {
+                        fromWishlist &&
+                        <div className='text-center'>
+                            Войдите или зарегистрируйтесь, чтобы добавлять товары в список избранного
+                        </div>
+                    }
                     <div className={s.mode_block}>
                         <button
                             className={s.mode_btn}

@@ -1,34 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './SizeChoice.module.css'
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
 import Image from "next/image";
+import {Context} from "@/context/AppWrapper";
 
-const SizeChoice = () => {
-    const sizes = [
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-        '10US',
-        '15US',
-        '17US',
-
-    ]
+const SizeChoice = ({prices}) => {
+    const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
@@ -39,6 +17,7 @@ const SizeChoice = () => {
     const selectItem = (item) => {
         setSelectedItem(item);
         setIsOpen(false);
+        productStore.setSizeChosen(true)
     };
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -64,12 +43,12 @@ const SizeChoice = () => {
                     ?
                         <>
                             <div className={s.size_block}>
-                                <div className={s.icons}>{selectedItem}</div>
+                                <div className={s.icons}>{selectedItem.view_size}</div>
                                 <Image src={truck} alt="" className={s.icons}/>
                                 <Image src={refund} alt="" className={s.icons}/>
                             </div>
                             <div className={s.price}>
-                                от 19999 $
+                                от {selectedItem.min_price}
                             </div>
                         </>
                         :
@@ -93,17 +72,17 @@ const SizeChoice = () => {
                             </div>
                         </>
                         {
-                            sizes.map(el =>
+                            prices.map(el =>
                                 <div className={s.items}
                                      onClick={() => selectItem(el)}
                                 >
                                     <div className={s.size_block}>
-                                        <div className={s.icons}>{el}</div>
+                                        <div className={s.icons}>{el.view_size}</div>
                                         <Image src={truck} alt="" className={s.icons}/>
                                         <Image src={refund} alt="" className={s.icons}/>
                                     </div>
                                     <div className={s.price}>
-                                        от 19999 $
+                                        от {el.min_price}
                                     </div>
                                 </div>
                             )

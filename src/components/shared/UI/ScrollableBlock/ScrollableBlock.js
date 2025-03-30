@@ -26,15 +26,19 @@ const ScrollableBlock = ({children, noArrows = false}) => {
     };
     return (
         <div className={s.scrollableBlock}>
-            <button className={s.left} onClick={scrollLeft} style={noArrows && {display: 'none'}}>
-                <Image src={arrow} alt='' style={{transform: 'rotate(180deg) translateY(2px)'}} className={s.img}/>
-            </button>
+            {!noArrows &&
+                <button className={s.left} onClick={scrollLeft}>
+                    <Image src={arrow} alt='' style={{transform: 'rotate(180deg) translateY(2px)'}} className={s.img}/>
+                </button>
+            }
             <div className={s.scrollableContainer} ref={scrollableContainerRef}>
                 {children}
             </div>
-            <button className={s.right} onClick={scrollRight} style={noArrows && {display: 'none'}}>
-                <Image src={arrow} alt='' className={s.img}/>
-            </button>
+            {!noArrows &&
+                <button className={s.right} onClick={scrollRight}>
+                    <Image src={arrow} alt='' className={s.img}/>
+                </button>
+            }
         </div>
     );
 };

@@ -11,6 +11,7 @@ import {useRouter} from "next/router";
 import Cookies from 'js-cookie'
 import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {Context} from "@/context/AppWrapper";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 
 const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
@@ -67,12 +68,22 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                 </div>
-                <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
-                       onClick={(e) => {
-                           e.stopPropagation()
-                           isInWishlist ? deleteFromWL() : addToWL()
-                       }}
-                />
+                {userStore.isLogged
+                    ?
+                    <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                           onClick={(e) => {
+                               e.stopPropagation()
+                               isInWishlist ? deleteFromWL() : addToWL()
+                           }}
+                    />
+                    :
+                    <div onClick={e => e.stopPropagation()}>
+                        <AuthModal fromWishlist={true}>
+                            <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                            />
+                        </AuthModal>
+                    </div>
+                }
             </div>
             <Image
                 onMouseEnter={handleMouseEnter}

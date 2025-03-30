@@ -2,14 +2,26 @@ import {makeAutoObservable} from "mobx";
 
 class ProductsStore {
     constructor() {
-        this._products = []
+        this._sizeChosen = false
+        this._shipChosen = false
         makeAutoObservable(this)
     }
-    setProducts(products) {
-        this._products = products
+    clearAll() {
+        this._sizeChosen = false
+        this._shipChosen = false
     }
-    get products() {
-        return this._products
+    setSizeChosen(bool) {
+        this._sizeChosen = bool
+        this._shipChosen = false
+    }
+    get sizeChosen() {
+        return this._sizeChosen
+    }
+    setShipChosen(value) {
+        this._shipChosen = value
+    }
+    get shipChosen() {
+        return this._shipChosen
     }
 }
 

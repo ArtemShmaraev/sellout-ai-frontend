@@ -39,3 +39,11 @@ export async function fetchOneProduct(slug) {
     const {data} = await $host.get(`product/slug/${slug}`)
     return data
 }
+export async function fetchPrices(id) {
+    const {data} = await $host.get(`product_unit/min_price/${id}`)
+    return data
+}
+export async function fetchShippings(productId, sizeId) {
+    const {data} = await $host.get(`product_unit/delivery/${productId}/${sizeId}`)
+    return data
+}

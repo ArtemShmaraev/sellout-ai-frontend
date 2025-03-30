@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import {Carousel, Col, Container, Row} from "react-bootstrap";
 import shoe from "@/static/img/shoe.png";
@@ -6,6 +6,7 @@ import shoe2 from '@/static/img/shoe2.png'
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
 import like from '@/static/icons/heart.svg'
+import like_fill from '@/static/icons/heart-fill.svg'
 import SizeTable from "@/components/pages/oneProduct/SizeTable/SizeTable";
 import SizeHelp from "@/components/pages/oneProduct/SizeHelp/SizeHelp";
 import SizeChoice from "@/components/pages/oneProduct/SizeChoice/SizeChoice";
@@ -15,19 +16,28 @@ import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/Q
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Image from 'next/image'
-import {fetchOneProduct} from "@/http/productsApi";
+import {fetchOneProduct, fetchPrices} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {useRouter} from "next/router";
+import {Context} from "@/context/AppWrapper";
+import {observer} from "mobx-react-lite";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 export const getServerSideProps = async ({params}) => {
     const product = await fetchOneProduct(params.slug)
-    return { props: {product} }
+    const {id} = product
+    const prices = await fetchPrices(id)
+    return { props: {product, prices} }
 }
 
-const OneProductPage = ({product}) => {
+const OneProductPage = ({product, prices}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
+    const {productStore, userStore} = useContext(Context)
     const router = useRouter()
+    useEffect(() => {
+        productStore.clearAll()
+    }, [])
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
@@ -116,26 +126,31 @@ const OneProductPage = ({product}) => {
                                     <SizeTable/>
                                     <SizeHelp/>
                                 </div>
-                                <SizeChoice/>
-                                <div className={s.btn_group}>
-                                    <button className={s.btn_black}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_white}>
-                                        до 30 дней | 5000$
-                                    </button>
-                                </div>
-                                <div className={s.btn_group}>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                </div>
+                                <SizeChoice prices={prices}/>
+                                {
+                                    productStore.sizeChosen &&
+                                    <div>
+                                        <div className={s.btn_group}>
+                                            <button className={s.btn_black}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_white}>
+                                                до 30 дней | 5000$
+                                            </button>
+                                        </div>
+                                        <div className={s.btn_group}>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
                                 <div className={s.how}>
                                     <HowToChoose/>
                                 </div>
@@ -214,26 +229,31 @@ const OneProductPage = ({product}) => {
                                     <SizeTable/>
                                     <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}/>
                                 </div>
-                                <SizeChoice/>
-                                <div className={s.btn_group}>
-                                    <button className={s.btn_black}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_white}>
-                                        до 30 дней | 5000$
-                                    </button>
-                                </div>
-                                <div className={s.btn_group}>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                    <button className={s.btn_black2}>
-                                        до 10 дней | 10000$
-                                    </button>
-                                </div>
+                                <SizeChoice prices={prices}/>
+                                {
+                                    productStore.sizeChosen &&
+                                    <div>
+                                        <div className={s.btn_group}>
+                                            <button className={s.btn_black}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_white}>
+                                                до 30 дней | 5000$
+                                            </button>
+                                        </div>
+                                        <div className={s.btn_group}>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                            <button className={s.btn_black2}>
+                                                до 10 дней | 10000$
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
                                 <div className={s.how}>
                                     <HowToChoose/>
                                 </div>
@@ -241,12 +261,25 @@ const OneProductPage = ({product}) => {
                                     <button className={s.cart_btn}>
                                         Добавить в корзину
                                     </button>
-                                    <button className={s.fav_btn}>
-                                        <div className={s.icon_block}>
-                                            <Image src={like} alt="" className={s.icons}/>
-                                            <div>В избранное</div>
-                                        </div>
-                                    </button>
+                                    {
+                                        userStore.isLogged
+                                        ?
+                                            <button className={s.fav_btn}>
+                                                <div className={s.icon_block}>
+                                                    <Image src={product.in_wishlist ? like_fill : like} alt="" className={s.icons}/>
+                                                    <div>В избранное</div>
+                                                </div>
+                                            </button>
+                                            :
+                                            <AuthModal fromWishlist={true}>
+                                                <div className={s.fav_btn}>
+                                                    <div className={s.icon_block}>
+                                                        <Image src={product.in_wishlist ? like_fill : like} alt="" className={s.icons}/>
+                                                        <div>В избранное</div>
+                                                    </div>
+                                                </div>
+                                            </AuthModal>
+                                    }
                                 </div>
                             </>
                         }
@@ -308,4 +341,4 @@ const OneProductPage = ({product}) => {
     );
 };
 //Денис Феоктистов хуесос
-export default OneProductPage;
+export default observer(OneProductPage);
