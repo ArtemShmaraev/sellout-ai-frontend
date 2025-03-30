@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useState} from 'react';
 import s from './RenderBtns.module.css'
 import {Context} from "@/context/AppWrapper";
+import Cookies from "js-cookie";
+import {observer} from "mobx-react-lite";
 
 const RenderBtns = ({btns}) => {
     const [activeButtonId, setActiveButtonId] = useState();
@@ -11,6 +13,12 @@ const RenderBtns = ({btns}) => {
     const handleClick = useCallback((id) => {
         setActiveButtonId(id);
         productStore.setShipChosen(id)
+        let cart = Cookies.get('cart')
+        if (!cart) {
+            Cookies.set('cart', '')
+        }
+        cart = Cookies.get('cart').trim().split(' ')
+        productStore.setText(cart, id)
     }, []);
 
     for (let i = 0; i < btns.length; i++) {
@@ -57,4 +65,4 @@ const RenderBtns = ({btns}) => {
     return <>{arr}</>
 };
 
-export default RenderBtns;
+export default observer(RenderBtns);

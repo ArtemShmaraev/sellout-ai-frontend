@@ -26,6 +26,7 @@ import Cookies from "js-cookie";
 import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
+import {addToCart} from "@/http/cartApi";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -96,6 +97,16 @@ const OneProductPage = ({product, prices}) => {
         const data = await removeFromWishlist(userId, product.id, token)
         setIsInWishlist(false)
     }
+    const cartAdd = async () => {
+        let cart = Cookies.get('cart')
+        Cookies.set('cart', cart + productStore.shipChosen + ' ')
+        productStore.setText(Cookies.get('cart').trim().split(' '), productStore.shipChosen)
+        if (userStore.isLogged) {
+            const token = Cookies.get('access_token')
+            const userId = userStore.id
+            const data = await addToCart(userId, productStore.shipChosen, token)
+        }
+    }
     return (
         <MainLayout>
             <Container className={s.container}>
@@ -148,41 +159,43 @@ const OneProductPage = ({product, prices}) => {
                                 <SizeChoice prices={prices} productId={product.id}/>
                                 {
                                     productStore.sizeChosen &&
-                                    <div>
-                                        <div className={s.btn_group}>
-                                            <button className={s.btn_black}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_white}>
-                                                до 30 дней | 5000$
-                                            </button>
-                                        </div>
-                                        <div className={s.btn_group}>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                        </div>
+                                    <div className={s.btn_group}>
+                                        <RenderBtns btns={productStore.shipps}/>
                                     </div>
                                 }
                                 <div className={s.how}>
                                     <HowToChoose/>
                                 </div>
                                 <div className={s.btn_group}>
-                                    <button className={s.cart_btn}>
-                                        Добавить в корзину
+                                    <button className={s.cart_btn}
+                                            disabled={!productStore.shipChosen || productStore.text[0] === 'У'}
+                                            onClick={cartAdd}
+                                    >
+                                        {productStore.text}
                                     </button>
-                                    <button className={s.fav_btn}>
-                                        <div className={s.icon_block}>
-                                            <Image src={like} alt="" className={s.icons}/>
-                                            <div>В избранное</div>
-                                        </div>
-                                    </button>
+                                    {
+                                        userStore.isLogged
+                                            ?
+                                            <button className={s.fav_btn}
+                                                    onClick={() => {
+                                                        isInWishlist ? deleteFromWL() : addToWL()
+                                                    }}
+                                            >
+                                                <div className={s.icon_block}>
+                                                    <Image src={isInWishlist ? like_fill : like} alt="" className={s.icons}/>
+                                                    <div>В избранное</div>
+                                                </div>
+                                            </button>
+                                            :
+                                            <div className={s.fav_btn2}>
+                                                <AuthModal fromWishlist={true}>
+                                                    <div className={s.icon_block}>
+                                                        <Image src={like} alt="" className={s.icons}/>
+                                                        <div>В избранное</div>
+                                                    </div>
+                                                </AuthModal>
+                                            </div>
+                                    }
                                 </div>
                             </>
                         }
@@ -259,8 +272,11 @@ const OneProductPage = ({product, prices}) => {
                                     <HowToChoose/>
                                 </div>
                                 <div className={s.btn_group}>
-                                    <button className={s.cart_btn} disabled={!productStore.shipChosen}>
-                                        Добавить в корзину
+                                    <button className={s.cart_btn}
+                                            disabled={!productStore.shipChosen || productStore.text[0] === 'У'}
+                                            onClick={cartAdd}
+                                    >
+                                        {productStore.text}
                                     </button>
                                     {
                                         userStore.isLogged

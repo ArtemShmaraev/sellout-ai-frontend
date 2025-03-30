@@ -1,0 +1,12 @@
+.cont {
+    margin-top: 130px;
+}
+.title_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.link {
+    color: #9a9999;
+    cursor: pointer;
+}

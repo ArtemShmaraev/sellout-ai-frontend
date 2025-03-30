@@ -48,6 +48,9 @@ const NavbarC = () => {
     const goToAccount = () => {
         router.push('/account')
     }
+    const goToCart = () => {
+        router.push('/cart')
+    }
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
@@ -93,7 +96,7 @@ const NavbarC = () => {
                                 <div className={s.name}>Войдите</div>
                             </AuthModal>
                         }
-                        <Image width={25} src={cart} alt="" className={s.icons}/>
+                        <Image width={25} src={cart} alt="" className={s.icons} onClick={goToCart}/>
                     </div>
                 </div>
                 {isDesktop &&

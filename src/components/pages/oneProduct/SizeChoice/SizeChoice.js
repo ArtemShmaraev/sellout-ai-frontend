@@ -21,6 +21,7 @@ const SizeChoice = ({prices, productId}) => {
         productStore.setSizeChosen(true)
         const ships = await fetchShippings(productId, item.size.id)
         console.log(ships)
+        //TODO delete log
         productStore.setShipps(ships)
     };
     useEffect(() => {

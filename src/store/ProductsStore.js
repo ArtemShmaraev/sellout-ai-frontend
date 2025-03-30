@@ -5,12 +5,14 @@ class ProductsStore {
         this._sizeChosen = false
         this._shipChosen = false
         this._shipps = []
+        this._addToCartText = 'Добавить в корзину'
         makeAutoObservable(this)
     }
     clearAll() {
         this._sizeChosen = false
         this._shipChosen = false
         this._shipps = []
+        this._addToCartText = 'Добавить в корзину'
     }
     setSizeChosen(bool) {
         this._sizeChosen = bool
@@ -30,6 +32,16 @@ class ProductsStore {
     }
     get shipps() {
         return this._shipps
+    }
+    get text() {
+        return this._addToCartText
+    }
+    setText(arr, id) {
+        if (arr.includes(String(id))) {
+            this._addToCartText = 'Уже в корзине'
+        } else {
+            this._addToCartText = 'Добавить в корзину'
+        }
     }
 }
 
