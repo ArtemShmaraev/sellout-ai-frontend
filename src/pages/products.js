@@ -26,7 +26,7 @@ export const getServerSideProps = async (context) => {
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
-    const collections = await fetchFilter('collections')
+    const collections = await fetchFilter('collabs')
     return { props: {products, categories, lines, colors, collections} }
 }
 const Products = ({products, categories, lines, colors, collections}) => {

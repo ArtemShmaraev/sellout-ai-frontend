@@ -31,7 +31,6 @@
 .modals_block {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 }
 .btn_group {
     display: flex;
@@ -39,46 +38,6 @@
     align-items: stretch;
     margin: 10px 0;
     flex-wrap: wrap;
-}
-.btn_black {
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    background: black;
-    color: white;
-    min-height: 40px;
-    width: 49%;
-    margin-bottom: 5px;
-}
-.btn_white {
-    border: 1px solid black;
-    outline: none;
-    border-radius: 7px;
-    background: white;
-    color: black;
-    min-height: 40px;
-    width: 49%;
-    margin-bottom: 5px;
-}
-.btn_black2 {
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    background: black;
-    color: white;
-    min-height: 40px;
-    width: 32%;
-    margin-bottom: 5px;
-}
-.btn_black3 {
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    background: black;
-    color: white;
-    min-height: 40px;
-    width: 100%;
-    margin-bottom: 5px;
 }
 .how {
     margin: 10px 0;
@@ -93,6 +52,10 @@
     color: white;
     min-height: 40px;
     width: 64%;
+    transition: 0.3s;
+}
+.cart_btn:disabled {
+    opacity: 0.7;
 }
 .fav_btn {
     border: 1px solid black;
@@ -119,7 +82,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 14px;
 }
 .link_block {
     display: flex;

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import {Carousel, Col, Container, Row} from "react-bootstrap";
 import shoe from "@/static/img/shoe.png";
@@ -25,6 +25,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import Cookies from "js-cookie";
 import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
+import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -94,50 +95,6 @@ const OneProductPage = ({product, prices}) => {
         const userId = userStore.id
         const data = await removeFromWishlist(userId, product.id, token)
         setIsInWishlist(false)
-    }
-    const renderButtons = (btns) => {
-        const arr = []
-        let curNum = 1
-        for (let i = 0; i < btns.length; i++) {
-            if (curNum > 3) {
-                curNum = 1
-            }
-            if (btns.length - 1 - i > 2) {
-                arr.push(
-                    <button className={s.btn_black2} key={btns[i].id}>
-                        hui
-                    </button>
-                )
-                curNum++
-                continue
-            }
-            if (btns.length % 3 !== 0 && btns.length - 1 - i === 0 && curNum === 1) {
-                arr.push(
-                    <button className={s.btn_black3} key={btns[i].delivery.id}>
-                        hui
-                    </button>
-                )
-                curNum++
-                continue
-            }
-            if (btns.length % 3 !== 0 && btns.length - 1 - i <= 2) {
-                if (curNum === 1) {
-                    arr.push(
-                        <button className={s.btn_black} key={btns[i].id}>
-                            hui
-                        </button>
-                    )
-                } else {
-                    arr.push(
-                        <button className={s.btn_white} key={btns[i].id}>
-                            hui
-                        </button>
-                    )
-                }
-                curNum++
-            }
-        }
-        return arr
     }
     return (
         <MainLayout>
@@ -295,16 +252,14 @@ const OneProductPage = ({product, prices}) => {
                                 {
                                     productStore.sizeChosen &&
                                     <div className={s.btn_group}>
-                                        {
-                                            renderButtons(productStore.shipps)
-                                        }
+                                        <RenderBtns btns={productStore.shipps}/>
                                     </div>
                                 }
                                 <div className={s.how}>
                                     <HowToChoose/>
                                 </div>
                                 <div className={s.btn_group}>
-                                    <button className={s.cart_btn}>
+                                    <button className={s.cart_btn} disabled={!productStore.shipChosen}>
                                         Добавить в корзину
                                     </button>
                                     {

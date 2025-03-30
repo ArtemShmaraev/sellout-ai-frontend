@@ -20,6 +20,7 @@ const SizeChoice = ({prices, productId}) => {
         setIsOpen(false);
         productStore.setSizeChosen(true)
         const ships = await fetchShippings(productId, item.size.id)
+        console.log(ships)
         productStore.setShipps(ships)
     };
     useEffect(() => {

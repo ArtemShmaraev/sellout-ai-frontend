@@ -26,7 +26,7 @@ const CollectionsDropdown = () => {
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-        changeQuery(query, 'collection', filterStore.checkedCollectionsQuery)
+        changeQuery(query, 'collab', filterStore.checkedCollectionsQuery)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

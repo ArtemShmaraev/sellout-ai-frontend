@@ -6,7 +6,7 @@ class FilterStore {
         this._allFilters = {
             category: {},
             line: {},
-            collection: {},
+            collab: {},
             color: {},
             gender: {
                 M: {
@@ -209,14 +209,14 @@ class FilterStore {
     }
     get collections() {
         const arr = []
-        for (const key in this.filters.collection) {
-            arr.push({...this.filters.collection[key]})
+        for (const key in this.filters.collab) {
+            arr.push({...this.filters.collab[key]})
         }
         return arr
     }
     fillCollections(collection) {
         collection.forEach(el => {
-            this.filters.collection[el.name] = {
+            this.filters.collab[el.name] = {
                 text: el.name,
                 query: el.query_name,
                 state: false
@@ -226,7 +226,7 @@ class FilterStore {
     get checkedCollectionsQuery() {
         const arr = []
         for (const key in this.activeFilters) {
-            if (this.activeFilters[key].path[0] === 'collection') {
+            if (this.activeFilters[key].path[0] === 'collab') {
                 arr.push(this.activeFilters[key].query)
             }
         }

@@ -1,0 +1,40 @@
+.btn_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+.btn_black {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    min-height: 40px;
+    width: 49%;
+    margin-bottom: 5px;
+}
+.btn_black2 {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    min-height: 40px;
+    width: 32%;
+    margin-bottom: 5px;
+}
+.btn_black3 {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    min-height: 40px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.black {
+    background: black;
+    color: white;
+}
+.white {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
