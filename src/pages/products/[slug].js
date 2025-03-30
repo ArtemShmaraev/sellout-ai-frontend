@@ -22,9 +22,14 @@ import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import Cookies from "js-cookie";
+import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
+import {parse} from "cookie";
 
-export const getServerSideProps = async ({params}) => {
-    const product = await fetchOneProduct(params.slug)
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    const product = await fetchOneProduct(context.params.slug, token)
     const {id} = product
     const prices = await fetchPrices(id)
     return { props: {product, prices} }
@@ -77,6 +82,63 @@ const OneProductPage = ({product, prices}) => {
             setIsDesktop(false)
         }
     }, [isDesktop])
+    const [isInWishlist, setIsInWishlist] = useState(product.in_wishlist)
+    const addToWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await addToWishlist(userId, product.id, token)
+        setIsInWishlist(true)
+    }
+    const deleteFromWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await removeFromWishlist(userId, product.id, token)
+        setIsInWishlist(false)
+    }
+    const renderButtons = (btns) => {
+        const arr = []
+        let curNum = 1
+        for (let i = 0; i < btns.length; i++) {
+            if (curNum > 3) {
+                curNum = 1
+            }
+            if (btns.length - 1 - i > 2) {
+                arr.push(
+                    <button className={s.btn_black2} key={btns[i].id}>
+                        hui
+                    </button>
+                )
+                curNum++
+                continue
+            }
+            if (btns.length % 3 !== 0 && btns.length - 1 - i === 0 && curNum === 1) {
+                arr.push(
+                    <button className={s.btn_black3} key={btns[i].delivery.id}>
+                        hui
+                    </button>
+                )
+                curNum++
+                continue
+            }
+            if (btns.length % 3 !== 0 && btns.length - 1 - i <= 2) {
+                if (curNum === 1) {
+                    arr.push(
+                        <button className={s.btn_black} key={btns[i].id}>
+                            hui
+                        </button>
+                    )
+                } else {
+                    arr.push(
+                        <button className={s.btn_white} key={btns[i].id}>
+                            hui
+                        </button>
+                    )
+                }
+                curNum++
+            }
+        }
+        return arr
+    }
     return (
         <MainLayout>
             <Container className={s.container}>
@@ -126,7 +188,7 @@ const OneProductPage = ({product, prices}) => {
                                     <SizeTable/>
                                     <SizeHelp/>
                                 </div>
-                                <SizeChoice prices={prices}/>
+                                <SizeChoice prices={prices} productId={product.id}/>
                                 {
                                     productStore.sizeChosen &&
                                     <div>
@@ -229,29 +291,13 @@ const OneProductPage = ({product, prices}) => {
                                     <SizeTable/>
                                     <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}/>
                                 </div>
-                                <SizeChoice prices={prices}/>
+                                <SizeChoice prices={prices} productId={product.id}/>
                                 {
                                     productStore.sizeChosen &&
-                                    <div>
-                                        <div className={s.btn_group}>
-                                            <button className={s.btn_black}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_white}>
-                                                до 30 дней | 5000$
-                                            </button>
-                                        </div>
-                                        <div className={s.btn_group}>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                            <button className={s.btn_black2}>
-                                                до 10 дней | 10000$
-                                            </button>
-                                        </div>
+                                    <div className={s.btn_group}>
+                                        {
+                                            renderButtons(productStore.shipps)
+                                        }
                                     </div>
                                 }
                                 <div className={s.how}>
@@ -264,21 +310,25 @@ const OneProductPage = ({product, prices}) => {
                                     {
                                         userStore.isLogged
                                         ?
-                                            <button className={s.fav_btn}>
+                                            <button className={s.fav_btn}
+                                                    onClick={() => {
+                                                        isInWishlist ? deleteFromWL() : addToWL()
+                                                    }}
+                                            >
                                                 <div className={s.icon_block}>
-                                                    <Image src={product.in_wishlist ? like_fill : like} alt="" className={s.icons}/>
+                                                    <Image src={isInWishlist ? like_fill : like} alt="" className={s.icons}/>
                                                     <div>В избранное</div>
                                                 </div>
                                             </button>
                                             :
-                                            <AuthModal fromWishlist={true}>
-                                                <div className={s.fav_btn}>
+                                            <div className={s.fav_btn2}>
+                                                <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={product.in_wishlist ? like_fill : like} alt="" className={s.icons}/>
+                                                        <Image src={like} alt="" className={s.icons}/>
                                                         <div>В избранное</div>
                                                     </div>
-                                                </div>
-                                            </AuthModal>
+                                                </AuthModal>
+                                            </div>
                                     }
                                 </div>
                             </>

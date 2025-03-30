@@ -4,8 +4,9 @@ import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
+import {fetchShippings} from "@/http/productsApi";
 
-const SizeChoice = ({prices}) => {
+const SizeChoice = ({prices, productId}) => {
     const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -14,10 +15,12 @@ const SizeChoice = ({prices}) => {
         setIsOpen(!isOpen);
     };
 
-    const selectItem = (item) => {
+    const selectItem = async (item) => {
         setSelectedItem(item);
         setIsOpen(false);
         productStore.setSizeChosen(true)
+        const ships = await fetchShippings(productId, item.size.id)
+        productStore.setShipps(ships)
     };
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -75,6 +78,7 @@ const SizeChoice = ({prices}) => {
                             prices.map(el =>
                                 <div className={s.items}
                                      onClick={() => selectItem(el)}
+                                     key={el.id}
                                 >
                                     <div className={s.size_block}>
                                         <div className={s.icons}>{el.view_size}</div>

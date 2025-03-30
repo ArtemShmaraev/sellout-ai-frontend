@@ -35,9 +35,16 @@ export async function deleteProduct(id) {
     const {data} = await $host.delete(`product/update/${id}`)
     return data
 }
-export async function fetchOneProduct(slug) {
-    const {data} = await $host.get(`product/slug/${slug}`)
-    return data
+export async function fetchOneProduct(slug, token = '') {
+    if (!token) {
+        const {data} = await $host.get(`product/slug/${slug}`)
+        return data
+    } else {
+        const {data} = await $host.get(`product/slug/${slug}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    }
 }
 export async function fetchPrices(id) {
     const {data} = await $host.get(`product_unit/min_price/${id}`)

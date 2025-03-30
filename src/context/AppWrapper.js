@@ -34,6 +34,9 @@ export default function AppWrapper({ children }) {
                 userStore.setFirstName(userData.first_name)
                 userStore.setLastName(userData.last_name)
 
+            }).catch(() => {
+                Cookies.remove('access_token')
+                Cookies.remove('refresh_token')
             })
         }
     }, [])
