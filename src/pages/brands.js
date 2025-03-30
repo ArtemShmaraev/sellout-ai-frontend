@@ -9,6 +9,7 @@ import {useContext, useEffect, useState} from "react";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
+import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 
 export const getStaticProps = async () => {
     const brands = await fetchFilter('brands')
@@ -28,6 +29,13 @@ const Brands = ({brands}) => {
             }
         }
         setA(arr)
+    }, [])
+    const [isDesktop, setIsDesktop] = useState(true)
+    useEffect(() => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        }
     }, [])
     const alphabet = () => {
         const letters = ['0-9'];
@@ -76,10 +84,11 @@ const Brands = ({brands}) => {
     }
     return (
         <MainLayout>
-            <Container className={s.cont} style={{marginTop: '100px'}}>
+            <Container className={s.cont}>
                 <div className={s.alphabet_block}>
                     <div className={s.alphabet}>
-                        {
+                        { isDesktop
+                            ?
                             alphabet().map(el =>
                                 <button onClick={(e) => {
                                     e.preventDefault()
@@ -89,6 +98,20 @@ const Brands = ({brands}) => {
                                    disabled={!a.includes(el)}
                                 >{el}</button>
                             )
+                            :
+                            <ScrollableBlock noArrows={true}>
+                                {
+                                    alphabet().map(el =>
+                                        <button onClick={(e) => {
+                                            e.preventDefault()
+                                            scroll(el)
+                                        }}
+                                                className={s.letter}
+                                                disabled={!a.includes(el)}
+                                        >{el}</button>
+                                    )
+                                }
+                            </ScrollableBlock>
                         }
                     </div>
                 </div>

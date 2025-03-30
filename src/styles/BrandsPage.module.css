@@ -1,3 +1,6 @@
+.cont {
+    margin-top: 100px;
+}
 .alphabet_block {
     position: sticky;
     top: 90px;
@@ -73,7 +76,34 @@
 }
 @media (max-width: 600px) {
     .cont {
-        margin: 0;
+        margin: 30px 0 0 0;
         padding: 15px;
+    }
+    .alphabet {
+        flex-wrap: nowrap;
+    }
+    .alphabet_block {
+        top: 25px;
+    }
+    .letter {
+        width: 50px;
+    }
+    .main_block {
+        display: block;
+        width: 100%;
+    }
+    .search_block {
+        position: static;
+    }
+    .brands_block {
+        width: 100%;
+    }
+    .big_letter {
+        margin-left: 10px;
+    }
+    .brand {
+        width: 50%;
+        font-size: 14px;
+        margin: 20px 0;
     }
 }

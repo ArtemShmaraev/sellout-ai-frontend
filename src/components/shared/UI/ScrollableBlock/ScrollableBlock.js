@@ -3,7 +3,7 @@ import s from './ScrollableBlock.module.css'
 import arrow from '@/static/icons/chevron-right.svg'
 import Image from "next/image";
 
-const ScrollableBlock = ({children}) => {
+const ScrollableBlock = ({children, noArrows = false}) => {
     const scrollableContainerRef = useRef(null);
     const scroll = 400
 
@@ -26,13 +26,13 @@ const ScrollableBlock = ({children}) => {
     };
     return (
         <div className={s.scrollableBlock}>
-            <button className={s.left} onClick={scrollLeft}>
+            <button className={s.left} onClick={scrollLeft} style={noArrows && {display: 'none'}}>
                 <Image src={arrow} alt='' style={{transform: 'rotate(180deg) translateY(2px)'}} className={s.img}/>
             </button>
             <div className={s.scrollableContainer} ref={scrollableContainerRef}>
                 {children}
             </div>
-            <button className={s.right} onClick={scrollRight}>
+            <button className={s.right} onClick={scrollRight} style={noArrows && {display: 'none'}}>
                 <Image src={arrow} alt='' className={s.img}/>
             </button>
         </div>

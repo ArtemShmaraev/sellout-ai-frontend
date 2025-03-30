@@ -75,7 +75,7 @@ const NavbarC = () => {
                         }
                     </div>
                     <div className={s.block}>
-                        <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 30} onClick={goToMainPage}/>
+                        <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25} onClick={goToMainPage}/>
                     </div>
                     <div className={s.block}>
                         <Image width={25} src={like} alt="" className={s.icons} onClick={goToWishlist}/>
