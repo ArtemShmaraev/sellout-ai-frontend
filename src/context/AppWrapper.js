@@ -41,6 +41,10 @@ export default function AppWrapper({ children }) {
                 Cookies.remove('refresh_token')
             })
         }
+        const cart = Cookies.get('cart')
+        if (!cart) {
+            Cookies.set('cart', '')
+        }
     }, [])
 
     return (

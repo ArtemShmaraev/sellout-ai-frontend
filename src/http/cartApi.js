@@ -22,3 +22,11 @@ export async function fetchProductUnits(obj) {
     const {data} = await $host.post('product_unit/list', obj)
     return data
 }
+export async function updateCartFromCookies(cookieStr, userId, token) {
+    const unitIdArr = cookieStr.trim().split(' ').map(el => Number(el))
+    const obj = {product_unit_list: unitIdArr}
+    const {data} = await $host.post(`order/cart_list/${userId}`, JSON.stringify(obj), {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

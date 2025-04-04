@@ -2,8 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 class CartStore {
     constructor() {
-        this._sizeId = null
-        this._shipps = []
+        this._shipps = {}
         this._cart = {}
         makeAutoObservable(this)
     }

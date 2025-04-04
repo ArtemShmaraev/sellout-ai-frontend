@@ -64,33 +64,34 @@ const SizeChoice = ({prices, productId}) => {
                 {
                     isOpen &&
                     <div>
-                        <>
-                            <div className={s.items_not}
-                            >
-                                <div className={s.size_block}>
-                                    <div className={s.crossed_text}>1 US</div>
-                                </div>
-                                <div className='d-flex'>
-                                    Распродано.
-                                    <a href="" className={s.link}>Сообщить о поступлении</a>
-                                </div>
-                            </div>
-                        </>
                         {
                             prices.map(el =>
-                                <div className={s.items}
-                                     onClick={() => selectItem(el)}
-                                     key={el.id}
-                                >
-                                    <div className={s.size_block}>
-                                        <div className={s.icons}>{el.view_size}</div>
-                                        <Image src={truck} alt="" className={s.icons}/>
-                                        <Image src={refund} alt="" className={s.icons}/>
+                                el.available
+                                    ?
+                                    <div className={s.items}
+                                         onClick={() => selectItem(el)}
+                                         key={el.id}
+                                    >
+                                        <div className={s.size_block}>
+                                            <div className={s.icons}>{el.view_size}</div>
+                                            {el.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                            {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                        </div>
+                                        <div className={s.price}>
+                                            от {el.min_price}
+                                        </div>
                                     </div>
-                                    <div className={s.price}>
-                                        от {el.min_price}
+                                    :
+                                    <div className={s.items_not}
+                                    >
+                                        <div className={s.size_block}>
+                                            <div className={s.crossed_text}>{el.view_size}</div>
+                                        </div>
+                                        <div className='d-flex'>
+                                            Распродано.
+                                            <a href="" className={s.link}>Сообщить о поступлении</a>
+                                        </div>
                                     </div>
-                                </div>
                             )
                         }
                     </div>

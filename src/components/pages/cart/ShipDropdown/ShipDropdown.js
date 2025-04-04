@@ -3,9 +3,10 @@ import {observer} from "mobx-react-lite";
 import s from "./ShipDropdown.module.css";
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
+import {addToCart, removeFromCart} from "@/http/cartApi";
 
 const ShipDropdown = ({cardId, unitId}) => {
-    const {cartStore} = useContext(Context)
+    const {cartStore, userStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [inCartArr, setInCartArr] = useState([])
@@ -34,7 +35,7 @@ const ShipDropdown = ({cardId, unitId}) => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-    const selectItem = (item) => {
+    const selectItem = async (item) => {
         const currCart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
         let currId
         selectedItem ? currId = selectedItem.id : currId = unitId
@@ -48,16 +49,11 @@ const ShipDropdown = ({cardId, unitId}) => {
         Cookies.set('cart', newCart.join(' '))
         setSelectedItem(item)
         setIsOpen(false);
-    }
-    const isInCart = (item) => {
-        const cart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
-        const arr = []
-        for (let i = 0; i < cart; i++) {
-            if (item.id === cart[i]) {
-                arr.push(item)
-            }
+        cartStore.ships[cardId] = item.id
+        if (userStore.isLogged) {
+            await removeFromCart(userStore.id, currId, Cookies.get('access_token'))
+            await addToCart(userStore.id, item.id, Cookies.get('access_token'))
         }
-        return arr
     }
     useEffect(() => {
         const handleClickOutside = (event) => {

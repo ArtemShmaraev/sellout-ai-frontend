@@ -124,11 +124,11 @@ const OneProductPage = ({product, prices}) => {
                                     style={product.is_sale
                                         ? {textDecoration: 'line-through', fontSize: '16px'}
                                         : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price}</div>
+                                >от {product.min_price} ₽</div>
                                 <div className='d-flex align-items-center'>
                                     {product.is_sale &&
                                         <div className={s.price_sale}>
-                                            от 100 $
+                                            от 100 ₽
                                         </div>
                                     }
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
@@ -247,11 +247,11 @@ const OneProductPage = ({product, prices}) => {
                                     style={product.is_sale
                                         ? {textDecoration: 'line-through', fontSize: '16px'}
                                         : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price}</div>
+                                >от {product.min_price} ₽</div>
                                 <div className='d-flex align-items-center'>
                                     {product.is_sale &&
                                         <div className={s.price_sale}>
-                                            от 100 $
+                                            от 100 ₽
                                         </div>
                                     }
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}

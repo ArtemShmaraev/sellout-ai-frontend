@@ -7,8 +7,13 @@ import CustomCheckbox from "../UI/CustoCheckbox/CustomCheckbox";
 import Image from 'next/image'
 import {userStore} from "@/store/UserStore";
 import {login, registration} from "@/http/userApi";
+import {updateCartFromCookies} from "@/http/cartApi";
+import Cookies from "js-cookie";
+import {useRouter} from "next/router";
 
 const AuthModal = ({children, fromWishlist = false}) => {
+    const router = useRouter()
+
     const [show, setShow] = useState(false);
     const [isReg, setIsReg] = useState(true)
     const [isDesktop, setIsDesktop] = useState(true)
@@ -63,8 +68,6 @@ const AuthModal = ({children, fromWishlist = false}) => {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
-            localStorage.setItem('access_token', res.access)
-            localStorage.setItem('refresh_token', res.refresh)
             setShow(false)
         } catch (e) {
             setEmailBusy(true)
@@ -89,9 +92,13 @@ const AuthModal = ({children, fromWishlist = false}) => {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
-            localStorage.setItem('access_token', res.access)
-            localStorage.setItem('refresh_token', res.refresh)
+            const cookieCart = Cookies.get('cart')
+            if (cookieCart) {
+                const cartFromCart = await updateCartFromCookies(cookieCart, res.user_id, res.access)
+                
+            }
             setShow(false)
+            router.push(router.pathname, undefined, {scroll: false})
         } catch (e) {
             setWrong(true)
         }

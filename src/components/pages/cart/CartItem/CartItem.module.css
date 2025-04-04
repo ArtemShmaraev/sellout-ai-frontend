@@ -25,3 +25,6 @@
 .ship_block {
     margin-top: 22px;
 }
+.icon {
+    cursor: pointer;
+}
