@@ -51,7 +51,25 @@
 .truck {
     margin-left: 5px;
 }
-
+.h_text {
+    margin-bottom: 20px;
+}
+.img_col {
+    display: flex;
+    flex-direction: column;
+}
+.pic_block {
+    display: flex;
+    justify-content: flex-end;
+}
+.megamenu_links {
+    cursor: pointer;
+    color: black;
+    transition: 0.3s;
+}
+.megamenu_links:hover {
+    opacity: 0.7;
+}
 @media (max-width: 1000px) {
     .logo {
         font-size: 26px;

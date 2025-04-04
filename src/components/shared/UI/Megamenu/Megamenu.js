@@ -4,7 +4,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import picture from '@/static/img/shoe2.png'
 import Image from "next/image";
 
-const Megamenu = ({children, className}) => {
+const Megamenu = ({children, className, label}) => {
     const ref = useRef(null)
     const [isShown, setIsShown] = useState(false)
     return (
@@ -15,7 +15,7 @@ const Megamenu = ({children, className}) => {
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
             >
-                {children}
+                {label}
             </p>
             {isShown &&
                 <div className={s.all}
@@ -26,30 +26,7 @@ const Megamenu = ({children, className}) => {
                          onMouseLeave={() => setIsShown(false)}
                     >
                         <Container>
-                            <Row>
-                                <Col lg={3}>
-                                    <h4 className={s.h_text}>Заголовок</h4>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                </Col>
-                                <Col lg={3}>
-                                    <h4 className={s.h_text}>Заголовок</h4>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                    <div>Что то</div>
-                                </Col>
-                                <Col lg={6} className={s.pic_block}>
-                                    <Col lg={6}>
-                                        <div className={s.img_col}>
-                                            <Image src={picture} alt=""/>
-                                            <a href="">Посмотреть все...</a>
-                                        </div>
-                                    </Col>
-                                </Col>
-                            </Row>
+                            {children}
                         </Container>
                     </div>
                     <div className={s.black_area}
