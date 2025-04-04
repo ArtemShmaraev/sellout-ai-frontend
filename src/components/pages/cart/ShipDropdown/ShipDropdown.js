@@ -8,16 +8,23 @@ const ShipDropdown = ({cardId, unitId}) => {
     const {cartStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [inCartArr, setInCartArr] = useState([])
     const dropdownRef = useRef(null);
     useEffect(() => {
         let changed = false
         if (cartStore.cart[cardId]) {
+            const cart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            const arr = []
             cartStore.cart[cardId].forEach(el => {
                 if (el.id === unitId) {
                     setSelectedItem(el)
                     changed = true
                 }
+                if (cart.includes(el.id)) {
+                    arr.push(el.id)
+                }
             })
+            setInCartArr(arr)
             if (!changed) {
                 setSelectedItem(null)
             }
@@ -91,13 +98,12 @@ const ShipDropdown = ({cardId, unitId}) => {
                         {
                             cartStore.cart[cardId].map((el, ind) =>
                                 <button className={ind !== cartStore.cart[cardId].length-1 ? s.dropdown_item : s.dropdown_item2}
-                                     onClick={() => selectItem(el)}
-                                     key={el.id}
+                                        onClick={() => selectItem(el)}
+                                        key={el.id}
+                                        disabled={inCartArr.includes(el.id)}
                                 >
-                                    {el.delivery.name} | {el.final_price} ₽
-                                    {/*{*/}
-                                    {/*    isInCart(el) && <div>Уже в корзине</div>*/}
-                                    {/*}*/}
+                                    <div>{el.delivery.name} | {el.final_price} ₽</div>
+                                    <div>{inCartArr.includes(el.id) && 'Уже в корзине'}</div>
                                 </button>
                             )
                         }
