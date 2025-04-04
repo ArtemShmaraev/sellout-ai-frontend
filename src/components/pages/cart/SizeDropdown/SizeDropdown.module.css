@@ -67,15 +67,28 @@
     font-size: 13px;
     margin-right: 10px;
 }
+.size {
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 5px;
+}
 .cross {
     text-decoration: line-through;
     font-size: 13px;
     font-weight: 700;
     margin-right: 5px;
+    white-space: nowrap;
+    flex-grow: 1;
 }
 .fs13 {
-    font-size: 12px;
+    font-size: 11px;
     text-align: left;
+}
+.sold_out {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .link {
     text-decoration: underline;
@@ -84,4 +97,16 @@
 }
 .price {
     font-size: 13px;
+}
+@media (max-width: 1200px) {
+    .dropdown, .dropdown_items_block {
+        width: 170px;
+    }
+    .dropdown_header_text, .dropdown_item, .dropdown_item2 {
+        font-size: 12px;
+    }
+    .fs13 {
+        font-size: 12px;
+        text-align: right;
+    }
 }

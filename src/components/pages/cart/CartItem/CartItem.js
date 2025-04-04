@@ -9,13 +9,13 @@ import close from '@/static/icons/x-lg.svg'
 import {Context} from "@/context/AppWrapper";
 import {useRouter} from "next/router";
 import Cookies from "js-cookie";
-import {userStore} from "@/store/UserStore";
 import {removeFromCart} from "@/http/cartApi";
+import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 
 const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId,
                   }) => {
     const [prices, setPrices] = useState([])
-    const {cartStore} = useContext(Context)
+    const {cartStore, userStore} = useContext(Context)
     const router = useRouter()
     useEffect(() => {
         fetchPrices(productId).then(res => {
@@ -32,37 +32,52 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
     }
+    const [isInWishlist, setIsInWishlist] = useState()
+    const addToWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await addToWishlist(userId, product.id, token)
+        setIsInWishlist(true)
+    }
+    const deleteFromWL = async () => {
+        const token = Cookies.get('access_token')
+        const userId = userStore.id
+        const data = await removeFromWishlist(userId, product.id, token)
+        setIsInWishlist(false)
+    }
     return (
         <div>
             <hr/>
             <div className={s.row}>
                 <div className={s.col1}>
-                    <Image src={shoe} alt=''/>
+                    <Image src={shoe} alt='' className={s.img}/>
                 </div>
-                <div className={s.col}>
-                    <div>
-                        <div className={s.brand}>{brand}</div>
-                        <div>{model}</div>
-                        <div>{colorway}</div>
+                <div className={s.inner_row}>
+                    <div className={s.col}>
+                        <div>
+                            <div className={s.brand}>{brand}</div>
+                            <div className={s.text}>{model}</div>
+                            <div className={s.text}>{colorway}</div>
+                        </div>
                     </div>
-                </div>
-                <div className={s.col}>
-                    <div>
-                        <div className={s.brand}>Цена</div>
-                        <div>{price} ₽</div>
+                    <div className={s.col}>
+                        <div className={s.dropdowns}>
+                            <div className={s.brand}>Размер</div>
+                            <SizeDropdown prices={prices} productId={productId} currentId={sizeId} cardId={cardId}/>
+                            <div className={s.number_block}>
+                                <div className={s.brand}>Доставка</div>
+                                <ShipDropdown cardId={cardId} unitId={unitId}/>
+                            </div>
+                        </div>
                     </div>
-                    <div className={s.ship_block}>
-                        <div className={s.brand}>Доставка</div>
-                        <ShipDropdown cardId={cardId} unitId={unitId}/>
-                    </div>
-                </div>
-                <div className={s.col}>
-                    <div>
-                        <div className={s.brand}>Размер</div>
-                        <SizeDropdown prices={prices} productId={productId} currentId={sizeId} cardId={cardId}/>
-                        <div className={s.number_block}>
+                    <div className={`${s.col} d-flex`}>
+                        <div className={s.dropdowns}>
+                            <div className={s.brand}>Цена</div>
+                            <div className={s.text}>{price} ₽</div>
+                        </div>
+                        <div className={s.ship_block}>
                             <div className={s.brand}>Количество</div>
-                            <div>1</div>
+                            <div className={s.text}>1</div>
                         </div>
                     </div>
                 </div>

@@ -68,7 +68,18 @@ const AuthModal = ({children, fromWishlist = false}) => {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
+            const cookieCart = Cookies.get('cart')
+            let cartFromBack
+            if (cookieCart) {
+                cartFromBack = await updateCartFromCookies(cookieCart, res.user_id, res.access)
+            } else {
+                cartFromBack = await updateCartFromCookies('', res.user_id, res.access)
+            }
+            let newStr = ''
+            cartFromBack.forEach(el => newStr += el + ' ')
+            Cookies.set('cart', newStr)
             setShow(false)
+            router.push(router.pathname, undefined, {scroll: false})
         } catch (e) {
             setEmailBusy(true)
         }
@@ -93,10 +104,15 @@ const AuthModal = ({children, fromWishlist = false}) => {
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
             const cookieCart = Cookies.get('cart')
+            let cartFromBack
             if (cookieCart) {
-                const cartFromCart = await updateCartFromCookies(cookieCart, res.user_id, res.access)
-                
+                cartFromBack = await updateCartFromCookies(cookieCart, res.user_id, res.access)
+            } else {
+                cartFromBack = await updateCartFromCookies('', res.user_id, res.access)
             }
+            let newStr = ''
+            cartFromBack.forEach(el => newStr += el + ' ')
+            Cookies.set('cart', newStr)
             setShow(false)
             router.push(router.pathname, undefined, {scroll: false})
         } catch (e) {

@@ -73,13 +73,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                         </div>
                                     </div>
                                     :
-                                    <>
+                                    <div className={s.sold_out}>
                                         <div className={s.cross}>{selectedItem.view_size}</div>
                                         <div className={s.fs13}>
                                             <div>Распродано</div>
                                             <a className={s.link}>Сообщить о поступлении</a>
                                         </div>
-                                    </>
+                                    </div>
                             }
                         </div>
                         :
@@ -104,7 +104,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                         ?
                                             <div className='d-flex justify-content-between align-items-center w-100'>
                                                 <div className='d-flex align-items-center'>
-                                                    <div className={s.icons}>{el.view_size}</div>
+                                                    <div className={s.size}>{el.view_size}</div>
                                                     {el.is_fast_ship && <Image src={truck} alt="" className={s.icons}/>}
                                                     {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                                 </div>
@@ -113,13 +113,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                                 </div>
                                             </div>
                                             :
-                                            <>
+                                            <div className={s.sold_out}>
                                                 <div className={s.cross}>{el.view_size}</div>
                                                 <div className={s.fs13}>
                                                     <div>Распродано</div>
                                                     <a className={s.link}>Сообщить о поступлении</a>
                                                 </div>
-                                            </>
+                                            </div>
                                     }
                                 </button>
                             )

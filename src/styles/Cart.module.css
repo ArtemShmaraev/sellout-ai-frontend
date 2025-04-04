@@ -1,5 +1,6 @@
 .cont {
     margin-top: 130px;
+    margin-bottom: 50px;
 }
 .title_block {
     display: flex;
@@ -9,4 +10,53 @@
 .link {
     color: #9a9999;
     cursor: pointer;
+}
+.text_underline {
+    text-decoration: underline;
+}
+.shop_button {
+    width: 200px;
+    padding: 10px;
+    background: black;
+    color: white;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+.login_block {
+    display: flex;
+}
+.main_block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.items_block {
+    width: 64%;
+}
+.promos_block {
+    width: 34%;
+}
+.big_text {
+    font-size: 20px;
+}
+.order_btn {
+    color: white;
+    background: black;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+@media (max-width: 1200px) {
+    .cont {
+        margin-top: 80px;
+    }
+    .login_block {
+        display: inline;
+    }
 }
