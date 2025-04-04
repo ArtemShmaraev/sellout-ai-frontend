@@ -18,3 +18,7 @@ export async function removeFromCart(userId, productUnitId, token) {
     })
     return data
 }
+export async function fetchProductUnits(obj) {
+    const {data} = await $host.post('product_unit/list', obj)
+    return data
+}

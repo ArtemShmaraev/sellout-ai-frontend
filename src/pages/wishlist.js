@@ -15,9 +15,9 @@ import Recommendations from "@/components/shared/Recommendations/Recommendations
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
-    const {user_id} = jwtDecode(token)
     let wishlist
     try {
+        const {user_id} = jwtDecode(token)
         wishlist = await fetchWishlist(user_id , context.req.headers.cookie)
     } catch (e) {
         wishlist = []
