@@ -40,3 +40,14 @@
     border-radius: 50px;
     top: -7px;
 }
+.rs-picker-toggle:hover,
+.rs-picker-toggle:focus {
+    box-shadow: none !important;
+}
+.rs-picker-toggle:hover::before,
+.rs-picker-toggle:hover::after {
+    /* переопределите стили здесь */
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}

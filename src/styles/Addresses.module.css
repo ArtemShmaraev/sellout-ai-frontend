@@ -1,0 +1,18 @@
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+.main_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn {
+    width: 80%;
+    color: white;
+    background: black;
+    border-radius: 7px;
+    padding: 10px;
+}

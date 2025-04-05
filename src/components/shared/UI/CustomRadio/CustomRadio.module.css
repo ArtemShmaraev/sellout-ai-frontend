@@ -16,7 +16,6 @@
     width: 10px;
     height: 10px;
     background: black;
-    transform: translate(0.5px, -0.5px);
 }
 .label {
     font-size: 12px;

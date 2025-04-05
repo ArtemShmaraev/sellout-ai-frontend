@@ -165,19 +165,6 @@ const AuthModal = ({children, fromWishlist = false}) => {
                                 <h4 className={s.headers}>Зарегистрироваться с помощью...</h4>
                                 <h4 className={s.headers}>Или зарегистрируйтесь по почте</h4>
                                 <div className={s.input_block}>
-                                    <label className={s.label}>Почта:</label>
-                                    <input type="email" className={s.input}
-                                           value={email}
-                                           onChange={(e) => setEmail(e.target.value)}/>
-                                    {!validEmail &&
-                                        <p className={s.validate}>Некорректный формат почты</p>
-                                    }
-                                    {emailBusy &&
-                                        <p className={s.validate}>Пользователь с таким email уже существует</p>
-                                    }
-                                    <p className={s.description}>Вам придёт письмо-подтверждение</p>
-                                </div>
-                                <div className={s.input_block}>
                                     <label className={s.label1}>Имя:</label>
                                     <input type="text" className={s.input}
                                            value={firstName}
@@ -190,6 +177,19 @@ const AuthModal = ({children, fromWishlist = false}) => {
                                            value={lastName}
                                            onChange={(e) => setLastName(e.target.value)}
                                     />
+                                </div>
+                                <div className={s.input_block}>
+                                    <label className={s.label}>Почта:</label>
+                                    <input type="email" className={s.input}
+                                           value={email}
+                                           onChange={(e) => setEmail(e.target.value)}/>
+                                    {!validEmail &&
+                                        <p className={s.validate}>Некорректный формат почты</p>
+                                    }
+                                    {emailBusy &&
+                                        <p className={s.validate}>Пользователь с таким email уже существует</p>
+                                    }
+                                    <p className={s.description}>Вам придёт письмо-подтверждение</p>
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>

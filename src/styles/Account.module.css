@@ -5,6 +5,7 @@
 }
 .input {
     width: 100%;
+    outline: none;
     border: 1px solid #9a9999;
     border-radius: 7px;
     padding: 5px;
@@ -22,4 +23,36 @@
     outline: none;
     border: 1px solid #9a9999;
     border-radius: 7px;
+}
+.datepicker:hover {
+    background: transparent !important;
+}
+.dropdown {
+    width: 100%;
+    border: 1px solid #9a9999;
+    border-radius: 7px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.toggle {
+    cursor: pointer;
+}
+.text {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.black_btn {
+    color: white;
+    background: black;
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px;
+}
+.red_text {
+    color: #b61212;
+    text-align: center;
 }

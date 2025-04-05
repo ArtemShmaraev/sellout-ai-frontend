@@ -10,6 +10,9 @@
 .link {
     color: #9a9999;
 }
+.link:hover {
+    color: #9a9999;
+}
 .main_block {
     display: flex;
 }
@@ -22,9 +25,22 @@
     text-decoration: none;
     color: black;
     margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+.nav_link:hover {
+    color: black;
+    text-decoration: none;
+}
+.icon {
+    margin-left: 5px;
+    width: 25px;
 }
 .children_block {
     width: 80%;
     display: flex;
     justify-content: center;
+}
+.bold {
+    font-weight: 700;
 }

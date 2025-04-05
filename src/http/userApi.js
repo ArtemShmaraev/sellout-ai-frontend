@@ -22,3 +22,9 @@ export async function refreshToken(token) {
     Cookies.set('access_token', data.access)
     return data
 }
+export async function fetchUserInfo(cookies, id) {
+    const {data} = await $authHost.get(`user/user_info/${id}`, {
+        headers: {cookie: cookies}
+    })
+    return data
+}
