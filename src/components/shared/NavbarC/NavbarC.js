@@ -151,6 +151,7 @@ const NavbarC = () => {
                                             Puma</div>
                                     </Col>
                                     <Col lg={3}>
+                                        <h4 className={s.h_text}>&nbsp;</h4>
                                         <div
                                             onClick={() => router.push('/products?line=supreme')}
                                             className={s.megamenu_links}
