@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './ProductCard.module.css'
 import shoe from '@/static/img/shoe.png'
 import shoe2 from '@/static/img/shoe2.png'
@@ -15,11 +15,20 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 
 const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
-                         id, inWishlist, smallCard}) => {
+                         id, inWishlist, photosArr, smallCard}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(inWishlist)
+
+    const [isDesktop, setIsDesktop] = useState(true)
+    useEffect(() => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        }
+    }, [])
+
     const brandsDisplay = (brands) => {
         if (!brands) {
             return 'No brand'
@@ -38,7 +47,16 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         }
         return brands[0].name
     }
-
+    const [photos, setPhotos] = useState([])
+    useEffect(() => {
+        if (photosArr) {
+            const arr = []
+            for (let i = 0; i < photosArr.length; i++) {
+                arr.push(photosArr[i].url)
+            }
+            setPhotos(arr)
+        }
+    }, [photosArr])
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -85,11 +103,14 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     </div>
                 }
             </div>
-            <Image
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                className={smallCard ? s.sm_img : s.img}
-                src={isHovered ? shoe2 : shoe} alt="shoe"/>
+            {photosArr &&
+                <Image
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    width={smallCard ? 150 : isDesktop ? 262 : 160}
+                    height={smallCard ? 100 : isDesktop ? 180 : 100}
+                    src={isHovered ? photos[1] : photos[0]} alt="shoe"/>
+            }
             <div className={s.text_block}>
                 <div className={s.tag}>{brandsDisplay(brands)}</div>
                 <div className={s.brand}>{model || 'No model'}</div>
