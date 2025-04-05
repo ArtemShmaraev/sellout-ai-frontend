@@ -1,7 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import s from './ProductCard.module.css'
-import shoe from '@/static/img/shoe.png'
-import shoe2 from '@/static/img/shoe2.png'
 import like from '@/static/icons/heart.svg'
 import like_fill from '@/static/icons/heart-fill.svg'
 import truck from '@/static/icons/truck.svg'
@@ -104,23 +102,25 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 }
             </div>
             {photosArr &&
-                <div>
+                <div className={s.image_container}>
                     <Image
+                        style={{position: 'absolute'}}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                         width={smallCard ? 150 : isDesktop ? 262 : 160}
                         height={smallCard ? 100 : isDesktop ? 180 : 100}
                         objectFit="cover"
-                        className={isHovered && photos[1] ? 'd-none' : ''}
+                        className={isHovered && photos[1] ? 'opacity-0' : ''}
                         src={photos[0]} alt="shoe"/>
                     {photos[1] &&
                         <Image
+                            style={{position: 'absolute'}}
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                             width={smallCard ? 150 : isDesktop ? 262 : 160}
                             height={smallCard ? 100 : isDesktop ? 180 : 100}
                             objectFit="cover"
-                            className={isHovered ? '' : 'd-none'}
+                            className={isHovered ? '' : 'opacity-0'}
                             src={photos[1]} alt="shoe"/>
                     }
                 </div>

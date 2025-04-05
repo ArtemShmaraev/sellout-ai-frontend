@@ -1,0 +1,25 @@
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+.input {
+    width: 100%;
+    border: 1px solid #9a9999;
+    border-radius: 7px;
+    padding: 5px;
+    margin: 5px 0;
+}
+.half_row {
+    width: 49%;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.datepicker {
+    outline: none;
+    border: 1px solid #9a9999;
+    border-radius: 7px;
+}

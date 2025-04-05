@@ -79,7 +79,7 @@ const AuthModal = ({children, fromWishlist = false}) => {
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
             setShow(false)
-            router.push(router.pathname, undefined, {scroll: false})
+            router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
         } catch (e) {
             setEmailBusy(true)
         }
@@ -114,7 +114,7 @@ const AuthModal = ({children, fromWishlist = false}) => {
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
             setShow(false)
-            router.push(router.pathname, undefined, {scroll: false})
+            router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
         } catch (e) {
             setWrong(true)
         }
