@@ -32,6 +32,8 @@ export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const product = await fetchOneProduct(context.params.slug, token)
+    console.log(product)
+    //TODO log
     const {id} = product
     const prices = await fetchPrices(id)
     return { props: {product, prices} }
@@ -141,14 +143,15 @@ const OneProductPage = ({product, prices}) => {
                             indicators={false}
                             interval={null}
                         >
-                            <Carousel.Item>
-                                <Image className={s.photo}
-                                       src={shoe} alt="shoe"/>
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <Image className={s.photo}
-                                       src={shoe2} alt="shoe"/>
-                            </Carousel.Item>
+                            {
+                                product.bucket_link.map(el =>
+                                    <Carousel.Item className={s.photo} key={el.id}>
+                                        <Image src={el.url} alt=''
+                                               fill={true}
+                                        />
+                                    </Carousel.Item>
+                                )
+                            }
                         </Carousel>
                         {!isDesktop &&
                             <>

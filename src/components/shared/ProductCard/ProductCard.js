@@ -104,12 +104,26 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 }
             </div>
             {photosArr &&
-                <Image
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    width={smallCard ? 150 : isDesktop ? 262 : 160}
-                    height={smallCard ? 100 : isDesktop ? 180 : 100}
-                    src={isHovered ? photos[1] : photos[0]} alt="shoe"/>
+                <div>
+                    <Image
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        width={smallCard ? 150 : isDesktop ? 262 : 160}
+                        height={smallCard ? 100 : isDesktop ? 180 : 100}
+                        objectFit="cover"
+                        className={isHovered && photos[1] ? 'd-none' : ''}
+                        src={photos[0]} alt="shoe"/>
+                    {photos[1] &&
+                        <Image
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            width={smallCard ? 150 : isDesktop ? 262 : 160}
+                            height={smallCard ? 100 : isDesktop ? 180 : 100}
+                            objectFit="cover"
+                            className={isHovered ? '' : 'd-none'}
+                            src={photos[1]} alt="shoe"/>
+                    }
+                </div>
             }
             <div className={s.text_block}>
                 <div className={s.tag}>{brandsDisplay(brands)}</div>
