@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import MainLayout from "@/layout/MainLayout";
 import s from '@/styles/Account.module.css'
 import AccountLayout from "@/layout/AccountLayout";
-import {DatePicker} from "rsuite";
 import {Context} from "@/context/AppWrapper";
 import InputMask from 'react-input-mask';
 import {fetchUserInfo} from "@/http/userApi";

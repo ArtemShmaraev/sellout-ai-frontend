@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './AddressCard.module.css'
 import cross from '@/static/icons/x-lg.svg'
-import edit from '@/static/icons/pencil-square.svg'
 import Image from "next/image";
 import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 

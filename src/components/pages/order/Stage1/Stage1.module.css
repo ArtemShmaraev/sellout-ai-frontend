@@ -1,0 +1,14 @@
+.stage_block {
+    display: flex;
+    justify-content: space-between;
+}
+.stage {
+    font-weight: 500;
+}
+.link {
+    color: #9a9999;
+    cursor: pointer;
+}
+.link:hover {
+    color: #9a9999;
+}

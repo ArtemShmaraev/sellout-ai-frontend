@@ -8,6 +8,7 @@ import {refreshToken} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Cookies from 'js-cookie';
 import {cartStore} from "@/store/CartStore";
+import {orderStore} from "@/store/OrderStore";
 
 export const Context = createContext(null);
 
@@ -18,7 +19,8 @@ export default function AppWrapper({ children }) {
         filterStore,
         adminStore,
         userStore,
-        cartStore
+        cartStore,
+        orderStore
     }
     useEffect(() => {
         const token = Cookies.get('refresh_token')

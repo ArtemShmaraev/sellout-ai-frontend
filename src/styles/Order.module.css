@@ -1,0 +1,33 @@
+.cont {
+    margin-top: 150px;
+    margin-bottom: 70px;
+}
+.section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.main_block {
+    width: 65%;
+}
+.promos_block {
+    width: 30%;
+}
+.big_text {
+    font-size: 20px;
+}
+.order_btn {
+    color: white;
+    background: black;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+@media (max-width: 1200px) {
+    .cont {
+        margin-top: 70px;
+    }
+}
