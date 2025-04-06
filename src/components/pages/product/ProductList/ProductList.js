@@ -5,6 +5,7 @@ import s from './ProductList.module.css'
 import {observer} from "mobx-react-lite";
 
 const ProductList = ({products, isAdmin}) => {
+    console.log(products[1])
     return (
         <div className={s.container}>
             <div className={s.product_list}>
@@ -32,7 +33,7 @@ const ProductList = ({products, isAdmin}) => {
                                    colorway={el.colorway}
                                    categories={el.categories}
                                    lines={el.lines}
-                                   mainLine={el.main_line}
+                                   mainLine={el.main_line.view_name}
                                    price={el.min_price_product_unit}
                                    key={el.id}/>
                     )
