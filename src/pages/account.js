@@ -23,6 +23,7 @@ const Account = ({userData}) => {
     const [lastname, setLastname] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState()
+    const [birthday, setBirthday] = useState()
     const handleChangeNumber = (e) => {
         const inputPhoneNumber = e.target.value;
         setPhone(inputPhoneNumber);
@@ -74,7 +75,7 @@ const Account = ({userData}) => {
     return (
         <MainLayout>
             <AccountLayout>
-                <div style={{width: '70%'}}>
+                <div className={s.cont}>
                     <h4 className={s.title}>Личные данные</h4>
                     <div className={s.row}>
                         <div className={s.half_row}>
@@ -118,6 +119,7 @@ const Account = ({userData}) => {
                             <div className={s.dropdown}>
                                 <div className={s.toggle}
                                      onClick={toggleGender}
+                                     style={genderOpen ? {borderBottom: '1px solid black'} : {}}
                                 >
                                     <div className={s.text}>
                                         <div>{selectedGender ? selectedGender[0]: 'Пол'}</div>
@@ -142,19 +144,22 @@ const Account = ({userData}) => {
                             </div>
                         </div>
                         <div className={s.half_row}>
-                            <DatePicker appearance="default"
-                                        placeholder="Дата рождения"
-                                        block={true}
-                                        editable={true}
-                                        className={s.datepicker}
-                            />
+                            <InputMask mask="99.99.9999" maskChar={'_'}
+                                       value={birthday}
+                                       onChange={e => setBirthday(e.target.value)}
+                            >
+                                {(inputProps) => <input {...inputProps} type="text"
+                                                        placeholder="Дата рождения"
+                                                        className={s.input}
+                                />}
+                            </InputMask>
                         </div>
                     </div>
-                    {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
-                    {fillLines && <div className={s.red_text}>Заполните все поля</div>}
                     <button className={s.black_btn}
                             onClick={sendData}
                     >Сохранить изменения</button>
+                    {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
+                    {fillLines && <div className={s.red_text}>Заполните все поля</div>}
                 </div>
             </AccountLayout>
         </MainLayout>

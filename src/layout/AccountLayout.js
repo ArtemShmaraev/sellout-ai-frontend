@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import person from '@/static/icons/person.svg'
 import geo from '@/static/icons/geo-alt.svg'
 import Image from "next/image";
+import {observer} from "mobx-react-lite";
 
 const AccountLayout = ({children}) => {
     const {userStore} = useContext(Context)
@@ -27,10 +28,10 @@ const AccountLayout = ({children}) => {
     return (
         <Container className={s.cont}>
             <div className={s.header}>
-                <h3>{`${userStore.firstName} ${userStore.lastName}`}</h3>
+                <h3 style={{marginBottom: '0px'}}>{`${userStore.firstName} ${userStore.lastName}`}</h3>
                 <a href="/" className={s.link} onClick={(e) => logout(e)}>Выйти</a>
             </div>
-            <hr/>
+            <hr style={{marginTop: '5px'}}/>
             <div className={s.main_block}>
                 <div className={s.nav_block}>
                     <a href="/account" className={s.nav_link}
@@ -54,9 +55,9 @@ const AccountLayout = ({children}) => {
                     <a href="" className={s.nav_link}
                        onClick={(e) => {
                            e.preventDefault()
-                           router.push('/account/addresses')
+                           router.push('/account/orders')
                        }}>
-                        <div>Личные данные</div>
+                        <div className={makeBold('orders')}>Заказы</div>
                         <Image src={person} alt='' className={s.icon} width={20}/>
                     </a>
                     <a href="" className={s.nav_link}
@@ -76,4 +77,4 @@ const AccountLayout = ({children}) => {
     );
 };
 
-export default AccountLayout;
+export default observer(AccountLayout);

@@ -3,6 +3,7 @@ import s from './AddressCard.module.css'
 import cross from '@/static/icons/x-lg.svg'
 import edit from '@/static/icons/pencil-square.svg'
 import Image from "next/image";
+import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 
 const AddressCard = () => {
     return (
@@ -14,7 +15,7 @@ const AddressCard = () => {
             </div>
             <div className={s.icons_block}>
                 <Image src={cross} alt='' className={s.icon}/>
-                <Image src={edit} alt='' className={s.icon}/>
+                <AddressModal newAddress={false}/>
             </div>
         </div>
     );

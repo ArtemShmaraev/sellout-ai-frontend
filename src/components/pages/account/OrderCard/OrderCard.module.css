@@ -1,3 +1,36 @@
+.dropdown {
+    width: 100%;
+    border: 1px solid black;
+}
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+.header_text {
+    font-size: 20px;
+    margin: 0 10px;
+}
+.header_block {
+    display: flex;
+    flex-grow: 1;
+}
+.header_col {
+    display: flex;
+}
+.icon_block {
+}
+.icon {
+    cursor: pointer;
+}
+.details_block {
+
+}
+.order {
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
 .row {
     min-height: 300px;
     display: flex;
@@ -7,7 +40,7 @@
     flex-grow: 1;
 }
 .col1 {
-    width: 30%;
+    width: 24%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -16,7 +49,7 @@
     width: 100%;
 }
 .col {
-    width: 23%;
+    width: 24%;
 }
 
 .brand {
@@ -35,7 +68,25 @@
 .icon {
     cursor: pointer;
 }
+.final_block {
+    display: flex;
+    padding: 15px;
+}
+.final_col {
+    width: 50%;
+}
+.prices {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
 @media (max-width: 1200px) {
+    .header_col {
+        display: block;
+    }
+    .header_text {
+        font-size: 15px;
+    }
     .inner_row {
         flex-direction: column;
         flex-grow: 1;
@@ -58,6 +109,8 @@
     }
     .ship_block {
         margin-top: 10px;
-        margin-left: 20px;
+    }
+    .prices {
+        font-size: 10px;
     }
 }

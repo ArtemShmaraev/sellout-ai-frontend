@@ -44,3 +44,17 @@
 .bold {
     font-weight: 700;
 }
+@media (max-width: 1200px) {
+    .cont {
+        margin-top: 70px;
+    }
+    .nav_block {
+        display: none;
+    }
+    .main_block {
+        width: 100%;
+    }
+    .children_block {
+        width: 100%;
+    }
+}

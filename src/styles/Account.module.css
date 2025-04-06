@@ -1,7 +1,11 @@
+.cont {
+    width: 60%;
+}
 .title {
     text-transform: uppercase;
     text-align: center;
     font-weight: 700;
+    margin-bottom: 20px;
 }
 .input {
     width: 100%;
@@ -36,9 +40,9 @@
 }
 .toggle {
     cursor: pointer;
+    padding: 5px;
 }
 .text {
-    margin: 5px;
     display: flex;
     justify-content: space-between;
 }
@@ -55,4 +59,9 @@
 .red_text {
     color: #b61212;
     text-align: center;
+}
+@media (max-width: 1200px) {
+    .cont {
+        width: 100%;
+    }
 }

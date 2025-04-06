@@ -3,16 +3,17 @@ import AccountLayout from "@/layout/AccountLayout";
 import MainLayout from "@/layout/MainLayout";
 import s from '@/styles/Addresses.module.css'
 import AddressCard from "@/components/pages/account/AddressCard/AddressCard";
+import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 const Addresses = () => {
     return (
         <MainLayout>
             <AccountLayout>
-                <div style={{width: '70%'}}>
+                <div className={s.cont}>
                     <h4 className={s.title}>Адреса</h4>
                     <div className={s.main_block}>
                         <AddressCard/>
                         <AddressCard/>
-                        <button className={s.btn}>Добавить адрес</button>
+                        <AddressModal newAddress={true}/>
                     </div>
                 </div>
             </AccountLayout>

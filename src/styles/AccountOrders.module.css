@@ -1,0 +1,8 @@
+.cont {
+    width: 80%;
+}
+@media (max-width: 1200px) {
+    .cont {
+        width: 100%;
+    }
+}
