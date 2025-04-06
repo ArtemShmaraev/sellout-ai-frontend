@@ -364,5 +364,5 @@ const OneProductPage = ({product, prices}) => {
         </MainLayout>
     );
 };
-//Денис Феоктистов хуесос
+
 export default observer(OneProductPage);

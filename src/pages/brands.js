@@ -27,6 +27,9 @@ const Brands = ({brands}) => {
                 currLetter = brands[i].name[0].toUpperCase()
                 arr.push(currLetter)
             }
+            if (currLetter !== '0-9' && /^\d$/.test(brands[i].name[0])) {
+                arr.push('0-9')
+            }
         }
         setA(arr)
     }, [])
@@ -52,7 +55,7 @@ const Brands = ({brands}) => {
         let arr = []
         let currLetter = ''
         for (let i = 0; i < brands.length; i++) {
-            if (currLetter !== brands[i].name[0].toUpperCase()) {
+            if (currLetter !== brands[i].name[0].toUpperCase() && !/^\d$/.test(brands[i].name[0])) {
                 currLetter = brands[i].name[0]
                 arr.push(
                     <h4 key={brands[i].name[0]}
@@ -60,6 +63,17 @@ const Brands = ({brands}) => {
                         className={s.big_letter}
                     >
                         {brands[i].name[0]}
+                    </h4>
+                )
+            }
+            if (currLetter !== '0-9' && /^\d$/.test(brands[i].name[0])) {
+                currLetter = '0-9'
+                arr.push(
+                    <h4 key={'0-9'}
+                        id={'0-9'}
+                        className={s.big_letter}
+                    >
+                        0-9
                     </h4>
                 )
             }
@@ -90,28 +104,36 @@ const Brands = ({brands}) => {
                         { isDesktop
                             ?
                             alphabet().map(el =>
-                                <button onClick={(e) => {
+                                <button
+                                    onClick={(e) => {
                                     e.preventDefault()
                                     scroll(el)
                                 }}
-                                   className={s.letter}
-                                   disabled={!a.includes(el)}
+                                    className={s.letter}
+                                    disabled={!a.includes(el)}
+                                    key={el}
                                 >{el}</button>
                             )
                             :
-                            <ScrollableBlock noArrows={true}>
-                                {
-                                    alphabet().map(el =>
-                                        <button onClick={(e) => {
-                                            e.preventDefault()
-                                            scroll(el)
-                                        }}
-                                                className={s.letter}
-                                                disabled={!a.includes(el)}
-                                        >{el}</button>
-                                    )
-                                }
-                            </ScrollableBlock>
+                            <div className={s.scrollable_block}>
+                                <div className={s.scrollable_container}>
+                                    {
+                                        alphabet().map((el, ind) =>
+                                            <button onClick={(e) => {
+                                                e.preventDefault()
+                                                scroll(el)
+                                            }}
+                                                    className={s.letter}
+                                                    disabled={!a.includes(el)}
+                                                    style={ind > 0 && ind < alphabet().length-1
+                                                        ? {margin: '0 12px'}
+                                                        :
+                                                        ind === 0 ? {marginRight: '12px'} : {marginLeft: '12px'}}
+                                            >{el}</button>
+                                        )
+                                    }
+                                </div>
+                            </div>
                         }
                     </div>
                 </div>

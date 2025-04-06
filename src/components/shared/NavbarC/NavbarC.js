@@ -220,7 +220,10 @@ const NavbarC = () => {
                                         <Col lg={6}>
                                             <div className={s.img_col}>
                                                 <Image src={picture} alt=""/>
-                                                <a href="" onClick={()=> router.push('/brands')}>Посмотреть все...</a>
+                                                <a href="/brands" onClick={(e)=> {
+                                                    e.preventDefault()
+                                                    router.push('/brands')
+                                                }}>Посмотреть все...</a>
                                             </div>
                                         </Col>
                                     </Col>
