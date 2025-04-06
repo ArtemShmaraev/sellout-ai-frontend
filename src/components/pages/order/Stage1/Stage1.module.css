@@ -12,3 +12,8 @@
 .link:hover {
     color: #9a9999;
 }
+.add_address_block {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}

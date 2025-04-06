@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import s from './CustomRadio.module.css'
 
-const CustomRadio = ({checked = false, label, onClick, margin = 0}) => {
+const CustomRadio = ({checked = false, label, onClick, margin = 0, normalLabel = false}) => {
     return (
         <div className={s.radio} onClick={onClick}>
-            <label className={s.label}>{label}</label>
+            <label className={normalLabel ? s.normal_label : s.label}>{label}</label>
             <div className={s.big} style={{marginRight: `${margin}px`}}>
                 {checked &&
                     <div className={s.small}></div>

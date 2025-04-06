@@ -7,7 +7,7 @@ import InputMask from "react-input-mask";
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import edit from "@/static/icons/pencil-square.svg";
 
-const AddressModal = ({newAddress = false}) => {
+const AddressModal = ({newAddress = false, whiteBnt = false}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false)
@@ -24,7 +24,7 @@ const AddressModal = ({newAddress = false}) => {
         <>
             {newAddress
                 ?
-                <button className={s.btn}
+                <button className={whiteBnt ? s.white_btn : s.btn}
                         onClick={handleShow}
                 >Добавить адрес</button>
                 :
@@ -72,11 +72,15 @@ const AddressModal = ({newAddress = false}) => {
                         ?
                         <>
                             <div className={s.checkbox_block}>
-                                <CustomCheckbox checked={mainAddress}
-                                                labelText={'Сделать адрес основным'}
-                                                labelClass={s.main_address}
-                                                reversed={true}
-                                />
+                                <div style={{width: 'fit-content'}}
+                                     onClick={() => setMainAddress(!mainAddress)}
+                                >
+                                    <CustomCheckbox checked={mainAddress}
+                                                    labelText={'Сделать адрес основным'}
+                                                    labelClass={s.main_address}
+                                                    reversed={true}
+                                    />
+                                </div>
                             </div>
                             <button className={s.add_btn}>Добавить адрес</button>
                         </>

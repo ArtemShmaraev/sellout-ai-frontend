@@ -5,15 +5,21 @@ import tg from '@/static/icons/telegram.png'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'
+import {useRouter} from "next/router";
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
+    const router = useRouter()
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1000) {
             setIsDesktop(false)
         }
     }, [isDesktop])
+    const goToFaq = (e) => {
+        e.preventDefault()
+        router.push('/faq')
+    }
     return (
         <footer className={s.footer}>
             <Container>
@@ -35,7 +41,7 @@ const Footer = () => {
                         </Col>
                         <Col lg={4}>
                             <h4>Остались вопросы?</h4>
-                            <a href="" className={s.footer_link}>FAQ</a>
+                            <a href="/faq" className={s.footer_link} onClick={e => goToFaq(e)}>FAQ</a>
                             <p className={s.footer_text}>Или свяжитесь с нами</p>
                             <p className={s.footer_text}>Почта: support@sellout.su</p>
                             <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>
@@ -55,7 +61,7 @@ const Footer = () => {
                             <a href="" className={s.footer_link}>Возврат</a>
                         </FooterDropdown>
                         <FooterDropdown header={'Остались вопросы?'}>
-                            <a href="" className={s.footer_link}>FAQ</a>
+                            <a href="/faq" className={s.footer_link} onClick={e => goToFaq(e)}>FAQ</a>
                             <p className={s.footer_text}>Или свяжитесь с нами</p>
                             <p className={s.footer_text}>Почта: support@sellout.su</p>
                             <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>

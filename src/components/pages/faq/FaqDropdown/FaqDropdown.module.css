@@ -1,0 +1,11 @@
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.text_block {
+    padding: 10px 10px;
+}

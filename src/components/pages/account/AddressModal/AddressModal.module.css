@@ -5,6 +5,12 @@
     border-radius: 7px;
     padding: 10px;
 }
+.white_btn {
+    color: black;
+    background: white;
+    border-radius: 7px;
+    padding: 10px;
+}
 .icon {
     margin: 10px;
     cursor: pointer;

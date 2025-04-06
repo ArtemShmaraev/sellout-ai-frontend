@@ -30,4 +30,11 @@
     .cont {
         margin-top: 70px;
     }
+    .section {
+        flex-direction: column;
+    }
+    .promos_block, .main_block {
+        width: 100%;
+        margin-bottom: 30px;
+    }
 }
