@@ -8,6 +8,7 @@ import FastShip from "./FastShip/FastShip";
 import Sale from "./Sale/Sale";
 import s from './FilterDropdowns.module.css'
 import CollectionsDropdown from "@/components/pages/product/FilterDropdowns/CollectionsDropdown/CollectionsDropdown";
+import SizeDropdown from "@/components/pages/product/FilterDropdowns/SizeDropdown/SizeDropdown";
 
 const FilterDropdowns = () => {
     return (
@@ -17,6 +18,7 @@ const FilterDropdowns = () => {
                 <BrandDropdown/>
                 <CollectionsDropdown/>
                 <GenderDropdown/>
+                <SizeDropdown/>
                 <ColorDropdown/>
                 <PriceDropdown/>
                 <FastShip/>

@@ -8,6 +8,7 @@ class FilterStore {
             line: {},
             collab: {},
             color: {},
+            size: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -231,6 +232,42 @@ class FilterStore {
             }
         }
         return arr
+    }
+    fillSizes(sizes) {
+        sizes.forEach(sizeCategory => {
+            this.filters.size[sizeCategory.filter_name] = {}
+            for (const key in sizeCategory.all_sizes) {
+                const name = sizeCategory.all_sizes[key].filter_name
+                this.filters.size[sizeCategory.filter_name][name] = {}
+                sizeCategory.all_sizes[key].sizes.forEach(size => {
+                    this.filters.size[sizeCategory.filter_name][name][size] = {
+                        text: size,
+                        query: size,
+                        state: false
+                    }
+                })
+
+            }
+        })
+        console.log(this.filters.size)
+        //TODO delete log
+    }
+    getSizes(category, row) {
+        const arr = []
+        const sizes = this.filters.size[category][row]
+        for (const key in sizes) {
+            arr.push(sizes[key])
+        }
+        return arr.sort((a, b) => Number(a.text) - Number(b.text))
+    }
+    get checkedSize() {
+        const checkedCat = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'size') {
+                checkedCat.push(this.activeFilters[key].query)
+            }
+        }
+        return checkedCat
     }
     get gender() {
         const arr = []

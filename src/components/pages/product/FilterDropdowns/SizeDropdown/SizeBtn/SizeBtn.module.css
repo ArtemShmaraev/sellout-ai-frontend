@@ -1,0 +1,18 @@
+.btn {
+    border-radius: 7px;
+    outline: none;
+    padding: 5px;
+    min-width: 50px;
+    font-size: 14px;
+    margin: 4px 7px 3px 0;
+}
+.btn_default {
+    color: black;
+    border: 1px solid black;
+    background: white;
+}
+.btn_active {
+    color: white;
+    background: black;
+    border: none;
+}

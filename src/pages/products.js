@@ -27,9 +27,10 @@ export const getServerSideProps = async (context) => {
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
-    return { props: {products, categories, lines, colors, collections} }
+    const sizes = await fetchFilter('size')
+    return { props: {products, categories, lines, colors, collections, sizes} }
 }
-const Products = ({products, categories, lines, colors, collections}) => {
+const Products = ({products, categories, lines, colors, collections, sizes}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -43,6 +44,7 @@ const Products = ({products, categories, lines, colors, collections}) => {
         filterStore.fillLines(lines)
         filterStore.fillColors(colors)
         filterStore.fillCollections(collections)
+        filterStore.fillSizes(sizes)
         filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)
         filterStore.setMinPrice(products.min_price)
@@ -100,9 +102,9 @@ const Products = ({products, categories, lines, colors, collections}) => {
                         <SortDropdown/>
                     </div>
                 }
-                <div className={s.product_list_row}>
+                <div className={s.product_list_row} ref={productListRef}>
                     {isOpen &&
-                        <FilterDropdowns plRef={productListRef}/>
+                        <FilterDropdowns/>
                     }
                     <ProductList products={products.results} isAdmin={false}/>
                 </div>
