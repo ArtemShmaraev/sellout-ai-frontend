@@ -21,6 +21,7 @@
     margin-left: -11px;
 }
 .links {
+    color: black;
     text-decoration: none;
     cursor: pointer;
     margin: 0 20px 0 0;
@@ -28,6 +29,16 @@
 }
 .links:hover {
     color: #8d8d8d;
+}
+.sale_link {
+    color: #b61212;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+    transition: 0.3s;
+}
+.sale_link:hover {
+    opacity: 0.6;
 }
 .logo {
     font-size: 40px;

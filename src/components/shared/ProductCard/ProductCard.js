@@ -102,7 +102,16 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 }
             </div>
             {photosArr &&
-                <div className={s.image_container}>
+                <div className={s.image_container}
+                     onTouchStart={e => {
+                         e.stopPropagation()
+                         handleMouseEnter()
+                     }}
+                     onTouchEnd={e => {
+                         e.stopPropagation()
+                         handleMouseLeave()
+                     }}
+                >
                     <Image
                         style={{position: 'absolute'}}
                         onMouseEnter={handleMouseEnter}
@@ -129,7 +138,9 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 <div className={s.tag}>{brandsDisplay(brands)}</div>
                 <div className={s.brand}>{model || 'No model'}</div>
                 <div className={s.name}>{colorway}</div>
-                <div className={s.price}>От {price}</div>
+                <div className={s.price_block}>
+                    <div className={s.price}>От {price}</div>
+                </div>
             </div>
         </div>
     );

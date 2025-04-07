@@ -5,7 +5,6 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
-import products from "@/pages/products";
 
 const GenderDropdown = () => {
     const {filterStore} = useContext(Context)

@@ -26,7 +26,9 @@ const TextModal = ({children, title, img}) => {
                 onClick={handleShow}
             >
                 <Image src={img} alt="" className={s.icon}/>
-                {title}
+                <div className={s.label}>
+                    {title}
+                </div>
             </button>
             <Modal
                 centered={true}

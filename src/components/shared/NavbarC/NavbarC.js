@@ -307,15 +307,21 @@ const NavbarC = () => {
                                     </Col>
                                 </Row>
                             </Megamenu>
-                            <p href="" className={s.links}
-                               onClick={goToFastShip}
+                            <a href="/products?is_fast_ship=is_fast_ship" className={s.links}
+                               onClick={e => {
+                                   e.preventDefault()
+                                   goToFastShip()
+                               }}
                             >
                                 Мгновенная доставка
                                 <Image src={truck} alt="" className={s.truck}/>
-                            </p>
-                            <p href="" className={s.links} style={{color: '#b61212'}}
-                               onClick={goToSale}
-                            >Скидки</p>
+                            </a>
+                            <a href="/products?is_sale=is_sale" className={s.sale_link}
+                               onClick={e => {
+                                   e.preventDefault()
+                                   goToSale()
+                               }}
+                            >Скидки</a>
                         </div>
                         <div>
                             <ElasticSearchModal/>

@@ -34,10 +34,16 @@
     align-self: center;
 }
 .text_block {
-    flex: 1; /* Occupy remaining space within the card */
+    height: 85%; /* Occupy remaining space within the card */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+.price_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
 }
 .tag {
     color: #727272;
@@ -90,7 +96,7 @@
 @media (max-width: 400px) {
     .card {
         width: 160px;
-        height: 250px;
+        height: 280px;
         padding: 0;
         margin: 30px 0;
     }
@@ -98,5 +104,8 @@
         height: 85px;
         width: 120px;
         align-self: center;
+    }
+    .tag, .brand, .name {
+        font-size: 14px;
     }
 }

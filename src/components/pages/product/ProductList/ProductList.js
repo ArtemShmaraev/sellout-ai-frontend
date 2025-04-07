@@ -5,7 +5,6 @@ import s from './ProductList.module.css'
 import {observer} from "mobx-react-lite";
 
 const ProductList = ({products, isAdmin}) => {
-    console.log(products[1])
     return (
         <div className={s.container}>
             <div className={s.product_list}>
