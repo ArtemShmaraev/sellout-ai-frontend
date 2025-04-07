@@ -67,9 +67,8 @@ const Products = ({products, categories, lines, colors, collections}) => {
     }
     return (
         <MainLayout>
-            <Container style={{marginTop: '150px'}} className={s.cont}>
+            <Container className={s.cont}>
                 <BigPicture/>
-                <div ref={productListRef}></div>
                 {isDesktop && <Row className={s.filter_sort_row}>
                     <Col lg={10} className='d-flex'>
                         <button className={s.border + ' fw-bold'}
@@ -91,7 +90,7 @@ const Products = ({products, categories, lines, colors, collections}) => {
                     </Col>
                 </Row>}
                 {!isDesktop &&
-                    <div className='d-flex justify-content-center align-items-center'>
+                    <div className='d-flex justify-content-evenly align-items-center'>
                         <button className={s.filter_toggle}
                                 onClick={handleClick}
                         >

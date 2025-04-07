@@ -11,7 +11,7 @@ import {updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 
-const AuthModal = ({children, fromWishlist = false}) => {
+const AuthModal = ({children, fromWishlist = false, inline = false}) => {
     const router = useRouter()
 
     const [show, setShow] = useState(false);
@@ -124,6 +124,7 @@ const AuthModal = ({children, fromWishlist = false}) => {
             <button
                 className={s.toggle_btn}
                 onClick={handleShow}
+                style={inline ? {display: 'inline'} : {}}
             >
                 {children}
             </button>

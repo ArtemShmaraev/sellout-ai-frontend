@@ -78,6 +78,7 @@ const Wishlist = ({wishlist}) => {
                                                  isReturn={el.is_return}
                                                  isSale={el.is_sale}
                                                  inWishlist={el.in_wishlist}
+                                                 photosArr={el.bucket_link}
                                                  key={el.id}/>
                                 )}
                             </>

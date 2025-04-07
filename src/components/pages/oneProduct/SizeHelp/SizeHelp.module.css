@@ -19,6 +19,10 @@
     width: 50px;
     margin-bottom: 20px;
 }
+.text_block {
+    text-align: center;
+    margin: 30px 50px;
+}
 .header {
     font-size: 16px;
     font-weight: 700;
@@ -27,7 +31,9 @@
     font-size: 14px;
 }
 .photo {
-    height: 80px;
+    height: 100px;
+    position: relative;
+    text-align: center;
 }
 .description {
     font-size: 16px;

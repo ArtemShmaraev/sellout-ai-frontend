@@ -35,12 +35,13 @@ const TextModal = ({children, title, img}) => {
                 show={show}
                 onHide={handleClose}
                 fullscreen={!isDesktop}
+                size={'lg'}
             >
                 <Modal.Body>
                     <div className={s.close}>
                         <Image src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
                     </div>
-                    <div className='text-center'>
+                    <div className={s.text_block}>
                         {children}
                     </div>
                 </Modal.Body>

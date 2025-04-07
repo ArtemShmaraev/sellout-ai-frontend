@@ -4,6 +4,7 @@ import {Modal} from "react-bootstrap";
 import close from "@/static/icons/x-lg.svg";
 import truck from "@/static/icons/truck.svg";
 import refund from "@/static/icons/arrow-return-left.svg";
+import Image from "next/image";
 
 const HowToChoose = () => {
     const [show, setShow] = useState(false);
@@ -33,12 +34,13 @@ const HowToChoose = () => {
                 show={show}
                 onHide={handleClose}
                 fullscreen={!isDesktop}
+                size={'lg'}
             >
                 <Modal.Body>
                     <div className={s.close}>
-                        <img src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
+                        <Image src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
                     </div>
-                    <div className='text-center'>
+                    <div className={s.text_block}>
                         <p className={s.text}>
                             Мы стараемся предоставить Вам как можно больший ассортимент на
                             всевозможных условиях, поэтому собираем предложения от разных продавцов,

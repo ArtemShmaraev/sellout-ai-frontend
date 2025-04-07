@@ -12,6 +12,7 @@
 }
 .letter {
     border: none;
+    outline: none;
     text-decoration: none;
     text-align: center;
     color: black;

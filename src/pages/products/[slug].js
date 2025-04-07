@@ -269,7 +269,8 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                                 <div className={s.modals_block}>
                                     <SizeTable/>
-                                    <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}/>
+                                    <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}
+                                              imgSrc={product.bucket_link[0].url}/>
                                 </div>
                                 <SizeChoice prices={prices} productId={product.id}/>
                                 {

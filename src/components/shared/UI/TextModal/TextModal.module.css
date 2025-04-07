@@ -24,3 +24,7 @@
 .label {
     text-align: left;
 }
+.text_block {
+    text-align: center;
+    margin: 30px 50px;
+}
