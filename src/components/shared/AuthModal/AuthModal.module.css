@@ -21,6 +21,7 @@
     background: transparent;
     border: none;
     border-bottom: 1px solid;
+    outline: none;
     width: 50%;
 }
 .reg_block {
@@ -59,6 +60,20 @@
     border-radius: 10px;
     height: 40px;
     padding: 5px;
+}
+.input_pass {
+    outline: none;
+    border: 1px solid #767676;
+    width: 100%;
+    border-radius: 10px;
+    height: 40px;
+    padding: 5px 35px 5px 5px;
+}
+.eye {
+    position: absolute;
+    right: 35px;
+    transform: translateY(10px);
+    cursor: pointer;
 }
 .description {
     font-size: 12px;

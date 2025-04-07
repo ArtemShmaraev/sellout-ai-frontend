@@ -10,6 +10,8 @@ import {login, registration} from "@/http/userApi";
 import {updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
+import eye from '@/static/icons/eye.svg'
+import eyeCrossed from '@/static/icons/eye-slash.svg'
 
 const AuthModal = ({children, fromWishlist = false, inline = false}) => {
     const router = useRouter()
@@ -27,6 +29,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
     const [emailBusy, setEmailBusy] = useState(false)
     const [wrong, setWrong] = useState(false)
     const [validEmail, setValidEmail] = useState(true);
+    const [passShown, setPassShown] = useState(false)
 
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -119,6 +122,13 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             setWrong(true)
         }
     }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        isReg ? reg() : log()
+    };
+    const changeVisibility = () => {
+        setPassShown(!passShown)
+    }
     return (
         <div>
             <button
@@ -159,7 +169,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                             Вход
                         </button>
                     </div>
-                    <div className={s.reg_block}>
+                    <form className={s.reg_block} onSubmit={e => handleSubmit(e)}>
                         {isReg
                             ?
                             <Container>
@@ -194,10 +204,18 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <input type="password" className={s.input}
-                                           value={password}
-                                           onChange={(e) => setPassword(e.target.value)}
-                                    />
+                                    <div>
+                                        <input type={passShown ? 'text' : 'password'} className={s.input_pass}
+                                               value={password}
+                                               onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <Image src={passShown ? eye : eyeCrossed}
+                                               alt={'Показать/скрыть пароль'}
+                                               className={s.eye}
+                                               width={20}
+                                               onClick={changeVisibility}
+                                        />
+                                    </div>
                                 </div>
                                 <div className={s.gender_block}>
                                     <label className={s.label}>Ваш пол:</label>
@@ -210,7 +228,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                                                     labelClass={s.sub}
                                     />
                                 </div>
-                                <button className={s.reg_btn} onClick={reg}>Зарегистрироваться</button>
+                                <button className={s.reg_btn} onClick={reg} type={'submit'}>Зарегистрироваться</button>
                             </Container>
                             :
                             <Container>
@@ -226,12 +244,20 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <input type="password" className={s.input}
-                                           value={password}
-                                           onChange={(e) => setPassword(e.target.value)}
-                                    />
+                                    <div>
+                                        <input type={passShown ? 'text' : 'password'} className={s.input_pass}
+                                               value={password}
+                                               onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <Image src={passShown ? eye : eyeCrossed}
+                                               alt={'Показать/скрыть пароль'}
+                                               className={s.eye}
+                                               width={20}
+                                               onClick={changeVisibility}
+                                        />
+                                    </div>
                                 </div>
-                                <button className={s.reg_btn} onClick={log}>Войти</button>
+                                <button className={s.reg_btn} onClick={log} type={"submit"}>Войти</button>
                                 {wrong &&
                                     <p className={s.validate}>Неверный логин или пароль</p>
                                 }
@@ -241,7 +267,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                                 <h4 className={s.headers}>Войти с помощью...</h4>
                             </Container>
                         }
-                    </div>
+                    </form>
                 </Modal.Body>
             </Modal>
         </div>
