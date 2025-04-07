@@ -148,6 +148,8 @@ const OneProductPage = ({product, prices}) => {
                                     <Carousel.Item className={s.photo} key={el.id}>
                                         <Image src={el.url} alt=''
                                                fill={true}
+                                               loading={'eager'}
+                                               style={{objectFit: 'contain'}}
                                         />
                                     </Carousel.Item>
                                 )
@@ -222,9 +224,14 @@ const OneProductPage = ({product, prices}) => {
                                     <p className={s.characteristics}>Артикул:
                                         <span className={s.characteristics_text}>{product.manufacturer_sku}</span>
                                     </p>
-                                    <p className={s.characteristics}>Цвет:
-                                        <span className={s.characteristics_text}>{product.main_color.russian_name}</span><
-                                    /p>
+                                    {product.main_color &&
+                                        <p className={s.characteristics}>Цвет:
+                                            <span
+                                                className={s.characteristics_text}>
+                                                {product.main_color.russian_name}
+                                            </span>
+                                        </p>
+                                    }
                                 </Col>
                             </Row>
                         </div>
