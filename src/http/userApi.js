@@ -28,3 +28,27 @@ export async function fetchUserInfo(cookies, id) {
     })
     return data
 }
+export async function fetchAddresses(cookies, id) {
+    const {data} = await $authHost.get(`user/address/${id}`, {
+        headers: {cookie: cookies}
+    })
+    return data
+}
+export async function addAddress(token, id, obj) {
+    const {data} = await $host.post(`user/address/${id}`, obj,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function editAddress(token, userId, addressId, obj) {
+    const {data} = await $host.put(`user/address/${userId}/${addressId}`, obj,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function deleteAddress(token, userId, addressId) {
+    const {data} = await $host.delete(`user/address/${userId}/${addressId}`,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
