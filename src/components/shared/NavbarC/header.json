@@ -1,0 +1,1971 @@
+{
+  "Популярные бренды": {
+    "name": "Популярные бренды",
+    "any": [
+      {
+        "name": "adidas",
+        "query_name": "adidas"
+      },
+      {
+        "name": "Alexander McQueen",
+        "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "alexander wang",
+        "query_name": "alexander_wang"
+      },
+      {
+        "name": "AMI Paris",
+        "query_name": "ami_paris"
+      },
+      {
+        "name": "Asics",
+        "query_name": "asics"
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
+      },
+      {
+        "name": "Balmain",
+        "query_name": "balmain"
+      },
+      {
+        "name": "Bottega Veneta",
+        "query_name": "bottega_veneta"
+      },
+      {
+        "name": "Cactus Jack by Travis Scott",
+        "query_name": "cactus_jack_by_travis_scott"
+      },
+      {
+        "name": "Celine",
+        "query_name": "celine"
+      },
+      {
+        "name": "Chanel",
+        "query_name": "chanel"
+      },
+      {
+        "name": "Chloe",
+        "query_name": "chloe"
+      },
+      {
+        "name": "Coach",
+        "query_name": "coach"
+      },
+      {
+        "name": "Converse",
+        "query_name": "converse"
+      },
+      {
+        "name": "Diesel",
+        "query_name": "diesel"
+      },
+      {
+        "name": "Dior",
+        "query_name": "dior"
+      },
+      {
+        "name": "Drew House",
+        "query_name": "drew_house"
+      },
+      {
+        "name": "Fear of God",
+        "query_name": "fear_of_god"
+      },
+      {
+        "name": "Furla",
+        "query_name": "furla"
+      },
+      {
+        "name": "Gianvito Rossi",
+        "query_name": "gianvito_rossi"
+      },
+      {
+        "name": "Gucci",
+        "query_name": "gucci"
+      },
+      {
+        "name": "Heron Preston",
+        "query_name": "heron_preston"
+      },
+      {
+        "name": "Jacquemus",
+        "query_name": "jacquemus"
+      },
+      {
+        "name": "Jimmy Choo",
+        "query_name": "jimmy_choo"
+      },
+      {
+        "name": "Jordan",
+        "query_name": "jordan"
+      },
+      {
+        "name": "Loewe",
+        "query_name": "loewe"
+      },
+      {
+        "name": "Louis Vuitton",
+        "query_name": "louis_vuitton"
+      },
+      {
+        "name": "Manolo Blahnik",
+        "query_name": "manolo_blahnik"
+      },
+      {
+        "name": "Michael Kors",
+        "query_name": "michael_kors"
+      },
+      {
+        "name": "Moncler",
+        "query_name": "moncler"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "Palm Angels",
+        "query_name": "palm_angels"
+      },
+      {
+        "name": "Prada",
+        "query_name": "prada"
+      },
+      {
+        "name": "PUMA",
+        "query_name": "puma"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Saint Laurent",
+        "query_name": "saint_laurent"
+      },
+      {
+        "name": "Stone Island",
+        "query_name": "stone_island"
+      },
+      {
+        "name": "Stüssy",
+        "query_name": "stüssy"
+      },
+      {
+        "name": "Supreme",
+        "query_name": "supreme"
+      },
+      {
+        "name": "The North Face",
+        "query_name": "the_north_face"
+      },
+      {
+        "name": "Tom Ford",
+        "query_name": "tom_ford"
+      },
+      {
+        "name": "Vetements",
+        "query_name": "vetements"
+      },
+      {
+        "name": "VLONE",
+        "query_name": "vlone"
+      }
+    ],
+    "male": [
+      {
+        "name": "A-COLD-WALL*",
+        "query_name": "a-cold-wall*"
+      },
+      {
+        "name": "A. P. C.",
+        "query_name": "a._p._c."
+      },
+      {
+        "name": "adidas",
+        "query_name": "adidas"
+      },
+      {
+        "name": "Alexander McQueen",
+        "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "AMBUSH",
+        "query_name": "ambush"
+      },
+      {
+        "name": "AMI Paris",
+        "query_name": "ami_paris"
+      },
+      {
+        "name": "Asics",
+        "query_name": "asics"
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
+      },
+      {
+        "name": "Balmain",
+        "query_name": "balmain"
+      },
+      {
+        "name": "Bottega Veneta",
+        "query_name": "bottega_veneta"
+      },
+      {
+        "name": "Burberry",
+        "query_name": "burberry"
+      },
+      {
+        "name": "Cactus Jack by Travis Scott",
+        "query_name": "cactus_jack_by_travis_scott"
+      },
+      {
+        "name": "Chrome Hearts",
+        "query_name": "chrome_hearts"
+      },
+      {
+        "name": "Coach",
+        "query_name": "coach"
+      },
+      {
+        "name": "Comme Des Garçons",
+        "query_name": "comme_des_garçons"
+      },
+      {
+        "name": "Converse",
+        "query_name": "converse"
+      },
+      {
+        "name": "Diesel",
+        "query_name": "diesel"
+      },
+      {
+        "name": "Dior",
+        "query_name": "dior"
+      },
+      {
+        "name": "Drew House",
+        "query_name": "drew_house"
+      },
+      {
+        "name": "Fear of God",
+        "query_name": "fear_of_god"
+      },
+      {
+        "name": "Goyard",
+        "query_name": "goyard"
+      },
+      {
+        "name": "Gucci",
+        "query_name": "gucci"
+      },
+      {
+        "name": "Heron Preston",
+        "query_name": "heron_preston"
+      },
+      {
+        "name": "Jacquemus",
+        "query_name": "jacquemus"
+      },
+      {
+        "name": "Jordan",
+        "query_name": "jordan"
+      },
+      {
+        "name": "Louis Vuitton",
+        "query_name": "louis_vuitton"
+      },
+      {
+        "name": "Maison Margiela",
+        "query_name": "maison_margiela"
+      },
+      {
+        "name": "Moncler",
+        "query_name": "moncler"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "Palm Angels",
+        "query_name": "palm_angels"
+      },
+      {
+        "name": "Polo Ralph Lauren",
+        "query_name": "polo_ralph_lauren"
+      },
+      {
+        "name": "Prada",
+        "query_name": "prada"
+      },
+      {
+        "name": "PUMA",
+        "query_name": "puma"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Stone Island",
+        "query_name": "stone_island"
+      },
+      {
+        "name": "Stüssy",
+        "query_name": "stüssy"
+      },
+      {
+        "name": "Supreme",
+        "query_name": "supreme"
+      },
+      {
+        "name": "The North Face",
+        "query_name": "the_north_face"
+      },
+      {
+        "name": "Thom Browne",
+        "query_name": "thom_browne"
+      },
+      {
+        "name": "Tom Ford",
+        "query_name": "tom_ford"
+      },
+      {
+        "name": "Valentino",
+        "query_name": "valentino"
+      },
+      {
+        "name": "Vetements",
+        "query_name": "vetements"
+      },
+      {
+        "name": "VLONE",
+        "query_name": "vlone"
+      }
+    ],
+    "female": [
+      {
+        "name": "A. P. C.",
+        "query_name": "a._p._c."
+      },
+      {
+        "name": "adidas",
+        "query_name": "adidas"
+      },
+      {
+        "name": "Alexander McQueen",
+        "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "alexander wang",
+        "query_name": "alexander_wang"
+      },
+      {
+        "name": "AMBUSH",
+        "query_name": "ambush"
+      },
+      {
+        "name": "AMI Paris",
+        "query_name": "ami_paris"
+      },
+      {
+        "name": "Asics",
+        "query_name": "asics"
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
+      },
+      {
+        "name": "Balmain",
+        "query_name": "balmain"
+      },
+      {
+        "name": "Bottega Veneta",
+        "query_name": "bottega_veneta"
+      },
+      {
+        "name": "Burberry",
+        "query_name": "burberry"
+      },
+      {
+        "name": "Cactus Jack by Travis Scott",
+        "query_name": "cactus_jack_by_travis_scott"
+      },
+      {
+        "name": "Celine",
+        "query_name": "celine"
+      },
+      {
+        "name": "Chanel",
+        "query_name": "chanel"
+      },
+      {
+        "name": "Chloe",
+        "query_name": "chloe"
+      },
+      {
+        "name": "Coach",
+        "query_name": "coach"
+      },
+      {
+        "name": "Comme Des Garçons",
+        "query_name": "comme_des_garçons"
+      },
+      {
+        "name": "Converse",
+        "query_name": "converse"
+      },
+      {
+        "name": "Diesel",
+        "query_name": "diesel"
+      },
+      {
+        "name": "Dior",
+        "query_name": "dior"
+      },
+      {
+        "name": "Fear of God",
+        "query_name": "fear_of_god"
+      },
+      {
+        "name": "Furla",
+        "query_name": "furla"
+      },
+      {
+        "name": "Gianvito Rossi",
+        "query_name": "gianvito_rossi"
+      },
+      {
+        "name": "Goyard",
+        "query_name": "goyard"
+      },
+      {
+        "name": "Gucci",
+        "query_name": "gucci"
+      },
+      {
+        "name": "Heron Preston",
+        "query_name": "heron_preston"
+      },
+      {
+        "name": "Jacquemus",
+        "query_name": "jacquemus"
+      },
+      {
+        "name": "Jil Sander",
+        "query_name": "jil_sander"
+      },
+      {
+        "name": "Jimmy Choo",
+        "query_name": "jimmy_choo"
+      },
+      {
+        "name": "Jordan",
+        "query_name": "jordan"
+      },
+      {
+        "name": "Loewe",
+        "query_name": "loewe"
+      },
+      {
+        "name": "Louis Vuitton",
+        "query_name": "louis_vuitton"
+      },
+      {
+        "name": "Manolo Blahnik",
+        "query_name": "manolo_blahnik"
+      },
+      {
+        "name": "MaxMara",
+        "query_name": "maxmara"
+      },
+      {
+        "name": "Michael Kors",
+        "query_name": "michael_kors"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "PINKO",
+        "query_name": "pinko"
+      },
+      {
+        "name": "Prada",
+        "query_name": "prada"
+      },
+      {
+        "name": "PUMA",
+        "query_name": "puma"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Saint Laurent",
+        "query_name": "saint_laurent"
+      },
+      {
+        "name": "Valentino",
+        "query_name": "valentino"
+      },
+      {
+        "name": "Vetements",
+        "query_name": "vetements"
+      }
+    ]
+  },
+  "Коллаборации": {
+    "name": "Коллаборации",
+    "any": [
+      {
+        "name": "adidas Yeezy",
+        "query_name": "adidas_yeezy"
+      },
+      {
+        "name": "adidas x Pharrell Williams",
+        "query_name": "adidas_x_pharrell_williams"
+      },
+      {
+        "name": "Converse x GOLF le FLEUR*",
+        "query_name": "converse_x_golf_le_fleur*"
+      },
+      {
+        "name": "New Balance x Aimé Leon Dore",
+        "query_name": "new_balance_x_aimé_leon_dore"
+      },
+      {
+        "name": "Nike x Off-White",
+        "query_name": "nike_x_off-white"
+      },
+      {
+        "name": "Nike x Travis Scott",
+        "query_name": "nike_x_travis_scott"
+      },
+      {
+        "name": "Nike x Supreme",
+        "query_name": "nike_x_supreme"
+      },
+      {
+        "name": "Nike x Union",
+        "query_name": "nike_x_union"
+      },
+      {
+        "name": "Nike x Clot",
+        "query_name": "nike_x_clot"
+      },
+      {
+        "name": "Nike x Sacai",
+        "query_name": "nike_x_sacai"
+      },
+      {
+        "name": "Nike x Stüssy",
+        "query_name": "nike_x_stüssy"
+      },
+      {
+        "name": "Nike x Ambush",
+        "query_name": "nike_x_ambush"
+      },
+      {
+        "name": "Nike x A Ma Maniére",
+        "query_name": "nike_x_a_ma_maniére"
+      },
+      {
+        "name": "Nike x Jacquemus",
+        "query_name": "nike_x_jacquemus"
+      },
+      {
+        "name": "Nike x Fear of God",
+        "query_name": "nike_x_fear_of_god"
+      }
+    ],
+    "male": [
+      {
+        "name": "adidas Yeezy",
+        "query_name": "adidas_yeezy"
+      },
+      {
+        "name": "adidas x Pharrell Williams",
+        "query_name": "adidas_x_pharrell_williams"
+      },
+      {
+        "name": "Converse x GOLF le FLEUR*",
+        "query_name": "converse_x_golf_le_fleur*"
+      },
+      {
+        "name": "New Balance x Aimé Leon Dore",
+        "query_name": "new_balance_x_aimé_leon_dore"
+      },
+      {
+        "name": "Nike x Off-White",
+        "query_name": "nike_x_off-white"
+      },
+      {
+        "name": "Nike x Travis Scott",
+        "query_name": "nike_x_travis_scott"
+      },
+      {
+        "name": "Nike x Supreme",
+        "query_name": "nike_x_supreme"
+      },
+      {
+        "name": "Nike x Union",
+        "query_name": "nike_x_union"
+      },
+      {
+        "name": "Nike x Clot",
+        "query_name": "nike_x_clot"
+      },
+      {
+        "name": "Nike x Sacai",
+        "query_name": "nike_x_sacai"
+      },
+      {
+        "name": "Nike x Stüssy",
+        "query_name": "nike_x_stüssy"
+      },
+      {
+        "name": "Nike x Ambush",
+        "query_name": "nike_x_ambush"
+      },
+      {
+        "name": "Nike x A Ma Maniére",
+        "query_name": "nike_x_a_ma_maniére"
+      },
+      {
+        "name": "Nike x Jacquemus",
+        "query_name": "nike_x_jacquemus"
+      },
+      {
+        "name": "Nike x Fear of God",
+        "query_name": "nike_x_fear_of_god"
+      }
+    ],
+    "female": [
+      {
+        "name": "adidas Yeezy",
+        "query_name": "adidas_yeezy"
+      },
+      {
+        "name": "adidas x Pharrell Williams",
+        "query_name": "adidas_x_pharrell_williams"
+      },
+      {
+        "name": "Converse x GOLF le FLEUR*",
+        "query_name": "converse_x_golf_le_fleur*"
+      },
+      {
+        "name": "New Balance x Aimé Leon Dore",
+        "query_name": "new_balance_x_aimé_leon_dore"
+      },
+      {
+        "name": "Nike x Off-White",
+        "query_name": "nike_x_off-white"
+      },
+      {
+        "name": "Nike x Travis Scott",
+        "query_name": "nike_x_travis_scott"
+      },
+      {
+        "name": "Nike x Supreme",
+        "query_name": "nike_x_supreme"
+      },
+      {
+        "name": "Nike x Union",
+        "query_name": "nike_x_union"
+      },
+      {
+        "name": "Nike x Clot",
+        "query_name": "nike_x_clot"
+      },
+      {
+        "name": "Nike x Sacai",
+        "query_name": "nike_x_sacai"
+      },
+      {
+        "name": "Nike x Stüssy",
+        "query_name": "nike_x_stüssy"
+      },
+      {
+        "name": "Nike x Ambush",
+        "query_name": "nike_x_ambush"
+      },
+      {
+        "name": "Nike x A Ma Maniére",
+        "query_name": "nike_x_a_ma_maniére"
+      },
+      {
+        "name": "Nike x Jacquemus",
+        "query_name": "nike_x_jacquemus"
+      },
+      {
+        "name": "Nike x Fear of God",
+        "query_name": "nike_x_fear_of_god"
+      }
+    ]
+  },
+  "Популярные линейки обуви": {
+    "name": "Популярные линейки",
+    "any": [
+      {
+        "name": "adidas Yeezy 350",
+        "query_name": "adidas_yeezy_350"
+      },
+      {
+        "name": "adidas Yeezy 500",
+        "query_name": "adidas_yeezy_500"
+      },
+      {
+        "name": "adidas Yeezy 700",
+        "query_name": "adidas_yeezy_700"
+      },
+      {
+        "name": "adidas Yeezy Slide",
+        "query_name": "adidas_yeezy_slide"
+      },
+      {
+        "name": "adidas Yeezy Foam Runner",
+        "query_name": "adidas_yeezy_foam_runner"
+      },
+      {
+        "name": "adidas Campus",
+        "query_name": "adidas_campus"
+      },
+      {
+        "name": "adidas Forum",
+        "query_name": "adidas_forum"
+      },
+      {
+        "name": "adidas Gazelle",
+        "query_name": "adidas_gazelle"
+      },
+      {
+        "name": "Converse Chuck Taylor",
+        "query_name": "converse_chuck_taylor"
+      },
+      {
+        "name": "Air Jordan 1 High",
+        "query_name": "air_jordan_1_high"
+      },
+      {
+        "name": "Air Jordan 1 Mid",
+        "query_name": "air_jordan_1_mid"
+      },
+      {
+        "name": "Air Jordan 1 Low",
+        "query_name": "air_jordan_1_low"
+      },
+      {
+        "name": "Air Jordan 3",
+        "query_name": "air_jordan_3"
+      },
+      {
+        "name": "Air Jordan 4",
+        "query_name": "air_jordan_4"
+      },
+      {
+        "name": "Air Jordan 6",
+        "query_name": "air_jordan_6"
+      },
+      {
+        "name": "Air Jordan 11",
+        "query_name": "air_jordan_11"
+      },
+      {
+        "name": "New Balance 327",
+        "query_name": "new_balance_327"
+      },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+      {
+        "name": "New Balance 530",
+        "query_name": "new_balance_530"
+      },
+      {
+        "name": "New Balance 990",
+        "query_name": "new_balance_990"
+      },
+      {
+        "name": "New Balance 993",
+        "query_name": "new_balance_993"
+      },
+      {
+        "name": "New Balance 1906R",
+        "query_name": "new_balance_1906r"
+      },
+      {
+        "name": "New Balance 2002R",
+        "query_name": "new_balance_2002r"
+      },
+      {
+        "name": "Nike Dunk",
+        "query_name": "nike_dunk"
+      },
+      {
+        "name": "Nike Air Force 1",
+        "query_name": "nike_air_force_1"
+      },
+      {
+        "name": "Nike Air Max 1",
+        "query_name": "nike_air_max_1"
+      },
+      {
+        "name": "Nike Air Max 90",
+        "query_name": "nike_air_max_90"
+      },
+      {
+        "name": "Nike Blazer",
+        "query_name": "nike_blazer"
+      },
+      {
+        "name": "Nike Cortez",
+        "query_name": "nike_cortez"
+      },
+      {
+        "name": "Vans Old Skool",
+        "query_name": "vans_old_skool"
+      }
+    ],
+    "male": [
+      {
+        "name": "adidas Yeezy 350",
+        "query_name": "adidas_yeezy_350"
+      },
+      {
+        "name": "adidas Yeezy 500",
+        "query_name": "adidas_yeezy_500"
+      },
+      {
+        "name": "adidas Yeezy 700",
+        "query_name": "adidas_yeezy_700"
+      },
+      {
+        "name": "adidas Yeezy Slide",
+        "query_name": "adidas_yeezy_slide"
+      },
+      {
+        "name": "adidas Yeezy Foam Runner",
+        "query_name": "adidas_yeezy_foam_runner"
+      },
+      {
+        "name": "adidas Campus",
+        "query_name": "adidas_campus"
+      },
+      {
+        "name": "adidas Forum",
+        "query_name": "adidas_forum"
+      },
+      {
+        "name": "adidas Gazelle",
+        "query_name": "adidas_gazelle"
+      },
+      {
+        "name": "Converse Chuck Taylor",
+        "query_name": "converse_chuck_taylor"
+      },
+      {
+        "name": "Air Jordan 1 High",
+        "query_name": "air_jordan_1_high"
+      },
+      {
+        "name": "Air Jordan 1 Mid",
+        "query_name": "air_jordan_1_mid"
+      },
+      {
+        "name": "Air Jordan 1 Low",
+        "query_name": "air_jordan_1_low"
+      },
+      {
+        "name": "Air Jordan 3",
+        "query_name": "air_jordan_3"
+      },
+      {
+        "name": "Air Jordan 4",
+        "query_name": "air_jordan_4"
+      },
+      {
+        "name": "Air Jordan 6",
+        "query_name": "air_jordan_6"
+      },
+      {
+        "name": "Air Jordan 11",
+        "query_name": "air_jordan_11"
+      },
+      {
+        "name": "New Balance 327",
+        "query_name": "new_balance_327"
+      },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+      {
+        "name": "New Balance 530",
+        "query_name": "new_balance_530"
+      },
+      {
+        "name": "New Balance 990",
+        "query_name": "new_balance_990"
+      },
+      {
+        "name": "New Balance 993",
+        "query_name": "new_balance_993"
+      },
+      {
+        "name": "New Balance 1906R",
+        "query_name": "new_balance_1906r"
+      },
+      {
+        "name": "New Balance 2002R",
+        "query_name": "new_balance_2002r"
+      },
+      {
+        "name": "Nike Dunk",
+        "query_name": "nike_dunk"
+      },
+      {
+        "name": "Nike Air Force 1",
+        "query_name": "nike_air_force_1"
+      },
+      {
+        "name": "Nike Air Max 1",
+        "query_name": "nike_air_max_1"
+      },
+      {
+        "name": "Nike Air Max 90",
+        "query_name": "nike_air_max_90"
+      },
+      {
+        "name": "Nike Blazer",
+        "query_name": "nike_blazer"
+      },
+      {
+        "name": "Nike Cortez",
+        "query_name": "nike_cortez"
+      },
+      {
+        "name": "Vans Old Skool",
+        "query_name": "vans_old_skool"
+      }
+    ],
+    "female": [
+      {
+        "name": "adidas Yeezy 350",
+        "query_name": "adidas_yeezy_350"
+      },
+      {
+        "name": "adidas Yeezy 500",
+        "query_name": "adidas_yeezy_500"
+      },
+      {
+        "name": "adidas Yeezy 700",
+        "query_name": "adidas_yeezy_700"
+      },
+      {
+        "name": "adidas Yeezy Slide",
+        "query_name": "adidas_yeezy_slide"
+      },
+      {
+        "name": "adidas Yeezy Foam Runner",
+        "query_name": "adidas_yeezy_foam_runner"
+      },
+      {
+        "name": "adidas Campus",
+        "query_name": "adidas_campus"
+      },
+      {
+        "name": "adidas Forum",
+        "query_name": "adidas_forum"
+      },
+      {
+        "name": "adidas Gazelle",
+        "query_name": "adidas_gazelle"
+      },
+      {
+        "name": "Converse Chuck Taylor",
+        "query_name": "converse_chuck_taylor"
+      },
+      {
+        "name": "Air Jordan 1 High",
+        "query_name": "air_jordan_1_high"
+      },
+      {
+        "name": "Air Jordan 1 Mid",
+        "query_name": "air_jordan_1_mid"
+      },
+      {
+        "name": "Air Jordan 1 Low",
+        "query_name": "air_jordan_1_low"
+      },
+      {
+        "name": "Air Jordan 3",
+        "query_name": "air_jordan_3"
+      },
+      {
+        "name": "Air Jordan 4",
+        "query_name": "air_jordan_4"
+      },
+      {
+        "name": "Air Jordan 6",
+        "query_name": "air_jordan_6"
+      },
+      {
+        "name": "Air Jordan 11",
+        "query_name": "air_jordan_11"
+      },
+      {
+        "name": "New Balance 327",
+        "query_name": "new_balance_327"
+      },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+      {
+        "name": "New Balance 530",
+        "query_name": "new_balance_530"
+      },
+      {
+        "name": "New Balance 990",
+        "query_name": "new_balance_990"
+      },
+      {
+        "name": "New Balance 993",
+        "query_name": "new_balance_993"
+      },
+      {
+        "name": "New Balance 1906R",
+        "query_name": "new_balance_1906r"
+      },
+      {
+        "name": "New Balance 2002R",
+        "query_name": "new_balance_2002r"
+      },
+      {
+        "name": "Nike Dunk",
+        "query_name": "nike_dunk"
+      },
+      {
+        "name": "Nike Air Force 1",
+        "query_name": "nike_air_force_1"
+      },
+      {
+        "name": "Nike Air Max 1",
+        "query_name": "nike_air_max_1"
+      },
+      {
+        "name": "Nike Air Max 90",
+        "query_name": "nike_air_max_90"
+      },
+      {
+        "name": "Nike Blazer",
+        "query_name": "nike_blazer"
+      },
+      {
+        "name": "Nike Cortez",
+        "query_name": "nike_cortez"
+      },
+      {
+        "name": "Vans Old Skool",
+        "query_name": "vans_old_skool"
+      }
+    ]
+  },
+  "Популярные бренды обуви": {
+    "name": "Популярные бренды",
+    "any": [
+      {
+        "name": "adidas",
+        "query_name": "adidas"
+      },
+      {
+        "name": "Asics",
+        "query_name": "asics"
+      },
+      {
+        "name": "Clarks",
+        "query_name": "clarks"
+      },
+      {
+        "name": "Converse ",
+        "query_name": "converse_"
+      },
+      {
+        "name": "Jimmy Choo",
+        "query_name": "jimmy_choo"
+      },
+      {
+        "name": "Jordan ",
+        "query_name": "jordan_"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "PUMA",
+        "query_name": "puma"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Saucony",
+        "query_name": "saucony"
+      },
+      {
+        "name": "Steve Madden",
+        "query_name": "steve_madden"
+      },
+      {
+        "name": "Timberland",
+        "query_name": "timberland"
+      },
+      {
+        "name": "Vans",
+        "query_name": "vans"
+      }
+    ],
+    "male": [
+      {
+        "name": "adidas ",
+        "query_name": "adidas_"
+      },
+      {
+        "name": "Alexander McQueen",
+        "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "Anta ",
+        "query_name": "anta_"
+      },
+      {
+        "name": "Asics",
+        "query_name": "asics"
+      },
+      {
+        "name": "Clarks",
+        "query_name": "clarks"
+      },
+      {
+        "name": "Converse ",
+        "query_name": "converse_"
+      },
+      {
+        "name": "Jordan ",
+        "query_name": "jordan_"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "PUMA",
+        "query_name": "puma"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Timberland",
+        "query_name": "timberland"
+      },
+      {
+        "name": "Tod's",
+        "query_name": "tod's"
+      },
+      {
+        "name": "Vans",
+        "query_name": "vans"
+      }
+    ],
+    "female": [
+      {
+        "name": "adidas",
+        "query_name": "adidas"
+      },
+      {
+        "name": "Christian Louboutin",
+        "query_name": "christian_louboutin"
+      },
+      {
+        "name": "Converse ",
+        "query_name": "converse_"
+      },
+      {
+        "name": "Gucci",
+        "query_name": "gucci"
+      },
+      {
+        "name": "Jimmy Choo",
+        "query_name": "jimmy_choo"
+      },
+      {
+        "name": "Jordan ",
+        "query_name": "jordan_"
+      },
+      {
+        "name": "Manolo Blahnik",
+        "query_name": "manolo_blahnik"
+      },
+      {
+        "name": "New Balance",
+        "query_name": "new_balance"
+      },
+      {
+        "name": "Nike",
+        "query_name": "nike"
+      },
+      {
+        "name": "Prada",
+        "query_name": "prada"
+      },
+      {
+        "name": "Reebok",
+        "query_name": "reebok"
+      },
+      {
+        "name": "Saint Laurent",
+        "query_name": "saint_laurent"
+      },
+      {
+        "name": "Steve Madden",
+        "query_name": "steve_madden"
+      },
+      {
+        "name": "Stuart Weitzman",
+        "query_name": "stuart_weitzman"
+      },
+      {
+        "name": "Vans",
+        "query_name": "vans"
+      }
+    ]
+  },
+  "Популярные категории обуви": {
+    "name": "Обувь",
+    "any": [
+      {
+        "name": "Кроссовки",
+        "query_name": "sneakers"
+      },
+      {
+        "name": "Кеды",
+        "query_name": "canvas_shoes"
+      },
+      {
+        "name": "Лоферы",
+        "query_name": "loafers"
+      },
+      {
+        "name": "Туфли",
+        "query_name": "shoes"
+      },
+      {
+        "name": "Ботинки",
+        "query_name": "boots"
+      },
+      {
+        "name": "Сандалии",
+        "query_name": "sandals"
+      },
+      {
+        "name": "Эспадрильи",
+        "query_name": "espadrilles"
+      },
+      {
+        "name": "Баскетбольные кроссовки",
+        "query_name": "basketball_sneakers"
+      },
+      {
+        "name": "Футбольные бутсы",
+        "query_name": "football_boots"
+      },
+      {
+        "name": "Челси",
+        "query_name": "chelsea_boots"
+      },
+      {
+        "name": "Слипоны",
+        "query_name": "slip_ons"
+      },
+      {
+        "name": "Зимняя обувь",
+        "query_name": "winter_shoes"
+      },
+      {
+        "name": "Шлёпки",
+        "query_name": "slippers"
+      }
+    ],
+    "male": [
+      {
+        "name": "Кроссовки",
+        "query_name": "sneakers"
+      },
+      {
+        "name": "Кеды",
+        "query_name": "canvas_shoes"
+      },
+      {
+        "name": "Лоферы",
+        "query_name": "loafers"
+      },
+      {
+        "name": "Туфли",
+        "query_name": "shoes"
+      },
+      {
+        "name": "Ботинки",
+        "query_name": "boots"
+      },
+      {
+        "name": "Сандалии",
+        "query_name": "sandals"
+      },
+      {
+        "name": "Эспадрильи",
+        "query_name": "espadrilles"
+      },
+      {
+        "name": "Баскетбольные кроссовки",
+        "query_name": "basketball_sneakers"
+      },
+      {
+        "name": "Футбольные бутсы",
+        "query_name": "football_boots"
+      },
+      {
+        "name": "Челси",
+        "query_name": "chelsea_boots"
+      },
+      {
+        "name": "Слипоны",
+        "query_name": "slip_ons"
+      },
+      {
+        "name": "Зимняя обувь",
+        "query_name": "winter_shoes"
+      },
+      {
+        "name": "Шлёпки",
+        "query_name": "slippers"
+      }
+    ],
+    "female": [
+      {
+        "name": "Кроссовки",
+        "query_name": "sneakers"
+      },
+      {
+        "name": "Кеды",
+        "query_name": "canvas_shoes"
+      },
+      {
+        "name": "Лоферы",
+        "query_name": "loafers"
+      },
+      {
+        "name": "Туфли",
+        "query_name": "shoes"
+      },
+      {
+        "name": "Ботинки",
+        "query_name": "boots"
+      },
+      {
+        "name": "Сандалии",
+        "query_name": "sandals"
+      },
+      {
+        "name": "Эспадрильи",
+        "query_name": "espadrilles"
+      },
+      {
+        "name": "Баскетбольные кроссовки",
+        "query_name": "basketball_sneakers"
+      },
+      {
+        "name": "Футбольные бутсы",
+        "query_name": "football_boots"
+      },
+      {
+        "name": "Челси",
+        "query_name": "chelsea_boots"
+      },
+      {
+        "name": "Слипоны",
+        "query_name": "slip_ons"
+      },
+      {
+        "name": "Зимняя обувь",
+        "query_name": "winter_shoes"
+      },
+      {
+        "name": "Шлёпки",
+        "query_name": "slippers"
+      }
+    ]
+  },
+  "Популярные бренды одежды": {
+    "name": "Популярные бренды",
+    "any": [
+      {
+        "name": "A-COLD-WALL*",
+        "query_name": "a-cold-wall*"
+      },
+      {
+        "name": "Alexander McQueen",
+        "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "alexander wang",
+        "query_name": "alexander_wang"
+      },
+      {
+        "name": "AMI Paris",
+        "query_name": "ami_paris"
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
+      },
+      {
+        "name": "Balmain",
+        "query_name": "balmain"
+      },
+      {
+        "name": "Bottega Veneta",
+        "query_name": "bottega_veneta"
+      },
+      {
+        "name": "Cactus Jack by Travis Scott",
+        "query_name": "cactus_jack_by_travis_scott"
+      },
+      {
+        "name": "Celine",
+        "query_name": "celine"
+      },
+      {
+        "name": "Chanel",
+        "query_name": "chanel"
+      },
+      {
+        "name": "Chloe",
+        "query_name": "chloe"
+      },
+      {
+        "name": "Diesel",
+        "query_name": "diesel"
+      },
+      {
+        "name": "Dior",
+        "query_name": "dior"
+      },
+      {
+        "name": "Drew House",
+        "query_name": "drew_house"
+      },
+      {
+        "name": "Fear of God",
+        "query_name": "fear_of_god"
+      },
+      {
+        "name": "Gucci",
+        "query_name": "gucci"
+      },
+      {
+        "name": "Heron Preston",
+        "query_name": "heron_preston"
+      },
+      {
+        "name": "Jacquemus",
+        "query_name": "jacquemus"
+      },
+      {
+        "name": "Louis Vuitton",
+        "query_name": "louis_vuitton"
+      },
+      {
+        "name": "Moncler",
+        "query_name": "moncler"
+      },
+      {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "Palm Angels",
+        "query_name": "palm_angels"
+      },
+      {
+        "name": "Prada",
+        "query_name": "prada"
+      },
+      {
+        "name": "Saint Laurent",
+        "query_name": "saint_laurent"
+      },
+      {
+        "name": "Stone Island",
+        "query_name": "stone_island"
+      },
+      {
+        "name": "Stüssy",
+        "query_name": "stüssy"
+      },
+      {
+        "name": "Supreme",
+        "query_name": "supreme"
+      },
+      {
+        "name": "The North Face",
+        "query_name": "the_north_face"
+      },
+      {
+        "name": "Vetements",
+        "query_name": "vetements"
+      },
+      {
+        "name": "VLONE",
+        "query_name": "vlone"
+      }
+    ],
+    "male": "",
+    "female": ""
+  },
+  "Популярные категории одежды": {
+    "name": "Одежда",
+    "any": [
+      {
+        "name": "Худи и толстовки",
+        "query_name": "hoodie_sweatshirts"
+      },
+      {
+        "name": "Футболки",
+        "query_name": "tshirts"
+      },
+      {
+        "name": "Лонгсливы",
+        "query_name": "longsleeves"
+      },
+      {
+        "name": "Свитеры и трикотаж",
+        "query_name": "knitwear"
+      },
+      {
+        "name": "Рубашки",
+        "query_name": "shirts"
+      },
+      {
+        "name": "Поло",
+        "query_name": "polo"
+      },
+      {
+        "name": "Майки",
+        "query_name": "vest_shirt"
+      },
+      {
+        "name": "Шорты",
+        "query_name": "shorts"
+      },
+      {
+        "name": "Треники",
+        "query_name": "sweatpants"
+      },
+      {
+        "name": "Джинсы",
+        "query_name": "jeans"
+      },
+      {
+        "name": "Брюки",
+        "query_name": "trousers"
+      },
+      {
+        "name": "Юбки",
+        "query_name": "skirts"
+      },
+      {
+        "name": "Платья",
+        "query_name": "dresses"
+      },
+      {
+        "name": "Костюмы",
+        "query_name": "suits"
+      },
+      {
+        "name": "Пляжная одежда",
+        "query_name": "beach_wear"
+      },
+      {
+        "name": "Куртки",
+        "query_name": "coats_jackets"
+      },
+      {
+        "name": "Пуховики",
+        "query_name": "down_jackets"
+      },
+      {
+        "name": "Плащи",
+        "query_name": "trench"
+      },
+      {
+        "name": "Пальто",
+        "query_name": "coats"
+      },
+      {
+        "name": "Ветровки",
+        "query_name": "windbreakers"
+      },
+      {
+        "name": "Жилетки",
+        "query_name": "vests"
+      },
+      {
+        "name": "Кожаные куртки",
+        "query_name": "leather_jackets"
+      },
+      {
+        "name": "Зимние штаны",
+        "query_name": "winter_pants"
+      },
+      {
+        "name": "Спортивные майки",
+        "query_name": "sport_vests"
+      },
+      {
+        "name": "Топы",
+        "query_name": "tops"
+      },
+      {
+        "name": "Спортивные шорты",
+        "query_name": "sport_shorts"
+      },
+      {
+        "name": "Баскетбольные джерси",
+        "query_name": "basketball_jerseys"
+      },
+      {
+        "name": "Баскетбольные шорты",
+        "query_name": "basketball_shorts"
+      },
+      {
+        "name": "Спортивные костюмы",
+        "query_name": "tracksuits"
+      },
+      {
+        "name": "Нижнее бельё и домашняя одежда",
+        "query_name": "underwear_home_wear"
+      }
+    ],
+    "male": [
+      {
+        "name": "Худи и толстовки",
+        "query_name": "hoodie_sweatshirts"
+      },
+      {
+        "name": "Футболки",
+        "query_name": "tshirts"
+      },
+      {
+        "name": "Лонгсливы",
+        "query_name": "longsleeves"
+      },
+      {
+        "name": "Свитеры и трикотаж",
+        "query_name": "knitwear"
+      },
+      {
+        "name": "Рубашки",
+        "query_name": "shirts"
+      },
+      {
+        "name": "Поло",
+        "query_name": "polo"
+      },
+      {
+        "name": "Майки",
+        "query_name": "vest_shirt"
+      },
+      {
+        "name": "Шорты",
+        "query_name": "shorts"
+      },
+      {
+        "name": "Треники",
+        "query_name": "sweatpants"
+      },
+      {
+        "name": "Джинсы",
+        "query_name": "jeans"
+      },
+      {
+        "name": "Брюки",
+        "query_name": "trousers"
+      },
+      {
+        "name": "Костюмы",
+        "query_name": "suits"
+      },
+      {
+        "name": "Жилеты",
+        "query_name": "suits"
+      },
+      {
+        "name": "Пляжная одежда",
+        "query_name": "beach_wear"
+      },
+      {
+        "name": "Нижнее бельё и домашняя одежда",
+        "query_name": "underwear_home_wear"
+      },
+      {
+        "name": "Куртки",
+        "query_name": "coats_jackets"
+      },
+      {
+        "name": "Пуховики",
+        "query_name": "down_jackets"
+      },
+      {
+        "name": "Плащи",
+        "query_name": "trench"
+      },
+      {
+        "name": "Пальто",
+        "query_name": "coats"
+      },
+      {
+        "name": "Ветровки",
+        "query_name": "windbreakers"
+      },
+      {
+        "name": "Жилетки",
+        "query_name": "vests"
+      },
+      {
+        "name": "Кожаные куртки",
+        "query_name": "leather_jackets"
+      },
+      {
+        "name": "Зимние штаны",
+        "query_name": "winter_pants"
+      },
+      {
+        "name": "Спортивные майки",
+        "query_name": "sport_vests"
+      },
+      {
+        "name": "Спортивные шорты",
+        "query_name": "sport_shorts"
+      },
+      {
+        "name": "Спортивные костюмы",
+        "query_name": "tracksuits"
+      },
+      {
+        "name": "Баскетбольные джерси",
+        "query_name": "basketball_jerseys"
+      },
+      {
+        "name": "Баскетбольные шорты",
+        "query_name": "basketball_shorts"
+      },
+      {
+        "name": "Футбольные майки",
+        "query_name": "football_shirts"
+      },
+      {
+        "name": "Футбольные шорты",
+        "query_name": "football_shorts"
+      }
+    ],
+    "female": [
+      {
+        "name": "Худи и толстовки",
+        "query_name": "hoodie_sweatshirts"
+      },
+      {
+        "name": "Футболки",
+        "query_name": "tshirts"
+      },
+      {
+        "name": "Лонгсливы",
+        "query_name": "longsleeves"
+      },
+      {
+        "name": "Свитеры и трикотаж",
+        "query_name": "knitwear"
+      },
+      {
+        "name": "Рубашки",
+        "query_name": "shirts"
+      },
+      {
+        "name": "Поло",
+        "query_name": "polo"
+      },
+      {
+        "name": "Майки",
+        "query_name": "vest_shirt"
+      },
+      {
+        "name": "Шорты",
+        "query_name": "shorts"
+      },
+      {
+        "name": "Треники",
+        "query_name": "sweatpants"
+      },
+      {
+        "name": "Джинсы",
+        "query_name": "jeans"
+      },
+      {
+        "name": "Брюки",
+        "query_name": "trousers"
+      },
+      {
+        "name": "Платья",
+        "query_name": "dresses"
+      },
+      {
+        "name": "Юбки",
+        "query_name": "skirts"
+      },
+      {
+        "name": "Топы",
+        "query_name": "tops"
+      },
+      {
+        "name": "Костюмы",
+        "query_name": "suits"
+      },
+      {
+        "name": "Пляжная одежда",
+        "query_name": "beach_wear"
+      },
+      {
+        "name": "Куртки",
+        "query_name": "coats_jackets"
+      },
+      {
+        "name": "Пуховики",
+        "query_name": "down_jackets"
+      },
+      {
+        "name": "Плащи",
+        "query_name": "trench"
+      },
+      {
+        "name": "Пальто",
+        "query_name": "coats"
+      },
+      {
+        "name": "Ветровки",
+        "query_name": "windbreakers"
+      },
+      {
+        "name": "Жилетки",
+        "query_name": "vests"
+      },
+      {
+        "name": "Кожаные куртки",
+        "query_name": "leather_jackets"
+      },
+      {
+        "name": "Зимние штаны",
+        "query_name": "winter_pants"
+      },
+      {
+        "name": "Спортивные майки",
+        "query_name": "sport_vests"
+      },
+      {
+        "name": "Спортивные топы",
+        "query_name": "sport_tops"
+      },
+      {
+        "name": "Спортивные шорты",
+        "query_name": "sport_shorts"
+      },
+      {
+        "name": "Легинсы и термобелье",
+        "query_name": "leggings_thermal_underwear"
+      },
+      {
+        "name": "Спортивные костюмы",
+        "query_name": "tracksuits"
+      },
+      {
+        "name": "Нижнее бельё и домашняя одежда",
+        "query_name": "underwear_home_wear"
+      }
+    ]
+  },
+  "Популярные бренды аксессуаров": {
+    "name": "Популярные бренды",
+    "any": "",
+    "male": "",
+    "female": ""
+  },
+  "Популярные категории аксессуаров": {
+    "name": "Аксессуары",
+    "any": "",
+    "male": "",
+    "female": ""
+  }
+}

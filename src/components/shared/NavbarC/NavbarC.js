@@ -16,10 +16,12 @@ import ElasticSearchModal from "@/components/shared/ElasticSearchModal/ElasticSe
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import picture from "@/static/img/shoe2.png";
+import headerJson from './header.json'
 
 const NavbarC = () => {
     const {userStore} = useContext(Context)
     const router = useRouter()
+    const header = headerJson
     const goToMainPage = () => {
         router.push('/')
     }
@@ -59,6 +61,48 @@ const NavbarC = () => {
             setIsDesktop(false)
         }
     }, [isDesktop])
+    
+    const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = '') => {
+        const cols = []
+        let gender = 'any'
+        if (userStore.isLogged) {
+            gender = userStore.gender
+        }
+        const obj = basicObj[gender]
+        const keys = Object.keys(obj)
+        for (let i = 0; i < colNum; i++) {
+            let rows = []
+            for (let j = 0; j < numInCol; j++) {
+                const dataInd = i * numInCol + j
+                const rowObj = obj[keys[dataInd]]
+                rows.push(
+                    <a
+                        href={`/products?${query}=${rowObj.query_name}&${constantQuery}`}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            router.push(`/products?${query}=${rowObj.query_name}&${constantQuery}`)
+                        }}
+                        className={s.megamenu_links}
+                    >
+                        {rowObj.name}</a>
+                )
+            }
+            cols.push(
+                <div style={{minWidth: `${100/colNum}%`}}>
+                    {rows}
+                </div>
+            )
+        }
+        const result = (
+            <div style={{minWidth: `${19*colNum}%`}}>
+                <h4 className={s.h_text}>{title}</h4>
+                <div className={s.cols_block}>
+                    {cols}
+                </div>
+            </div>
+        )
+        return result
+    }
     return (
         <header className={s.header}>
             <Container>
@@ -106,180 +150,103 @@ const NavbarC = () => {
                             <p href="" className={s.links}>Новинки</p>
                             <p href="" className={s.links}>Рекомендации</p>
                             <Megamenu className={s.links} label={'Бренды'}>
-                                <Row>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Популярные</h4>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_adidas')}
-                                            className={s.megamenu_links}
-                                        >
-                                            adidas</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=converse')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Converse</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=fear_of_god')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Fear of God</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_jordan')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Jordan</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_new_balance')}
-                                            className={s.megamenu_links}
-                                        >
-                                            New Balance</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_nike')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Nike</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=off-white')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Off-White</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=puma')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Puma</div>
-                                    </Col>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>&nbsp;</h4>
-                                        <div
-                                            onClick={() => router.push('/products?line=supreme')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Supreme</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=the_north_face')}
-                                            className={s.megamenu_links}
-                                        >
-                                            The North Face</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=vans')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Vans</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=travis_scott')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Travis Scott</div>
-                                    </Col>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Коллаборации</h4>
-                                        <div
-                                            onClick={() => router.push('/products?collab=adidas_yeezy')}
-                                            className={s.megamenu_links}
-                                        >
-                                            adidas Yeezy</div>
-                                        <div
-                                            onClick={() => router.push('/products?collab=Off-White')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Nike x Off-White</div>
-                                        <div
-                                            onClick={() => router.push('/products?collab=adidas_yeezy')}
-                                            className={s.megamenu_links}
-                                        >
-                                            adidas Yeezy</div>
-                                        <div
-                                            onClick={() => router.push('/products?collab=adidas_yeezy')}
-                                            className={s.megamenu_links}
-                                        >
-                                            adidas Yeezy</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_new_balance')}
-                                            className={s.megamenu_links}
-                                        >
-                                            New Balance</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=все_nike')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Nike</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=off-white')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Off-White</div>
-                                        <div
-                                            onClick={() => router.push('/products?line=puma')}
-                                            className={s.megamenu_links}
-                                        >
-                                            Puma</div>
-                                    </Col>
-                                    <Col lg={3} className={s.pic_block}>
-                                        <Col lg={6}>
-                                            <div className={s.img_col}>
-                                                <Image src={picture} alt=""/>
-                                                <a href="/brands" onClick={(e)=> {
-                                                    e.preventDefault()
-                                                    router.push('/brands')
-                                                }}>Посмотреть все...</a>
+                                <div className={s.megamenu_row}>
+                                    {
+                                        renderMegamenu(15, 3,
+                                            header['Популярные бренды'], 'line',
+                                            'Популярные бренды'
+                                        )
+                                    }
+                                    {
+                                        renderMegamenu(15, 1,
+                                            header['Коллаборации'], 'collab',
+                                            'Коллаборации'
+                                        )
+                                    }
+                                    <div className={s.img_col}>
+                                        <div>
+                                            <Image src={picture}
+                                                   alt=''
+                                            />
+                                            <div className={s.link_block}>
+                                                <a className={s.img_link}
+                                                   onClick={(e) => {
+                                                       e.preventDefault()
+                                                       router.push('/brands')
+                                                   }}
+                                                >
+                                                    Все бренды
+                                                </a>
                                             </div>
-                                        </Col>
-                                    </Col>
-                                </Row>
+                                        </div>
+                                    </div>
+                                </div>
                             </Megamenu>
                             <Megamenu className={s.links} label={'Обувь'}>
-                                <Row>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={6} className={s.pic_block}>
-                                        <Col lg={6}>
-                                            <div className={s.img_col}>
-                                                <Image src={picture} alt=""/>
-                                                <a href="">Посмотреть все...</a>
+                                <div className={s.megamenu_row}>
+                                    {
+                                        renderMegamenu(13, 2,
+                                            header['Популярные линейки обуви'], 'line',
+                                            'Линейки'
+                                        )
+                                    }
+                                    {
+                                        renderMegamenu(13, 1,
+                                            header['Популярные категории обуви'], 'category',
+                                            'Обувь'
+                                        )
+                                    }
+                                    {
+                                        renderMegamenu(13, 1,
+                                            header['Популярные бренды обуви'], 'collab',
+                                            'Бренды', 'category=shoes_category'
+                                        )
+                                    }
+                                    <div className={s.img_col}>
+                                        <div>
+                                            <Image src={picture}
+                                                   alt=''
+                                            />
+                                            <div className={s.link_block}>
+                                                <a className={s.img_link}
+                                                   onClick={(e) => {
+                                                       e.preventDefault()
+                                                       router.push('/brands')
+                                                   }}
+                                                >
+                                                    Все бренды
+                                                </a>
                                             </div>
-                                        </Col>
-                                    </Col>
-                                </Row>
+                                        </div>
+                                    </div>
+                                </div>
                             </Megamenu>
                             <Megamenu className={s.links} label={'Одежда'}>
-                                <Row>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={6} className={s.pic_block}>
-                                        <Col lg={6}>
-                                            <div className={s.img_col}>
-                                                <Image src={picture} alt=""/>
-                                                <a href="">Посмотреть все...</a>
+                                <div className={s.megamenu_row}>
+                                    {
+                                        renderMegamenu(15, 2,
+                                            header['Популярные категории одежды'], 'category',
+                                            'Категории'
+                                        )
+                                    }
+                                    <div className={s.img_col}>
+                                        <div>
+                                            <Image src={picture}
+                                                   alt=''
+                                            />
+                                            <div className={s.link_block}>
+                                                <a className={s.img_link}
+                                                   onClick={(e) => {
+                                                       e.preventDefault()
+                                                       router.push('/brands')
+                                                   }}
+                                                >
+                                                    Все бренды
+                                                </a>
                                             </div>
-                                        </Col>
-                                    </Col>
-                                </Row>
+                                        </div>
+                                    </div>
+                                </div>
                             </Megamenu>
                             <Megamenu className={s.links} label={'Аксессуары'}>
                                 <Row>

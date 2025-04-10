@@ -79,6 +79,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
+            userStore.setGender(res.gender)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -107,6 +108,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
         }
         try {
             const res = await login(JSON.stringify(data))
+            console.log(res)
             setWrong(false)
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
@@ -114,6 +116,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
+            userStore.setGender(res.gender)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
