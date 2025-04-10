@@ -1,0 +1,21 @@
+.brand {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 20px 0;
+}
+.like {
+    cursor: pointer;
+    margin: 0 10px;
+}
+.brand_link {
+    text-decoration: none;
+    color: black;
+}
+@media (max-width: 600px) {
+    .brand {
+        width: 50%;
+        font-size: 14px;
+        margin: 20px 0;
+    }
+}

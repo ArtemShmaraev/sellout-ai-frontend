@@ -77,7 +77,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         setIsInWishlist(false)
     }
     return (
-        <div className={smallCard ? s.sm_card : s.card} onClick={() => router.push(`products/${slug}`)}>
+        <div className={smallCard ? s.sm_card : s.card} onClick={() => router.push(`/products/${slug}`)}>
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>-20%</div>}
@@ -132,11 +132,11 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 </div>
             }
             <div className={s.text_block}>
-                <div className={s.tag}>{brandsDisplay(brands)}</div>
-                <div className={s.brand}>{model || 'No model'}</div>
-                <div className={s.name}>{colorway}</div>
-                <div className={s.price_block}>
-                    <div className={s.price}>От {price}</div>
+                <div className={`${s.tag}`}>{brandsDisplay(brands)}</div>
+                <div className={`${s.brand}`}>{model || 'No model'}</div>
+                <div className={`${s.name}`}>{colorway}</div>
+                <div className={`${s.price_block}`}>
+                    <div className={`${s.price}`}>От {price}</div>
                 </div>
             </div>
         </div>

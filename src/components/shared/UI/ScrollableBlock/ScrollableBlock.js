@@ -32,7 +32,11 @@ const ScrollableBlock = ({children, noArrows = false}) => {
                 </button>
             }
             <div className={s.scrollableContainer} ref={scrollableContainerRef}>
-                {children}
+                {React.Children.map(children, (child, index) => (
+                    <div style={{ flexShrink: 0 }} key={index}>
+                        {child}
+                    </div>
+                ))}
             </div>
             {!noArrows &&
                 <button className={s.right} onClick={scrollRight}>

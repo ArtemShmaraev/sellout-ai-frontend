@@ -18,3 +18,15 @@ export async function removeFromWishlist(userId, productId, token) {
     })
     return data
 }
+export async function addToFavouriteBrands(userId, brandId, token) {
+    const {data} = await $host.get(`user/favorite_brand/${userId}/${brandId}`,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function deleteFavouriteBrands(userId, brandId, token) {
+    const {data} = await $host.delete(`user/favorite_brand/${userId}/${brandId}`,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

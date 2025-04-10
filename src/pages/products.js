@@ -34,10 +34,12 @@ export const getServerSideProps = async (context) => {
     let lastSeen = []
     if (token) {
         const {user_id} = jwtDecode(token)
-        // lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
+        lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
     } else {
         const arr = cookies['last_seen'].trim().split(' ')
-        // lastSeen = await fetchProductsByArray(arr)
+        if (arr[0] !== '') {
+            lastSeen = await fetchProductsByArray(arr)
+        }
     }
     return { props: {products, categories, lines, colors, collections, sizes, lastSeen} }
 }

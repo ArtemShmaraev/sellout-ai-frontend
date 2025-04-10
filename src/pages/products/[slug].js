@@ -16,7 +16,7 @@ import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/Q
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Image from 'next/image'
-import {fetchOneProduct, fetchPrices} from "@/http/productsApi";
+import {fetchOneProduct, fetchPrices, fetchProductsByArray} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
@@ -27,20 +27,31 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
-import {addLastSeen} from "@/http/userApi";
+import {addLastSeen, fetchLastSeen} from "@/http/userApi";
+import Viewed from "@/components/pages/product/Viewed/Viewed";
+import jwtDecode from "jwt-decode";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const product = await fetchOneProduct(context.params.slug, token)
-    console.log(product)
-    //TODO log
     const {id} = product
     const prices = await fetchPrices(id)
-    return { props: {product, prices} }
+
+    let lastSeen = []
+    if (token) {
+        const {user_id} = jwtDecode(token)
+        lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
+    } else {
+        const arr = cookies['last_seen'].trim().split(' ')
+        if (arr[0] !== '') {
+            lastSeen = await fetchProductsByArray(arr)
+        }
+    }
+    return { props: {product, prices, lastSeen} }
 }
 
-const OneProductPage = ({product, prices}) => {
+const OneProductPage = ({product, prices, lastSeen}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const {productStore, userStore} = useContext(Context)
@@ -118,15 +129,16 @@ const OneProductPage = ({product, prices}) => {
             addLastSeen(token, userId, product.id)
         }
         let currArr = Cookies.get('last_seen').trim().split(' ')
-        if (currArr.length < 7) {
-            if (currArr.includes(product.id)) {
-                let ind = currArr.indexOf(product.id)
-                currArr.splice(ind, 1)
-            } else {
+        const id = String(product.id)
+        if (currArr.includes(id)) {
+            let ind = currArr.indexOf(id)
+            currArr.splice(ind, 1)
+        } else {
+            if (currArr.length > 7) {
                 currArr.pop()
             }
         }
-        currArr.unshift(product.id)
+        currArr.unshift(id)
         const newStr = currArr.join(' ')
         Cookies.set('last_seen', newStr)
     }, [])
@@ -389,6 +401,9 @@ const OneProductPage = ({product, prices}) => {
                     </Col>
                 </Row>
                 <Recommendations/>
+                {lastSeen.length > 0 &&
+                    <Viewed lastSeen={lastSeen}/>
+                }
             </Container>
         </MainLayout>
     );

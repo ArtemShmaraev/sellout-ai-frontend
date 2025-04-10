@@ -33,8 +33,8 @@ const Account = ({userData}) => {
     const [genderOpen, setGenderOpen] = useState(false)
     const [selectedGender, setSelectedGender] = useState()
     const genders = [
-        ['Мужской', 'M'],
-        ['Женский', 'F'],
+        ['Мужской', 'M','male'],
+        ['Женский', 'F','female'],
     ]
     useEffect(() => {
         genders.forEach(el => {

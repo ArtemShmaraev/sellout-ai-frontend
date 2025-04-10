@@ -18,6 +18,7 @@ const AccountLayout = ({children}) => {
         Cookies.remove('access_token')
         Cookies.remove('refresh_token')
         Cookies.set('cart', '')
+        Cookies.set('last_seen', '')
         userStore.setIsLogged(false)
         router.push('/')
     }

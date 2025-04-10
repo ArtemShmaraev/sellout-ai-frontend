@@ -73,6 +73,8 @@
     flex-direction: column;
     justify-content: flex-start;
     cursor: pointer;
+    font-size: 13px;
+    flex-shrink: 0;
 }
 .sm_img {
     height: 100px;

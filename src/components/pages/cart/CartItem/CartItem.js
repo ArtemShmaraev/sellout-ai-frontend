@@ -15,7 +15,7 @@ import like from "@/static/icons/heart.svg";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
 
-const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug
+const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL
                   }) => {
     const [prices, setPrices] = useState([])
     const {cartStore, userStore} = useContext(Context)
@@ -35,7 +35,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
     }
-    const [isInWishlist, setIsInWishlist] = useState()
+    const [isInWishlist, setIsInWishlist] = useState(inWL)
     const addToWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id

@@ -10,6 +10,7 @@ import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import jwtDecode from "jwt-decode";
+import {observer} from "mobx-react-lite";
 
 
 export const getServerSideProps = async (context) => {
@@ -40,13 +41,12 @@ export const getServerSideProps = async (context) => {
     }
     return { props: {productUnits, defaultPrice, finalPrice} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
     const router = useRouter()
     const {userStore} = useContext(Context)
     const goToProductsPage = () => {
         router.push('/products')
     }
-    console.log(productUnits)
     return (
         <MainLayout>
             <Container className={s.cont}>
@@ -59,7 +59,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice}) => {
                 <div>
                     <div>
 
-                        {!(userStore.isLogged ? productUnits.product_units.length : productUnits.length) && 'Твоя корзина пуста.'}
+                        {!(token ? productUnits.product_units.length : productUnits.length) && 'Твоя корзина пуста.'}
                         {!userStore.isLogged &&
                             <div className={s.login_block}>
                                 <AuthModal>
@@ -93,6 +93,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice}) => {
                                               cardId={ind}
                                               imgSrc={el.product.bucket_link[0].url}
                                               slug={el.product.slug}
+                                              inWL={el.product.in_wishlist}
                                     />
                                 )
                                 :
@@ -128,4 +129,4 @@ const Cart = ({productUnits, defaultPrice, finalPrice}) => {
     );
 };
 
-export default Cart;
+export default observer(Cart);

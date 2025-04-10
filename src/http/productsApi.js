@@ -27,6 +27,18 @@ export async function fetchFilter(filter) {
     const {data} = await $host.get(`product/${filter}`)
     return data
 }
+export async function fetchBrands(token = '') {
+    let res
+    if (token) {
+        res = await $host.get(`product/brands`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+    } else {
+        res = await $host.get(`product/brands`)
+    }
+    const {data} = res
+    return data
+}
 export async function updateProduct(id, body) {
     const {data} = await $host.post(`product/update/${id}`, body)
     return data

@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import {fetchFilter} from "@/http/productsApi";
+import {fetchBrands} from "@/http/productsApi";
 import {Container} from "react-bootstrap";
 import s from '@/styles/BrandsPage.module.css'
 import like from '@/static/icons/heart.svg'
@@ -9,10 +9,19 @@ import {useContext, useEffect, useState} from "react";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
-import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
+import Brand from "@/components/pages/brands/Brand";
+import {parse} from "cookie";
 
-export const getStaticProps = async () => {
-    const brands = await fetchFilter('brands')
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    let brands
+    if (token) {
+        brands = await fetchBrands(token)
+    } else {
+        brands = await fetchBrands()
+    }
+    console.log(brands)
     return { props: {brands} }
 }
 const Brands = ({brands}) => {
@@ -62,7 +71,7 @@ const Brands = ({brands}) => {
                         id={brands[i].name[0]}
                         className={s.big_letter}
                     >
-                        {brands[i].name[0]}
+                        {brands[i].name[0].toUpperCase()}
                     </h4>
                 )
             }
@@ -78,12 +87,11 @@ const Brands = ({brands}) => {
                 )
             }
             arr.push(
-                <div className={s.brand} key={brands[i].name}>
-                    <Image src={like} alt='' className={s.like}/>
-                    <a href=""
-                       className={s.brand_link}
-                    >{brands[i].name}</a>
-                </div>
+                <Brand name={brands[i].name}
+                       brandId={brands[i].id}
+                       query={brands[i].query_name}
+                       inWL={brands[i].in_wishlist}
+                />
             )
         }
         return arr
