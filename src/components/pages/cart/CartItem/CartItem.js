@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import s from './CartItem.module.css'
 import Image from "next/image";
-import shoe from '@/static/img/shoe2.png'
 import SizeDropdown from "@/components/pages/cart/SizeDropdown/SizeDropdown";
 import {fetchPrices} from "@/http/productsApi";
 import ShipDropdown from "@/components/pages/cart/ShipDropdown/ShipDropdown";
@@ -11,8 +10,12 @@ import {useRouter} from "next/router";
 import Cookies from "js-cookie";
 import {removeFromCart} from "@/http/cartApi";
 import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
+import like_fill from "@/static/icons/heart-fill.svg";
+import like from "@/static/icons/heart.svg";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import {observer} from "mobx-react-lite";
 
-const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId,
+const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug
                   }) => {
     const [prices, setPrices] = useState([])
     const {cartStore, userStore} = useContext(Context)
@@ -36,13 +39,13 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     const addToWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
-        const data = await addToWishlist(userId, product.id, token)
+        const data = await addToWishlist(userId, productId, token)
         setIsInWishlist(true)
     }
     const deleteFromWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
-        const data = await removeFromWishlist(userId, product.id, token)
+        const data = await removeFromWishlist(userId, productId, token)
         setIsInWishlist(false)
     }
     return (
@@ -50,7 +53,12 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             <hr/>
             <div className={s.row}>
                 <div className={s.col1}>
-                    <Image src={shoe} alt='' className={s.img}/>
+                    <div className={s.img}>
+                        <Image src={imgSrc} fill={true} alt=''
+                               style={{objectFit: 'contain', cursor: 'pointer'}}
+                               onClick={() => router.push(`/products/${slug}`)}
+                        />
+                    </div>
                 </div>
                 <div className={s.inner_row}>
                     <div className={s.col}>
@@ -60,7 +68,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             <div className={s.text}>{colorway}</div>
                         </div>
                     </div>
-                    <div className={s.col}>
+                    <div className={s.col_dropdown}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Размер</div>
                             <SizeDropdown prices={prices} productId={productId} currentId={sizeId} cardId={cardId}/>
@@ -70,7 +78,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             </div>
                         </div>
                     </div>
-                    <div className={`${s.col} d-flex`}>
+                    <div className={`${s.col}`}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Цена</div>
                             <div className={s.text}>{price} ₽</div>
@@ -79,6 +87,28 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             <div className={s.brand}>Количество</div>
                             <div className={s.text}>1</div>
                         </div>
+                        {userStore.isLogged
+                            ?
+                            <div className={s.like_block}
+                                 onClick={(e) => {
+                                     e.stopPropagation()
+                                     isInWishlist ? deleteFromWL() : addToWL()
+                                 }}>
+                                <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                                />
+                                <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
+                            </div>
+                            :
+                            <div onClick={e => e.stopPropagation()}>
+                                <AuthModal fromWishlist={true}>
+                                    <div className={s.like_block}>
+                                        <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                                        />
+                                        <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
+                                    </div>
+                                </AuthModal>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div>
@@ -91,4 +121,4 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     );
 };
 
-export default CartItem;
+export default observer(CartItem);

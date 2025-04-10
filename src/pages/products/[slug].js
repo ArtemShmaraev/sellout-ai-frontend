@@ -27,6 +27,7 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
+import {addLastSeen} from "@/http/userApi";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -109,6 +110,26 @@ const OneProductPage = ({product, prices}) => {
             const data = await addToCart(userId, productStore.shipChosen, token)
         }
     }
+
+    useEffect(() => {
+        if (userStore.isLogged) {
+            const token = Cookies.get('access_token')
+            const userId = userStore.id
+            addLastSeen(token, userId, product.id)
+        }
+        let currArr = Cookies.get('last_seen').trim().split(' ')
+        if (currArr.length < 7) {
+            if (currArr.includes(product.id)) {
+                let ind = currArr.indexOf(product.id)
+                currArr.splice(ind, 1)
+            } else {
+                currArr.pop()
+            }
+        }
+        currArr.unshift(product.id)
+        const newStr = currArr.join(' ')
+        Cookies.set('last_seen', newStr)
+    }, [])
     return (
         <MainLayout>
             <Container className={s.container}>

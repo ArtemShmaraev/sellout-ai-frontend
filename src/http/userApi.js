@@ -28,6 +28,12 @@ export async function fetchUserInfo(cookies, id) {
     })
     return data
 }
+export async function editUserInfo(token, userId, obj) {
+    const {data} = await $host.put(`user/user_info/${userId}`, obj,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function fetchAddresses(cookies, id) {
     const {data} = await $authHost.get(`user/address/${id}`, {
         headers: {cookie: cookies}
@@ -48,6 +54,19 @@ export async function editAddress(token, userId, addressId, obj) {
 }
 export async function deleteAddress(token, userId, addressId) {
     const {data} = await $host.delete(`user/address/${userId}/${addressId}`,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function fetchLastSeen(cookies, userId) {
+    const {data} = await $authHost.get(`user/last_seen/${userId}`, {
+        headers: {cookie: cookies}
+    })
+    return data
+}
+export async function addLastSeen(token, userId, productId) {
+    const obj = {product_id: productId}
+    const {data} = await $host.post(`user/last_seen/${userId}`, JSON.stringify(obj),{
         headers: {Authorization: `Bearer ${token}`}
     })
     return data

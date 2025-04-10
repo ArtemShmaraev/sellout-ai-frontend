@@ -14,6 +14,7 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const {user_id} = jwtDecode(token)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    console.log(userData)
     return { props: { userData } }
 }
 const Account = ({userData}) => {
@@ -21,7 +22,7 @@ const Account = ({userData}) => {
     const [firstname, setFirstname] = useState(userData.first_name)
     const [lastname, setLastname] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
-    const [phone, setPhone] = useState()
+    const [phone, setPhone] = useState(userData.phone_number)
     const [birthday, setBirthday] = useState()
     const handleChangeNumber = (e) => {
         const inputPhoneNumber = e.target.value;

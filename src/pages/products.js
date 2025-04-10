@@ -13,11 +13,13 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
-import {fetchFilter, fetchProductsPage} from "@/http/productsApi";
+import {fetchFilter, fetchProductsByArray, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {parse} from "cookie";
+import {fetchLastSeen} from "@/http/userApi";
+import jwtDecode from "jwt-decode";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -28,9 +30,18 @@ export const getServerSideProps = async (context) => {
     const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
     const sizes = await fetchFilter('size')
-    return { props: {products, categories, lines, colors, collections, sizes} }
+
+    let lastSeen = []
+    if (token) {
+        const {user_id} = jwtDecode(token)
+        // lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
+    } else {
+        const arr = cookies['last_seen'].trim().split(' ')
+        // lastSeen = await fetchProductsByArray(arr)
+    }
+    return { props: {products, categories, lines, colors, collections, sizes, lastSeen} }
 }
-const Products = ({products, categories, lines, colors, collections, sizes}) => {
+const Products = ({products, categories, lines, colors, collections, sizes, lastSeen}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -111,7 +122,9 @@ const Products = ({products, categories, lines, colors, collections, sizes}) => 
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
                 <BuyoutModal/>
                 <Recommendations/>
-                <Viewed/>
+                {lastSeen.length > 0 &&
+                    <Viewed lastSeen={lastSeen}/>
+                }
 
 
 

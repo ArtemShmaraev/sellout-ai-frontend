@@ -3,22 +3,29 @@ import s from './Viewed.module.css'
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 
-const Viewed = () => {
+const Viewed = ({lastSeen}) => {
     return (
         <div>
             <p className={s.title}>Ранее просмотренные</p>
             <ScrollableBlock>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
-                <ProductCard smallCard={true}/>
+                {
+                    lastSeen.map(el =>
+                        <ProductCard model={el.model}
+                                     id={el.id}
+                                     slug={el.slug}
+                                     brands={el.brands}
+                                     colorway={el.colorway}
+                                     price={el.min_price_product_unit}
+                                     isFastShip={el.is_fast_shipping}
+                                     isReturn={el.is_return}
+                                     isSale={el.is_sale}
+                                     inWishlist={el.in_wishlist}
+                                     photosArr={el.bucket_link}
+                                     key={el.id}
+                                     smallCard={true}
+                        />
+                    )
+                }
             </ScrollableBlock>
             <hr/>
         </div>

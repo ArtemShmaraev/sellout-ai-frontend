@@ -34,10 +34,10 @@
     margin-top: 20px;
 }
 .items_block {
-    width: 64%;
+    width: 70%;
 }
 .promos_block {
-    width: 34%;
+    width: 28%;
 }
 .big_text {
     font-size: 20px;
@@ -58,5 +58,11 @@
     }
     .login_block {
         display: inline;
+    }
+    .main_block {
+        flex-direction: column-reverse;
+    }
+    .items_block, .promos_block {
+        width: 100%;
     }
 }

@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import eye from '@/static/icons/eye.svg'
 import eyeCrossed from '@/static/icons/eye-slash.svg'
+import InputMask from "react-input-mask";
 
 const AuthModal = ({children, fromWishlist = false, inline = false}) => {
     const router = useRouter()
@@ -24,12 +25,18 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState()
     const [isMailingList, setIsMailingList] = useState(true)
 
     const [emailBusy, setEmailBusy] = useState(false)
     const [wrong, setWrong] = useState(false)
     const [validEmail, setValidEmail] = useState(true);
     const [passShown, setPassShown] = useState(false)
+
+    const handleChangeNumber = (e) => {
+        const inputPhoneNumber = e.target.value;
+        setPhone(inputPhoneNumber);
+    };
 
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,6 +66,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             password: password,
             first_name: firstName,
             last_name: lastName,
+            phone: phone,
             gender: userStore.gender,
             is_mailing_list: isMailingList
         }
@@ -188,6 +196,17 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                                            value={lastName}
                                            onChange={(e) => setLastName(e.target.value)}
                                     />
+                                </div>
+                                <div className={s.input_block}>
+                                    <label className={s.label}>Номер телефона</label>
+                                    <InputMask mask="+7 999 999-99-99" maskChar={null}
+                                               value={phone}
+                                               onChange={e => handleChangeNumber(e)}
+                                    >
+                                        {(inputProps) => <input {...inputProps} type="tel"
+                                                                className={s.input}
+                                        />}
+                                    </InputMask>
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Почта:</label>

@@ -19,8 +19,8 @@ const SizeChoice = ({prices, productId}) => {
         setSelectedItem(item);
         setIsOpen(false);
         productStore.setSizeChosen(true)
-        const ships = await fetchShippings(productId, item.size.id)
-        console.log(ships)
+        const ships = await fetchShippings(productId, item.size)
+        console.log(ships, item.size.id)
         //TODO delete log
         productStore.setShipps(ships)
     };

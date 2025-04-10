@@ -14,9 +14,9 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     useEffect(() => {
         if (prices) {
             prices.forEach(el => {
-                if (el.size.id === currentId) {
+                if (el.size === currentId) {
                     setSelectedItem(el)
-                    cartStore.setSizeId(el.size.id)
+                    cartStore.setSizeId(el.size)
                     fetchShippings(productId, cartStore.sizeId).then(res => {
                         cartStore.cart[cardId] = res
                     })
@@ -31,7 +31,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const selectItem = async (item) => {
         setSelectedItem(item);
         setIsOpen(false);
-        cartStore.setSizeId(item.size.id)
+        cartStore.setSizeId(item.size)
         const data = await fetchShippings(productId, cartStore.sizeId)
         cartStore.cart[cardId] = data
     };

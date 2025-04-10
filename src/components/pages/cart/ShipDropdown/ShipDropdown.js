@@ -4,8 +4,10 @@ import s from "./ShipDropdown.module.css";
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
 import {addToCart, removeFromCart} from "@/http/cartApi";
+import {useRouter} from "next/router";
 
 const ShipDropdown = ({cardId, unitId}) => {
+    const router = useRouter()
     const {cartStore, userStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -54,6 +56,7 @@ const ShipDropdown = ({cardId, unitId}) => {
             await removeFromCart(userStore.id, currId, Cookies.get('access_token'))
             await addToCart(userStore.id, item.id, Cookies.get('access_token'))
         }
+        router.push('/cart', undefined, {scroll: false})
     }
     useEffect(() => {
         const handleClickOutside = (event) => {
