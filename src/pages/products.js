@@ -30,7 +30,6 @@ export const getServerSideProps = async (context) => {
     const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
     const sizes = await fetchFilter('size')
-
     let lastSeen = []
     if (token) {
         const {user_id} = jwtDecode(token)
@@ -51,7 +50,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
-    const {filterStore} = useContext(Context)
+    const {filterStore, desktopStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
@@ -82,28 +81,30 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
     }
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={`${s.cont} custom_cont`}>
                 <BigPicture/>
-                {isDesktop && <Row className={s.filter_sort_row}>
-                    <Col lg={10} className='d-flex'>
-                        <button className={s.border + ' fw-bold'}
-                                onClick={() => setIsOpen(!isOpen)}
-                        >Фильтры
-                        </button>
-                        {(filterStore.activeFilters.length !== 0 || router.query.price_min) &&
-                            <button
-                                className={s.border}
-                                onClick={clearFilters}
-                            >
-                                Сбросить фильтры
+                {isDesktop &&
+                    <div className={s.filter_sort_row}>
+                        <div className='d-flex'>
+                            <button className={s.border + ' fw-bold'}
+                                    onClick={() => setIsOpen(!isOpen)}
+                            >Фильтры
                             </button>
-                        }
-                        <FiltersBlock/>
-                    </Col>
-                    <Col lg={2} className='mt-lg-0 mt-2 d-flex justify-content-lg-end'>
-                        <SortDropdown/>
-                    </Col>
-                </Row>}
+                            {(filterStore.activeFilters.length !== 0 || router.query.price_min) &&
+                                <button
+                                    className={s.border}
+                                    onClick={clearFilters}
+                                >
+                                    Сбросить фильтры
+                                </button>
+                            }
+                            <FiltersBlock/>
+                        </div>
+                        <div className='mt-lg-0 mt-2 d-flex justify-content-lg-end'>
+                            <SortDropdown/>
+                        </div>
+                    </div>
+                }
                 {!isDesktop &&
                     <div className='d-flex justify-content-evenly align-items-center'>
                         <button className={s.filter_toggle}
@@ -158,7 +159,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                         </Container>
                     </div>
                 }
-            </Container>
+            </div>
         </MainLayout>
     );
 };

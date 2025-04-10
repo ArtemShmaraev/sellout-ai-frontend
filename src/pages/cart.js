@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import s from '@/styles/Cart.module.css'
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
 import {useRouter} from "next/router";
 import {parse} from "cookie";
@@ -49,7 +48,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
     }
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <div className={s.title_block}>
                     <h3>Корзина</h3>
                     <a onClick={goToProductsPage}
@@ -124,7 +123,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                         </div>
                     </div>
                 }
-            </Container>
+            </div>
         </MainLayout>
     );
 };

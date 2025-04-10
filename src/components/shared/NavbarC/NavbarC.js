@@ -19,7 +19,7 @@ import picture from "@/static/img/shoe2.png";
 import headerJson from './header.json'
 
 const NavbarC = () => {
-    const {userStore} = useContext(Context)
+    const {userStore, desktopStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
     const goToMainPage = () => {
@@ -60,7 +60,7 @@ const NavbarC = () => {
         if (width <= 1200) {
             setIsDesktop(false)
         }
-    }, [isDesktop])
+    }, [])
     
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = '') => {
         const cols = []
@@ -105,7 +105,7 @@ const NavbarC = () => {
     }
     return (
         <header className={s.header}>
-            <Container>
+            <div className={'custom_cont'}>
                 <div className={s.row1}>
                     <div className={s.block1}>
                         {isDesktop
@@ -249,30 +249,7 @@ const NavbarC = () => {
                                 </div>
                             </Megamenu>
                             <Megamenu className={s.links} label={'Аксессуары'}>
-                                <Row>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={3}>
-                                        <h4 className={s.h_text}>Заголовок</h4>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                        <div>Что то</div>
-                                    </Col>
-                                    <Col lg={6} className={s.pic_block}>
-                                        <Col lg={6}>
-                                            <div className={s.img_col}>
-                                                <Image src={picture} alt=""/>
-                                                <a href="">Посмотреть все...</a>
-                                            </div>
-                                        </Col>
-                                    </Col>
-                                </Row>
+
                             </Megamenu>
                             <a href="/products?is_fast_ship=is_fast_ship" className={s.links}
                                onClick={e => {
@@ -295,7 +272,7 @@ const NavbarC = () => {
                         </div>
                     </div>
                 }
-            </Container>
+            </div>
         </header>
     );
 };

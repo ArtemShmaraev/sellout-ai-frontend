@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Container} from "react-bootstrap";
 import s from './AccountLayout.module.css'
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
@@ -38,7 +37,7 @@ const AccountLayout = ({children}) => {
         }
     }, [])
     return (
-        <Container className={s.cont}>
+        <div className={s.cont + ' custom_cont'}>
             <div className={s.header}>
                 <h3 style={{marginBottom: '0px'}}>{`${userStore.firstName} ${userStore.lastName}`}</h3>
                 <a href="/" className={s.link} onClick={(e) => logout(e)}>Выйти</a>
@@ -93,7 +92,7 @@ const AccountLayout = ({children}) => {
                     {children}
                 </div>
             </div>
-        </Container>
+        </div>
     );
 };
 

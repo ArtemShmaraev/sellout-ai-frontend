@@ -1,13 +1,12 @@
 import React from 'react';
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import s from '@/styles/FAQ.module.css'
 import FaqDropdown from "@/components/pages/faq/FaqDropdown/FaqDropdown";
 
 const Faq = () => {
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <h4>FAQs</h4>
                 <hr/>
                 <h6 className={s.h}>Раздел</h6>
@@ -73,7 +72,7 @@ const Faq = () => {
                     fugiat impedit nemo, nostrum perferendis quibusdam, reprehenderit repudiandae
                     sunt suscipit vero. Amet mollitia qui quos!
                 </FaqDropdown>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

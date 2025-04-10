@@ -22,7 +22,7 @@ const Footer = () => {
     }
     return (
         <footer className={s.footer}>
-            <Container>
+            <div className={'custom_cont'}>
                 {isDesktop
                     ?
                     <Row>
@@ -82,9 +82,9 @@ const Footer = () => {
                         <MailingInput/>
                     </Col>
                 </Row>
-            </Container>
+            </div>
             <hr/>
-            <Container>
+            <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
                     <div>
                         <p className={s.footer_text}>&#9400; SELLOUT, 2023</p>
@@ -94,7 +94,7 @@ const Footer = () => {
                         <a href="" className={s.dark_links}>Политика конфидециальности</a>
                     </div>
                 </div>
-            </Container>
+            </div>
         </footer>
     );
 };

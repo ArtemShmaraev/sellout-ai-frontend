@@ -1,8 +1,5 @@
 import React, {useRef, useState} from 'react';
 import s from './Megamenu.module.css'
-import {Col, Container, Row} from "react-bootstrap";
-import picture from '@/static/img/shoe2.png'
-import Image from "next/image";
 
 const Megamenu = ({children, className, label}) => {
     const ref = useRef(null)
@@ -25,9 +22,9 @@ const Megamenu = ({children, className, label}) => {
                          onMouseEnter={() => setIsShown(true)}
                          onMouseLeave={() => setIsShown(false)}
                     >
-                        <Container>
+                        <div className={'custom_cont'}>
                             {children}
-                        </Container>
+                        </div>
                     </div>
                     <div className={s.black_area}
                          onMouseEnter={() => setIsShown(false)}

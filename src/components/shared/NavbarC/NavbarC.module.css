@@ -6,6 +6,9 @@
     top: 0;
     z-index: 10;
 }
+.cont {
+
+}
 .row1 {
     display: flex;
     justify-content: space-between;
@@ -19,7 +22,6 @@
 .block1 {
     display: flex;
     align-items: center;
-    margin-left: -11px;
 }
 .links {
     color: black;

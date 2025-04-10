@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import s from '@/styles/OrderComplete.module.css'
 import check from '@/static/icons/check2-circle.svg'
 import info from '@/static/icons/info-circle.svg'
@@ -27,7 +26,7 @@ const Complete = () => {
     }
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <div className={s.thanks_block}>
                     <Image  src={check} alt='' width={isDesktop ? 80 : 40}/>
                     <div>
@@ -70,7 +69,7 @@ const Complete = () => {
                         Если у Вас остались вопросы, обращайтесь в <a href="" className={s.link}>службу поддержки</a>
                     </div>
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

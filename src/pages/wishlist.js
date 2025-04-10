@@ -1,6 +1,5 @@
 import {parse} from "cookie";
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import jwtDecode from "jwt-decode";
 import {fetchWishlist} from "@/http/wishlistAPI";
 import s from '@/styles/Wishlist.module.css'
@@ -47,7 +46,7 @@ const Wishlist = ({wishlist}) => {
 
     return (
         <MainLayout>
-            <Container style={{marginTop: '130px'}}>
+            <div className={'custom_cont'} style={{marginTop: '130px'}}>
                 <h3>Избранное</h3>
                 {
                     wishlist.length > 0 &&
@@ -92,7 +91,7 @@ const Wishlist = ({wishlist}) => {
                     }
                 </div>
                 <Recommendations/>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

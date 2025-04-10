@@ -3,6 +3,14 @@ import {makeAutoObservable} from "mobx";
 class DesktopStore {
     constructor() {
         this._isDesktop = true
+        this._styleCont = {
+            marginRight: '3vw',
+            marginLeft: '3vw',
+        }
+        this._styleMob = {
+            marginRight: '0',
+            marginLeft: '0',
+        }
         makeAutoObservable(this)
     }
     setIsDesktop(bool) {

@@ -4,7 +4,6 @@ import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
 import Stage1 from "@/components/pages/order/Stage1/Stage1";
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import Stage2 from "@/components/pages/order/Stage2/Stage2";
 
@@ -24,7 +23,7 @@ const Order = () => {
     }
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <div className={s.section}>
                     <div className={s.main_block}>
                         {renderStage()}
@@ -42,7 +41,7 @@ const Order = () => {
                         >Продолжить оформление</button>
                     </div>
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

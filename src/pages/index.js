@@ -1,5 +1,4 @@
 import MainLayout from "@/layout/MainLayout";
-import {Container} from "react-bootstrap";
 import BigPicture from "@/components/shared/BigPicture/BigPicture";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
@@ -10,7 +9,7 @@ import React from "react";
 export default function Home() {
   return (
     <MainLayout>
-        <Container style={{marginTop: '150px', marginBottom: '100px'}}>
+        <div className={s.cont + ' custom_cont'}>
             <BigPicture/>
             <BigPicture reversed={true}/>
             <div className={s.big_pict_block}>
@@ -57,7 +56,7 @@ export default function Home() {
             </div>
             <hr className={s.hr}/>
             <BuyoutModal/>
-        </Container>
+        </div>
     </MainLayout>
   )
 }

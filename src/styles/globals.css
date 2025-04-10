@@ -40,3 +40,13 @@
     border-radius: 50px;
     top: -7px;
 }
+.custom_cont {
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+@media (max-width: 1200px) {
+    .custom_cont {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+}

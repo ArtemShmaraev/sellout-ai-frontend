@@ -72,7 +72,7 @@ const Admin = ({products, categories, lines, colors, collections, brandsArr, cat
     }
     return (
         <MainLayout>
-            <Container style={{marginTop: '150px'}} className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <BigPicture/>
                 <div ref={productListRef}></div>
                 {isDesktop && <Row className={s.filter_sort_row}>
@@ -149,7 +149,7 @@ const Admin = ({products, categories, lines, colors, collections, brandsArr, cat
                         </Container>
                     </div>
                 }
-            </Container>
+            </div>
         </MainLayout>
     );
 };

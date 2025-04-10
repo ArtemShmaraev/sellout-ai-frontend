@@ -1,6 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
 import {fetchBrands} from "@/http/productsApi";
-import {Container} from "react-bootstrap";
 import s from '@/styles/BrandsPage.module.css'
 import like from '@/static/icons/heart.svg'
 import Image from "next/image";
@@ -106,7 +105,7 @@ const Brands = ({brands}) => {
     }
     return (
         <MainLayout>
-            <Container className={s.cont}>
+            <div className={s.cont + ' custom_cont'}>
                 <div className={s.alphabet_block}>
                     <div className={s.alphabet}>
                         { isDesktop
@@ -174,7 +173,7 @@ const Brands = ({brands}) => {
                         {renderBrands()}
                     </div>
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

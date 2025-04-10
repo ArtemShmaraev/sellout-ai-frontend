@@ -144,7 +144,7 @@ const OneProductPage = ({product, prices, lastSeen}) => {
     }, [])
     return (
         <MainLayout>
-            <Container className={s.container}>
+            <div className={s.container + ' custom_cont'}>
                 <Row>
                     <Col lg={7}>
                         {!isDesktop &&
@@ -404,7 +404,7 @@ const OneProductPage = ({product, prices, lastSeen}) => {
                 {lastSeen.length > 0 &&
                     <Viewed lastSeen={lastSeen}/>
                 }
-            </Container>
+            </div>
         </MainLayout>
     );
 };

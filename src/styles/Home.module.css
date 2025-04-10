@@ -1,3 +1,7 @@
+.cont {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
 .big_pict_block {
     display: flex;
 }
