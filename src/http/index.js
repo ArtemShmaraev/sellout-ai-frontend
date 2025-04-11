@@ -7,6 +7,9 @@ const $host = axios.create({
 const $authHost = axios.create({
     baseURL: 'http://51.250.74.115:8080/api/v1/'
 })
+const $dadata = axios.create({
+    baseURL: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address'
+})
 
 $authHost.interceptors.request.use((config) => {
     const accessToken = parse(config.headers.cookie).access_token
@@ -32,5 +35,6 @@ $authHost.interceptors.request.use((config) => {
 
 export {
     $host,
-    $authHost
+    $authHost,
+    $dadata
 }

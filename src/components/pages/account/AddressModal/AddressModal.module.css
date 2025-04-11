@@ -33,6 +33,21 @@
     padding: 5px;
     margin: 5px 0;
 }
+.sug_block {
+    margin-top: -5px;
+    border: 1px solid #9a9999;
+    border-top: none;
+    border-radius: 0 0 7px 7px;
+    max-height: 150px;
+    overflow-y: scroll;
+}
+.sug_item {
+    cursor: pointer;
+    padding: 3px;
+}
+.sug_item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
 .checkbox_block {
     display: flex;
     justify-content: center;

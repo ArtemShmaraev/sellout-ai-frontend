@@ -11,8 +11,11 @@ import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
+import logo from "@/static/img/sellout_logo.svg";
+import headerJson from "@/components/shared/NavbarC/header.json";
 
 const Sidebar = () => {
+    const header = headerJson
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSectionOpen, setIsSectionOpen] = useState(false)
     const {userStore} = useContext(Context)
@@ -25,6 +28,32 @@ const Sidebar = () => {
         handleClose()
         router.push('/account')
     }
+    const goToMainPage = () => {
+        handleClose()
+        router.push('/')
+    }
+    const goToFastShip = () => {
+        handleClose()
+        const query = {}
+        query.is_fast_ship = 'is_fast_ship'
+        router.push(
+            {
+                pathname: '/products',
+                query: query
+            }
+        )
+    }
+    const goToSale = () => {
+        handleClose()
+        const query = {}
+        query.is_sale = 'is_sale'
+        router.push(
+            {
+                pathname: '/products',
+                query: query
+            }
+        )
+    }
     return (
         <>
             <button className={s.toggle_btn}
@@ -35,7 +64,7 @@ const Sidebar = () => {
             {isMenuOpen &&
                 <div className={s.sidebar}>
                     <div className={s.sidebar_header}>
-                        <h2>SELLOUT</h2>
+                        <Image alt='' src={logo} height={25} onClick={goToMainPage}/>
                         <Image src={close} alt="" onClick={handleClose}/>
                     </div>
                     {
@@ -103,7 +132,7 @@ const Sidebar = () => {
                                     <div>Аксессуары</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
-                                <div className={s.section_block}
+                                <div className={s.section_block} onClick={goToFastShip}
                                 >
                                     <div>
                                         Мгновенная доставка
@@ -111,7 +140,7 @@ const Sidebar = () => {
                                     </div>
                                     <Image src={arrow} alt=""/>
                                 </div>
-                                <div className={s.section_block}
+                                <div className={s.section_block} onClick={goToSale}
                                 >
                                     <div className={s.sale}>Скидки</div>
                                     <Image src={arrow} alt=""/>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './AddressModal.module.css'
 import {Modal} from "react-bootstrap";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import {addAddress, deleteAddress, editAddress} from "@/http/userApi";
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
+import {suggestions} from "@/http/dadataApi";
 
 const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) => {
     const {userStore} = useContext(Context)
@@ -16,13 +17,15 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false)
+        setSuggsShown(false)
     };
     const handleShow = () => {
         setShow(true)
     };
-    const [name, setName] = useState()
-    const [address, setAddress] = useState()
+    const [name, setName] = useState('')
+    const [address, setAddress] = useState('')
     const [mainAddress, setMainAddress] = useState(true)
+    const [postInd, setPostInd] = useState(null)
 
     const sendData = async (e) => {
         e.preventDefault()
@@ -30,7 +33,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
             name,
             address,
             is_main: mainAddress,
-            post_index: 1
+            post_index: postInd
         }
         const token = Cookies.get('access_token')
         const userId = userStore.id
@@ -55,6 +58,53 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
         await router.push({pathname, query}, undefined, {scroll: false})
         return response
     }
+
+    const [suggs, setSuggs] = useState(null)
+    const [suggsShown, setSuggsShown] = useState(false)
+    const sugRef = useRef(null)
+    const dadata = async (str) => {
+        return await suggestions(str)
+    }
+    const changeAddress = async (e) => {
+        const str = e.target.value
+        setAddress(str)
+        if (str.length > 4) {
+            const res = await dadata(str)
+            if (res.suggestions.length > 0) {
+                setSuggsShown(true)
+                setSuggs(res.suggestions)
+            }
+        } else {
+            setSuggsShown(false)
+            setSuggs(null)
+        }
+    }
+    const selectAddress = (item) => {
+        setAddress(item.value)
+        setPostInd(item.data.postal_code)
+        setSuggsShown(false)
+    }
+    const clickInput = async () => {
+        if (address.length > 4) {
+            const res = await dadata(address)
+            setSuggsShown(true)
+            setSuggs(res.suggestions)
+        }
+    }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sugRef.current && !sugRef.current.contains(event.target)) {
+                setSuggsShown(false);
+                setSuggs(null)
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
     return (
         <>
             {newAddress
@@ -83,12 +133,30 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
                                value={name}
                                onChange={e => setName(e.target.value)}
                         />
-                        <input type="text"
-                               className={s.input}
-                               placeholder={'Город, улица, дом'}
-                               value={address}
-                               onChange={e => setAddress(e.target.value)}
-                        />
+                        <div ref={sugRef}>
+                            <input type="text"
+                                   className={s.input}
+                                   placeholder={'Город, улица, дом'}
+                                   value={address}
+                                   onChange={e => changeAddress(e)}
+                                   onClick={clickInput}
+                                   style={suggsShown ? {borderRadius: '7px 7px 0 0'} : {}}
+                            />
+                            {
+                                suggsShown &&
+                                <div className={s.sug_block}>
+                                    {
+                                        suggs.map(el =>
+                                            <div className={s.sug_item}
+                                                 onClick={() => selectAddress(el)}
+                                                 key={el.value}>
+                                                {el.value}
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            }
+                        </div>
                         {newAddress
                             ?
                             <>
