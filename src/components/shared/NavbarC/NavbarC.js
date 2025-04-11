@@ -182,7 +182,7 @@ const NavbarC = () => {
                                     </div>
                                 </div>
                             </Megamenu>
-                            <Megamenu className={s.links} label={'Обувь'}>
+                            <Megamenu className={s.links} label={'Обувь'} link={'/products?category=shoes_category'}>
                                 <div className={s.megamenu_row}>
                                     {
                                         renderMegamenu(13, 2,
@@ -221,7 +221,7 @@ const NavbarC = () => {
                                     </div>
                                 </div>
                             </Megamenu>
-                            <Megamenu className={s.links} label={'Одежда'}>
+                            <Megamenu className={s.links} label={'Одежда'} link={'/products?category=clothes'}>
                                 <div className={s.megamenu_row}>
                                     {
                                         renderMegamenu(15, 2,
@@ -248,7 +248,7 @@ const NavbarC = () => {
                                     </div>
                                 </div>
                             </Megamenu>
-                            <Megamenu className={s.links} label={'Аксессуары'}>
+                            <Megamenu className={s.links} label={'Аксессуары'} link={'/products?category=accessories'}>
 
                             </Megamenu>
                             <a href="/products?is_fast_ship=is_fast_ship" className={s.links}

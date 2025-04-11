@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['cdn.poizon.com'],
   },
+  experimental: {
+    scrollRestoration: true,
+  },
 }
 
 module.exports = nextConfig
