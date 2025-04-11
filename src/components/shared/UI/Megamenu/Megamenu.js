@@ -11,14 +11,15 @@ const Megamenu = ({children, className, label, link}) => {
         router.push(link)
     }
     return (
-        <div>
+        <div
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+        >
             <a
                 href={link}
                 className={className}
                 ref={ref}
                 onClick={(e) => clickLabel(e)}
-                onMouseEnter={() => setIsShown(true)}
-                onMouseLeave={() => setIsShown(false)}
             >
                 {label}
             </a>
@@ -27,8 +28,6 @@ const Megamenu = ({children, className, label, link}) => {
                 >
                     <div className={s.megamenu}
                          ref={ref}
-                         onMouseEnter={() => setIsShown(true)}
-                         onMouseLeave={() => setIsShown(false)}
                     >
                         <div className={'custom_cont'}>
                             {children}

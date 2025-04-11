@@ -149,7 +149,7 @@ const NavbarC = () => {
                         <div className={s.block1}>
                             <p href="" className={s.links}>Новинки</p>
                             <p href="" className={s.links}>Рекомендации</p>
-                            <Megamenu className={s.links} label={'Бренды'}>
+                            <Megamenu className={s.links} label={'Бренды'} link={'/brands'}>
                                 <div className={s.megamenu_row}>
                                     {
                                         renderMegamenu(15, 3,

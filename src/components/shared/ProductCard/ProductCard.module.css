@@ -1,6 +1,6 @@
 .card {
-    width: 350px;
-    height: 340px;
+    width: 355px;
+    height: 400px;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -61,7 +61,7 @@
 .image_container {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 370px;
 }
 .sm_card {
     width: 210px;

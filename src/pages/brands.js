@@ -63,7 +63,7 @@ const Brands = ({brands}) => {
         let arr = []
         let currLetter = ''
         for (let i = 0; i < brands.length; i++) {
-            if (currLetter !== brands[i].name[0].toUpperCase() && !/^\d$/.test(brands[i].name[0])) {
+            if (currLetter.toUpperCase() !== brands[i].name[0].toUpperCase() && !/^\d$/.test(brands[i].name[0])) {
                 currLetter = brands[i].name[0]
                 arr.push(
                     <h4 key={brands[i].name[0]}
