@@ -68,9 +68,12 @@
     background: rgba(0, 0, 0, 0.05);
 }
 .row_text {
+    display: flex;
     padding: 5px;
 }
-
+.icon {
+    margin-right: 5px;
+}
 .btn_block {
     display: flex;
     justify-content: flex-start;

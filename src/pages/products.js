@@ -85,7 +85,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                 <BigPicture/>
                 {isDesktop &&
                     <div className={s.filter_sort_row}>
-                        <div className='d-flex'>
+                        <Col lg={10} className='d-flex'>
                             <button className={s.border + ' fw-bold'}
                                     onClick={() => setIsOpen(!isOpen)}
                             >Фильтры
@@ -99,10 +99,10 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                                 </button>
                             }
                             <FiltersBlock/>
-                        </div>
-                        <div className='mt-lg-0 mt-2 d-flex justify-content-lg-end'>
+                        </Col>
+                        <Col lg={2} className='mt-lg-0 mt-2 d-flex justify-content-lg-end'>
                             <SortDropdown/>
-                        </div>
+                        </Col>
                     </div>
                 }
                 {!isDesktop &&

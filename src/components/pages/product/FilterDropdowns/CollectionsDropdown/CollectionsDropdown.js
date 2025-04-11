@@ -4,6 +4,7 @@ import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox"
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import {useRouter} from "next/router";
+import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 
 const CollectionsDropdown = () => {
     const {filterStore} = useContext(Context)
@@ -51,8 +52,15 @@ const CollectionsDropdown = () => {
                 </div>
             </div>
             {isOpen && (
-                <div>
+                <div className={s.scroll}>
                     <div className={s.dropdown_items_block}>
+                        <div
+                            className={s.dropdown_input}
+                        >
+                            <div className={s.dropdown_text}>
+                                <SearchInput w100={true}/>
+                            </div>
+                        </div>
                         {
                             filterStore.collections.map(item =>
                                 <div

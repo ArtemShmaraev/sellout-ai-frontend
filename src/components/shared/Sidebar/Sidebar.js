@@ -132,17 +132,23 @@ const Sidebar = () => {
                                     <div>Аксессуары</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
-                                <div className={s.section_block} onClick={goToFastShip}
-                                >
-                                    <div>
-                                        Мгновенная доставка
-                                        <Image src={truck} alt="" className={s.truck}/>
-                                    </div>
-                                    <Image src={arrow} alt=""/>
-                                </div>
+                                {/*<div className={s.section_block} onClick={goToFastShip}*/}
+                                {/*>*/}
+                                {/*    <div>*/}
+                                {/*        Мгновенная доставка*/}
+                                {/*        <Image src={truck} alt="" className={s.truck}/>*/}
+                                {/*    </div>*/}
+                                {/*    <Image src={arrow} alt=""/>*/}
+                                {/*</div>*/}
                                 <div className={s.section_block} onClick={goToSale}
                                 >
                                     <div className={s.sale}>Скидки</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => router.push('/products')}
+                                >
+                                    <div>Все товары</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                             </div>

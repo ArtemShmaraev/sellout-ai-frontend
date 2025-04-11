@@ -4,11 +4,23 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import SizeBtn from "@/components/pages/product/FilterDropdowns/SizeDropdown/SizeBtn/SizeBtn";
 import {useRouter} from "next/router";
+import it from '@/static/icons/countries/it.svg'
+import cn from '@/static/icons/countries/cn.svg'
+import int from '@/static/icons/countries/int.svg'
+import ru from '@/static/icons/countries/ru.svg'
+import us from '@/static/icons/countries/us.svg'
+import uk from '@/static/icons/countries/uk.svg'
+import jp from '@/static/icons/countries/jp.svg'
+import eu from '@/static/icons/countries/eu.svg'
+import fr from '@/static/icons/countries/fr.svg'
 
 const SizeCategoryDropdown = ({category}) => {
     const router = useRouter()
     const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
+    const flags = {
+
+    }
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };

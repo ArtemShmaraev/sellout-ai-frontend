@@ -10,7 +10,8 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Для плавной прокрутки на iOS */
 }
 .scrollableContainer::-webkit-scrollbar {
     display: none;
@@ -43,6 +44,9 @@
     outline: none;
 }
 @media (max-width: 1000px) {
+    .scrollableBlock {
+        margin: 0;
+    }
     .left, .right {
         transform: translateY(-6px);
     }

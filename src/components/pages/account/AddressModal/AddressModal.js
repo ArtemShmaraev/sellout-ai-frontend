@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {suggestions} from "@/http/dadataApi";
 
-const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) => {
+const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, defName = '', defAddress = ''}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [show, setShow] = useState(false);
@@ -22,8 +22,8 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
     const handleShow = () => {
         setShow(true)
     };
-    const [name, setName] = useState('')
-    const [address, setAddress] = useState('')
+    const [name, setName] = useState(defName)
+    const [address, setAddress] = useState(defAddress)
     const [mainAddress, setMainAddress] = useState(true)
     const [postInd, setPostInd] = useState(null)
 

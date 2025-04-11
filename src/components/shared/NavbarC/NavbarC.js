@@ -185,21 +185,21 @@ const NavbarC = () => {
                             <Megamenu className={s.links} label={'Обувь'} link={'/products?category=shoes_category'}>
                                 <div className={s.megamenu_row}>
                                     {
-                                        renderMegamenu(13, 2,
+                                        renderMegamenu(15, 2,
                                             header['Популярные линейки обуви'], 'line',
-                                            'Линейки'
+                                            'Популярные линейки'
                                         )
                                     }
                                     {
                                         renderMegamenu(13, 1,
                                             header['Популярные категории обуви'], 'category',
-                                            'Обувь'
+                                            'Категории'
                                         )
                                     }
                                     {
-                                        renderMegamenu(13, 1,
+                                        renderMegamenu(15, 1,
                                             header['Популярные бренды обуви'], 'collab',
-                                            'Бренды', 'category=shoes_category'
+                                            'Популярные бренды', 'category=shoes_category'
                                         )
                                     }
                                     <div className={s.img_col}>
@@ -229,6 +229,12 @@ const NavbarC = () => {
                                             'Категории'
                                         )
                                     }
+                                    {
+                                        renderMegamenu(15, 2,
+                                            header['Популярные бренды одежды'], 'line',
+                                            'Популярные бренды', 'category=clothes'
+                                        )
+                                    }
                                     <div className={s.img_col}>
                                         <div>
                                             <Image src={picture}
@@ -249,23 +255,55 @@ const NavbarC = () => {
                                 </div>
                             </Megamenu>
                             <Megamenu className={s.links} label={'Аксессуары'} link={'/products?category=accessories'}>
-
+                                <div className={s.megamenu_row}>
+                                    {
+                                        renderMegamenu(15, 2,
+                                            header['Популярные бренды аксессуаров'], 'line',
+                                            'Популярные бренды', 'category=accessories'
+                                        )
+                                    }
+                                    <div className={s.img_col}>
+                                        <div>
+                                            <Image src={picture}
+                                                   alt=''
+                                            />
+                                            <div className={s.link_block}>
+                                                <a className={s.img_link}
+                                                   onClick={(e) => {
+                                                       e.preventDefault()
+                                                       router.push('/brands')
+                                                   }}
+                                                >
+                                                    Все бренды
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </Megamenu>
-                            <a href="/products?is_fast_ship=is_fast_ship" className={s.links}
-                               onClick={e => {
-                                   e.preventDefault()
-                                   goToFastShip()
-                               }}
-                            >
-                                Мгновенная доставка
-                                <Image src={truck} alt="" className={s.truck}/>
-                            </a>
+                            {/*<a href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
+                            {/*   onClick={e => {*/}
+                            {/*       e.preventDefault()*/}
+                            {/*       goToFastShip()*/}
+                            {/*   }}*/}
+                            {/*>*/}
+                            {/*    Мгновенная доставка*/}
+                            {/*    <Image src={truck} alt="" className={s.truck}/>*/}
+                            {/*</a>*/}
                             <a href="/products?is_sale=is_sale" className={s.sale_link}
                                onClick={e => {
                                    e.preventDefault()
                                    goToSale()
                                }}
                             >Скидки</a>
+                            <a href="/products" className={s.links}
+                               onClick={e => {
+                                   e.preventDefault()
+                                   router.push('/products')
+                               }}
+                            >
+                                Все товары
+                            </a>
                         </div>
                         <div>
                             <ElasticSearchModal/>

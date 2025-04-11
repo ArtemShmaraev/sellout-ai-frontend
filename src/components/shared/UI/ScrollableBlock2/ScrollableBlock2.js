@@ -46,7 +46,11 @@ const ScrollableBlock2 = ({children}) => {
                 <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
             </button>}
             <div className={s.scrollableContainer} ref={scrollableContainerRef}>
-                {children}
+                {React.Children.map(children, (child, index) => (
+                    <div style={{ flexShrink: 0 }} key={index}>
+                        {child}
+                    </div>
+                ))}
             </div>
             {isShown && <button className={s.right} onClick={scrollRight}>
                 <Image src={arrow} alt=''/>

@@ -27,7 +27,7 @@ const AddressCard = ({name, address, id}) => {
             </div>
             <div className={s.icons_block}>
                 <Image src={cross} alt='' className={s.icon} onClick={e => removeAddress(e)}/>
-                <AddressModal newAddress={false} addressId={id}/>
+                <AddressModal newAddress={false} addressId={id} defAddress={address} defName={name}/>
             </div>
         </div>
     );
