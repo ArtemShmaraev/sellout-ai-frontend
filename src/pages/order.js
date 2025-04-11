@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import s from '@/styles/Order.module.css'
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
@@ -6,13 +6,37 @@ import Stage1 from "@/components/pages/order/Stage1/Stage1";
 import MainLayout from "@/layout/MainLayout";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import Stage2 from "@/components/pages/order/Stage2/Stage2";
+import {parse} from "cookie";
+import jwtDecode from "jwt-decode";
+import {fetchAddresses, fetchUserInfo} from "@/http/userApi";
+import Cookies from "js-cookie";
+import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
+import {useRouter} from "next/router";
+import {Head} from "next/document";
 
-const Order = () => {
-    const {orderStore} = useContext(Context)
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    const {user_id} = jwtDecode(token)
+    const addresses = await fetchAddresses(context.req.headers.cookie, user_id)
+    const cart = await fetchCart(user_id, context.req.headers.cookie)
+    const defaultPrice = cart.total_amount
+    const finalPrice = cart.final_amount
+    const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    return { props: {addresses, defaultPrice, finalPrice, userData} }
+}
+const Order = ({addresses, defaultPrice, finalPrice, userData}) => {
+    const router = useRouter()
+    const {orderStore, userStore} = useContext(Context)
+    const [promo, setPromo] = useState('')
+    const [bonuses, setBonuses] = useState('')
+    const [defAmount, setDefAmount] = useState(defaultPrice)
+    const [finAmount, setFinAmount] = useState(finalPrice)
+    const [promoRes, setPromoRes] = useState(null)
     const renderStage = () => {
         const stage = orderStore.stage
         if (stage === 1) {
-            return <Stage1/>
+            return <Stage1 addresses={addresses} userData={userData}/>
         }
         if (stage === 2) {
             return <Stage2/>
@@ -20,6 +44,22 @@ const Order = () => {
     }
     const next = () => {
         orderStore.nextStage()
+    }
+    const sendPromo = async (e) => {
+        e.preventDefault()
+        const token = Cookies.get('access_token')
+        let res
+        if (userStore.isLogged) {
+            res = await promoAuth(promo, userStore.id, token)
+            router.push('/order', undefined, {scroll: false})
+        } else {
+            const cartArr = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            res = await promoUnauth(promo, cartArr)
+        }
+        if (res.status) {
+            setFinAmount(res.final_amount)
+        }
+        setPromoRes(res)
     }
     return (
         <MainLayout>
@@ -30,15 +70,26 @@ const Order = () => {
                     </div>
                     <div className={s.promos_block}>
                         <h4>Ваш заказ:</h4>
-                        <p>Промежуточная стоимость: 100 ₽</p>
-                        <PromoInput placeholder={'Введите промокод'}/>
-                        <PromoInput placeholder={'Списать бонусы'}/>
+                        <p>Cтоимость: {defAmount} ₽</p>
+                        <PromoInput placeholder={'Введите промокод'}
+                                    onChange={(e) => setPromo(e.target.value)}
+                                    value={promo}
+                                    onClick={(e) => sendPromo(e)}
+                        />
+                        {
+                            promoRes &&
+                            <p className={promoRes.status ? s.green_text : s.red_text}>
+                                {promoRes.message}
+                            </p>
+                        }
+                        <PromoInput placeholder={'Списать бонусы'}
+                                    onChange={(e) => setBonuses(e.target.value)}
+                                    value={bonuses}
+                        />
                         <p>Суммарная скидка: 100 ₽</p>
                         <hr/>
-                        <p className={s.big_text}>Промежуточный итог: 228 ₽</p>
-                        <button className={s.order_btn}
-                                onClick={next}
-                        >Продолжить оформление</button>
+                        <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
+                        <button className={s.order_btn}>Перейти к оформлению заказа</button>
                     </div>
                 </div>
             </div>

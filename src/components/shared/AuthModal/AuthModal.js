@@ -73,6 +73,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
         try {
             const res = await registration(JSON.stringify(data))
             setEmailBusy(false)
+            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)
@@ -91,7 +92,6 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
             setShow(false)
-            router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
         } catch (e) {
             setEmailBusy(true)
         }
@@ -108,8 +108,8 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
         }
         try {
             const res = await login(JSON.stringify(data))
-            console.log(res)
             setWrong(false)
+            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)
@@ -128,7 +128,6 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
             setShow(false)
-            router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
         } catch (e) {
             setWrong(true)
         }

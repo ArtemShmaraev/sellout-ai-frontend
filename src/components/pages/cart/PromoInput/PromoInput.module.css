@@ -2,7 +2,7 @@
     position: relative;
     z-index: 6;
     width: 100%;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 .mailing {
     width: 100%;
@@ -22,4 +22,14 @@
     right: 5px;
     transform: translateY(-50%);
     cursor: pointer;
+}
+.button {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
 }

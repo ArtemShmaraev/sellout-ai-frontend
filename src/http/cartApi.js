@@ -48,3 +48,21 @@ export async function fetchCartPrice(arr) {
     const {data} = await $host.post(`product_unit/total_amount_list`, JSON.stringify(obj))
     return data
 }
+export async function promoAuth(promoStr, userId, token) {
+    const obj = {
+        promo: promoStr
+    }
+    const {data} = await $host.post(`promo/check/${userId}`, JSON.stringify(obj), {
+            headers: {Authorization: `Bearer ${token}`}
+        }
+    )
+    return data
+}
+export async function promoUnauth(promoStr, cartArt) {
+    const obj = {
+        product_unit_list: cartArt,
+        promo: promoStr
+    }
+    const {data} = await $host.post(`promo/anon_check`, JSON.stringify(obj))
+    return data
+}

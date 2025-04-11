@@ -3,23 +3,25 @@ import s from './PromoInput.module.css'
 import Image from "next/image";
 import icon from "@/static/icons/chevron-right.svg";
 
-const PromoInput = ({placeholder}) => {
-    const [value, setValue] = useState('')
+const PromoInput = ({value, placeholder, onChange,onClick}) => {
     return (
         <div>
             <div className={s.input}>
-                <input
-                    type="text"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder={placeholder}
-                    className={s.mailing}
-                />
-                <Image
-                    className={s.icon}
-                    src={icon}
-                    alt="search"
-                />
+                <form>
+                    <input
+                        type="text"
+                        value={value}
+                        onChange={onChange}
+                        placeholder={placeholder}
+                        className={s.mailing}
+                    />
+                    <button className={s.button} type={'submit'} onClick={onClick}>
+                        <Image
+                            src={icon}
+                            alt="search"
+                        />
+                    </button>
+                </form>
             </div>
 
         </div>

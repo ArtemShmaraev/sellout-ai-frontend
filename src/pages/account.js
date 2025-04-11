@@ -14,7 +14,6 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const {user_id} = jwtDecode(token)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    console.log(userData)
     return { props: { userData } }
 }
 const Account = ({userData}) => {

@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/Cart.module.css'
 import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
 import {useRouter} from "next/router";
 import {parse} from "cookie";
-import {fetchCart, fetchCartPrice, fetchProductUnits} from "@/http/cartApi";
+import {fetchCart, fetchCartPrice, fetchProductUnits, promoAuth, promoUnauth} from "@/http/cartApi";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import jwtDecode from "jwt-decode";
 import {observer} from "mobx-react-lite";
+import Cookies from "js-cookie";
 
 
 export const getServerSideProps = async (context) => {
@@ -43,8 +44,32 @@ export const getServerSideProps = async (context) => {
 const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
     const router = useRouter()
     const {userStore} = useContext(Context)
+    const [promo, setPromo] = useState('')
+    const [bonuses, setBonuses] = useState('')
+    const [defAmount, setDefAmount] = useState(defaultPrice)
+    const [finAmount, setFinAmount] = useState(finalPrice)
+    const [promoRes, setPromoRes] = useState(null)
     const goToProductsPage = () => {
         router.push('/products')
+    }
+    const sendPromo = async (e) => {
+        e.preventDefault()
+        const token = Cookies.get('access_token')
+        let res
+        if (userStore.isLogged) {
+            res = await promoAuth(promo, userStore.id, token)
+            router.push('/cart', undefined, {scroll: false})
+        } else {
+            const cartArr = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            res = await promoUnauth(promo, cartArr)
+        }
+        if (res.status) {
+            setFinAmount(res.final_amount)
+        }
+        setPromoRes(res)
+    }
+    const goToCheckout = () => {
+        router.push('/order')
     }
     return (
         <MainLayout>
@@ -57,8 +82,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                 </div>
                 <div>
                     <div>
-
-                        {!(token ? productUnits.product_units.length : productUnits.length) && 'Твоя корзина пуста.'}
+                        {!(userStore.isLogged ? productUnits.product_units.length : productUnits.length) && 'Твоя корзина пуста.'}
                         {!userStore.isLogged &&
                             <div className={s.login_block}>
                                 <AuthModal>
@@ -76,7 +100,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                     }
                 </div>
                 {
-                    (userStore.isLogged ? productUnits.product_units.length : productUnits.length) > -1 &&
+                    (userStore.isLogged ? productUnits.product_units.length : productUnits.length) > 0 &&
                     <div className={s.main_block}>
                         <div className={s.items_block}>
                             { userStore.isLogged
@@ -93,6 +117,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                                               imgSrc={el.product.bucket_link[0].url}
                                               slug={el.product.slug}
                                               inWL={el.product.in_wishlist}
+                                              key={el.id}
                                     />
                                 )
                                 :
@@ -113,13 +138,28 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                         </div>
                         <div className={s.promos_block}>
                             <h4>Ваш заказ:</h4>
-                            <p>Cтоимость: {defaultPrice} ₽</p>
-                            <PromoInput placeholder={'Введите промокод'}/>
-                            <PromoInput placeholder={'Списать бонусы'}/>
+                            <p>Cтоимость: {defAmount} ₽</p>
+                            <PromoInput placeholder={'Введите промокод'}
+                                        onChange={(e) => setPromo(e.target.value)}
+                                        value={promo}
+                                        onClick={(e) => sendPromo(e)}
+                            />
+                            {
+                                promoRes &&
+                                <p className={promoRes.status ? s.green_text : s.red_text}>
+                                    {promoRes.message}
+                                </p>
+                            }
+                            <PromoInput placeholder={'Списать бонусы'}
+                                        onChange={(e) => setBonuses(e.target.value)}
+                                        value={bonuses}
+                            />
                             <p>Суммарная скидка: 100 ₽</p>
                             <hr/>
-                            <p className={s.big_text}>Промежуточный итог: {finalPrice} ₽</p>
-                            <button className={s.order_btn}>Перейти к оформлению заказа</button>
+                            <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
+                            <button className={s.order_btn}
+                                    onClick={goToCheckout}
+                            >Перейти к оформлению заказа</button>
                         </div>
                     </div>
                 }

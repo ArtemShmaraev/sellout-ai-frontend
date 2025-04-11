@@ -41,7 +41,8 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
             response = await editAddress(token, userId, addressId, JSON.stringify(obj))
         }
         setShow(false)
-        router.push('/account/addresses', undefined, {scroll: false})
+        const {pathname, query} = router
+        await router.push({pathname, query}, undefined, {scroll: false})
         return response
     }
     const removeAddress = async (e) => {
@@ -50,7 +51,8 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null}) 
         const userId = userStore.id
         const response = await deleteAddress(token, userId, addressId)
         setShow(false)
-        router.push('/account/addresses', undefined, {scroll: false})
+        const {pathname, query} = router
+        await router.push({pathname, query}, undefined, {scroll: false})
         return response
     }
     return (

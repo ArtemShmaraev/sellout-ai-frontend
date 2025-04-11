@@ -30,10 +30,10 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const currCart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
         Cookies.set('cart', newCart.join(' '))
-        router.push('/cart', undefined, {scroll: false})
         if (userStore.isLogged) {
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
+        await router.push('/cart', undefined, {scroll: false})
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)
     const addToWL = async () => {
@@ -49,7 +49,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         setIsInWishlist(false)
     }
     return (
-        <div>
+        <div key={unitId}>
             <hr/>
             <div className={s.row}>
                 <div className={s.col1}>

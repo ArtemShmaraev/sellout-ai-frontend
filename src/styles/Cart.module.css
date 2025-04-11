@@ -52,6 +52,14 @@
     outline: none;
     width: 100%;
 }
+.green_text {
+    margin: 0 0;
+    color: green;
+}
+.red_text {
+    margin: 0 0;
+    color: #b61212;
+}
 @media (max-width: 1200px) {
     .cont {
         margin-top: 80px;

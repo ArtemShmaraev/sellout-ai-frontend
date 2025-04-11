@@ -94,7 +94,7 @@ const NavbarC = () => {
             )
         }
         const result = (
-            <div style={{minWidth: `${19*colNum}%`}}>
+            <div style={{minWidth: `${20*colNum}%`}} key={title}>
                 <h4 className={s.h_text}>{title}</h4>
                 <div className={s.cols_block}>
                     {cols}
