@@ -236,8 +236,7 @@ class FilterStore {
         return arr
     }
     fillSizes(sizes) {
-        console.log(sizes)
-        //TODO log
+        this.filters.size = {}
         sizes.forEach(sizeCategory => {
             this.filters.size[sizeCategory.filter_name] = {}
             for (const key in sizeCategory.size_rows) {

@@ -11,6 +11,7 @@ import jp from "@/static/icons/countries/jp.svg";
 import cn from "@/static/icons/countries/cn.svg";
 import int from "@/static/icons/countries/int.svg";
 import fr from "@/static/icons/countries/fr.svg";
+import it from "@/static/icons/countries/it.svg";
 import size from "@/static/icons/countries/size.svg";
 import {Context} from "@/context/AppWrapper";
 import Image from "next/image";
@@ -31,6 +32,7 @@ const SizeRows = ({catObj, cat}) => {
         CN: cn,
         INT: int,
         FR: fr,
+        IT: it,
         SIZE: size
     }
     const toggleDropdown = () => {
