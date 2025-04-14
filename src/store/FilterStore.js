@@ -69,7 +69,7 @@ class FilterStore {
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
                 || key === 'price_min' || key === 'price_max' || key === 'is_collab'
-                || key === 'brand') continue
+                || key === 'brand' || key === 'q') continue
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     this.dfsActivate(this.filters[key], el)
