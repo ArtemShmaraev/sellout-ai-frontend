@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './Sidebar.module.css'
 import list from '@/static/icons/list.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -13,6 +13,10 @@ import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import logo from "@/static/img/sellout_logo.svg";
 import headerJson from "@/components/shared/NavbarC/header.json";
+import Brand from './Sections/Brand'
+import Clothes from "@/components/shared/Sidebar/Sections/Clothes";
+import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
+import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
 
 const Sidebar = () => {
     const header = headerJson
@@ -20,6 +24,53 @@ const Sidebar = () => {
     const [isSectionOpen, setIsSectionOpen] = useState(false)
     const {userStore} = useContext(Context)
     const router = useRouter()
+    const [currSection, setCurrSection] = useState()
+    // const sections = {
+    //     'Бренды': {},
+    //     'Обувь': {},
+    //     'Одежда': {},
+    //     'Аксессуары': {},
+    // }
+    // useEffect(() => {
+    //     sections["Бренды"]['Популярные бренды'] = header["Популярные бренды"]
+    //     sections["Бренды"]['Коллаборации'] = header["Коллаборации"]
+    //     sections["Обувь"]['Популярные линейки обуви'] = header["Популярные линейки обуви"]
+    //     sections["Обувь"]['Популярные категории обуви'] = header["Популярные категории обуви"]
+    //     sections["Обувь"]['Популярные бренды обуви'] = header["Популярные бренды обуви"]
+    //     sections["Одежда"]['Популярные бренды одежды'] = header["Популярные бренды одежды"]
+    //     sections["Одежда"]['Популярные бренды одежды'] = header["Популярные бренды одежды"]
+    //     sections["Аксессуары"]['Популярные бренды аксессуаров'] = header["Популярные бренды аксессуаров"]
+    // }, [])
+    // const renderSection = () => {
+    //     let gender = 'any'
+    //     let genderQuery = ''
+    //     if (userStore.isLogged) {
+    //         gender = userStore.gender
+    //         genderQuery = 'gender=' + gender[0].toUpperCase()
+    //     }
+    //     let res = []
+    //     const obj = sections[currSection]
+    //     for (const key in obj) {
+    //         const name = obj[key].name
+    //         const linksArr = obj[key][gender]
+    //         const arr = []
+    //         arr.push(
+    //             <h4>{name}</h4>
+    //         )
+    //         linksArr.forEach(el => {
+    //             arr.push(
+    //                 <a href={}
+    //             )
+    //         })
+    //
+    //     }
+    // }
+    const sections = {
+        brands: <Brand/>,
+        clothes: <Clothes/>,
+        shoes: <Shoes/>,
+        accessories: <Accessories/>
+    }
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
@@ -84,7 +135,7 @@ const Sidebar = () => {
                                 <div className={s.auth_block}>
                                     <div className={s.person_block}>
                                         <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                        <div>Войдите'</div>
+                                        <div>Войдите</div>
                                     </div>
                                     <div>
                                         <Image src={arrow} alt=""/>
@@ -109,25 +160,37 @@ const Sidebar = () => {
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}
-                                     onClick={() => setIsSectionOpen(true)}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.brands)
+                                     }}
                                 >
                                     <div>Бренды</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}
-                                     onClick={() => setIsSectionOpen(true)}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.shoes)
+                                     }}
                                 >
                                     <div>Обувь</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}
-                                     onClick={() => setIsSectionOpen(true)}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.clothes)
+                                     }}
                                 >
                                     <div>Одежда</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}
-                                     onClick={() => setIsSectionOpen(true)}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.accessories)
+                                     }}
                                 >
                                     <div>Аксессуары</div>
                                     <Image src={arrow} alt=""/>
@@ -165,22 +228,9 @@ const Sidebar = () => {
                                         </div>
                                     </button>
                                 </div>
-                                <div>
-                                    <div className={s.col}>
-                                        <h4>Заголовок</h4>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                    </div>
-                                    <div className={s.col}>
-                                        <h4>Заголовок</h4>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                        <p>Что то</p>
-                                    </div>
-                                </div>
+                                {
+                                    currSection
+                                }
                             </div>
                     }
                     <div className={s.sidebar_footer}>

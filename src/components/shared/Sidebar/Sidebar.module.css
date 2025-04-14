@@ -12,8 +12,8 @@
     z-index: 6;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 101vw;
+    height: 101vh;
     background: white;
     padding: 20px 0 0 0;
     overflow-y: scroll;
@@ -102,4 +102,9 @@
     width: 30px;
     margin-right: 50px;
     cursor: pointer;
+}
+.link {
+    color: black;
+    display: block;
+    text-decoration: none;
 }
