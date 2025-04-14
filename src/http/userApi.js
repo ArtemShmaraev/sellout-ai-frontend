@@ -71,3 +71,9 @@ export async function addLastSeen(token, userId, productId) {
     })
     return data
 }
+export async function getSizeTable(cookies) {
+    const {data} = await $authHost.get(`user/get_size_table`, {
+        headers: {cookie: cookies}
+    })
+    return data
+}

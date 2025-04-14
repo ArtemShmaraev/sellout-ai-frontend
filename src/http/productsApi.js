@@ -54,7 +54,7 @@ export async function fetchSizes(query, token = '') {
         const {data} = await $host.get(`product/size_table?${allQuery}`)
         return data
     } else {
-        const {data} = await $host.get(`product/size_table/?${allQuery}`, {
+        const {data} = await $host.get(`product/size_table?${allQuery}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
         return data
