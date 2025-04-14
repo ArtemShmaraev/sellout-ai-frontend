@@ -9,6 +9,7 @@ class FilterStore {
             collab: {},
             color: {},
             size: {},
+            size_table: {},
             gender: {
                 M: {
                     text: 'Мужской',
@@ -39,6 +40,7 @@ class FilterStore {
                 state: false,
             },
         }
+        this._curr_size = {}
         this._activeFilters = []
         makeAutoObservable(this)
     }
@@ -234,23 +236,27 @@ class FilterStore {
         return arr
     }
     fillSizes(sizes) {
+        console.log(sizes)
+        //TODO log
         sizes.forEach(sizeCategory => {
             this.filters.size[sizeCategory.filter_name] = {}
-            for (const key in sizeCategory.all_sizes) {
-                const name = sizeCategory.all_sizes[key].filter_name
+            for (const key in sizeCategory.size_rows) {
+                const name = sizeCategory.size_rows[key].filter_name
+                const logo = sizeCategory.size_rows[key].filter_logo
+                const isMain = sizeCategory.size_rows[key].is_main
                 this.filters.size[sizeCategory.filter_name][name] = {}
-                sizeCategory.all_sizes[key].sizes.forEach(size => {
-                    this.filters.size[sizeCategory.filter_name][name][size] = {
-                        text: size,
-                        query: size,
-                        state: false
+                sizeCategory.size_rows[key].sizes.forEach(size => {
+                    this.filters.size[sizeCategory.filter_name][name][size.size] = {
+                        text: size.size,
+                        query: size.query[0],
+                        state: false,
+                        logo,
+                        isMain
                     }
                 })
 
             }
         })
-        console.log(this.filters.size)
-        //TODO delete log
     }
     getSizes(category, row) {
         const arr = []

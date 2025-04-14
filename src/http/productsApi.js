@@ -11,8 +11,6 @@ export async function fetchProductsPage(query, token = '') {
             allQuery +=`${key}=${query[key]}&`
         }
     })
-    console.log(allQuery)
-    //TODO delete log
     if (!token) {
         const {data} = await $host.get(`product/products/?${allQuery}`)
         return data
@@ -38,6 +36,29 @@ export async function fetchBrands(token = '') {
     }
     const {data} = res
     return data
+}
+export async function fetchSizes(query, token = '') {
+    let allQuery = ''
+    Object.keys(query).forEach(key => {
+        if (typeof query[key] === "object") {
+            query[key].forEach(el => {
+                allQuery += `${key}=${el}&`
+            })
+        } else {
+            allQuery +=`${key}=${query[key]}&`
+        }
+    })
+    console.log(`product/size_table?${allQuery}`)
+    //TODO log
+    if (!token) {
+        const {data} = await $host.get(`product/size_table?${allQuery}`)
+        return data
+    } else {
+        const {data} = await $host.get(`product/size_table/?${allQuery}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    }
 }
 export async function updateProduct(id, body) {
     const {data} = await $host.post(`product/update/${id}`, body)

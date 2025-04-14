@@ -5,6 +5,7 @@ import {Context} from "@/context/AppWrapper";
 import {useRouter} from "next/router";
 import SizeCategoryDropdown
     from "@/components/pages/product/FilterDropdowns/SizeDropdown/SizeCategoryDropdown/SizeCategoryDropdown";
+import {observer} from "mobx-react-lite";
 
 
 const SizeDropdown = () => {
@@ -62,7 +63,7 @@ const SizeDropdown = () => {
                 <div>
                     <div className={s.dropdown_items_block}>
                         {allCategories().map(cat =>
-                            <SizeCategoryDropdown category={cat}/>
+                            <SizeCategoryDropdown category={cat} catObj={filterStore.filters.size[cat]}/>
                         )}
                     </div>
                 </div>
@@ -71,4 +72,4 @@ const SizeDropdown = () => {
     );
 };
 
-export default SizeDropdown;
+export default observer(SizeDropdown);

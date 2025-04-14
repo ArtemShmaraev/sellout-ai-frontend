@@ -13,7 +13,7 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
-import {fetchFilter, fetchProductsByArray, fetchProductsPage} from "@/http/productsApi";
+import {fetchFilter, fetchProductsByArray, fetchProductsPage, fetchSizes} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
@@ -29,7 +29,7 @@ export const getServerSideProps = async (context) => {
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
-    const sizes = await fetchFilter('size')
+    const sizes = await fetchSizes(context.query, token)
     let lastSeen = []
     if (token) {
         const {user_id} = jwtDecode(token)
@@ -50,7 +50,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
     const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
-    const {filterStore, desktopStore} = useContext(Context)
+    const {filterStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
         filterStore.fillLines(lines)
