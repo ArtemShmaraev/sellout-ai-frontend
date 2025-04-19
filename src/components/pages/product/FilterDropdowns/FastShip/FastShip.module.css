@@ -12,6 +12,7 @@
     padding: 7px 0;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .sale:hover {
     background: rgba(0, 0, 0, 0.05);

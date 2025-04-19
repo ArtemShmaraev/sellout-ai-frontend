@@ -121,8 +121,10 @@ class FilterStore {
         if (d.state) {
             this._activeFilters.push(item)
         } else {
-            let ind = this._activeFilters.indexOf(item)
-            this._activeFilters.splice(ind, 1)
+            // let ind = this._activeFilters.indexOf(item)
+            // this._activeFilters.splice(ind, 1)
+            //Старый вариант
+            this._activeFilters = this._activeFilters.filter(el => el.query !== item.query)
         }
         this.handleScrollTo()
     }
