@@ -22,9 +22,10 @@ export const getServerSideProps = async (context) => {
         const obj = {
             product_unit_list: cartArr
         }
-        productUnits = await fetchProductUnits(JSON.stringify(obj), token)
+        const res = await fetchProductUnits(JSON.stringify(obj), token)
+        productUnits = {product_units: res}
     } else {
-        productUnits = []
+        productUnits = {product_units: []}
     }
     let defaultPrice
     let finalPrice
@@ -88,7 +89,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                 </div>
                 <div>
                     <div>
-                        {!(userStore.isLogged ? productUnits.product_units.length : productUnits.length) && 'Твоя корзина пуста.'}
+                        {!(productUnits.product_units.length) && 'Твоя корзина пуста.'}
                         {!userStore.isLogged &&
                             <div className={s.login_block}>
                                 <AuthModal>
@@ -98,7 +99,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                             </div>
                         }
                     </div>
-                    {!(userStore.isLogged ? productUnits.product_units.length : productUnits.length) &&
+                    {!(productUnits.product_units.length) &&
                         <button
                             onClick={goToProductsPage}
                             className={s.shop_button}
@@ -106,11 +107,10 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                     }
                 </div>
                 {
-                    (userStore.isLogged ? productUnits.product_units.length : productUnits.length) > 0 &&
+                    productUnits.product_units.length > 0 &&
                     <div className={s.main_block}>
                         <div className={s.items_block}>
-                            { userStore.isLogged
-                                ?
+                            {
                                 productUnits.product_units.map((el, ind) =>
                                     <CartItem model={el.product.model}
                                               colorway={el.product.colorway}
@@ -124,20 +124,6 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                                               slug={el.product.slug}
                                               inWL={el.product.in_wishlist}
                                               key={el.id}
-                                    />
-                                )
-                                :
-                                productUnits.map((el, ind) =>
-                                    <CartItem model={el.product.model}
-                                              colorway={el.product.colorway}
-                                              brand={el.product.is_collab ? el.product.collab.name : el.product.brands[0].name}
-                                              price={el.final_price}
-                                              productId={el.product.id}
-                                              unitId={el.id}
-                                              sizeId={el.good_size_platform}
-                                              cardId={ind}
-                                              imgSrc={el.product.bucket_link[0].url}
-                                              slug={el.product.slug}
                                     />
                                 )
                             }

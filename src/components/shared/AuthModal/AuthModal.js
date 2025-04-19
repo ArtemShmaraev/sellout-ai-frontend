@@ -73,14 +73,6 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         try {
             const res = await registration(JSON.stringify(data))
             setEmailBusy(false)
-            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
-            userStore.setIsLogged(true)
-            userStore.setId(res.user_id)
-            userStore.setUsername(res.username)
-            userStore.setFirstName(res.first_name)
-            userStore.setLastName(res.last_name)
-            userStore.setAccessToken(res.access)
-            userStore.setGender(res.gender)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -91,6 +83,14 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
+            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
+            userStore.setIsLogged(true)
+            userStore.setId(res.user_id)
+            userStore.setUsername(res.username)
+            userStore.setFirstName(res.first_name)
+            userStore.setLastName(res.last_name)
+            userStore.setAccessToken(res.access)
+            userStore.setGender(res.gender)
             setShow(false)
         } catch (e) {
             setEmailBusy(true)
@@ -109,14 +109,6 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         try {
             const res = await login(JSON.stringify(data))
             setWrong(false)
-            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
-            userStore.setIsLogged(true)
-            userStore.setId(res.user_id)
-            userStore.setUsername(res.username)
-            userStore.setFirstName(res.first_name)
-            userStore.setLastName(res.last_name)
-            userStore.setAccessToken(res.access)
-            userStore.setGender(res.gender)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -127,6 +119,14 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
+            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
+            userStore.setIsLogged(true)
+            userStore.setId(res.user_id)
+            userStore.setUsername(res.username)
+            userStore.setFirstName(res.first_name)
+            userStore.setLastName(res.last_name)
+            userStore.setAccessToken(res.access)
+            userStore.setGender(res.gender)
             setShow(false)
         } catch (e) {
             setWrong(true)
