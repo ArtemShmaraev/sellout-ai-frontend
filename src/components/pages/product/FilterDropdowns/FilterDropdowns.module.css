@@ -1,7 +1,7 @@
 .container {
     width: 317px;
     position: sticky;
-    top: 160px;
+    top: 183px;
     z-index: 3;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;

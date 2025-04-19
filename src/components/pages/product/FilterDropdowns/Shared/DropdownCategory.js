@@ -39,12 +39,24 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
         filterStore.toggleFilter(item)
         reloadPage()
     }
+    const checkIsShow = (d) => {
+        if (d.hasOwnProperty('is_show')) {
+            return !d.is_show
+        } else {
+            for (const dKey in d) {
+                return checkIsShow(d[dKey])
+            }
+        }
+    }
 
     const renderCategory = (category, level) => {
         if (!category.hasOwnProperty('text')) {
             const dropdowns = [];
             for (const key in category) {
                 if (!category[key].hasOwnProperty('text')) {
+                    if (brand && checkIsShow(category[key])) {
+                        continue
+                    }
                     dropdowns.push(
                         <div key={key}>
                             <div onClick={() => handleToggle(key)}
@@ -59,6 +71,9 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
                         </div>
                     );
                 } else {
+                    if (category[key].hasOwnProperty('is_show') && !category[key].is_show) {
+                        continue
+                    }
                     dropdowns.push(
                         <div className={s.dropdown_item}
                              onClick={() => handleClick(category[key])}

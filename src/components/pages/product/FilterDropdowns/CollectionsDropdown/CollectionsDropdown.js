@@ -5,11 +5,14 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {Context} from "@/context/AppWrapper";
 import {useRouter} from "next/router";
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
+import {fetchFilter} from "@/http/productsApi";
+import {observer} from "mobx-react-lite";
 
 const CollectionsDropdown = () => {
     const {filterStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
+    const [inputVal, setInputVal] = useState('')
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -35,7 +38,43 @@ const CollectionsDropdown = () => {
         filterStore.toggleFilter(item)
         reloadPage()
     }
-
+    const searchCollab = async (value) => {
+        setInputVal(value)
+        let newTree
+        if (value) {
+            newTree = await fetchFilter(`collabs?q=${value}`)
+        } else {
+            newTree = await fetchFilter(`collabs`)
+        }
+        filterStore.fillCollections(newTree)
+        filterStore.deactivateFilters(filterStore.filters)
+        filterStore.reactivateFilters(router.query)
+    }
+    const renderCollesctions = () => {
+        const res = []
+        filterStore.collections.forEach(item => {
+                if (item.is_show) {
+                    res.push(
+                        <div
+                            key={item.query}
+                            className={s.dropdown_item}
+                        >
+                            <div className={s.dropdown_text} onClick={(e) => {
+                                e.stopPropagation()
+                                handleClick(item)
+                            }}>
+                                <CustomCheckbox
+                                    labelText={item.text}
+                                    checked={item.state}
+                                />
+                            </div>
+                        </div>
+                    )
+                }
+            }
+        )
+        return res
+    }
     return (
         <div>
             <div className={s.dropdown}
@@ -58,26 +97,14 @@ const CollectionsDropdown = () => {
                             className={s.dropdown_input}
                         >
                             <div className={s.dropdown_text}>
-                                <SearchInput w100={true}/>
+                                <SearchInput w100={true}
+                                             value={inputVal}
+                                             onChange={e => searchCollab(e.target.value)}
+                                />
                             </div>
                         </div>
                         {
-                            filterStore.collections.map(item =>
-                                <div
-                                    key={item.query}
-                                    className={s.dropdown_item}
-                                >
-                                    <div className={s.dropdown_text} onClick={(e) => {
-                                        e.stopPropagation()
-                                        handleClick(item)
-                                    }}>
-                                        <CustomCheckbox
-                                            labelText={item.text}
-                                            checked={item.state}
-                                        />
-                                    </div>
-                                </div>
-                            )
+                            renderCollesctions()
                         }
                     </div>
                 </div>
@@ -86,4 +113,4 @@ const CollectionsDropdown = () => {
     )
 };
 
-export default CollectionsDropdown;
+export default observer(CollectionsDropdown);

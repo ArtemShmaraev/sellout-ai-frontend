@@ -187,19 +187,29 @@ class FilterStore {
         return checkedCat
     }
     fillLines(lines) {
+        this.filters.line = {}
         this.line_dfs(this.filters.line, lines)
     }
-    line_dfs(d, node) {
+    line_dfs(d, node, isShow = true) {
         for (let line of node) {
             if ("children" in line) {
+                let show = true
+                if ('is_show' in line && !line.is_show) {
+                    show = false
+                }
                 d[line["name"]] = {};
-                this.line_dfs(d[line["name"]], line["children"]);
+                this.line_dfs(d[line["name"]], line["children"], show);
             } else {
                 d[line["name"]] = {};
                 d[line["name"]]["text"] = line["view_name"];
                 d[line["name"]]["query"] = line["full_eng_name"];
                 d[line["name"]]["is_all"] = line["is_all"];
                 d[line["name"]]["state"] = false;
+                if (line.hasOwnProperty('is_show')) {
+                    d[line["name"]]["is_show"] = line["is_show"];
+                } else {
+                    d[line["name"]]["is_show"] = isShow;
+                }
             }
         }
     }
@@ -220,11 +230,14 @@ class FilterStore {
         return arr
     }
     fillCollections(collection) {
+        this.filters.collab = {}
         collection.forEach(el => {
             this.filters.collab[el.name] = {
                 text: el.name,
                 query: el.query_name,
-                state: false
+                state: false,
+                is_all: el.is_all,
+                is_show: el.is_show
             }
         })
     }

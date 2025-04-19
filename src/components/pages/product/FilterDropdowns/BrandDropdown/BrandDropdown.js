@@ -4,19 +4,29 @@ import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Dropdown from "@/components/pages/product/FilterDropdowns/Shared/Dropdown";
 import {Context} from "@/context/AppWrapper";
+import {fetchFilter} from "@/http/productsApi";
+import {useRouter} from "next/router";
 
 const BrandDropdown = () => {
     const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [inputVal, setInputVal] = useState('')
+    const router = useRouter()
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-
-    const selectItem = (item) => {
-        setSelectedItem(item);
-        setIsOpen(false);
-    };
+    const searchBrand = async (value) => {
+        setInputVal(value)
+        let newTree
+        if (value) {
+            newTree = await fetchFilter(`tree_line?q=${value}`)
+        } else {
+            newTree = await fetchFilter(`tree_line`)
+        }
+        filterStore.fillLines(newTree)
+        filterStore.deactivateFilters(filterStore.filters)
+        filterStore.reactivateFilters(router.query)
+    }
     return (
         <div>
             <div className={s.dropdown}
@@ -39,7 +49,10 @@ const BrandDropdown = () => {
                             className={s.dropdown_input}
                         >
                             <div className={s.dropdown_text}>
-                                <SearchInput w100={true}/>
+                                <SearchInput w100={true}
+                                             value={inputVal}
+                                             onChange={e => searchBrand(e.target.value)}
+                                />
                             </div>
                         </div>
                     </div>

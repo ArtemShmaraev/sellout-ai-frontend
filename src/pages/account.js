@@ -188,6 +188,15 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                     {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
                     {fillLines && <div className={s.red_text}>Заполните все поля</div>}
 
+                    <div className={s.text_block}>
+                        <div className={s.text_size}>
+                            <h5 className={s.header}>Укажите ваши размеры</h5>
+                            <p>Вы можете указать свои размеры, чтобы мы искали для Вас
+                                специальные предложения в Ваших размерах,
+                                помогали с выбором размера на конкретные модели, а также упрощали
+                                процесс покупок на нашей платформе!</p>
+                        </div>
+                    </div>
                     <div className={s.size_block}>
                         <div className={s.col_dropdown}>
                             <h5>Обувь</h5>
