@@ -1,6 +1,6 @@
 .header {
     background: white;
-    padding: 10px 0;
+    padding: 20px 0 10px 0;
     position: fixed;
     width: 100vw;
     top: 0;
@@ -111,7 +111,10 @@
     cursor: pointer;
     color: #8d8d8d;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+    .header {
+        padding: 10px 0 10px 0;
+    }
     .logo {
         font-size: 26px;
         transform: translateX(13px);

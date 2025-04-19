@@ -77,3 +77,15 @@ export async function getSizeTable(cookies) {
     })
     return data
 }
+export async function fetchSizeInfo(cookies) {
+    const {data} = await $authHost.get(`user/size_info`, {
+        headers: {cookie: cookies}
+    })
+    return data
+}
+export async function sendSizeInfo(token, obj) {
+    const {data} = await $host.post(`user/size_info`, obj, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

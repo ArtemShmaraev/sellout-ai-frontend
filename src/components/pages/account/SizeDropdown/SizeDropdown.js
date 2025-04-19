@@ -13,10 +13,13 @@ import size from "@/static/icons/countries/size.svg";
 import Image from "next/image";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import SizeBtn from "@/components/pages/product/FilterDropdowns/SizeDropdown/SizeBtn/SizeBtn";
+import {sendSizeInfo} from "@/http/userApi";
+import Cookies from "js-cookie";
 
-const SizeDropdown = ({catObj}) => {
+const SizeDropdown = ({catObj, typeIsShoes, currSizeId}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null)
+    const [rowId, setRowId] = useState(null)
     const [icon, setIcon] = useState(null)
     const [dropdownWidth, setDropdownWidth] = useState(0);
     const dropdownRef = useRef(null)
@@ -36,6 +39,7 @@ const SizeDropdown = ({catObj}) => {
         const rowArr = catObj.size_rows
         rowArr.forEach(row => {
             if (row.is_main) {
+                setRowId(row.id)
                 setSelectedRow(row.filter_name)
                 setIcon(row.filter_logo)
             }
@@ -58,6 +62,7 @@ const SizeDropdown = ({catObj}) => {
                 >
                     <div className={s.row_text} onClick={(e) => {
                         e.stopPropagation()
+                        setRowId(row.id)
                         setSelectedRow(row.filter_name)
                         setIsOpen(false)
                         setIcon(row.filter_logo)
@@ -69,6 +74,39 @@ const SizeDropdown = ({catObj}) => {
             )
         })
         return arr
+    }
+    const [selectedBtnId, setSelectedBtnId] = useState(currSizeId)
+    const getSizeBtns = () => {
+        const res = []
+        const sizeRowArr = catObj.size_rows
+        for (let i = 0; i < sizeRowArr.length; i++) {
+            if (sizeRowArr[i].filter_name === selectedRow) {
+                const sizesArr = sizeRowArr[i].sizes
+                sizesArr.forEach(size => {
+                    if (size.size !== 'Один размер') {
+                        res.push({
+                            id: size.id[0],
+                            text: size.size,
+                        })
+                    }
+                })
+                break
+            }
+        }
+        return res
+    }
+    const selectSize = async (id) => {
+        const token = Cookies.get('access_token')
+        setSelectedBtnId(id)
+        const obj = {}
+        if (typeIsShoes) {
+            obj.preferred_shoes_size_row = String(rowId)
+            obj.shoes_size = id
+        } else {
+            obj.preferred_clothes_size_row = String(rowId)
+            obj.clothes_size = id
+        }
+        const res = await sendSizeInfo(token, JSON.stringify(obj))
     }
     return (
         <div>
@@ -98,6 +136,15 @@ const SizeDropdown = ({catObj}) => {
                         }
                     </div>
                 </div>
+            }
+            {
+                selectedRow &&
+                getSizeBtns().map(el =>
+                    <SizeBtn text={el.text}
+                             onClick={() => selectSize(el.id)}
+                             state={el.id == selectedBtnId}
+                    />
+                )
             }
         </div>
     );

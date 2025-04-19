@@ -4,11 +4,12 @@ import s from '@/styles/Account.module.css'
 import AccountLayout from "@/layout/AccountLayout";
 import {Context} from "@/context/AppWrapper";
 import InputMask from 'react-input-mask';
-import {fetchUserInfo, getSizeTable} from "@/http/userApi";
+import {fetchSizeInfo, fetchUserInfo, getSizeTable, sendSizeInfo} from "@/http/userApi";
 import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import SizeDropdown from "@/components/pages/account/SizeDropdown/SizeDropdown";
+import Cookies from "js-cookie";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -16,14 +17,18 @@ export const getServerSideProps = async (context) => {
     const {user_id} = jwtDecode(token)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     const sizeTable = await getSizeTable(context.req.headers.cookie)
-    return { props: {userData, sizeTable} }
+    const sizeInfo = await fetchSizeInfo(context.req.headers.cookie)
+    console.log(sizeInfo)
+    return { props: {userData, sizeTable, sizeInfo} }
 }
-const Account = ({userData, sizeTable}) => {
+const Account = ({userData, sizeTable, sizeInfo}) => {
     const {userStore} = useContext(Context)
     const [firstname, setFirstname] = useState(userData.first_name)
     const [lastname, setLastname] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
+    const [weight, setWeight] = useState(sizeInfo.weight)
+    const [height, setHeight] = useState(sizeInfo.height)
     const [birthday, setBirthday] = useState()
     const handleChangeNumber = (e) => {
         const inputPhoneNumber = e.target.value;
@@ -43,8 +48,6 @@ const Account = ({userData, sizeTable}) => {
                 setSelectedGender(el)
             }
         })
-        console.log(sizeTable)
-        //TODO log
     }, [])
 
     const toggleGender = () => {
@@ -74,6 +77,27 @@ const Account = ({userData, sizeTable}) => {
             return false
         }
         setValidEmail(true)
+    }
+    const checkIsNum = (str) => {
+        return !isNaN(str)
+    }
+    const changeWeight = async (value) => {
+        if (checkIsNum(value)) {
+            setWeight(value)
+            const token = Cookies.get('access_token')
+            const obj = {}
+            obj.weight = value
+            const res = await sendSizeInfo(token, JSON.stringify(obj))
+        }
+    }
+    const changeHeight = async (value) => {
+        if (checkIsNum(value)) {
+            setHeight(value)
+            const token = Cookies.get('access_token')
+            const obj = {}
+            obj.height = value
+            const res = await sendSizeInfo(token, JSON.stringify(obj))
+        }
     }
     return (
         <MainLayout>
@@ -163,8 +187,34 @@ const Account = ({userData, sizeTable}) => {
                     >Сохранить изменения</button>
                     {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
                     {fillLines && <div className={s.red_text}>Заполните все поля</div>}
-                    <div>
-                        <SizeDropdown catObj={sizeTable.size_tables[0]}/>
+
+                    <div className={s.size_block}>
+                        <div className={s.col_dropdown}>
+                            <h5>Обувь</h5>
+                            <SizeDropdown catObj={sizeTable.size_tables[0]} typeIsShoes={true} currSizeId={sizeInfo.shoes_size}/>
+                        </div>
+                        <div className={s.col_dropdown}>
+                            <h5>Одежда</h5>
+                            <SizeDropdown catObj={sizeTable.size_tables[1]} typeIsShoes={false} currSizeId={sizeInfo.clothes_size}/>
+                        </div>
+                        <div className={s.col_input}>
+                            <div>
+                                <h5>Рост</h5>
+                                <input
+                                    className={s.size_input}
+                                    onChange={e => changeHeight(e.target.value)}
+                                    value={height}
+                                />
+                            </div>
+                            <div>
+                                <h5>Вес</h5>
+                                <input
+                                    className={s.size_input}
+                                    onChange={e => changeWeight(e.target.value)}
+                                    value={weight}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </AccountLayout>
