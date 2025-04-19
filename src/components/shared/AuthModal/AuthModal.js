@@ -14,7 +14,7 @@ import eye from '@/static/icons/eye.svg'
 import eyeCrossed from '@/static/icons/eye-slash.svg'
 import InputMask from "react-input-mask";
 
-const AuthModal = ({children, fromWishlist = false, inline = false}) => {
+const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false}) => {
     const router = useRouter()
 
     const [show, setShow] = useState(false);
@@ -144,7 +144,7 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
             <button
                 className={s.toggle_btn}
                 onClick={handleShow}
-                style={inline ? {display: 'inline'} : {}}
+                style={inline ? {display: 'inline', ...style} : style}
             >
                 {children}
             </button>
@@ -161,6 +161,12 @@ const AuthModal = ({children, fromWishlist = false, inline = false}) => {
                         fromWishlist &&
                         <div className='text-center'>
                             Войдите или зарегистрируйтесь, чтобы добавлять товары в список избранного
+                        </div>
+                    }
+                    {
+                        order &&
+                        <div className='text-center'>
+                            Войдите или зарегистрируйтесь, чтобы оформить заказ
                         </div>
                     }
                     <div className={s.mode_block}>

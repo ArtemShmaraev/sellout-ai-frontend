@@ -43,7 +43,6 @@ const ShipDropdown = ({cardId, unitId}) => {
         selectedItem ? currId = selectedItem.id : currId = unitId
         const newCart = currCart.map(el => {
             if (el === currId) {
-                console.log('ok')
                 return item.id
             }
             return el
@@ -56,6 +55,7 @@ const ShipDropdown = ({cardId, unitId}) => {
             await removeFromCart(userStore.id, currId, Cookies.get('access_token'))
             await addToCart(userStore.id, item.id, Cookies.get('access_token'))
         }
+        cartStore.setIsShipChosen(true)
         router.push('/cart', undefined, {scroll: false})
     }
     useEffect(() => {

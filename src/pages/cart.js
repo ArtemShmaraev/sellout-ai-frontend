@@ -43,7 +43,7 @@ export const getServerSideProps = async (context) => {
 }
 const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
     const router = useRouter()
-    const {userStore} = useContext(Context)
+    const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState('')
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
@@ -68,8 +68,14 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
         }
         setPromoRes(res)
     }
+    const [checkoutErr, setCheckoutErr] = useState('')
     const goToCheckout = () => {
-        router.push('/order')
+        if (cartStore.isShipChosen) {
+            setCheckoutErr('')
+            router.push('/order')
+        } else {
+            setCheckoutErr('Пожалуйста, выберите доставку для всех товаров')
+        }
     }
     return (
         <MainLayout>
@@ -157,9 +163,24 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                             <p>Суммарная скидка: 100 ₽</p>
                             <hr/>
                             <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
-                            <button className={s.order_btn}
-                                    onClick={goToCheckout}
-                            >Перейти к оформлению заказа</button>
+                            {
+                                userStore.isLogged
+                                    ?
+                                    <button className={s.order_btn}
+                                            onClick={goToCheckout}
+                                    >Перейти к оформлению заказа</button>
+                                    :
+                                    <AuthModal order={true} style={{width: '100%'}}>
+                                        <div className={s.order_btn}
+                                        >Перейти к оформлению заказа</div>
+                                    </AuthModal>
+                            }
+                            {
+                                checkoutErr &&
+                                <p className={s.red_text}>
+                                    {checkoutErr}
+                                </p>
+                            }
                         </div>
                     </div>
                 }

@@ -4,6 +4,7 @@ class CartStore {
     constructor() {
         this._shipps = {}
         this._cart = {}
+        this._isShipChosen = true
         makeAutoObservable(this)
     }
     get cart() {
@@ -20,6 +21,12 @@ class CartStore {
     }
     setShips(ships) {
         this._shipps = ships
+    }
+    get isShipChosen() {
+        return this._isShipChosen
+    }
+    setIsShipChosen(bool) {
+        this._isShipChosen = bool
     }
 }
 

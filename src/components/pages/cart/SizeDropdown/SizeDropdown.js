@@ -34,6 +34,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
         cartStore.setSizeId(item.size)
         const data = await fetchShippings(productId, cartStore.sizeId)
         cartStore.cart[cardId] = data
+        cartStore.setIsShipChosen(false)
     };
     useEffect(() => {
         const handleClickOutside = (event) => {
