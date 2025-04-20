@@ -258,7 +258,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                                     labelClass={s.sub}
                                     />
                                 </div>
-                                <button className={s.reg_btn} onClick={(e) => handleSubmit(e)} type={'submit'}>Зарегистрироваться</button>
+                                <button className={s.reg_btn} type={'submit'}>Зарегистрироваться</button>
                             </Container>
                             :
                             <Container>
@@ -287,7 +287,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                         />
                                     </div>
                                 </div>
-                                <button className={s.reg_btn} onClick={(e) => handleSubmit(e)} type={"submit"}>Войти</button>
+                                <button className={s.reg_btn} type={"submit"}>Войти</button>
                                 {wrong &&
                                     <p className={s.validate}>Неверный логин или пароль</p>
                                 }

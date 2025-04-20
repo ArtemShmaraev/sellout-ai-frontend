@@ -121,7 +121,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
                    onHide={handleClose}
                    >
                 <Modal.Body className='pt-4'>
-                    <form>
+                    <form onSubmit={(e) => sendData(e)}>
                         <div className={s.close_block}>
                             <Image src={close} alt="" style={{cursor: 'pointer'}} onClick={handleClose}/>
                         </div>
@@ -172,7 +172,6 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
                                     </div>
                                 </div>
                                 <button className={s.add_btn}
-                                        onClick={(e) => sendData(e)}
                                         type={'submit'}
                                 >Добавить адрес</button>
                             </>
@@ -186,7 +185,6 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
                                 </button>
                                 <button className={s.save_btn}
                                         type={'submit'}
-                                        onClick={(e) => sendData(e)}
                                 >
                                     Сохранить
                                 </button>
