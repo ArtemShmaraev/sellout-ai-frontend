@@ -40,9 +40,22 @@ class FilterStore {
                 state: false,
             },
         }
-        this._curr_size = {}
+        this._collabQ = ''
+        this._lineQ = ''
         this._activeFilters = []
         makeAutoObservable(this)
+    }
+    get collabQ() {
+        return this._collabQ
+    }
+    setCollabQ(val) {
+        this._collabQ = val
+    }
+    get lineQ() {
+        return this._lineQ
+    }
+    setLineQ(val) {
+        this._lineQ = val
     }
     get filters() {
         return this._allFilters

@@ -10,7 +10,7 @@ const BuyoutModal = () => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
         const width = window.innerWidth
-        if (width <= 1000) {
+        if (width <= 1200) {
             setIsDesktop(false)
         }
     }, [isDesktop])
@@ -22,7 +22,7 @@ const BuyoutModal = () => {
         setIsSend(false)
     };
     return (
-        <Container style={{margin: '35px 0'}}>
+        <div style={{margin: '35px 0'}} className={'custom_cont'}>
             <div className={s.text_container}>
                 <div className={s.text}>
                     Не смогли найти на нашей платформе то, что искали?
@@ -85,7 +85,8 @@ const BuyoutModal = () => {
                             <Col lg={12} className='d-flex justify-content-center'>
                                 <button onClick={() => setIsSend(true)} className={s.send}>Отправить</button>
                             </Col>
-                            <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="">обработку персональных данных</a></p>
+                            <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="" className={s.link}
+                            >обработку персональных данных</a></p>
                         </Row>
                     </Modal.Body>
                     :
@@ -98,7 +99,7 @@ const BuyoutModal = () => {
                     </Modal.Body>
                 }
             </Modal>
-        </Container>
+        </div>
     );
 };
 

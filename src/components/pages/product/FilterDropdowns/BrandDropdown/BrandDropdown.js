@@ -10,13 +10,12 @@ import {useRouter} from "next/router";
 const BrandDropdown = () => {
     const {filterStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
-    const [inputVal, setInputVal] = useState('')
     const router = useRouter()
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
     const searchBrand = async (value) => {
-        setInputVal(value)
+        filterStore.setLineQ(value)
         let newTree
         if (value) {
             newTree = await fetchFilter(`tree_line?q=${value}`)
@@ -50,7 +49,7 @@ const BrandDropdown = () => {
                         >
                             <div className={s.dropdown_text}>
                                 <SearchInput w100={true}
-                                             value={inputVal}
+                                             value={filterStore.lineQ}
                                              onChange={e => searchBrand(e.target.value)}
                                 />
                             </div>

@@ -102,8 +102,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 }
             </div>
             {photosArr &&
-                <div className={s.image_container}
-                     style={smallCard ? {height: '100px'} : {}}
+                <div className={!smallCard ? s.image_container : s.sm_image_container}
                      onTouchStart={e => {
                          e.stopPropagation()
                          handleMouseEnter()

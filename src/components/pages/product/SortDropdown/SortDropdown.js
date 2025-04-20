@@ -6,12 +6,21 @@ import {useRouter} from "next/router";
 
 const SortDropdown = () => {
     const sorts = [
-        ['По популярности'],
-        ['Случайная подборка'],
+        ['По популярности', 'popularity'],
+        ['Случайная подборка', 'random'],
         ['По новизне', '-release_date'],
         ['По возрастанию цены', 'min_price'],
         ['По убыванию цены', '-min_price']
     ]
+    useEffect(() => {
+        const query = {...router.query}
+        const {ordering} = query
+        sorts.forEach(el => {
+            if (el[1] === ordering) {
+                setSelectedItem(el[0])
+            }
+        })
+    }, [])
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);

@@ -53,9 +53,13 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
     const {filterStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
-        filterStore.fillLines(lines)
+        if (!filterStore.lineQ) {
+            filterStore.fillLines(lines)
+        }
         filterStore.fillColors(colors)
-        filterStore.fillCollections(collections)
+        if (!filterStore.collabQ) {
+            filterStore.fillCollections(collections)
+        }
         filterStore.fillSizes(sizes)
         filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)

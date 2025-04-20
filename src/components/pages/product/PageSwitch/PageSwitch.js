@@ -33,7 +33,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
         }
     }
     return (
-        <Container className={s.container}>
+        <div className={s.container + ' custom_cont'}>
             <div className='d-flex justify-content-between'>
                 <a className={s.previous} href=''
                    onClick={(e) => previousPage(e)}
@@ -45,7 +45,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
                    style={currentPage < getTotalPages(totalProducts) ? {color: '#000'} : {color: '#E6E6E6'}}
                 >{'Следующая >'}</a>
             </div>
-        </Container>
+        </div>
     );
 };
 

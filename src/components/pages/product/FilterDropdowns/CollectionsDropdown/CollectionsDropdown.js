@@ -12,7 +12,6 @@ const CollectionsDropdown = () => {
     const {filterStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
-    const [inputVal, setInputVal] = useState('')
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -39,7 +38,7 @@ const CollectionsDropdown = () => {
         reloadPage()
     }
     const searchCollab = async (value) => {
-        setInputVal(value)
+        filterStore.setCollabQ(value)
         let newTree
         if (value) {
             newTree = await fetchFilter(`collabs?q=${value}`)
@@ -98,7 +97,7 @@ const CollectionsDropdown = () => {
                         >
                             <div className={s.dropdown_text}>
                                 <SearchInput w100={true}
-                                             value={inputVal}
+                                             value={filterStore.collabQ}
                                              onChange={e => searchCollab(e.target.value)}
                                 />
                             </div>
