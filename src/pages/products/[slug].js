@@ -1,8 +1,6 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
-import {Carousel, Col, Container, Row} from "react-bootstrap";
-import shoe from "@/static/img/shoe.png";
-import shoe2 from '@/static/img/shoe2.png'
+import {Carousel, Col, Row} from "react-bootstrap";
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
 import like from '@/static/icons/heart.svg'
@@ -16,7 +14,7 @@ import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/Q
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Image from 'next/image'
-import {fetchOneProduct, fetchPrices, fetchProductsByArray} from "@/http/productsApi";
+import {fetchOneProduct, fetchPrices, fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
@@ -30,6 +28,7 @@ import {addToCart} from "@/http/cartApi";
 import {addLastSeen, fetchLastSeen} from "@/http/userApi";
 import Viewed from "@/components/pages/product/Viewed/Viewed";
 import jwtDecode from "jwt-decode";
+import SimilarProducts from "@/components/pages/product/SimilarProducts/SimilarProducts";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -48,10 +47,11 @@ export const getServerSideProps = async (context) => {
             lastSeen = await fetchProductsByArray(arr)
         }
     }
-    return { props: {product, prices, lastSeen} }
+    const similar = await fetchSimilarProducts(product.id)
+    return { props: {product, prices, lastSeen, similar} }
 }
 
-const OneProductPage = ({product, prices, lastSeen}) => {
+const OneProductPage = ({product, prices, lastSeen, similar}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const {productStore, userStore, cartStore} = useContext(Context)
@@ -172,28 +172,45 @@ const OneProductPage = ({product, prices, lastSeen}) => {
                                 </div>
                             </>
                         }
-                        <Carousel
-                            variant='dark'
-                            indicators={false}
-                            interval={null}
-                        >
-                            {
-                                product.bucket_link.map(el =>
-                                    <Carousel.Item className={s.photo} key={el.id}>
-                                        <Image src={el.url} alt=''
+                        {
+                            product.bucket_link.length > 1
+                            ?
+                                <Carousel
+                                    variant='dark'
+                                    indicators={false}
+                                    interval={null}
+                                >
+                                    {
+                                        product.bucket_link.map(el =>
+                                            <Carousel.Item className={s.photo} key={el.id}>
+                                                <Image src={el.url} alt=''
+                                                       fill={true}
+                                                       loading={'eager'}
+                                                       style={{objectFit: 'contain'}}
+                                                />
+                                            </Carousel.Item>
+                                        )
+                                    }
+                                </Carousel>
+                                :
+                                <div style={{position: "relative"}}
+                                >
+                                    <div className={s.photo}>
+                                        <Image src={product.bucket_link[0].url} alt=''
                                                fill={true}
                                                loading={'eager'}
                                                style={{objectFit: 'contain'}}
                                         />
-                                    </Carousel.Item>
-                                )
-                            }
-                        </Carousel>
+                                    </div>
+                                </div>
+
+                        }
                         {!isDesktop &&
                             <>
                                 <div className={s.modals_block}>
                                     <SizeTable/>
-                                    <SizeHelp/>
+                                    <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}
+                                              imgSrc={product.bucket_link[0].url}/>
                                 </div>
                                 <SizeChoice prices={prices} productId={product.id}/>
                                 {
@@ -405,6 +422,7 @@ const OneProductPage = ({product, prices, lastSeen}) => {
                 {lastSeen.length > 0 &&
                     <Viewed lastSeen={lastSeen}/>
                 }
+                <SimilarProducts products={similar}/>
             </div>
         </MainLayout>
     );

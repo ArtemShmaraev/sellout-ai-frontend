@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './SizeTable.module.css'
 import {Modal} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
+import Image from "next/image";
 
 const SizeTable = () => {
     const [show, setShow] = useState(false);
@@ -35,10 +36,10 @@ const SizeTable = () => {
                 <Modal.Body>
                     <div className={s.close}>
                         <div className={s.header}>Таблица размеров</div>
-                        <img src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
+                        <Image src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
                     </div>
                     <div className={s.header}>Jordan</div>
-                    <div className={s.header}>Сбер пидоры</div>
+                    <div className={s.header}>Сбер молодцы</div>
                     <div className={s.table_block}>
                         <table>
                             <tbody>

@@ -92,3 +92,7 @@ export async function fetchProductsByArray(arr) {
     const {data} = await $host.post(`product/list_product`, JSON.stringify(obj))
     return data
 }
+export async function fetchSimilarProducts(productId) {
+    const {data} = await $host.get(`product/similar/${productId}`)
+    return data
+}

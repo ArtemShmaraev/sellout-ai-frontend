@@ -1,10 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './Sidebar.module.css'
 import list from '@/static/icons/list.svg'
 import close from '@/static/icons/x-lg.svg'
 import person from '@/static/icons/person-circle.svg'
 import arrow from '@/static/icons/chevron-right.svg'
-import truck from '@/static/icons/truck.svg'
 import tg from "@/static/icons/telegram.png";
 import AuthModal from "../AuthModal/AuthModal";
 import Image from "next/image";

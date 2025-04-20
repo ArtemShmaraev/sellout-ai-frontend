@@ -12,7 +12,6 @@ import {fetchAddresses, fetchUserInfo} from "@/http/userApi";
 import Cookies from "js-cookie";
 import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
 import {useRouter} from "next/router";
-import {Head} from "next/document";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -22,16 +21,18 @@ export const getServerSideProps = async (context) => {
     const cart = await fetchCart(user_id, context.req.headers.cookie)
     const defaultPrice = cart.total_amount
     const finalPrice = cart.final_amount
+    const sale = cart.total_sale
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return { props: {addresses, defaultPrice, finalPrice, userData} }
+    return { props: {addresses, defaultPrice, finalPrice, sale, userData} }
 }
-const Order = ({addresses, defaultPrice, finalPrice, userData}) => {
+const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     const router = useRouter()
     const {orderStore, userStore} = useContext(Context)
     const [promo, setPromo] = useState('')
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
+    const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
     const renderStage = () => {
         const stage = orderStore.stage
@@ -58,6 +59,7 @@ const Order = ({addresses, defaultPrice, finalPrice, userData}) => {
         }
         if (res.status) {
             setFinAmount(res.final_amount)
+            setSaleAmount(res.total_sale)
         }
         setPromoRes(res)
     }
@@ -86,7 +88,9 @@ const Order = ({addresses, defaultPrice, finalPrice, userData}) => {
                                     onChange={(e) => setBonuses(e.target.value)}
                                     value={bonuses}
                         />
-                        <p>Суммарная скидка: 100 ₽</p>
+                        {
+                            Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
+                        }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
                         <button className={s.order_btn}>Перейти к оформлению заказа</button>

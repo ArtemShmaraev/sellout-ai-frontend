@@ -29,26 +29,30 @@ export const getServerSideProps = async (context) => {
     }
     let defaultPrice
     let finalPrice
+    let sale
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
         defaultPrice = cart.total_amount
         finalPrice = cart.final_amount
+        sale = cart.total_sale
         productUnits = cart
     } else {
         const res = await fetchCartPrice(cartArr)
         defaultPrice = res.total_amount
         finalPrice = defaultPrice
+        sale = 0
     }
-    return { props: {productUnits, defaultPrice, finalPrice} }
+    return { props: {productUnits, defaultPrice, finalPrice, sale} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState('')
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
+    const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
     const goToProductsPage = () => {
         router.push('/products')
@@ -66,6 +70,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
         }
         if (res.status) {
             setFinAmount(res.final_amount)
+            setSaleAmount(res.total_sale)
         }
         setPromoRes(res)
     }
@@ -142,11 +147,16 @@ const Cart = ({productUnits, defaultPrice, finalPrice, token}) => {
                                     {promoRes.message}
                                 </p>
                             }
-                            <PromoInput placeholder={'Списать бонусы'}
-                                        onChange={(e) => setBonuses(e.target.value)}
-                                        value={bonuses}
-                            />
-                            <p>Суммарная скидка: 100 ₽</p>
+                            {
+                                userStore.isLogged &&
+                                <PromoInput placeholder={'Списать бонусы'}
+                                            onChange={(e) => setBonuses(e.target.value)}
+                                            value={bonuses}
+                                />
+                            }
+                            {
+                                Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
+                            }
                             <hr/>
                             <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
                             {

@@ -42,7 +42,7 @@ const ProductList = ({products, isAdmin}) => {
             {products.length === 0 &&
                 <div className={s.nothing}>
                     <div className='text-center'>
-                        Hui vam a ne tovari
+                        Товары по вашему запросу не найдены
                     </div>
                 </div>
             }

@@ -10,7 +10,7 @@ import {observer} from "mobx-react-lite";
 import AccountNavbar from "@/components/pages/account/AccountNavbar/AccountNavbar";
 
 const AccountLayout = ({children}) => {
-    const {userStore} = useContext(Context)
+    const {userStore, cartStore} = useContext(Context)
     const router = useRouter()
     const logout = (e) => {
         e.preventDefault()
@@ -19,6 +19,7 @@ const AccountLayout = ({children}) => {
         Cookies.set('cart', '')
         Cookies.set('last_seen', '')
         userStore.setIsLogged(false)
+        cartStore.setCartCnt(0)
         router.push('/')
     }
     const makeBold = (currPage) => {

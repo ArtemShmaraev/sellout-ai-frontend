@@ -18,7 +18,6 @@ export const getServerSideProps = async (context) => {
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     const sizeTable = await getSizeTable(context.req.headers.cookie)
     const sizeInfo = await fetchSizeInfo(context.req.headers.cookie)
-    console.log(sizeInfo)
     return { props: {userData, sizeTable, sizeInfo} }
 }
 const Account = ({userData, sizeTable, sizeInfo}) => {
