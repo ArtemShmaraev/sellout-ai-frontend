@@ -33,6 +33,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         if (userStore.isLogged) {
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
+        cartStore.setCartCnt(cartStore.cartCnt - 1)
         await router.push('/cart', undefined, {scroll: false})
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)

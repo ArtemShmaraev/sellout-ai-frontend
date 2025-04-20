@@ -5,6 +5,7 @@ class CartStore {
         this._shipps = {}
         this._cart = {}
         this._isShipChosen = true
+        this._cartCnt = 0
         makeAutoObservable(this)
     }
     get cart() {
@@ -27,6 +28,12 @@ class CartStore {
     }
     setIsShipChosen(bool) {
         this._isShipChosen = bool
+    }
+    get cartCnt() {
+        return this._cartCnt
+    }
+    setCartCnt(value) {
+        this._cartCnt = value
     }
 }
 

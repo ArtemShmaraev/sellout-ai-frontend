@@ -46,6 +46,10 @@ export default function AppWrapper({ children }) {
         }
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
+        if (cart) {
+            const cartCnt = cart.trim().split(' ').length
+            cartStore.setCartCnt(cartCnt)
+        }
         if (!cart) {
             Cookies.set('cart', '')
         }

@@ -17,6 +17,7 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import picture from "@/static/img/shoe2.png";
 import headerJson from './header.json'
+import CartIcon from "@/components/shared/CartIcon/CartIcon";
 
 const NavbarC = () => {
     const {userStore, desktopStore} = useContext(Context)
@@ -150,7 +151,7 @@ const NavbarC = () => {
                                 <div className={s.name}>Войдите</div>
                             </AuthModal>
                         }
-                        <Image width={25} src={cart} alt="" className={s.icons} onClick={goToCart}/>
+                        <CartIcon/>
                     </div>
                 </div>
                 {isDesktop &&

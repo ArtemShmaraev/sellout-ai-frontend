@@ -54,7 +54,7 @@ export const getServerSideProps = async (context) => {
 const OneProductPage = ({product, prices, lastSeen}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
-    const {productStore, userStore} = useContext(Context)
+    const {productStore, userStore, cartStore} = useContext(Context)
     const router = useRouter()
     useEffect(() => {
         productStore.clearAll()
@@ -120,6 +120,7 @@ const OneProductPage = ({product, prices, lastSeen}) => {
             const userId = userStore.id
             const data = await addToCart(userId, productStore.shipChosen, token)
         }
+        cartStore.setCartCnt(cartStore.cartCnt + 1)
     }
 
     useEffect(() => {

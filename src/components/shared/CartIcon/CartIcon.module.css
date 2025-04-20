@@ -1,0 +1,29 @@
+.icons {
+    width: 25px;
+    margin-left: 30px;
+    cursor: pointer;
+    position: relative;
+}
+.circle {
+    border-radius: 50%;
+    color: white;
+    background: black;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 11px;
+    position: absolute;
+    right: -5px;
+    top: 15px;
+}
+@media (max-width: 1200px) {
+    .icons {
+        width: 20px;
+    }
+    .circle {
+        right: -10px;
+    }
+}

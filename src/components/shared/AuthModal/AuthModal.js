@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './AuthModal.module.css'
 import {Container, Modal} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
 import RadioGroup from "../UI/RadioGroup/RadioGroup";
 import CustomCheckbox from "../UI/CustoCheckbox/CustomCheckbox";
 import Image from 'next/image'
-import {userStore} from "@/store/UserStore";
 import {login, registration} from "@/http/userApi";
 import {updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
@@ -13,9 +12,11 @@ import {useRouter} from "next/router";
 import eye from '@/static/icons/eye.svg'
 import eyeCrossed from '@/static/icons/eye-slash.svg'
 import InputMask from "react-input-mask";
+import {Context} from "@/context/AppWrapper";
 
 const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false}) => {
     const router = useRouter()
+    const {userStore, cartStore} = useContext(Context)
 
     const [show, setShow] = useState(false);
     const [isReg, setIsReg] = useState(true)
@@ -80,6 +81,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             } else {
                 cartFromBack = await updateCartFromCookies('', res.user_id, res.access)
             }
+            cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
@@ -116,6 +118,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             } else {
                 cartFromBack = await updateCartFromCookies('', res.user_id, res.access)
             }
+            cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
