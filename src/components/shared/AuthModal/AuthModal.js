@@ -139,7 +139,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         event.preventDefault();
         isReg ? await reg() : await log()
     };
-    const changeVisibility = () => {
+    const changeVisibility = (e) => {
+        e.preventDefault()
         setPassShown(!passShown)
     }
     return (
@@ -243,7 +244,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                                alt={'Показать/скрыть пароль'}
                                                className={s.eye}
                                                width={20}
-                                               onClick={changeVisibility}
+                                               onClick={(e) => changeVisibility(e)}
                                         />
                                     </div>
                                 </div>
@@ -283,7 +284,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                                alt={'Показать/скрыть пароль'}
                                                className={s.eye}
                                                width={20}
-                                               onClick={changeVisibility}
+                                               onClick={(e) => changeVisibility(e)}
                                         />
                                     </div>
                                 </div>

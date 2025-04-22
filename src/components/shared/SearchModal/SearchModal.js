@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './SearchModal.module.css'
 import search from '@/static/icons/search.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -6,8 +6,10 @@ import SearchInput from "../UI/SearchInput/SearchInput";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import {suggestSearch} from "@/http/productsApi";
+import {Context} from "@/context/AppWrapper";
 
 const SearchModal = () => {
+    const {filterStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
@@ -16,6 +18,7 @@ const SearchModal = () => {
         query.q = value
         const pathname = '/products'
         router.push({pathname, query})
+        filterStore.setQ(value)
         setIsOpen(false)
         setValue('')
     }

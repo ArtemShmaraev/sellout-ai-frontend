@@ -86,14 +86,15 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 </div>
                 {userStore.isLogged
                     ?
-                    <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}
-                           onClick={(e) => {
-                               e.stopPropagation()
-                               isInWishlist ? deleteFromWL() : addToWL()
-                           }}
-                    />
+                    <div className={s.like_block}
+                        onClick={(e) => {
+                        e.stopPropagation()
+                        isInWishlist ? deleteFromWL() : addToWL()
+                    }}>
+                        <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
+                    </div>
                     :
-                    <div onClick={e => e.stopPropagation()}>
+                    <div onClick={e => e.stopPropagation()} className={s.like_block}>
                         <AuthModal fromWishlist={true}>
                             <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}
                             />

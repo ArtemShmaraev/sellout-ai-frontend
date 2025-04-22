@@ -24,6 +24,18 @@
     margin-right: 5px;
     user-select: none;
 }
+.like_block {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.like_block:hover {
+    background: #e5e3e3;
+}
 .like {
     cursor: pointer;
 }
