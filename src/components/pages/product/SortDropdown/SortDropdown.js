@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 
 const SortDropdown = () => {
     const sorts = [
-        ['По популярности', 'popularity'],
+        ['По популярности', '-rel_num'],
         ['Случайная подборка', 'random'],
         ['По новизне', '-release_date'],
         ['По возрастанию цены', 'min_price'],

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './BrandDropdown.module.css'
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
@@ -14,8 +14,15 @@ const BrandDropdown = () => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    const [query, setQuery] = useState("");
+    useEffect(() => {
+        const timeOutId = setTimeout(() => {
+            filterStore.setLineQ(query)
+            searchBrand(query)
+        }, 300);
+        return () => clearTimeout(timeOutId);
+    }, [query]);
     const searchBrand = async (value) => {
-        filterStore.setLineQ(value)
         let newTree
         if (value) {
             newTree = await fetchFilter(`tree_line?q=${value}`)
@@ -49,8 +56,8 @@ const BrandDropdown = () => {
                         >
                             <div className={s.dropdown_text}>
                                 <SearchInput w100={true}
-                                             value={filterStore.lineQ}
-                                             onChange={e => searchBrand(e.target.value)}
+                                             value={query}
+                                             onChange={e => setQuery(e.target.value)}
                                 />
                             </div>
                         </div>

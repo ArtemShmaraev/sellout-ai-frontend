@@ -26,17 +26,6 @@ const SizeDropdown = () => {
             query[filterName] = filterArr[0]
         }
     }
-    const reloadPage = () => {
-        const {pathname} = router
-        const query = {...router.query}
-        changeQuery(query, 'gender', filterStore.checkedGendersQuery)
-        query.page = 1
-        router.push({pathname, query}, undefined, {scroll: false})
-    }
-    const handleClick = (item) => {
-        filterStore.toggleFilter(item)
-        reloadPage()
-    }
     const allCategories = () => {
         const arr = []
         for (const key in filterStore.filters.size) {
