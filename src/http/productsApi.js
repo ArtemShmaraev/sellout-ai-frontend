@@ -96,3 +96,7 @@ export async function fetchSimilarProducts(productId) {
     const {data} = await $host.get(`product/similar/${productId}`)
     return data
 }
+export async function suggestSearch(qStr) {
+    const {data} = await $host.get(`product/suggest_search?q=${qStr}`)
+    return data
+}

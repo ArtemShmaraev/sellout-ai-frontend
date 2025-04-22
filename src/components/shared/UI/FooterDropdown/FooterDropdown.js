@@ -8,7 +8,7 @@ const FooterDropdown = ({children, header}) => {
         <div className={s.dropdown}>
             <div onClick={() => setIsOpen(!isOpen)} className={s.toggle}>
                 <h4>{header}</h4>
-                <Arrow isOpen={isOpen}/>
+                <Arrow isOpen={isOpen} white={true}/>
             </div>
             {isOpen &&
                 <div>

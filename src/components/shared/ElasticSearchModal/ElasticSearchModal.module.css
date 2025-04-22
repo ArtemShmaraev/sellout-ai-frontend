@@ -40,3 +40,23 @@
 .main_block {
     width: 50%;
 }
+.sug_block {
+    overflow-y: scroll;
+    max-height: 39vh;
+}
+.sugg {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 7px;
+    transition: 0.3s;
+}
+.sugg:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.result {
+    color: black;
+}
+.type {
+    color: #8d8d8d;
+}

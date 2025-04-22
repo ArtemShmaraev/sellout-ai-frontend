@@ -77,7 +77,7 @@ const Footer = () => {
                             <Image src={tg} width={30} alt="" className={s.icon}/>
                         </div>
                     </Col>
-                    <Col lg={8}>
+                    <Col lg={8} >
                         <h4 className={s.row2}>Подпишитесь на рассылку, чтобы быть в курсе новых поступлений и акций:</h4>
                         <MailingInput/>
                     </Col>

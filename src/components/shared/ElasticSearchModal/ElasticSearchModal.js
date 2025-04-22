@@ -6,16 +6,26 @@ import Image from "next/image";
 import {Container} from "react-bootstrap";
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import {useRouter} from "next/router";
+import {suggestSearch} from "@/http/productsApi";
 
 const ElasticSearchModal = () => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
     const q = () => {
-        const query = router.query
+        const query = {}
         query.q = value
         const pathname = '/products'
         router.push({pathname, query})
+        setIsOpen(false)
+    }
+    const [suggs, setSuggs] = useState([])
+    const fetchSuggs = (str) => {
+        setValue(str)
+        suggestSearch(str).then(res => setSuggs(res))
+    }
+    const clickOnSugg = (url) => {
+        router.push('/products?' + url)
         setIsOpen(false)
     }
     return (
@@ -45,12 +55,32 @@ const ElasticSearchModal = () => {
                                     <SearchInput w100={true}
                                                  value={value}
                                                  onChange={e => {
-                                                     setValue(e.target.value)
+                                                     fetchSuggs(e.target.value)
                                                  }}
+                                                 onSubmit={q}
                                     />
+                                    <div className={s.sug_block}>
+                                        {
+                                            suggs.map(el =>
+                                                <a className={s.sugg}
+                                                   href={'/products?' + el.url}
+                                                   onClick={(e) => {
+                                                       e.preventDefault()
+                                                       clickOnSugg(el.url)
+                                                   }}
+                                                >
+                                                    <div className={s.result}>
+                                                        {el.name}
+                                                    </div>
+                                                    <div className={s.type}>
+                                                        {el.type}
+                                                    </div>
+                                                </a>
+                                            )
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                            <button onClick={q}>Поиск</button>
                         </Container>
                     </div>
                 </div>

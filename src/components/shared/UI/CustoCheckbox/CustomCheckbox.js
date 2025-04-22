@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './CustomCheckbox.module.css'
 import {observer} from "mobx-react-lite";
+import Image from 'next/image'
 
 const CustomCheckbox = ({reversed = false,
                             labelText,
@@ -36,9 +37,11 @@ const CustomCheckbox = ({reversed = false,
                     color && <span className={s.color} style={{background: `${color}`}}/>
                 }
                 {labelText}
-                {
-                    imgSrc && <img src={imgSrc} alt="" style={{margin: '0 5px'}}/>
-                }
+                <div>
+                    {
+                        imgSrc && <Image src={imgSrc} alt="" style={{margin: '0 5px'}}/>
+                    }
+                </div>
             </div>
         </div>
     );

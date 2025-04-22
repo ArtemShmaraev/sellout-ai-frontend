@@ -19,3 +19,23 @@
     height: 100vh;
     padding: 20px;
 }
+.sug_block {
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+.sugg {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 7px;
+    transition: 0.3s;
+}
+.sugg:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.result {
+    color: black;
+}
+.type {
+    color: #8d8d8d;
+}

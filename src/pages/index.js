@@ -37,7 +37,7 @@ export default function Home() {
             </div>
             <div className={s.collections}>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <p className={s.title}>Хуевки</p>
+                    <p className={s.title}>Одежда</p>
                     <a href="" className={s.link}>Посмотреть все</a>
                 </div>
                 <ScrollableBlock>

@@ -27,8 +27,8 @@
 .validate {
     color: #b61212;
 }
-@media (max-width: 1000px) {
-    .mailing {
+@media (max-width: 1200px) {
+    .input, .mailing {
         width: 100%;
     }
 }
