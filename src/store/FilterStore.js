@@ -4,6 +4,11 @@ class FilterStore {
     constructor() {
         this._ref = null
         this._allFilters = {
+            q: {
+                text: '',
+                query: '',
+                state: false,
+            },
             category: {},
             line: {},
             collab: {},
@@ -45,6 +50,20 @@ class FilterStore {
         this._activeFilters = []
         makeAutoObservable(this)
     }
+    setQ(value) {
+        this.filters.q.text = 'Поиск: ' + value
+        // this.filters.q.query = value
+        this.filters.q.state = true
+    }
+    toggleQ(bool) {
+        this.filters.q.state = bool
+    }
+    get QActive() {
+        if (this.filters.q.state === true) {
+            return [this.filters.q]
+        }
+        return []
+    }
     get collabQ() {
         return this._collabQ
     }
@@ -82,7 +101,12 @@ class FilterStore {
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
                 || key === 'price_min' || key === 'price_max' || key === 'is_collab'
-                || key === 'brand' || key === 'q') continue
+                || key === 'brand') continue
+            if (key === 'q') {
+                this.setQ(query[key])
+                this._activeFilters.push(this.filters.q)
+                continue
+            }
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     this.dfsActivate(this.filters[key], el)

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './ElasticSearchModal.module.css'
 import search from '@/static/icons/search.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -7,8 +7,10 @@ import {Container} from "react-bootstrap";
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import {useRouter} from "next/router";
 import {suggestSearch} from "@/http/productsApi";
+import {Context} from "@/context/AppWrapper";
 
 const ElasticSearchModal = () => {
+    const {filterStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
@@ -17,7 +19,9 @@ const ElasticSearchModal = () => {
         query.q = value
         const pathname = '/products'
         router.push({pathname, query})
+        filterStore.setQ(value)
         setIsOpen(false)
+        setValue('')
     }
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
@@ -27,6 +31,7 @@ const ElasticSearchModal = () => {
     const clickOnSugg = (url) => {
         router.push('/products?' + url)
         setIsOpen(false)
+        setValue('')
     }
     return (
         <>

@@ -19,7 +19,7 @@ const BrandDropdown = () => {
         const timeOutId = setTimeout(() => {
             filterStore.setLineQ(query)
             searchBrand(query)
-        }, 300);
+        }, 200);
         return () => clearTimeout(timeOutId);
     }, [query]);
     const searchBrand = async (value) => {

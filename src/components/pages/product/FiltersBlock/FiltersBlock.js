@@ -33,7 +33,7 @@ const FiltersBlock = () => {
         changeQuery(query, 'color', filterStore.checkedColorsQuery)
         changeQuery(query, 'is_fast_ship', filterStore.checkedFastShip)
         changeQuery(query, 'is_sale', filterStore.checkedSale)
-
+        changeQuery(query, 'q', filterStore.QActive)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

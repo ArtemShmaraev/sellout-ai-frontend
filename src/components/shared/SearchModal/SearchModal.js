@@ -17,6 +17,7 @@ const SearchModal = () => {
         const pathname = '/products'
         router.push({pathname, query})
         setIsOpen(false)
+        setValue('')
     }
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
@@ -26,6 +27,7 @@ const SearchModal = () => {
     const clickOnSugg = (url) => {
         router.push('/products?' + url)
         setIsOpen(false)
+        setValue('')
     }
     return (
         <>

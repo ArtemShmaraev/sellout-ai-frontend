@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './CollectionsDropdown.module.css'
 import CustomCheckbox from "@/components/shared/UI/CustoCheckbox/CustomCheckbox";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
@@ -37,8 +37,15 @@ const CollectionsDropdown = () => {
         filterStore.toggleFilter(item)
         reloadPage()
     }
+    const [query, setQuery] = useState("");
+    useEffect(() => {
+        const timeOutId = setTimeout(() => {
+            filterStore.setCollabQ(query)
+            searchCollab(query)
+        }, 200);
+        return () => clearTimeout(timeOutId);
+    }, [query]);
     const searchCollab = async (value) => {
-        filterStore.setCollabQ(value)
         let newTree
         if (value) {
             newTree = await fetchFilter(`collabs?q=${value}`)
@@ -97,8 +104,8 @@ const CollectionsDropdown = () => {
                         >
                             <div className={s.dropdown_text}>
                                 <SearchInput w100={true}
-                                             value={filterStore.collabQ}
-                                             onChange={e => searchCollab(e.target.value)}
+                                             value={query}
+                                             onChange={e => setQuery(e.target.value)}
                                 />
                             </div>
                         </div>
