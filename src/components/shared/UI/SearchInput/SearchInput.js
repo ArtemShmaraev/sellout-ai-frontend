@@ -22,6 +22,7 @@ const SearchInput = ({w100, value, onChange, onSubmit}) => {
                 <Image
                     className={s.icon}
                     src={icon}
+                    onClick={onSubmit}
                     alt="search"/>
             </form>
         </div>
