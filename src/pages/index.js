@@ -6,6 +6,7 @@ import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React from "react";
 import Head from "next/head";
+import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
             <title>SELLOUT</title>
         </Head>
         <div className={s.cont + ' custom_cont'}>
-            <BigPicture/>
+            <PictureBlock/>
             <BigPicture reversed={true}/>
             <div className={s.big_pict_block}>
                 <BigPicture vertical={true}/>

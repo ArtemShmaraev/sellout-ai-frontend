@@ -67,7 +67,7 @@ export default function AppWrapper({ children }) {
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
-            userStore.setGender('')
+            userStore.setGender('female')
         }
     }
     useEffect(() => {
