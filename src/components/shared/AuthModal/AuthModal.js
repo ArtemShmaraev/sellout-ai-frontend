@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './AuthModal.module.css'
 import {Container, Modal} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
@@ -139,9 +139,12 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         event.preventDefault();
         isReg ? await reg() : await log()
     };
+    const regRef = useRef(null)
+    const logRef = useRef(null)
     const changeVisibility = (e) => {
         e.preventDefault()
         setPassShown(!passShown)
+        // isReg ? regRef.current.focus() : logRef.current.focus()
     }
     return (
         <div>
@@ -239,6 +242,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                         <input type={passShown ? 'text' : 'password'} className={s.input_pass}
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}
+                                               ref={regRef => regRef && regRef.focus()}
+                                               onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                                         />
                                         <Image src={passShown ? eye : eyeCrossed}
                                                alt={'Показать/скрыть пароль'}
@@ -279,6 +284,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                         <input type={passShown ? 'text' : 'password'} className={s.input_pass}
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}
+                                               ref={logRef => logRef && logRef.focus()}
+                                               onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                                         />
                                         <Image src={passShown ? eye : eyeCrossed}
                                                alt={'Показать/скрыть пароль'}

@@ -69,12 +69,16 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         const userId = userStore.id
         const data = await addToWishlist(userId, id, token)
         setIsInWishlist(true)
+        const {pathname, query} = router
+        router.push({pathname, query}, undefined, {scroll: false})
     }
     const deleteFromWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, id, token)
         setIsInWishlist(false)
+        const {pathname, query} = router
+        router.push({pathname, query}, undefined, {scroll: false})
     }
     return (
         <div className={smallCard ? s.sm_card : s.card} onClick={() => router.push(`/products/${slug}`)}>
