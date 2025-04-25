@@ -50,10 +50,24 @@ button {
     margin-right: 3vw;
     margin-left: 3vw;
 }
+.mobile_d{
+    display: none;
+    align-items: center;
+}
+.desktop_d {
+    display: flex;
+    align-items: center;
+}
 @media (max-width: 1200px) {
     .custom_cont {
         margin-right: 8px;
         margin-left: 8px;
+    }
+    .mobile_d {
+        display: flex;
+    }
+    .desktop_d {
+        display: none;
     }
 }
 @media (min-width: 1800px) {

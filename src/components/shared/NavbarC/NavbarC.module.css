@@ -15,6 +15,12 @@
     align-items: center;
     margin-bottom: 10px;
 }
+.row2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
 .block {
     display: flex;
     align-items: center;
@@ -122,5 +128,8 @@
     .icons {
         width: 20px;
         margin: 0 15px;
+    }
+    .row2 {
+        display: none;
     }
 }

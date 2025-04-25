@@ -1,25 +1,32 @@
 import React from 'react';
 import Image from "next/image";
 import s from './PictureBlock.module.css'
-import logo from '@/static/img/sellout_logo.svg'
-import nb from '@/static/img/zoom.png'
-const PictureBlock = () => {
+const PictureBlock = ({obj, type}) => {
+    const getDirection = () => {
+        if (type === 'row_reverse') {
+            return s.row_reverse
+        }
+        if (type === 'column_reverse') {
+            return s.column_reverse
+        }
+        return s.row
+    }
     return (
-        <div className={s.main_block}>
+        <div className={`${s.main_block} ${getDirection()}`}>
             <div className={s.text_block}>
-                <Image src={logo} alt='' className={s.logo} width={200}/>
+                {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
                 <div className={s.text_cont}>
-                    На нашей платформе представлены сотни тысяч брендовой одежды и обуви,
-                    аксессуаров и прочих товаров. Приобретайте знаковые коллаборации и модели, такие
-                    как Air Jordan 1, Nike x Off-White, Nike x Travis Scott, Air Force 1, Nike Dunk, adidas Yeezy и другие.
-                    Открывайте для себя новые бренды, коллекции и стили. У нас Вы найдете все: лимитированные кроссовки Nike,
-                    Air Jordan и adidas, люксовые сумки Hermes и Chanel, классические образы Loro Piana и Brunello Cucinelli, обувь и одежду для
-                    повседневной носки от New Balance и Puma, спортивную одежду и многое другое.
+                    <div>
+                        <h3>{obj.title}</h3>
+                    </div>
+                    <div>
+                        {obj.content}
+                    </div>
                 </div>
             </div>
             <div className={s.img_block}>
                 <div className={s.img_cont}>
-                    <Image src={nb} alt='' fill={true} className={s.img}/>
+                    <Image src={obj.photo} alt='' fill={true} className={s.img}/>
                 </div>
             </div>
         </div>

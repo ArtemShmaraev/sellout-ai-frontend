@@ -15,7 +15,7 @@ export default function Home() {
             <title>SELLOUT</title>
         </Head>
         <div className={s.cont + ' custom_cont'}>
-            <PictureBlock/>
+            {/*<PictureBlock/>*/}
             <BigPicture reversed={true}/>
             <div className={s.big_pict_block}>
                 <BigPicture vertical={true}/>

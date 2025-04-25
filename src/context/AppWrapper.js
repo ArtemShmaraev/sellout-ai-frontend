@@ -49,6 +49,8 @@ export default function AppWrapper({ children }) {
         const googleToken = getGoogleToken()
         if (googleToken) {
             const res = await googleAuth(googleToken)
+            Cookies.set('access_token', res.access)
+            Cookies.set('refresh_token', res.refresh)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -60,14 +62,13 @@ export default function AppWrapper({ children }) {
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr)
-            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)
             userStore.setFirstName(res.first_name)
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
-            userStore.setGender('female')
+            userStore.setGender('')
         }
     }
     useEffect(() => {
@@ -85,14 +86,18 @@ export default function AppWrapper({ children }) {
                 userStore.setUsername(userData.username)
                 userStore.setFirstName(userData.first_name)
                 userStore.setLastName(userData.last_name)
-                userStore.setGender(userData.gender)
+                if (userData.gender === 'None') {
+                    userStore.setGender('')
+                } else {
+                    userStore.setGender(userData.gender)
+                }
 
             }).catch(() => {
                 Cookies.remove('access_token')
                 Cookies.remove('refresh_token')
             })
         }
-        // authViaGoogle()
+        authViaGoogle()
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
         if (cart) {

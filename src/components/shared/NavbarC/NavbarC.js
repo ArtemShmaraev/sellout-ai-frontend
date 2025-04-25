@@ -61,23 +61,32 @@ const NavbarC = () => {
     const goToCart = () => {
         router.push('/cart')
     }
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
+    const [isDesktop, setIsDesktop] = useState(null)
+    const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
             setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
         }
-    }, [])
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = '') => {
         const cols = []
         let gender = 'any'
         let genderQuery = ''
-        if (userStore.isLogged) {
+        if (userStore.gender) {
             gender = userStore.gender
             genderQuery = `gender=${gender[0].toUpperCase()}&`
         }
-        const obj = basicObj[gender]
+        let obj = basicObj[gender]
         const keys = Object.keys(obj)
         for (let i = 0; i < colNum; i++) {
             let rows = []
@@ -86,7 +95,7 @@ const NavbarC = () => {
                 const rowObj = obj[keys[dataInd]]
                 rows.push(
                     <a
-                        href={`/products?${genderQuery}${query}=${rowObj.query_name}&${constantQuery}`}
+                        href={`/products?${genderQuery}${query}=${rowObj.query_name}${constantQuery}`}
                         onClick={(e) => {
                             e.preventDefault()
                             router.push(`/products?${genderQuery}${query}=${rowObj.query_name}&${constantQuery}`)
@@ -112,25 +121,21 @@ const NavbarC = () => {
         )
         return result
     }
-    const queryGender = userStore.isLogged ? 'gender=' + userStore.gender[0].toUpperCase() + '&' : ''
+    const queryGender = userStore.gender ? '?gender=' + userStore.gender[0].toUpperCase() + '&' : '?'
     return (
         <header className={s.header}>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
                     <div className={s.block1}>
-                        {isDesktop
-                            ?
-                            <>
-                                <p href="" className={s.links}>О нас</p>
-                                <p href="" className={s.links}>Блог</p>
-                                <p href="" className={s.links}>Связаться с нами</p>
-                            </>
-                            :
-                            <>
-                                <Sidebar/>
-                                <SearchModal/>
-                            </>
-                        }
+                        <div className={'desktop_d'}>
+                            <p href="" className={s.links}>О нас</p>
+                            <p href="" className={s.links}>Блог</p>
+                            <p href="" className={s.links}>Связаться с нами</p>
+                        </div>
+                        <div className={'mobile_d'}>
+                            <Sidebar/>
+                            <SearchModal/>
+                        </div>
                     </div>
                     <div className={s.block}>
                         <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25} onClick={goToMainPage}/>
@@ -154,174 +159,172 @@ const NavbarC = () => {
                         <CartIcon/>
                     </div>
                 </div>
-                {isDesktop &&
-                    <div className={s.row1}>
-                        <div className={s.block1}>
-                            <p href="" className={s.links}>Новинки</p>
-                            <p href="" className={s.links}>Рекомендации</p>
-                            <Megamenu className={s.links} label={'Бренды'} link={'/brands'}>
-                                <div className={s.megamenu_row}>
-                                    {
-                                        renderMegamenu(15, 3,
-                                            header['Популярные бренды'], 'line',
-                                            'Популярные бренды'
-                                        )
-                                    }
-                                    {
-                                        renderMegamenu(15, 1,
-                                            header['Коллаборации'], 'collab',
-                                            'Коллаборации'
-                                        )
-                                    }
-                                    <div className={s.img_col}>
-                                        <div>
-                                            <Image src={picture}
-                                                   alt=''
-                                            />
-                                            <div className={s.link_block}>
-                                                <a className={s.img_link}
-                                                   onClick={(e) => {
-                                                       e.preventDefault()
-                                                       router.push('/brands')
-                                                   }}
-                                                >
-                                                    Все бренды
-                                                </a>
-                                            </div>
+                <div className={s.row2}>
+                    <div className={s.block1}>
+                        <p href="" className={s.links}>Новинки</p>
+                        <p href="" className={s.links}>Рекомендации</p>
+                        <Megamenu className={s.links} label={'Бренды'} link={'/brands'}>
+                            <div className={s.megamenu_row}>
+                                {
+                                    renderMegamenu(15, 3,
+                                        header['Популярные бренды'], 'line',
+                                        'Популярные бренды'
+                                    )
+                                }
+                                {
+                                    renderMegamenu(15, 1,
+                                        header['Коллаборации'], 'collab',
+                                        'Коллаборации'
+                                    )
+                                }
+                                <div className={s.img_col}>
+                                    <div>
+                                        <Image src={picture}
+                                               alt=''
+                                        />
+                                        <div className={s.link_block}>
+                                            <a className={s.img_link}
+                                               onClick={(e) => {
+                                                   e.preventDefault()
+                                                   router.push('/brands')
+                                               }}
+                                            >
+                                                Все бренды
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </Megamenu>
-                            <Megamenu className={s.links} label={'Обувь'} link={`/products?${queryGender}category=shoes_category`}>
-                                <div className={s.megamenu_row}>
-                                    {
-                                        renderMegamenu(15, 2,
-                                            header['Популярные линейки обуви'], 'line',
-                                            'Популярные линейки'
-                                        )
-                                    }
-                                    {
-                                        renderMegamenu(13, 1,
-                                            header['Популярные категории обуви'], 'category',
-                                            'Категории'
-                                        )
-                                    }
-                                    {
-                                        renderMegamenu(15, 1,
-                                            header['Популярные бренды обуви'], 'collab',
-                                            'Популярные бренды', 'category=shoes_category'
-                                        )
-                                    }
-                                    <div className={s.img_col}>
-                                        <div>
-                                            <Image src={picture}
-                                                   alt=''
-                                            />
-                                            <div className={s.link_block}>
-                                                <a className={s.img_link}
-                                                   onClick={(e) => {
-                                                       e.preventDefault()
-                                                       router.push('/brands')
-                                                   }}
-                                                >
-                                                    Все бренды
-                                                </a>
-                                            </div>
+                            </div>
+                        </Megamenu>
+                        <Megamenu className={s.links} label={'Обувь'} link={`/products${queryGender}category=shoes_category`}>
+                            <div className={s.megamenu_row}>
+                                {
+                                    renderMegamenu(15, 2,
+                                        header['Популярные линейки обуви'], 'line',
+                                        'Популярные линейки'
+                                    )
+                                }
+                                {
+                                    renderMegamenu(13, 1,
+                                        header['Популярные категории обуви'], 'category',
+                                        'Категории'
+                                    )
+                                }
+                                {
+                                    renderMegamenu(15, 1,
+                                        header['Популярные бренды обуви'], 'collab',
+                                        'Популярные бренды', '&category=shoes_category'
+                                    )
+                                }
+                                <div className={s.img_col}>
+                                    <div>
+                                        <Image src={picture}
+                                               alt=''
+                                        />
+                                        <div className={s.link_block}>
+                                            <a className={s.img_link}
+                                               onClick={(e) => {
+                                                   e.preventDefault()
+                                                   router.push('/brands')
+                                               }}
+                                            >
+                                                Все бренды
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </Megamenu>
-                            <Megamenu className={s.links} label={'Одежда'} link={`/products?${queryGender}category=clothes`}>
-                                <div className={s.megamenu_row}>
-                                    {
-                                        renderMegamenu(15, 2,
-                                            header['Популярные категории одежды'], 'category',
-                                            'Категории'
-                                        )
-                                    }
-                                    {
-                                        renderMegamenu(15, 2,
-                                            header['Популярные бренды одежды'], 'line',
-                                            'Популярные бренды', 'category=clothes'
-                                        )
-                                    }
-                                    <div className={s.img_col}>
-                                        <div>
-                                            <Image src={picture}
-                                                   alt=''
-                                            />
-                                            <div className={s.link_block}>
-                                                <a className={s.img_link}
-                                                   href={`/products?${queryGender}category=clothes`}
-                                                   onClick={(e) => {
-                                                       e.preventDefault()
-                                                       router.push(`/products?${queryGender}category=clothes`)
-                                                   }}
-                                                >
-                                                    Вся одежда
-                                                </a>
-                                            </div>
+                            </div>
+                        </Megamenu>
+                        <Megamenu className={s.links} label={'Одежда'} link={`/products${queryGender}category=clothes`}>
+                            <div className={s.megamenu_row}>
+                                {
+                                    renderMegamenu(15, 2,
+                                        header['Популярные категории одежды'], 'category',
+                                        'Категории'
+                                    )
+                                }
+                                {
+                                    renderMegamenu(15, 2,
+                                        header['Популярные бренды одежды'], 'line',
+                                        'Популярные бренды', '&category=clothes'
+                                    )
+                                }
+                                <div className={s.img_col}>
+                                    <div>
+                                        <Image src={picture}
+                                               alt=''
+                                        />
+                                        <div className={s.link_block}>
+                                            <a className={s.img_link}
+                                               href={`/products?${queryGender}category=clothes`}
+                                               onClick={(e) => {
+                                                   e.preventDefault()
+                                                   router.push(`/products?${queryGender}category=clothes`)
+                                               }}
+                                            >
+                                                Вся одежда
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </Megamenu>
-                            <Megamenu className={s.links} label={'Аксессуары'} link={`/products?${queryGender}category=accessories`}>
-                                <div className={s.megamenu_row}>
-                                    {
-                                        renderMegamenu(15, 2,
-                                            header['Популярные бренды аксессуаров'], 'line',
-                                            'Популярные бренды', 'category=accessories'
-                                        )
-                                    }
-                                    <div className={s.img_col}>
-                                        <div>
-                                            <Image src={picture}
-                                                   alt=''
-                                            />
-                                            <div className={s.link_block}>
-                                                <a className={s.img_link}
-                                                   href={`/products?${queryGender}category=accessories`}
-                                                   onClick={(e) => {
-                                                       e.preventDefault()
-                                                       router.push(`/products?${queryGender}category=accessories`)
-                                                   }}
-                                                >
-                                                    Все аксессуары
-                                                </a>
-                                            </div>
+                            </div>
+                        </Megamenu>
+                        <Megamenu className={s.links} label={'Аксессуары'} link={`/products${queryGender}category=accessories`}>
+                            <div className={s.megamenu_row}>
+                                {
+                                    renderMegamenu(15, 2,
+                                        header['Популярные бренды аксессуаров'], 'line',
+                                        'Популярные бренды', '&category=accessories'
+                                    )
+                                }
+                                <div className={s.img_col}>
+                                    <div>
+                                        <Image src={picture}
+                                               alt=''
+                                        />
+                                        <div className={s.link_block}>
+                                            <a className={s.img_link}
+                                               href={`/products?${queryGender}category=accessories`}
+                                               onClick={(e) => {
+                                                   e.preventDefault()
+                                                   router.push(`/products?${queryGender}category=accessories`)
+                                               }}
+                                            >
+                                                Все аксессуары
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </Megamenu>
-                            {/*<a href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
-                            {/*   onClick={e => {*/}
-                            {/*       e.preventDefault()*/}
-                            {/*       goToFastShip()*/}
-                            {/*   }}*/}
-                            {/*>*/}
-                            {/*    Мгновенная доставка*/}
-                            {/*    <Image src={truck} alt="" className={s.truck}/>*/}
-                            {/*</a>*/}
-                            <a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}
-                               onClick={e => {
-                                   e.preventDefault()
-                                   goToSale()
-                               }}
-                            >Скидки</a>
-                            <a href={`/products?${queryGender}`} className={s.links}
-                               onClick={e => {
-                                   e.preventDefault()
-                                   router.push(`/products?${queryGender}`)
-                               }}
-                            >
-                                Все товары
-                            </a>
-                        </div>
-                        <div>
-                            <ElasticSearchModal/>
-                        </div>
+                            </div>
+                        </Megamenu>
+                        {/*<a href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
+                        {/*   onClick={e => {*/}
+                        {/*       e.preventDefault()*/}
+                        {/*       goToFastShip()*/}
+                        {/*   }}*/}
+                        {/*>*/}
+                        {/*    Мгновенная доставка*/}
+                        {/*    <Image src={truck} alt="" className={s.truck}/>*/}
+                        {/*</a>*/}
+                        <a href={`/products${queryGender}is_sale=is_sale`} className={s.sale_link}
+                           onClick={e => {
+                               e.preventDefault()
+                               goToSale()
+                           }}
+                        >Скидки</a>
+                        <a href={`/products${queryGender}`} className={s.links}
+                           onClick={e => {
+                               e.preventDefault()
+                               router.push(`/products${queryGender}`)
+                           }}
+                        >
+                            Все товары
+                        </a>
                     </div>
-                }
+                    <div>
+                        <ElasticSearchModal/>
+                    </div>
+                </div>
             </div>
         </header>
     );

@@ -68,11 +68,22 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)
         filterStore.setRef(productListRef)
+    }, [products])
+    const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
             setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
         }
-    }, [products])
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     const handleClick = () => {
         if (isDesktop) {
             setIsOpen(!isOpen)
@@ -91,7 +102,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                 <title>Товары</title>
             </Head>
             <div className={`${s.cont} custom_cont`}>
-                <PictureBlock/>
+                <PictureBlock obj={isDesktop ? products.desktop : products.mobile}/>
                 {isDesktop &&
                     <div className={s.filter_sort_row}>
                         <Col lg={10} className='d-flex'>
