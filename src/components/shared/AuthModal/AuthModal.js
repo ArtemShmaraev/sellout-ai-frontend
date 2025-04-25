@@ -242,8 +242,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                         <input type={passShown ? 'text' : 'password'} className={s.input_pass}
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}
-                                               ref={regRef => regRef && regRef.focus()}
-                                               onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+                                               ref={regRef}
                                         />
                                         <Image src={passShown ? eye : eyeCrossed}
                                                alt={'Показать/скрыть пароль'}
@@ -284,8 +283,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                         <input type={passShown ? 'text' : 'password'} className={s.input_pass}
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}
-                                               ref={logRef => logRef && logRef.focus()}
-                                               onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+                                               ref={logRef}
                                         />
                                         <Image src={passShown ? eye : eyeCrossed}
                                                alt={'Показать/скрыть пароль'}
