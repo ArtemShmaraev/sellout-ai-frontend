@@ -4,12 +4,13 @@ import s from '@/styles/BrandsPage.module.css'
 import like from '@/static/icons/heart.svg'
 import Image from "next/image";
 import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
 import Brand from "@/components/pages/brands/Brand";
 import {parse} from "cookie";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -105,6 +106,9 @@ const Brands = ({brands}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Бренды</title>
+            </Head>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.alphabet_block}>
                     <div className={s.alphabet}>

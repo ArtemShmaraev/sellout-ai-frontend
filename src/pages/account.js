@@ -10,6 +10,7 @@ import jwtDecode from "jwt-decode";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import SizeDropdown from "@/components/pages/account/SizeDropdown/SizeDropdown";
 import Cookies from "js-cookie";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -100,6 +101,9 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Личный кабинет</title>
+            </Head>
             <AccountLayout>
                 <div className={s.cont}>
                     <h4 className={s.title}>Личные данные</h4>

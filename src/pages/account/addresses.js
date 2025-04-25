@@ -7,6 +7,7 @@ import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
 import {fetchAddresses} from "@/http/userApi";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -18,6 +19,9 @@ export const getServerSideProps = async (context) => {
 const Addresses = ({addresses}) => {
     return (
         <MainLayout>
+            <Head>
+                <title>Мои адреса</title>
+            </Head>
             <AccountLayout>
                 <div className={s.cont}>
                     <h4 className={s.title}>Адреса</h4>

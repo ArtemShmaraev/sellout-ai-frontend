@@ -11,6 +11,7 @@ import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import jwtDecode from "jwt-decode";
 import {observer} from "mobx-react-lite";
 import Cookies from "js-cookie";
+import Head from "next/head";
 
 
 export const getServerSideProps = async (context) => {
@@ -85,6 +86,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Корзина</title>
+            </Head>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.title_block}>
                     <h3>Корзина</h3>

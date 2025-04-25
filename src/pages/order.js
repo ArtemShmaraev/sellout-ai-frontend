@@ -12,6 +12,7 @@ import {fetchAddresses, fetchUserInfo} from "@/http/userApi";
 import Cookies from "js-cookie";
 import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
 import {useRouter} from "next/router";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -65,6 +66,9 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Оформление заказа</title>
+            </Head>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.section}>
                     <div className={s.main_block}>

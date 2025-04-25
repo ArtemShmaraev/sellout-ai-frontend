@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import s from '../styles/products.module.css'
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
@@ -20,6 +20,8 @@ import {observer} from "mobx-react-lite";
 import {parse} from "cookie";
 import {fetchLastSeen} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
+import Head from "next/head";
+import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -85,8 +87,11 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Товары</title>
+            </Head>
             <div className={`${s.cont} custom_cont`}>
-                <BigPicture/>
+                <PictureBlock/>
                 {isDesktop &&
                     <div className={s.filter_sort_row}>
                         <Col lg={10} className='d-flex'>

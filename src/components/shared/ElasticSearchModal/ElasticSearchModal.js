@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import s from './ElasticSearchModal.module.css'
 import search from '@/static/icons/search.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -14,6 +14,7 @@ const ElasticSearchModal = () => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
+    const inputRef = useRef(null)
     const q = () => {
         const query = {}
         query.q = value
@@ -26,7 +27,11 @@ const ElasticSearchModal = () => {
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
         setValue(str)
-        suggestSearch(str).then(res => setSuggs(res))
+        if (str) {
+            suggestSearch(str).then(res => setSuggs(res))
+        } else {
+            setSuggs([])
+        }
     }
     const clickOnSugg = (url) => {
         router.push('/products?' + url)
@@ -63,6 +68,7 @@ const ElasticSearchModal = () => {
                                                      fetchSuggs(e.target.value)
                                                  }}
                                                  onSubmit={q}
+                                                 ref={inputRef}
                                     />
                                     <div className={s.sug_block}>
                                         {

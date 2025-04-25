@@ -3,11 +3,12 @@ import s from './SearchInput.module.css'
 import icon from '@/static/icons/search.svg'
 import Image from "next/image";
 
-const SearchInput = ({w100, value, onChange, onSubmit}) => {
+const SearchInput = ({w100, value, onChange, onSubmit, ref}) => {
     return (
         <div className={s.input} style={w100 && {width: '100%'}}>
             <form onSubmit={onSubmit}>
                 <input
+                    ref={ref}
                     type="text"
                     onClick={(e) => {
                         e.stopPropagation()

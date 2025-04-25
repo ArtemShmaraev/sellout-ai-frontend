@@ -4,15 +4,18 @@ import {desktopStore} from "@/store/DesktopStore";
 import {filterStore} from "@/store/FilterStore";
 import {adminStore} from "@/store/AdminStore";
 import {userStore} from "@/store/UserStore";
-import {refreshToken} from "@/http/userApi";
+import {googleAuth, refreshToken} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Cookies from 'js-cookie';
 import {cartStore} from "@/store/CartStore";
 import {orderStore} from "@/store/OrderStore";
+import {useRouter} from "next/router";
+import {updateCartFromCookies} from "@/http/cartApi";
 
 export const Context = createContext(null);
 
 export default function AppWrapper({ children }) {
+    const router = useRouter()
     let sharedState = {
         desktopStore,
         productStore,
@@ -21,6 +24,51 @@ export default function AppWrapper({ children }) {
         userStore,
         cartStore,
         orderStore
+    }
+    const getGoogleToken = () => {
+        const path = router.asPath
+        if (!path.includes('#')) {
+            return null
+        }
+        const urlParts = path.split("#");
+        let idToken = null;
+        if (urlParts.length > 1) {
+            const queryParams = urlParts[1].split("&");
+            for (let i = 0; i < queryParams.length; i++) {
+                const paramParts = queryParams[i].split("=");
+                if (paramParts[0] === "id_token") {
+                    idToken = paramParts[1];
+                    break;
+                }
+            }
+        }
+
+        return idToken
+    }
+    const authViaGoogle = async () => {
+        const googleToken = getGoogleToken()
+        if (googleToken) {
+            const res = await googleAuth(googleToken)
+            const cookieCart = Cookies.get('cart')
+            let cartFromBack
+            if (cookieCart) {
+                cartFromBack = await updateCartFromCookies(cookieCart, res.user_id, res.access)
+            } else {
+                cartFromBack = await updateCartFromCookies('', res.user_id, res.access)
+            }
+            cartStore.setCartCnt(cartFromBack.length)
+            let newStr = ''
+            cartFromBack.forEach(el => newStr += el + ' ')
+            Cookies.set('cart', newStr)
+            await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
+            userStore.setIsLogged(true)
+            userStore.setId(res.user_id)
+            userStore.setUsername(res.username)
+            userStore.setFirstName(res.first_name)
+            userStore.setLastName(res.last_name)
+            userStore.setAccessToken(res.access)
+            userStore.setGender('')
+        }
     }
     useEffect(() => {
         const token = Cookies.get('refresh_token')
@@ -44,6 +92,7 @@ export default function AppWrapper({ children }) {
                 Cookies.remove('refresh_token')
             })
         }
+        // authViaGoogle()
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
         if (cart) {

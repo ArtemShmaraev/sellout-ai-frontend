@@ -1,0 +1,22 @@
+.main_block {
+    display: flex;
+    justify-content: space-between;
+    min-height: 40vh;
+}
+.text_block {
+    width: 25%;
+}
+.img_block {
+    width: 70%;
+}
+.img_cont {
+    position: relative;
+    height: 100%;
+}
+.logo {
+    margin-bottom: 15px;
+}
+.img {
+    object-fit: contain;
+    object-position: right top;
+}

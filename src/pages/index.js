@@ -5,10 +5,14 @@ import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBl
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React from "react";
+import Head from "next/head";
 
 export default function Home() {
   return (
     <MainLayout>
+        <Head>
+            <title>SELLOUT</title>
+        </Head>
         <div className={s.cont + ' custom_cont'}>
             <BigPicture/>
             <BigPicture reversed={true}/>

@@ -10,6 +10,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -46,6 +47,9 @@ const Wishlist = ({wishlist}) => {
 
     return (
         <MainLayout>
+            <Head>
+                <title>Избранное</title>
+            </Head>
             <div className={'custom_cont'} style={{marginTop: '130px'}}>
                 <h3>Избранное</h3>
                 {

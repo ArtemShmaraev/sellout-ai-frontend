@@ -117,6 +117,28 @@
     margin: 0;
     color: #b61212;
 }
+.google_block {
+    margin: 10px 0;
+}
+.google_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 6px;
+    width: 45%;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+.google_icon {
+    position: absolute;
+    left: 10px;
+}
 @media (max-width: 1000px) {
     .toggle_btn {
         width: 100%;
