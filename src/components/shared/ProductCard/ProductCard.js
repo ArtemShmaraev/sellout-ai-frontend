@@ -13,7 +13,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 
 const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
-                         id, inWishlist, photosArr, smallCard}) => {
+                         id, inWishlist, photosArr, cardList = false}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
@@ -81,7 +81,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         router.push({pathname, query}, undefined, {scroll: false})
     }
     return (
-        <div className={smallCard ? s.sm_card : s.card} onClick={() => router.push(`/products/${slug}`)}>
+        <div className={cardList ? s.card_list : s.card} onClick={() => router.push(`/products/${slug}`)}>
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>-20%</div>}
@@ -107,7 +107,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 }
             </div>
             {photosArr &&
-                <div className={!smallCard ? s.image_container : s.sm_image_container}
+                <div className={s.image_container}
                      onTouchStart={e => {
                          e.stopPropagation()
                          handleMouseEnter()

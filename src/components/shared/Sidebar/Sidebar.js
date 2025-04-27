@@ -202,11 +202,11 @@ const Sidebar = () => {
                                 {/*    </div>*/}
                                 {/*    <Image src={arrow} alt=""/>*/}
                                 {/*</div>*/}
-                                <div className={s.section_block} onClick={goToSale}
-                                >
-                                    <div className={s.sale}>Скидки</div>
-                                    <Image src={arrow} alt=""/>
-                                </div>
+                                {/*<div className={s.section_block} onClick={goToSale}*/}
+                                {/*>*/}
+                                {/*    <div className={s.sale}>Скидки</div>*/}
+                                {/*    <Image src={arrow} alt=""/>*/}
+                                {/*</div>*/}
                                 <div className={s.section_block}
                                      onClick={() => router.push('/products')}
                                 >

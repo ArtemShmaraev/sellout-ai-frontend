@@ -18,11 +18,21 @@ import {observer} from "mobx-react-lite";
 import picture from "@/static/img/shoe2.png";
 import headerJson from './header.json'
 import CartIcon from "@/components/shared/CartIcon/CartIcon";
+import {fetchNavbarPhoto} from "@/http/mainPageApi";
 
 const NavbarC = () => {
     const {userStore, desktopStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
+    const [photos, setPhotos] = useState({
+        brand: "",
+        shoes: "",
+        clothes: "",
+        accessories: ""
+    })
+    useEffect(() => {
+        fetchNavbarPhoto().then(res => setPhotos(res))
+    }, [])
     const goToMainPage = () => {
         router.push('/')
     }
@@ -178,10 +188,14 @@ const NavbarC = () => {
                                     )
                                 }
                                 <div className={s.img_col}>
-                                    <div>
-                                        <Image src={picture}
-                                               alt=''
-                                        />
+                                    <div className={'w-100'}>
+                                        <div className={s.img_cont}>
+                                            <Image src={photos.brand}
+                                                   alt=''
+                                                   fill={true}
+                                                   className={s.img}
+                                            />
+                                        </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
                                                onClick={(e) => {
@@ -217,18 +231,22 @@ const NavbarC = () => {
                                     )
                                 }
                                 <div className={s.img_col}>
-                                    <div>
-                                        <Image src={picture}
-                                               alt=''
-                                        />
+                                    <div className={'w-100'}>
+                                        <div className={s.img_cont}>
+                                            <Image src={photos.shoes}
+                                                   alt=''
+                                                   fill={true}
+                                                   className={s.img}
+                                            />
+                                        </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
                                                onClick={(e) => {
                                                    e.preventDefault()
-                                                   router.push('/brands')
+                                                   router.push(`/products?${queryGender}category=accessories`)
                                                }}
                                             >
-                                                Все бренды
+                                                Вся обувь
                                             </a>
                                         </div>
                                     </div>
@@ -250,10 +268,14 @@ const NavbarC = () => {
                                     )
                                 }
                                 <div className={s.img_col}>
-                                    <div>
-                                        <Image src={picture}
-                                               alt=''
-                                        />
+                                    <div className={'w-100'}>
+                                        <div className={s.img_cont}>
+                                            <Image src={photos.clothes}
+                                                   alt=''
+                                                   fill={true}
+                                                   className={s.img}
+                                            />
+                                        </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
                                                href={`/products?${queryGender}category=clothes`}
@@ -278,10 +300,14 @@ const NavbarC = () => {
                                     )
                                 }
                                 <div className={s.img_col}>
-                                    <div>
-                                        <Image src={picture}
-                                               alt=''
-                                        />
+                                    <div className={'w-100'}>
+                                        <div className={s.img_cont}>
+                                            <Image src={photos.accessories}
+                                                   alt=''
+                                                   fill={true}
+                                                   className={s.img}
+                                            />
+                                        </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
                                                href={`/products?${queryGender}category=accessories`}
@@ -306,12 +332,12 @@ const NavbarC = () => {
                         {/*    Мгновенная доставка*/}
                         {/*    <Image src={truck} alt="" className={s.truck}/>*/}
                         {/*</a>*/}
-                        <a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}
-                           onClick={e => {
-                               e.preventDefault()
-                               goToSale()
-                           }}
-                        >Скидки</a>
+                        {/*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*/}
+                        {/*   onClick={e => {*/}
+                        {/*       e.preventDefault()*/}
+                        {/*       goToSale()*/}
+                        {/*   }}*/}
+                        {/*>Скидки</a>*/}
                         <a href={`/products${queryGender}`} className={s.links}
                            onClick={e => {
                                e.preventDefault()

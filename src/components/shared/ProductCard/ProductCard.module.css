@@ -7,6 +7,15 @@
     justify-content: flex-start;
     cursor: pointer;
 }
+.card_list {
+    width: 356px;
+    height: 340px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+}
 .icons_block {
     display: flex;
     justify-content: space-between;
@@ -109,6 +118,12 @@
         padding: 0;
         margin: 30px 0;
     }
+    .card_list {
+        width: 180px;
+        height: 275px;
+        padding: 0;
+        margin: 10px 0;
+    }
     .img {
         height: 90px;
         width: 125px;
@@ -117,6 +132,12 @@
 }
 @media (max-width: 400px) {
     .card {
+        width: 180px;
+        height: 275px;
+        padding: 0;
+        margin: 10px 10px;
+    }
+    .card_list {
         width: 49%;
         height: 275px;
         padding: 0;

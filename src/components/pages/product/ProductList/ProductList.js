@@ -22,7 +22,9 @@ const ProductList = ({products, isAdmin}) => {
                                      isSale={el.is_sale}
                                      inWishlist={el.in_wishlist}
                                      photosArr={el.bucket_link}
-                                     key={el.id}/>
+                                     key={el.id}
+                                     cardList={true}
+                        />
                     )
                     :
                     products.map(el =>
@@ -34,7 +36,9 @@ const ProductList = ({products, isAdmin}) => {
                                    lines={el.lines}
                                    mainLine={el.main_line.view_name}
                                    price={el.min_price_product_unit}
-                                   key={el.id}/>
+                                   key={el.id}
+                                   cardList={true}
+                        />
                     )
                 }
 

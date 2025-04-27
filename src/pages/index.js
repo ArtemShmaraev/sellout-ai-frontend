@@ -63,6 +63,7 @@ export default function Home({data}) {
                                      inWishlist={product.in_wishlist}
                                      photosArr={product.bucket_link}
                                      key={product.id}
+                                     smallCard={true}
                         />
                     )
                 })
@@ -70,7 +71,7 @@ export default function Home({data}) {
                     <div className={s.collections}>
                         <div className='d-flex justify-content-between align-items-center'>
                             <div className={s.title_block}>
-                                <p className={s.title}>{el.title}</p>
+                                <h3 className={s.title}>{el.title}</h3>
                             </div>
                             <div>
                                 <a href={'/products?' + el.url} className={s.link}
