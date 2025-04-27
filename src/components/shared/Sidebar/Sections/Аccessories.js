@@ -14,7 +14,7 @@ const Accessories = () => {
         const name = colObj.name
         let gender = 'any'
         let genderQuery = ''
-        if (userStore.isLogged) {
+        if (userStore.gender) {
             gender = userStore.gender
             genderQuery = 'gender=' + gender[0].toUpperCase() + '&'
         }

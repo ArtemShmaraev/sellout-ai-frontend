@@ -22,7 +22,6 @@ const Viewed = ({lastSeen}) => {
                                      inWishlist={el.in_wishlist}
                                      photosArr={el.bucket_link}
                                      key={el.id}
-                                     smallCard={true}
                         />
                     )
                 }

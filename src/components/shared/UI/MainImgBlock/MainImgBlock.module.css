@@ -2,18 +2,15 @@
     display: flex;
     justify-content: space-between;
     min-height: 40vh;
-}
-.row {
-    flex-direction: row;
-}
-.row_reverse {
-    flex-direction: row-reverse;
-}
-.column_reverse {
-    flex-direction: column-reverse;
+    margin: 120px 0;
 }
 .text_block {
     width: 38%;
+}
+.text_cont {
+    border: 1px solid #9A9999;
+    padding: 15px;
+    font-size: 14px;
 }
 .text_cont h3 {
     font-size: 26px;
@@ -23,7 +20,7 @@
 }
 .text {
     margin-top: 25px;
-    font-size: 14px;
+    color: #727272;
 }
 .img_block {
     width: 57%;
@@ -38,6 +35,35 @@
 .img {
     object-fit: contain;
     object-position: right top;
+}
+.btn_block {
+    display: flex;
+}
+.btn {
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 15px;
+    margin-top: -15px;
+}
+.row {
+    flex-direction: row;
+}
+.row_reverse {
+    flex-direction: row-reverse;
+}
+.column_reverse {
+    flex-direction: column-reverse;
+}
+.align_right {
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+.align_left {
+    justify-content: flex-start;
+    padding-left: 30px;
 }
 @media (max-width: 1000px) {
     .main_block {
@@ -59,14 +85,7 @@
         background: white;
         color: #8d8d8d;
         padding: 10px;
-        font-size: 14px;
         margin: -75px 15px 0 15px;
-    }
-    .text_cont h3 {
-        font-size: 26px;
-    }
-    .text_cont a {
-        color: black;
     }
     .img {
         z-index: -1;

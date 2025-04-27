@@ -32,6 +32,7 @@
     font-size: 24px;
     left: 0;
     outline: none;
+    z-index: 1;
 }
 
 .right {
