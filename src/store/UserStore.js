@@ -9,7 +9,7 @@ class UserStore {
         this._lastName = ''
         this._address = ''
         this._post = ''
-        this._gender = 'female'
+        this._gender = ''
         this._accessToken = ''
         makeAutoObservable(this)
     }

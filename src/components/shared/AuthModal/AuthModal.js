@@ -14,6 +14,7 @@ import eyeCrossed from '@/static/icons/eye-slash.svg'
 import InputMask from "react-input-mask";
 import {Context} from "@/context/AppWrapper";
 import google from '@/static/icons/google.svg'
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false}) => {
     const router = useRouter()
@@ -147,6 +148,16 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         setPassShown(!passShown)
         isReg ? regRef.current.focus() : logRef.current.focus()
     }
+    const getGoogleLink = () => {
+        let env = process.env.NODE_ENV
+        if (env === 'development') {
+            return 'https://accounts.google.com/o/oauth2/v2/auth?client_id=853829711600-mok5b6g0aur5ls1hmllelc8spqninqkk.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=id_token&scope=email profile&nonce=1213'
+        }
+        if (env === 'production') {
+            return 'https://sellout.su/api/v1/user/auth/google/'
+        }
+    }
+    getGoogleLink()
     return (
         <div>
             <button
@@ -200,8 +211,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 <h4 className={s.headers}>Зарегистрироваться с помощью...</h4>
                                 <div className={s.google_block}>
                                     <a className={s.google_btn}
-                                       // href={'https://sellout.su/api/v1/user/auth/google/'}
-                                        href={'https://accounts.google.com/o/oauth2/v2/auth?client_id=853829711600-mok5b6g0aur5ls1hmllelc8spqninqkk.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=id_token&scope=email profile&nonce=1213'}
+                                       href={getGoogleLink()}
                                     >
                                         <Image src={google} alt='' className={s.google_icon} width={20}/>
                                         <div>
@@ -313,6 +323,16 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <a href="" className={s.forget_pass}>Забыли пароль?</a>
                                 </div>
                                 <h4 className={s.headers}>Войти с помощью...</h4>
+                                <div className={s.google_block}>
+                                    <a className={s.google_btn}
+                                       href={getGoogleLink()}
+                                    >
+                                        <Image src={google} alt='' className={s.google_icon} width={20}/>
+                                        <div>
+                                            Google
+                                        </div>
+                                    </a>
+                                </div>
                             </Container>
                         }
                     </form>

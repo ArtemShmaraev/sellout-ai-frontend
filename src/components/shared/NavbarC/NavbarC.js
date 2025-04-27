@@ -121,7 +121,7 @@ const NavbarC = () => {
         )
         return result
     }
-    const queryGender = userStore.gender ? '?gender=' + userStore.gender[0].toUpperCase() + '&' : '?'
+    const queryGender = userStore.gender ? '?gender=' + userStore.gender[0].toUpperCase() + '&' : ''
     return (
         <header className={s.header}>
             <div className={'custom_cont'}>
@@ -196,7 +196,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Обувь'} link={`/products${queryGender}category=shoes_category`}>
+                        <Megamenu className={s.links} label={'Обувь'} link={`/products?${queryGender}category=shoes_category`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -235,7 +235,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Одежда'} link={`/products${queryGender}category=clothes`}>
+                        <Megamenu className={s.links} label={'Одежда'} link={`/products?${queryGender}category=clothes`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -269,7 +269,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Аксессуары'} link={`/products${queryGender}category=accessories`}>
+                        <Megamenu className={s.links} label={'Аксессуары'} link={`/products?${queryGender}category=accessories`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -306,7 +306,7 @@ const NavbarC = () => {
                         {/*    Мгновенная доставка*/}
                         {/*    <Image src={truck} alt="" className={s.truck}/>*/}
                         {/*</a>*/}
-                        <a href={`/products${queryGender}is_sale=is_sale`} className={s.sale_link}
+                        <a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}
                            onClick={e => {
                                e.preventDefault()
                                goToSale()

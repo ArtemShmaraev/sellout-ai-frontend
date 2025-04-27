@@ -127,7 +127,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
                                               price={el.final_price}
                                               productId={el.product.id}
                                               unitId={el.id}
-                                              sizeId={el.good_size_platform}
+                                              sizeId={el.view_size_platform}
                                               cardId={ind}
                                               imgSrc={el.product.bucket_link[0].url}
                                               slug={el.product.slug}
