@@ -3,7 +3,9 @@ import Image from "next/image";
 import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
 import logo from '@/static/img/sellout_logo.svg'
+import {useRouter} from "next/router";
 const MainImgBlock = ({obj}) => {
+    const router = useRouter()
     const getDirection = () => {
         if (obj.type === 'right_photo') {
             return s.row_reverse
@@ -34,7 +36,13 @@ const MainImgBlock = ({obj}) => {
                     </div>
                 </div>
                 <div className={`${s.btn_block} ${getAlign()}`}>
-                    <button className={s.btn}>Посмотреть все</button>
+                    <a className={s.btn}
+                       href={`/products?${obj.url}`}
+                       onClick={(e) => {
+                           e.preventDefault()
+                           router.push(`/products?${obj.url}`)
+                       }}
+                    >Посмотреть все</a>
                 </div>
             </div>
             <div className={s.img_block}>

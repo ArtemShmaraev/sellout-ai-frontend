@@ -7,16 +7,16 @@ import s from '@/styles/Home.module.css'
 import React, {useEffect, useState} from "react";
 import Head from "next/head";
 import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
-import {fetchMainPage} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
-    const content = await fetchMainPage()
-    console.log(content)
-    return { props: {content} }
+    const data = await fetchMainPage()
+    return { props: {data} }
 }
-export default function Home({content}) {
+export default function Home({data}) {
+    const [content, setContent] = useState(data)
     const router = useRouter()
     const [isDesktop, setIsDesktop] = useState(null)
     const checkIsDesktop = () => {
@@ -34,6 +34,12 @@ export default function Home({content}) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
+    const getMore = async () => {
+        const newData = await fetchMore()
+        const oldData = content
+        const arr = [...oldData, ...newData]
+        setContent(arr)
+    }
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
@@ -63,13 +69,17 @@ export default function Home({content}) {
                 arr.push(
                     <div className={s.collections}>
                         <div className='d-flex justify-content-between align-items-center'>
-                            <p className={s.title}>{el.title}</p>
-                            <a href={'/products?' + el.url} className={s.link}
-                               onClick={(e) => {
-                                   e.preventDefault()
-                                   router.push(`/products?${el.url}`)
-                               }}
-                            >Посмотреть все</a>
+                            <div className={s.title_block}>
+                                <p className={s.title}>{el.title}</p>
+                            </div>
+                            <div>
+                                <a href={'/products?' + el.url} className={s.link}
+                                   onClick={(e) => {
+                                       e.preventDefault()
+                                       router.push(`/products?${el.url}`)
+                                   }}
+                                >Посмотреть все</a>
+                            </div>
                         </div>
                         <ScrollableBlock>
                             {scrollableBlockArr}
@@ -87,6 +97,9 @@ export default function Home({content}) {
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 {renderPage()}
+                <div className={'d-flex justify-content-center my-5'}>
+                    <button onClick={getMore} className={s.more_btn}>Посмотреть больше</button>
+                </div>
                 <hr className={s.hr}/>
                 <BuyoutModal/>
             </div>

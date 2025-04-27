@@ -11,9 +11,12 @@
 .hr {
     margin: 40px 0;
 }
+.title_block {
+    max-width: 50%;
+}
 .title {
     font-size: 20px;
-    margin-left: 25px;
+    margin-bottom: 0;
 }
 .link {
     text-decoration: underline;
@@ -23,8 +26,23 @@
 .link:hover {
     color: #464646;
 }
-@media (max-width: 1000px) {
+.more_btn {
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 15px;
+    margin-top: -15px;
+}
+@media (max-width: 1200px) {
     .big_pict_block {
         flex-wrap: wrap;
+    }
+    .title {
+        margin-left: 0;
+        font-size: 16px;
     }
 }

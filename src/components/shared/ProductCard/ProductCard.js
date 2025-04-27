@@ -121,6 +121,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                         style={{position: 'absolute', objectFit: 'contain'}}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] ? 'opacity-0' : ''}
                         src={photos[0]} alt="shoe"/>
@@ -129,6 +130,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                             style={{position: 'absolute', objectFit: 'contain'}}
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
+                            loading={'eager'}
                             fill={true}
                             className={isHovered ? '' : 'opacity-0'}
                             src={photos[1]} alt="shoe"/>
@@ -136,9 +138,11 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                 </div>
             }
             <div className={s.text_block}>
-                <div className={`${s.tag}`}>{brandsDisplay(brands)}</div>
-                <div className={`${s.brand}`}>{model || 'No model'}</div>
-                <div className={`${s.name}`}>{colorway}</div>
+                <div className={s.info}>
+                    <div className={`${s.tag}`}>{brandsDisplay(brands)}</div>
+                    <div className={`${s.brand}`}>{model || 'No model'}</div>
+                    <div className={`${s.name}`}>{colorway}</div>
+                </div>
                 <div className={`${s.price_block}`}>
                     <div className={`${s.price}`}>От {price}</div>
                 </div>
