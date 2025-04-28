@@ -1,5 +1,4 @@
 .main_block {
-    display: flex;
     justify-content: space-between;
     min-height: 40vh;
     margin: 120px 0;
@@ -30,7 +29,7 @@
     height: 100%;
 }
 .logo {
-    margin-bottom: 15px;
+
 }
 .img {
     object-fit: contain;
@@ -67,13 +66,10 @@
     justify-content: flex-start;
     padding-left: 30px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .main_block {
         margin: 40px 0;
         flex-direction: column-reverse;
-    }
-    .logo {
-        display: none;
     }
     .text_block, .img_block {
         width: 100%;

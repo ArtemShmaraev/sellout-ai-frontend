@@ -112,6 +112,12 @@
     opacity: 0.85;
     z-index: 4;
 }
+.desktop {
+    display: flex;
+}
+.mobile {
+    display: none;
+}
 @media (max-width: 1200px) {
     .border, .filter_toggle {
         border: none;
@@ -119,6 +125,12 @@
     .modal_btn {
         padding: 5px;
         font-size: 14px;
+    }
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: flex;
     }
 }
 

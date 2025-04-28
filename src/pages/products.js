@@ -102,7 +102,8 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                 <title>Товары</title>
             </Head>
             <div className={`${s.cont} custom_cont`}>
-                <PictureBlock obj={isDesktop ? products.desktop : products.mobile}/>
+                <PictureBlock obj={products.desktop} className={s.desktop}/>
+                <PictureBlock obj={products.mobile} className={s.mobile}/>
                 {isDesktop &&
                     <div className={s.filter_sort_row}>
                         <Col lg={10} className='d-flex'>

@@ -1,5 +1,4 @@
 .main_block {
-    display: flex;
     justify-content: space-between;
     min-height: 40vh;
 }
@@ -33,7 +32,7 @@
     height: 100%;
 }
 .logo {
-    margin-bottom: 15px;
+
 }
 .img {
     object-fit: contain;
@@ -43,9 +42,6 @@
     .main_block {
         margin-top: 20px;
         flex-direction: column-reverse;
-    }
-    .logo {
-        display: none;
     }
     .text_block, .img_block {
         width: 100%;

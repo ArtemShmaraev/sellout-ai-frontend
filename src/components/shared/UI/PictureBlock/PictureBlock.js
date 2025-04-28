@@ -3,7 +3,7 @@ import Image from "next/image";
 import s from './PictureBlock.module.css'
 import parse from "html-react-parser";
 import logo from "@/static/img/sellout_logo.svg";
-const PictureBlock = ({obj, type}) => {
+const PictureBlock = ({obj, className, type}) => {
     const getDirection = () => {
         if (type === 'row_reverse') {
             return s.row_reverse
@@ -14,7 +14,7 @@ const PictureBlock = ({obj, type}) => {
         return s.row
     }
     return (
-        <div className={`${s.main_block} ${getDirection()}`}>
+        <div className={`${className} ${s.main_block} ${getDirection()}`}>
             <div className={s.text_block}>
                 {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
                 <div className={s.text_cont}>

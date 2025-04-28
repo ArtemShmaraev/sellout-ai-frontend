@@ -38,6 +38,12 @@
     padding: 15px;
     margin-top: -15px;
 }
+.desktop {
+    display: flex;
+}
+.mobile {
+    display: none;
+}
 @media (max-width: 1200px) {
     .big_pict_block {
         flex-wrap: wrap;
@@ -45,5 +51,11 @@
     .title {
         margin-left: 0;
         font-size: 20px;
+    }
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: flex;
     }
 }

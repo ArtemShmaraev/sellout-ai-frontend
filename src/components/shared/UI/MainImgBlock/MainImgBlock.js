@@ -4,7 +4,7 @@ import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
 import logo from '@/static/img/sellout_logo.svg'
 import {useRouter} from "next/router";
-const MainImgBlock = ({obj}) => {
+const MainImgBlock = ({obj, className}) => {
     const router = useRouter()
     const getDirection = () => {
         if (obj.type === 'right_photo') {
@@ -20,7 +20,7 @@ const MainImgBlock = ({obj}) => {
     }
 
     return (
-        <div className={`${s.main_block} ${getDirection()}`}>
+        <div className={`${className} ${s.main_block} ${getDirection()}`}>
             <div className={s.text_block}>
                 <div className={s.text_cont}>
                     <div>
@@ -47,7 +47,7 @@ const MainImgBlock = ({obj}) => {
             </div>
             <div className={s.img_block}>
                 <div className={s.img_cont}>
-                    <Image src={obj.photo} alt='' fill={true} className={s.img}/>
+                    <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}/>
                 </div>
             </div>
         </div>

@@ -1,24 +1,23 @@
 import MainLayout from "@/layout/MainLayout";
-import BigPicture from "@/components/shared/BigPicture/BigPicture";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useEffect, useState} from "react";
 import Head from "next/head";
-import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
+    const userAgent = context.req.headers['user-agent'];
     const data = await fetchMainPage()
     return { props: {data} }
 }
 export default function Home({data}) {
     const [content, setContent] = useState(data)
     const router = useRouter()
-    const [isDesktop, setIsDesktop] = useState(null)
+    const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -45,7 +44,10 @@ export default function Home({data}) {
         content.forEach(el => {
             if (el.type === 'photo') {
                 arr.push(
-                    <MainImgBlock obj={isDesktop ? el.desktop : el.mobile}/>
+                    <MainImgBlock obj={el.desktop} className={s.desktop}/>
+                )
+                arr.push(
+                    <MainImgBlock obj={el.mobile} className={s.mobile}/>
                 )
             } else {
                 const scrollableBlockArr = []
