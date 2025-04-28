@@ -101,7 +101,7 @@ export default function Home({data}) {
             <div className={s.cont + ' custom_cont'}>
                 {renderPage()}
                 <div className={'d-flex justify-content-center my-5'}>
-                    <button onClick={getMore} className={s.more_btn}>Посмотреть больше</button>
+                    <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
                 </div>
                 <hr className={s.hr}/>
                 <BuyoutModal/>
