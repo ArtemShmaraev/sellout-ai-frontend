@@ -44,7 +44,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
     ]
     useEffect(() => {
         genders.forEach(el => {
-            if (userData.gender.name === el[1]) {
+            if (userData.gender !== 'None' && userData.gender.name === el[1]) {
                 setSelectedGender(el)
             }
         })
