@@ -105,10 +105,13 @@
 .forget_pass {
     font-size: 15px;
     text-align: center;
-    text-decoration: none;
+    text-decoration: underline;
     color: #727272;
     margin-top: 15px;
     margin-bottom: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
 }
 .forget_pass:hover {
     color: #343434;

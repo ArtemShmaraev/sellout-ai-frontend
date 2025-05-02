@@ -15,6 +15,8 @@ import InputMask from "react-input-mask";
 import {Context} from "@/context/AppWrapper";
 import google from '@/static/icons/google.svg'
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import PasswordInput from "@/components/shared/UI/PasswordInput/PasswordInput";
+import PassEmailModal from "@/components/shared/PassEmailModal/PassEmailModal";
 
 const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false}) => {
     const router = useRouter()
@@ -161,7 +163,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             return 'https://sellout.su/api/v1/user/auth/google/'
         }
     }
-    getGoogleLink()
+    const [passModalShown, setPassModalShown] = useState(false)
     return (
         <div>
             <button
@@ -264,19 +266,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <div>
-                                        <input type={passShown ? 'text' : 'password'} className={s.input_pass}
-                                               value={password}
-                                               onChange={(e) => setPassword(e.target.value)}
-                                               ref={regRef}
-                                        />
-                                        <Image src={passShown ? eye : eyeCrossed}
-                                               alt={'Показать/скрыть пароль'}
-                                               className={s.eye}
-                                               width={20}
-                                               onClick={(e) => changeVisibility(e)}
-                                        />
-                                    </div>
+                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </div>
                                 <div className={s.gender_block}>
                                     <label className={s.label}>Ваш пол:</label>
@@ -305,27 +295,26 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <div>
-                                        <input type={passShown ? 'text' : 'password'} className={s.input_pass}
-                                               value={password}
-                                               onChange={(e) => setPassword(e.target.value)}
-                                               ref={logRef}
-                                        />
-                                        <Image src={passShown ? eye : eyeCrossed}
-                                               alt={'Показать/скрыть пароль'}
-                                               className={s.eye}
-                                               width={20}
-                                               onClick={(e) => changeVisibility(e)}
-                                        />
-                                    </div>
+                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </div>
                                 <button className={s.reg_btn} type={"submit"}>Войти</button>
                                 {wrong &&
                                     <p className={s.validate}>Неверный логин или пароль</p>
                                 }
+
+
                                 <div className='d-flex justify-content-center'>
-                                    <a href="" className={s.forget_pass}>Забыли пароль?</a>
+                                    <button className={s.forget_pass}
+                                            type={'button'}
+                                            onClick={() => {
+                                                setPassModalShown(true)
+                                                setShow(false)
+                                            }}
+                                    >Забыли пароль?</button>
                                 </div>
+
+
+
                                 <h4 className={s.headers}>Войти с помощью...</h4>
                                 <div className={s.google_block}>
                                     <a className={s.google_btn}
@@ -342,6 +331,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                     </form>
                 </Modal.Body>
             </Modal>
+            <PassEmailModal show={passModalShown} onHide={() => setPassModalShown(false)} defEmail={email}/>
         </div>
     );
 };

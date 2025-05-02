@@ -63,6 +63,12 @@ input {
     display: flex;
     align-items: center;
 }
+.red_text {
+    color: #b61212;
+}
+.green_text {
+    color: green;
+}
 /*::-webkit-scrollbar {*/
 /*    -webkit-appearance: none;*/
 /*}*/

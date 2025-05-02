@@ -95,3 +95,24 @@ export async function sendSizeInfo(token, obj) {
     })
     return data
 }
+export async function sendPassEmail(email) {
+    const {data} = await $host.get(`user/send_set_pwd/${email}`)
+    return data
+}
+export async function changePass(uidb64, token, pass) {
+    const obj = {
+        password: pass
+    }
+    const {data} = await $host.post(`user/change_pwd/${uidb64}/${token}`, JSON.stringify(obj))
+    return data
+}
+export async function changePassAccountPage(token, userId, oldPass, newPass) {
+    const obj = {
+        old_password: oldPass,
+        new_password: newPass
+    }
+    const {data} = await $host.post(`user/change_pwd_lk/${userId}`, JSON.stringify(obj), {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

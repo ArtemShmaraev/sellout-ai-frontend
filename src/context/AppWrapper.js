@@ -93,6 +93,8 @@ export default function AppWrapper({ children }) {
                 }
 
             }).catch(() => {
+                userStore.setIsLogged(false)
+                userStore.setGender('')
                 Cookies.remove('access_token')
                 Cookies.remove('refresh_token')
             })

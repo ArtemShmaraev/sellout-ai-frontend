@@ -11,6 +11,7 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import SizeDropdown from "@/components/pages/account/SizeDropdown/SizeDropdown";
 import Cookies from "js-cookie";
 import Head from "next/head";
+import ResetPasswordModal from "@/components/pages/account/ResetPasswordModal/ResetPasswordModal";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -19,7 +20,6 @@ export const getServerSideProps = async (context) => {
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     const sizeTable = await getSizeTable(context.req.headers.cookie)
     const sizeInfo = await fetchSizeInfo(context.req.headers.cookie)
-    console.log(userData)
     return { props: {userData, sizeTable, sizeInfo} }
 }
 const Account = ({userData, sizeTable, sizeInfo}) => {
@@ -99,6 +99,13 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
             obj.height = value
             const res = await sendSizeInfo(token, JSON.stringify(obj))
         }
+    }
+    const [passModalShown, setPassModalShown] = useState(false)
+    const closeModal = () => {
+        setPassModalShown(false)
+    }
+    const toggleModal = () => {
+        setPassModalShown(!passModalShown)
     }
     return (
         <MainLayout>
@@ -191,6 +198,13 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                     >Сохранить изменения</button>
                     {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
                     {fillLines && <div className={s.red_text}>Заполните все поля</div>}
+
+                    <div className={'d-flex justify-content-center mt-2'}>
+                        <button onClick={toggleModal} className={s.change_pass_btn}>
+                            Изменить пароль
+                        </button>
+                    </div>
+                    <ResetPasswordModal show={passModalShown} onHide={closeModal}/>
 
                     <div className={s.text_block}>
                         <div className={s.text_size}>

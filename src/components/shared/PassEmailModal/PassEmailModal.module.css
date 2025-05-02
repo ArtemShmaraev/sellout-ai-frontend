@@ -1,0 +1,31 @@
+.close_block {
+    display: flex;
+    justify-content: flex-end;
+}
+.cross {
+    cursor: pointer;
+}
+.input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #9a9999;
+    border-radius: 7px;
+    padding: 5px;
+    margin: 5px 0;
+}
+.btn {
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    background: black;
+    color: white;
+    padding: 7px;
+    margin-top: 10px;
+}
+.label {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #707070;
+    margin: 10px 0;
+}
