@@ -15,6 +15,7 @@ const ProductList = ({products, isAdmin}) => {
                                      id={el.id}
                                      slug={el.slug}
                                      brands={el.brands}
+                                     collab={el.collab}
                                      colorway={el.colorway}
                                      price={el.min_price_product_unit}
                                      isFastShip={el.is_fast_shipping}
@@ -32,6 +33,7 @@ const ProductList = ({products, isAdmin}) => {
                                    id={el.id}
                                    brands={el.brands}
                                    colorway={el.colorway}
+                                   collab={el.collab}
                                    categories={el.categories}
                                    lines={el.lines}
                                    mainLine={el.main_line.view_name}

@@ -145,7 +145,6 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
                 <BuyoutModal/>
-                <Recommendations/>
                 {lastSeen.length > 0 &&
                     <Viewed lastSeen={lastSeen}/>
                 }

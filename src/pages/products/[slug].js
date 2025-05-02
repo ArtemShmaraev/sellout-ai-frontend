@@ -60,33 +60,19 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
     useEffect(() => {
         productStore.clearAll()
     }, [])
-    const brandsDisplay = (brands) => {
-        if (!brands) {
-            return 'No brand'
-        }
-        for (let i = 0; i < brands.length; i++) {
-            if (brands[i].name === 'Yeezy') {
-                return 'Adidas Yeezy'
-            }
-        }
-        if (brands.length > 1) {
-            let str = brands[0].name
-            for (let i = 1; i < brands.length; i++) {
-                str += ` x ${brands[i].name}`
-            }
-            return str
-        }
-        return brands[0].name
-    }
-    const clickBrand = (brands) => {
-        const query = {}
-        if (brands.length > 1) {
-            query.brand = []
-            for (let i = 0; i < brands.length; i++) {
-                query.brand.push(brands[i].name)
-            }
+    const brandsDisplay = () => {
+        if (product.collab) {
+            return product.collab.name
         } else {
-            query.line = brands[0].name
+            return product.brands[0].name
+        }
+    }
+    const clickBrand = () => {
+        const query = {}
+        if (product.collab) {
+            query.collab = product.collab.query_name
+        } else {
+            query.line = product.brands[0].query_name
         }
         return {
             pathname: '/products',
@@ -151,8 +137,8 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                     <Col lg={7}>
                         {!isDesktop &&
                             <>
-                                <Link href={clickBrand(product.brands)} className={s.brand}
-                                >{brandsDisplay(product.brands)}</Link>
+                                <Link href={clickBrand()} className={s.brand}
+                                >{brandsDisplay()}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div
@@ -209,7 +195,7 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                             <>
                                 <div className={s.modals_block}>
                                     <SizeTable/>
-                                    <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}
+                                    <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>
                                 <SizeChoice prices={prices} productId={product.id}/>
@@ -258,7 +244,7 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                         <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}>
                             <Row>
                                 <Col lg={6}>
-                                    <div className={s.model}>{brandsDisplay(product.brands)}</div>
+                                    <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <p className={s.description}>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto debitis eos
@@ -298,8 +284,8 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                     <Col lg={5}>
                         {isDesktop &&
                             <>
-                                <Link href={clickBrand(product.brands)} className={s.brand}
-                                >{brandsDisplay(product.brands)}</Link>
+                                <Link href={clickBrand()} className={s.brand}
+                                >{brandsDisplay()}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div
@@ -319,7 +305,7 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                                 </div>
                                 <div className={s.modals_block}>
                                     <SizeTable/>
-                                    <SizeHelp model={`${brandsDisplay(product.brands)} ${product.model}`}
+                                    <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>
                                 <SizeChoice prices={prices} productId={product.id}/>
@@ -417,7 +403,6 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                         </div>
                     </Col>
                 </Row>
-                <Recommendations/>
                 {lastSeen.length > 0 &&
                     <Viewed lastSeen={lastSeen}/>
                 }

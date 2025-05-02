@@ -13,7 +13,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import Link from "next/link";
 
 
-const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
+const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale,
                          id, inWishlist, photosArr, cardList = false}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
@@ -28,23 +28,12 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         }
     }, [])
 
-    const brandsDisplay = (brands) => {
-        if (!brands) {
-            return 'No brand'
+    const brandsDisplay = () => {
+        if (collab) {
+            return collab.name
+        } else {
+            return brands[0].name
         }
-        for (let i = 0; i < brands.length; i++) {
-            if (brands[i].name === 'Yeezy') {
-                return 'Adidas Yeezy'
-            }
-        }
-        if (brands.length > 1) {
-            let str = brands[0].name
-            for (let i = 1; i < brands.length; i++) {
-                str += ` x ${brands[i].name}`
-            }
-            return str
-        }
-        return brands[0].name
     }
     const [photos, setPhotos] = useState([])
     useEffect(() => {
@@ -146,7 +135,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
             }
             <div className={s.text_block}>
                 <div className={s.info}>
-                    <div className={`${s.tag}`}>{brandsDisplay(brands)}</div>
+                    <div className={`${s.tag}`}>{brandsDisplay()}</div>
                     <div className={`${s.brand}`}>{model || 'No model'}</div>
                     <div className={`${s.name}`}>{colorway}</div>
                 </div>

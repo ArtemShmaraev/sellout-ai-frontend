@@ -14,6 +14,7 @@ const SimilarProducts = ({products}) => {
                                      id={el.id}
                                      slug={el.slug}
                                      brands={el.brands}
+                                     collab={el.collab}
                                      colorway={el.colorway}
                                      price={el.min_price_product_unit}
                                      isFastShip={el.is_fast_shipping}
