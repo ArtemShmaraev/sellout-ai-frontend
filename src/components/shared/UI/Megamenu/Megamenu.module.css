@@ -1,3 +1,6 @@
+.displayNone {
+    display: none;
+}
 .all {
     display: flex;
     flex-direction: column;

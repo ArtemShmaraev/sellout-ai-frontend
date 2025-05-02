@@ -32,38 +32,6 @@ const NavbarC = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    const goToMainPage = () => {
-        router.push('/')
-    }
-    const goToWishlist = () => {
-        router.push('/wishlist')
-    }
-    const goToFastShip = () => {
-        const query = {}
-        query.is_fast_ship = 'is_fast_ship'
-        if (userStore.isLogged) {
-            query.gender = userStore.gender[0].toUpperCase
-        }
-        router.push(
-            {
-                pathname: '/products',
-                query: query
-            }
-        )
-    }
-    const goToSale = () => {
-        const query = {}
-        query.is_sale = 'is_sale'
-        if (userStore.isLogged) {
-            query.gender = userStore.gender[0].toUpperCase
-        }
-        router.push(
-            {
-                pathname: '/products',
-                query: query
-            }
-        )
-    }
     const [isDesktop, setIsDesktop] = useState(null)
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -138,7 +106,7 @@ const NavbarC = () => {
                     </div>
                     <div className={s.block}>
                         <Link href={'/'}>
-                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25} onClick={goToMainPage}/>
+                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25}/>
                         </Link>
                     </div>
                     <div className={s.block}>
@@ -197,6 +165,7 @@ const NavbarC = () => {
                                                    alt=''
                                                    fill={true}
                                                    className={s.img}
+                                                   loading={'eager'}
                                             />
                                         </div>
                                         <div className={s.link_block}>
@@ -242,6 +211,7 @@ const NavbarC = () => {
                                                    alt=''
                                                    fill={true}
                                                    className={s.img}
+                                                   loading={'eager'}
                                             />
                                         </div>
                                         <div className={s.link_block}>
@@ -282,6 +252,7 @@ const NavbarC = () => {
                                                    alt=''
                                                    fill={true}
                                                    className={s.img}
+                                                   loading={'eager'}
                                             />
                                         </div>
                                         <div className={s.link_block}>
@@ -316,6 +287,7 @@ const NavbarC = () => {
                                                    alt=''
                                                    fill={true}
                                                    className={s.img}
+                                                   loading={'eager'}
                                             />
                                         </div>
                                         <div className={s.link_block}>

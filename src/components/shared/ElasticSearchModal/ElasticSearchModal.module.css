@@ -42,7 +42,7 @@
 }
 .sug_block {
     overflow-y: scroll;
-    max-height: 39vh;
+    max-height: 37vh;
 }
 .sugg {
     display: flex;

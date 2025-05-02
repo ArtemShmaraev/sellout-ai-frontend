@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import s from './Sidebar.module.css'
-import list from '@/static/icons/list.svg'
+import list from '@/static/icons/list2.svg'
 import close from '@/static/icons/x-lg.svg'
 import person from '@/static/icons/person-circle.svg'
 import arrow from '@/static/icons/chevron-right.svg'
@@ -75,54 +75,27 @@ const Sidebar = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
     }
-    const goToAccount = () => {
-        handleClose()
-        router.push('/account')
-    }
-    const goToMainPage = () => {
-        handleClose()
-        router.push('/')
-    }
-    const goToFastShip = () => {
-        handleClose()
-        const query = {}
-        query.is_fast_ship = 'is_fast_ship'
-        router.push(
-            {
-                pathname: '/products',
-                query: query
-            }
-        )
-    }
-    const goToSale = () => {
-        handleClose()
-        const query = {}
-        query.is_sale = 'is_sale'
-        router.push(
-            {
-                pathname: '/products',
-                query: query
-            }
-        )
-    }
+
     const queryGender = userStore.gender ? 'gender=' + userStore.gender[0].toUpperCase() : ''
     return (
         <>
             <button className={s.toggle_btn}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-                <Image width={30} src={list} alt="" className={s.list_icon}/>
+                <Image width={22} src={list} alt="" className={s.list_icon}/>
             </button>
             {isMenuOpen &&
                 <div className={s.sidebar}>
                     <div className={s.sidebar_header}>
-                        <Image alt='' src={logo} height={25} onClick={goToMainPage}/>
+                        <Link href={'/'}>
+                            <Image alt='' src={logo} height={25}/>
+                        </Link>
                         <Image src={close} alt="" onClick={handleClose}/>
                     </div>
                     {
                         userStore.isLogged
                         ?
-                            <a href={'/account'} className={s.auth_block} onClick={goToAccount}>
+                            <Link href={'/account'} className={s.auth_block}>
                                 <div className={s.person_block}>
                                     <Image width={25} src={person} alt="" className={s.person_icon}/>
                                     <div>{userStore.firstName}</div>
@@ -130,7 +103,7 @@ const Sidebar = () => {
                                 <div>
                                     <Image src={arrow} alt=""/>
                                 </div>
-                            </a>
+                            </Link>
                             :
                             <AuthModal>
                                 <div className={s.auth_block}>

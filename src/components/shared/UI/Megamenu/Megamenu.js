@@ -17,7 +17,7 @@ const Megamenu = ({children, className, label, link}) => {
             >
                 {label}
             </Link>
-            {isShown &&
+            <div className={!isShown ? s.displayNone : ''}>
                 <div className={s.all}
                 >
                     <div className={s.megamenu}
@@ -31,7 +31,7 @@ const Megamenu = ({children, className, label, link}) => {
                          onMouseEnter={() => setIsShown(false)}
                     ></div>
                 </div>
-            }
+            </div>
         </div>
     );
 };

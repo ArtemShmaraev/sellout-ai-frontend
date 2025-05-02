@@ -3,7 +3,7 @@
 }
 .alphabet_block {
     position: sticky;
-    top: 90px;
+    top: 100px;
     background: white;
     padding: 20px 0;
 }
@@ -96,7 +96,7 @@
 }
 @media (max-width: 600px) {
     .cont {
-        margin: 70px 0 0 0;
+        margin: 80px 0 0 0;
         padding: 15px;
     }
     .alphabet {

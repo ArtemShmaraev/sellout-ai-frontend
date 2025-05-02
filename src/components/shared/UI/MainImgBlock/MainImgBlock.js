@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Image from "next/image";
 import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
 import logo from '@/static/img/sellout_logo.svg'
 import {useRouter} from "next/router";
+import Link from "next/link";
 const MainImgBlock = ({obj, className}) => {
-    const router = useRouter()
     const getDirection = () => {
         if (obj.type === 'right_photo') {
             return s.row_reverse
@@ -36,13 +36,9 @@ const MainImgBlock = ({obj, className}) => {
                     </div>
                 </div>
                 <div className={`${s.btn_block} ${getAlign()}`}>
-                    <a className={s.btn}
+                    <Link className={s.btn}
                        href={`/products?${obj.url}`}
-                       onClick={(e) => {
-                           e.preventDefault()
-                           router.push(`/products?${obj.url}`)
-                       }}
-                    >Посмотреть все</a>
+                    >{obj.button}</Link>
                 </div>
             </div>
             <div className={s.img_block}>

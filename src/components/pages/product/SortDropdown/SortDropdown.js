@@ -8,7 +8,7 @@ const SortDropdown = () => {
     const sorts = [
         ['По популярности', '-rel_num'],
         ['Случайная подборка', 'random'],
-        ['По новизне', '-release_date'],
+        ['По новизне', '-exact_date'],
         ['По возрастанию цены', 'min_price'],
         ['По убыванию цены', '-min_price']
     ]
@@ -20,6 +20,9 @@ const SortDropdown = () => {
                 setSelectedItem(el[0])
             }
         })
+        if (!selectedItem) {
+            setSelectedItem(sorts[0][0])
+        }
     }, [])
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);

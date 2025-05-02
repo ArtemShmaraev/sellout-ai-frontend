@@ -144,9 +144,13 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
     const regRef = useRef(null)
     const logRef = useRef(null)
     const changeVisibility = (e) => {
-        e.preventDefault()
-        setPassShown(!passShown)
-        isReg ? regRef.current.focus() : logRef.current.focus()
+        e.preventDefault();
+        if (isReg) {
+            regRef.current.focus();
+        } else {
+            logRef.current.focus();
+        }
+        setPassShown(!passShown);
     }
     const getGoogleLink = () => {
         let env = process.env.NODE_ENV
@@ -247,7 +251,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Почта:</label>
-                                    <input type="email" className={s.input}
+                                    <input type="text" className={s.input}
                                            value={email}
                                            onChange={(e) => setEmail(e.target.value)}/>
                                     {!validEmail &&
@@ -291,7 +295,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                             <Container>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Почта:</label>
-                                    <input type="email" className={s.input}
+                                    <input type="text" className={s.input}
                                            value={email}
                                            onChange={(e) => setEmail(e.target.value)}
                                     />

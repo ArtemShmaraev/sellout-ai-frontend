@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import s from './SearchInput.module.css'
 import icon from '@/static/icons/search.svg'
 import cross from '@/static/icons/x-lg-copy.svg'
 import Image from "next/image";
 
-const SearchInput = ({w100, value, onChange, onSubmit, ref, clearFunc = false}) => {
+const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) => {
+    const ref = useRef(null)
+    useEffect(() => {
+        if (autoFocus) {
+            ref.current.focus()
+        }
+    }, []);
     return (
         <div className={s.input} style={w100 && {width: '100%'}}>
             <form onSubmit={onSubmit}>

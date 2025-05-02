@@ -23,7 +23,6 @@ const ElasticSearchModal = () => {
         router.push({pathname, query})
         filterStore.setQ(value)
         setIsOpen(false)
-        setValue('')
     }
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
@@ -37,10 +36,8 @@ const ElasticSearchModal = () => {
     const clearInput = () => {
         setValue('')
     }
-    const clickOnSugg = (url) => {
-        router.push('/products?' + url)
+    const clickOnSugg = () => {
         setIsOpen(false)
-        setValue('')
     }
     return (
         <>
@@ -74,12 +71,14 @@ const ElasticSearchModal = () => {
                                                  onSubmit={q}
                                                  ref={inputRef}
                                                  clearFunc={clearInput}
+                                                 autoFocus={true}
                                     />
                                     <div className={s.sug_block}>
                                         {
                                             suggs.map(el =>
                                                 <Link className={s.sugg}
                                                    href={'/products?' + el.url}
+                                                      onClick={clickOnSugg}
                                                 >
                                                     <div className={s.result}>
                                                         {el.name}
