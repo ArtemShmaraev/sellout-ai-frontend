@@ -27,6 +27,9 @@ const SearchModal = () => {
         setValue(str)
         suggestSearch(str).then(res => setSuggs(res))
     }
+    const clearInput = () => {
+        setValue('')
+    }
     const clickOnSugg = (url) => {
         router.push('/products?' + url)
         setIsOpen(false)
@@ -37,14 +40,13 @@ const SearchModal = () => {
             <button className={s.toggle_btn}
                     onClick={() => setIsOpen(!isOpen)}
             >
-                <Image width={20} src={search} alt=""/>
+                <Image width={25} src={search} alt=""/>
             </button>
             {isOpen &&
                 <div className={s.search_modal}>
                     <div className={s.close}
-                         onClick={() => setIsOpen(false)}
                     >
-                        <Image src={close} alt=""/>
+                        <Image src={close} alt="" onClick={() => setIsOpen(false)}/>
                     </div>
                     <SearchInput w100={true}
                                  value={value}
@@ -52,6 +54,7 @@ const SearchModal = () => {
                                      fetchSuggs(e.target.value)
                                  }}
                                  onSubmit={q}
+                                 clearFunc={clearInput}
                     />
                     <div className={s.sug_block}>
                         {

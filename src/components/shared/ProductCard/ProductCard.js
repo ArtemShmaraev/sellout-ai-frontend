@@ -81,7 +81,14 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         router.push({pathname, query}, undefined, {scroll: false})
     }
     return (
-        <div className={cardList ? s.card_list : s.card} onClick={() => router.push(`/products/${slug}`)}>
+        <a className={cardList ? s.card_list : s.card}
+           onClick={(e) => {
+               e.preventDefault()
+               e.stopPropagation()
+               router.push(`/products/${slug}`)
+           }}
+           href={`/products/${slug}`}
+        >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>-20%</div>}
@@ -92,8 +99,9 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     ?
                     <div className={s.like_block}
                         onClick={(e) => {
-                        e.stopPropagation()
-                        isInWishlist ? deleteFromWL() : addToWL()
+                            e.stopPropagation()
+                            e.preventDefault()
+                            isInWishlist ? deleteFromWL() : addToWL()
                     }}>
                         <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
                     </div>
@@ -147,7 +155,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     <div className={`${s.price}`}>От {price}</div>
                 </div>
             </div>
-        </div>
+        </a>
     );
 };
 

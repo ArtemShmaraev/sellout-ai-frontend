@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: flex-start;
     cursor: pointer;
+    text-decoration: none;
 }
 .card_list {
     width: 356px;
@@ -15,6 +16,7 @@
     flex-direction: column;
     justify-content: flex-start;
     cursor: pointer;
+    text-decoration: none;
 }
 .icons_block {
     display: flex;

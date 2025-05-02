@@ -19,6 +19,7 @@ const AccountLayout = ({children}) => {
         Cookies.set('cart', '')
         Cookies.set('last_seen', '')
         userStore.setIsLogged(false)
+        userStore.setGender('')
         cartStore.setCartCnt(0)
         router.push('/')
     }

@@ -7,7 +7,7 @@
     border: 1px solid darkgrey;
     border-radius: 5px;
     outline: none;
-    padding: 5px 25px 5px 5px;
+    padding: 5px 5px 5px 28px;
 }
 .search::placeholder {
     font-style: italic;
@@ -17,7 +17,14 @@
     position: absolute;
     cursor: pointer;
     top: 50%;
-    right: 5px;
+    left: 6px;
+    transform: translateY(-50%);
+}
+.cross {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    right: 6px;
     transform: translateY(-50%);
 }
 @media (max-width: 1000px) {

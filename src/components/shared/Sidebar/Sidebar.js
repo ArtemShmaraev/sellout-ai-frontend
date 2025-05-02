@@ -104,6 +104,7 @@ const Sidebar = () => {
             }
         )
     }
+    const queryGender = userStore.gender ? 'gender=' + userStore.gender[0].toUpperCase() : ''
     return (
         <>
             <button className={s.toggle_btn}
@@ -120,7 +121,7 @@ const Sidebar = () => {
                     {
                         userStore.isLogged
                         ?
-                            <div className={s.auth_block} onClick={goToAccount}>
+                            <a href={'/account'} className={s.auth_block} onClick={goToAccount}>
                                 <div className={s.person_block}>
                                     <Image width={25} src={person} alt="" className={s.person_icon}/>
                                     <div>{userStore.firstName}</div>
@@ -128,7 +129,7 @@ const Sidebar = () => {
                                 <div>
                                     <Image src={arrow} alt=""/>
                                 </div>
-                            </div>
+                            </a>
                             :
                             <AuthModal>
                                 <div className={s.auth_block}>
@@ -148,16 +149,26 @@ const Sidebar = () => {
                         !isSectionOpen
                         ?
                             <div>
-                                <div className={s.section_block}
+                                <a className={s.section_block}
+                                   href={`/products?new=true&${queryGender}`}
+                                   onClick={(e) => {
+                                       e.preventDefault()
+                                       router.push(`/products?new=true&${queryGender}`)
+                                   }}
                                 >
                                     <div>Новинки</div>
                                     <Image src={arrow} alt=""/>
-                                </div>
-                                <div className={s.section_block}
+                                </a>
+                                <a className={s.section_block}
+                                   href={`/products?recommendations=true&${queryGender}`}
+                                   onClick={(e) => {
+                                       e.preventDefault()
+                                       router.push(`/products?recommendations=true&${queryGender}`)
+                                   }}
                                 >
                                     <div>Рекомендации</div>
                                     <Image src={arrow} alt=""/>
-                                </div>
+                                </a>
                                 <div className={s.section_block}
                                      onClick={() => {
                                          setIsSectionOpen(true)
@@ -207,12 +218,16 @@ const Sidebar = () => {
                                 {/*    <div className={s.sale}>Скидки</div>*/}
                                 {/*    <Image src={arrow} alt=""/>*/}
                                 {/*</div>*/}
-                                <div className={s.section_block}
-                                     onClick={() => router.push('/products')}
+                                <a className={s.section_block}
+                                   href={`/products?${queryGender}`}
+                                   onClick={e => {
+                                       e.preventDefault()
+                                       router.push(`/products?${queryGender}`)
+                                   }}
                                 >
                                     <div>Все товары</div>
                                     <Image src={arrow} alt=""/>
-                                </div>
+                                </a>
                             </div>
                             :
                             <div className={s.section_container}>

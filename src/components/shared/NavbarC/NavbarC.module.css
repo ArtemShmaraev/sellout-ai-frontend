@@ -59,6 +59,7 @@
 .auth_block {
     display: flex;
     cursor: pointer;
+    text-decoration: none;
 }
 .icons {
     width: 25px;
@@ -135,7 +136,7 @@
         transform: translateX(13px);
     }
     .icons {
-        width: 20px;
+        width: 25px;
         margin: 0 15px;
     }
     .row2 {

@@ -19,6 +19,7 @@ export const getServerSideProps = async (context) => {
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     const sizeTable = await getSizeTable(context.req.headers.cookie)
     const sizeInfo = await fetchSizeInfo(context.req.headers.cookie)
+    console.log(userData)
     return { props: {userData, sizeTable, sizeInfo} }
 }
 const Account = ({userData, sizeTable, sizeInfo}) => {
@@ -44,7 +45,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
     ]
     useEffect(() => {
         genders.forEach(el => {
-            if (userData.gender !== 'None' && userData.gender.name === el[1]) {
+            if (userData.gender && userData.gender.name === el[1]) {
                 setSelectedGender(el)
             }
         })

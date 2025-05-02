@@ -33,6 +33,9 @@ const ElasticSearchModal = () => {
             setSuggs([])
         }
     }
+    const clearInput = () => {
+        setValue('')
+    }
     const clickOnSugg = (url) => {
         router.push('/products?' + url)
         setIsOpen(false)
@@ -69,6 +72,7 @@ const ElasticSearchModal = () => {
                                                  }}
                                                  onSubmit={q}
                                                  ref={inputRef}
+                                                 clearFunc={clearInput}
                                     />
                                     <div className={s.sug_block}>
                                         {

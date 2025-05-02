@@ -131,7 +131,7 @@ const NavbarC = () => {
         )
         return result
     }
-    const queryGender = userStore.gender ? '?gender=' + userStore.gender[0].toUpperCase() + '&' : ''
+    const queryGender = userStore.gender ? 'gender=' + userStore.gender[0].toUpperCase() : ''
     return (
         <header className={s.header}>
             <div className={'custom_cont'}>
@@ -142,23 +142,25 @@ const NavbarC = () => {
                             <p href="" className={s.links}>Блог</p>
                             <p href="" className={s.links}>Связаться с нами</p>
                         </div>
-                        <div className={'mobile_d'}>
+                        <div className={'mobile_d align-items-center'}>
                             <Sidebar/>
                             <SearchModal/>
                         </div>
                     </div>
                     <div className={s.block}>
-                        <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25} onClick={goToMainPage}/>
+                        <a href={'/'}>
+                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25} onClick={goToMainPage}/>
+                        </a>
                     </div>
                     <div className={s.block}>
                         <Image width={25} src={like} alt="" className={s.icons} onClick={goToWishlist}/>
                         {isDesktop &&
                         userStore.isLogged
                             ?
-                            <div onClick={goToAccount} className={s.auth_block}>
+                            <a href={'/account'} onClick={goToAccount} className={s.auth_block}>
                                 <Image width={25} src={person} alt="" className={s.icons}/>
                                 <div className={s.name}>{userStore.firstName}</div>
-                            </div>
+                            </a>
                             :
                             isDesktop &&
                             <AuthModal>
@@ -171,8 +173,18 @@ const NavbarC = () => {
                 </div>
                 <div className={s.row2}>
                     <div className={s.block1}>
-                        <p href="" className={s.links}>Новинки</p>
-                        <p href="" className={s.links}>Рекомендации</p>
+                        <a href={`/products?new=true&${queryGender}`}
+                           onClick={(e) => {
+                               e.preventDefault()
+                               router.push(`/products?new=true&${queryGender}`)
+                           }}
+                           className={s.links}>Новинки</a>
+                        <a href={`/products?recommendations=true&${queryGender}`}
+                           onClick={(e) => {
+                               e.preventDefault()
+                               router.push(`/products?recommendations=true&${queryGender}`)
+                           }}
+                           className={s.links}>Рекомендации</a>
                         <Megamenu className={s.links} label={'Бренды'} link={'/brands'}>
                             <div className={s.megamenu_row}>
                                 {
@@ -198,6 +210,7 @@ const NavbarC = () => {
                                         </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
+                                               href={'/brands'}
                                                onClick={(e) => {
                                                    e.preventDefault()
                                                    router.push('/brands')
@@ -210,7 +223,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Обувь'} link={`/products?${queryGender}category=shoes_category`}>
+                        <Megamenu className={s.links} label={'Обувь'} link={`/products?category=shoes_category&${queryGender}`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -241,9 +254,10 @@ const NavbarC = () => {
                                         </div>
                                         <div className={s.link_block}>
                                             <a className={s.img_link}
+                                               href={`/products?${queryGender}category=shoes_category`}
                                                onClick={(e) => {
                                                    e.preventDefault()
-                                                   router.push(`/products?${queryGender}category=accessories`)
+                                                   router.push(`/products?${queryGender}category=shoes_category`)
                                                }}
                                             >
                                                 Вся обувь
@@ -253,7 +267,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Одежда'} link={`/products?${queryGender}category=clothes`}>
+                        <Megamenu className={s.links} label={'Одежда'} link={`/products?category=clothes&${queryGender}`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -291,7 +305,7 @@ const NavbarC = () => {
                                 </div>
                             </div>
                         </Megamenu>
-                        <Megamenu className={s.links} label={'Аксессуары'} link={`/products?${queryGender}category=accessories`}>
+                        <Megamenu className={s.links} label={'Аксессуары'} link={`/products?category=accessories&${queryGender}`}>
                             <div className={s.megamenu_row}>
                                 {
                                     renderMegamenu(15, 2,
@@ -338,10 +352,10 @@ const NavbarC = () => {
                         {/*       goToSale()*/}
                         {/*   }}*/}
                         {/*>Скидки</a>*/}
-                        <a href={`/products${queryGender}`} className={s.links}
+                        <a href={`/products?${queryGender}`} className={s.links}
                            onClick={e => {
                                e.preventDefault()
-                               router.push(`/products${queryGender}`)
+                               router.push(`/products?${queryGender}`)
                            }}
                         >
                             Все товары
