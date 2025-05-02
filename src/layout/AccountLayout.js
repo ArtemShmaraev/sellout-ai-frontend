@@ -8,6 +8,7 @@ import geo from '@/static/icons/geo-alt.svg'
 import Image from "next/image";
 import {observer} from "mobx-react-lite";
 import AccountNavbar from "@/components/pages/account/AccountNavbar/AccountNavbar";
+import Link from "next/link";
 
 const AccountLayout = ({children}) => {
     const {userStore, cartStore} = useContext(Context)
@@ -49,40 +50,26 @@ const AccountLayout = ({children}) => {
                 {isDesktop
                     ?
                     <div className={s.nav_block}>
-                        <a href="/account" className={s.nav_link}
-                           onClick={(e) => {
-                               e.preventDefault()
-                               router.push('/account')
-                           }}
+                        <Link href="/account" className={s.nav_link}
                         >
                             <div className={makeBold('account')}>Личные данные</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
-                        </a>
-                        <a href="/account/addresses" className={s.nav_link}
-                           onClick={(e) => {
-                               e.preventDefault()
-                               router.push('/account/addresses')
-                           }}
+                        </Link>
+                        <Link href="/account/addresses" className={s.nav_link}
                         >
                             <div className={makeBold('addresses')}>Адреса</div>
                             <Image src={geo} alt='' className={s.icon} width={20}/>
-                        </a>
-                        <a href="" className={s.nav_link}
-                           onClick={(e) => {
-                               e.preventDefault()
-                               router.push('/account/orders')
-                           }}>
+                        </Link>
+                        <Link href="/account/orders" className={s.nav_link}
+                        >
                             <div className={makeBold('orders')}>Заказы</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
-                        </a>
-                        <a href="" className={s.nav_link}
-                           onClick={(e) => {
-                               e.preventDefault()
-                               router.push('/account/addresses')
-                           }}>
+                        </Link>
+                        <Link href="" className={s.nav_link}
+                        >
                             <div>Личные данные</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
-                        </a>
+                        </Link>
                     </div>
                     :
                     <>

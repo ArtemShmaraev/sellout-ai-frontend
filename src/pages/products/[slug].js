@@ -29,6 +29,7 @@ import {addLastSeen, fetchLastSeen} from "@/http/userApi";
 import Viewed from "@/components/pages/product/Viewed/Viewed";
 import jwtDecode from "jwt-decode";
 import SimilarProducts from "@/components/pages/product/SimilarProducts/SimilarProducts";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -87,10 +88,10 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
         } else {
             query.line = brands[0].name
         }
-        router.push({
+        return {
             pathname: '/products',
             query: query
-        })
+        }
     }
     useEffect(() => {
         const width = window.innerWidth
@@ -150,9 +151,8 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                     <Col lg={7}>
                         {!isDesktop &&
                             <>
-                                <a className={s.brand}
-                                   onClick={() => clickBrand(product.brands)}
-                                >{brandsDisplay(product.brands)}</a>
+                                <Link href={clickBrand(product.brands)} className={s.brand}
+                                >{brandsDisplay(product.brands)}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div
@@ -298,9 +298,8 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                     <Col lg={5}>
                         {isDesktop &&
                             <>
-                                <a className={s.brand}
-                                   onClick={() => clickBrand(product.brands)}
-                                >{brandsDisplay(product.brands)}</a>
+                                <Link href={clickBrand(product.brands)} className={s.brand}
+                                >{brandsDisplay(product.brands)}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 <div

@@ -11,6 +11,7 @@ import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Head from "next/head";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -65,9 +66,8 @@ const Wishlist = ({wishlist}) => {
                                     !wishlist.length &&
                                     <div>
                                         <p className={s.empty_text}>Ваш список избранного пуст</p>
-                                        <button className={s.button}
-                                                onClick={goToProductPage}
-                                        >За покупками</button>
+                                        <Link href={'/products'} className={s.button}
+                                        >За покупками</Link>
                                     </div>
                                 }
                                 {wishlist.map(el =>

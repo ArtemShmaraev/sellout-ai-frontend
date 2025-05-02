@@ -8,9 +8,10 @@
     outline: none;
     border: none;
     border-radius: 7px;
-    padding: 7px;
+    padding: 10px;
     margin-bottom: 30px;
     cursor: pointer;
+    text-decoration: none;
 }
 .wishlist_cont {
     display: flex;

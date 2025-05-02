@@ -8,6 +8,7 @@ import SearchInput from "@/components/shared/UI/SearchInput/SearchInput";
 import {useRouter} from "next/router";
 import {suggestSearch} from "@/http/productsApi";
 import {Context} from "@/context/AppWrapper";
+import Link from "next/link";
 
 const ElasticSearchModal = () => {
     const {filterStore} = useContext(Context)
@@ -77,12 +78,8 @@ const ElasticSearchModal = () => {
                                     <div className={s.sug_block}>
                                         {
                                             suggs.map(el =>
-                                                <a className={s.sugg}
+                                                <Link className={s.sugg}
                                                    href={'/products?' + el.url}
-                                                   onClick={(e) => {
-                                                       e.preventDefault()
-                                                       clickOnSugg(el.url)
-                                                   }}
                                                 >
                                                     <div className={s.result}>
                                                         {el.name}
@@ -90,7 +87,7 @@ const ElasticSearchModal = () => {
                                                     <div className={s.type}>
                                                         {el.type}
                                                     </div>
-                                                </a>
+                                                </Link>
                                             )
                                         }
                                     </div>

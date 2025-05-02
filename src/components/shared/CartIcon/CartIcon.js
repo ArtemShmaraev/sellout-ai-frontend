@@ -1,19 +1,15 @@
 import React, {useContext} from 'react';
-import {useRouter} from "next/router";
 import cart from "@/static/icons/bag.svg";
 import s from "./CartIcon.module.css"
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
+import Link from "next/link";
 
 const CartIcon = () => {
-    const router = useRouter()
     const {cartStore} = useContext(Context)
-    const goToCart = () => {
-        router.push('/cart')
-    }
     return (
-        <div className={s.icons} onClick={goToCart}>
+        <Link className={s.icons} href={'/cart'}>
             <Image width={25} src={cart} alt=""/>
             {
                 cartStore.cartCnt > 0 &&
@@ -21,7 +17,7 @@ const CartIcon = () => {
                     {cartStore.cartCnt}
                 </div>
             }
-        </div>
+        </Link>
     );
 };
 

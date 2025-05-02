@@ -1,25 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import s from './Footer.module.css'
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import tg from '@/static/icons/telegram.png'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'
-import {useRouter} from "next/router";
+import Link from "next/link";
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
-    const router = useRouter()
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1000) {
             setIsDesktop(false)
         }
     }, [isDesktop])
-    const goToFaq = (e) => {
-        e.preventDefault()
-        router.push('/faq')
-    }
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>
@@ -28,20 +23,20 @@ const Footer = () => {
                     <Row>
                         <Col lg={4}>
                             <h4>Sellout</h4>
-                            <a href="" className={s.footer_link}>О нас</a>
-                            <a href="" className={s.footer_link}>Блог</a>
-                            <a href="" className={s.footer_link}>Контакты</a>
+                            <Link href="" className={s.footer_link}>О нас</Link>
+                            <Link href="" className={s.footer_link}>Блог</Link>
+                            <Link href="" className={s.footer_link}>Контакты</Link>
                         </Col>
                         <Col lg={4}>
                             <h4>Помощь</h4>
-                            <a href="" className={s.footer_link}>Как мы работаем?</a>
-                            <a href="" className={s.footer_link}>Гарантии</a>
-                            <a href="" className={s.footer_link}>Оплата</a>
-                            <a href="" className={s.footer_link}>Возврат</a>
+                            <Link href="" className={s.footer_link}>Как мы работаем?</Link>
+                            <Link href="" className={s.footer_link}>Гарантии</Link>
+                            <Link href="" className={s.footer_link}>Оплата</Link>
+                            <Link href="" className={s.footer_link}>Возврат</Link>
                         </Col>
                         <Col lg={4}>
                             <h4>Остались вопросы?</h4>
-                            <a href="/faq" className={s.footer_link} onClick={e => goToFaq(e)}>FAQ</a>
+                            <Link href="/faq" className={s.footer_link}>FAQ</Link>
                             <p className={s.footer_text}>Или свяжитесь с нами</p>
                             <p className={s.footer_text}>Почта: support@sellout.su</p>
                             <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>
@@ -61,7 +56,7 @@ const Footer = () => {
                             <a href="" className={s.footer_link}>Возврат</a>
                         </FooterDropdown>
                         <FooterDropdown header={'Остались вопросы?'}>
-                            <a href="/faq" className={s.footer_link} onClick={e => goToFaq(e)}>FAQ</a>
+                            <a href="/faq" className={s.footer_link}>FAQ</a>
                             <p className={s.footer_text}>Или свяжитесь с нами</p>
                             <p className={s.footer_text}>Почта: support@sellout.su</p>
                             <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>

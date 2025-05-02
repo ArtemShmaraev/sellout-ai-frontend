@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from '@/styles/Cart.module.css'
 import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
@@ -12,6 +12,7 @@ import jwtDecode from "jwt-decode";
 import {observer} from "mobx-react-lite";
 import Cookies from "js-cookie";
 import Head from "next/head";
+import Link from "next/link";
 
 
 export const getServerSideProps = async (context) => {
@@ -55,9 +56,6 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
-    const goToProductsPage = () => {
-        router.push('/products')
-    }
     const sendPromo = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')
@@ -92,9 +90,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.title_block}>
                     <h3>Корзина</h3>
-                    <a onClick={goToProductsPage}
+                    <Link href={'/products'}
                        className={s.link}
-                    >Продолжить покупки</a>
+                    >Продолжить покупки</Link>
                 </div>
                 <div>
                     <div>
@@ -109,10 +107,10 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
                         }
                     </div>
                     {!(productUnits.product_units.length) &&
-                        <button
-                            onClick={goToProductsPage}
+                        <Link
+                            href={'/products'}
                             className={s.shop_button}
-                        >За покупками</button>
+                        >За покупками</Link>
                     }
                 </div>
                 {

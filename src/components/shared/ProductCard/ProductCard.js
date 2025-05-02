@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import Link from "next/link";
 
 
 const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip, isSale,
@@ -81,12 +82,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
         router.push({pathname, query}, undefined, {scroll: false})
     }
     return (
-        <a className={cardList ? s.card_list : s.card}
-           onClick={(e) => {
-               e.preventDefault()
-               e.stopPropagation()
-               router.push(`/products/${slug}`)
-           }}
+        <Link className={cardList ? s.card_list : s.card}
            href={`/products/${slug}`}
         >
             <div className={s.icons_block}>
@@ -99,14 +95,17 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     ?
                     <div className={s.like_block}
                         onClick={(e) => {
-                            e.stopPropagation()
                             e.preventDefault()
+                            e.stopPropagation()
                             isInWishlist ? deleteFromWL() : addToWL()
                     }}>
                         <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
                     </div>
                     :
-                    <div onClick={e => e.stopPropagation()} className={s.like_block}>
+                    <div onClick={e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }} className={s.like_block}>
                         <AuthModal fromWishlist={true}>
                             <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}
                             />
@@ -155,7 +154,7 @@ const ProductCard = ({model, brands, colorway, price, slug, isReturn, isFastShip
                     <div className={`${s.price}`}>От {price}</div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };
 

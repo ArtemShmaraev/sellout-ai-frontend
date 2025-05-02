@@ -16,6 +16,7 @@ import Brand from './Sections/Brand'
 import Clothes from "@/components/shared/Sidebar/Sections/Clothes";
 import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
 import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
+import Link from "next/link";
 
 const Sidebar = () => {
     const header = headerJson
@@ -151,20 +152,12 @@ const Sidebar = () => {
                             <div>
                                 <a className={s.section_block}
                                    href={`/products?new=true&${queryGender}`}
-                                   onClick={(e) => {
-                                       e.preventDefault()
-                                       router.push(`/products?new=true&${queryGender}`)
-                                   }}
                                 >
                                     <div>Новинки</div>
                                     <Image src={arrow} alt=""/>
                                 </a>
                                 <a className={s.section_block}
                                    href={`/products?recommendations=true&${queryGender}`}
-                                   onClick={(e) => {
-                                       e.preventDefault()
-                                       router.push(`/products?recommendations=true&${queryGender}`)
-                                   }}
                                 >
                                     <div>Рекомендации</div>
                                     <Image src={arrow} alt=""/>
@@ -220,10 +213,6 @@ const Sidebar = () => {
                                 {/*</div>*/}
                                 <a className={s.section_block}
                                    href={`/products?${queryGender}`}
-                                   onClick={e => {
-                                       e.preventDefault()
-                                       router.push(`/products?${queryGender}`)
-                                   }}
                                 >
                                     <div>Все товары</div>
                                     <Image src={arrow} alt=""/>
@@ -249,9 +238,9 @@ const Sidebar = () => {
                     }
                     <div className={s.sidebar_footer}>
                         <div className={s.col}>
-                            <a href="" className={s.sidebar_links}>О нас</a>
-                            <a href="" className={s.sidebar_links}>Блог</a>
-                            <a href="" className={s.sidebar_links}>Контакты</a>
+                            <Link href="" className={s.sidebar_links}>О нас</Link>
+                            <Link href="" className={s.sidebar_links}>Блог</Link>
+                            <Link href="" className={s.sidebar_links}>Контакты</Link>
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Мы в социальных сетях:</h4>
@@ -263,14 +252,14 @@ const Sidebar = () => {
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Помощь</h4>
-                            <a href="" className={s.sidebar_links}>Как мы работаем?</a>
-                            <a href="" className={s.sidebar_links}>Гарантии</a>
-                            <a href="" className={s.sidebar_links}>Оплата</a>
-                            <a href="" className={s.sidebar_links}>Возврат</a>
+                            <Link href="" className={s.sidebar_links}>Как мы работаем?</Link>
+                            <Link href="" className={s.sidebar_links}>Гарантии</Link>
+                            <Link href="" className={s.sidebar_links}>Оплата</Link>
+                            <Link href="" className={s.sidebar_links}>Возврат</Link>
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Остались вопросы?</h4>
-                            <a href="" className={s.sidebar_links}>FAQ</a>
+                            <Link href={'/faq'} className={s.sidebar_links}>FAQ</Link>
                             <p className={s.sidebar_text}>Или свяжитесь с нами</p>
                             <p className={s.sidebar_text}>Почта: support@sellout.su</p>
                             <p className={s.sidebar_text}>Телефон: +7(916)114-92-27</p>

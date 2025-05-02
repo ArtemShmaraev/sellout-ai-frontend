@@ -41,15 +41,14 @@ const ProductList = ({products, isAdmin}) => {
                         />
                     )
                 }
-
-            </div>
-            {products.length === 0 &&
-                <div className={s.nothing}>
-                    <div className='text-center'>
-                        Товары по вашему запросу не найдены
+                {products.length === 0 &&
+                    <div className={s.nothing}>
+                        <div className='text-center'>
+                            Товары по вашему запросу не найдены
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     );
 };

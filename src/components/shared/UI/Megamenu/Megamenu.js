@@ -1,28 +1,22 @@
 import React, {useRef, useState} from 'react';
 import s from './Megamenu.module.css'
-import {useRouter} from "next/router";
+import Link from "next/link";
 
 const Megamenu = ({children, className, label, link}) => {
-    const router = useRouter()
     const ref = useRef(null)
     const [isShown, setIsShown] = useState(false)
-    const clickLabel = (e) => {
-        e.preventDefault()
-        router.push(link)
-    }
     return (
         <div
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
         >
-            <a
+            <Link
                 href={link}
                 className={className}
                 ref={ref}
-                onClick={(e) => clickLabel(e)}
             >
                 {label}
-            </a>
+            </Link>
             {isShown &&
                 <div className={s.all}
                 >
