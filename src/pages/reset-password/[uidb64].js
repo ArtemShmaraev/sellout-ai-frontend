@@ -1,7 +1,7 @@
 import React from 'react';
 import MainLayout from "@/layout/MainLayout";
 
-const Token = () => {
+const Uidb64 = () => {
     return (
         <MainLayout>
             <div style={{marginTop: 180}}>
@@ -9,4 +9,4 @@ const Token = () => {
         </MainLayout>
     );
 };
-export default Token;
+export default Uidb64;
