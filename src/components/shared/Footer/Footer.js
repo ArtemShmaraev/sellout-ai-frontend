@@ -85,8 +85,9 @@ const Footer = () => {
                         <p className={s.footer_text}>&#9400; SELLOUT, 2023</p>
                     </div>
                     <div className={s.footer_bottom}>
-                        <a href="" className={s.dark_links}>Публичная оферта</a>
-                        <a href="" className={s.dark_links}>Политика конфидециальности</a>
+                        <a href="" className={s.dark_links}>Агентский договор</a>
+                        <a href="" className={s.dark_links}>Пользовательский договор</a>
+                        <a href="" className={s.dark_links}>Политика конфиденциальности</a>
                     </div>
                 </div>
             </div>

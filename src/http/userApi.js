@@ -95,6 +95,12 @@ export async function sendSizeInfo(token, obj) {
     })
     return data
 }
+export async function confirmEmail(token, userId, url) {
+    const {data} = await $host.get(`user/send_verify_email/${userId}?url=${url}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function sendPassEmail(email) {
     const {data} = await $host.get(`user/send_set_pwd/${email}`)
     return data

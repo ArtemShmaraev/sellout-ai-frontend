@@ -5,7 +5,7 @@ import close from '@/static/icons/x-lg.svg'
 import RadioGroup from "../UI/RadioGroup/RadioGroup";
 import CustomCheckbox from "../UI/CustoCheckbox/CustomCheckbox";
 import Image from 'next/image'
-import {login, registration} from "@/http/userApi";
+import {confirmEmail, login, registration} from "@/http/userApi";
 import {updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
@@ -97,6 +97,9 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
             userStore.setGender(res.gender)
+
+
+            await confirmEmail(res.access, res.user_id, window.location.href)
             setShow(false)
         } catch (e) {
             setEmailBusy(true)
