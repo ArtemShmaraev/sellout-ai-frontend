@@ -122,3 +122,9 @@ export async function changePassAccountPage(token, userId, oldPass, newPass) {
     })
     return data
 }
+export async function fetchFavoriteBrands(token, userId) {
+    const {data} = await $host.get(`user/favorite_brand/${userId}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

@@ -1,3 +1,16 @@
 .breadcrumb {
-    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.link {
+    color: #8d8d8d;
+}
+.arrow {
+    margin: 0 5px;
+}
+@media (max-width: 700px) {
+    .link {
+        font-size: 12px;
+    }
 }

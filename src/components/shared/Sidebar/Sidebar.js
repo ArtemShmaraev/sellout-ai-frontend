@@ -86,39 +86,41 @@ const Sidebar = () => {
             </button>
             {isMenuOpen &&
                 <div className={s.sidebar}>
-                    <div className={s.sidebar_header}>
-                        <Link href={'/'}>
-                            <Image alt='' src={logo} height={25}/>
-                        </Link>
-                        <Image src={close} alt="" onClick={handleClose}/>
-                    </div>
-                    {
-                        userStore.isLogged
-                        ?
-                            <Link href={'/account'} className={s.auth_block}>
-                                <div className={s.person_block}>
-                                    <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                    <div>{userStore.firstName}</div>
-                                </div>
-                                <div>
-                                    <Image src={arrow} alt=""/>
-                                </div>
+                    <div className={s.header_block}>
+                        <div className={s.sidebar_header}>
+                            <Link href={'/'}>
+                                <Image alt='' src={logo} height={25}/>
                             </Link>
-                            :
-                            <AuthModal>
-                                <div className={s.auth_block}>
+                            <Image src={close} alt="" onClick={handleClose}/>
+                        </div>
+                        {
+                            userStore.isLogged
+                                ?
+                                <Link href={'/account'} className={s.auth_block}>
                                     <div className={s.person_block}>
                                         <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                        <div>Войдите</div>
+                                        <div>{userStore.firstName}</div>
                                     </div>
                                     <div>
                                         <Image src={arrow} alt=""/>
                                     </div>
-                                </div>
-                            </AuthModal>
+                                </Link>
+                                :
+                                <AuthModal>
+                                    <div className={s.auth_block}>
+                                        <div className={s.person_block}>
+                                            <Image width={25} src={person} alt="" className={s.person_icon}/>
+                                            <div>Войдите</div>
+                                        </div>
+                                        <div>
+                                            <Image src={arrow} alt=""/>
+                                        </div>
+                                    </div>
+                                </AuthModal>
 
-                    }
-                    <hr/>
+                        }
+                        <hr/>
+                    </div>
                     {
                         !isSectionOpen
                         ?

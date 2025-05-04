@@ -7,10 +7,9 @@ import {Context} from "@/context/AppWrapper";
 import {addToFavouriteBrands, deleteFavouriteBrands} from "@/http/wishlistAPI";
 import like_fill from "@/static/icons/heart-fill.svg";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
-import {useRouter} from "next/router";
+import Link from "next/link";
 
 const Brand = ({name, inWL, brandId, query}) => {
-    const router = useRouter()
     const {userStore} = useContext(Context)
     const [isInWishlist, setIsInWishlist] = useState(inWL)
     const addToFB = async () => {
@@ -43,13 +42,9 @@ const Brand = ({name, inWL, brandId, query}) => {
                     </AuthModal>
                 </div>
             }
-            <a href={`/products?line=${query}`}
-               className={s.brand_link}
-               onClick={(e) => {
-                   e.preventDefault()
-                   router.push(`/products?line=${query}`)
-               }}
-            >{name}</a>
+            <Link href={`/products?line=${query}`}
+                  className={s.brand_link}
+            >{name}</Link>
         </div>
     );
 };

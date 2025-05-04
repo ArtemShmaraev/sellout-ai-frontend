@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import {Carousel, Col, Row} from "react-bootstrap";
 import truck from '@/static/icons/truck.svg'
@@ -30,6 +30,7 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import jwtDecode from "jwt-decode";
 import SimilarProducts from "@/components/pages/product/SimilarProducts/SimilarProducts";
 import Link from "next/link";
+import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -79,12 +80,21 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
             query: query
         }
     }
-    useEffect(() => {
+    const checkIsDesktop = () => {
         const width = window.innerWidth
-        if (width <= 1000) {
+        if (width <= 1200) {
             setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
         }
-    }, [isDesktop])
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     const [isInWishlist, setIsInWishlist] = useState(product.in_wishlist)
     const addToWL = async () => {
         const token = Cookies.get('access_token')
@@ -130,9 +140,28 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
         const newStr = currArr.join(' ')
         Cookies.set('last_seen', newStr)
     }, [])
+
+
+    const [isCarouselScrolling, setCarouselScrolling] = useState(false);
+    const carouselRef = useRef(null);
+
+    const handleCarouselTouchStart = () => {
+        setCarouselScrolling(true);
+    };
+
+    const handleCarouselTouchEnd = () => {
+        setCarouselScrolling(false);
+    };
+
+    const handleCarouselScroll = (e) => {
+        if (isCarouselScrolling) {
+            e.preventDefault();
+        }
+    };
     return (
         <MainLayout>
             <div className={s.container + ' custom_cont'}>
+                <BreadcrumbC list={product.list_lines}/>
                 <Row>
                     <Col lg={7}>
                         {!isDesktop &&
@@ -165,6 +194,10 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                                     variant='dark'
                                     indicators={false}
                                     interval={null}
+                                    onTouchStart={handleCarouselTouchStart}
+                                    onTouchEnd={handleCarouselTouchEnd}
+                                    onTouchMove={handleCarouselScroll}
+                                    ref={carouselRef}
                                 >
                                     {
                                         product.bucket_link.map(el =>
