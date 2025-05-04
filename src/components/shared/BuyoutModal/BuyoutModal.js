@@ -1,13 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './BuyoutModal.module.css'
 import {Col, Container, Form, Modal, Row} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
 import Image from 'next/image'
+import InputMask from "react-input-mask";
+import {Context} from "@/context/AppWrapper";
+import {fetchUserInfo} from "@/http/userApi";
+import Cookies from "js-cookie";
 
 const BuyoutModal = () => {
+    const {userStore} = useContext(Context)
     const [isSend, setIsSend] = useState(false)
     const [show, setShow] = useState(false);
     const [isDesktop, setIsDesktop] = useState(true)
+    const [name, setName] = useState('');
+    const [tg, setTg] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [link, setLink] = useState('');
+    const [info, setInfo] = useState('');
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        if (token) {
+            const id = userStore.id
+            // fetchUserInfo(token, id).then(res => {
+            //     setName(res.first_name)
+            //     setEmail(res.username)
+            //     setPhone(res.phone_number)
+            // })
+        }
+    }, [])
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -48,31 +70,50 @@ const BuyoutModal = () => {
                         <Row className='gy-4'>
                             <Col lg={12}>
                                 <input type="text"
-                                       placeholder={'Фамилия Имя'}
+                                       placeholder={'Имя*'}
                                        className={s.input}
+                                       value={name}
+                                       onChange={e => setName(e.target.value)}
                                 />
                             </Col>
                             <Col lg={6} sm={12}>
                                 <input type="text"
                                        placeholder={'@telegram_nickname'}
                                        className={s.input}
+                                       value={tg}
+                                       onChange={e => setTg(e.target.value)}
                                 />
                             </Col>
                             <Col lg={6} sm={12}>
                                 <input type="email"
-                                       placeholder={'Почта'}
+                                       placeholder={'Почта*'}
                                        className={s.input}
+                                       value={email}
+                                       onChange={e => setEmail(e.target.value)}
                                 />
+                            </Col>
+                            <Col lg={12}>
+                                <InputMask mask="+7 999 999-99-99" maskChar={null}
+                                           placeholder={'Номер телефона*'}
+                                           value={phone}
+                                           onChange={e => setPhone(e.target.value)}
+                                >
+                                    {(inputProps) => <input {...inputProps} type="tel"
+                                                            className={s.input}
+                                    />}
+                                </InputMask>
                             </Col>
                             <Col lg={12}>
                                 <input type="text"
                                        placeholder={'Ссылка на товар, бренд, магазин и.т.д.'}
                                        className={s.input}
+                                       value={link}
+                                       onChange={e => setLink(e.target.value)}
                                 />
                             </Col>
                             <Col lg={12}>
                                 <Form.Label>Прикрепите фото товара</Form.Label>
-                                <Form.Control type="file"/>
+                                <Form.Control type="file" multiple={true}/>
                             </Col>
                             <Col lg={12}>
                             <textarea
@@ -80,6 +121,8 @@ const BuyoutModal = () => {
                                 placeholder={'Укажите дополнительные сведения о товаре: наимонования/артикул/' +
                                     'размер/цвет/другие характеристики товара'}
                                 className={s.textarea}
+                                value={info}
+                                onChange={e => setInfo(e.target.value)}
                             />
                             </Col>
                             <Col lg={12} className='d-flex justify-content-center'>
