@@ -9,8 +9,6 @@ import {confirmEmail, login, registration} from "@/http/userApi";
 import {updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
-import eye from '@/static/icons/eye.svg'
-import eyeCrossed from '@/static/icons/eye-slash.svg'
 import InputMask from "react-input-mask";
 import {Context} from "@/context/AppWrapper";
 import google from '@/static/icons/google.svg'

@@ -24,6 +24,13 @@
     font-family: 'Montserrat', sans-serif;
 }
 body {
+    overflow: clip;
+}
+.modal-open {
+    overflow-y: clip;
+}
+.modal-backdrop {
+    overflow-y: clip;
 }
 div {
     color: black;

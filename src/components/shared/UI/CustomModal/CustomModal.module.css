@@ -1,0 +1,7 @@
+.modal {
+    background: red;
+    position: absolute;
+    min-width: 50vw;
+    min-height: 50vh;
+    top: 25vh;
+}

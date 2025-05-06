@@ -9,12 +9,21 @@ import Link from "next/link";
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
+    const checkIsDesktop = () => {
         const width = window.innerWidth
-        if (width <= 1000) {
+        if (width <= 1200) {
             setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
         }
-    }, [isDesktop])
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>

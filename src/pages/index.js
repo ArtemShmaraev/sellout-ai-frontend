@@ -102,8 +102,8 @@ export default function Home({data}) {
                     <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
                 </div>
                 <hr className={s.hr}/>
-                <BuyoutModal/>
             </div>
+            <BuyoutModal/>
         </MainLayout>
     )
 }

@@ -13,12 +13,12 @@ const MainLayout = ({children}) => {
         }
     }, [])
     return (
-        <>
+        <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '100vh', position: "relative"}}>
             <NavbarC/>
             {children}
             <ScrollUp/>
             <Footer/>
-        </>
+        </div>
     );
 };
 
