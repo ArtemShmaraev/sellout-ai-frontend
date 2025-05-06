@@ -1,24 +1,27 @@
 .text_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    background: linear-gradient(180deg, #222 0%, rgba(34, 34, 34, 0.56) 100%);
+    padding: 40px 0 20px 0;
 }
 .text {
     font-weight: 400;
-    font-size: 19px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
 }
 .toggle_btn {
-    background: #222222;
+    background: white;
     border-radius: 8px;
-    color: white;
+    color: black;
     border: none;
     outline: none;
-    padding: 10px;
+    padding: 20px;
+    font-size: 20px;
+    box-shadow: 4px 4px 250px 0px #000;
     transition: 0.3s;
 }
 .toggle_btn:hover {
-    background: #383f48;
+    background: #e3e3e3;
 }
 .send {
     background: #222222;

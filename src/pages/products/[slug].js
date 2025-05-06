@@ -49,6 +49,7 @@ export const getServerSideProps = async (context) => {
             lastSeen = await fetchProductsByArray(arr)
         }
     }
+    console.log(product)
     const similar = await fetchSimilarProducts(product.id)
     return { props: {product, prices, lastSeen, similar} }
 }

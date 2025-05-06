@@ -128,3 +128,11 @@ export async function fetchFavoriteBrands(token, userId) {
     })
     return data
 }
+export async function addToWaitingList(token, productId, sizeArr) {
+    const obj = {
+        size: sizeArr
+    }
+    const {data} = await $host.post(`user/waiting_list/${productId}`, JSON.stringify(obj), {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+}

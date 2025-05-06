@@ -47,10 +47,12 @@ const BuyoutModal = () => {
         <div style={{margin: '35px 0'}} className={'custom_cont'}>
             <div className={s.text_container}>
                 <div className={s.text}>
-                    Не смогли найти на нашей платформе то, что искали?
+                    Не смогли найти на нашей платформе то, что искали? <br/>
                     Оставьте заявку, и мы привезем Вам желаемый товар!
                 </div>
-                <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                <div className={'d-flex justify-content-center'}>
+                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                </div>
             </div>
 
             <Modal show={show}

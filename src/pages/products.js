@@ -144,42 +144,44 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
                     <ProductList products={products.results} isAdmin={false}/>
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
-                <BuyoutModal/>
+            </div>
+            <BuyoutModal/>
+            <div className={'custom_cont'}>
                 {lastSeen.length > 0 &&
                     <Viewed lastSeen={lastSeen}/>
                 }
-
-
-
-                {modalOpen &&
-                    <div className={s.modal}>
-                        <Container>
-                            <div className='d-flex justify-content-between'>
-                                <div className={s.modal_header}>
-                                    <div className='d-flex align-items-center'>
-                                        <div className={s.modal_text}>Фильтры</div>
-                                        <div className={s.number}>{filterStore.activeFilters.length}</div>
-                                    </div>
-                                    <button className={s.modal_btn}
-                                            onClick={clearFilters}
-                                    >Сбросить все</button>
-                                </div>
-                                <svg onClick={handleClick}
-                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill=""
-                                     className="bi bi-x-lg" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
-                                    <path
-                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                </svg>
-                            </div>
-                            <FiltersBlock/>
-                            <FilterDropdowns/>
-                            <div className='d-flex justify-content-center'>
-                                <button className={s.results} onClick={handleClick}>Показать результаты</button>
-                            </div>
-                        </Container>
-                    </div>
-                }
             </div>
+
+
+
+            {modalOpen &&
+                <div className={s.modal}>
+                    <Container>
+                        <div className='d-flex justify-content-between'>
+                            <div className={s.modal_header}>
+                                <div className='d-flex align-items-center'>
+                                    <div className={s.modal_text}>Фильтры</div>
+                                    <div className={s.number}>{filterStore.activeFilters.length}</div>
+                                </div>
+                                <button className={s.modal_btn}
+                                        onClick={clearFilters}
+                                >Сбросить все</button>
+                            </div>
+                            <svg onClick={handleClick}
+                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill=""
+                                 className="bi bi-x-lg" viewBox="0 0 16 16" style={{cursor: 'pointer'}}>
+                                <path
+                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </div>
+                        <FiltersBlock/>
+                        <FilterDropdowns/>
+                        <div className='d-flex justify-content-center'>
+                            <button className={s.results} onClick={handleClick}>Показать результаты</button>
+                        </div>
+                    </Container>
+                </div>
+            }
         </MainLayout>
     );
 };

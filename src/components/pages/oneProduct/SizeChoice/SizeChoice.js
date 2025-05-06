@@ -8,6 +8,9 @@ import {fetchShippings} from "@/http/productsApi";
 import {userStore} from "@/store/UserStore";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {Modal} from "react-bootstrap";
+import {addToWaitingList} from "@/http/userApi";
+import Cookies from "js-cookie";
+import close from "@/static/icons/x-lg.svg";
 
 const SizeChoice = ({prices, productId}) => {
     const {productStore} = useContext(Context)
@@ -39,7 +42,17 @@ const SizeChoice = ({prices, productId}) => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-    const [isShow, setIsShow] = useState('')
+    const [isShow, setIsShow] = useState(false)
+    const handleClose = () => {
+        setIsShow(false)
+    }
+    const handleOpen = () => {
+        setIsShow(true)
+    }
+    const toWaitingList = (sizeArr) => {
+        const token = Cookies.get('access_token')
+        addToWaitingList(token, productId, sizeArr)
+    }
     return (
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}
@@ -93,7 +106,12 @@ const SizeChoice = ({prices, productId}) => {
                                         <div className='d-flex'>
                                             Распродано.
                                             {userStore.isLogged ?
-                                                <button className={s.link}>Сообщить о поступлении</button>
+                                                <button className={s.link}
+                                                        onClick={() => {
+                                                            handleOpen()
+                                                            toWaitingList(el.size)
+                                                        }}
+                                                >Сообщить о поступлении</button>
                                                 :
                                                 <AuthModal inline={true}
                                                            text={'Зарегистрируйстесь, чтобы получить уведомление о поступлении'}>
@@ -108,9 +126,18 @@ const SizeChoice = ({prices, productId}) => {
                 }
             </div>
 
-            <Modal>
+            <Modal
+                show={isShow}
+                centered={true}
+                onHide={handleClose}
+            >
                 <Modal.Body>
-
+                    <div className='d-flex justify-content-end'>
+                        <Image src={close} alt='' onClick={handleClose}/>
+                    </div>
+                    <div className={'text-center'}>
+                        Мы сообщим о поступлении данной позиции. Уведомление придет вам на электронную почту.
+                    </div>
                 </Modal.Body>
             </Modal>
         </div>

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './AccountNavbar.module.css'
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 const AccountNavbar = () => {
     const router = useRouter()
@@ -14,25 +15,25 @@ const AccountNavbar = () => {
         {
             name: 'Личные данные',
             address: 'account',
-            func: () => router.push('/account')
+            link: '/account'
 
         },
         {
             name: 'Адреса',
             address: 'addresses',
-            func: () => router.push('/account/addresses')
+            link: '/account/addresses'
 
         },
         {
             name: 'Заказы',
             address: 'orders',
-            func: () => router.push('/account/orders')
+            link: '/account/orders'
 
         },
         {
-            name: 'Личные данные',
-            address: 'adasd',
-            func: () => router.push('/address')
+            name: 'Любимые бренды',
+            address: 'favorite-brands',
+            link: '/account/favorite-brands'
 
         }
     ]
@@ -61,12 +62,12 @@ const AccountNavbar = () => {
                     <div className={s.items_block}>
                         {
                             links.map(el =>
-                                <div onClick={el.func}
+                                <Link href={el.link}
                                      className={s.item}
                                      key={el.name}
                                 >
                                     {el.name}
-                                </div>
+                                </Link>
                             )
                         }
                     </div>

@@ -49,7 +49,7 @@ const Shoes = () => {
     return (
         <div>
             {
-                fillCol(shoes.popularBrands, 'line', '&category=shoes_categoty')
+                fillCol(shoes.popularBrands, 'line', '&category=shoes_category')
             }
             {
                 fillCol(shoes.popularLines, 'line')
