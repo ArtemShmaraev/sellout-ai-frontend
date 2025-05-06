@@ -36,3 +36,18 @@
 .dropdown_input {
     background: white;
 }
+
+@media (max-width: 1200px) {
+    .dropdown_toggle:hover {
+        background: white;
+    }
+    .dropdown_toggle:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    .dropdown_item:hover {
+        background: white;
+    }
+    .dropdown_item:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}

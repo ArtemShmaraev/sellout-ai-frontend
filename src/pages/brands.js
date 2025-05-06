@@ -11,6 +11,7 @@ import {observer} from "mobx-react-lite";
 import Brand from "@/components/pages/brands/Brand";
 import {parse} from "cookie";
 import Head from "next/head";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -21,7 +22,6 @@ export const getServerSideProps = async (context) => {
     } else {
         brands = await fetchBrands()
     }
-    console.log(brands)
     return { props: {brands} }
 }
 const Brands = ({brands}) => {
@@ -157,7 +157,8 @@ const Brands = ({brands}) => {
                                     ?
                                     <div className={s.text}>
                                         Нажми на <Image src={like} alt='' className={s.like}/>
-                                        чтобы добавить бренд в <a href="" className={s.link}>избранное</a>
+                                        чтобы добавить бренд в <Link href="/account/favorite-brands"
+                                                                     className={s.link}>избранное</Link>
                                     </div>
                                     :
                                     <div className={s.text}>

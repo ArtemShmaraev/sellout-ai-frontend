@@ -3,8 +3,10 @@ import headerJson from "@/components/shared/NavbarC/header.json";
 import {Context} from "@/context/AppWrapper";
 import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
+import Image from "next/image";
+import arrow from "@/static/icons/chevron-right.svg";
 
-const Brand = () => {
+const Brand = ({photo}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
@@ -46,13 +48,21 @@ const Brand = () => {
         )
     }
     return (
-        <div>
+        <div style={{marginTop: 15}}>
+            <a className={s.all_link}
+               href={`/brands`}
+            >
+                Все бренды
+            </a>
             {
                 fillCol(brands.popularBrands, 'line')
             }
             {
                 fillCol(brands.collabs, 'collab')
             }
+            <div className={s.img_cont}>
+                <Image src={photo} alt='' fill={true} style={{objectFit: 'contain', objectPosition: 'left top'}}/>
+            </div>
         </div>
     );
 };

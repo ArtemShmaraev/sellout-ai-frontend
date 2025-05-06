@@ -18,7 +18,7 @@ import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
 import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
 import Link from "next/link";
 
-const Sidebar = () => {
+const Sidebar = ({photos}) => {
     const header = headerJson
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isSectionOpen, setIsSectionOpen] = useState(false)
@@ -66,10 +66,10 @@ const Sidebar = () => {
     //     }
     // }
     const sections = {
-        brands: <Brand/>,
-        clothes: <Clothes/>,
-        shoes: <Shoes/>,
-        accessories: <Accessories/>
+        brands: <Brand photo={photos.brand}/>,
+        clothes: <Clothes photo={photos.clothes}/>,
+        shoes: <Shoes photo={photos.shoes}/>,
+        accessories: <Accessories photo={photos.accessories}/>
     }
     const handleClose = () => {
         setIsMenuOpen(false)

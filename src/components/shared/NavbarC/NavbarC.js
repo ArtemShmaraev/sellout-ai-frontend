@@ -100,7 +100,7 @@ const NavbarC = () => {
                             <Link href="" className={s.links}>Связаться с нами</Link>
                         </div>
                         <div className={'mobile_d align-items-center'}>
-                            <Sidebar/>
+                            <Sidebar photos={photos}/>
                             <SearchModal/>
                         </div>
                     </div>

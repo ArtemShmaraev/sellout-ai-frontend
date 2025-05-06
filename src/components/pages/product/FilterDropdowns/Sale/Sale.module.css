@@ -13,3 +13,11 @@
 .sale:hover {
     background: rgba(0, 0, 0, 0.05);
 }
+@media (max-width: 1200px) {
+    .sale:hover {
+        background: white;
+    }
+    .sale:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}

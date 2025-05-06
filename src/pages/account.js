@@ -67,6 +67,8 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
         return emailRegex.test(email);
     };
     const [validEmail, setValidEmail] = useState(true);
+    const [sent, setSent] = useState(false)
+    const [emailChanged, setEmailChanged] = useState(false)
     const sendData = () => {
         if (!checkFilling()) {
             setFillLines(true)
@@ -78,6 +80,10 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
             return false
         }
         setValidEmail(true)
+        setSent(true)
+        if (email !== userData.email) {
+            setEmailChanged(true)
+        }
     }
     const checkIsNum = (str) => {
         return !isNaN(str)
@@ -198,7 +204,8 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                     >Сохранить изменения</button>
                     {!validEmail && <div className={s.red_text}>Некорректный формат почты</div>}
                     {fillLines && <div className={s.red_text}>Заполните все поля</div>}
-
+                    {sent && <div className={'green_text text-center'}>Именения успешно сохранены</div>}
+                    {emailChanged && <div className={'green_text text-center'}>Пиьсмо подтверждение было выслано на новую почту</div>}
                     <div className={'d-flex justify-content-center mt-2'}>
                         <button onClick={toggleModal} className={s.change_pass_btn}>
                             Изменить пароль

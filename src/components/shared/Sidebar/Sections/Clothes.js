@@ -3,8 +3,9 @@ import headerJson from "@/components/shared/NavbarC/header.json";
 import {Context} from "@/context/AppWrapper";
 import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
+import Image from "next/image";
 
-const Clothes = () => {
+const Clothes = ({photo}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
@@ -45,14 +46,23 @@ const Clothes = () => {
             </div>
         )
     }
+    const queryGender = userStore.gender ? '&gender=' + userStore.gender[0].toUpperCase() : ''
     return (
-        <div>
+        <div style={{marginTop: 15}}>
+            <a className={s.all_link}
+               href={`/products?category=clothes${queryGender}`}
+            >
+                Вся одежда
+            </a>
             {
                 fillCol(clothes.popularBrands, 'line', '&category=clothes')
             }
             {
                 fillCol(clothes.cats, 'line')
             }
+            <div className={s.img_cont}>
+                <Image src={photo} alt='' fill={true} style={{objectFit: 'contain', objectPosition: 'left top'}}/>
+            </div>
         </div>
     );
 };

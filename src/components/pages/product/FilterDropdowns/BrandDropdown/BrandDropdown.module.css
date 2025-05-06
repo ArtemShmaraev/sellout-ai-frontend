@@ -39,3 +39,11 @@
     max-height: 400px;
     overflow-y: scroll;
 }
+@media (max-width: 1200px) {
+    .dropdown_toggle:hover {
+        background: white;
+    }
+    .dropdown_toggle:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}

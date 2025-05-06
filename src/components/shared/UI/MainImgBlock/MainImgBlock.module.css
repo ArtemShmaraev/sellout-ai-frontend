@@ -8,8 +8,10 @@
 }
 .text_cont {
     border: 1px solid #9A9999;
+    border-radius: 7px;
     padding: 15px;
     font-size: 14px;
+    min-height: 77%;
 }
 .text_cont h3 {
     font-size: 26px;

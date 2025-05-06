@@ -17,4 +17,11 @@
     transition: 0.3s;
     background: rgba(0, 0, 0, 0.05);
 }
-
+@media (max-width: 1200px) {
+    .dropdown_toggle:hover {
+        background: white;
+    }
+    .dropdown_toggle:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}

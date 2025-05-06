@@ -76,14 +76,6 @@ input {
 .green_text {
     color: green;
 }
-/*::-webkit-scrollbar {*/
-/*    -webkit-appearance: none;*/
-/*}*/
-/*@media screen and (max-width: 768px){*/
-/*    ::-webkit-scrollbar {*/
-/*        -webkit-appearance: none;*/
-/*    }*/
-/*}*/
 .placeholder_img {
     background: linear-gradient(180deg, #FFF 0%, #BCBCBC 100%);
     border-radius: 7px;
@@ -92,6 +84,7 @@ input {
     position: absolute;
     z-index: 0;
 }
+
 @media (max-width: 1200px) {
     .custom_cont {
         margin-right: 8px;
@@ -102,6 +95,9 @@ input {
     }
     .desktop_d {
         display: none;
+    }
+    .placeholder_img {
+        z-index: -1;
     }
 }
 @media (min-width: 1800px) {

@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import s from './FiltersBlock.module.css'
 import ScrollableBlock2 from "@/components/shared/UI/ScrollableBlock2/ScrollableBlock2";
 import {Context} from "@/context/AppWrapper";
-import close from '@/static/icons/x-lg.svg'
+import close from '@/static/icons/x-lg-copy.svg'
 import Image from "next/image";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
