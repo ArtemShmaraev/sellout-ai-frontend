@@ -51,7 +51,7 @@ const Wishlist = ({wishlist}) => {
             <Head>
                 <title>Избранное</title>
             </Head>
-            <div className={'custom_cont'} style={{marginTop: '130px'}}>
+            <div className={'custom_cont'} style={{marginTop: '130px', marginBottom: '50px'}}>
                 <h3>Избранное</h3>
                 {
                     wishlist.length > 0 &&
@@ -94,7 +94,7 @@ const Wishlist = ({wishlist}) => {
                             </div>
                     }
                 </div>
-                <Recommendations/>
+
             </div>
         </MainLayout>
     );

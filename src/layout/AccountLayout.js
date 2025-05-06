@@ -65,9 +65,9 @@ const AccountLayout = ({children}) => {
                             <div className={makeBold('orders')}>Заказы</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
                         </Link>
-                        <Link href="" className={s.nav_link}
+                        <Link href="/account/favorite-brands" className={s.nav_link}
                         >
-                            <div>Личные данные</div>
+                            <div className={makeBold('favorite-brands')}>Любимые бренды</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
                         </Link>
                     </div>

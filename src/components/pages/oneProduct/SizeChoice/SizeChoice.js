@@ -5,6 +5,9 @@ import refund from '@/static/icons/arrow-return-left.svg'
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import {fetchShippings} from "@/http/productsApi";
+import {userStore} from "@/store/UserStore";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import {Modal} from "react-bootstrap";
 
 const SizeChoice = ({prices, productId}) => {
     const {productStore} = useContext(Context)
@@ -19,9 +22,8 @@ const SizeChoice = ({prices, productId}) => {
         setSelectedItem(item);
         setIsOpen(false);
         productStore.setSizeChosen(true)
-        const ships = await fetchShippings(productId, item.size)
-        console.log(ships, item.size.id)
-        //TODO delete log
+        console.log(item)
+        const ships = await fetchShippings(productId, item.view_size)
         productStore.setShipps(ships)
     };
     useEffect(() => {
@@ -37,6 +39,7 @@ const SizeChoice = ({prices, productId}) => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+    const [isShow, setIsShow] = useState('')
     return (
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}
@@ -89,7 +92,14 @@ const SizeChoice = ({prices, productId}) => {
                                         </div>
                                         <div className='d-flex'>
                                             Распродано.
-                                            <a href="" className={s.link}>Сообщить о поступлении</a>
+                                            {userStore.isLogged ?
+                                                <button className={s.link}>Сообщить о поступлении</button>
+                                                :
+                                                <AuthModal inline={true}
+                                                           text={'Зарегистрируйстесь, чтобы получить уведомление о поступлении'}>
+                                                    <button className={s.link}>Сообщить о поступлении</button>
+                                                </AuthModal>
+                                            }
                                         </div>
                                     </div>
                             )
@@ -97,6 +107,12 @@ const SizeChoice = ({prices, productId}) => {
                     </div>
                 }
             </div>
+
+            <Modal>
+                <Modal.Body>
+
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };

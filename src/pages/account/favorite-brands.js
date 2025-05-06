@@ -2,9 +2,10 @@ import React from 'react';
 import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
 import {fetchFavoriteBrands} from "@/http/userApi";
-import s from "@/styles/BrandsPage.module.css";
+import s from "@/styles/FavBrands.module.css";
 import Brand from "@/components/pages/brands/Brand";
 import AccountLayout from "@/layout/AccountLayout";
+import MainLayout from "@/layout/MainLayout";
 
 
 export const getServerSideProps = async (context) => {
@@ -12,6 +13,7 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const {user_id} = jwtDecode(token)
     const brands = await fetchFavoriteBrands(token, user_id)
+    console.log(brands)
     return { props: {brands} }
 }
 
@@ -53,9 +55,19 @@ const FavoriteBrands = ({brands}) => {
         return arr
     }
     return (
-        <AccountLayout>
-            {renderBrands()}
-        </AccountLayout>
+        <MainLayout>
+            <AccountLayout>
+                <div className={s.cont}>
+                    <h4 className={s.title}>Любимые бренды</h4>
+                    {
+                        renderBrands().length > 0
+                        ? renderBrands()
+                        :
+                        <h5 className={'text-center'}>У вас пока нет любимых брендов</h5>
+                    }
+                </div>
+            </AccountLayout>
+        </MainLayout>
     );
 };
 

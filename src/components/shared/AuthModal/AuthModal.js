@@ -18,7 +18,7 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import PasswordInput from "@/components/shared/UI/PasswordInput/PasswordInput";
 import PassEmailModal from "@/components/shared/PassEmailModal/PassEmailModal";
 
-const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false}) => {
+const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false, text = ''}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
 
@@ -197,6 +197,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                             Войдите или зарегистрируйтесь, чтобы оформить заказ
                         </div>
                     }
+                    {text && <div className='text-center'>{text}</div>}
                     <div className={s.mode_block}>
                         <button
                             className={s.mode_btn}

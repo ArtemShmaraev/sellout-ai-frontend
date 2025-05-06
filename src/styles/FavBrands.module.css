@@ -1,0 +1,13 @@
+.cont {
+    width: 100%;
+}
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+.big_letter {
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+}
