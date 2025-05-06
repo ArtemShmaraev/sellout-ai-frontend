@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from "next/image";
 import s from './PictureBlock.module.css'
 import parse from "html-react-parser";
@@ -13,6 +13,7 @@ const PictureBlock = ({obj, className, type}) => {
         }
         return s.row
     }
+    const [isLoading, setIsLoading] = useState(true)
     return (
         <div className={`${className} ${s.main_block} ${getDirection()}`}>
             <div className={s.text_block}>
@@ -33,7 +34,9 @@ const PictureBlock = ({obj, className, type}) => {
             </div>
             <div className={s.img_block}>
                 <div className={s.img_cont}>
-                    <Image src={obj.photo} alt='' fill={true} className={s.img}/>
+                    <Image src={obj.photo} alt='' fill={true} className={s.img} onLoadingComplete={() => setIsLoading(false)}/>
+                    <div className={'placeholder_img'} style={isLoading ? {} : {opacity: 0}}>
+                    </div>
                 </div>
             </div>
         </div>

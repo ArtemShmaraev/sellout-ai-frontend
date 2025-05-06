@@ -12,7 +12,6 @@ import HowToChoose from "@/components/pages/oneProduct/HowToChoose/HowToChoose";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/QuestionsDropdown";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
-import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Image from 'next/image'
 import {fetchOneProduct, fetchPrices, fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
@@ -26,11 +25,10 @@ import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
 import {addLastSeen, fetchLastSeen} from "@/http/userApi";
-import Viewed from "@/components/pages/product/Viewed/Viewed";
 import jwtDecode from "jwt-decode";
-import SimilarProducts from "@/components/pages/product/SimilarProducts/SimilarProducts";
 import Link from "next/link";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
+import Compilation from "@/components/shared/Compilation/Compilation";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -49,7 +47,6 @@ export const getServerSideProps = async (context) => {
             lastSeen = await fetchProductsByArray(arr)
         }
     }
-    console.log(product)
     const similar = await fetchSimilarProducts(product.id)
     return { props: {product, prices, lastSeen, similar} }
 }
@@ -438,9 +435,9 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                     </Col>
                 </Row>
                 {lastSeen.length > 0 &&
-                    <Viewed lastSeen={lastSeen}/>
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
-                <SimilarProducts products={similar}/>
+                <Compilation arr={similar} title={'Похожие товары'}/>
             </div>
         </MainLayout>
     );

@@ -8,6 +8,7 @@ import Head from "next/head";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
     const userAgent = context.req.headers['user-agent'];
@@ -77,12 +78,8 @@ export default function Home({data}) {
                                 <h3 className={s.title}>{el.title}</h3>
                             </div>
                             <div>
-                                <a href={'/products?' + el.url} className={s.link}
-                                   onClick={(e) => {
-                                       e.preventDefault()
-                                       router.push(`/products?${el.url}`)
-                                   }}
-                                >Посмотреть все</a>
+                                <Link href={'/products?' + el.url} className={s.link}
+                                >Посмотреть все</Link>
                             </div>
                         </div>
                         <ScrollableBlock>

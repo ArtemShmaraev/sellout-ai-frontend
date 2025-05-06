@@ -70,6 +70,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
         const {pathname, query} = router
         router.push({pathname, query}, undefined, {scroll: false})
     }
+    const [isLoading, setIsLoading] = useState(true)
     return (
         <Link className={cardList ? s.card_list : s.card}
            href={`/products/${slug}`}
@@ -102,7 +103,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                     </div>
                 }
             </div>
-            {photosArr &&
+            {photosArr.length > 0 &&
                 <div className={s.image_container}
                      onTouchStart={e => {
                          e.stopPropagation()
@@ -120,7 +121,8 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                         loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] ? 'opacity-0' : ''}
-                        src={photos[0]} alt="shoe"/>
+                        onLoadingComplete={() => setIsLoading(false)}
+                        src={photosArr[0].url} alt="shoe"/>
                     {photos[1] &&
                         <Image
                             style={{position: 'absolute', objectFit: 'contain'}}
@@ -129,8 +131,11 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                             loading={'eager'}
                             fill={true}
                             className={isHovered ? '' : 'opacity-0'}
-                            src={photos[1]} alt="shoe"/>
+                            onLoadingComplete={() => setIsLoading(false)}
+                            src={photosArr[1].url} alt="shoe"/>
                     }
+                    <div className={'placeholder_img'} style={isLoading ? {} : {opacity: 0}}>
+                    </div>
                 </div>
             }
             <div className={s.text_block}>

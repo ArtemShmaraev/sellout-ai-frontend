@@ -77,6 +77,14 @@ input {
 /*        -webkit-appearance: none;*/
 /*    }*/
 /*}*/
+.placeholder_img {
+    background: linear-gradient(180deg, #FFF 0%, #BCBCBC 100%);
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+}
 @media (max-width: 1200px) {
     .custom_cont {
         margin-right: 8px;

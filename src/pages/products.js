@@ -2,14 +2,11 @@ import MainLayout from "@/layout/MainLayout";
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import s from '../styles/products.module.css'
-import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import PageSwitch from "@/components/pages/product/PageSwitch/PageSwitch";
-import BigPicture from "@/components/shared/BigPicture/BigPicture";
 import FiltersBlock from "@/components/pages/product/FiltersBlock/FiltersBlock";
 import SortDropdown from "@/components/pages/product/SortDropdown/SortDropdown";
 import FilterDropdowns from "@/components/pages/product/FilterDropdowns/FilterDropdowns";
-import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
@@ -22,6 +19,7 @@ import {fetchLastSeen} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Head from "next/head";
 import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
+import Compilation from "@/components/shared/Compilation/Compilation";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -148,7 +146,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
             <BuyoutModal/>
             <div className={'custom_cont'}>
                 {lastSeen.length > 0 &&
-                    <Viewed lastSeen={lastSeen}/>
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
 

@@ -14,6 +14,7 @@ const Megamenu = ({children, className, label, link}) => {
                 href={link}
                 className={className}
                 ref={ref}
+                onClick={() => setIsShown(false)}
             >
                 {label}
             </Link>
