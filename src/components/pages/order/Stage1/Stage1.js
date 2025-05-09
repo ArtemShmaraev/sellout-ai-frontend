@@ -148,7 +148,7 @@ const Stage1 = ({addresses, userData}) => {
                         </>
                     }
                 </div>
-                <div onClick={() => chooseType(3)} className={s.radio}>
+                <div onClick={() => chooseType(3)} className={s.radio} style={{marginTop: 30}}>
                     <CustomRadio label={'Доставка до пункта самовывоза SELLOUT (бесплатно)'}
                                  normalLabel={true}
                                  checked={orderStore.shipType === 3}

@@ -37,6 +37,18 @@ export async function fetchBrands(token = '') {
     const {data} = res
     return data
 }
+export async function searchBrands(q, token = '') {
+    let res
+    if (token) {
+        res = await $host.get(`product/search_brands?q=${q}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+    } else {
+        res = await $host.get(`product/search_brands?q=${q}`)
+    }
+    const {data} = res
+    return data
+}
 export async function fetchSizes(query, token = '') {
     let allQuery = ''
     Object.keys(query).forEach(key => {

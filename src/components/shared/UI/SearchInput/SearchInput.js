@@ -13,7 +13,13 @@ const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) =>
     }, []);
     return (
         <div className={s.input} style={w100 && {width: '100%'}}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={(e) => {
+                if (onSubmit) {
+                    onSubmit()
+                } else {
+                    e.preventDefault()
+                }
+            }}>
                 <input
                     ref={ref}
                     type="text"

@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 class FilterStore {
     constructor() {
         this._ref = null
+        this._pageRef = null
         this._allFilters = {
             q: {
                 text: '',
@@ -409,13 +410,18 @@ class FilterStore {
     get ref() {
         return this._ref
     }
+    setPageRef(ref) {
+        this._pageRef = ref
+    }
+    get pageRef() {
+        return this._pageRef
+    }
     handleScrollTo() {
-        const position = this.ref.current.offsetTop - 100;
-        const currentScroll = window.scrollTop || document.documentElement.scrollTop
-
-        if (currentScroll > position) {
-            window.scrollTo({
-                top: position,
+        const productListPosition = this.ref.current.offsetTop - 135;
+        const currPagePosition = this.pageRef.current.scrollTop
+        if (currPagePosition > productListPosition) {
+            this.pageRef.current.scrollTo({
+                top: productListPosition,
                 behavior: 'smooth',
             });
         }

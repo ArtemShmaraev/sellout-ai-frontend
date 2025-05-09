@@ -12,7 +12,7 @@
     align-items: center;
     cursor: pointer;
     text-align: center;
-    height: 45px;
+    height: 48px;
 }
 .dropdown:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -39,7 +39,7 @@
     margin: 5px;
 }
 .dropdown_header_text {
-    margin: 5px;
+    font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import {fetchBrands} from "@/http/productsApi";
+import {fetchBrands, fetchFilter, searchBrands} from "@/http/productsApi";
 import s from '@/styles/BrandsPage.module.css'
 import like from '@/static/icons/heart.svg'
 import Image from "next/image";
@@ -12,21 +12,23 @@ import Brand from "@/components/pages/brands/Brand";
 import {parse} from "cookie";
 import Head from "next/head";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
-    let brands
+    let brandsArr
     if (token) {
-        brands = await fetchBrands(token)
+        brandsArr = await fetchBrands(token)
     } else {
-        brands = await fetchBrands()
+        brandsArr = await fetchBrands()
     }
-    return { props: {brands} }
+    return { props: {brandsArr} }
 }
-const Brands = ({brands}) => {
+const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
-    const {userStore} = useContext(Context)
+    const {userStore, filterStore} = useContext(Context)
+    const [brands, setBrands] = useState(brandsArr)
 
     useEffect(() => {
         let arr = []
@@ -43,12 +45,21 @@ const Brands = ({brands}) => {
         setA(arr)
     }, [])
     const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
+    const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
             setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
         }
-    }, [])
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     const alphabet = () => {
         const letters = ['0-9'];
 
@@ -99,10 +110,34 @@ const Brands = ({brands}) => {
     const scroll = (id) => {
         const el = document.getElementById(id)
         const scrollPosition = el.offsetTop
-        window.scrollTo({
-            top: scrollPosition - 150,
+        const num = isDesktop ? 170 : 95
+        filterStore.pageRef.current.scrollTo({
+            top: scrollPosition - num,
             behavior: 'smooth',
         });
+    }
+    const [query, setQuery] = useState("");
+    const [searchValue, setSearchValue] = useState('')
+    useEffect(() => {
+        const timeOutId = setTimeout(() => {
+            setSearchValue(query)
+            search(query).then(res => setBrands(res))
+        }, 200);
+        return () => clearTimeout(timeOutId);
+    }, [query]);
+    const search = async (value) => {
+        let token = Cookies.get('access_token')
+        if (!token) {
+            token = ''
+        }
+        let res
+        if (value) {
+            res = await searchBrands(value, token)
+        } else {
+            res = await fetchBrands(token)
+
+        }
+        return res
     }
     return (
         <MainLayout>

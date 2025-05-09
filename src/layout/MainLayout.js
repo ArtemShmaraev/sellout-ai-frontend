@@ -1,19 +1,17 @@
 import NavbarC from "@/components/shared/NavbarC/NavbarC";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useRef} from "react";
 import {Context} from "@/context/AppWrapper";
 import Footer from "@/components/shared/Footer/Footer";
 import ScrollUp from "@/components/shared/ScrollUp/ScrollUp";
 
 const MainLayout = ({children}) => {
-    const {desktopStore} = useContext(Context)
+    const {filterStore} = useContext(Context)
+    const ref = useRef(null)
     useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1000) {
-            desktopStore.setIsDesktop(false)
-        }
-    }, [])
+        filterStore.setPageRef(ref)
+    }, []);
     return (
-        <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '100vh', position: "relative"}}>
+        <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '100vh', position: "relative"}} ref={ref}>
             <NavbarC/>
             {children}
             <ScrollUp/>
