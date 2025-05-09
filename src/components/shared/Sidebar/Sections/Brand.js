@@ -32,10 +32,6 @@ const Brand = ({photo}) => {
                 <a
                     className={s.link}
                     href={`/products?${genderQuery}${query}=${link.query_name}${secondQuery}`}
-                    onClick={e => {
-                        e.preventDefault()
-                        router.push(`/products?${genderQuery}${query}=${link.query_name}${secondQuery}`)
-                    }}
                 >
                     {link.name}
                 </a>

@@ -7,6 +7,9 @@ import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 import CustomRadio from "@/components/shared/UI/CustomRadio/CustomRadio";
 import {observer} from "mobx-react-lite";
 import InputMask from "react-input-mask";
+import heart from '@/static/icons/circle_heart.svg'
+import Image from "next/image";
+import Link from "next/link";
 
 const Stage1 = ({addresses, userData}) => {
     const router = useRouter()
@@ -15,7 +18,7 @@ const Stage1 = ({addresses, userData}) => {
     const [lastname, setLastname] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
-
+    const [comment, setComment] = useState('')
     const goToCart = (e) => {
         e.preventDefault()
         router.push('/cart')
@@ -149,21 +152,79 @@ const Stage1 = ({addresses, userData}) => {
                         </>
                     }
                 </div>
-                <div onClick={() => chooseType(3)} className={s.radio} style={{marginTop: 30}}>
-                    <CustomRadio label={'Доставка до пункта самовывоза SELLOUT (бесплатно)'}
-                                 normalLabel={true}
-                                 checked={orderStore.shipType === 3}
-                                 reversed={true}
-                    />
+                {/*<div onClick={() => chooseType(3)} className={s.radio} style={{marginTop: 30}}>*/}
+                {/*    <CustomRadio label={'Доставка до пункта самовывоза SELLOUT (бесплатно)'}*/}
+                {/*                 normalLabel={true}*/}
+                {/*                 checked={orderStore.shipType === 3}*/}
+                {/*                 reversed={true}*/}
+                {/*    />*/}
+                {/*</div>*/}
+            </div>
+            {/*<div className={s.text_block}>*/}
+            {/*    <div>*/}
+            {/*        Самовывоз по адресу: ул. Профсоюзная, д.77, к. 3*/}
+            {/*    </div>*/}
+            {/*    <div>*/}
+            {/*        Время: какой-то здесь текст будет*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            <div style={{marginTop: 40}}>
+                <h5>Выберите тип доставки</h5>
+                <p>Так как в Вашем заказе присутствует несколько позиций,
+                    прибывающих в разные даты, мы хотим предложить Вам выбрать предпочитаемый тип доставки:</p>
+                <div>
+                    <div className={s.radio}>
+                        <CustomRadio label={'Доставка всех позиций одновременно'}
+                                     onClick={() => {
+                                         orderStore.setMethod(1)
+                                     }}
+                                     checked={orderStore.method === 1}
+                                     normalLabel={true}
+                                     reversed={true}
+                        />
+                    </div>
+                    <p className={s.method_text}>
+                        Мы дождёмся прибытия крайнего товара из Вашего заказа и отправим весь заказ целиком.
+                        Благодаря этому стоимость доставки уменьшается, однако придется дожидаться всего заказа,
+                        а не получать его по частям.
+                    </p>
+                </div>
+                <div>
+                    <div className={s.radio}>
+                        <CustomRadio label={'Доставка каждой позиции по отдельности'}
+                                     onClick={() => {
+                                         orderStore.setMethod(2)
+                                     }}
+                                     checked={orderStore.method === 2}
+                                     normalLabel={true}
+                                     reversed={true}
+                        />
+                    </div>
+                    <p className={s.method_text}>
+                        Мы будем отправлять каждую позицию Вашего заказа сразу же по прибытии к нам на
+                        склад. Благодаря этому Вы сможете получать части заказа сразу же, однако стоимость доставки увеличится.
+                    </p>
                 </div>
             </div>
-            <div className={s.text_block}>
-                <div>
-                    Самовывоз по адресу: ул. Профсоюзная, д.77, к. 3
+            <hr/>
+            <div>
+                <textarea
+                    rows={3}
+                    placeholder={'Комментарий к заказу (необязательно)'}
+                    className={s.textarea}
+                    value={comment}
+                    onChange={e => setComment(e.target.value)}
+                />
+            </div>
+            <hr/>
+            <div>
+                <div className={'d-flex justify-content-center'}>
+                    <Image src={heart} alt='' width={85}/>
                 </div>
-                <div>
-                    Время: какой-то здесь текст будет
-                </div>
+                <p className={'text-center mt-2'}>
+                    Мы готовы сформировать для Вас индивидуальные условия отправления,
+                    поэтому Вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно Вам поможем!
+                </p>
             </div>
         </div>
     );

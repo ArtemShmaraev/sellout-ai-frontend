@@ -5,6 +5,7 @@ class OrderStore {
         this._stage = 1
         this._shipType = null
         this._selectedAddressId = null
+        this._method = null
         makeAutoObservable(this)
     }
     get stage() {
@@ -21,6 +22,12 @@ class OrderStore {
     }
     setSelectedAddressId(id) {
         this._selectedAddressId = id
+    }
+    get method() {
+        return this._method
+    }
+    setMethod(method) {
+        this._method = method
     }
     nextStage() {
         this._stage += 1

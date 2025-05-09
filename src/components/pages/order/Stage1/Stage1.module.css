@@ -55,6 +55,20 @@
     font-style: italic;
     color: green;
 }
+.method_text {
+    margin-left: 30px;
+    font-size: 14px;
+    max-width: 80%;
+}
+.textarea {
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 25px 5px 5px;
+    width: 100%;
+    resize: none;
+}
+
 @media (max-width: 1200px) {
     .address_block {
         margin-left: 0;
