@@ -47,11 +47,11 @@ export const getServerSideProps = async (context) => {
             lastSeen = await fetchProductsByArray(arr)
         }
     }
-    const similar = await fetchSimilarProducts(product.id)
-    return { props: {product, prices, lastSeen, similar} }
+    const compilations = await fetchSimilarProducts(product.id)
+    return { props: {product, prices, lastSeen, compilations} }
 }
 
-const OneProductPage = ({product, prices, lastSeen, similar}) => {
+const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const {productStore, userStore, cartStore} = useContext(Context)
@@ -437,7 +437,11 @@ const OneProductPage = ({product, prices, lastSeen, similar}) => {
                 {lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
-                <Compilation arr={similar} title={'Похожие товары'}/>
+                {
+                    compilations.map(el =>
+                        <Compilation arr={el.products} title={el.name}/>
+                    )
+                }
             </div>
         </MainLayout>
     );

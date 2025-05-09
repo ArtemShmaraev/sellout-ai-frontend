@@ -23,6 +23,13 @@ const Stage1 = ({addresses, userData}) => {
     const chooseType = type => {
         orderStore.setShipType(type)
         orderStore.setSelectedAddressId(null)
+        if (type === 1) {
+            addresses.forEach(el => {
+                if (el.is_main) {
+                    orderStore.setSelectedAddressId(el.id)
+                }
+            })
+        }
     }
     useEffect(() => {
         // Создаем элемент script
@@ -94,6 +101,7 @@ const Stage1 = ({addresses, userData}) => {
                     <CustomRadio label={'Доставка до двери'}
                                  normalLabel={true}
                                  checked={orderStore.shipType === 1}
+                                 reversed={true}
                     />
                 </div>
                 <div>
@@ -116,6 +124,7 @@ const Stage1 = ({addresses, userData}) => {
                     <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
                                  normalLabel={true}
                                  checked={orderStore.shipType === 2}
+                                 reversed={true}
                     />
                     {
                         orderStore.shipType === 2 &&
@@ -143,6 +152,7 @@ const Stage1 = ({addresses, userData}) => {
                     <CustomRadio label={'Доставка до пункта самовывоза SELLOUT (бесплатно)'}
                                  normalLabel={true}
                                  checked={orderStore.shipType === 3}
+                                 reversed={true}
                     />
                 </div>
             </div>

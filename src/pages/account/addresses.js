@@ -14,6 +14,7 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const {user_id} = jwtDecode(token)
     const addresses = await fetchAddresses(context.req.headers.cookie, user_id)
+    console.log(addresses)
     return { props: {addresses} }
 }
 const Addresses = ({addresses}) => {
@@ -30,7 +31,7 @@ const Addresses = ({addresses}) => {
                             addresses.length > 0
                             ?
                                 addresses.map(el =>
-                                    <AddressCard name={el.name} address={el.address} id={el.id} key={el.id}/>
+                                    <AddressCard name={el.name} address={el.address} id={el.id} is_main={el.is_main} key={el.id}/>
                                 )
                                 :
                                 <h5>У вас пока нет сохраненных адресов</h5>

@@ -18,6 +18,12 @@ export async function removeFromCart(userId, productUnitId, token) {
     })
     return data
 }
+export async function updateProductUnit(userId, productUnitId, newProductUnitId, token) {
+    const {data} = await $host.put(`order/cart/${userId}/${productUnitId}/${newProductUnitId}`,{
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function fetchProductUnits(obj, token) {
     if (!token) {
         const {data} = await $host.post('product_unit/list', obj)

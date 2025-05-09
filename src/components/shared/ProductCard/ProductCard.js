@@ -103,7 +103,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                     </div>
                 }
             </div>
-            {photosArr.length > 0 &&
+            {photosArr && photosArr.length > 0 &&
                 <div className={s.image_container}
                      onTouchStart={e => {
                          e.stopPropagation()
@@ -113,11 +113,11 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                          e.stopPropagation()
                          handleMouseLeave()
                      }}
+                     onMouseEnter={handleMouseEnter}
+                     onMouseLeave={handleMouseLeave}
                 >
                     <Image
                         style={{position: 'absolute', objectFit: 'contain'}}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
                         loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] ? 'opacity-0' : ''}
@@ -126,13 +126,11 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                     {photos[1] &&
                         <Image
                             style={{position: 'absolute', objectFit: 'contain'}}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
                             loading={'eager'}
                             fill={true}
                             className={isHovered ? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
-                            src={photosArr[1].url} alt="shoe"/>
+                            src={photos[1]} alt="shoe"/>
                     }
                     <div className={'placeholder_img'} style={isLoading ? {} : {opacity: 0}}>
                     </div>

@@ -18,6 +18,7 @@ const OrderAddress = ({isPickup = false, checked, name, address, id}) => {
                     <CustomRadio checked={orderStore.selectedAddressId === id}
                                  label={isPickup ? 'Самовывоз' : name}
                                  normalLabel={true}
+                                 reversed={true}
                     />
                 </div>
                 <div>{isPickup ? 'Ул 3-я Лесные поляны, д27/22' : address}</div>

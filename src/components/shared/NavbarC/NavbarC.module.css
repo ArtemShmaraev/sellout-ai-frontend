@@ -2,7 +2,7 @@
     background: white;
     padding: 20px 0 10px 0;
     position: fixed;
-    width: 99%;
+    width: calc(100% - 16px);
     top: 0;
     z-index: 10;
 }
@@ -130,7 +130,7 @@
 @media (max-width: 1200px) {
     .header {
         padding: 10px 0 10px 0;
-        width: 100%;
+        width: calc(100% - 7px);
     }
     .logo {
         font-size: 26px;

@@ -1,6 +1,7 @@
 .cont {
     margin-top: 130px;
     margin-bottom: 50px;
+    min-height: 25vh;
 }
 .title_block {
     display: flex;

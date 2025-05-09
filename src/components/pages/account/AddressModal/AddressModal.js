@@ -11,7 +11,9 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {suggestions} from "@/http/dadataApi";
 
-const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, defName = '', defAddress = ''}) => {
+const AddressModal = ({newAddress = false, whiteBnt = false,
+                          addressId = null, defName = '',
+                          defAddress = '', defMain = true}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [show, setShow] = useState(false);
@@ -24,7 +26,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
     };
     const [name, setName] = useState(defName)
     const [address, setAddress] = useState(defAddress)
-    const [mainAddress, setMainAddress] = useState(true)
+    const [mainAddress, setMainAddress] = useState(defMain)
     const [postInd, setPostInd] = useState(null)
 
     const sendData = async (e) => {
@@ -45,7 +47,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
         }
         setShow(false)
         const {pathname, query} = router
-        await router.push({pathname, query}, undefined, {scroll: false})
+        router.push({pathname, query}, undefined, {scroll: false})
         return response
     }
     const removeAddress = async (e) => {
@@ -176,19 +178,32 @@ const AddressModal = ({newAddress = false, whiteBnt = false, addressId = null, d
                                 >Добавить адрес</button>
                             </>
                             :
-                            <div className={s.btn_block}>
-                                <button
-                                    className={s.delete_btn}
-                                    onClick={(e) => removeAddress(e)}
-                                >
-                                    Удалить адрес
-                                </button>
-                                <button className={s.save_btn}
-                                        type={'submit'}
-                                >
-                                    Сохранить
-                                </button>
-                            </div>
+                            <>
+                                <div className={s.checkbox_block}>
+                                    <div style={{width: 'fit-content'}}
+                                         onClick={() => setMainAddress(!mainAddress)}
+                                    >
+                                        <CustomCheckbox checked={mainAddress}
+                                                        labelText={'Сделать адрес основным'}
+                                                        labelClass={s.main_address}
+                                                        reversed={true}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={s.btn_block}>
+                                    <button
+                                        className={s.delete_btn}
+                                        onClick={(e) => removeAddress(e)}
+                                    >
+                                        Удалить адрес
+                                    </button>
+                                    <button className={s.save_btn}
+                                            type={'submit'}
+                                    >
+                                        Сохранить
+                                    </button>
+                                </div>
+                            </>
                         }
                     </form>
                 </Modal.Body>
