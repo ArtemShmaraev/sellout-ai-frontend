@@ -5,7 +5,7 @@ import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 
-const OrderAddress = ({isPickup = false, checked, name, address, id}) => {
+const OrderAddress = ({isPickup = false, checked, name, address, id, isMain}) => {
     const {orderStore} = useContext(Context)
     const selectAddress = () => {
         orderStore.setSelectedAddressId(id)
@@ -24,7 +24,7 @@ const OrderAddress = ({isPickup = false, checked, name, address, id}) => {
                 <div>{isPickup ? 'Ул 3-я Лесные поляны, д27/22' : address}</div>
             </div>
             <div className={s.icons_block}>
-                <AddressModal addressId={id}/>
+                <AddressModal addressId={id} defName={name} defAddress={address} defMain={isMain}/>
             </div>
         </div>
     );

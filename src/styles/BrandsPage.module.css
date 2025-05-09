@@ -1,5 +1,6 @@
 .cont {
     margin-top: 100px;
+    min-height: 35vh;
 }
 .alphabet_block {
     position: sticky;

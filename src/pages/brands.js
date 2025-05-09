@@ -30,20 +30,6 @@ const Brands = ({brandsArr}) => {
     const {userStore, filterStore} = useContext(Context)
     const [brands, setBrands] = useState(brandsArr)
 
-    useEffect(() => {
-        let arr = []
-        let currLetter = ''
-        for (let i = 0; i < brands.length; i++) {
-            if (currLetter !== brands[i].name[0].toUpperCase()) {
-                currLetter = brands[i].name[0].toUpperCase()
-                arr.push(currLetter)
-            }
-            if (currLetter !== '0-9' && /^\d$/.test(brands[i].name[0])) {
-                arr.push('0-9')
-            }
-        }
-        setA(arr)
-    }, [])
     const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -78,7 +64,7 @@ const Brands = ({brandsArr}) => {
             if (currLetter.toUpperCase() !== brands[i].name[0].toUpperCase() && !/^\d$/.test(brands[i].name[0])) {
                 currLetter = brands[i].name[0]
                 arr.push(
-                    <h4 key={brands[i].name[0]}
+                    <h4 key={brands[i].name[0] + i}
                         id={brands[i].name[0]}
                         className={s.big_letter}
                     >
@@ -131,14 +117,24 @@ const Brands = ({brandsArr}) => {
             token = ''
         }
         let res
-        if (value) {
-            res = await searchBrands(value, token)
-        } else {
-            res = await fetchBrands(token)
-
-        }
+        res = await searchBrands(value, token)
+        console.log(res)
         return res
     }
+    useEffect(() => {
+        let arr = []
+        let currLetter = ''
+        for (let i = 0; i < brands.length; i++) {
+            if (currLetter !== brands[i].name[0].toUpperCase()) {
+                currLetter = brands[i].name[0].toUpperCase()
+                arr.push(currLetter)
+            }
+            if (currLetter !== '0-9' && /^\d$/.test(brands[i].name[0])) {
+                arr.push('0-9')
+            }
+        }
+        setA(arr)
+    }, [brands])
     return (
         <MainLayout>
             <Head>
@@ -186,7 +182,10 @@ const Brands = ({brandsArr}) => {
                 <div className={s.main_block}>
                     <div>
                         <div className={s.search_block}>
-                            <SearchInput w100={true}/>
+                            <SearchInput w100={true}
+                                         value={query}
+                                         onChange={e => setQuery(e.target.value)}
+                            />
                             {
                                 userStore.isLogged
                                     ?

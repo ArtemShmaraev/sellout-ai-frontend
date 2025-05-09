@@ -112,6 +112,7 @@ const Stage1 = ({addresses, userData}) => {
                                     name={el.name}
                                     address={el.address}
                                     id={el.id}
+                                    isMain={el.is_main}
                                 />
                             )}
                             <div className={s.add_address_block}>
