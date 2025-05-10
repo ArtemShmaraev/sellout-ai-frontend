@@ -13,7 +13,7 @@ const BreadcrumbC = ({list}) => {
             )
             if (ind !== list.length-1) {
                 arr.push(
-                    <Image src={arrow} alt='' className={s.arrow}/>
+                    <Image src={arrow} alt='' className={s.arrow} width={14}/>
                 )
             }
         })

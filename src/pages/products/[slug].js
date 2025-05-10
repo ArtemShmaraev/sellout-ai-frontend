@@ -29,6 +29,8 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import Compilation from "@/components/shared/Compilation/Compilation";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -160,8 +162,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         <MainLayout>
             <div className={s.container + ' custom_cont'}>
                 <BreadcrumbC list={product.list_lines}/>
-                <Row>
-                    <Col lg={7}>
+                <div className={s.row}>
+                    <div className={s.col1}>
                         {!isDesktop &&
                             <>
                                 <Link href={clickBrand()} className={s.brand}
@@ -188,27 +190,41 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         {
                             product.bucket_link.length > 1
                             ?
-                                <Carousel
-                                    variant='dark'
-                                    indicators={false}
-                                    interval={null}
-                                    onTouchStart={handleCarouselTouchStart}
-                                    onTouchEnd={handleCarouselTouchEnd}
-                                    onTouchMove={handleCarouselScroll}
-                                    ref={carouselRef}
-                                >
+                                // <Carousel
+                                //     variant='dark'
+                                //     indicators={false}
+                                //     interval={null}
+                                //     onTouchStart={handleCarouselTouchStart}
+                                //     onTouchEnd={handleCarouselTouchEnd}
+                                //     onTouchMove={handleCarouselScroll}
+                                //     ref={carouselRef}
+                                //     touch={true}
+                                // >
+                                //     {
+                                //         product.bucket_link.map(el =>
+                                //             <Carousel.Item className={s.photo} key={el.id}>
+                                //                 <Image src={el.url} alt=''
+                                //                        fill={true}
+                                //                        loading={'eager'}
+                                //                        style={{objectFit: 'contain'}}
+                                //                 />
+                                //             </Carousel.Item>
+                                //         )
+                                //     }
+                                // </Carousel>
+                                <Splide aria-label="My Favorite Images" >
                                     {
                                         product.bucket_link.map(el =>
-                                            <Carousel.Item className={s.photo} key={el.id}>
+                                            <SplideSlide className={s.photo} key={el.id}>
                                                 <Image src={el.url} alt=''
                                                        fill={true}
                                                        loading={'eager'}
                                                        style={{objectFit: 'contain'}}
                                                 />
-                                            </Carousel.Item>
+                                            </SplideSlide>
                                         )
                                     }
-                                </Carousel>
+                                </Splide>
                                 :
                                 <div style={{position: "relative"}}
                                 >
@@ -273,8 +289,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                             </>
                         }
                         <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}>
-                            <Row>
-                                <Col lg={6}>
+                            <div className={s.row}>
+                                <div className={s.col50}>
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <p className={s.description}>
@@ -286,8 +302,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                         Adipisci aperiam deserunt eveniet non quibusdam ratione repudiandae soluta unde velit vero?
                                         Cumque deserunt quo vero.
                                     </p>
-                                </Col>
-                                <Col lg={6}>
+                                </div>
+                                <div className={s.col50}>
                                     <div className={s.characteristics_title}>Характеристики товара:</div>
                                     <p className={s.characteristics}>Артикул:
                                         <span className={s.characteristics_text}>{product.manufacturer_sku}</span>
@@ -300,8 +316,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             </span>
                                         </p>
                                     }
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                         </div>
                         <div className='d-flex justify-content-center'>
                             <button
@@ -311,8 +327,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <Arrow isOpen={moreOpen}/>
                             </button>
                         </div>
-                    </Col>
-                    <Col lg={5}>
+                    </div>
+                    <div className={s.col2}>
                         {isDesktop &&
                             <>
                                 <Link href={clickBrand()} className={s.brand}
@@ -432,8 +448,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                             </TextModal>
                             <QuestionsDropdown/>
                         </div>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
                 {lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }

@@ -23,9 +23,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-/*body {*/
-/*    padding: 0 !important;*/
-/*}*/
+body {
+    overflow-x: clip;
+}
 body.modal-open #navbar {
     width: calc(100% - 17px);
 }
@@ -87,7 +87,13 @@ input {
     position: absolute;
     z-index: 0;
 }
-
+.carousel-control-prev {
+    width: fit-content;
+}
+.carousel-control-next {
+    width: fit-content;
+    right: 40px;
+}
 @media (max-width: 1200px) {
     .custom_cont {
         margin-right: 8px;
@@ -104,6 +110,12 @@ input {
     }
     body.modal-open #navbar {
         width: 100%
+    }
+    .carousel-control-prev {
+        left: 0;
+    }
+    .carousel-control-next {
+        right: 0;
     }
 }
 @media (min-width: 1800px) {

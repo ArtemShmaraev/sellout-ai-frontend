@@ -4,8 +4,8 @@ export async function fetchMainPage() {
     const {data} = await $host.get(`product/main_page`)
     return data
 }
-export async function fetchMore() {
-    const {data} = await $host.get(`product/main_page?more=yes`)
+export async function fetchMore(page) {
+    const {data} = await $host.get(`product/main_page?page=${page}`)
     return data
 }
 export async function fetchNavbarPhoto() {

@@ -35,8 +35,10 @@ export default function Home({data}) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
+    let [page, setPage] = useState(2)
     const getMore = async () => {
-        const newData = await fetchMore()
+        const newData = await fetchMore(page)
+        setPage(page + 1)
         const oldData = content
         const arr = [...oldData, ...newData]
         setContent(arr)
