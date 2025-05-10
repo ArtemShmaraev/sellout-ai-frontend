@@ -65,15 +65,15 @@ const Sidebar = ({photos}) => {
     //
     //     }
     // }
-    const sections = {
-        brands: <Brand photo={photos.brand}/>,
-        clothes: <Clothes photo={photos.clothes}/>,
-        shoes: <Shoes photo={photos.shoes}/>,
-        accessories: <Accessories photo={photos.accessories}/>
-    }
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
+    }
+    const sections = {
+        brands: <Brand photo={photos.brand} handleClose={handleClose}/>,
+        clothes: <Clothes photo={photos.clothes} handleClose={handleClose}/>,
+        shoes: <Shoes photo={photos.shoes} handleClose={handleClose}/>,
+        accessories: <Accessories photo={photos.accessories} handleClose={handleClose}/>
     }
 
     const queryGender = userStore.gender ? 'gender=' + userStore.gender[0].toUpperCase() : ''
@@ -236,8 +236,14 @@ const Sidebar = ({photos}) => {
                             <h4 className='text-white'>Остались вопросы?</h4>
                             <Link href={'/faq'} className={s.sidebar_links}>FAQ</Link>
                             <p className={s.sidebar_text}>Или свяжитесь с нами</p>
-                            <p className={s.sidebar_text}>Почта: support@sellout.su</p>
-                            <p className={s.sidebar_text}>Телефон: +7(916)114-92-27</p>
+                            <a href={'mailto:customerservice@sellout.su'}
+                               className={s.footer_link}>Почта: customerservice@sellout.su</a>
+                            <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                               target={'_blank'}
+                               className={s.footer_link}>WhatsApp: написать</a>
+                            <a href={'https://t.me/sellout_official'}
+                               target={'_blank'}
+                               className={s.footer_link}>Telegram: @sellout_official</a>
                         </div>
                     </div>
                 </div>

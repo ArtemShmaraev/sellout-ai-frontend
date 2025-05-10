@@ -4,21 +4,22 @@ import {Context} from "@/context/AppWrapper";
 import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 
-const Clothes = ({photo}) => {
+const Clothes = ({photo, handleClose}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
     const clothes = {}
     clothes.popularBrands = header["Популярные бренды"]
     clothes.cats = header["Популярные категории одежды"]
-    const fillCol = (colObj, query, secondQuery = '') => {
+    const fillCol = (colObj, query, secondQuery) => {
         const name = colObj.name
         let gender = 'any'
-        let genderQuery = ''
+        let queryObj = {}
         if (userStore.gender) {
             gender = userStore.gender
-            genderQuery = 'gender=' + gender[0].toUpperCase() + '&'
+            queryObj.gender = gender
         }
         const colArr = []
         colArr.push(
@@ -27,13 +28,19 @@ const Clothes = ({photo}) => {
         const links = colObj[gender]
         for (const key in links) {
             const link = links[key]
+            const linkQuery = {...queryObj, ...secondQuery}
+            linkQuery[query] = link.query_name
             colArr.push(
-                <a
+                <Link
                     className={s.link}
-                    href={`/products?${genderQuery}${query}=${link.query_name}${secondQuery}`}
+                    href={{
+                        pathname: '/products',
+                        query: linkQuery
+                    }}
+                    onClick={handleClose}
                 >
                     {link.name}
-                </a>
+                </Link>
             )
         }
         return (
@@ -42,16 +49,20 @@ const Clothes = ({photo}) => {
             </div>
         )
     }
-    const queryGender = userStore.gender ? '&gender=' + userStore.gender[0].toUpperCase() : ''
+    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
     return (
         <div style={{marginTop: 15}}>
-            <a className={s.all_link}
-               href={`/products?category=clothes${queryGender}`}
+            <Link className={s.all_link}
+                  href={{
+                      pathname: '/products',
+                      query: {category: 'clothes', ...queryGender}
+                  }}
+                  onClick={handleClose}
             >
                 Вся одежда
-            </a>
+            </Link>
             {
-                fillCol(clothes.popularBrands, 'line', '&category=clothes')
+                fillCol(clothes.popularBrands, 'line', {category: 'clothes'})
             }
             {
                 fillCol(clothes.cats, 'line')

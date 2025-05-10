@@ -58,4 +58,10 @@
     .dark_links {
         margin: 0;
     }
+    .footer_link:hover {
+        color: #c4c0c0;
+    }
+    .footer_link:active {
+        color: #9a9999;
+    }
 }

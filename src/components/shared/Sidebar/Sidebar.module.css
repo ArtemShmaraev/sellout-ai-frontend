@@ -131,3 +131,13 @@
     display: block;
     text-decoration: none;
 }
+.footer_link {
+    text-decoration: none;
+    color: #c4c0c0;
+    display: block;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+.footer_link:active {
+    color: #9a9999;
+}

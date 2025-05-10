@@ -144,166 +144,19 @@ const NavbarC = () => {
                            className={s.links}>Рекомендации</Link>
                         <Megamenu className={s.links} label={'Бренды'} link={{
                             pathname: '/brands',
-                        }}>
-                            <div className={s.megamenu_row}>
-                                {
-                                    renderMegamenu(15, 3,
-                                        header['Популярные бренды'], 'line',
-                                        'Популярные бренды'
-                                    )
-                                }
-                                {
-                                    renderMegamenu(15, 1,
-                                        header['Коллаборации'], 'collab',
-                                        'Коллаборации'
-                                    )
-                                }
-                                <div className={s.img_col}>
-                                    <div className={'w-100'}>
-                                        <div className={s.img_cont}>
-                                            <Image src={photos.brand}
-                                                   alt=''
-                                                   fill={true}
-                                                   className={s.img}
-                                                   loading={'eager'}
-                                            />
-                                        </div>
-                                        <div className={s.link_block}>
-                                            <Link className={s.img_link}
-                                               href={{
-                                                   pathname: '/brands',
-                                               }}
-                                            >
-                                                Все бренды
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Megamenu>
+                        }} photos={photos} type={'brands'}/>
                         <Megamenu className={s.links} label={'Обувь'} link={{
                             pathname: '/products',
                             query: {category: 'shoes_category', ...queryGender}
-                        }}>
-                            <div className={s.megamenu_row}>
-                                {
-                                    renderMegamenu(15, 2,
-                                        header['Популярные линейки обуви'], 'line',
-                                        'Популярные линейки'
-                                    )
-                                }
-                                {
-                                    renderMegamenu(13, 1,
-                                        header['Популярные категории обуви'], 'category',
-                                        'Категории'
-                                    )
-                                }
-                                {
-                                    renderMegamenu(15, 1,
-                                        header['Популярные бренды обуви'], 'collab',
-                                        'Популярные бренды', '&category=shoes_category'
-                                    )
-                                }
-                                <div className={s.img_col}>
-                                    <div className={'w-100'}>
-                                        <div className={s.img_cont}>
-                                            <Image src={photos.shoes}
-                                                   alt=''
-                                                   fill={true}
-                                                   className={s.img}
-                                                   loading={'eager'}
-                                            />
-                                        </div>
-                                        <div className={s.link_block}>
-                                            <Link className={s.img_link}
-                                               href={{
-                                                   pathname: '/products',
-                                                   query: {category: 'shoes_category', ...queryGender}
-                                               }}
-                                            >
-                                                Вся обувь
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Megamenu>
+                        }} photos={photos} type={'shoes'}/>
                         <Megamenu className={s.links} label={'Одежда'} link={{
                             pathname: '/products',
                             query: {category: 'clothes', ...queryGender}
-                        }}>
-                            <div className={s.megamenu_row}>
-                                {
-                                    renderMegamenu(15, 2,
-                                        header['Популярные категории одежды'], 'category',
-                                        'Категории'
-                                    )
-                                }
-                                {
-                                    renderMegamenu(15, 2,
-                                        header['Популярные бренды одежды'], 'line',
-                                        'Популярные бренды', '&category=clothes'
-                                    )
-                                }
-                                <div className={s.img_col}>
-                                    <div className={'w-100'}>
-                                        <div className={s.img_cont}>
-                                            <Image src={photos.clothes}
-                                                   alt=''
-                                                   fill={true}
-                                                   className={s.img}
-                                                   loading={'eager'}
-                                            />
-                                        </div>
-                                        <div className={s.link_block}>
-                                            <Link className={s.img_link}
-                                               href={{
-                                                   pathname: '/products',
-                                                   query: {category: 'clothes', ...queryGender}
-                                               }}
-                                            >
-                                                Вся одежда
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Megamenu>
+                        }} photos={photos} type={'clothes'}/>
                         <Megamenu className={s.links} label={'Аксессуары'} link={{
                             pathname: '/products',
                             query: {category: 'accessories', ...queryGender}
-                        }}>
-                            <div className={s.megamenu_row}>
-                                {
-                                    renderMegamenu(15, 2,
-                                        header['Популярные бренды аксессуаров'], 'line',
-                                        'Популярные бренды', '&category=accessories'
-                                    )
-                                }
-                                <div className={s.img_col}>
-                                    <div className={'w-100'}>
-                                        <div className={s.img_cont}>
-                                            <Image src={photos.accessories}
-                                                   alt=''
-                                                   fill={true}
-                                                   className={s.img}
-                                                   loading={'eager'}
-                                            />
-                                        </div>
-                                        <div className={s.link_block}>
-                                            <Link className={s.img_link}
-                                               href={{
-                                                   pathname: '/products',
-                                                   query: {category: 'accessories', ...queryGender}
-                                               }}
-                                            >
-                                                Все аксессуары
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Megamenu>
+                        }} type={'accessories'} photos={photos}/>
                         {/*<a href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
                         {/*   onClick={e => {*/}
                         {/*       e.preventDefault()*/}

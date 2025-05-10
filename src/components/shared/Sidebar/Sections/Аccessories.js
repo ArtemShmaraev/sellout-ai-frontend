@@ -4,20 +4,21 @@ import {Context} from "@/context/AppWrapper";
 import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 
-const Accessories = ({photo}) => {
+const Accessories = ({photo, handleClose}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
     const accs = {}
     accs.popularBrands = header["Популярные бренды аксессуаров"]
-    const fillCol = (colObj, query, secondQuery = '') => {
+    const fillCol = (colObj, query, secondQuery) => {
         const name = colObj.name
         let gender = 'any'
-        let genderQuery = ''
+        let queryObj = {}
         if (userStore.gender) {
             gender = userStore.gender
-            genderQuery = 'gender=' + gender[0].toUpperCase() + '&'
+            queryObj.gender = gender
         }
         const colArr = []
         colArr.push(
@@ -26,13 +27,19 @@ const Accessories = ({photo}) => {
         const links = colObj[gender]
         for (const key in links) {
             const link = links[key]
+            const linkQuery = {...queryObj, ...secondQuery}
+            linkQuery[query] = link.query_name
             colArr.push(
-                <a
+                <Link
                     className={s.link}
-                    href={`/products?${genderQuery}${query}=${link.query_name}${secondQuery}`}
+                    href={{
+                        pathname: '/products',
+                        query: linkQuery
+                    }}
+                    onClick={handleClose}
                 >
                     {link.name}
-                </a>
+                </Link>
             )
         }
         return (
@@ -41,16 +48,20 @@ const Accessories = ({photo}) => {
             </div>
         )
     }
-    const queryGender = userStore.gender ? '&gender=' + userStore.gender[0].toUpperCase() : ''
+    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
     return (
         <div style={{marginTop: 15}}>
-            <a className={s.all_link}
-               href={`/products?category=accessories${queryGender}`}
+            <Link className={s.all_link}
+                  href={{
+                      pathname: '/products',
+                      query: {category: 'accessories', ...queryGender}
+                  }}
+                  onClick={handleClose}
             >
                 Все аксессуары
-            </a>
+            </Link>
             {
-                fillCol(accs.popularBrands, 'line', '&category=accessories')
+                fillCol(accs.popularBrands, 'line', {category: 'accessories'})
             }
             <div className={s.img_cont}>
                 <Image src={photo} alt='' fill={true} style={{objectFit: 'contain', objectPosition: 'left top'}}/>
