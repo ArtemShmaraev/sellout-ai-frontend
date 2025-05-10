@@ -72,7 +72,7 @@ const Footer = () => {
                         </FooterDropdown>
                     </>
                 }
-                <Row>
+                <Row className={'w-100'}>
                     <Col lg={4}>
                         <h4 className={s.row2}>Мы в социальных сетях:</h4>
                         <div className={s.icons_block}>

@@ -417,11 +417,12 @@ class FilterStore {
         return this._pageRef
     }
     handleScrollTo() {
-        const productListPosition = this.ref.current.offsetTop - 135;
-        const currPagePosition = this.pageRef.current.scrollTop
-        if (currPagePosition > productListPosition) {
-            this.pageRef.current.scrollTo({
-                top: productListPosition,
+        const position = this.ref.current.offsetTop - 130;
+        const currentScroll = window.scrollTop || document.documentElement.scrollTop
+
+        if (currentScroll > position) {
+            window.scrollTo({
+                top: position,
                 behavior: 'smooth',
             });
         }

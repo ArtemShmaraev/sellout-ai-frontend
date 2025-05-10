@@ -10,8 +10,9 @@ const MainLayout = ({children}) => {
     useEffect(() => {
         filterStore.setPageRef(ref)
     }, []);
+
     return (
-        <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '100vh', position: "relative"}} ref={ref}>
+        <div ref={ref}>
             <NavbarC/>
             {children}
             <ScrollUp/>

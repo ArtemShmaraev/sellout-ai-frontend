@@ -27,7 +27,7 @@ export const getServerSideProps = async (context) => {
 }
 const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
-    const {userStore, filterStore} = useContext(Context)
+    const {userStore} = useContext(Context)
     const [brands, setBrands] = useState(brandsArr)
 
     const [isDesktop, setIsDesktop] = useState(true)
@@ -97,7 +97,7 @@ const Brands = ({brandsArr}) => {
         const el = document.getElementById(id)
         const scrollPosition = el.offsetTop
         const num = isDesktop ? 170 : 95
-        filterStore.pageRef.current.scrollTo({
+        window.scrollTo({
             top: scrollPosition - num,
             behavior: 'smooth',
         });

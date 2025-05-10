@@ -9,6 +9,7 @@ import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import Footer from "@/components/shared/Footer/Footer";
 
 export const getServerSideProps = async (context) => {
     const userAgent = context.req.headers['user-agent'];

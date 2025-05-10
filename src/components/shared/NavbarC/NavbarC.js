@@ -90,7 +90,7 @@ const NavbarC = () => {
     }
     const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()}  : {}
     return (
-        <header className={s.header}>
+        <header className={s.header} id={'navbar'}>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
                     <div className={s.block1}>

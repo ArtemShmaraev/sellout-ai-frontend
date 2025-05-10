@@ -23,11 +23,14 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-body {
-    overflow: clip;
+/*body {*/
+/*    padding: 0 !important;*/
+/*}*/
+body.modal-open #navbar {
+    width: calc(100% - 17px);
 }
 .modal-open {
-    overflow-y: clip;
+    overflow-y: scroll;
 }
 .modal-backdrop {
     overflow-y: clip;
@@ -98,6 +101,9 @@ input {
     }
     .placeholder_img {
         z-index: -1;
+    }
+    body.modal-open #navbar {
+        width: 100%
     }
 }
 @media (min-width: 1800px) {
