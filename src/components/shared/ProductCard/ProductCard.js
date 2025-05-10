@@ -11,6 +11,8 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import Link from "next/link";
+import desktop from '@/static/img/desktop_background.svg'
+import mobile from '@/static/img/mobile_background.svg'
 
 
 const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale,
@@ -132,8 +134,10 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                             onLoadingComplete={() => setIsLoading(false)}
                             src={photos[1]} alt="shoe"/>
                     }
-                    <div className={'placeholder_img'} style={isLoading ? {} : {opacity: 0}}>
-                    </div>
+                    <Image src={isDesktop ? desktop : mobile} alt=''
+                           className={'placeholder_img'} fill={true}
+                           style={isLoading ? {} : {opacity: 0}}
+                    />
                 </div>
             }
             <div className={s.text_block}>

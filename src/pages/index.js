@@ -38,6 +38,7 @@ export default function Home({data}) {
     let [page, setPage] = useState(2)
     const getMore = async () => {
         const newData = await fetchMore(page)
+        console.log(page)
         setPage(page + 1)
         const oldData = content
         const arr = [...oldData, ...newData]

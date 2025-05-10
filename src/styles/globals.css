@@ -80,13 +80,12 @@ input {
     color: green;
 }
 .placeholder_img {
-    /*background: linear-gradient(180deg, #FFF 0%, #BCBCBC 100%);*/
-    background: url("../static/img/desktop_background.svg");
     border-radius: 7px;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     z-index: 0;
+    object-fit: cover;
 }
 .splide__arrow {
     background: transparent !important;
@@ -113,7 +112,7 @@ input {
     }
     .placeholder_img {
         z-index: -1;
-        background: url("../static/img/mobile_background.svg");
+        object-fit: contain;
     }
     body.modal-open #navbar {
         width: 100%

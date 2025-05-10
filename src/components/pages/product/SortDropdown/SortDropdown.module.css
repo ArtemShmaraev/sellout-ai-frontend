@@ -5,6 +5,7 @@
     user-select: none;
     color: #222222;
     background: transparent;
+    transition: 0.3s;
 }
 .dropdown_toggle {
     display: flex;
@@ -51,6 +52,12 @@
 @media (max-width: 1200px) {
     .dropdown {
         border: none;
+    }
+    .dropdown:hover {
+        background: transparent;
+    }
+    .dropdown:active {
+        background: rgba(0, 0, 0, 0.05);
     }
     .dropdown_header_text {
         font-weight: 700;

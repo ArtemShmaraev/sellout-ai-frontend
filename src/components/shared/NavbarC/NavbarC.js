@@ -106,7 +106,7 @@ const NavbarC = () => {
                     </div>
                     <div className={s.block}>
                         <Link href={'/'}>
-                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 40 : 25}/>
+                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 50 : 25}/>
                         </Link>
                     </div>
                     <div className={s.block}>

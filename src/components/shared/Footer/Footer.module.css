@@ -47,6 +47,13 @@
 .dark_links:hover {
     color: #383f48;
 }
+.payment_block {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 20px;
+    margin-top: 10px;
+}
 @media (max-width: 1000px) {
     .dark_links {
         margin: 0;

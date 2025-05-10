@@ -6,6 +6,9 @@ import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'
 import Link from "next/link";
+import visa from '@/static/icons/payment/visa.svg'
+import mastercard from '@/static/icons/payment/mastercard.svg'
+import mir from '@/static/icons/payment/mir.svg'
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -46,9 +49,15 @@ const Footer = () => {
                         <Col lg={4}>
                             <h4>Остались вопросы?</h4>
                             <Link href="/faq" className={s.footer_link}>FAQ</Link>
-                            <p className={s.footer_text}>Или свяжитесь с нами</p>
-                            <p className={s.footer_text}>Почта: support@sellout.su</p>
-                            <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>
+                            <p className={s.footer_text}>Или свяжитесь с нами:</p>
+                            <a href={'mailto:customerservice@sellout.su'}
+                               className={s.footer_link}>Почта: customerservice@sellout.su</a>
+                            <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                               target={'_blank'}
+                               className={s.footer_link}>WhatsApp: написать</a>
+                            <a href={'https://t.me/sellout_official'}
+                               target={'_blank'}
+                               className={s.footer_link}>Telegram: @sellout_official</a>
                         </Col>
                     </Row>
                     :
@@ -67,8 +76,14 @@ const Footer = () => {
                         <FooterDropdown header={'Остались вопросы?'}>
                             <a href="/faq" className={s.footer_link}>FAQ</a>
                             <p className={s.footer_text}>Или свяжитесь с нами</p>
-                            <p className={s.footer_text}>Почта: support@sellout.su</p>
-                            <p className={s.footer_text}>Телефон: +7(916)114-92-27</p>
+                            <a href={'mailto:customerservice@sellout.su'}
+                               className={s.footer_link}>Почта: customerservice@sellout.su</a>
+                            <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                               target={'_blank'}
+                               className={s.footer_link}>WhatsApp: написать</a>
+                            <a href={'https://t.me/sellout_official'}
+                               target={'_blank'}
+                               className={s.footer_link}>Telegram: @sellout_official</a>
                         </FooterDropdown>
                     </>
                 }
@@ -98,6 +113,11 @@ const Footer = () => {
                         <a href="" className={s.dark_links}>Пользовательский договор</a>
                         <a href="" className={s.dark_links}>Политика конфиденциальности</a>
                     </div>
+                </div>
+                <div className={s.payment_block}>
+                    <Image src={mastercard} alt=''/>
+                    <Image src={visa} alt=''/>
+                    <Image src={mir} alt=''/>
                 </div>
             </div>
         </footer>

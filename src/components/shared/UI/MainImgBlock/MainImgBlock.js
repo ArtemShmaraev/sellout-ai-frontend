@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
 import logo from '@/static/img/sellout_logo.svg'
-import {useRouter} from "next/router";
 import Link from "next/link";
+import desktop from "@/static/img/desktop_background.svg";
+import mobile from "@/static/img/big_bg.svg";
 const MainImgBlock = ({obj, className}) => {
+    const [isDesktop, setIsDesktop] = useState(true)
+    useEffect(() => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        }
+    }, [])
     const getDirection = () => {
         if (obj.type === 'right_photo') {
             return s.row_reverse
@@ -46,8 +54,10 @@ const MainImgBlock = ({obj, className}) => {
                     <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
                            onLoadingComplete={() => setIsLoading(false)}
                     />
-                    <div className={'placeholder_img'} style={isLoading ? {} : {opacity: 0}}>
-                    </div>
+                    <Image src={isDesktop ? desktop : mobile} alt=''
+                           className={'placeholder_img'} fill={true}
+                           style={isLoading ? {} : {opacity: 0}}
+                    />
                 </div>
             </div>
         </div>
