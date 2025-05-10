@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
-import {Carousel, Col, Row} from "react-bootstrap";
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
 import like from '@/static/icons/heart.svg'
@@ -15,7 +14,6 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Image from 'next/image'
 import {fetchOneProduct, fetchPrices, fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
-import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
@@ -29,8 +27,10 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import Compilation from "@/components/shared/Compilation/Compilation";
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import {Splide, SplideSlide, SplideTrack} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'
+import right from '@/static/icons/chevron-right.svg'
+import left from '@/static/icons/chevron-left.svg'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -57,7 +57,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const {productStore, userStore, cartStore} = useContext(Context)
-    const router = useRouter()
     useEffect(() => {
         productStore.clearAll()
     }, [])
@@ -141,23 +140,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         Cookies.set('last_seen', newStr)
     }, [])
 
-
-    const [isCarouselScrolling, setCarouselScrolling] = useState(false);
-    const carouselRef = useRef(null);
-
-    const handleCarouselTouchStart = () => {
-        setCarouselScrolling(true);
-    };
-
-    const handleCarouselTouchEnd = () => {
-        setCarouselScrolling(false);
-    };
-
-    const handleCarouselScroll = (e) => {
-        if (isCarouselScrolling) {
-            e.preventDefault();
-        }
-    };
     return (
         <MainLayout>
             <div className={s.container + ' custom_cont'}>
@@ -190,40 +172,34 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         {
                             product.bucket_link.length > 1
                             ?
-                                // <Carousel
-                                //     variant='dark'
-                                //     indicators={false}
-                                //     interval={null}
-                                //     onTouchStart={handleCarouselTouchStart}
-                                //     onTouchEnd={handleCarouselTouchEnd}
-                                //     onTouchMove={handleCarouselScroll}
-                                //     ref={carouselRef}
-                                //     touch={true}
-                                // >
-                                //     {
-                                //         product.bucket_link.map(el =>
-                                //             <Carousel.Item className={s.photo} key={el.id}>
-                                //                 <Image src={el.url} alt=''
-                                //                        fill={true}
-                                //                        loading={'eager'}
-                                //                        style={{objectFit: 'contain'}}
-                                //                 />
-                                //             </Carousel.Item>
-                                //         )
-                                //     }
-                                // </Carousel>
-                                <Splide aria-label="My Favorite Images" >
-                                    {
-                                        product.bucket_link.map(el =>
-                                            <SplideSlide className={s.photo} key={el.id}>
-                                                <Image src={el.url} alt=''
-                                                       fill={true}
-                                                       loading={'eager'}
-                                                       style={{objectFit: 'contain'}}
-                                                />
-                                            </SplideSlide>
-                                        )
-                                    }
+                                <Splide aria-label="My Favorite Images"
+                                        options={{
+                                            type: 'loop',
+                                            pagination: false,
+                                        }}
+                                        hasTrack={false}
+                                >
+                                    <SplideTrack>
+                                        {
+                                            product.bucket_link.map(el =>
+                                                <SplideSlide className={s.photo} key={el.id}>
+                                                    <Image src={el.url} alt=''
+                                                           fill={true}
+                                                           loading={'eager'}
+                                                           style={{objectFit: 'contain'}}
+                                                    />
+                                                </SplideSlide>
+                                            )
+                                        }
+                                    </SplideTrack>
+                                    <div className="splide__arrows">
+                                        <button className="splide__arrow splide__arrow--prev">
+                                            <Image src={left} alt='' width={20}/>
+                                        </button>
+                                        <button className="splide__arrow splide__arrow--next">
+                                            <Image src={right} alt='' width={20}/>
+                                        </button>
+                                    </div>
                                 </Splide>
                                 :
                                 <div style={{position: "relative"}}
