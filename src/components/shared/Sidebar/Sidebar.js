@@ -76,7 +76,7 @@ const Sidebar = ({photos}) => {
         accessories: <Accessories photo={photos.accessories} handleClose={handleClose}/>
     }
 
-    const queryGender = userStore.gender ? 'gender=' + userStore.gender[0].toUpperCase() : ''
+    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
     return (
         <>
             <button className={s.toggle_btn}
@@ -125,18 +125,26 @@ const Sidebar = ({photos}) => {
                         !isSectionOpen
                         ?
                             <div>
-                                <a className={s.section_block}
-                                   href={`/products?new=true&${queryGender}`}
+                                <Link className={s.section_block}
+                                      href={{
+                                          pathname: '/products',
+                                          query: {new: true, ...queryGender}
+                                      }}
+                                      onClick={handleClose}
                                 >
                                     <div>Новинки</div>
                                     <Image src={arrow} alt=""/>
-                                </a>
-                                <a className={s.section_block}
-                                   href={`/products?recommendations=true&${queryGender}`}
+                                </Link>
+                                <Link className={s.section_block}
+                                      href={{
+                                          pathname: '/products',
+                                          query: {recommendations: true, ...queryGender}
+                                      }}
+                                      onClick={handleClose}
                                 >
                                     <div>Рекомендации</div>
                                     <Image src={arrow} alt=""/>
-                                </a>
+                                </Link>
                                 <div className={s.section_block}
                                      onClick={() => {
                                          setIsSectionOpen(true)
@@ -186,12 +194,16 @@ const Sidebar = ({photos}) => {
                                 {/*    <div className={s.sale}>Скидки</div>*/}
                                 {/*    <Image src={arrow} alt=""/>*/}
                                 {/*</div>*/}
-                                <a className={s.section_block}
-                                   href={`/products?${queryGender}`}
+                                <Link className={s.section_block}
+                                      href={{
+                                          pathname: '/products',
+                                          query: {...queryGender}
+                                      }}
+                                      onClick={handleClose}
                                 >
                                     <div>Все товары</div>
                                     <Image src={arrow} alt=""/>
-                                </a>
+                                </Link>
                             </div>
                             :
                             <div className={s.section_container}>
