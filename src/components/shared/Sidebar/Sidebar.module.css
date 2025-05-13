@@ -54,6 +54,16 @@
 }
 .section_container {
     padding: 0 20px;
+    position: relative;
+}
+.back_cont {
+    position: fixed;
+    padding: 15px 20px 5px 20px;
+    top: 110px;
+    left: 0;
+    background: white;
+    width: 100%;
+    z-index: 1;
 }
 .back_btn {
     display: flex;
@@ -74,6 +84,13 @@
 }
 .section_block:active {
     background: #e3e3e3;
+}
+.all_link_block {
+    position: sticky;
+    width: 100%;
+    background: white;
+    z-index: 1;
+    padding: 10px 0;
 }
 .all_link {
     color: #8d8d8d;

@@ -120,6 +120,9 @@ input {
     .splide__arrow--next {
         right: 0 !important;
     }
+    body.body-scroll-clip {
+        overflow-y: clip;
+    }
 }
 @media (min-width: 1800px) {
     .custom_cont {

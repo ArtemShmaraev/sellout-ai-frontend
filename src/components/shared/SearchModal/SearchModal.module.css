@@ -16,12 +16,13 @@
     left: 0;
     background: white;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
+    overflow-y: clip;
     padding: 20px;
 }
-.sug_block {
+.sug_block_mob {
     overflow-y: scroll;
-    max-height: 90vh;
+    max-height: 75vh;
 }
 .sugg {
     display: flex;

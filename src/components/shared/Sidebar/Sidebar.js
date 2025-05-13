@@ -68,6 +68,7 @@ const Sidebar = ({photos}) => {
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
+        document.body.classList.remove('body-scroll-clip')
     }
     const sections = {
         brands: <Brand photo={photos.brand} handleClose={handleClose}/>,
@@ -80,7 +81,14 @@ const Sidebar = ({photos}) => {
     return (
         <>
             <button className={s.toggle_btn}
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={() => {
+                        if (!isMenuOpen) {
+                            document.body.classList.add('body-scroll-clip')
+                        } else {
+                            document.body.classList.remove('body-scroll-clip')
+                        }
+                        setIsMenuOpen(!isMenuOpen)
+                    }}
             >
                 <Image width={22} src={list} alt="" className={s.list_icon}/>
             </button>
@@ -207,7 +215,7 @@ const Sidebar = ({photos}) => {
                             </div>
                             :
                             <div className={s.section_container}>
-                                <div>
+                                <div className={s.back_cont}>
                                     <button
                                         className={s.back_btn}
                                         onClick={() => setIsSectionOpen(false)}
@@ -218,9 +226,11 @@ const Sidebar = ({photos}) => {
                                         </div>
                                     </button>
                                 </div>
-                                {
-                                    currSection
-                                }
+                                <div style={{marginTop: 30, position: "relative"}}>
+                                    {
+                                        currSection
+                                    }
+                                </div>
                             </div>
                     }
                     <div className={s.sidebar_footer}>

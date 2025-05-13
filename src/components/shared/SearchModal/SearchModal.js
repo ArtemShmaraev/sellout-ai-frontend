@@ -33,10 +33,18 @@ const SearchModal = () => {
     const clickOnSugg = () => {
         setIsOpen(false)
     }
+    const toggleModal = () => {
+        if (!isOpen) {
+            document.body.classList.add('body-scroll-clip')
+        } else {
+            document.body.classList.remove('body-scroll-clip')
+        }
+        setIsOpen(!isOpen)
+    }
     return (
         <>
             <button className={s.toggle_btn}
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={toggleModal}
             >
                 <Image width={25} src={search} alt=""/>
             </button>
@@ -44,7 +52,7 @@ const SearchModal = () => {
                 <div className={s.search_modal}>
                     <div className={s.close}
                     >
-                        <Image src={close} alt="" onClick={() => setIsOpen(false)}/>
+                        <Image src={close} alt="" onClick={toggleModal}/>
                     </div>
                     <SearchInput w100={true}
                                  value={value}
@@ -55,7 +63,7 @@ const SearchModal = () => {
                                  clearFunc={clearInput}
                                  autoFocus={true}
                     />
-                    <div className={s.sug_block}>
+                    <div className={s.sug_block_mob}>
                         {
                             suggs.map(el =>
                                 <Link className={s.sugg}
