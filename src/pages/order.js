@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
 import {useRouter} from "next/router";
 import Head from "next/head";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -24,6 +25,7 @@ export const getServerSideProps = async (context) => {
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    console.log(userData)
     return { props: {addresses, defaultPrice, finalPrice, sale, userData} }
 }
 const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {

@@ -54,8 +54,13 @@ const MainImgBlock = ({obj, className}) => {
                     <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
                            onLoadingComplete={() => setIsLoading(false)}
                     />
-                    <Image src={isDesktop ? desktop : mobile} alt=''
-                           className={'placeholder_img'} fill={true}
+
+                    <Image src={desktop} alt=''
+                           className={`${className} placeholder_img`} fill={true}
+                           style={isLoading ? {} : {opacity: 0}}
+                    />
+                    <Image src={mobile} alt=''
+                           className={`${className} placeholder_img`} fill={true}
                            style={isLoading ? {} : {opacity: 0}}
                     />
                 </div>

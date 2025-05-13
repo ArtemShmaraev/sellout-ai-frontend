@@ -119,7 +119,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                      onMouseLeave={handleMouseLeave}
                 >
                     <Image
-                        style={{position: 'absolute', objectFit: 'contain'}}
+                        style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                         loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] ? 'opacity-0' : ''}
@@ -127,7 +127,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                         src={photosArr[0].url} alt="shoe"/>
                     {photos[1] &&
                         <Image
-                            style={{position: 'absolute', objectFit: 'contain'}}
+                            style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                             loading={'eager'}
                             fill={true}
                             className={isHovered ? '' : 'opacity-0'}

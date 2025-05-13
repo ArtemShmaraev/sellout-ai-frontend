@@ -5,20 +5,24 @@ import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useEffect, useState} from "react";
 import Head from "next/head";
-import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
+import {fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
-import {useRouter} from "next/router";
 import Link from "next/link";
-import Footer from "@/components/shared/Footer/Footer";
+import {parse} from "cookie";
+import Cookies from "js-cookie";
+import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
-    const userAgent = context.req.headers['user-agent'];
-    const data = await fetchMainPage()
+    const cookies = parse(context.req.headers.cookie || '')
+    const page = cookies['index_page']
+    let n = page ? page : 1
+    console.log(n)
+    const data = await fetchMore(n)
     return { props: {data} }
 }
 export default function Home({data}) {
-    const [content, setContent] = useState(data)
     const router = useRouter()
+    const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -35,13 +39,26 @@ export default function Home({data}) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
-    let [page, setPage] = useState(2)
+    const [isPageReloaded, setIsPageReloaded] = useState(false);
+
+    useEffect(() => {
+        // Проверяем, была ли страница перезагружена, проверяя, есть ли объект performance в браузере
+        if (typeof window !== 'undefined' && window.performance) {
+            const navigation = window.performance.getEntriesByType('navigation')[0];
+            if (navigation.type === 'reload') {
+                setIsPageReloaded(true);
+                const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
+                Cookies.set('index_page', 1, {expires: fiveHours})
+                router.push('/')
+            }
+        }
+    }, []);
     const getMore = async () => {
+        const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
+        const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
+        Cookies.set('index_page', Number(page) + 1, {expires: fiveHours})
         const newData = await fetchMore(page)
-        console.log(page)
-        setPage(page + 1)
-        const oldData = content
-        const arr = [...oldData, ...newData]
+        const arr = [...(content), ...newData]
         setContent(arr)
     }
     const renderPage = () => {

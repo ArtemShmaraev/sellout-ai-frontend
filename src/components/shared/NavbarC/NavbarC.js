@@ -105,9 +105,9 @@ const NavbarC = () => {
                         </div>
                     </div>
                     <div className={s.block}>
-                        <Link href={'/'}>
+                        <a href={'/'}>
                             <Image className={s.logo} alt='' src={logo} height={isDesktop ? 50 : 25}/>
-                        </Link>
+                        </a>
                     </div>
                     <div className={s.block}>
                         <Link href={'/wishlist'}>

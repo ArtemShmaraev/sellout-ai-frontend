@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
@@ -140,6 +140,10 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         Cookies.set('last_seen', newStr)
     }, [])
 
+    const buttonRef = useRef()
+    useEffect(() => {
+        buttonRef.current.focus()
+    }, [])
     return (
         <MainLayout>
             <div className={s.container + ' custom_cont'}>
@@ -176,6 +180,9 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                         options={{
                                             type: 'loop',
                                             pagination: false,
+                                            paginationKeyboard: true,
+                                            keyboard: true,
+                                            focus: 'center'
                                         }}
                                         hasTrack={false}
                                 >
@@ -196,7 +203,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                         <button className="splide__arrow splide__arrow--prev">
                                             <Image src={left} alt='' width={20}/>
                                         </button>
-                                        <button className="splide__arrow splide__arrow--next">
+                                        <button className="splide__arrow splide__arrow--next" ref={buttonRef}>
                                             <Image src={right} alt='' width={20}/>
                                         </button>
                                     </div>
