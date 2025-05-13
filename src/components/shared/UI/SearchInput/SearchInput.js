@@ -15,6 +15,7 @@ const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) =>
         <div className={s.input} style={w100 && {width: '100%'}}>
             <form onSubmit={(e) => {
                 if (onSubmit) {
+                    e.preventDefault()
                     onSubmit()
                 } else {
                     e.preventDefault()

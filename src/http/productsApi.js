@@ -112,3 +112,7 @@ export async function suggestSearch(qStr) {
     const {data} = await $host.get(`product/suggest_search?q=${qStr}`)
     return data
 }
+export async function addFilterSearch(qStr) {
+    const {data} = await $host.get(`product/add_filter_search?q=${qStr}`)
+    return data
+}

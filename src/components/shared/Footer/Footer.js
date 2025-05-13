@@ -34,31 +34,55 @@ const Footer = () => {
                 {isDesktop
                     ?
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={4} className={s.footer_col}>
                             <h4>Sellout</h4>
-                            <Link href="" className={s.footer_link}>О нас</Link>
-                            <Link href="" className={s.footer_link}>Блог</Link>
-                            <Link href="" className={s.footer_link}>Контакты</Link>
+                            <div>
+                                <Link href="" className={s.footer_link}>О нас</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Блог</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Контакты</Link>
+                            </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className={s.footer_col}>
                             <h4>Помощь</h4>
-                            <Link href="" className={s.footer_link}>Как мы работаем?</Link>
-                            <Link href="" className={s.footer_link}>Гарантии</Link>
-                            <Link href="" className={s.footer_link}>Оплата</Link>
-                            <Link href="" className={s.footer_link}>Возврат</Link>
+                            <div>
+                                <Link href="" className={s.footer_link}>Как мы работаем?</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Гарантии</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Оплата</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Возврат</Link>
+                            </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className={s.footer_col}>
                             <h4>Остались вопросы?</h4>
-                            <Link href="/faq" className={s.footer_link}>FAQ</Link>
-                            <p className={s.footer_text}>Или свяжитесь с нами:</p>
-                            <a href={'mailto:customerservice@sellout.su'}
-                               className={s.footer_link}>Почта: customerservice@sellout.su</a>
-                            <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
-                               target={'_blank'}
-                               className={s.footer_link}>WhatsApp: написать</a>
-                            <a href={'https://t.me/sellout_official'}
-                               target={'_blank'}
-                               className={s.footer_link}>Telegram: @sellout_official</a>
+                            <div>
+                                <Link href="/faq" className={s.footer_link}>FAQ</Link>
+                            </div>
+                            <div>
+                                <p className={s.footer_text}>Или свяжитесь с нами:</p>
+                            </div>
+                            <div>
+                                <a href={'mailto:customerservice@sellout.su'}
+                                   className={s.footer_link}>Почта: customerservice@sellout.su</a>
+                            </div>
+                            <div>
+                                <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                                   target={'_blank'}
+                                   className={s.footer_link}>WhatsApp: написать</a>
+                            </div>
+                            <div>
+                                <a href={'https://t.me/sellout_official'}
+                                   target={'_blank'}
+                                   className={s.footer_link}>Telegram: @sellout_official</a>
+                            </div>
                         </Col>
                     </Row>
                     :

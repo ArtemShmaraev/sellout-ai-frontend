@@ -11,6 +11,9 @@
 .toggle_btn:hover {
     color: #444444;
 }
+.modal {
+    max-width: 50vw;
+}
 .close {
     display: flex;
     justify-content: space-between;
@@ -25,6 +28,7 @@
     text-align: center;
     max-height: 395px;
     overflow-y: scroll;
+    overflow-x: scroll;
 }
 .tr_gray {
     background: #d7d7d7;
@@ -35,6 +39,9 @@
 @media (max-width: 1000px) {
     .toggle_btn {
         margin-top: 20px;
+    }
+    .modal {
+        max-width: 100vw;
     }
     .table_block {
         max-height: 90vh;

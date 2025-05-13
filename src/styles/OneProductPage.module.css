@@ -3,9 +3,10 @@
 }
 .row {
     display: flex;
+    justify-content: space-between;
 }
 .col1 {
-    width: 60%;
+    width: 58%;
 }
 .col2 {
     width: 40%;

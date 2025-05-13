@@ -33,6 +33,7 @@ class FilterStore {
                     state: false
                 },
             },
+            materials: {},
             price: [null, null],
             minMaxPrice: [null, null],
             is_fast_ship: {
@@ -368,6 +369,33 @@ class FilterStore {
             }
         }
         return checkedColors
+    }
+    get materials() {
+        const arr = []
+        for (const key in this.filters.materials) {
+            arr.push({...this.filters.materials[key]})
+        }
+        return arr
+    }
+    fillMaterials(materials) {
+        this.filters.materials = {}
+        materials.forEach(el => {
+            this.filters.materials[el.name] = {
+                text: el.name,
+                query: el.eng_name,
+                state: false,
+                is_all: el.is_all,
+            }
+        })
+    }
+    get checkedMaterials() {
+        const arr = []
+        for (const key in this.activeFilters) {
+            if (this.activeFilters[key].path[0] === 'materials') {
+                arr.push(this.activeFilters[key].query)
+            }
+        }
+        return arr
     }
     setPriceFrom(from) {
         this._allFilters.price[0] = from

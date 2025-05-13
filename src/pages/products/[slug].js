@@ -31,6 +31,7 @@ import {Splide, SplideSlide, SplideTrack} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'
 import right from '@/static/icons/chevron-right.svg'
 import left from '@/static/icons/chevron-left.svg'
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -78,6 +79,37 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             pathname: '/products',
             query: query
         }
+    }
+    const renderParams = () => {
+        const res = []
+        res.push(
+            <p className={s.characteristics}>Артикул:
+                <span className={s.characteristics_text}>{product.manufacturer_sku}</span>
+            </p>
+        )
+        res.push(
+            <p className={s.characteristics}>Дата релиза:
+                <span className={s.characteristics_text}>{product.approximate_date}</span>
+            </p>
+        )
+        const params = product.parameters
+        for (const key in params) {
+            if (params[key].length === 1) {
+                res.push(
+                    <p className={s.characteristics}>{key}:
+                        <span className={s.characteristics_text}>{params[key][0]}</span>
+                    </p>
+                )
+            }
+            if (params[key].length > 1) {
+                res.push(
+                    <p className={s.characteristics}>{key}:
+                        <span className={s.characteristics_text}>{params[key].join(', ')}</span>
+                    </p>
+                )
+            }
+        }
+        return res
     }
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -140,12 +172,17 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         Cookies.set('last_seen', newStr)
     }, [])
 
-    const buttonRef = useRef()
+    const buttonRef = useRef(null)
     useEffect(() => {
-        buttonRef.current.focus()
+        if (product.bucket_link.length > 1) {
+            buttonRef.current.focus()
+        }
     }, [])
     return (
         <MainLayout>
+            <Head>
+                <title>{product.model}</title>
+            </Head>
             <div className={s.container + ' custom_cont'}>
                 <BreadcrumbC list={product.list_lines}/>
                 <div className={s.row}>
@@ -182,7 +219,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             pagination: false,
                                             paginationKeyboard: true,
                                             keyboard: true,
-                                            focus: 'center'
+                                            focus: 'center',
+                                            speed: isDesktop ? 800 : 400
                                         }}
                                         hasTrack={false}
                                 >
@@ -224,7 +262,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         {!isDesktop &&
                             <>
                                 <div className={s.modals_block}>
-                                    <SizeTable/>
+                                    <SizeTable tables={product.size_table_platform.tables}/>
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>
@@ -277,28 +315,12 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <p className={s.description}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto debitis eos
-                                        esse facere,
-                                        impedit incidunt neque non officiis quis totam. A accusamus adipisci animi, dolorem
-                                        doloremque facere
-                                        magni natus nobis quam, repellendus reprehenderit repudiandae.
-                                        Adipisci aperiam deserunt eveniet non quibusdam ratione repudiandae soluta unde velit vero?
-                                        Cumque deserunt quo vero.
+                                        {product.description}
                                     </p>
                                 </div>
                                 <div className={s.col50}>
                                     <div className={s.characteristics_title}>Характеристики товара:</div>
-                                    <p className={s.characteristics}>Артикул:
-                                        <span className={s.characteristics_text}>{product.manufacturer_sku}</span>
-                                    </p>
-                                    {product.main_color &&
-                                        <p className={s.characteristics}>Цвет:
-                                            <span
-                                                className={s.characteristics_text}>
-                                                {product.main_color.russian_name}
-                                            </span>
-                                        </p>
-                                    }
+                                    {renderParams()}
                                 </div>
                             </div>
                         </div>
@@ -334,7 +356,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                 </div>
                                 <div className={s.modals_block}>
-                                    <SizeTable/>
+                                    <SizeTable tables={product.size_table_platform.tables}/>
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>

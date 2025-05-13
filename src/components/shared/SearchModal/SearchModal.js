@@ -5,7 +5,7 @@ import close from '@/static/icons/x-lg.svg'
 import SearchInput from "../UI/SearchInput/SearchInput";
 import Image from "next/image";
 import {useRouter} from "next/router";
-import {suggestSearch} from "@/http/productsApi";
+import {addFilterSearch, suggestSearch} from "@/http/productsApi";
 import {Context} from "@/context/AppWrapper";
 import Link from "next/link";
 
@@ -14,9 +14,15 @@ const SearchModal = () => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
-    const q = () => {
+    const q = async () => {
         const query = {}
         query.q = value
+        const filters = await addFilterSearch(value)
+        for (const key in filters) {
+            if (filters[key]) {
+                query[key] = filters[key]
+            }
+        }
         const pathname = '/products'
         router.push({pathname, query})
         filterStore.setQ(value)

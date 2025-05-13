@@ -97,7 +97,7 @@ input {
     left: 0 !important;
 }
 .splide__arrow--next {
-    right: 55px !important;
+    right: 0px !important;
 }
 @media (max-width: 1200px) {
     .custom_cont {
