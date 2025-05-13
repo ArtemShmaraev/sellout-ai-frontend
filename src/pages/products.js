@@ -87,6 +87,11 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
         if (isDesktop) {
             setIsOpen(!isOpen)
         } else {
+            if (!modalOpen) {
+                document.body.classList.add('body-scroll-clip')
+            } else {
+                document.body.classList.remove('body-scroll-clip')
+            }
             setModalOpen(!modalOpen)
         }
     }
