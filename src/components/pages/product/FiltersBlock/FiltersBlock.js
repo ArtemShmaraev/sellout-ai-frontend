@@ -31,6 +31,7 @@ const FiltersBlock = () => {
         changeQuery(query, 'collab', filterStore.checkedCollectionsQuery)
         changeQuery(query, 'size', filterStore.checkedSize)
         changeQuery(query, 'color', filterStore.checkedColorsQuery)
+        changeQuery(query, 'materials', filterStore.checkedMaterials)
         changeQuery(query, 'is_fast_ship', filterStore.checkedFastShip)
         changeQuery(query, 'is_sale', filterStore.checkedSale)
         changeQuery(query, 'q', filterStore.QActive)

@@ -30,6 +30,7 @@ export const getServerSideProps = async (context) => {
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
+    const materials = await fetchFilter('materials')
     const sizes = await fetchSizes(context.query, token)
     let lastSeen = []
     if (token) {
@@ -41,9 +42,9 @@ export const getServerSideProps = async (context) => {
             lastSeen = await fetchProductsByArray(arr)
         }
     }
-    return { props: {products, categories, lines, colors, collections, sizes, lastSeen} }
+    return { props: {products, categories, lines, colors, collections, materials, sizes, lastSeen} }
 }
-const Products = ({products, categories, lines, colors, collections, sizes, lastSeen}) => {
+const Products = ({products, categories, lines, colors, collections, materials, sizes, lastSeen}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -61,6 +62,7 @@ const Products = ({products, categories, lines, colors, collections, sizes, last
         if (!filterStore.collabQ) {
             filterStore.fillCollections(collections)
         }
+        filterStore.fillMaterials(materials)
         filterStore.fillSizes(sizes)
         filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)
