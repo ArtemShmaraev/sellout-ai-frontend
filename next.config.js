@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['cdn.poizon.com', 'drive.google.com', 'storage.yandexcloud.net'],
+    domains: ['cdn.poizon.com', 'drive.google.com', 'storage.yandexcloud.net', 'img.stadiumgoods.com'],
   },
   experimental: {
     scrollRestoration: true,
