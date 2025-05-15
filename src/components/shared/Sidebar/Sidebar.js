@@ -17,6 +17,7 @@ import Clothes from "@/components/shared/Sidebar/Sections/Clothes";
 import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
 import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
 import Link from "next/link";
+import vk from "@/static/icons/vk.svg";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -240,11 +241,16 @@ const Sidebar = ({photos}) => {
                             <Link href="" className={s.sidebar_links}>Контакты</Link>
                         </div>
                         <div className={s.col}>
-                            <h4 className='text-white'>Мы в социальных сетях:</h4>
-                            <div className={s.icons_block}>
-                                <Image src={tg} width={30} alt="" className={s.icon}/>
-                                <Image src={tg} width={30} alt="" className={s.icon}/>
-                                <Image src={tg} width={30} alt="" className={s.icon}/>
+                            <div style={{width: "fit-content"}}>
+                                <h4 className={'text-white'}>Мы в социальных сетях:</h4>
+                                <div className={s.icons_block}>
+                                    <a href={''}>
+                                        <Image src={tg} width={30} alt="" className={s.icon}/>
+                                    </a>
+                                    <a href={''}>
+                                        <Image src={vk} width={35} alt="" className={s.icon}/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div className={s.col}>

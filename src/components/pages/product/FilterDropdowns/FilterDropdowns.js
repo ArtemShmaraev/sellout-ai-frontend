@@ -21,8 +21,8 @@ const FilterDropdowns = () => {
                 <SizeDropdown/>
                 <ColorDropdown/>
                 <PriceDropdown/>
-                <FastShip/>
-                <Sale/>
+                {/*<FastShip/>*/}
+                {/*<Sale/>*/}
             </div>
         </div>
     );

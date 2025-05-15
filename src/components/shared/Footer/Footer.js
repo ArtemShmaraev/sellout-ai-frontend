@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import s from './Footer.module.css'
 import {Col, Row} from "react-bootstrap";
-import tg from '@/static/icons/telegram.png'
+import tg from '@/static/icons/tg.svg'
+import vk from '@/static/icons/vk.svg'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'
@@ -89,11 +90,16 @@ const Footer = () => {
                 }
                 <Row className={'w-100'}>
                     <Col lg={4}>
-                        <h4 className={s.row2}>Мы в социальных сетях:</h4>
-                        <div className={s.icons_block}>
-                            <Image src={tg} width={30} alt="" className={s.icon}/>
-                            <Image src={tg} width={30} alt="" className={s.icon}/>
-                            <Image src={tg} width={30} alt="" className={s.icon}/>
+                        <div style={{width: "fit-content"}}>
+                            <h4 className={s.row2}>Мы в социальных сетях:</h4>
+                            <div className={s.icons_block}>
+                                <a href={''}>
+                                    <Image src={tg} width={30} alt="" className={s.icon}/>
+                                </a>
+                                <a href={''}>
+                                    <Image src={vk} width={35} alt="" className={s.icon}/>
+                                </a>
+                            </div>
                         </div>
                     </Col>
                     <Col lg={8} >

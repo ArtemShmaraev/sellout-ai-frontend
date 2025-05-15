@@ -28,11 +28,11 @@
 }
 .icons_block {
     display: flex;
+    justify-content: center;
     margin: 20px 0;
+    gap: 50px;
 }
 .icon {
-    width: 30px;
-    margin-right: 50px;
     cursor: pointer;
 }
 .footer_bottom {
