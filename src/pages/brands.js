@@ -64,7 +64,7 @@ const Brands = ({brandsArr}) => {
             if (currLetter.toUpperCase() !== brands[i].name[0].toUpperCase() && !/^\d$/.test(brands[i].name[0])) {
                 currLetter = brands[i].name[0]
                 arr.push(
-                    <h4 key={brands[i].name[0] + i}
+                    <h4 key={brands[i].id}
                         id={brands[i].name[0]}
                         className={s.big_letter}
                     >
@@ -75,7 +75,7 @@ const Brands = ({brandsArr}) => {
             if (currLetter !== '0-9' && /^\d$/.test(brands[i].name[0])) {
                 currLetter = '0-9'
                 arr.push(
-                    <h4 key={'0-9'}
+                    <h4 key={brands[i].id}
                         id={'0-9'}
                         className={s.big_letter}
                     >
@@ -108,6 +108,7 @@ const Brands = ({brandsArr}) => {
         const timeOutId = setTimeout(() => {
             setSearchValue(query)
             search(query).then(res => setBrands(res))
+            console.log(brands)
         }, 200);
         return () => clearTimeout(timeOutId);
     }, [query]);

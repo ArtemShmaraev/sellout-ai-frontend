@@ -11,8 +11,10 @@ import {Modal} from "react-bootstrap";
 import {addToWaitingList} from "@/http/userApi";
 import Cookies from "js-cookie";
 import close from "@/static/icons/x-lg.svg";
+import {useRouter} from "next/router";
 
 const SizeChoice = ({prices, productId, config}) => {
+    const router = useRouter()
     const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -52,10 +54,14 @@ const SizeChoice = ({prices, productId, config}) => {
         addToWaitingList(token, productId, sizeArr)
     }
     useEffect(() => {
+        productStore.setSizeChosen(true)
+        productStore.setShipps([])
         if (prices.length === 1) {
             selectItem(prices[0])
+        } else {
+            setSelectedItem(null)
         }
-    }, [])
+    }, [router.asPath])
     return (
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}

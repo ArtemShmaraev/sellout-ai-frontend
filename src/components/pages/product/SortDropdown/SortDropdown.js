@@ -15,12 +15,14 @@ const SortDropdown = () => {
     useEffect(() => {
         const query = {...router.query}
         const {ordering} = query
+        let sortChosen = false
         sorts.forEach(el => {
             if (el[1] === ordering) {
                 setSelectedItem(el[0])
+                sortChosen = true
             }
         })
-        if (!selectedItem) {
+        if (!sortChosen) {
             setSelectedItem(sorts[0][0])
         }
     }, [])

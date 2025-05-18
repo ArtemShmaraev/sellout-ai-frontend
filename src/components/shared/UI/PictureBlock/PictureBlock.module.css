@@ -23,6 +23,7 @@
 .text {
     margin-top: 25px;
     font-size: 14px;
+    color: black;
 }
 .img_block {
     width: 57%;

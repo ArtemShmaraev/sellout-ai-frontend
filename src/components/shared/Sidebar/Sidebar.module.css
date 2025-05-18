@@ -81,6 +81,7 @@
     justify-content: space-between;
     padding: 17px 20px;
     text-decoration: none;
+    color: black;
 }
 .section_block:active {
     background: #e3e3e3;
