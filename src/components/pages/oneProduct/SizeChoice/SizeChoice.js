@@ -12,7 +12,7 @@ import {addToWaitingList} from "@/http/userApi";
 import Cookies from "js-cookie";
 import close from "@/static/icons/x-lg.svg";
 
-const SizeChoice = ({prices, productId}) => {
+const SizeChoice = ({prices, productId, config}) => {
     const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -20,12 +20,10 @@ const SizeChoice = ({prices, productId}) => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-
     const selectItem = async (item) => {
         setSelectedItem(item);
         setIsOpen(false);
         productStore.setSizeChosen(true)
-        console.log(item)
         const ships = await fetchShippings(productId, item.view_size)
         productStore.setShipps(ships)
     };
@@ -53,6 +51,11 @@ const SizeChoice = ({prices, productId}) => {
         const token = Cookies.get('access_token')
         addToWaitingList(token, productId, sizeArr)
     }
+    useEffect(() => {
+        if (prices.length === 1) {
+            selectItem(prices[0])
+        }
+    }, [])
     return (
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}
@@ -65,15 +68,15 @@ const SizeChoice = ({prices, productId}) => {
                         <>
                             <div className={s.size_block}>
                                 <div className={s.icons}>{selectedItem.view_size}</div>
-                                <Image src={truck} alt="" className={s.icons}/>
-                                <Image src={refund} alt="" className={s.icons}/>
+                                {selectedItem.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
                             <div className={s.price}>
                                 от {selectedItem.min_price}
                             </div>
                         </>
                         :
-                        'Выберите размер'
+                        `Выберите конфигурацию ${(config && config !== 'undefined') ? `- (${config})` : ''}`
                 }
             </div>
             <div className={s.dropdown_content}>

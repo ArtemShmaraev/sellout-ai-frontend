@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import s from './RenderBtns.module.css'
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
@@ -29,12 +29,19 @@ const RenderBtns = ({btns}) => {
         if (btns[i].id === activeButtonId) {
             className = s.black;
         }
+        const content = (
+            <div className={`${s.content}`}>
+                <div className={s.half_text}>{btns[i].delivery.name}</div>
+                <div className={s.display_none}>|</div>
+                <div className={s.half_text}>{btns[i].final_price} ₽</div>
+            </div>
+        )
         if (btns.length - 1 - i > 2) {
             arr.push(
                 <button className={`${s.btn_black2} ${className}`} key={btns[i].id}
                         onClick={() => handleClick(btns[i].id)}
                 >
-                    {`${btns[i].delivery.name} | ${btns[i].final_price} ₽`}
+                    {content}
                 </button>
             )
             curNum++
@@ -45,7 +52,7 @@ const RenderBtns = ({btns}) => {
                 <button className={`${s.btn_black3} ${className}`} key={btns[i].delivery.id}
                         onClick={() => handleClick(btns[i].id)}
                 >
-                    {`${btns[i].delivery.name} | ${btns[i].final_price} ₽`}
+                    {content}
                 </button>
             )
             curNum++
@@ -56,12 +63,17 @@ const RenderBtns = ({btns}) => {
                 <button className={`${s.btn_black} ${className}`} key={btns[i].id}
                         onClick={() => handleClick(btns[i].id)}
                 >
-                    {`${btns[i].delivery.name} | ${btns[i].final_price} ₽`}
+                    {content}
                 </button>
             )
             curNum++
         }
     }
+    useEffect(() => {
+        if (btns.length === 1) {
+            handleClick(btns[0].id)
+        }
+    }, [])
     return <>{arr}</>
 };
 

@@ -241,7 +241,7 @@ const Sidebar = ({photos}) => {
                             <Link href="" className={s.sidebar_links}>Контакты</Link>
                         </div>
                         <div className={s.col}>
-                            <div style={{width: "fit-content"}}>
+                            <div className={s.social_media}>
                                 <h4 className={'text-white'}>Мы в социальных сетях:</h4>
                                 <div className={s.icons_block}>
                                     <a href={''}>

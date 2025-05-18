@@ -22,13 +22,10 @@
     font-size: 20px;
 }
 .table_block {
-    display: flex;
-    justify-content: center;
     color: #626161;
     text-align: center;
     max-height: 395px;
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow: auto;
 }
 .tr_gray {
     background: #d7d7d7;

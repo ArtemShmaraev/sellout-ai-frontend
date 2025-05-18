@@ -266,7 +266,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>
-                                <SizeChoice prices={prices} productId={product.id}/>
+                                <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
                                 {
                                     productStore.sizeChosen &&
                                     <div className={s.btn_group}>
@@ -314,6 +314,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.col50}>
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
+                                    <div className={s.more_color}>{product.unit_common_name}</div>
                                     <p className={s.description}>
                                         {product.description}
                                     </p>
@@ -360,9 +361,9 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                               imgSrc={product.bucket_link[0].url}/>
                                 </div>
-                                <SizeChoice prices={prices} productId={product.id}/>
+                                <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
                                 {
-                                    productStore.sizeChosen &&
+                                    productStore.shipps.length > 0 &&
                                     <div className={s.btn_group}>
                                         <RenderBtns btns={productStore.shipps}/>
                                     </div>

@@ -29,6 +29,9 @@
 .row2 {
     margin-top: 40px;
 }
+.social_media {
+    width: fit-content;
+}
 .icons_block {
     display: flex;
     justify-content: center;
@@ -66,5 +69,9 @@
     }
     .footer_link:active {
         color: #9a9999;
+    }
+    .social_media {
+        width: 100%;
+        text-align: center;
     }
 }

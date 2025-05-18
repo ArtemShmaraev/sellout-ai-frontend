@@ -114,7 +114,7 @@ const Footer = () => {
                 }
                 <Row className={'w-100'}>
                     <Col lg={4}>
-                        <div style={{width: "fit-content"}}>
+                        <div className={s.social_media}>
                             <h4 className={s.row2}>Мы в социальных сетях:</h4>
                             <div className={s.icons_block}>
                                 <a href={''}>

@@ -26,7 +26,7 @@ const MaterialsDropdown = () => {
     const reloadPage = () => {
         const {pathname} = router
         const query = {...router.query}
-        changeQuery(query, 'materials', filterStore.checkedMaterials)
+        changeQuery(query, 'material', filterStore.checkedMaterials)
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }

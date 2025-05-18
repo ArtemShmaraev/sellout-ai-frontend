@@ -69,7 +69,7 @@ const SizeTable = ({tables}) => {
             )
         }
         return (
-            <table width={'100%'}>
+            <table width={'100%'} style={{marginBottom: 20}}>
                 <tbody>
                 {sizeRowsArr}
                 </tbody>
@@ -78,7 +78,24 @@ const SizeTable = ({tables}) => {
     }
 
     const allTables = () => {
-
+        const tablesArr = []
+        if (tables.hasOwnProperty('main_regular_table')) {
+            const table = renderTable(tables.main_regular_table)
+            tablesArr.push(table)
+        }
+        if (tables.hasOwnProperty('main_measurements_table')) {
+            const table = renderTable(tables.main_measurements_table)
+            tablesArr.push(table)
+        }
+        if (tables.hasOwnProperty('tables_recommendations')) {
+            const table = renderTable(tables.tables_recommendations)
+            tablesArr.push(table)
+        }
+        if (tables.hasOwnProperty('default_table')) {
+            const table = renderTable(tables.default_table)
+            tablesArr.push(table)
+        }
+        return tablesArr
     }
     return (
         <>
@@ -103,7 +120,9 @@ const SizeTable = ({tables}) => {
                     <div className={s.header}>Jordan</div>
                     <div className={s.header}>Сбер молодцы</div>
                     <div className={s.table_block}>
-                        {renderTable(tables.default_table)}
+                        {
+                            allTables()
+                        }
                     </div>
 
                 </Modal.Body>

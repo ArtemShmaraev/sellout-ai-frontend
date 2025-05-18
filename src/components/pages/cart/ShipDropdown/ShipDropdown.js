@@ -83,7 +83,11 @@ const ShipDropdown = ({cardId, unitId}) => {
                 >
                     {selectedItem ?
                         <div className={s.dropdown_header_text}>
-                            {`${selectedItem.delivery.name} | ${selectedItem.final_price} ₽`}
+                            <div className={`${s.content}`}>
+                                <div className={s.half_text}>{selectedItem.delivery.name}</div>
+                                <div className={s.display_none}>|</div>
+                                <div className={s.half_text}>{selectedItem.final_price} ₽</div>
+                            </div>
                         </div>
                         :
                         <div className={s.dropdown_header_text}>
@@ -102,7 +106,11 @@ const ShipDropdown = ({cardId, unitId}) => {
                                         key={el.id}
                                         disabled={inCartArr.includes(el.id)}
                                 >
-                                    <div>{el.delivery.name} | {el.final_price} ₽</div>
+                                    <div className={`${s.content}`}>
+                                        <div className={s.half_text}>{el.delivery.name}</div>
+                                        <div className={s.display_none}>|</div>
+                                        <div className={s.half_text}>{el.final_price} ₽</div>
+                                    </div>
                                     <div>{inCartArr.includes(el.id) && 'Уже в корзине'}</div>
                                 </button>
                             )
