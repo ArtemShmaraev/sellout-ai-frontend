@@ -96,7 +96,8 @@ export async function fetchPrices(id) {
     return data
 }
 export async function fetchShippings(productId, sizeId) {
-    const {data} = await $host.get(`product_unit/delivery/${productId}?view_size=${sizeId}`)
+    const obj = {view_size: sizeId}
+    const {data} = await $host.post(`product_unit/delivery/${productId}`, JSON.stringify(obj))
     return data
 }
 export async function fetchProductsByArray(arr) {

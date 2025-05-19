@@ -45,9 +45,12 @@ export const getServerSideProps = async (context) => {
         const {user_id} = jwtDecode(token)
         lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
     } else {
-        const arr = cookies['last_seen'].trim().split(' ')
-        if (arr[0] !== '') {
-            lastSeen = await fetchProductsByArray(arr)
+        let arr
+        if (cookies.last_seen) {
+            arr = cookies['last_seen'].trim().split(' ')
+            if (arr[0] !== '') {
+                lastSeen = await fetchProductsByArray(arr)
+            }
         }
     }
     const compilations = await fetchSimilarProducts(product.id)
@@ -156,6 +159,9 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             const token = Cookies.get('access_token')
             const userId = userStore.id
             addLastSeen(token, userId, product.id)
+        }
+        if (!Cookies.get('last_seen')) {
+            Cookies.set('last_seen', '')
         }
         let currArr = Cookies.get('last_seen').trim().split(' ')
         const id = String(product.id)
