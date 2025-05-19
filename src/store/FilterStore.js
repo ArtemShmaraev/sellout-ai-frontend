@@ -34,7 +34,7 @@ class FilterStore {
                 },
             },
             material: {},
-            price: [null, null],
+            price: ['0', '1000000'],
             minMaxPrice: [null, null],
             is_fast_ship: {
                 text: 'Мгновенная доставка',
@@ -96,8 +96,6 @@ class FilterStore {
             }
         }
         this._activeFilters = [];
-        this._allFilters.price[0] = this._allFilters.minMaxPrice[0];
-        this._allFilters.price[1] = this._allFilters.minMaxPrice[1];
     }
     reactivateFilters(query) {
         for (const key in query) {

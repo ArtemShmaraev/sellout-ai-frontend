@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './PriceDropdown.module.css'
 import RangeSlider from "@/components/shared/UI/RangeSlider/RangeSlider";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
@@ -13,24 +13,39 @@ const PriceDropdown = () => {
         setIsOpen(!isOpen);
     };
     const {filterStore} = useContext(Context)
+    function isNumber(str) {
+        // Преобразуем строку в число с помощью parseFloat
+        // и проверяем, является ли результат числом и не NaN
+        console.log(!isNaN(parseFloat(str)))
+        return !isNaN(parseFloat(str));
+    }
     const handleFrom = (e) => {
         filterStore.setPriceFrom(e.target.value)
-        const {pathname} = router
-        const query = {...router.query}
-        query.price_min = filterStore.price[0]
-        query.price_max = filterStore.price[1]
-        query.page = 1
-        router.push({pathname, query}, undefined, {scroll: false})
     }
     const handleTo = (e) => {
         filterStore.setPriceTo(e.target.value)
-        const {pathname} = router
-        const query = {...router.query}
-        query.price_min = filterStore.price[0]
-        query.price_max = filterStore.price[1]
-        query.page = 1
-        router.push({pathname, query}, undefined, {scroll: false})
     }
+    useEffect(() => {
+        const timeOutId = setTimeout(() => {
+            console.log('ok')
+            const {pathname} = router
+            const query = {...router.query}
+            query.price_min = filterStore.price[0]
+            query.price_max = filterStore.price[1]
+            if (query.price_min === '') {
+                query.price_min = '0'
+            }
+            query.page = 1
+            router.push({pathname, query}, undefined, {scroll: false})
+        }, 200);
+        return () => clearTimeout(timeOutId);
+    }, [filterStore.price]);
+
+    useEffect(() => {
+        const {query} = router
+        const {price_min, price_max} = query
+        filterStore.setPriceBoth([price_min, price_max])
+    }, [])
     return (
         <div>
             <div className={s.dropdown}
@@ -51,7 +66,7 @@ const PriceDropdown = () => {
                     <div className={s.input_group}>
                         <div className='d-flex align-items-center'>
                             <label htmlFor="From">От</label>
-                            <input type="number" id='From'
+                            <input type="number" id='From' inputMode={'decimal'}
                                    className={s.dropdown_input}
                                    defaultValue={filterStore.minMaxPrice[0]}
                                    value={filterStore.price[0]}
@@ -60,7 +75,7 @@ const PriceDropdown = () => {
                         </div>
                         <div className='d-flex align-items-center'>
                             <label htmlFor="To">До</label>
-                            <input type="number" id='To'
+                            <input type="number" id='To' inputMode="decimal"
                                    className={s.dropdown_input}
                                    defaultValue={filterStore.minMaxPrice[1]}
                                    value={filterStore.price[1]}
