@@ -88,27 +88,51 @@ const Footer = () => {
                     :
                     <>
                         <FooterDropdown header={'Sellout'}>
-                            <a href="" className={s.footer_link}>О нас</a>
-                            <a href="" className={s.footer_link}>Блог</a>
-                            <a href="" className={s.footer_link}>Контакты</a>
+                            <div>
+                                <Link href="" className={s.footer_link}>О нас</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Блог</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Контакты</Link>
+                            </div>
                         </FooterDropdown>
                         <FooterDropdown header={'Помощь'}>
-                            <a href="" className={s.footer_link}>Как мы работаем?</a>
-                            <a href="" className={s.footer_link}>Гарантии</a>
-                            <a href="" className={s.footer_link}>Оплата</a>
-                            <a href="" className={s.footer_link}>Возврат</a>
+                            <div>
+                                <Link href="" className={s.footer_link}>Как мы работаем?</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Гарантии</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Оплата</Link>
+                            </div>
+                            <div>
+                                <Link href="" className={s.footer_link}>Возврат</Link>
+                            </div>
                         </FooterDropdown>
                         <FooterDropdown header={'Остались вопросы?'}>
-                            <a href="/faq" className={s.footer_link}>FAQ</a>
-                            <p className={s.footer_text}>Или свяжитесь с нами</p>
-                            <a href={'mailto:customerservice@sellout.su'}
-                               className={s.footer_link}>Почта: customerservice@sellout.su</a>
-                            <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
-                               target={'_blank'}
-                               className={s.footer_link}>WhatsApp: написать</a>
-                            <a href={'https://t.me/sellout_official'}
-                               target={'_blank'}
-                               className={s.footer_link}>Telegram: @sellout_official</a>
+                            <div>
+                                <Link href="/faq" className={s.footer_link}>FAQ</Link>
+                            </div>
+                            <div>
+                                <p className={s.footer_text}>Или свяжитесь с нами:</p>
+                            </div>
+                            <div>
+                                <a href={'mailto:customerservice@sellout.su'}
+                                   className={s.footer_link}>Почта: customerservice@sellout.su</a>
+                            </div>
+                            <div>
+                                <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                                   target={'_blank'}
+                                   className={s.footer_link}>WhatsApp: написать</a>
+                            </div>
+                            <div>
+                                <a href={'https://t.me/sellout_official'}
+                                   target={'_blank'}
+                                   className={s.footer_link}>Telegram: @sellout_official</a>
+                            </div>
                         </FooterDropdown>
                     </>
                 }

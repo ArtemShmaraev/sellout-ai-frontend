@@ -1,32 +1,8 @@
-.btn_group {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    margin: 10px 0;
-    flex-wrap: wrap;
-}
-.btn_black {
+.btn {
     border: none;
     outline: none;
     border-radius: 7px;
     min-height: 40px;
-    width: 49%;
-    margin-bottom: 5px;
-}
-.btn_black2 {
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    min-height: 40px;
-    width: 32%;
-    margin-bottom: 5px;
-}
-.btn_black3 {
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    min-height: 40px;
-    width: 100%;
     margin-bottom: 5px;
 }
 .black {
@@ -46,6 +22,12 @@
 }
 .half_text {
     width: 48%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 @media (max-width: 1200px) {

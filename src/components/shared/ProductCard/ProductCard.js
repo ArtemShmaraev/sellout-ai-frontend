@@ -124,7 +124,9 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                         fill={true}
                         className={isHovered && photos[1] ? 'opacity-0' : ''}
                         onLoadingComplete={() => setIsLoading(false)}
-                        src={photosArr[0].url} alt="shoe"/>
+                        src={photosArr[0].url} alt="shoe"
+                        sizes={'100%'}
+                    />
                     {photos[1] &&
                         <Image
                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
@@ -132,11 +134,14 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                             fill={true}
                             className={isHovered ? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
-                            src={photos[1]} alt="shoe"/>
+                            src={photos[1]} alt="shoe"
+                            sizes={'100%'}
+                        />
                     }
                     <Image src={isDesktop ? desktop : mobile} alt=''
                            className={'placeholder_img'} fill={true}
                            style={isLoading ? {} : {opacity: 0}}
+                           sizes={'100%'}
                     />
                 </div>
             }

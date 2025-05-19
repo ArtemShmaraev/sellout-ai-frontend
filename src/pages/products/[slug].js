@@ -145,7 +145,11 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const cartAdd = async () => {
         let cart = Cookies.get('cart')
         Cookies.set('cart', cart + productStore.shipChosen + ' ')
-        productStore.setText(Cookies.get('cart').trim().split(' '), productStore.shipChosen)
+        const arr = Cookies.get('cart').trim().split(' ')
+        productStore.setText(arr, productStore.shipChosen)
+        console.log(productStore.shipChosen)
+        console.log(arr)
+        //TODO delete log
         if (userStore.isLogged) {
             const token = Cookies.get('access_token')
             const userId = userStore.id

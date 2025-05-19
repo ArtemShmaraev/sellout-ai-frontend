@@ -99,6 +99,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                                 <Image src={photos.brand}
                                                        alt=''
                                                        fill={true}
+                                                       sizes={'100%'}
                                                        className={s.img}
                                                        loading={'eager'}
                                                 />
@@ -143,6 +144,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                                 <Image src={photos.shoes}
                                                        alt=''
                                                        fill={true}
+                                                       sizes={'100%'}
                                                        className={s.img}
                                                        loading={'eager'}
                                                 />
@@ -182,6 +184,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                                 <Image src={photos.clothes}
                                                        alt=''
                                                        fill={true}
+                                                       sizes={'100%'}
                                                        className={s.img}
                                                        loading={'eager'}
                                                 />
@@ -215,6 +218,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                                 <Image src={photos.accessories}
                                                        alt=''
                                                        fill={true}
+                                                       sizes={'100%'}
                                                        className={s.img}
                                                        loading={'eager'}
                                                 />

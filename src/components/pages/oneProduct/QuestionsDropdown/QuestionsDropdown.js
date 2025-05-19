@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import s from './QuestionDropdown.module.css'
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
+import Link from "next/link";
 
 const QuestionsDropdown = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +15,7 @@ const QuestionsDropdown = () => {
             </button>
             {isOpen &&
                 <div className={s.text_block}>
-                    <p className={s.text}>Ответы на большинство вопросов Вы сможете найти здесь: <a href="" className={s.link}>FAQ</a></p>
+                    <p className={s.text}>Ответы на большинство вопросов Вы сможете найти здесь: <Link href="/FAQ" className={s.link}>FAQ</Link></p>
                     <p className={s.text}>Если у Вас остались вопросы, обратитесь в поддержку, мы обязательно Вам поможем:</p>
                     <p className={s.text}>Email: support@sellout.su</p>
                 </div>

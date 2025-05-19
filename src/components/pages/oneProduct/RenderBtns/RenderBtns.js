@@ -18,63 +18,63 @@ const RenderBtns = ({btns}) => {
             Cookies.set('cart', '')
         }
         cart = Cookies.get('cart').trim().split(' ')
+
         productStore.setText(cart, id)
     }, []);
 
-    for (let i = 0; i < btns.length; i++) {
-        if (curNum > 3) {
-            curNum = 1
-        }
-        let className = s.white;
-        if (btns[i].id === activeButtonId) {
-            className = s.black;
-        }
-        const content = (
-            <div className={`${s.content}`}>
-                <div className={s.half_text}>{btns[i].delivery.name}</div>
-                <div className={s.display_none}>|</div>
-                <div className={s.half_text}>{btns[i].final_price} ₽</div>
-            </div>
-        )
-        if (btns.length - 1 - i > 2) {
-            arr.push(
-                <button className={`${s.btn_black2} ${className}`} key={btns[i].id}
-                        onClick={() => handleClick(btns[i].id)}
+    const renderBtns = (buttons) => {
+        const rows = [];
+        let currentRow = [];
+
+        for (let i = 0; i < buttons.length; i++) {
+            const button = buttons[i];
+            const content = (
+                <div className={`${s.content}`}>
+                    <div className={s.half_text}>{button.delivery.name}</div>
+                    <div className={s.display_none}>|</div>
+                    <div className={s.half_text}>{button.final_price} ₽</div>
+                </div>
+            )
+            let buttonWidth = '49%';
+            let lastRow = buttons.length - 1 - i < 1
+            if (lastRow) {
+                if (buttons.length -1 - i === 0 && currentRow.length === 0) {
+                    buttonWidth = '100%';
+                }
+            }
+
+            currentRow.push(
+                <button
+                    key={i}
+                    style={{ width: buttonWidth }}
+                    className={`${s.btn} ${productStore.shipChosen === button.id ? s.black : s.white}`}
+                    onClick={() => handleClick(button.id)}
                 >
                     {content}
                 </button>
-            )
-            curNum++
-            continue
+            );
+
+            if (currentRow.length === 2 || i === buttons.length - 1) {
+                rows.push(
+                    <div key={rows.length} className={s.row}>
+                        {currentRow}
+                    </div>
+                );
+                currentRow = [];
+            }
         }
-        if (btns.length % 3 !== 0 && btns.length - 1 - i === 0 && curNum === 1) {
-            arr.push(
-                <button className={`${s.btn_black3} ${className}`} key={btns[i].delivery.id}
-                        onClick={() => handleClick(btns[i].id)}
-                >
-                    {content}
-                </button>
-            )
-            curNum++
-            continue
-        }
-        if (btns.length % 3 !== 0 && btns.length - 1 - i <= 2) {
-            arr.push(
-                <button className={`${s.btn_black} ${className}`} key={btns[i].id}
-                        onClick={() => handleClick(btns[i].id)}
-                >
-                    {content}
-                </button>
-            )
-            curNum++
-        }
+        return rows
     }
     useEffect(() => {
         if (btns.length === 1) {
             handleClick(btns[0].id)
         }
-    }, [])
-    return <>{arr}</>
+    }, [productStore.shipps])
+    return (
+        <div className={'w-100'}>
+            {renderBtns(btns)}
+        </div>
+    )
 };
 
 export default observer(RenderBtns);

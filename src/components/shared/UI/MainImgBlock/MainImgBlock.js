@@ -52,15 +52,15 @@ const MainImgBlock = ({obj, className}) => {
             <div className={s.img_block}>
                 <div className={s.img_cont}>
                     <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
-                           onLoadingComplete={() => setIsLoading(false)}
+                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
                     />
 
                     <Image src={desktop} alt=''
-                           className={`${className} placeholder_img`} fill={true}
+                           className={`${className} placeholder_img`} fill={true} sizes={'100%'}
                            style={isLoading ? {} : {opacity: 0}}
                     />
                     <Image src={mobile} alt=''
-                           className={`${className} placeholder_img`} fill={true}
+                           className={`${className} placeholder_img`} fill={true} sizes={'100%'}
                            style={isLoading ? {} : {opacity: 0}}
                     />
                 </div>

@@ -44,16 +44,16 @@ const PictureBlock = ({obj, className, type}) => {
             <div className={s.img_block}>
                 <div className={s.img_cont}>
                     <Image src={obj.photo} alt='' fill={true} className={s.img}
-                           onLoadingComplete={() => setIsLoading(false)}/>
+                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
 
 
                     <Image src={desktop} alt=''
                            className={`${className} placeholder_img`} fill={true}
-                           style={isLoading ? {} : {opacity: 0}}
+                           style={isLoading ? {} : {opacity: 0}} sizes={'100%'}
                     />
                     <Image src={mobile} alt=''
                            className={`${className} placeholder_img`} fill={true}
-                           style={isLoading ? {} : {opacity: 0}}
+                           style={isLoading ? {} : {opacity: 0}} sizes={'100%'}
                     />
                 </div>
             </div>
