@@ -19,7 +19,10 @@ export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     let productUnits
-    const cartArr = cookies['cart'].trim().split(' ').map(el => Number(el))
+    let cartArr
+    if (cookies.cart) {
+        cartArr = cookies['cart'].trim().split(' ').map(el => Number(el))
+    }
     if (cookies['cart']) {
         const obj = {
             product_unit_list: cartArr
