@@ -15,12 +15,14 @@
 }
 .footer_text {
     color: #c4c0c0;
+    font-size: 18px;
     margin: 0;
 }
 .footer_link {
     text-decoration: none;
     color: #c4c0c0;
     margin: 10px 0;
+    font-size: 18px;
     transition: 0.3s;
 }
 .footer_link:hover {

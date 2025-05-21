@@ -4,7 +4,7 @@ import list from '@/static/icons/list2.svg'
 import close from '@/static/icons/x-lg.svg'
 import person from '@/static/icons/person-circle.svg'
 import arrow from '@/static/icons/chevron-right.svg'
-import tg from "@/static/icons/telegram.png";
+import tg from "@/static/icons/tg.svg";
 import AuthModal from "../AuthModal/AuthModal";
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
@@ -97,7 +97,7 @@ const Sidebar = ({photos}) => {
                 <div className={s.sidebar}>
                     <div className={s.header_block}>
                         <div className={s.sidebar_header}>
-                            <Link href={'/'}>
+                            <Link href={'/'} onClick={handleClose}>
                                 <Image alt='' src={logo} height={25}/>
                             </Link>
                             <Image src={close} alt="" onClick={handleClose}/>
@@ -108,7 +108,7 @@ const Sidebar = ({photos}) => {
                                 <Link href={'/account'} className={s.auth_block}>
                                     <div className={s.person_block}>
                                         <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                        <div>{userStore.firstName}</div>
+                                        <div className={'text-black'}>{userStore.firstName}</div>
                                     </div>
                                     <div>
                                         <Image src={arrow} alt=""/>
@@ -119,7 +119,7 @@ const Sidebar = ({photos}) => {
                                     <div className={s.auth_block}>
                                         <div className={s.person_block}>
                                             <Image width={25} src={person} alt="" className={s.person_icon}/>
-                                            <div>Войдите</div>
+                                            <div className={'text-black'}>Войдите</div>
                                         </div>
                                         <div>
                                             <Image src={arrow} alt=""/>
@@ -248,7 +248,7 @@ const Sidebar = ({photos}) => {
                                         <Image src={tg} width={30} alt="" className={s.icon}/>
                                     </a>
                                     <a href={''}>
-                                        <Image src={vk} width={35} alt="" className={s.icon}/>
+                                        <Image src={vk} width={38} alt="" className={s.icon}/>
                                     </a>
                                 </div>
                             </div>

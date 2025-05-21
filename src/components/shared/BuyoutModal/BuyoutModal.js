@@ -44,7 +44,7 @@ const BuyoutModal = () => {
         setIsSend(false)
     };
     return (
-        <div style={{margin: '35px 0'}} className={'custom_cont'}>
+        <div style={{marginTop: '35px'}}>
             <div className={s.text_container}>
                 <div className={s.text}>
                     Не смогли найти на нашей платформе то, что искали? <br/>

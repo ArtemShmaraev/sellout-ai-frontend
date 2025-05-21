@@ -4,7 +4,7 @@
 }
 .alphabet_block {
     position: sticky;
-    top: 100px;
+    top: 105px;
     background: white;
     padding: 20px 0;
 }
@@ -33,7 +33,7 @@
 }
 .search_block {
     position: sticky;
-    top: 140px;
+    top: 145px;
     width: 300px;
     padding-top: 10px;
     padding-right: 30px;
@@ -119,6 +119,8 @@
         width: 100%;
     }
     .search_block {
+        width: 100%;
+        text-align: center;
         position: static;
     }
     .brands_block {

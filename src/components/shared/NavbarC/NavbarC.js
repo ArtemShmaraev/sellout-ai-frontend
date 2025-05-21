@@ -106,7 +106,7 @@ const NavbarC = () => {
                     </div>
                     <div className={s.block}>
                         <a href={'/'}>
-                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 50 : 25}/>
+                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 42 : 25}/>
                         </a>
                     </div>
                     <div className={s.block}>
@@ -157,7 +157,7 @@ const NavbarC = () => {
                             pathname: '/products',
                             query: {category: 'accessories', ...queryGender}
                         }} type={'accessories'} photos={photos}/>
-                        {/*<a href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
+                        {/*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
                         {/*   onClick={e => {*/}
                         {/*       e.preventDefault()*/}
                         {/*       goToFastShip()*/}
@@ -165,7 +165,7 @@ const NavbarC = () => {
                         {/*>*/}
                         {/*    Мгновенная доставка*/}
                         {/*    <Image src={truck} alt="" className={s.truck}/>*/}
-                        {/*</a>*/}
+                        {/*</Link>*/}
                         {/*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*/}
                         {/*   onClick={e => {*/}
                         {/*       e.preventDefault()*/}

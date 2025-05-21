@@ -12,6 +12,7 @@ const SortDropdown = () => {
         ['По возрастанию цены', 'min_price'],
         ['По убыванию цены', '-min_price']
     ]
+    const router = useRouter()
     useEffect(() => {
         const query = {...router.query}
         const {ordering} = query
@@ -25,8 +26,7 @@ const SortDropdown = () => {
         if (!sortChosen) {
             setSelectedItem(sorts[0][0])
         }
-    }, [])
-    const router = useRouter()
+    }, [router.asPath])
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);

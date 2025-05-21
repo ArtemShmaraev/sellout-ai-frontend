@@ -21,6 +21,7 @@ const ProductList = ({products, isAdmin}) => {
                                      isFastShip={el.is_fast_shipping}
                                      isReturn={el.is_return}
                                      isSale={el.is_sale}
+                                     sale={el.sale_amount}
                                      inWishlist={el.in_wishlist}
                                      photosArr={el.bucket_link}
                                      key={el.id}

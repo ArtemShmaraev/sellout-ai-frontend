@@ -85,6 +85,7 @@ export default function Home({data}) {
                                      isFastShip={product.is_fast_shipping}
                                      isReturn={product.is_return}
                                      isSale={product.is_sale}
+                                     sale={el.sale_amount}
                                      inWishlist={product.in_wishlist}
                                      photosArr={product.bucket_link}
                                      key={product.id}
@@ -122,7 +123,6 @@ export default function Home({data}) {
                 <div className={'d-flex justify-content-center my-5'}>
                     <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
                 </div>
-                <hr className={s.hr}/>
             </div>
             <BuyoutModal/>
         </MainLayout>

@@ -41,7 +41,7 @@
 }
 @media (max-width: 1000px) {
     .main_block {
-        margin-top: 20px;
+        margin-top: 25px;
         flex-direction: column-reverse;
     }
     .text_block, .img_block {

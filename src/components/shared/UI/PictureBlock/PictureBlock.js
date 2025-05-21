@@ -33,7 +33,7 @@ const PictureBlock = ({obj, className, type}) => {
                             ?
                             <Image src={logo} alt='' className={s.logo} width={200}/>
                             :
-                            <h3>{obj.title}</h3>
+                            <h3 className={'text-black'}>{obj.title}</h3>
                         }
                     </div>
                     <div className={s.text}>

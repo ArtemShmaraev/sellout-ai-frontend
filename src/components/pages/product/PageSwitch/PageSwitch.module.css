@@ -1,8 +1,8 @@
 .container {
-    margin: 20px 0;
+    margin: 20px 0 100px 0;
+    font-size: 18px;
 }
 .previous {
-    font-size: 15px;
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
@@ -12,12 +12,10 @@
 }
 .page {
     color: #000;
-    font-size: 15px;
     font-weight: 700;
     margin: 0 10px;
 }
 .next {
-    font-size: 15px;
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;

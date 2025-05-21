@@ -105,6 +105,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         router.push('/products', undefined, {scroll: false})
         filterStore.handleScrollTo()
     }
+    console.log(products)
     return (
         <MainLayout>
             <Head>
@@ -154,12 +155,12 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
             </div>
-            <BuyoutModal/>
             <div className={'custom_cont'}>
                 {lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
+            <BuyoutModal/>
 
 
 

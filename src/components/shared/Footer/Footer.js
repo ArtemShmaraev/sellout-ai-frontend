@@ -145,7 +145,7 @@ const Footer = () => {
                                     <Image src={tg} width={30} alt="" className={s.icon}/>
                                 </a>
                                 <a href={''}>
-                                    <Image src={vk} width={35} alt="" className={s.icon}/>
+                                    <Image src={vk} width={38} alt="" className={s.icon}/>
                                 </a>
                             </div>
                         </div>

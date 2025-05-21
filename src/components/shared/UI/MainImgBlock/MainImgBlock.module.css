@@ -70,7 +70,7 @@
 }
 @media (max-width: 1200px) {
     .main_block {
-        margin: 40px 0;
+        margin: 45px 0;
         flex-direction: column-reverse;
     }
     .text_block, .img_block {

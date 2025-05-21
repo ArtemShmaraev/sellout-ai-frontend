@@ -35,10 +35,11 @@ const PriceDropdown = () => {
         filterStore.setPriceTo(e.target.value)
         const {pathname} = router
         const query = {...router.query}
-        query.price_min = filterStore.price[0]
-        query.price_max = filterStore.price[1]
-        if (query.price_min === '') {
-            query.price_min = '0'
+        if (filterStore.price[0]) {
+            query.price_min = filterStore.price[0]
+        }
+        if (filterStore.price[1]) {
+            query.price_max = filterStore.price[1]
         }
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
@@ -86,7 +87,7 @@ const PriceDropdown = () => {
                             <label htmlFor="From">От</label>
                             <input type="number" id='From' inputMode={'decimal'}
                                    className={s.dropdown_input}
-                                   defaultValue={filterStore.minMaxPrice[0]}
+                                   placeholder={filterStore.minMaxPrice[0]}
                                    value={filterStore.price[0]}
                                    onChange={(e) => handleFrom(e)}
                             />
@@ -95,7 +96,7 @@ const PriceDropdown = () => {
                             <label htmlFor="To">До</label>
                             <input type="number" id='To' inputMode="decimal"
                                    className={s.dropdown_input}
-                                   defaultValue={filterStore.minMaxPrice[1]}
+                                   placeholder={filterStore.minMaxPrice[1]}
                                    value={filterStore.price[1]}
                                    onChange={(e) => handleTo(e)}
                             />

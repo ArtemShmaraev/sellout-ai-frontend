@@ -134,11 +134,11 @@
     }
     .logo {
         font-size: 26px;
-        transform: translateX(13px);
+        transform: translateX(0px);
     }
     .icons {
         width: 25px;
-        margin: 0 15px;
+        margin: 0 4px;
     }
     .row2 {
         display: none;

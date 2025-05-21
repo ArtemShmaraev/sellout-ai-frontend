@@ -15,7 +15,7 @@ import desktop from '@/static/img/desktop_background.svg'
 import mobile from '@/static/img/mobile_background.svg'
 
 
-const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale,
+const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale, sale = '',
                          id, inWishlist, photosArr, cardList = false}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
@@ -79,7 +79,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {isSale && <div className={s.sale}>-20%</div>}
+                    {isSale && <div className={s.sale}>-{sale}%</div>}
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                 </div>
