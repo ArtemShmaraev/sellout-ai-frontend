@@ -50,10 +50,12 @@ const Stage1 = ({addresses, userData}) => {
     }, []);
     const [boxberryAddress, setBoxberryAddress] = useState(null)
     const handleWidgetClick = () => {
-        boxberry.open(boxberryCallback);
+        boxberry.open(boxberryCallback, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', 0, 0,
+            0, 0, 0, 0);
     };
     const boxberryCallback = (res) => {
         setBoxberryAddress(res)
+        console.log(res)
     }
     return (
         <div>
@@ -100,6 +102,30 @@ const Stage1 = ({addresses, userData}) => {
                     />
                 </div>
                 <h5>Выберите доставку</h5>
+                <div onClick={() => chooseType(3)} className={s.radio}>
+                    <CustomRadio label={'Доставка в пределах МКАД (бесплатно)'}
+                                 normalLabel={true}
+                                 checked={orderStore.shipType === 3}
+                                 reversed={true}
+                    />
+                </div>
+                <div>
+                    {orderStore.shipType === 3 &&
+                        <div className={s.address_block}>
+                            {addresses.map(el =>
+                                <OrderAddress
+                                    name={el.name}
+                                    address={el.address}
+                                    id={el.id}
+                                    isMain={el.is_main}
+                                />
+                            )}
+                            <div className={s.add_address_block}>
+                                <AddressModal newAddress={true} whiteBnt={true}/>
+                            </div>
+                        </div>
+                    }
+                </div>
                 <div onClick={() => chooseType(1)} className={s.radio}>
                     <CustomRadio label={'Доставка до двери'}
                                  normalLabel={true}
@@ -125,11 +151,13 @@ const Stage1 = ({addresses, userData}) => {
                     }
                 </div>
                 <div onClick={() => chooseType(2)} className={s.radio}>
-                    <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
-                                 normalLabel={true}
-                                 checked={orderStore.shipType === 2}
-                                 reversed={true}
-                    />
+                    <div style={{width: "fit-content"}}>
+                        <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
+                                     normalLabel={true}
+                                     checked={orderStore.shipType === 2}
+                                     reversed={true}
+                        />
+                    </div>
                     {
                         orderStore.shipType === 2 &&
                         <>

@@ -113,6 +113,7 @@
     color: #9a9999;
 }
 .more {
+    margin-top: 40px;
     margin-bottom: 20px;
     overflow: hidden;
 }
@@ -156,6 +157,7 @@
     }
     .row {
         flex-direction: column;
+
     }
     .col1, .col2, .col50 {
         width: 100%;
@@ -165,5 +167,8 @@
     }
     .photo {
         height: 235px;
+    }
+    .more {
+        margin-top: 0;
     }
 }
