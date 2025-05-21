@@ -144,7 +144,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     }
     const cartAdd = async () => {
         let cart = Cookies.get('cart')
-        Cookies.set('cart', cart + productStore.shipChosen + ' ')
+        Cookies.set('cart', cart + ' ' + productStore.shipChosen)
         const arr = Cookies.get('cart').trim().split(' ')
         productStore.setText(arr, productStore.shipChosen)
         console.log(productStore.shipChosen)
