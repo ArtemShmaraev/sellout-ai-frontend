@@ -14,17 +14,19 @@ const RangeSlider = ({min, max, values}) => {
     const handleAfterChange = () => {
         const {pathname} = router
         const query = {...router.query}
-        // query.price_min = filterStore.price[0]
-        // query.price_max = filterStore.price[1]
-        // query.page = 1
-        // router.push({pathname, query}, undefined, {scroll: false})
+        query.price_min = filterStore.price[0]
+        query.price_max = filterStore.price[1]
+        query.page = 1
+        router.push({pathname, query}, undefined, {scroll: false})
         filterStore.handleScrollTo()
     };
 
     useEffect(() => {
         const {query} = router
         const {price_min, price_max} = query
-        filterStore.setPriceBoth([price_min, price_max])
+        if (price_min && price_max) {
+            filterStore.setPriceBoth([price_min, price_max])
+        }
     }, [])
     return (
         <Slider

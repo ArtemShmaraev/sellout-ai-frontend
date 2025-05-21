@@ -42,7 +42,7 @@ const FiltersBlock = () => {
         <ScrollableBlock2>
             {filterStore.activeFilters.map(el =>
                 <div className={s.border}>
-                    {el.text}
+                    {el.hasOwnProperty('viewName') ? el.viewName : el.text}
                     <span className={s.cross}>
                         <Image src={close} alt=''
                                onClick={() => {

@@ -35,7 +35,7 @@ class FilterStore {
             },
             material: {},
             price: ['0', '1000000'],
-            minMaxPrice: [null, null],
+            minMaxPrice: ['0', '1000000'],
             is_fast_ship: {
                 text: 'Мгновенная доставка',
                 query: 'is_fast_ship',
@@ -300,6 +300,7 @@ class FilterStore {
                     this.filters.size[sizeCategory.filter_name][name][size.size] = {
                         text: size.size,
                         query: size.query[0],
+                        viewName: size.view_name_in_line,
                         state: false,
                         logo,
                         isMain
