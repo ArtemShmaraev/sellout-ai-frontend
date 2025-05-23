@@ -25,6 +25,8 @@
     border: 1px solid #222222;
     border-radius: 0 0 7px 7px;
     border-top: none;
+    overflow-y: auto;
+    max-height: 200px;
 }
 .dropdown_item {
     background: white;
@@ -97,6 +99,13 @@
 }
 .price {
     font-size: 13px;
+}
+.crossed {
+    text-decoration: line-through;
+}
+.sale_price {
+    /*margin-left: 6px;*/
+    color: #b61212;
 }
 @media (max-width: 1200px) {
     .dropdown, .dropdown_items_block {

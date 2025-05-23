@@ -43,6 +43,13 @@
 .price {
     font-weight: 700;
 }
+.crossed {
+    text-decoration: line-through;
+}
+.sale_price {
+    margin-left: 10px;
+    color: #b61212;
+}
 .icons {
     font-weight: 700;
     margin-right: 10px;

@@ -16,7 +16,7 @@ const Compilation = ({arr, title}) => {
                                      brands={el.brands}
                                      collab={el.collab}
                                      colorway={el.colorway}
-                                     price={el.min_price_product_unit}
+                                     price={el.price}
                                      isFastShip={el.is_fast_shipping}
                                      isReturn={el.is_return}
                                      isSale={el.is_sale}

@@ -79,7 +79,9 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {isSale && <div className={s.sale}>-{sale}%</div>}
+                    {isSale && <div className={s.sale}>
+                        -{Math.ceil(100 - (price.final_price/price.start_price) * 100)}%
+                    </div>}
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                 </div>
@@ -152,7 +154,16 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                     <div className={`${s.name}`}>{colorway}</div>
                 </div>
                 <div className={`${s.price_block}`}>
-                    <div className={`${s.price}`}>От {price}</div>
+                    {
+                        isSale
+                        ?
+                            <div className={`${s.price}`}>
+                                <span className={s.crossed}>От {price.start_price} ₽</span>
+                                <span className={s.sale_price}>От {price.final_price} ₽</span>
+                            </div>
+                            :
+                            <div className={`${s.price}`}>От {price.final_price} ₽</div>
+                    }
                 </div>
             </div>
         </Link>

@@ -81,7 +81,7 @@ export default function Home({data}) {
                                      brands={product.brands}
                                      collab={product.collab}
                                      colorway={product.colorway}
-                                     price={product.min_price_product_unit}
+                                     price={product.price}
                                      isFastShip={product.is_fast_shipping}
                                      isReturn={product.is_return}
                                      isSale={product.is_sale}

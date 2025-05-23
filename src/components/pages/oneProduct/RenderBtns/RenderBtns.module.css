@@ -29,6 +29,13 @@
     justify-content: space-between;
     width: 100%;
 }
+.crossed {
+    text-decoration: line-through;
+}
+.sale_price {
+    margin-left: 10px;
+    color: #b61212;
+}
 
 @media (max-width: 1200px) {
     .display_none {

@@ -105,7 +105,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         router.push('/products', undefined, {scroll: false})
         filterStore.handleScrollTo()
     }
-    console.log(products)
     return (
         <MainLayout>
             <Head>

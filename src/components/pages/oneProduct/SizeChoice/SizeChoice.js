@@ -77,9 +77,18 @@ const SizeChoice = ({prices, productId, config}) => {
                                 {selectedItem.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                 {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
-                            <div className={s.price}>
-                                от {selectedItem.min_price}
-                            </div>
+                            {
+                                selectedItem.is_sale
+                                    ?
+                                    <div className={s.price}>
+                                        <span className={s.crossed}>От {selectedItem.min_price_without_sale} ₽</span>
+                                        <span className={s.sale_price}>От {selectedItem.min_price} ₽</span>
+                                    </div>
+                                    :
+                                    <div className={s.price}>
+                                        от {selectedItem.min_price}
+                                    </div>
+                            }
                         </>
                         :
                         `Выберите конфигурацию ${(config && config !== 'undefined') ? `- (${config})` : ''}`
@@ -102,9 +111,18 @@ const SizeChoice = ({prices, productId, config}) => {
                                             {el.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                             {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
-                                        <div className={s.price}>
-                                            от {el.min_price}
-                                        </div>
+                                        {
+                                            el.is_sale
+                                            ?
+                                                <div className={s.price}>
+                                                    <span className={s.crossed}>От {el.min_price_without_sale} ₽</span>
+                                                    <span className={s.sale_price}>От {el.min_price} ₽</span>
+                                                </div>
+                                                :
+                                                <div className={s.price}>
+                                                    от {el.min_price}
+                                                </div>
+                                        }
                                     </div>
                                     :
                                     <div className={s.items_not}

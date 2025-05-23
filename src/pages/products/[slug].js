@@ -208,11 +208,11 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     style={product.is_sale
                                         ? {textDecoration: 'line-through', fontSize: '16px'}
                                         : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price} ₽</div>
+                                >от {product.min_price_without_sale} ₽</div>
                                 <div className='d-flex align-items-center'>
                                     {product.is_sale &&
                                         <div className={s.price_sale}>
-                                            от 100 ₽
+                                            от {product.min_price} ₽
                                         </div>
                                     }
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
@@ -356,11 +356,11 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     style={product.is_sale
                                         ? {textDecoration: 'line-through', fontSize: '16px'}
                                         : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price} ₽</div>
+                                >от {product.min_price_without_sale} ₽</div>
                                 <div className='d-flex align-items-center'>
                                     {product.is_sale &&
                                         <div className={s.price_sale}>
-                                            от 100 ₽
+                                            от {product.min_price} ₽
                                         </div>
                                     }
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}

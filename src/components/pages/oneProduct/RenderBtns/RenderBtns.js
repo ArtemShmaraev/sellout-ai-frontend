@@ -25,14 +25,22 @@ const RenderBtns = ({btns}) => {
     const renderBtns = (buttons) => {
         const rows = [];
         let currentRow = [];
-
         for (let i = 0; i < buttons.length; i++) {
             const button = buttons[i];
             const content = (
                 <div className={`${s.content}`}>
                     <div className={s.half_text}>{button.delivery.name}</div>
                     <div className={s.display_none}>|</div>
-                    <div className={s.half_text}>{button.final_price} ₽</div>
+                    {
+                        button.is_sale
+                        ?
+                            <div className={s.half_text}>
+                                <span className={s.crossed}>{button.final_price} ₽</span>
+                                <span className={s.sale_price}>{button.start_price} ₽</span>
+                            </div>
+                            :
+                            <div className={s.half_text}>{button.final_price} ₽</div>
+                    }
                 </div>
             )
             let buttonWidth = '49%';

@@ -86,7 +86,16 @@ const ShipDropdown = ({cardId, unitId}) => {
                             <div className={`${s.content}`}>
                                 <div className={s.half_text}>{selectedItem.delivery.name}</div>
                                 <div className={s.display_none}>|</div>
-                                <div className={s.half_text}>{selectedItem.final_price} ₽</div>
+                                {
+                                    selectedItem.is_sale
+                                        ?
+                                        <div className={s.half_text}>
+                                            <span className={s.crossed}>{selectedItem.final_price} ₽</span>
+                                            <span className={s.sale_price}>{selectedItem.start_price} ₽</span>
+                                        </div>
+                                        :
+                                        <div className={s.half_text}>{selectedItem.final_price} ₽</div>
+                                }
                             </div>
                         </div>
                         :
@@ -109,7 +118,16 @@ const ShipDropdown = ({cardId, unitId}) => {
                                     <div className={`${s.content}`}>
                                         <div className={s.half_text}>{el.delivery.name}</div>
                                         <div className={s.display_none}>|</div>
-                                        <div className={s.half_text}>{el.final_price} ₽</div>
+                                        {
+                                            el.is_sale
+                                                ?
+                                                <div className={s.half_text}>
+                                                    <span className={s.crossed}>{el.final_price} ₽</span>
+                                                    <span className={s.sale_price}>{el.start_price} ₽</span>
+                                                </div>
+                                                :
+                                                <div className={s.half_text}>{el.final_price} ₽</div>
+                                        }
                                     </div>
                                     <div>{inCartArr.includes(el.id) && 'Уже в корзине'}</div>
                                 </button>
