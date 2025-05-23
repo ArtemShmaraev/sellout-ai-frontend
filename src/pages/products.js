@@ -52,10 +52,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const totalProducts = Number(products.count) || 1
-    const [isDesktop, setIsDesktop] = useState(true)
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
-    const {filterStore} = useContext(Context)
+    const {filterStore, desktopStore} = useContext(Context)
     useEffect(() => {
         filterStore.fillCat(categories)
         if (!filterStore.lineQ) {
@@ -73,23 +72,8 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         filterStore.setMaxPrice(products.max_price)
         filterStore.setRef(productListRef)
     }, [products])
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
     const handleClick = () => {
-        if (isDesktop) {
+        if (desktopStore.isDesktop) {
             setIsOpen(!isOpen)
         } else {
             if (!modalOpen) {
@@ -113,7 +97,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={products.desktop} className={s.desktop}/>
                 <PictureBlock obj={products.mobile} className={s.mobile}/>
-                {isDesktop &&
+                {desktopStore.isDesktop &&
                     <div className={s.filter_sort_row}>
                         <Col lg={10} className='d-flex'>
                             <button className={s.border + ' fw-bold'}
@@ -135,7 +119,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                         </Col>
                     </div>
                 }
-                {!isDesktop &&
+                {!desktopStore.isDesktop &&
                     <div className='d-flex justify-content-evenly align-items-center'>
                         <button className={s.filter_toggle}
                                 onClick={handleClick}

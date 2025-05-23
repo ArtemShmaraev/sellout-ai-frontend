@@ -74,12 +74,12 @@
 }
 .half_text {
     width: 48%;
+    text-align: center;
 }
 .crossed {
     text-decoration: line-through;
 }
 .sale_price {
-    margin-left: 10px;
     color: #b61212;
 }
 @media (max-width: 1200px) {

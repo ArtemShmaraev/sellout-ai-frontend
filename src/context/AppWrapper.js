@@ -60,7 +60,7 @@ export default function AppWrapper({ children }) {
             }
             cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
-            cartFromBack.forEach(el => newStr += el + ' ')
+            cartFromBack.forEach(el => newStr += " " + el)
             Cookies.set('cart', newStr)
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
@@ -104,6 +104,7 @@ export default function AppWrapper({ children }) {
         const lastSeen = Cookies.get('last_seen')
         if (cart) {
             const cartCnt = cart.trim().split(' ').length
+            console.log(cart.trim().split(' '))
             cartStore.setCartCnt(cartCnt)
         }
         if (!cart) {

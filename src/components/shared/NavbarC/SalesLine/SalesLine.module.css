@@ -1,0 +1,21 @@
+.line {
+    width: 100%;
+    background: black;
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+.splide {
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+.link {
+    color: #8d8d8d;
+}
+
+@media (max-width: 1200px) {
+    .splide {
+        font-size: 12px;
+    }
+}

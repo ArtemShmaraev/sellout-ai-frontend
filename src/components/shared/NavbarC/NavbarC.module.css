@@ -1,6 +1,6 @@
 .header {
     background: white;
-    padding: 20px 0 10px 0;
+    padding: 0px 0 10px 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -55,6 +55,8 @@
     user-select: none;
     text-align: center;
     cursor: pointer;
+    height: 37px;
+    width: auto;
 }
 .auth_block {
     display: flex;
@@ -130,11 +132,12 @@
 }
 @media (max-width: 1200px) {
     .header {
-        padding: 10px 0 10px 0;
+        padding: 0px 0 10px 0;
     }
     .logo {
         font-size: 26px;
         transform: translateX(0px);
+        height: 25px;
     }
     .icons {
         width: 25px;

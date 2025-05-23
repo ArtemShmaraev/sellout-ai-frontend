@@ -91,6 +91,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                                         ?
                                         <div className={s.half_text}>
                                             <span className={s.crossed}>{selectedItem.final_price} ₽</span>
+                                            <br/>
                                             <span className={s.sale_price}>{selectedItem.start_price} ₽</span>
                                         </div>
                                         :
@@ -123,6 +124,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                                                 ?
                                                 <div className={s.half_text}>
                                                     <span className={s.crossed}>{el.final_price} ₽</span>
+                                                    <br/>
                                                     <span className={s.sale_price}>{el.start_price} ₽</span>
                                                 </div>
                                                 :

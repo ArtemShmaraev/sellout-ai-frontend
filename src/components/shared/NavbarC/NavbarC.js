@@ -18,6 +18,7 @@ import headerJson from './header.json'
 import CartIcon from "@/components/shared/CartIcon/CartIcon";
 import {fetchNavbarPhoto} from "@/http/mainPageApi";
 import Link from "next/link";
+import SalesLine from "@/components/shared/NavbarC/SalesLine/SalesLine";
 
 const NavbarC = () => {
     const {userStore} = useContext(Context)
@@ -32,7 +33,7 @@ const NavbarC = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    const [isDesktop, setIsDesktop] = useState(null)
+    const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -91,6 +92,7 @@ const NavbarC = () => {
     const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()}  : {}
     return (
         <header className={s.header} id={'navbar'}>
+            <SalesLine/>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
                     <div className={s.block1}>
@@ -105,9 +107,9 @@ const NavbarC = () => {
                         </div>
                     </div>
                     <div className={s.block}>
-                        <a href={'/'}>
-                            <Image className={s.logo} alt='' src={logo} height={isDesktop ? 42 : 25}/>
-                        </a>
+                        <Link href={'/'}>
+                            <Image className={s.logo} alt='' src={logo}/>
+                        </Link>
                     </div>
                     <div className={s.block}>
                         <Link href={'/wishlist'}>

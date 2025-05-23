@@ -96,7 +96,7 @@ const Brands = ({brandsArr}) => {
     const scroll = (id) => {
         const el = document.getElementById(id)
         const scrollPosition = el.offsetTop
-        const num = isDesktop ? 170 : 95
+        const num = isDesktop ? 200 : 135
         window.scrollTo({
             top: scrollPosition - num,
             behavior: 'smooth',

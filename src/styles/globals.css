@@ -58,6 +58,9 @@ input {
     border-radius: 50px;
     top: -7px;
 }
+.cont_up {
+    padding-top: 30px;
+}
 .custom_cont {
     margin-right: 3vw;
     margin-left: 3vw;

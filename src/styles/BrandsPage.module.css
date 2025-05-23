@@ -4,7 +4,7 @@
 }
 .alphabet_block {
     position: sticky;
-    top: 105px;
+    top: 135px;
     background: white;
     padding: 20px 0;
 }
@@ -33,7 +33,7 @@
 }
 .search_block {
     position: sticky;
-    top: 145px;
+    top: 175px;
     width: 300px;
     padding-top: 10px;
     padding-right: 30px;
@@ -106,7 +106,7 @@
     .alphabet_block {
         position: fixed;
         left: 0;
-        top: 35px;
+        top: 75px;
         z-index: 7;
     }
     .letter {
