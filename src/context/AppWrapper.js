@@ -103,7 +103,7 @@ export default function AppWrapper({ children }) {
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
         if (cart) {
-            const cartCnt = cart.trim().split(' ').length
+            const cartCnt = cart.trim().split(' ').filter(el => el !== ' ').length
             console.log(cart.trim().split(' '))
             cartStore.setCartCnt(cartCnt)
         }

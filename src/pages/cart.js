@@ -21,7 +21,7 @@ export const getServerSideProps = async (context) => {
     let productUnits
     let cartArr = []
     if (cookies.cart) {
-        cartArr = cookies['cart'].trim().split(' ').map(el => Number(el))
+        cartArr = cookies['cart'].trim().split(' ')
     }
     if (cookies['cart']) {
         const obj = {
@@ -67,7 +67,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
             res = await promoAuth(promo, userStore.id, token)
             router.push('/cart', undefined, {scroll: false})
         } else {
-            const cartArr = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            const cartArr = Cookies.get('cart').trim().split(' ')
             res = await promoUnauth(promo, cartArr)
         }
         if (res.status) {
