@@ -97,6 +97,16 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
                         {
                             Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
                         }
+                        {
+                            orderStore.deliveryPrice &&
+                            (
+                                orderStore.deliveryPrice.block && orderStore.method === 2
+                                ?
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all} ₽</p>
+                                    :
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_part} ₽</p>
+                            )
+                        }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
                         <button className={s.order_btn}>Перейти к оформлению заказа</button>

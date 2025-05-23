@@ -10,6 +10,8 @@ import InputMask from "react-input-mask";
 import heart from '@/static/icons/circle_heart.svg'
 import Image from "next/image";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import {fetchDeliveryInfo} from "@/http/orderApi";
 
 const Stage1 = ({addresses, userData}) => {
     const router = useRouter()
@@ -50,12 +52,37 @@ const Stage1 = ({addresses, userData}) => {
     }, []);
     const [boxberryAddress, setBoxberryAddress] = useState(null)
     const handleWidgetClick = () => {
-        boxberry.open(boxberryCallback, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', 0, 0,
-            0, 0, 0, 0);
+        // boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', 0, 0,
+        //     0, 0, 0, 0);
+        boxberry.open(boxberryCallback_function);
     };
-    const boxberryCallback = (res) => {
+    const boxberryCallback_function = (res) => {
         setBoxberryAddress(res)
         console.log(res)
+        fetchDeliveryPrice()
+    }
+
+
+    const fetchDeliveryPrice = async () => {
+        const obj = {}
+        //По МСК
+        if (orderStore.shipType === 3) {
+            obj.delivery_type = 0
+            obj.address_id = orderStore.selectedAddressId
+        }
+        //До двери
+        if (orderStore.shipType === 1) {
+            obj.delivery_type = 2
+            obj.address_id = orderStore.selectedAddressId
+        }
+        //Boxberry
+        if (orderStore.shipType === 2) {
+            obj.delivery_type = 1
+            obj.target = boxberryAddress.id
+        }
+        const token = Cookies.get('access_token')
+        const data = await fetchDeliveryInfo(obj, token)
+        orderStore.setDeliveryPrice(data)
     }
     return (
         <div>

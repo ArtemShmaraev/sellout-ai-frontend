@@ -4,12 +4,36 @@ import CustomRadio from "@/components/shared/UI/CustomRadio/CustomRadio";
 import AddressModal from "@/components/pages/account/AddressModal/AddressModal";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
+import Cookies from "js-cookie";
+import {fetchDeliveryInfo} from "@/http/orderApi";
 
 const OrderAddress = ({isPickup = false, checked, name, address, id, isMain}) => {
     const {orderStore} = useContext(Context)
+    const fetchDeliveryPrice = async () => {
+        const obj = {}
+        //По МСК
+        if (orderStore.shipType === 3) {
+            obj.delivery_type = 0
+            obj.address_id = orderStore.selectedAddressId
+        }
+        //До двери
+        if (orderStore.shipType === 1) {
+            obj.delivery_type = 2
+            obj.address_id = orderStore.selectedAddressId
+        }
+        //Boxberry
+        if (orderStore.shipType === 2) {
+            obj.delivery_type = 1
+            obj.target = boxberryAddress.id
+        }
+        const token = Cookies.get('access_token')
+        const data = await fetchDeliveryInfo(obj, token)
+        orderStore.setDeliveryPrice(data)
+    }
     const selectAddress = () => {
         orderStore.setSelectedAddressId(id)
         orderStore.setShipType(1)
+        fetchDeliveryPrice()
     }
     return (
         <div className={s.card}>

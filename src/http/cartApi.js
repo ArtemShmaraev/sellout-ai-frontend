@@ -50,7 +50,6 @@ export async function fetchCartPrice(arr) {
     const obj = {
         product_unit_list: arr
     }
-    console.log(JSON.stringify(obj))
     const {data} = await $host.post(`product_unit/total_amount_list`, JSON.stringify(obj))
     return data
 }

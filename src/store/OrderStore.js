@@ -6,6 +6,7 @@ class OrderStore {
         this._shipType = null
         this._selectedAddressId = null
         this._method = null
+        this._deliveryPrice = null
         makeAutoObservable(this)
     }
     get stage() {
@@ -28,6 +29,12 @@ class OrderStore {
     }
     setMethod(method) {
         this._method = method
+    }
+    get deliveryPrice() {
+        return this._deliveryPrice
+    }
+    setDeliveryPrice(obj) {
+        this._deliveryPrice = obj
     }
     nextStage() {
         this._stage += 1
