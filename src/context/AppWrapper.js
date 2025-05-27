@@ -104,7 +104,6 @@ export default function AppWrapper({ children }) {
         const lastSeen = Cookies.get('last_seen')
         if (cart) {
             const cartCnt = cart.trim().split(' ').filter(el => el !== ' ').length
-            console.log(cart.trim().split(' '))
             cartStore.setCartCnt(cartCnt)
         }
         if (!cart) {
@@ -115,6 +114,12 @@ export default function AppWrapper({ children }) {
         }
     }, [])
 
+    useEffect(() => {
+        desktopStore.setAnimation(true)
+        setTimeout(() => {
+            desktopStore.setAnimation(false)
+        }, 4000)
+    }, []);
     return (
         <Context.Provider value={sharedState}>
             {children}

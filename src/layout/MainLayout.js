@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import CookieComponent from "@/components/shared/CookieComponent/CookieComponent";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
+import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSellout";
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
@@ -36,6 +37,7 @@ const MainLayout = ({children}) => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
+
     return (
         <>
             <Head>
@@ -47,6 +49,7 @@ const MainLayout = ({children}) => {
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
+            {desktopStore.animation && <AnimationSellout/>}
             <Footer/>
         </>
     );

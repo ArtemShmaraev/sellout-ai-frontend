@@ -11,6 +11,7 @@ class DesktopStore {
             marginRight: '0',
             marginLeft: '0',
         }
+        this._animation = true
         makeAutoObservable(this)
     }
     setIsDesktop(bool) {
@@ -18,6 +19,12 @@ class DesktopStore {
     }
     get isDesktop() {
         return this._isDesktop
+    }
+    setAnimation(bool) {
+        this._animation = bool
+    }
+    get animation() {
+        return this._animation
     }
 }
 
