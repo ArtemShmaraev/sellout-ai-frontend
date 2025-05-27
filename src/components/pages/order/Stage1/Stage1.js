@@ -21,6 +21,12 @@ const Stage1 = ({addresses, userData}) => {
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
     const [comment, setComment] = useState('')
+    useEffect(() => {
+        orderStore.setName(userData.first_name)
+        orderStore.setSurname(userData.last_name)
+        orderStore.setEmail(userData.email)
+        orderStore.setPhone(userData.phone_number)
+    }, [])
     const goToCart = (e) => {
         e.preventDefault()
         router.push('/cart')
@@ -28,10 +34,11 @@ const Stage1 = ({addresses, userData}) => {
     const chooseType = type => {
         orderStore.setShipType(type)
         orderStore.setSelectedAddressId(null)
-        if (type === 1) {
+        if (type === 1 || type === 3) {
             addresses.forEach(el => {
                 if (el.is_main) {
                     orderStore.setSelectedAddressId(el.id)
+                    fetchDeliveryPrice()
                 }
             })
         }
@@ -56,10 +63,9 @@ const Stage1 = ({addresses, userData}) => {
         //     0, 0, 0, 0);
         boxberry.open(boxberryCallback_function);
     };
-    const boxberryCallback_function = (res) => {
-        setBoxberryAddress(res)
-        console.log(res)
-        fetchDeliveryPrice()
+    const boxberryCallback_function = async (res) => {
+        await setBoxberryAddress(res)
+        await fetchDeliveryPrice(res.id)
     }
 
 
@@ -99,22 +105,24 @@ const Stage1 = ({addresses, userData}) => {
                     <input type="text"
                            className={s.input}
                            placeholder={'Фамилия*'}
-                           value={lastname}
-                           onChange={e => setLastname(e.target.value)}
+                           value={orderStore.surname}
+                           onChange={e => orderStore.setSurname(e.target.value)}
                     />
                     <input type="text"
                            className={s.input}
                            placeholder={'Имя*'}
-                           value={firstname}
-                           onChange={e => setFirstname(e.target.value)}
+                           value={orderStore.name}
+                           onChange={e => orderStore.setSurname(e.target.value)}
                     />
                     <input type="text"
                            className={s.input}
                            placeholder={'Отчество*'}
+                           value={orderStore.patronymic}
+                           onChange={e => orderStore.setPatronymic(e.target.value)}
                     />
                     <InputMask mask="+7 999 999-99-99" maskChar={null}
-                               value={phone}
-                               onChange={e => setPhone(e.target.value)}
+                               value={orderStore.phone}
+                               onChange={e => orderStore.setPhone(e.target.value)}
                     >
                         {(inputProps) => <input {...inputProps} type="tel"
                                                 placeholder="Номер*"
@@ -124,8 +132,8 @@ const Stage1 = ({addresses, userData}) => {
                     <input type="email"
                            className={s.input}
                            placeholder={'Почта*'}
-                           value={email}
-                           onChange={e => setEmail(e.target.value)}
+                           value={orderStore.email}
+                           onChange={e => orderStore.setEmail(e.target.value)}
                     />
                 </div>
                 <h5>Выберите доставку</h5>
@@ -147,9 +155,7 @@ const Stage1 = ({addresses, userData}) => {
                                     isMain={el.is_main}
                                 />
                             )}
-                            <div className={s.add_address_block}>
-                                <AddressModal newAddress={true} whiteBnt={true}/>
-                            </div>
+                            <AddressModal newAddress={true} whiteBnt={true}/>
                         </div>
                     }
                 </div>
@@ -171,13 +177,16 @@ const Stage1 = ({addresses, userData}) => {
                                     isMain={el.is_main}
                                 />
                             )}
-                            <div className={s.add_address_block}>
-                                <AddressModal newAddress={true} whiteBnt={true}/>
-                            </div>
+                            <AddressModal newAddress={true} whiteBnt={true}/>
                         </div>
                     }
                 </div>
-                <div onClick={() => chooseType(2)} className={s.radio}>
+                <div onClick={() => {
+                    chooseType(2)
+                    if (boxberryAddress) {
+                        fetchDeliveryPrice()
+                    }
+                }} className={s.radio}>
                     <div style={{width: "fit-content"}}>
                         <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
                                      normalLabel={true}
@@ -223,64 +232,70 @@ const Stage1 = ({addresses, userData}) => {
             {/*        Время: какой-то здесь текст будет*/}
             {/*    </div>*/}
             {/*</div>*/}
-            <div style={{marginTop: 40}}>
-                <h5>Выберите тип доставки</h5>
-                <p>Так как в Вашем заказе присутствует несколько позиций,
-                    прибывающих в разные даты, мы хотим предложить Вам выбрать предпочитаемый тип доставки:</p>
-                <div>
-                    <div className={s.radio}>
-                        <CustomRadio label={'Доставка всех позиций одновременно'}
-                                     onClick={() => {
-                                         orderStore.setMethod(1)
-                                     }}
-                                     checked={orderStore.method === 1}
-                                     normalLabel={true}
-                                     reversed={true}
-                        />
+            {
+                orderStore.deliveryPrice && orderStore.deliveryPrice.block &&
+                <>
+                    <div style={{marginTop: 40}}>
+                        <h5>Выберите тип доставки</h5>
+                        <p>Так как в Вашем заказе присутствует несколько позиций,
+                            прибывающих в разные даты, мы хотим предложить Вам выбрать предпочитаемый тип доставки:</p>
+                        <div>
+                            <div className={s.radio}>
+                                <CustomRadio label={'Доставка всех позиций одновременно'}
+                                             onClick={() => {
+                                                 orderStore.setMethod(1)
+                                             }}
+                                             checked={orderStore.method === 1}
+                                             normalLabel={true}
+                                             reversed={true}
+                                />
+                            </div>
+                            <p className={s.method_text}>
+                                Мы дождёмся прибытия крайнего товара из Вашего заказа и отправим весь заказ целиком.
+                                Благодаря этому стоимость доставки уменьшается, однако придется дожидаться всего заказа,
+                                а не получать его по частям.
+                            </p>
+                        </div>
+                        <div>
+                            <div className={s.radio}>
+                                <CustomRadio label={'Доставка каждой позиции по отдельности'}
+                                             onClick={() => {
+                                                 orderStore.setMethod(2)
+                                             }}
+                                             checked={orderStore.method === 2}
+                                             normalLabel={true}
+                                             reversed={true}
+                                />
+                            </div>
+                            <p className={s.method_text}>
+                                Мы будем отправлять каждую позицию Вашего заказа сразу же по прибытии к нам на
+                                склад. Благодаря этому Вы сможете получать части заказа сразу же, однако стоимость доставки увеличится.
+                            </p>
+                        </div>
                     </div>
-                    <p className={s.method_text}>
-                        Мы дождёмся прибытия крайнего товара из Вашего заказа и отправим весь заказ целиком.
-                        Благодаря этому стоимость доставки уменьшается, однако придется дожидаться всего заказа,
-                        а не получать его по частям.
-                    </p>
-                </div>
-                <div>
-                    <div className={s.radio}>
-                        <CustomRadio label={'Доставка каждой позиции по отдельности'}
-                                     onClick={() => {
-                                         orderStore.setMethod(2)
-                                     }}
-                                     checked={orderStore.method === 2}
-                                     normalLabel={true}
-                                     reversed={true}
-                        />
-                    </div>
-                    <p className={s.method_text}>
-                        Мы будем отправлять каждую позицию Вашего заказа сразу же по прибытии к нам на
-                        склад. Благодаря этому Вы сможете получать части заказа сразу же, однако стоимость доставки увеличится.
-                    </p>
-                </div>
-            </div>
-            <hr/>
-            <div>
+                    <hr/>
+                    <div>
                 <textarea
                     rows={3}
                     placeholder={'Комментарий к заказу (необязательно)'}
                     className={s.textarea}
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
+                    value={orderStore.comment}
+                    onChange={e => orderStore.setComment(e.target.value)}
                 />
-            </div>
-            <hr/>
-            <div>
-                <div className={'d-flex justify-content-center'}>
-                    <Image src={heart} alt='' width={85}/>
-                </div>
-                <p className={'text-center mt-2'}>
-                    Мы готовы сформировать для Вас индивидуальные условия отправления,
-                    поэтому Вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно Вам поможем!
-                </p>
-            </div>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div className={'d-flex justify-content-center'}>
+                            <Image src={heart} alt='' width={85}/>
+                        </div>
+                        <p className={'text-center mt-2'}>
+                            Мы готовы сформировать для Вас индивидуальные условия отправления,
+                            поэтому Вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно Вам поможем!
+                        </p>
+                    </div>
+                </>
+            }
+
         </div>
     );
 };

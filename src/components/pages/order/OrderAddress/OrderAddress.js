@@ -26,7 +26,6 @@ const OrderAddress = ({isPickup = false, checked, name, address, id, isMain}) =>
             obj.delivery_type = 1
             obj.target = boxberryAddress.id
         }
-        console.log(JSON.stringify(obj))
         const token = Cookies.get('access_token')
         const data = await fetchDeliveryInfo(obj, token)
         orderStore.setDeliveryPrice(data)

@@ -25,7 +25,6 @@ export const getServerSideProps = async (context) => {
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    console.log(userData)
     return { props: {addresses, defaultPrice, finalPrice, sale, userData} }
 }
 const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
@@ -57,7 +56,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
             res = await promoAuth(promo, userStore.id, token)
             router.push('/order', undefined, {scroll: false})
         } else {
-            const cartArr = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            const cartArr = Cookies.get('cart').trim().split(' ')
             res = await promoUnauth(promo, cartArr)
         }
         if (res.status) {
@@ -65,6 +64,17 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
             setSaleAmount(res.total_sale)
         }
         setPromoRes(res)
+    }
+    const calculateFinalPrice = () => {
+        if (orderStore.deliveryPrice &&
+            orderStore.deliveryPrice.block &&
+            orderStore.method === 2) {
+            return Number(finAmount) + Number(orderStore.deliveryPrice.sum_part)
+        } else if (orderStore.deliveryPrice) {
+            return Number(finAmount) + Number(orderStore.deliveryPrice.sum_all)
+        } else {
+            return finAmount
+        }
     }
     return (
         <MainLayout>
@@ -100,16 +110,20 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
                         {
                             orderStore.deliveryPrice &&
                             (
-                                orderStore.deliveryPrice.block && orderStore.method === 2
+                                orderStore.deliveryPrice.block
                                 ?
+                                    orderStore.method === 1
+                                    ?
                                     <p>Сумма доставки: {orderStore.deliveryPrice.sum_all} ₽</p>
                                     :
                                     <p>Сумма доставки: {orderStore.deliveryPrice.sum_part} ₽</p>
+                                :
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all} ₽</p>
                             )
                         }
                         <hr/>
-                        <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
-                        <button className={s.order_btn}>Перейти к оформлению заказа</button>
+                        <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice()} ₽</p>
+                        <button className={s.order_btn}>Перейти к оплате</button>
                     </div>
                 </div>
             </div>

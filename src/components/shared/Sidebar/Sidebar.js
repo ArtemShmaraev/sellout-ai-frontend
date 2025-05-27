@@ -105,7 +105,9 @@ const Sidebar = ({photos}) => {
                         {
                             userStore.isLogged
                                 ?
-                                <Link href={'/account'} className={s.auth_block}>
+                                <Link href={'/account'} className={s.auth_block}
+                                      onClick={handleClose}
+                                >
                                     <div className={s.person_block}>
                                         <Image width={25} src={person} alt="" className={s.person_icon}/>
                                         <div className={'text-black'}>{userStore.firstName}</div>

@@ -18,7 +18,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
         let queryObj = {}
         if (userStore.gender) {
             gender = userStore.gender
-            queryObj.gender = gender
+            queryObj.gender = gender[0].toUpperCase()
         }
         let obj = basicObj[gender]
         const keys = Object.keys(obj)
@@ -134,7 +134,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                     }
                                     {
                                         renderMegamenu(15, 1,
-                                            header['Популярные бренды обуви'], 'collab',
+                                            header['Популярные бренды обуви'], 'line',
                                             'Популярные бренды', {category: 'shoes_category'}
                                         )
                                     }

@@ -220,6 +220,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 <div className={s.google_block}>
                                     <a className={s.google_btn}
                                        href={getGoogleLink()}
+                                       onClick={() => document.body.classList.remove('body-scroll-clip')}
                                     >
                                         <Image src={google} alt='' className={s.google_icon} width={20}/>
                                         <div>
@@ -311,6 +312,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                             onClick={() => {
                                                 setPassModalShown(true)
                                                 setShow(false)
+                                                document.body.classList.remove('body-scroll-clip')
                                             }}
                                     >Забыли пароль?</button>
                                 </div>
@@ -321,6 +323,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 <div className={s.google_block}>
                                     <a className={s.google_btn}
                                        href={getGoogleLink()}
+                                       onClick={() => document.body.classList.remove('body-scroll-clip')}
                                     >
                                         <Image src={google} alt='' className={s.google_icon} width={20}/>
                                         <div>
