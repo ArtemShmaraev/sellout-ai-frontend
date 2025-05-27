@@ -13,6 +13,7 @@ class OrderStore {
         this._method = null
         this._deliveryPrice = null
         this._comment = ''
+        this._target = ''
         makeAutoObservable(this)
     }
     get email() {
@@ -77,6 +78,12 @@ class OrderStore {
     }
     setComment(value) {
         this._comment = value
+    }
+    get target() {
+        return this._target
+    }
+    setTarget(value) {
+        this._target = value
     }
     nextStage() {
         this._stage += 1

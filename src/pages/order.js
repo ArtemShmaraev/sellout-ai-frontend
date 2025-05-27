@@ -14,6 +14,7 @@ import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
 import {useRouter} from "next/router";
 import Head from "next/head";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import {checkoutOrder} from "@/http/orderApi";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -76,6 +77,78 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
             return finAmount
         }
     }
+
+    const [fillAll, setFillAll] = useState(false)
+    const checkout = async () => {
+        const orderObj = {
+            email: orderStore.email,
+            phone: orderStore.phone,
+            surname: orderStore.surname,
+            name: orderStore.name,
+            patronymic: orderStore.patronymic,
+            comment: orderStore.comment
+        }
+
+
+        const validate = () => {
+            if (!orderObj.name || !orderObj.surname || !orderObj.patronymic || !orderObj.email || !orderObj.surname) {
+                setFillAll(true)
+                return null
+            }
+            if (!orderStore.shipType) {
+                setFillAll(true)
+                return null
+            }
+            if (orderStore.shipType === 3 && !orderObj.address_id) {
+                setFillAll(true)
+                return null
+            }
+            //До двери
+            if (orderStore.shipType === 1 && !orderObj.address_id) {
+                setFillAll(true)
+                return null
+            }
+            //Boxberry
+            if (orderStore.shipType === 2 && !orderObj.target) {
+                setFillAll(true)
+                return null
+            }
+            if (orderStore.deliveryPrice && orderStore.deliveryPrice.block && !orderStore.method) {
+                setFillAll(true)
+                return null
+            }
+            setFillAll(false)
+            return true
+        }
+
+
+        if (orderStore.shipType === 3) {
+            orderObj.delivery_type = 0
+            orderObj.address_id = orderStore.selectedAddressId
+        }
+        //До двери
+        if (orderStore.shipType === 1) {
+            orderObj.delivery_type = 2
+            orderObj.address_id = orderStore.selectedAddressId
+        }
+        //Boxberry
+        if (orderStore.shipType === 2) {
+            orderObj.delivery_type = 1
+            orderObj.target = orderStore.target
+        }
+        if (orderStore.deliveryPrice && orderStore.deliveryPrice.block) {
+            orderObj.consolidation = orderStore.method !== 2;
+        }
+        if (!validate()) {
+            return null
+        }
+
+        const token = Cookies.get('access_token')
+        const id = userStore.id
+        console.log(JSON.stringify(orderObj))
+        const order = await checkoutOrder(orderObj, id, token)
+        console.log(order)
+    }
     return (
         <MainLayout>
             <Head>
@@ -123,7 +196,10 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
                         }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice()} ₽</p>
-                        <button className={s.order_btn}>Перейти к оплате</button>
+                        <button className={s.order_btn} onClick={checkout}>Перейти к оплате</button>
+                        {fillAll &&
+                            <p className={'red_text'}>Заполните все поля</p>
+                        }
                     </div>
                 </div>
             </div>

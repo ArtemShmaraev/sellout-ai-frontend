@@ -63,13 +63,16 @@ const Stage1 = ({addresses, userData}) => {
         //     0, 0, 0, 0);
         boxberry.open(boxberryCallback_function);
     };
-    const boxberryCallback_function = async (res) => {
-        await setBoxberryAddress(res)
-        await fetchDeliveryPrice(res.id)
+    const boxberryCallback_function = (res) => {
+        setBoxberryAddress(res)
+        if (res) {
+            fetchDeliveryPrice(res)
+            orderStore.setTarget(res.id)
+        }
     }
 
 
-    const fetchDeliveryPrice = async () => {
+    const fetchDeliveryPrice = async (boxberryRes) => {
         const obj = {}
         //По МСК
         if (orderStore.shipType === 3) {
@@ -84,7 +87,7 @@ const Stage1 = ({addresses, userData}) => {
         //Boxberry
         if (orderStore.shipType === 2) {
             obj.delivery_type = 1
-            obj.target = boxberryAddress.id
+            obj.target = boxberryRes.id
         }
         const token = Cookies.get('access_token')
         const data = await fetchDeliveryInfo(obj, token)
@@ -112,7 +115,7 @@ const Stage1 = ({addresses, userData}) => {
                            className={s.input}
                            placeholder={'Имя*'}
                            value={orderStore.name}
-                           onChange={e => orderStore.setSurname(e.target.value)}
+                           onChange={e => orderStore.setName(e.target.value)}
                     />
                     <input type="text"
                            className={s.input}
@@ -181,13 +184,14 @@ const Stage1 = ({addresses, userData}) => {
                         </div>
                     }
                 </div>
-                <div onClick={() => {
-                    chooseType(2)
-                    if (boxberryAddress) {
-                        fetchDeliveryPrice()
-                    }
-                }} className={s.radio}>
-                    <div style={{width: "fit-content"}}>
+                <div onClick={() => chooseType(2)} className={s.radio}>
+                    <div style={{width: "fit-content"}}
+                         onClick={() => {
+                             if (boxberryAddress) {
+                                 fetchDeliveryPrice(boxberryAddress)
+                             }
+                         }}
+                    >
                         <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
                                      normalLabel={true}
                                      checked={orderStore.shipType === 2}
@@ -274,7 +278,9 @@ const Stage1 = ({addresses, userData}) => {
                         </div>
                     </div>
                     <hr/>
-                    <div>
+                </>
+            }
+            <div>
                 <textarea
                     rows={3}
                     placeholder={'Комментарий к заказу (необязательно)'}
@@ -282,19 +288,17 @@ const Stage1 = ({addresses, userData}) => {
                     value={orderStore.comment}
                     onChange={e => orderStore.setComment(e.target.value)}
                 />
-                    </div>
-                    <hr/>
-                    <div>
-                        <div className={'d-flex justify-content-center'}>
-                            <Image src={heart} alt='' width={85}/>
-                        </div>
-                        <p className={'text-center mt-2'}>
-                            Мы готовы сформировать для Вас индивидуальные условия отправления,
-                            поэтому Вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно Вам поможем!
-                        </p>
-                    </div>
-                </>
-            }
+            </div>
+            <hr/>
+            <div>
+                <div className={'d-flex justify-content-center'}>
+                    <Image src={heart} alt='' width={85}/>
+                </div>
+                <p className={'text-center mt-2'}>
+                    Мы готовы сформировать для Вас индивидуальные условия отправления,
+                    поэтому Вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно Вам поможем!
+                </p>
+            </div>
 
         </div>
     );
