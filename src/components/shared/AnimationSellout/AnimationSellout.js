@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from './AnimationSellout.module.css'
-import img from '@/static/img/logo_white.svg'
+import img from '@/static/img/logo_white.png'
 import Image from "next/image";
 
 const AnimationSellout = () => {

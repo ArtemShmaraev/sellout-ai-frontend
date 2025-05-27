@@ -14,6 +14,7 @@
 }
 .img {
     width: 50%;
+    height: auto;
     animation: zoomOut 4s ease forwards;
 }
 
