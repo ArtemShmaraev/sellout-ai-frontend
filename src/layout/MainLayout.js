@@ -14,7 +14,7 @@ const MainLayout = ({children}) => {
 
     const [cookieOpen, setCookieOpen] = useState(false)
     const closeCookie = () => {
-        Cookies.set('cookie_message', true)
+        Cookies.set('cookie_message', true, {expires: 2772})
         setCookieOpen(false)
     }
     useEffect(() => {

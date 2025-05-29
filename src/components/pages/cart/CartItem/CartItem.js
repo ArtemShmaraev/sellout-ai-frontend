@@ -30,7 +30,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     const deleteFromCart = async () => {
         const currCart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
-        Cookies.set('cart', newCart.join(' '))
+        Cookies.set('cart', newCart.join(' '), {expires: 2772})
         if (userStore.isLogged) {
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }

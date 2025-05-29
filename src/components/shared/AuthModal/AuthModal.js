@@ -86,7 +86,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
-            Cookies.set('cart', newStr)
+            Cookies.set('cart', newStr, {expires: 2772})
             await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
@@ -126,7 +126,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
-            Cookies.set('cart', newStr)
+            Cookies.set('cart', newStr, {expires: 2772})
             await router.push({pathname: router.pathname, query: router.query}, undefined, {scroll: false})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)

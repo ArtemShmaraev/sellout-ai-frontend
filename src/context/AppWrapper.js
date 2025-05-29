@@ -49,8 +49,8 @@ export default function AppWrapper({ children }) {
         const googleToken = getGoogleToken()
         if (googleToken) {
             const res = await googleAuth(googleToken)
-            Cookies.set('access_token', res.access)
-            Cookies.set('refresh_token', res.refresh)
+            Cookies.set('access_token', res.access, {expires: 2772})
+            Cookies.set('refresh_token', res.refresh, {expires: 2772})
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -61,7 +61,7 @@ export default function AppWrapper({ children }) {
             cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += " " + el)
-            Cookies.set('cart', newStr)
+            Cookies.set('cart', newStr, {expires: 2772})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)
@@ -77,7 +77,7 @@ export default function AppWrapper({ children }) {
         if (token) {
             refreshToken(refreshObj).then((data) => {
                 // Save the new token
-                Cookies.set('access_token', data.access)
+                Cookies.set('access_token', data.access, {expires: 2772})
                 // Decode token to get user data
                 const userData = jwtDecode(data.access)
                 // Set user data in userStore
@@ -107,10 +107,10 @@ export default function AppWrapper({ children }) {
             cartStore.setCartCnt(cartCnt)
         }
         if (!cart) {
-            Cookies.set('cart', '')
+            Cookies.set('cart', '', {expires: 2772})
         }
         if (!lastSeen) {
-            Cookies.set('last_seen', '')
+            Cookies.set('last_seen', '', {expires: 2772})
         }
     }, [])
 

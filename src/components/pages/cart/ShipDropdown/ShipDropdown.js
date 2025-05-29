@@ -47,7 +47,7 @@ const ShipDropdown = ({cardId, unitId}) => {
             }
             return el
         })
-        Cookies.set('cart', newCart.join(' '))
+        Cookies.set('cart', newCart.join(' '), {expires: 2772})
         setSelectedItem(item)
         setIsOpen(false);
         cartStore.ships[cardId] = item.id

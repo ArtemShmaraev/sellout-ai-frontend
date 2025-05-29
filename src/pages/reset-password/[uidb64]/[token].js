@@ -37,7 +37,7 @@ const Token = () => {
             cartStore.setCartCnt(cartFromBack.length)
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
-            Cookies.set('cart', newStr)
+            Cookies.set('cart', newStr, {expires: 2772})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)

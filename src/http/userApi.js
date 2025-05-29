@@ -3,20 +3,20 @@ import Cookies from 'js-cookie'
 
 export async function registration(body) {
     const {data} = await $host.post(`user/register`, body)
-    Cookies.set('access_token', data.access)
-    Cookies.set('refresh_token', data.refresh)
+    Cookies.set('access_token', data.access, {expires: 2772})
+    Cookies.set('refresh_token', data.refresh, {expires: 2772})
     return data
 }
 export async function login(body) {
     const {data} = await $host.post(`user/login`, body)
-    Cookies.set('access_token', data.access)
-    Cookies.set('refresh_token', data.refresh)
+    Cookies.set('access_token', data.access, {expires: 2772})
+    Cookies.set('refresh_token', data.refresh, {expires: 2772})
     return data
 }
 export async function googleAuth(token) {
     const {data} = await $host.get(`user/auth/complete/google/?id_token=${token}`)
-    Cookies.set('access_token', data.access)
-    Cookies.set('refresh_token', data.refresh)
+    Cookies.set('access_token', data.access, {expires: 2772})
+    Cookies.set('refresh_token', data.refresh, {expires: 2772})
     return data
 }
 export async function checkAuth() {
@@ -25,7 +25,7 @@ export async function checkAuth() {
 }
 export async function refreshToken(token) {
     const {data} = await $host.post('user/token/refresh/', token)
-    Cookies.set('access_token', data.access)
+    Cookies.set('access_token', data.access, {expires: 2772})
     return data
 }
 export async function fetchUserInfo(cookies, id) {

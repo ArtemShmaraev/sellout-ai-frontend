@@ -15,7 +15,7 @@ const RenderBtns = ({btns}) => {
         productStore.setShipChosen(id)
         let cart = Cookies.get('cart')
         if (!cart) {
-            Cookies.set('cart', '')
+            Cookies.set('cart', '', {expires: 2772})
         }
         cart = Cookies.get('cart').trim().split(' ')
 

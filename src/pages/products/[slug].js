@@ -144,7 +144,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     }
     const cartAdd = async () => {
         let cart = Cookies.get('cart')
-        Cookies.set('cart', cart + ' ' + productStore.shipChosen)
+        Cookies.set('cart', cart + ' ' + productStore.shipChosen, {expires: 2772})
         const arr = Cookies.get('cart').trim().split(' ')
         productStore.setText(arr, productStore.shipChosen)
         console.log(productStore.shipChosen)
@@ -165,7 +165,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             addLastSeen(token, userId, product.id)
         }
         if (!Cookies.get('last_seen')) {
-            Cookies.set('last_seen', '')
+            Cookies.set('last_seen', '', {expires: 2772})
         }
         let currArr = Cookies.get('last_seen').trim().split(' ')
         const id = String(product.id)
@@ -179,7 +179,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         }
         currArr.unshift(id)
         const newStr = currArr.join(' ')
-        Cookies.set('last_seen', newStr)
+        Cookies.set('last_seen', newStr, {expires: 2772})
     }, [])
 
     const buttonRef = useRef(null)
