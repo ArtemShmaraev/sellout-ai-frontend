@@ -1,0 +1,126 @@
+.cont {
+    width: 100%;
+}
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+.card_container {
+    margin-top: 20px;
+    width: fit-content;
+}
+.card {
+    position: relative;
+    width:500px;
+    height: 281px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.bg_image {
+    object-fit: cover;
+    z-index: -1;
+    border-radius: 20px;
+}
+.above_card {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+.in_card_text {
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 0 10px;
+}
+.logo {
+    width: auto;
+    height: 50px;
+    position: absolute;
+    top: calc(50% - 25px);
+}
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+}
+.first_row_td {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+.table_block {
+    margin-top: 50px;
+}
+.tr_border {
+    border-top: 1px solid #9A9999;
+}
+.table_block td {
+    padding: 10px 15px;
+    text-align: center;
+}
+.check {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    margin: -10px 0 0 -10px;
+}
+.amethyst_text {
+    background: linear-gradient(90deg, #9E5EB5 60.36%, #CFC1D2 76.86%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.amethyst_circle {
+    background: linear-gradient(117deg, #6402A3 20.75%, #F02CF8 76.5%);
+}
+.sapphire_text {
+    background: linear-gradient(90deg, #0C64C4 60.36%, #133762 76.86%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sapphire_circle {
+    background: linear-gradient(117deg, #0C64C4 20.75%, #133762 76.5%);
+}
+.emerald_text {
+    background: linear-gradient(90deg, #20AD05 60.36%, #000900 76.86%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.emerald_circle {
+    background: linear-gradient(127deg, #20AD05 15.84%, #000900 82.72%);
+}
+.ruby_text {
+    background: linear-gradient(90deg, #B95886 60.34%, #35041A 67.37%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.ruby_circle {
+    background: linear-gradient(131deg, #B95886 17.1%, #35041A 79.93%);
+}
+.diamond_text {
+    background: linear-gradient(90deg, #D6D6D6 52.67%, #6A6B6B 71.36%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.diamond_circle {
+    background: linear-gradient(128deg, #E5ECF2 17.9%, #6A6B6B 80.32%);
+}
+@media (max-width: 1200px) {
+    .cont {
+        width: 100%;
+    }
+}

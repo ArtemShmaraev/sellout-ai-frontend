@@ -4,8 +4,19 @@ import AccountLayout from "@/layout/AccountLayout";
 import s from '@/styles/AccountOrders.module.css'
 import OrderCard from "@/components/pages/account/OrderCard/OrderCard";
 import Head from "next/head";
+import {parse} from "cookie";
+import jwtDecode from "jwt-decode";
+import {fetchUserOrders} from "@/http/userApi";
+import Link from "next/link";
 
-const Orders = () => {
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    const {user_id} = jwtDecode(token)
+    const orders = await fetchUserOrders(user_id, token)
+    return { props: {orders} }
+}
+const Orders = ({orders}) => {
     return (
         <MainLayout>
             <Head>
@@ -13,7 +24,21 @@ const Orders = () => {
             </Head>
             <AccountLayout>
                 <div className={s.cont}>
-                    <OrderCard/>
+                    <h4 className={s.title}>Ваши заказы</h4>
+                    {
+                        orders.length > 0
+                        ?
+                            orders.map(el =>
+                                <OrderCard order={el}/>
+                            )
+                            :
+                            <>
+                                <h5 className={'text-center'}>У вас пока нет заказов</h5>
+                                <div className={'d-flex justify-content-center mt-3'}>
+                                    <Link href={'/products'} className={s.link}>За покупками</Link>
+                                </div>
+                            </>
+                    }
                 </div>
             </AccountLayout>
         </MainLayout>

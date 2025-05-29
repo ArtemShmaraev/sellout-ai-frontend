@@ -136,6 +136,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
             orderObj.delivery_type = 1
             orderObj.target = orderStore.target
         }
+        orderObj.consolidation = true
         if (orderStore.deliveryPrice && orderStore.deliveryPrice.block) {
             orderObj.consolidation = orderStore.method !== 2;
         }

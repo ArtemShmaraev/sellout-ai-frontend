@@ -136,3 +136,9 @@ export async function addToWaitingList(token, productId, sizeArr) {
         headers: {Authorization: `Bearer ${token}`}
     })
 }
+export async function fetchUserOrders(userId, token) {
+    const {data} = await $host.get(`order/user_orders/${userId}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}

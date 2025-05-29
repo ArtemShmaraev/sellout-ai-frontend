@@ -1,0 +1,76 @@
+.row {
+    min-height: 300px;
+    display: flex;
+}
+.inner_row {
+    display: flex;
+    flex-grow: 1;
+}
+.col1 {
+    width: 32%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+}
+.img {
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.col {
+    width: 33%;
+}
+
+.brand {
+    color: #727272;
+    margin-bottom: 5px;
+}
+
+.number_block {
+    margin-top: 16px;
+}
+
+.ship_block {
+    margin-top: 22px;
+}
+
+.icon {
+    cursor: pointer;
+}
+.final_block {
+    display: flex;
+    padding: 15px;
+}
+.final_col {
+    width: 50%;
+}
+.prices {
+    font-size: 16px;
+    display: flex;
+}
+@media (max-width: 1200px) {
+    .header_col {
+        display: block;
+    }
+    .header_text {
+        font-size: 15px;
+    }
+    .inner_row {
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .col1 {
+        align-items: center;
+        width: 200px;
+    }
+    .col {
+        width: 100%;
+    }
+    .brand {
+        font-size: 12px;
+    }
+    .text {
+        font-size: 12px;
+    }
+}

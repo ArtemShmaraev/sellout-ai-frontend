@@ -79,6 +79,11 @@ const AccountLayout = ({children}) => {
                             <div className={makeBold('favorite-brands')}>Любимые бренды</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
                         </Link>
+                        <Link href="/account/loyalty" className={s.nav_link}
+                        >
+                            <div className={makeBold('loyalty')}>Программа лояльности</div>
+                            <Image src={person} alt='' className={s.icon} width={20}/>
+                        </Link>
                     </div>
                     :
                     <>

@@ -35,6 +35,12 @@ const AccountNavbar = () => {
             address: 'favorite-brands',
             link: '/account/favorite-brands'
 
+        },
+        {
+            name: 'Программа лояльности',
+            address: 'loyalty',
+            link: '/account/loyalty'
+
         }
     ]
     useEffect(() => {
