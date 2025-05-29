@@ -76,7 +76,7 @@ const Footer = () => {
                             <div>
                                 <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                    target={'_blank'}
-                                   className={s.footer_link}>WhatsApp: написать</a>
+                                   className={s.footer_link}>WhatsApp: написать +7 993 896-92-27</a>
                             </div>
                             <div>
                                 <a href={'https://t.me/sellout_official'}
@@ -126,7 +126,7 @@ const Footer = () => {
                             <div>
                                 <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                    target={'_blank'}
-                                   className={s.footer_link}>WhatsApp: написать</a>
+                                   className={s.footer_link}>WhatsApp: написать +7 993 896-92-27</a>
                             </div>
                             <div>
                                 <a href={'https://t.me/sellout_official'}

@@ -6,6 +6,7 @@ import s from "@/styles/FavBrands.module.css";
 import Brand from "@/components/pages/brands/Brand";
 import AccountLayout from "@/layout/AccountLayout";
 import MainLayout from "@/layout/MainLayout";
+import Link from "next/link";
 
 
 export const getServerSideProps = async (context) => {
@@ -63,7 +64,12 @@ const FavoriteBrands = ({brands}) => {
                         renderBrands().length > 0
                         ? renderBrands()
                         :
-                        <h5 className={'text-center'}>У вас пока нет любимых брендов</h5>
+                            <>
+                                <h5 className={'text-center'}>У вас пока нет любимых брендов</h5>
+                                <div className={'d-flex justify-content-center mt-3'}>
+                                    <Link href={'/brands'} className={s.link}>Все бренды</Link>
+                                </div>
+                            </>
                     }
                 </div>
             </AccountLayout>

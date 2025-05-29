@@ -90,9 +90,9 @@ const ShipDropdown = ({cardId, unitId}) => {
                                     selectedItem.is_sale
                                         ?
                                         <div className={s.half_text}>
-                                            <span className={s.crossed}>{selectedItem.final_price} ₽</span>
+                                            <span className={s.crossed}>{selectedItem.start_price} ₽</span>
                                             <br/>
-                                            <span className={s.sale_price}>{selectedItem.start_price} ₽</span>
+                                            <span className={s.sale_price}>{selectedItem.final_price} ₽</span>
                                         </div>
                                         :
                                         <div className={s.half_text}>{selectedItem.final_price} ₽</div>
@@ -123,9 +123,9 @@ const ShipDropdown = ({cardId, unitId}) => {
                                             el.is_sale
                                                 ?
                                                 <div className={s.half_text}>
-                                                    <span className={s.crossed}>{el.final_price} ₽</span>
+                                                    <span className={s.crossed}>{el.start_price} ₽</span>
                                                     <br/>
-                                                    <span className={s.sale_price}>{el.start_price} ₽</span>
+                                                    <span className={s.sale_price}>{el.final_price} ₽</span>
                                                 </div>
                                                 :
                                                 <div className={s.half_text}>{el.final_price} ₽</div>

@@ -131,7 +131,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false,
                         <hr/>
                         <input type="text"
                                className={s.input}
-                               placeholder={'Название адреса'}
+                               placeholder={'Название адреса (например, домашний)'}
                                value={name}
                                onChange={e => setName(e.target.value)}
                         />

@@ -11,3 +11,15 @@
     width: 100%;
     margin-top: 40px;
 }
+.link {
+    background: black;
+    color: white;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    width: fit-content;
+    text-align: center;
+    text-decoration: none;
+    padding: 7px 100px;
+}

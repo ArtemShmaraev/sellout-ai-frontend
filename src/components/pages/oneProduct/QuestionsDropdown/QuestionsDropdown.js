@@ -17,7 +17,20 @@ const QuestionsDropdown = () => {
                 <div className={s.text_block}>
                     <p className={s.text}>Ответы на большинство вопросов Вы сможете найти здесь: <Link href="/FAQ" className={s.link}>FAQ</Link></p>
                     <p className={s.text}>Если у Вас остались вопросы, обратитесь в поддержку, мы обязательно Вам поможем:</p>
-                    <p className={s.text}>Email: support@sellout.su</p>
+                    <div>
+                        <a href={'mailto:customerservice@sellout.su'}
+                           className={s.text}>Почта: customerservice@sellout.su</a>
+                    </div>
+                    <div>
+                        <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                           target={'_blank'}
+                           className={s.text}>WhatsApp: написать +7 993 896-92-27</a>
+                    </div>
+                    <div>
+                        <a href={'https://t.me/sellout_official'}
+                           target={'_blank'}
+                           className={s.text}>Telegram: @sellout_official</a>
+                    </div>
                 </div>
             }
         </div>
