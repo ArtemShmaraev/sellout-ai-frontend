@@ -6,6 +6,8 @@ import amethystBg from '/public/img/Amethyst.jpg'
 import Image from "next/image";
 import logo from '@/static/img/sellout_logo.svg'
 import check from '@/static/icons/check.svg'
+import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
+import Link from "next/link";
 
 const Loyalty = () => {
     return (
@@ -296,6 +298,38 @@ const Loyalty = () => {
                                 </tbody>
                             </table>
                         </div>
+
+                    </div>
+
+
+
+                    <div className={s.faq_block}>
+                        <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                        <LoyaltyFAQ title={'Как получить новый статус?'}>
+                            Чтобы перейти на следующий уровень, Вам необходимо совершить
+                            покупки на платформе Sellout на определенную сумму. Конкретные значения указаны выше.
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Как начисляются бонусы за каждую покупку?'}>
+                            При совершении заказа Вам будут начислены бонусы за каждую единицу товара в заказе. Количество начисляемых
+                            бонусов зависит от Вашего статуса и будет расти по мере достижения следующих уровней! Также Вы можете
+                            получать до 6000₽ бонусами, участвуя в нашей реферальной программе и приглашая Ваших друзей на нашу платформу!
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Как тратить накопленные бонусы?'}>
+                            Вы можете списывать накопленные бонусы при оформлении заказа. В корзине или на любом этапе оформления заказа у Вас
+                            будет возможность ввести число бонусов, которое Вы хотите списать и оплатить ими до 100% стоимости заказа!
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Когда сгорают бонусы?'}>
+                            Бонусы сгорают ровно спустя 365 дней со дня их начисления,
+                            поэтому успейте их потратить вовремя. Мы обязательно напомним Вам о приближающейся дате сгорания бонусов!
+                        </LoyaltyFAQ>
+                    </div>
+
+                    <div className={s.faq_block}>
+                        <h5 className={'text-center'}>Ответы на большинство вопросов
+                            Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                        <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
+                            можете обратиться в <Link href={''} className={'text-black'}>службу поддержки</Link> и мы будем
+                            рады Вам помочь!</h5>
                     </div>
                 </div>
             </AccountLayout>
