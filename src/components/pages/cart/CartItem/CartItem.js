@@ -21,14 +21,15 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     const {cartStore, userStore} = useContext(Context)
     const router = useRouter()
     useEffect(() => {
-        fetchPrices(productId).then(res => {
+        const token = Cookies.get('access_token')
+        fetchPrices(productId, token).then(res => {
             setPrices(res)
             console.log(res)
         })
         cartStore.ships[cardId] = unitId
     }, [Cookies.get('cart')])
     const deleteFromCart = async () => {
-        const currCart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+        const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '')
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
         Cookies.set('cart', newCart.join(' '), {expires: 2772})
         if (userStore.isLogged) {

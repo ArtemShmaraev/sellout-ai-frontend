@@ -41,7 +41,7 @@ export const getServerSideProps = async (context) => {
         if (cookies.last_seen) {
             arr = cookies['last_seen'].trim().split(' ')
             if (arr[0] !== '') {
-                lastSeen = await fetchProductsByArray(arr)
+                lastSeen = await fetchProductsByArray(arr, token)
             }
         }
     }

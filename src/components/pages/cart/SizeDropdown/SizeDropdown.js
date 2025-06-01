@@ -5,6 +5,7 @@ import truck from "@/static/icons/truck.svg";
 import refund from "@/static/icons/arrow-return-left.svg";
 import {Context} from "@/context/AppWrapper";
 import {fetchShippings} from "@/http/productsApi";
+import Cookies from "js-cookie";
 
 const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const {cartStore} = useContext(Context)
@@ -13,11 +14,12 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const dropdownRef = useRef(null);
     useEffect(() => {
         if (prices) {
+            const token = Cookies.get('access_token')
             prices.forEach(el => {
-                if (el.view_size === currentId) {
+                if (el.size_for_api === currentId) {
                     setSelectedItem(el)
-                    cartStore.setSizeId(el.view_size)
-                    fetchShippings(productId, cartStore.sizeId).then(res => {
+                    cartStore.setSizeId(el.size_for_api)
+                    fetchShippings(productId, cartStore.sizeId, token).then(res => {
                         cartStore.cart[cardId] = res
                     })
                 }
@@ -31,8 +33,9 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const selectItem = async (item) => {
         setSelectedItem(item);
         setIsOpen(false);
-        cartStore.setSizeId(item.view_size)
-        const data = await fetchShippings(productId, cartStore.sizeId)
+        cartStore.setSizeId(item.size_for_api)
+        const token = Cookies.get('access_token')
+        const data = await fetchShippings(productId, cartStore.sizeId, token)
         cartStore.cart[cardId] = data
         cartStore.setIsShipChosen(false)
     };

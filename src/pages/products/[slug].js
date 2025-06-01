@@ -38,7 +38,7 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const product = await fetchOneProduct(context.params.slug, token)
     const {id} = product
-    const prices = await fetchPrices(id)
+    const prices = await fetchPrices(id, token)
 
     let lastSeen = []
     if (token) {
@@ -49,11 +49,11 @@ export const getServerSideProps = async (context) => {
         if (cookies.last_seen) {
             arr = cookies['last_seen'].trim().split(' ')
             if (arr[0] !== '') {
-                lastSeen = await fetchProductsByArray(arr)
+                lastSeen = await fetchProductsByArray(arr, token)
             }
         }
     }
-    const compilations = await fetchSimilarProducts(product.id)
+    const compilations = await fetchSimilarProducts(product.id, token)
     return { props: {product, prices, lastSeen, compilations} }
 }
 

@@ -51,7 +51,7 @@ export default function AppWrapper({ children }) {
             const res = await googleAuth(googleToken)
             Cookies.set('access_token', res.access, {expires: 2772})
             Cookies.set('refresh_token', res.refresh, {expires: 2772})
-            const cookieCart = Cookies.get('cart')
+            const cookieCart = Cookies.get('cart').trim().filter(el => el !== '' && el !== ' ')
             let cartFromBack
             if (cookieCart) {
                 cartFromBack = await updateCartFromCookies(cookieCart, res.user_id, res.access)
@@ -103,7 +103,7 @@ export default function AppWrapper({ children }) {
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
         if (cart) {
-            const cartCnt = cart.trim().split(' ').filter(el => el !== ' ').length
+            const cartCnt = cart.trim().split(' ').filter(el => el !== ' ' && el !== '').length
             cartStore.setCartCnt(cartCnt)
         }
         if (!cart) {

@@ -16,7 +16,7 @@ const ShipDropdown = ({cardId, unitId}) => {
     useEffect(() => {
         let changed = false
         if (cartStore.cart[cardId]) {
-            const cart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+            const cart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
             const arr = []
             cartStore.cart[cardId].forEach(el => {
                 if (el.id === unitId) {
@@ -38,7 +38,7 @@ const ShipDropdown = ({cardId, unitId}) => {
         setIsOpen(!isOpen);
     };
     const selectItem = async (item) => {
-        const currCart = Cookies.get('cart').trim().split(' ').map(el => Number(el))
+        const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
         let currId
         selectedItem ? currId = selectedItem.id : currId = unitId
         const newCart = currCart.map(el => {

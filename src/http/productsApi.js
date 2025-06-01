@@ -91,23 +91,51 @@ export async function fetchOneProduct(slug, token = '') {
         return data
     }
 }
-export async function fetchPrices(id) {
-    const {data} = await $host.get(`product_unit/min_price/${id}`)
-    return data
+export async function fetchPrices(id, token = '') {
+    if (token) {
+        const {data} = await $host.get(`product_unit/min_price/${id}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.get(`product_unit/min_price/${id}`)
+        return data
+    }
 }
-export async function fetchShippings(productId, sizeId) {
+export async function fetchShippings(productId, sizeId, token = '') {
     const obj = {view_size: sizeId}
-    const {data} = await $host.post(`product_unit/delivery/${productId}`, JSON.stringify(obj))
-    return data
+    if (token) {
+        const {data} = await $host.post(`product_unit/delivery/${productId}`, JSON.stringify(obj), {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.post(`product_unit/delivery/${productId}`, JSON.stringify(obj))
+        return data
+    }
 }
-export async function fetchProductsByArray(arr) {
+export async function fetchProductsByArray(arr, token = '') {
     const obj = {products: arr}
-    const {data} = await $host.post(`product/list_product`, JSON.stringify(obj))
-    return data
+    if (token) {
+        const {data} = await $host.post(`product/list_product`, JSON.stringify(obj), {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.post(`product/list_product`, JSON.stringify(obj))
+        return data
+    }
 }
-export async function fetchSimilarProducts(productId) {
-    const {data} = await $host.get(`product/similar/${productId}`)
-    return data
+export async function fetchSimilarProducts(productId, token = '') {
+    if (token) {
+        const {data} = await $host.get(`product/similar/${productId}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.get(`product/similar/${productId}`)
+        return data
+    }
 }
 export async function suggestSearch(qStr) {
     const {data} = await $host.get(`product/suggest_search?q=${qStr}`)

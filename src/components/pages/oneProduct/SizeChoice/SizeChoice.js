@@ -26,7 +26,8 @@ const SizeChoice = ({prices, productId, config}) => {
         setSelectedItem(item);
         setIsOpen(false);
         productStore.setSizeChosen(true)
-        const ships = await fetchShippings(productId, item.view_size)
+        const token = Cookies.get('access_token')
+        const ships = await fetchShippings(productId, item.size_for_api, token)
         productStore.setShipps(ships)
     };
     useEffect(() => {

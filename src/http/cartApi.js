@@ -36,7 +36,7 @@ export async function fetchProductUnits(obj, token) {
     }
 }
 export async function updateCartFromCookies(cookieStr, userId, token) {
-    const unitIdArr = cookieStr.trim().split(' ').map(el => Number(el))
+    const unitIdArr = cookieStr.trim().split(' ').filter(el => el !== '' && el !== ' ')
     const obj = {product_unit_list: unitIdArr}
     if (!cookieStr) {
         obj.product_unit_list = []
