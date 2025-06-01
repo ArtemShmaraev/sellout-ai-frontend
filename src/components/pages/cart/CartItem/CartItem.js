@@ -30,13 +30,12 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     }, [Cookies.get('cart')])
     const deleteFromCart = async () => {
         const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
-        console.log(typeof cartStore.ships[cardId])
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
         Cookies.set('cart', newCart.join(' '), {expires: 2772})
         if (userStore.isLogged) {
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
-        cartStore.setCartCnt(cartStore.cartCnt - 1)
+        cartStore.setCartCnt(newCart.length)
         router.push('/cart', undefined, {scroll: false})
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)
