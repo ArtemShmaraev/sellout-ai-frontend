@@ -1,41 +1,124 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import s from '@/styles/Loyalty.module.css'
 import MainLayout from "@/layout/MainLayout";
 import AccountLayout from "@/layout/AccountLayout";
 import amethystBg from '/public/img/Amethyst.jpg'
+import sapBg from '/public/img/Sap.jpg'
+import emeraldBg from '/public/img/emerald.jpg'
+import rubyBg from '/public/img/ruby.jpg'
+import diamondBg from '/public/img/diamond2 1 (1).jpg'
+import privilegedBg from '/public/img/privileged.jpg'
+import ffBg from '/public/img/ff.jpg'
+import denisBg from '/public/img/penis.jpg'
 import Image from "next/image";
-import logo from '@/static/img/sellout_logo.svg'
+import logo from '@/static/img/bold_logo.svg'
+import whiteLogo from '@/static/img/white_bold_logo.svg'
+import gardLogo from '@/static/img/gard_logo.svg'
 import check from '@/static/icons/check.svg'
+import question from '@/static/icons/question.svg'
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import Link from "next/link";
+import {parse} from "cookie";
+import {fetchLoyaltyInfo} from "@/http/userApi";
+import ffIcon from '@/static/icons/ff.png'
+import privilegedIcon from '@/static/icons/privileged.svg'
+import info from '@/static/icons/info.svg'
+import {Context} from "@/context/AppWrapper";
 
-const Loyalty = () => {
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    const loyalty = await fetchLoyaltyInfo(token)
+    return { props: {loyalty} }
+}
+const Loyalty = ({loyalty}) => {
+    const {userStore} = useContext(Context)
+    const config = {
+        Amethyst: {
+            img: amethystBg,
+            text: 'Amethyst',
+            className: s.amethyst_text,
+            logo: logo,
+            shadow: s.amethyst_shadow
+        },
+        Sapphire: {
+            img: sapBg,
+            text: 'Sapphire',
+            className: s.sapphire_text,
+            logo: whiteLogo,
+            shadow: s.sapphire_shadow
+        },
+        Emerald: {
+            img: emeraldBg,
+            text: 'Emerald',
+            className: s.emerald_text,
+            logo: whiteLogo,
+            shadow: s.emerald_shadow
+        },
+        Ruby: {
+            img: rubyBg,
+            text: 'Ruby',
+            className: s.ruby_text,
+            logo: whiteLogo,
+            shadow: s.ruby_shadow
+        },
+        Diamond: {
+            img: diamondBg,
+            text: 'Diamond',
+            className: s.diamond_text,
+            logo: whiteLogo,
+            shadow: s.diamond_shadow
+        },
+        Privileged: {
+            img: privilegedBg,
+            text: 'Privileged',
+            className: s.privileged_text,
+            logo: logo,
+            shadow: s.privileged_shadow
+        },
+        'Friends & Family': {
+            img: ffBg,
+            text: 'Friends & Family',
+            className: s.ff_text,
+            logo: gardLogo,
+            shadow: s.ff_shadow
+        },
+        Penis: {
+            img: denisBg,
+            text: 'Penis',
+            className: s.ff_text,
+            logo: gardLogo,
+            shadow: s.ff_shadow
+        }
+    }
+    const statusObj = config[loyalty.status_name]
+    // const statusObj = config["Privileged"]
     return (
         <MainLayout>
             <AccountLayout>
                 <div className={s.cont}>
                     <h4 className={s.title}>Программа лояльноси</h4>
                     <div>
-                        <h4 className={'text-center'}>Ваш статус <span className={s.amethyst_text}>Amethyst</span></h4>
+                        <h4 className={'text-center'}>Ваш статус <span className={statusObj.className}>{statusObj.text}</span></h4>
                         <div className={'d-flex justify-content-center'}>
                             <div className={s.card_container}>
                                 <div className={s.above_card}>
                                     <div>
-                                        Всего потрачено: 34400₽
+                                        Всего потрачено: {loyalty.total}₽
                                     </div>
                                     <div>
-                                        До следующего статуса: 600₽
+                                        До следующего статуса: {loyalty.until_next_status}₽
                                     </div>
                                 </div>
-                                <div className={s.card}>
-                                    <Image src={amethystBg} alt='' fill={true} className={s.bg_image}/>
-                                    <Image src={logo} alt='' className={s.logo} width={50}/>
-                                    <div className={s.in_card_text}>
+                                <div className={`${s.card} ${statusObj.shadow}`}>
+                                    <Image src={statusObj.img} alt='' fill={true} className={s.bg_image}/>
+                                    <Image src={statusObj.logo} alt='' className={s.logo} width={50}/>
+                                    <div className={`${s.in_card_text} ${statusObj.text === 'Diamond' ? '' : ''}`}>
                                         <div>
-                                            ****7777
+                                            ****{loyalty.number_card}
                                         </div>
                                         <div>
-                                            Накоплено бонусов: 70000₽
+                                            Накоплено бонусов: {loyalty.bonuses}₽
                                         </div>
                                     </div>
                                 </div>
@@ -43,260 +126,361 @@ const Loyalty = () => {
                         </div>
 
                         <div className={s.table_block}>
-                            <table width={'100%'}>
-                                <tbody>
-                                <tr>
-                                    <td>
+                            {
+                                statusObj.text === 'Friends & Family' &&
+                                <div className={s.ff_block}>
+                                    <Image src={ffIcon} alt='' width={120} style={{marginRight: '-25px'}}/>
+                                    <div>
+                                        {userStore.firstName}, спасибо за постоянную поддержку Sellout’a! Мы рады, что Вы всегда были и
+                                        остаетесь частью нашей семьи и являетесь обладателем статуса <span className={s.ff_text}>Friends & Family</span> У Вас есть доступ
+                                        к уникальным ценовым предложениям, а также к ограниченному ассортименту. Мы уже рассчитали цену,
+                                        учтя по-максимуму все скидки, бонусы и подарки! Вы
+                                        по-прежнему можете накапливать баллы, приглашая
+                                        людей по нашей <Link href={'/'} className={'text-decoration-underline text-black'}>реферальной программе</Link>
+                                    </div>
+                                    <Image src={info} alt='' width={90}/>
+                                    <div>
+                                        Обратите внимание, совершая покупки на Sellout со статусом <span className={s.ff_text}>Friends & Family</span> Вы обязуетесь
+                                        не передавать третьим лицам доступ к Вашему аккаунту и совершать покупки исключительно
+                                        для личных нужд, не связанных с осуществлением предпринимательской деятельности.
+                                    </div>
+                                </div>
+                            }
+                            {
+                                statusObj.text === 'Privileged' &&
+                                <div className={s.ff_block}>
+                                    <Image src={privilegedIcon} alt='' width={90}/>
+                                    <div>
+                                        {userStore.firstName}, поздравляем, Вы стали обладателем статуса <span className={s.privileged_text}>Privileged</span>! У Вас
+                                        есть доступ к уникальным ценовым предложениям, а также к ограниченному ассортименту.
+                                        Мы уже рассчитали цену, учтя по-максимуму все скидки, бонусы и подарки, поэтому Вам больше
+                                        не будут начисляться баллы за каждый заказ.
+                                        Однако Вы по-прежнему можете накапливать баллы, приглашая людей по
+                                        нашей <Link href={'/'} className={'text-decoration-underline text-black'}>реферальной программе</Link>
+                                    </div>
+                                    <Image src={info} alt='' width={90}/>
+                                    <div>
+                                        Обратите внимание, совершая покупки на Sellout со статусом <span className={s.ff_text}>Friends & Family</span> Вы обязуетесь
+                                        не передавать третьим лицам доступ к Вашему аккаунту и совершать покупки исключительно
+                                        для личных нужд, не связанных с осуществлением предпринимательской деятельности.
+                                    </div>
+                                </div>
+                            }
 
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.amethyst_circle}`}></div>
-                                            <div className={s.amethyst_text}>Amethyst</div>
-                                            <div className={s.amethyst_text}>0₽</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.sapphire_circle}`}></div>
-                                            <div className={s.sapphire_text}>Sapphire</div>
-                                            <div className={s.sapphire_text}>15000₽</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.emerald_circle}`}></div>
-                                            <div className={s.emerald_text}>Emerald</div>
-                                            <div className={s.emerald_text}>45000₽</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.ruby_circle}`}></div>
-                                            <div className={s.ruby_text}>Ruby</div>
-                                            <div className={s.ruby_text}>100000₽</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}></div>
-                                            <div className={s.diamond_text}>Diamond</div>
-                                            <div className={s.diamond_text}>300000₽</div>
-                                        </div>
-                                    </td>
-                                </tr>
+                            {
+                                (statusObj.text !== 'Privileged' && statusObj.text !== 'Friends & Family') &&
+                                <table width={'100%'}>
+                                    <tbody>
+                                    <tr>
+                                        <td>
 
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Приветственный бонус
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.amethyst_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.amethyst_circle}`}></div>
+                                                <div className={s.amethyst_text}>Amethyst</div>
+                                                <div className={s.amethyst_text}>0₽</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.sapphire_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.sapphire_circle}`}></div>
+                                                <div className={s.sapphire_text}>Sapphire</div>
+                                                <div className={s.sapphire_text}>15000₽</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.emerald_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.emerald_circle}`}></div>
+                                                <div className={s.emerald_text}>Emerald</div>
+                                                <div className={s.emerald_text}>45000₽</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.ruby_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.ruby_circle}`}></div>
+                                                <div className={s.ruby_text}>Ruby</div>
+                                                <div className={s.ruby_text}>100000₽</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}></div>
+                                                <div className={s.diamond_text}>Diamond</div>
+                                                <div className={s.diamond_text}>300000₽</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Подарок на день рождения
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.amethyst_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}></div>
+                                                <div className={s.privileged_text}>Privileged</div>
+                                                <div className={s.privileged_text}>?</div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.sapphire_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Приветственный бонус
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.amethyst_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.emerald_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.sapphire_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.ruby_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.emerald_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.ruby_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Бонусы за каждую позицию заказа
-                                    </td>
-                                    <td>
-                                        <div className={s.amethyst_text}>до 250₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.sapphire_text}>до 500₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.emerald_text}>до 750₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.ruby_text}>до 1000₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.diamond_text}>до 1500₽</div>
-                                    </td>
-                                </tr>
-
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Бесплатная доставка
-                                    </td>
-                                    <td>
-                                        <div className={s.amethyst_text}>От 20000₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.sapphire_text}>От 20000₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.emerald_text}>От 15000₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.ruby_text}>От 15000₽</div>
-                                    </td>
-                                    <td>
-                                        <div className={s.diamond_text}>От 15000₽</div>
-                                    </td>
-                                </tr>
-
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Эксклюзивные скидки
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.ruby_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
 
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Ранний доступ к релизам и закрытым продажам
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Подарок на день рождения
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.amethyst_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-                                <tr className={s.tr_border}>
-                                    <td>
-                                        Приоритетное обслуживание
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <div className={s.first_row_td}>
-                                            <div className={`${s.circle} ${s.diamond_circle}`}>
-                                                <Image src={check} alt='' className={s.check}/>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.sapphire_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.emerald_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.ruby_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Бонусы за каждую позицию заказа
+                                        </td>
+                                        <td>
+                                            <div className={s.amethyst_text}>до 250₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.sapphire_text}>до 500₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.emerald_text}>до 750₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.ruby_text}>до 1000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.diamond_text}>до 1500₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Бесплатная доставка
+                                        </td>
+                                        <td>
+                                            <div className={s.amethyst_text}>От 20000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.sapphire_text}>От 20000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.emerald_text}>От 15000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.ruby_text}>От 15000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.diamond_text}>От 15000₽</div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Эксклюзивные скидки
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.ruby_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Ранний доступ к релизам и закрытым продажам
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr className={s.tr_border}>
+                                        <td>
+                                            Приоритетное обслуживание
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.diamond_circle}`}>
+                                                    <Image src={check} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={s.first_row_td}>
+                                                <div className={`${s.circle} ${s.privileged_circle}`}>
+                                                    <Image src={question} alt='' className={s.check}/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            }
                         </div>
 
                     </div>

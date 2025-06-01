@@ -18,6 +18,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    border-radius: 20px;
 }
 .bg_image {
     object-fit: cover;
@@ -59,6 +60,15 @@
 .table_block {
     margin: 50px 0;
 }
+.ff_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-weight: 500;
+    text-align: center;
+}
 .tr_border {
     border-top: 1px solid #9A9999;
 }
@@ -87,6 +97,9 @@
 .amethyst_circle {
     background: linear-gradient(117deg, #6402A3 20.75%, #F02CF8 76.5%);
 }
+.amethyst_shadow {
+    box-shadow: 4px 4px 20px #9914B9;
+}
 .sapphire_text {
     background: linear-gradient(90deg, #0C64C4 60.36%, #133762 76.86%);
     background-clip: text;
@@ -95,6 +108,9 @@
 }
 .sapphire_circle {
     background: linear-gradient(117deg, #0C64C4 20.75%, #133762 76.5%);
+}
+.sapphire_shadow {
+    box-shadow: 4px 4px 20px 2px #211144;
 }
 .emerald_text {
     background: linear-gradient(90deg, #20AD05 60.36%, #000900 76.86%);
@@ -105,6 +121,9 @@
 .emerald_circle {
     background: linear-gradient(127deg, #20AD05 15.84%, #000900 82.72%);
 }
+.emerald_shadow {
+    box-shadow: 4px 4px 20px 2px #003C00;
+}
 .ruby_text {
     background: linear-gradient(90deg, #B95886 60.34%, #35041A 67.37%);
     background-clip: text;
@@ -113,6 +132,9 @@
 }
 .ruby_circle {
     background: linear-gradient(131deg, #B95886 17.1%, #35041A 79.93%);
+}
+.ruby_shadow {
+    box-shadow: 4px 4px 20px 0px #81032B;
 }
 .diamond_text {
     background: linear-gradient(90deg, #D6D6D6 52.67%, #6A6B6B 71.36%);
@@ -123,6 +145,31 @@
 .diamond_circle {
     background: linear-gradient(128deg, #E5ECF2 17.9%, #6A6B6B 80.32%);
 }
+.diamond_shadow {
+    box-shadow: 4px 4px 20px 0px #8F9190;
+}
+.privileged_text {
+    background: linear-gradient(90deg, #C7C8CC 53.16%, #8B8C91 72.17%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.privileged_circle {
+    background: linear-gradient(90deg, #C7C8CC 0%, #C7C8CC 50.52%, #8B8C91 100%);
+}
+.privileged_shadow {
+    box-shadow: 4px 4px 20px 0px #7B7C81;
+}
+.ff_text {
+    background: linear-gradient(90deg, #98999D 47.09%, #000612 77.27%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.ff_shadow {
+    box-shadow: 4px 4px 20px 0px #000612;
+}
+
 @media (max-width: 1200px) {
     .cont {
         width: 100%;

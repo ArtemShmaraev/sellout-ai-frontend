@@ -3,12 +3,12 @@ import CustomRadio from "../CustomRadio/CustomRadio";
 import {Context} from "@/context/AppWrapper";
 
 const RadioGroup = () => {
-    const [woman, setWoman] = useState(true)
+    const [woman, setWoman] = useState(null)
     const {userStore} = useContext(Context)
 
     return (
         <div className='d-flex'>
-            <CustomRadio checked={woman}
+            <CustomRadio checked={woman === true}
                          onClick={() => {
                              setWoman(true)
                              userStore.setGender('female')
@@ -16,7 +16,7 @@ const RadioGroup = () => {
                          label={'Женский'}
                          margin={40}
             />
-            <CustomRadio checked={!woman}
+            <CustomRadio checked={woman === false}
                          onClick={() => {
                              setWoman(false)
                              userStore.setGender('male')
