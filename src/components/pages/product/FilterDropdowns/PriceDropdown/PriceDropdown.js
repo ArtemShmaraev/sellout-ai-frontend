@@ -25,8 +25,11 @@ const PriceDropdown = () => {
         const query = {...router.query}
         query.price_min = filterStore.price[0]
         query.price_max = filterStore.price[1]
-        if (query.price_min === '') {
-            query.price_min = '0'
+        if (filterStore.price[0]) {
+            query.price_min = filterStore.price[0]
+        }
+        if (filterStore.price[1]) {
+            query.price_max = filterStore.price[1]
         }
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})

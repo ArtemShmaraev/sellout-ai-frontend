@@ -10,7 +10,7 @@ import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
 import {fetchAddresses, fetchUserInfo} from "@/http/userApi";
 import Cookies from "js-cookie";
-import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
+import {fetchCart, promoAuth, promoUnauth, useBonuses} from "@/http/cartApi";
 import {useRouter} from "next/router";
 import Head from "next/head";
 import {checkoutOrder} from "@/http/orderApi";
@@ -48,6 +48,12 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     const next = () => {
         orderStore.nextStage()
     }
+    const changeBonuses = (value) => {
+        const maxBonuses = userData.bonuses.total_amount
+        if (Number(value) <= Number(maxBonuses)) {
+            setBonuses(value)
+        }
+    }
     const sendPromo = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')
@@ -64,6 +70,11 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
             setSaleAmount(res.total_sale)
         }
         setPromoRes(res)
+    }
+    const spendBonuses = async (e) => {
+        e.preventDefault()
+        const token = Cookies.get('access_token')
+        const data = await useBonuses(bonuses, token)
     }
     const calculateFinalPrice = () => {
         if (orderStore.deliveryPrice &&
@@ -146,12 +157,10 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
 
         const token = Cookies.get('access_token')
         const id = userStore.id
-        console.log(JSON.stringify(orderObj))
         const order = await checkoutOrder(orderObj, id, token)
-        console.log(order)
         Cookies.set('cart', '', {expires: 2772})
         cartStore.setCartCnt(0)
-        router.push('/order/complete')
+        router.push(`order/complete?id=${order.id}`)
     }
     return (
         <MainLayout>
@@ -177,10 +186,14 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
                                 {promoRes.message}
                             </p>
                         }
-                        <PromoInput placeholder={'Списать бонусы'}
-                                    onChange={(e) => setBonuses(e.target.value)}
-                                    value={bonuses}
-                        />
+                        {
+                            userStore.isLogged &&
+                            <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount})`}
+                                        onChange={(e) => changeBonuses(e.target.value)}
+                                        value={bonuses}
+                                        onClick={e => spendBonuses(e)}
+                            />
+                        }
                         {
                             Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
                         }

@@ -7,7 +7,7 @@ const PromoInput = ({value, placeholder, onChange,onClick}) => {
     return (
         <div>
             <div className={s.input}>
-                <form>
+                <form onSubmit={onClick}>
                     <input
                         type="text"
                         value={value}
@@ -15,7 +15,7 @@ const PromoInput = ({value, placeholder, onChange,onClick}) => {
                         placeholder={placeholder}
                         className={s.mailing}
                     />
-                    <button className={s.button} type={'submit'} onClick={onClick}>
+                    <button className={s.button} type={'submit'}>
                         <Image
                             src={icon}
                             alt="search"

@@ -19,6 +19,8 @@ import CartIcon from "@/components/shared/CartIcon/CartIcon";
 import {fetchNavbarPhoto} from "@/http/mainPageApi";
 import Link from "next/link";
 import SalesLine from "@/components/shared/NavbarC/SalesLine/SalesLine";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
+
 
 const NavbarC = () => {
     const {userStore} = useContext(Context)
@@ -90,6 +92,13 @@ const NavbarC = () => {
         return result
     }
     const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()}  : {}
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     return (
         <header className={s.header} id={'navbar'}>
             <SalesLine/>
@@ -99,7 +108,9 @@ const NavbarC = () => {
                         <div className={'desktop_d'}>
                             <Link href="" className={s.links}>О нас</Link>
                             <Link href="" className={s.links}>Блог</Link>
-                            <Link href="" className={s.links}>Связаться с нами</Link>
+                            <span className={s.links}
+                                  onClick={toggleContact}
+                            >Связаться с нами</span>
                         </div>
                         <div className={'mobile_d align-items-center'}>
                             <Sidebar photos={photos}/>
@@ -186,6 +197,7 @@ const NavbarC = () => {
                     </div>
                     <div>
                         <ElasticSearchModal/>
+                        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
                     </div>
                 </div>
             </div>

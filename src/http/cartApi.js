@@ -71,3 +71,13 @@ export async function promoUnauth(promoStr, cartArt) {
     const {data} = await $host.post(`promo/anon_check`, JSON.stringify(obj))
     return data
 }
+export async function useBonuses(bonusesVal, token) {
+    const obj = {
+        bonus: bonusesVal
+    }
+    const {data} = await $host.post(`order/cart/use_bonus`, JSON.stringify(obj), {
+            headers: {Authorization: `Bearer ${token}`}
+        }
+    )
+    return data
+}

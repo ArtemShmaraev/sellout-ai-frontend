@@ -11,6 +11,7 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import {parse} from "cookie";
 import {fetchOneOrder} from "@/http/userApi";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 
 export const getServerSideProps = async (context) => {
@@ -33,6 +34,13 @@ const Complete = ({order}) => {
             setIsDesktop(false)
         }
     }, [])
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     return (
         <MainLayout>
             <div className={s.cont + ' custom_cont'}>
@@ -62,7 +70,7 @@ const Complete = ({order}) => {
                         Ваш заказ успешно создан. Мы должны подтвердить Ваш заказ, обычно это происходит моментально, и
                         статус заказа в личном кабинете меняется с “Ожидает подтверждения” на “Заказ подтвержден”.
                         Как только это произойдет, Вам придет письмо на почту. Также все изменения по статусу заказа
-                        Вы можете отслеживать в личном кабинете.
+                        Вы можете отслеживать в <Link href="/account/orders" className={s.link}>личном кабинете</Link>.
                     </div>
                 </div>
                 <hr/>
@@ -75,10 +83,11 @@ const Complete = ({order}) => {
                         здесь: <Link href="/faq" className={s.link}>FAQ</Link>
                     </div>
                     <div>
-                        Если у Вас остались вопросы, обращайтесь в <a href="" className={s.link}>службу поддержки</a>
+                        Если у Вас остались вопросы, обращайтесь в <span className={s.link} onClick={toggleContact}>службу поддержки</span>
                     </div>
                 </div>
             </div>
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </MainLayout>
     );
 };

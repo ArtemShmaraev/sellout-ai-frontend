@@ -7,6 +7,7 @@ import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {useRouter} from "next/router";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 const SizeHelp = ({model, imgSrc}) => {
     const [show, setShow] = useState(false);
@@ -25,6 +26,15 @@ const SizeHelp = ({model, imgSrc}) => {
     const handleShow = () => {
         setShow(true)
     };
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+        setShow(!s)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+        setShow(true)
+    }
     return (
         <>
             <button
@@ -74,12 +84,13 @@ const SizeHelp = ({model, imgSrc}) => {
                             На данный момент не все товары подлежат примерке и возврату, поэтому, если Вы все же
                             сомневаетесь в выборе подходящего размера, советуем попробовать примерить эту же или похожую
                             модель в другом месте, а после этого приобрести у нас.
-                            Если у Вас остались вопросы, обращайтесь в <a href="" className={s.link}>службу поддержки</a>,
+                            Если у Вас остались вопросы, обращайтесь в <span className={s.link} onClick={toggleContact}>службу поддержки</span>,
                             мы обязательно Вам поможем!
                             Спасибо за понимание! Приятных покупок!</p>
                     </div>
                 </Modal.Body>
             </Modal>
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </>
     );
 };

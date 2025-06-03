@@ -4,7 +4,7 @@ import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
 import {useRouter} from "next/router";
 import {parse} from "cookie";
-import {fetchCart, fetchCartPrice, fetchProductUnits, promoAuth, promoUnauth} from "@/http/cartApi";
+import {fetchCart, fetchCartPrice, fetchProductUnits, promoAuth, promoUnauth, useBonuses} from "@/http/cartApi";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
@@ -13,6 +13,7 @@ import {observer} from "mobx-react-lite";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
+import {fetchUserInfo} from "@/http/userApi";
 
 
 export const getServerSideProps = async (context) => {
@@ -48,9 +49,11 @@ export const getServerSideProps = async (context) => {
         finalPrice = defaultPrice
         sale = 0
     }
-    return { props: {productUnits, defaultPrice, finalPrice, sale} }
+    const {user_id} = jwtDecode(token)
+    const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    return { props: {productUnits, defaultPrice, finalPrice, sale, userData} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState('')
@@ -82,6 +85,17 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
             setSaleAmount(res.total_sale)
         }
         setPromoRes(res)
+    }
+    const changeBonuses = (value) => {
+        const maxBonuses = userData.bonuses.total_amount
+        if (Number(value) <= Number(maxBonuses)) {
+            setBonuses(value)
+        }
+    }
+    const spendBonuses = async (e) => {
+        e.preventDefault()
+        const token = Cookies.get('access_token')
+        const data = await useBonuses(bonuses, token)
     }
     const [checkoutErr, setCheckoutErr] = useState('')
     const goToCheckout = () => {
@@ -161,9 +175,10 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
                             }
                             {
                                 userStore.isLogged &&
-                                <PromoInput placeholder={'Списать бонусы'}
-                                            onChange={(e) => setBonuses(e.target.value)}
+                                <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount})`}
+                                            onChange={(e) => changeBonuses(e.target.value)}
                                             value={bonuses}
+                                            onClick={e => spendBonuses(e)}
                                 />
                             }
                             {
