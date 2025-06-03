@@ -26,14 +26,16 @@
     border-radius: 20px;
 }
 .above_card {
-    font-size: 14px;
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 .in_card_text {
     width: 100%;
-    font-size: 14px;
+    font-size: 17px;
     display: flex;
     justify-content: space-between;
     color: white;
@@ -175,7 +177,9 @@
         width: 100%;
     }
     .above_card {
-        font-size: 10px;
+        font-size: 15px;
+        flex-direction: column;
+        text-align: center;
     }
     .card {
         width: 350px;

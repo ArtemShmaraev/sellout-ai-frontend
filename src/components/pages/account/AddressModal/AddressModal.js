@@ -64,6 +64,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false,
     const [suggs, setSuggs] = useState(null)
     const [suggsShown, setSuggsShown] = useState(false)
     const sugRef = useRef(null)
+    const inputRef = useRef(null)
     const dadata = async (str) => {
         return await suggestions(str)
     }
@@ -137,6 +138,7 @@ const AddressModal = ({newAddress = false, whiteBnt = false,
                         />
                         <div ref={sugRef}>
                             <input type="text"
+                                   ref={inputRef}
                                    className={s.input}
                                    placeholder={'Город, улица, дом'}
                                    value={address}

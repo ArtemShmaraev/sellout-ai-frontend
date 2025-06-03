@@ -24,6 +24,7 @@
 .block {
     display: flex;
     align-items: center;
+    width: 33%;
 }
 .block1 {
     display: flex;
@@ -51,7 +52,7 @@
 }
 .logo {
     font-size: 40px;
-    transform: translate(-10%, -5px);
+    transform: translate(-0%, -5px);
     user-select: none;
     text-align: center;
     cursor: pointer;

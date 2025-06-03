@@ -104,7 +104,7 @@ const NavbarC = () => {
             <SalesLine/>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
-                    <div className={s.block1}>
+                    <div className={s.block}>
                         <div className={'desktop_d'}>
                             <Link href="" className={s.links}>О нас</Link>
                             <Link href="" className={s.links}>Блог</Link>
@@ -117,12 +117,12 @@ const NavbarC = () => {
                             <SearchModal/>
                         </div>
                     </div>
-                    <div className={s.block}>
+                    <div className={s.block} style={{justifyContent: 'center'}}>
                         <Link href={'/'}>
                             <Image className={s.logo} alt='' src={logo}/>
                         </Link>
                     </div>
-                    <div className={s.block}>
+                    <div className={s.block} style={{justifyContent: 'flex-end'}}>
                         <Link href={'/wishlist'}>
                             <Image width={25} src={like} alt="" className={s.icons}/>
                         </Link>

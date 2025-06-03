@@ -20,6 +20,23 @@
 }
 .header_col {
     display: flex;
+    width: 40%;
+}
+.header_col2 {
+    display: flex;
+    width: 60%;
+}
+.num {
+    width: 40%;
+}
+.date {
+    width: 60%;
+}
+.sum {
+    width: 50%;
+}
+.status {
+    width: 50%;
 }
 .icon_block {
 }
@@ -85,6 +102,21 @@
 @media (max-width: 1200px) {
     .header_col {
         display: block;
+    }
+    .header_col2 {
+        display: block;
+    }
+    .num {
+        width: 100%;
+    }
+    .date {
+        width: 100%;
+    }
+    .sum {
+        width: 100%;
+    }
+    .status {
+        width: 100%;
     }
     .header_text {
         font-size: 15px;

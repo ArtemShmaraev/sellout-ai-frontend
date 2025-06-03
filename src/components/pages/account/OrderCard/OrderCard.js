@@ -20,18 +20,18 @@ const OrderCard = ({order}) => {
             >
                 <div className={s.header_block}>
                     <div className={s.header_col}>
-                        <div className={s.header_text}>
+                        <div className={`${s.header_text} ${s.num}`}>
                             № {order.id}
                         </div>
-                        <div className={s.header_text}>
+                        <div className={`${s.header_text} ${s.date}`}>
                             Дата: {order.formatted_date}
                         </div>
                     </div>
-                    <div className={s.header_col}>
-                        <div className={s.header_text}>
+                    <div className={s.header_col2}>
+                        <div className={`${s.header_text} ${s.sum}`}>
                             Сумма: {order.final_amount}
                         </div>
-                        <div className={s.header_text}>
+                        <div className={`${s.header_text} ${s.status}`}>
                             Статус: {order.status.name}
                         </div>
                     </div>
