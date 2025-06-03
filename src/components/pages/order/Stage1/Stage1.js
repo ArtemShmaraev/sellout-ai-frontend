@@ -68,6 +68,7 @@ const Stage1 = ({addresses, userData}) => {
         if (res) {
             fetchDeliveryPrice(res)
             orderStore.setTarget(res.id)
+            orderStore.setPvzAddress(res.address)
         }
     }
 

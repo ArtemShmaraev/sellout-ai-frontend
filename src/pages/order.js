@@ -13,7 +13,6 @@ import Cookies from "js-cookie";
 import {fetchCart, promoAuth, promoUnauth} from "@/http/cartApi";
 import {useRouter} from "next/router";
 import Head from "next/head";
-import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {checkoutOrder} from "@/http/orderApi";
 
 export const getServerSideProps = async (context) => {
@@ -30,7 +29,7 @@ export const getServerSideProps = async (context) => {
 }
 const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     const router = useRouter()
-    const {orderStore, userStore} = useContext(Context)
+    const {orderStore, userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState('')
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
@@ -135,6 +134,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
         if (orderStore.shipType === 2) {
             orderObj.delivery_type = 1
             orderObj.target = orderStore.target
+            orderObj.pvz_address = orderStore.pvzAddress
         }
         orderObj.consolidation = true
         if (orderStore.deliveryPrice && orderStore.deliveryPrice.block) {
@@ -149,6 +149,9 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
         console.log(JSON.stringify(orderObj))
         const order = await checkoutOrder(orderObj, id, token)
         console.log(order)
+        Cookies.set('cart', '', {expires: 2772})
+        cartStore.setCartCnt(0)
+        router.push('/order/complete')
     }
     return (
         <MainLayout>

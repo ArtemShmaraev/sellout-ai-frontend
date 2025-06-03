@@ -56,7 +56,7 @@ const OrderCard = ({order}) => {
                     <div className={s.final_block}>
                         <div className={s.final_col}>
                             <div className={s.prices}>
-                                Адрес: {order.address.address}
+                                Адрес: {order.pvz_address ? order.pvz_address: order.address.address}
                             </div>
                             <div className={s.prices}>
                                 Телефон: {order.phone}

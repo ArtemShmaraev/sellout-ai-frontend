@@ -17,6 +17,7 @@ export const getServerSideProps = async (context) => {
     return { props: {orders} }
 }
 const Orders = ({orders}) => {
+    console.log(orders)
     return (
         <MainLayout>
             <Head>
@@ -28,9 +29,13 @@ const Orders = ({orders}) => {
                     {
                         orders.length > 0
                         ?
-                            orders.map(el =>
-                                <OrderCard order={el}/>
-                            )
+                            <div className={s.cards_block}>
+                                {
+                                    orders.map(el =>
+                                        <OrderCard order={el}/>
+                                    )
+                                }
+                            </div>
                             :
                             <>
                                 <h5 className={'text-center'}>У вас пока нет заказов</h5>
