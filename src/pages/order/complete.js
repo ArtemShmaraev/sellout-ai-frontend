@@ -8,8 +8,21 @@ import {Context} from "@/context/AppWrapper";
 import CompleteCard from "@/components/pages/order/CompleteCard/CompleteCard";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
+import Link from "next/link";
+import {parse} from "cookie";
+import {fetchOneOrder} from "@/http/userApi";
 
-const Complete = () => {
+
+export const getServerSideProps = async (context) => {
+    const cookies = parse(context.req.headers.cookie || '')
+    const token = cookies['access_token']
+    const {id} = context.query
+    console.log(id)
+    const order = await fetchOneOrder(id, token)
+    console.log(order)
+    return {props : {order}}
+}
+const Complete = ({order}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
 
@@ -20,10 +33,6 @@ const Complete = () => {
             setIsDesktop(false)
         }
     }, [])
-    const goToFAQ = (e) => {
-        e.preventDefault()
-        router.push('/faq')
-    }
     return (
         <MainLayout>
             <div className={s.cont + ' custom_cont'}>
@@ -38,14 +47,14 @@ const Complete = () => {
                         Ваш заказ:
                     </div>
                     <div className={s.header_text}>
-                        № 1337
+                        № {order.id}
                     </div>
                     <div className={s.header_text}>
-                        Дата: 12.12.2021
+                        Дата: {order.formatted_date}
                     </div>
                 </div>
                 <hr/>
-                <CompleteCard/>
+                <CompleteCard order={order}/>
                 <hr/>
                 <div className={s.info_block}>
                     <Image src={info} alt='' width={isDesktop ? 80 : 40}/>
@@ -63,7 +72,7 @@ const Complete = () => {
                     </div>
                     <div>
                         Ответы на большинство вопросов Вы всегда можете найти
-                        здесь: <a href="/faq" className={s.link} onClick={(e) => goToFAQ(e)}>FAQ</a>
+                        здесь: <Link href="/faq" className={s.link}>FAQ</Link>
                     </div>
                     <div>
                         Если у Вас остались вопросы, обращайтесь в <a href="" className={s.link}>службу поддержки</a>

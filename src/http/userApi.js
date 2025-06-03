@@ -142,6 +142,12 @@ export async function fetchUserOrders(userId, token) {
     })
     return data
 }
+export async function fetchOneOrder(orderId, token) {
+    const {data} = await $host.get(`order/info/${orderId}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function fetchLoyaltyInfo(token) {
     const {data} = await $host.get(`user/loyalty_program`, {
         headers: {Authorization: `Bearer ${token}`}

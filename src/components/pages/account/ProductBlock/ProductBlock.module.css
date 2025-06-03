@@ -73,4 +73,7 @@
     .text {
         font-size: 12px;
     }
+    .number_block {
+        margin-bottom: 5px;
+    }
 }

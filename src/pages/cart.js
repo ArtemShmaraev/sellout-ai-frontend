@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/Cart.module.css'
 import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
@@ -59,6 +59,13 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale}) => {
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
+
+    useEffect(() => {
+        setDefAmount(defaultPrice)
+        setFinAmount(finalPrice)
+        setSaleAmount(sale)
+    }, [Cookies.get('cart')]);
+
     const sendPromo = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')

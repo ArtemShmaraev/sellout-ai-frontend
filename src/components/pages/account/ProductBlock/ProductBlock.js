@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './ProductBlock.module.css'
 import Image from "next/image";
-import shoe from "@/static/img/shoe2.png";
 
 const ProductBlock = ({unit}) => {
     const brandsDisplay = () => {
@@ -31,7 +30,7 @@ const ProductBlock = ({unit}) => {
                         <div className={s.text}>{unit.view_size_platform}</div>
                         <div className={s.number_block}>
                             <div className={s.brand}>Статус</div>
-                            <div className={s.text}>{unit.status.name}</div>
+                            <div className={s.text} id={'status'}>{unit.status.name}</div>
                         </div>
                     </div>
                 </div>
