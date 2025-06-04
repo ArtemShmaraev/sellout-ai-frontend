@@ -5,7 +5,7 @@ import close from '@/static/icons/x-lg.svg'
 import Image from 'next/image'
 import InputMask from "react-input-mask";
 import {Context} from "@/context/AppWrapper";
-import {fetchUserInfo} from "@/http/userApi";
+import {fetchUserInfo2} from "@/http/userApi";
 import Cookies from "js-cookie";
 
 const BuyoutModal = () => {
@@ -21,15 +21,15 @@ const BuyoutModal = () => {
     const [info, setInfo] = useState('');
     useEffect(() => {
         const token = Cookies.get('access_token')
-        if (token) {
+        if (token && userStore.id) {
             const id = userStore.id
-            // fetchUserInfo(token, id).then(res => {
-            //     setName(res.first_name)
-            //     setEmail(res.username)
-            //     setPhone(res.phone_number)
-            // })
+            fetchUserInfo2(token, id).then(res => {
+                setName(res.first_name)
+                setEmail(res.username)
+                setPhone(res.phone_number)
+            })
         }
-    }, [])
+    }, [userStore.isLogged])
     useEffect(() => {
         const width = window.innerWidth
         if (width <= 1200) {

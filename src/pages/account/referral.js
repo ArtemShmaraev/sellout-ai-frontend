@@ -4,7 +4,7 @@ import AccountLayout from "@/layout/AccountLayout";
 import s from '@/styles/Referral.module.css'
 import Image from "next/image";
 import {parse} from "cookie";
-import {fetchLoyaltyInfo} from "@/http/userApi";
+import {editPromo, fetchLoyaltyInfo, fetchPromo} from "@/http/userApi";
 import amethystBg from "../../../public/img/Amethyst.jpg";
 import logo from "@/static/img/bold_logo.svg";
 import sapBg from "../../../public/img/Sap.jpg";
@@ -16,15 +16,22 @@ import privilegedBg from "../../../public/img/privileged.jpg";
 import ffBg from "../../../public/img/ff.jpg";
 import gardLogo from "@/static/img/gard_logo.svg";
 import denisBg from "../../../public/img/penis.jpg";
-import ClipboardJS from "clipboard";
+import megaphone from '@/static/img/megaphone.svg'
+import heart from '@/static/icons/circle_heart.svg'
+import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
+import Link from "next/link";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
+import Cookies from "js-cookie";
+import ReferralModal from "@/components/pages/account/ReferralModal/ReferralModal";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const loyalty = await fetchLoyaltyInfo(token)
-    return { props: {loyalty} }
+    const fetchedPromo = await fetchPromo(token)
+    return { props: {loyalty, fetchedPromo} }
 }
-const Referral = ({loyalty}) => {
+const Referral = ({loyalty, fetchedPromo}) => {
     const config = {
         Amethyst: {
             img: amethystBg,
@@ -85,27 +92,56 @@ const Referral = ({loyalty}) => {
     }
     const statusObj = config[loyalty.status_name]
     // const statusObj = config["Privileged"]
-
-    const [promo, setPromo] = useState('PROMO')
+    const [promo, setPromo] = useState(fetchedPromo.string_representation)
     const [readOnly, setReadOnly] = useState(true)
     const promoRef = useRef(null)
 
-    const handleSecondBtnClick = () => {
+    const handleSecondBtnClick = async () => {
         if (readOnly) {
             setReadOnly(false)
             promoRef.current.focus({focusVisible: true})
         } else {
             setReadOnly(true)
+            const token = Cookies.get('access_token')
+            const res = await editPromo(promo, token)
+            console.log(res)
+            if ('message' in res) {
+                setError(res.message)
+                setSaved(false)
+            } else {
+                setSaved(true)
+                setError('')
+            }
         }
     }
     const copyRef = useRef(null)
     const textRef = useRef(null)
+    const [saved, setSaved] = useState(false)
+    const [error, setError] = useState('')
+
+    const [showCopyBlock, setShowCopyBlock] = useState(false)
     const copyValue = async (ref) => {
         const text = ref.current.value ?? ref.current.textContent;
         await navigator.clipboard.writeText(text)
 
-        copyRef.current.style.display = 'block'
-        setTimeout(() => copyRef.current.style.display = 'none', 2000)
+        setShowCopyBlock(true)
+        setTimeout(() => setShowCopyBlock(false), 2000)
+    }
+
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
+
+    const [referralOpen, setReferralOpen] = useState(false)
+    const toggleReferral = () => {
+        setReferralOpen(!referralOpen)
+    }
+    const closeReferral = () => {
+        setReferralOpen(false)
     }
     return (
         <MainLayout>
@@ -202,6 +238,8 @@ const Referral = ({loyalty}) => {
                                     {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}
                                 </button>
                             </div>
+                            {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
+                            {error && <p className={'red_text text-center'}>{error}</p>}
                         </div>
                     </div>
                     <div className={'text-center my-4'}>
@@ -328,10 +366,73 @@ const Referral = ({loyalty}) => {
                             </button>
                         </div>
                     </div>
-                    <div className={s.copy} ref={copyRef}>
-                        Текст скопирован
+
+                    <div className={'mb-5'}>
+                        <div className={'d-flex justify-content-center mb-3'}>
+                            <Image src={heart} alt='' width={100}/>
+                        </div>
+                        <p className={s.exp_text}>Мы искренне стремимся создать лучший продукт на рынке. Рекомендуя Sellout всем окружающим, Вы помогаете нам развиваться и улучшать платформу Sellout для Вас! Вы можете использовать любые инструменты привлечения клиентов будь то знакомые,
+                            социальные сети, блог и.т.д. <br/> Приглашайте новых пользователей и экономьте до 100% вместе с Sellout!</p>
                     </div>
+
+                    <div className={'mb-5'}>
+                        <div className={'d-flex justify-content-center mb-3'}>
+                            <Image src={megaphone} alt='' width={100}/>
+                        </div>
+                        <p className={s.exp_text}>Хотите стать амбассадором Sellout на взаимовыгодных условиях? Являетесь
+                            лидером мнений, блогером, инфлюенсером или есть аудитория, для которой наш продукт может быть полезным?
+                        </p>
+                        <p className={s.exp_text}>Мы можем предложить Вам огромную вариативность условий сотрудничества: от аффилированного маркетинга
+                            с мгновенными выплатами и с использованием наших
+                            статистических данных для повышения конверсии до полного спонсирования проведения маркетинговой кампании.
+                        </p>
+                        <p className={s.exp_text}>Оставляйте заявку даже если сомневаетесь, что охватываете достаточную аудиторию, мы поможем продвинуть Ваш блог
+                            за счет коллаборации. Свяжитесь с нами, и мы обязательно
+                            договоримся о партнерстве.
+                        </p>
+                        <div className={'d-flex justify-content-center'}>
+                            <button className={s.btn_black} onClick={toggleReferral}>Оставить заявку</button>
+                        </div>
+                    </div>
+
+                    <div className={s.faq_block}>
+                        <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                        <LoyaltyFAQ title={'Как получить новый статус?'}>
+                            Чтобы перейти на следующий уровень, Вам необходимо совершить
+                            покупки на платформе Sellout на определенную сумму. Конкретные значения указаны выше.
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Как начисляются бонусы за каждую покупку?'}>
+                            При совершении заказа Вам будут начислены бонусы за каждую единицу товара в заказе. Количество начисляемых
+                            бонусов зависит от Вашего статуса и будет расти по мере достижения следующих уровней! Также Вы можете
+                            получать до 6000₽ бонусами, участвуя в нашей реферальной программе и приглашая Ваших друзей на нашу платформу!
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Как тратить накопленные бонусы?'}>
+                            Вы можете списывать накопленные бонусы при оформлении заказа. В корзине или на любом этапе оформления заказа у Вас
+                            будет возможность ввести число бонусов, которое Вы хотите списать и оплатить ими до 100% стоимости заказа!
+                        </LoyaltyFAQ>
+                        <LoyaltyFAQ title={'Когда сгорают бонусы?'}>
+                            Бонусы сгорают ровно спустя 365 дней со дня их начисления,
+                            поэтому успейте их потратить вовремя. Мы обязательно напомним Вам о приближающейся дате сгорания бонусов!
+                        </LoyaltyFAQ>
+                    </div>
+
+                    <div className={s.faq_block}>
+                        <h5 className={'text-center'}>Ответы на большинство вопросов
+                            Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                        <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
+                            можете обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span> и мы будем
+                            рады Вам помочь!</h5>
+                    </div>
+
+                    {
+                        showCopyBlock &&
+                        <div className={s.copy} ref={copyRef}>
+                            Текст скопирован
+                        </div>
+                    }
                 </div>
+                <ReferralModal isOpen={referralOpen} handleClose={closeReferral}/>
+                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             </AccountLayout>
         </MainLayout>
     );

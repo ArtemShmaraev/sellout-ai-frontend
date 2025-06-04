@@ -8,7 +8,7 @@ import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
 import Stage2 from "@/components/pages/order/Stage2/Stage2";
 import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
-import {fetchAddresses, fetchUserInfo} from "@/http/userApi";
+import {confirmEmail, fetchAddresses, fetchUserInfo} from "@/http/userApi";
 import Cookies from "js-cookie";
 import {fetchCart, promoAuth, promoUnauth, useBonuses} from "@/http/cartApi";
 import {useRouter} from "next/router";
@@ -36,6 +36,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
+    const [verifyEmail, setVerifyEmail] = useState(false)
     const renderStage = () => {
         const stage = orderStore.stage
         if (stage === 1) {
@@ -60,7 +61,6 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
         let res
         if (userStore.isLogged) {
             res = await promoAuth(promo, userStore.id, token)
-            console.log(res)
             setFinAmount(res.final_amount)
             setSaleAmount(res.total_sale)
             router.push('/order', undefined, {scroll: false})
@@ -162,6 +162,12 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
 
         const token = Cookies.get('access_token')
         const id = userStore.id
+        if (!userData.verify_email) {
+            await confirmEmail(token, id, window.location.href)
+            setVerifyEmail(true)
+            return null
+        }
+        setVerifyEmail(false)
         const order = await checkoutOrder(orderObj, id, token)
         Cookies.set('cart', '', {expires: 2772})
         cartStore.setCartCnt(0)
@@ -221,6 +227,11 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
                         <button className={s.order_btn} onClick={checkout}>Перейти к оплате</button>
                         {fillAll &&
                             <p className={'red_text'}>Заполните все поля</p>
+                        }
+                        {verifyEmail &&
+                            <p className={'red_text'}>Для оформления заказа подтвердите ваш Email. Письмо отправлено
+                                на {userData.email}
+                            </p>
                         }
                     </div>
                 </div>

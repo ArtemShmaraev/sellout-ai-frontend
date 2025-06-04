@@ -24,7 +24,6 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const token = Cookies.get('access_token')
         fetchPrices(productId, token).then(res => {
             setPrices(res)
-            console.log(res)
         })
         cartStore.ships[cardId] = unitId
     }, [Cookies.get('cart')])

@@ -34,8 +34,14 @@ export async function fetchUserInfo(cookies, id) {
     })
     return data
 }
+export async function fetchUserInfo2(token, id) {
+    const {data} = await $host.get(`user/user_info/${id}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function editUserInfo(token, userId, obj) {
-    const {data} = await $host.put(`user/user_info/${userId}`, obj,{
+    const {data} = await $host.post(`user/user_info/${userId}`, JSON.stringify(obj),{
         headers: {Authorization: `Bearer ${token}`}
     })
     return data
@@ -135,6 +141,7 @@ export async function addToWaitingList(token, productId, sizeArr) {
     const {data} = await $host.post(`user/waiting_list/${productId}`, JSON.stringify(obj), {
         headers: {Authorization: `Bearer ${token}`}
     })
+    return data
 }
 export async function fetchUserOrders(userId, token) {
     const {data} = await $host.get(`order/user_orders/${userId}`, {
@@ -150,6 +157,21 @@ export async function fetchOneOrder(orderId, token) {
 }
 export async function fetchLoyaltyInfo(token) {
     const {data} = await $host.get(`user/loyalty_program`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+
+export async function fetchPromo(token) {
+    const {data} = await $host.get(`user/referral_promo`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function editPromo(promo, token) {
+    console.log(token)
+    const obj = {promo}
+    const {data} = await $host.put(`user/referral_promo`, JSON.stringify(obj), {
         headers: {Authorization: `Bearer ${token}`}
     })
     return data

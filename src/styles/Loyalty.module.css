@@ -172,6 +172,10 @@
     box-shadow: 4px 4px 20px 0px #000612;
 }
 
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}
 @media (max-width: 1200px) {
     .cont {
         width: 100%;

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import s from '@/styles/Loyalty.module.css'
 import MainLayout from "@/layout/MainLayout";
 import AccountLayout from "@/layout/AccountLayout";
@@ -24,6 +24,7 @@ import ffIcon from '@/static/icons/ff.png'
 import privilegedIcon from '@/static/icons/privileged.svg'
 import info from '@/static/icons/info.svg'
 import {Context} from "@/context/AppWrapper";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -93,6 +94,14 @@ const Loyalty = ({loyalty}) => {
     }
     const statusObj = config[loyalty.status_name]
     // const statusObj = config["Privileged"]
+
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     return (
         <MainLayout>
             <AccountLayout>
@@ -512,10 +521,11 @@ const Loyalty = ({loyalty}) => {
                         <h5 className={'text-center'}>Ответы на большинство вопросов
                             Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
                         <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
-                            можете обратиться в <Link href={''} className={'text-black'}>службу поддержки</Link> и мы будем
+                            можете обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span> и мы будем
                             рады Вам помочь!</h5>
                     </div>
                 </div>
+                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             </AccountLayout>
         </MainLayout>
     );

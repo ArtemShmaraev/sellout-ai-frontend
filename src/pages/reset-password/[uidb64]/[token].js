@@ -26,7 +26,8 @@ const Token = () => {
         const {query} = router
         try {
             const res = await changePass(query.uidb64, query.token, newPass1)
-            setWrong(true)
+            console.log(res)
+            setWrong(false)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
             if (cookieCart) {
@@ -38,6 +39,8 @@ const Token = () => {
             let newStr = ''
             cartFromBack.forEach(el => newStr += el + ' ')
             Cookies.set('cart', newStr, {expires: 2772})
+            Cookies.set('access_token', res.access, {expires: 2772})
+            Cookies.set('refresh_token', res.refresh, {expires: 2772})
             userStore.setIsLogged(true)
             userStore.setId(res.user_id)
             userStore.setUsername(res.username)

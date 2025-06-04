@@ -115,7 +115,7 @@
     width: 200px;
     text-align: center;
     border-radius: 7px;
-    display: none;
+    display: block;
     position: fixed;
     top: 50vh;
     left: calc(60% - 100px);
@@ -126,7 +126,6 @@
 }
 @keyframes copyAnim {
     0% {
-        display: block;
         opacity: 0;
     }
     50% {
@@ -134,7 +133,6 @@
     }
     100% {
         opacity: 0;
-        display: none;
     }
 }
 .referral_table .first_tr td {
@@ -152,6 +150,10 @@
     width: 100%;
     text-align: center;
     margin: 5px 0;
+}
+.faq_block {
+    padding: 0 10%;
+    margin-bottom: 30px;
 }
 
 .amethyst_text {
@@ -218,7 +220,19 @@
     box-shadow: 4px 4px 20px 0px #000612;
 }
 
-
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.btn_black {
+    color: white;
+    background: black;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    width: 300px;
+    padding: 10px;
+}
 
 @media (max-width: 1200px) {
     .cont {
@@ -233,6 +247,12 @@
     }
     .input_block {
         width: 100%;
+    }
+    .exp_item {
+        width: 48%;
+    }
+    .copy {
+        left: calc(50% - 100px);
     }
     .faq_block {
         padding: 0;

@@ -4,7 +4,7 @@ import s from '@/styles/Account.module.css'
 import AccountLayout from "@/layout/AccountLayout";
 import {Context} from "@/context/AppWrapper";
 import InputMask from 'react-input-mask';
-import {fetchSizeInfo, fetchUserInfo, getSizeTable, sendSizeInfo} from "@/http/userApi";
+import {confirmEmail, editUserInfo, fetchSizeInfo, fetchUserInfo, getSizeTable, sendSizeInfo} from "@/http/userApi";
 import {parse} from "cookie";
 import jwtDecode from "jwt-decode";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
@@ -30,7 +30,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
     const [phone, setPhone] = useState(userData.phone_number)
     const [weight, setWeight] = useState(sizeInfo.weight)
     const [height, setHeight] = useState(sizeInfo.height)
-    const [birthday, setBirthday] = useState()
+    const [birthday, setBirthday] = useState(userData.formatted_happy_birthday_date)
     const handleChangeNumber = (e) => {
         const inputPhoneNumber = e.target.value;
         setPhone(inputPhoneNumber);
@@ -69,7 +69,8 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
     const [validEmail, setValidEmail] = useState(true);
     const [sent, setSent] = useState(false)
     const [emailChanged, setEmailChanged] = useState(false)
-    const sendData = () => {
+    const [emailBusy, setEmailBusy] = useState(false)
+    const sendData = async () => {
         if (!checkFilling()) {
             setFillLines(true)
             return false
@@ -81,8 +82,29 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
         }
         setValidEmail(true)
         setSent(true)
+        const obj = {
+            first_name: firstname,
+            last_name: lastname,
+            email,
+            username: email,
+            phone
+        }
+        if (selectedGender) {
+            obj.gender = selectedGender[2]
+        }
+        if (birthday) {
+            obj.date = birthday
+        }
+        const token = Cookies.get('access_token')
+        try {
+            const changeRes = await editUserInfo(token, userStore.id, obj)
+            setEmailBusy(false)
+        } catch (e) {
+            setEmailBusy(true)
+        }
         if (email !== userData.email) {
             setEmailChanged(true)
+            await confirmEmail(token, userStore.id, window.location.href)
         }
     }
     const checkIsNum = (str) => {
@@ -206,6 +228,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                     {fillLines && <div className={s.red_text}>Заполните все поля</div>}
                     {sent && <div className={'green_text text-center'}>Именения успешно сохранены</div>}
                     {emailChanged && <div className={'green_text text-center'}>Пиьсмо подтверждение было выслано на новую почту</div>}
+                    {emailBusy && <div className={s.red_text}>Заполните все поля</div>}
                     <div className={'d-flex justify-content-center mt-2'}>
                         <button onClick={toggleModal} className={s.change_pass_btn}>
                             Изменить пароль
