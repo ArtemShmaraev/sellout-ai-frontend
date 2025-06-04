@@ -60,6 +60,9 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
         let res
         if (userStore.isLogged) {
             res = await promoAuth(promo, userStore.id, token)
+            console.log(res)
+            setFinAmount(res.final_amount)
+            setSaleAmount(res.total_sale)
             router.push('/order', undefined, {scroll: false})
         } else {
             const cartArr = Cookies.get('cart').trim().split(' ')
@@ -74,7 +77,9 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
     const spendBonuses = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')
-        const data = await useBonuses(bonuses, token)
+        const res = await useBonuses(bonuses, token)
+        setFinAmount(res.final_amount)
+        setSaleAmount(res.total_sale)
     }
     const calculateFinalPrice = () => {
         if (orderStore.deliveryPrice &&

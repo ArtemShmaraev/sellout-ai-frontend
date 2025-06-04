@@ -44,6 +44,17 @@
 .icons {
     margin: 0 7px;
 }
+.bonuses_block {
+    display: inline;
+    align-items: center;
+}
+.bonuses {
+    margin: 3px 0;
+    color: green;
+}
+.bonus_icon {
+    margin-top: -3px;
+}
 .modals_block {
     display: flex;
     justify-content: space-between;

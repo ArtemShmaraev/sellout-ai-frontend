@@ -4,13 +4,13 @@ import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
 import {observer} from "mobx-react-lite";
 
-const RenderBtns = ({btns}) => {
+const RenderBtns = ({btns, changeBonuses}) => {
     const [activeButtonId, setActiveButtonId] = useState();
     const {productStore} = useContext(Context)
     const arr = []
     let curNum = 1
 
-    const handleClick = useCallback((id) => {
+    const handleClick = useCallback((id, bonuses) => {
         setActiveButtonId(id);
         productStore.setShipChosen(id)
         let cart = Cookies.get('cart')
@@ -20,6 +20,7 @@ const RenderBtns = ({btns}) => {
         cart = Cookies.get('cart').trim().split(' ')
 
         productStore.setText(cart, id)
+        changeBonuses(bonuses)
     }, []);
 
     const renderBtns = (buttons) => {
@@ -56,7 +57,7 @@ const RenderBtns = ({btns}) => {
                     key={i}
                     style={{ width: buttonWidth }}
                     className={`${s.btn} ${productStore.shipChosen === button.id ? s.black : s.white}`}
-                    onClick={() => handleClick(button.id)}
+                    onClick={() => handleClick(button.id, button.bonus)}
                 >
                     {content}
                 </button>
@@ -75,7 +76,7 @@ const RenderBtns = ({btns}) => {
     }
     useEffect(() => {
         if (btns.length === 1) {
-            handleClick(btns[0].id)
+            handleClick(btns[0].id, btns[0].bonus)
         }
     }, [productStore.shipps])
     return (

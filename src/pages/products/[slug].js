@@ -32,6 +32,7 @@ import '@splidejs/react-splide/css'
 import right from '@/static/icons/chevron-right.svg'
 import left from '@/static/icons/chevron-left.svg'
 import Head from "next/head";
+import gift from '@/static/icons/gift-green.svg'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -60,7 +61,12 @@ export const getServerSideProps = async (context) => {
 const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
+    const [bonuses, setBonuses] = useState(`до ${product.max_bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
+    console.log(product)
+    const changeBonusesString = (value) => {
+        setBonuses(value)
+    }
     useEffect(() => {
         productStore.clearAll()
     }, [])
@@ -218,6 +224,10 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                     {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                 </div>
+                                <p className={s.bonuses_block}>
+                                    <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                    в подарок!
+                                </p>
                             </>
                         }
                         {
@@ -280,7 +290,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     productStore.sizeChosen &&
                                     <div className={s.btn_group}>
-                                        <RenderBtns btns={productStore.shipps}/>
+                                        <RenderBtns btns={productStore.shipps} changeBonuses={changeBonusesString}/>
                                     </div>
                                 }
                                 <div className={s.how}>
@@ -366,6 +376,10 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                     {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                 </div>
+                                <p className={s.bonuses_block}>
+                                    <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                    в подарок!
+                                </p>
                                 <div className={s.modals_block}>
                                     <SizeTable tables={product.size_table_platform.tables}/>
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
@@ -375,7 +389,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     productStore.shipps.length > 0 &&
                                     <div className={s.btn_group}>
-                                        <RenderBtns btns={productStore.shipps}/>
+                                        <RenderBtns btns={productStore.shipps} changeBonuses={changeBonusesString}/>
                                     </div>
                                 }
                                 <div className={s.how}>

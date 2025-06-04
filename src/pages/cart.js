@@ -36,6 +36,7 @@ export const getServerSideProps = async (context) => {
     let defaultPrice
     let finalPrice
     let sale
+    let userData = {}
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
@@ -43,14 +44,13 @@ export const getServerSideProps = async (context) => {
         finalPrice = cart.final_amount
         sale = cart.total_sale
         productUnits = cart
+        userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     } else {
         const res = await fetchCartPrice(cartArr)
         defaultPrice = res.total_amount
         finalPrice = defaultPrice
         sale = 0
     }
-    const {user_id} = jwtDecode(token)
-    const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     return { props: {productUnits, defaultPrice, finalPrice, sale, userData} }
 }
 const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
@@ -75,6 +75,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
         let res
         if (userStore.isLogged) {
             res = await promoAuth(promo, userStore.id, token)
+            setFinAmount(res.final_amount)
+            setSaleAmount(res.total_sale)
             router.push('/cart', undefined, {scroll: false})
         } else {
             const cartArr = Cookies.get('cart').trim().split(' ')
@@ -95,7 +97,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
     const spendBonuses = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')
-        const data = await useBonuses(bonuses, token)
+        const res = await useBonuses(bonuses, token)
+        setFinAmount(res.final_amount)
+        setSaleAmount(res.total_sale)
     }
     const [checkoutErr, setCheckoutErr] = useState('')
     const goToCheckout = () => {

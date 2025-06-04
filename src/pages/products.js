@@ -99,7 +99,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                 <PictureBlock obj={products.mobile} className={s.mobile}/>
                 {desktopStore.isDesktop &&
                     <div className={s.filter_sort_row}>
-                        <Col lg={10} className='d-flex'>
+                        <Col lg={10} className='d-flex align-items-stretch'>
                             <button className={s.border + ' fw-bold'}
                                     onClick={() => setIsOpen(!isOpen)}
                             >Фильтры

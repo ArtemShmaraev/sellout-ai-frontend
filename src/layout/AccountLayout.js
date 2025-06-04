@@ -84,6 +84,11 @@ const AccountLayout = ({children}) => {
                             <div className={makeBold('loyalty')}>Программа лояльности</div>
                             <Image src={person} alt='' className={s.icon} width={20}/>
                         </Link>
+                        <Link href="/account/referral" className={s.nav_link}
+                        >
+                            <div className={makeBold('referral')}>Реферальная программа</div>
+                            <Image src={person} alt='' className={s.icon} width={20}/>
+                        </Link>
                     </div>
                     :
                     <>

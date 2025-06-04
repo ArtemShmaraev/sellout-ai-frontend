@@ -23,6 +23,7 @@
     color: #c4c0c0;
     margin: 10px 0;
     font-size: 18px;
+    cursor: pointer;
     transition: 0.3s;
 }
 .footer_link:hover {

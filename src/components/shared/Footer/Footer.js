@@ -10,6 +10,7 @@ import Link from "next/link";
 import visa from '@/static/icons/payment/visa.svg'
 import mastercard from '@/static/icons/payment/mastercard.svg'
 import mir from '@/static/icons/payment/mir.svg'
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -28,6 +29,13 @@ const Footer = () => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>
@@ -43,7 +51,9 @@ const Footer = () => {
                                 <Link href="" className={s.footer_link}>Блог</Link>
                             </div>
                             <div>
-                                <Link href="" className={s.footer_link}>Контакты</Link>
+                                <span className={s.footer_link}
+                                onClick={toggleContact}
+                                >Контакты</span>
                             </div>
                         </Col>
                         <Col lg={4} className={s.footer_col}>
@@ -95,7 +105,9 @@ const Footer = () => {
                                 <Link href="" className={s.footer_link}>Блог</Link>
                             </div>
                             <div>
-                                <Link href="" className={s.footer_link}>Контакты</Link>
+                                <span className={s.footer_link}
+                                      onClick={toggleContact}
+                                >Контакты</span>
                             </div>
                         </FooterDropdown>
                         <FooterDropdown header={'Помощь'}>
@@ -180,6 +192,7 @@ const Footer = () => {
                     <Image src={mir} alt=''/>
                 </div>
             </div>
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </footer>
     );
 };

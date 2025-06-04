@@ -18,6 +18,7 @@ import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
 import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
 import Link from "next/link";
 import vk from "@/static/icons/vk.svg";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -79,6 +80,14 @@ const Sidebar = ({photos}) => {
     }
 
     const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
+
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     return (
         <>
             <button className={s.toggle_btn}
@@ -240,7 +249,9 @@ const Sidebar = ({photos}) => {
                         <div className={s.col}>
                             <Link href="" className={s.sidebar_links}>О нас</Link>
                             <Link href="" className={s.sidebar_links}>Блог</Link>
-                            <Link href="" className={s.sidebar_links}>Контакты</Link>
+                            <span className={s.sidebar_links}
+                                  onClick={toggleContact}
+                            >Контакты</span>
                         </div>
                         <div className={s.col}>
                             <div className={s.social_media}>
@@ -278,6 +289,7 @@ const Sidebar = ({photos}) => {
                     </div>
                 </div>
             }
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </>
     );
 };

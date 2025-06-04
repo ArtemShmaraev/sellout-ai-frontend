@@ -95,7 +95,7 @@ export default function Home({data}) {
                 })
                 arr.push(
                     <div className={s.collections}>
-                        <div className='d-flex justify-content-between align-items-center'>
+                        <div className='d-flex justify-content-between align-items-center my-5'>
                             <div className={s.title_block}>
                                 <h3 className={s.title}>{el.title}</h3>
                             </div>

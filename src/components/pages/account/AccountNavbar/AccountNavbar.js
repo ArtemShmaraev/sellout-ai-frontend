@@ -41,6 +41,12 @@ const AccountNavbar = () => {
             address: 'loyalty',
             link: '/account/loyalty'
 
+        },
+        {
+            name: 'Реферальная программа',
+            address: 'referral',
+            link: '/account/referral'
+
         }
     ]
     useEffect(() => {

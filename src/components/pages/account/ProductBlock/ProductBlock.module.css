@@ -7,7 +7,7 @@
     flex-grow: 1;
 }
 .col1 {
-    width: 32%;
+    min-width: 32%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -56,13 +56,16 @@
     .header_text {
         font-size: 15px;
     }
+    .row {
+        gap: 10px;
+    }
     .inner_row {
         flex-direction: column;
         flex-grow: 1;
     }
     .col1 {
         align-items: center;
-        width: 200px;
+        min-width: 180px;
     }
     .col {
         width: 100%;
