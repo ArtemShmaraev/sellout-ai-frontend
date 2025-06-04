@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProductBlock.module.css'
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductBlock = ({unit}) => {
     const brandsDisplay = () => {
@@ -12,15 +13,15 @@ const ProductBlock = ({unit}) => {
     }
     return (
         <div className={s.row}>
-            <div className={s.col1}>
+            <Link href={`/products/${unit.product.slug}`} className={s.col1}>
                 <Image src={unit.product.bucket_link[0].url} alt=''
                        className={s.img} fill={true} sizes={'width: 100%'}/>
-            </div>
+            </Link>
             <div className={s.inner_row}>
                 <div className={s.col}>
                     <div>
                         <div className={s.brand}>{brandsDisplay()}</div>
-                        <div className={s.text}>{unit.product.model}</div>
+                        <div className={s.text} style={{fontWeight: 700}}>{unit.product.model}</div>
                         <div className={s.text}>{unit.product.colorway}</div>
                     </div>
                 </div>

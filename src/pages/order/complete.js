@@ -52,10 +52,7 @@ const Complete = ({order}) => {
                 </div>
                 <div className={s.header}>
                     <div className={s.header_text}>
-                        Ваш заказ:
-                    </div>
-                    <div className={s.header_text}>
-                        № {order.id}
+                        Ваш заказ: № {order.id}
                     </div>
                     <div className={s.header_text}>
                         Дата: {order.formatted_date}

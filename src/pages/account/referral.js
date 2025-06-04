@@ -167,273 +167,275 @@ const Referral = ({loyalty, fetchedPromo}) => {
                             </div>
                         </div>
                     </div>
-
-                    <div className={s.explanation_block}>
-                        <h4 className={'text-center'}>
-                            Приглашайте Ваших друзей на платформу Sellout и получайте
-                            до <span className={'fw-bold'}>6000₽</span> бонусов
-                        </h4>
-                        <div className={'d-flex justify-content-center'}>
-                            <div className={s.exp_item}>
-                                <div className={s.circle}>
-                                    <div className={s.circle_val}>
-                                        ?
-                                    </div>
+                </div>
+            </AccountLayout>
+            <div className={'custom_cont'}>
+                <div className={s.explanation_block}>
+                    <h4 className={'text-center mb-4'}>
+                        Приглашайте Ваших друзей на платформу Sellout и получайте
+                        до <span className={'fw-bold'}>6000₽</span> бонусов
+                    </h4>
+                    <div className={'d-flex justify-content-center'}>
+                        <div className={s.exp_item}>
+                            <div className={s.circle}>
+                                <div className={s.circle_val}>
+                                    ?
                                 </div>
-                                <h5 className={'text-center'}>Как это работает?</h5>
                             </div>
+                            <h5 className={'text-center'}>Как это работает?</h5>
                         </div>
+                    </div>
+                    <div className={'d-flex justify-content-between'}>
+                        <div className={s.exp_item}>
+                            <div className={s.circle}>
+                                <div className={s.circle_val}>
+                                    1
+                                </div>
+                            </div>
+                            <p className={s.exp_text}>Получите уникальный промокод ниже и поделитесь им со всеми</p>
+                        </div>
+                        <div className={s.exp_item}>
+                            <div className={s.circle}>
+                                <div className={s.circle_val}>
+                                    2
+                                </div>
+                            </div>
+                            <p className={s.exp_text}>Пользователь совершает свой первый заказ и указывает при его оформлении Ваш промокод</p>
+                        </div>
+                    </div>
+                    <div className={'d-flex justify-content-center'}>
+                        <div className={s.exp_item}>
+                            <div className={s.circle}>
+                                <div className={s.circle_val}>
+                                    3
+                                </div>
+                            </div>
+                            <p className={s.exp_text}>Вы получаете бонусы в виде рублей на свой счет, а
+                                приглашенный Вами пользователь дополнительную скидку!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={'d-flex flex-column align-items-center'}>
+                    <h5 className={'text-center'}>Ваш промокод:</h5>
+                    <div className={s.input_block}>
+                        <input
+                            placeholder={'Промокод'}
+                            className={s.textarea}
+                            value={promo}
+                            onChange={e => setPromo(e.target.value)}
+                            readOnly={readOnly}
+                            ref={promoRef}
+                            id={'promoCopy'}
+                        />
                         <div className={'d-flex justify-content-between'}>
-                            <div className={s.exp_item}>
-                                <div className={s.circle}>
-                                    <div className={s.circle_val}>
-                                        1
-                                    </div>
-                                </div>
-                                <p className={s.exp_text}>Получите уникальный промокод ниже и поделитесь им со всеми</p>
-                            </div>
-                            <div className={s.exp_item}>
-                                <div className={s.circle}>
-                                    <div className={s.circle_val}>
-                                        2
-                                    </div>
-                                </div>
-                                <p className={s.exp_text}>Пользователь совершает свой первый заказ и указывает при его оформлении Ваш промокод</p>
-                            </div>
-                        </div>
-                        <div className={'d-flex justify-content-center'}>
-                            <div className={s.exp_item}>
-                                <div className={s.circle}>
-                                    <div className={s.circle_val}>
-                                        3
-                                    </div>
-                                </div>
-                                <p className={s.exp_text}>Вы получаете бонусы в виде рублей на свой счет, а
-                                    приглашенный Вами пользователь дополнительную скидку!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={'d-flex flex-column align-items-center'}>
-                        <h5 className={'text-center'}>Ваш промокод:</h5>
-                        <div className={s.input_block}>
-                            <input
-                                placeholder={'Промокод'}
-                                className={s.textarea}
-                                value={promo}
-                                onChange={e => setPromo(e.target.value)}
-                                readOnly={readOnly}
-                                ref={promoRef}
-                                id={'promoCopy'}
-                            />
-                            <div className={'d-flex justify-content-between'}>
-                                <button className={s.btn}
-                                        onClick={() => copyValue(promoRef)}
-                                >
-                                    Скопировать
-                                </button>
-                                <button className={s.btn}
-                                        onClick={handleSecondBtnClick}
-                                >
-                                    {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}
-                                </button>
-                            </div>
-                            {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
-                            {error && <p className={'red_text text-center'}>{error}</p>}
-                        </div>
-                    </div>
-                    <div className={'text-center my-4'}>
-                        <h5>Бонусов заработано: <span className={'green_text'}>7000₽</span></h5>
-                        <h5>Людей приглашено: <span className={'green_text'}>7</span></h5>
-                    </div>
-
-
-                    <div className={'text-center'}>
-                        <h5>Размер бонуса и скидки в зависимости от суммы заказа:</h5>
-                        <hr/>
-                        <table width={'100%'} className={s.referral_table}>
-                            <tbody>
-                            <tr className={s.first_tr}>
-                                <td>
-                                    Сумма заказа
-                                </td>
-                                <td>
-                                    Вы получите бонусов
-                                </td>
-                                <td>
-                                    Приглашенный пользователь получит скидку
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 3000₽
-                                </td>
-                                <td>
-                                    500₽
-                                </td>
-                                <td>
-                                    500₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 5000₽
-                                </td>
-                                <td>
-                                    750₽
-                                </td>
-                                <td>
-                                    750₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 15000₽
-                                </td>
-                                <td>
-                                    1000₽
-                                </td>
-                                <td>
-                                    1000₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 35000₽
-                                </td>
-                                <td>
-                                    1250₽
-                                </td>
-                                <td>
-                                    1250₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 70000₽
-                                </td>
-                                <td>
-                                    2000₽
-                                </td>
-                                <td>
-                                    2000₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 130000₽
-                                </td>
-                                <td>
-                                    2500₽
-                                </td>
-                                <td>
-                                    2500₽
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    От 150000₽
-                                </td>
-                                <td>
-                                    3000₽
-                                </td>
-                                <td>
-                                    3000₽
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div className={'text-center my-5'}>
-                        <h5>Вы можете использовать заготовленный ниже текст, чтобы
-                            удобнее рассказывать друзьям об акции:</h5>
-
-                        <div className={s.text_copy} ref={textRef}
-                        >
-                            Соверши свой первый заказ на платформе Sellout и введи мой промокод
-                            при оформелении заказа, чтобы получить скидку: при заказе от 3000₽ ты получишь 500₽, от 5000₽ - 750₽, от 15000₽ - 1000₽,
-                            от 35000₽ - 1250₽, от 70000₽ - 2000₽, от 130000₽ - 2500₽, от 150000₽ - 3000₽ &nbsp;
-                            <br/>
-                            Промокод: {promo}
-                        </div>
-
-                        <div className={'d-flex justify-content-center'}>
-                            <button className={s.btn} style={{width: 300}}
-                                    onClick={() => copyValue(textRef)}
+                            <button className={s.btn}
+                                    onClick={() => copyValue(promoRef)}
                             >
                                 Скопировать
                             </button>
+                            <button className={s.btn}
+                                    onClick={handleSecondBtnClick}
+                            >
+                                {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}
+                            </button>
                         </div>
+                        {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
+                        {error && <p className={'red_text text-center'}>{error}</p>}
                     </div>
-
-                    <div className={'mb-5'}>
-                        <div className={'d-flex justify-content-center mb-3'}>
-                            <Image src={heart} alt='' width={100}/>
-                        </div>
-                        <p className={s.exp_text}>Мы искренне стремимся создать лучший продукт на рынке. Рекомендуя Sellout всем окружающим, Вы помогаете нам развиваться и улучшать платформу Sellout для Вас! Вы можете использовать любые инструменты привлечения клиентов будь то знакомые,
-                            социальные сети, блог и.т.д. <br/> Приглашайте новых пользователей и экономьте до 100% вместе с Sellout!</p>
-                    </div>
-
-                    <div className={'mb-5'}>
-                        <div className={'d-flex justify-content-center mb-3'}>
-                            <Image src={megaphone} alt='' width={100}/>
-                        </div>
-                        <p className={s.exp_text}>Хотите стать амбассадором Sellout на взаимовыгодных условиях? Являетесь
-                            лидером мнений, блогером, инфлюенсером или есть аудитория, для которой наш продукт может быть полезным?
-                        </p>
-                        <p className={s.exp_text}>Мы можем предложить Вам огромную вариативность условий сотрудничества: от аффилированного маркетинга
-                            с мгновенными выплатами и с использованием наших
-                            статистических данных для повышения конверсии до полного спонсирования проведения маркетинговой кампании.
-                        </p>
-                        <p className={s.exp_text}>Оставляйте заявку даже если сомневаетесь, что охватываете достаточную аудиторию, мы поможем продвинуть Ваш блог
-                            за счет коллаборации. Свяжитесь с нами, и мы обязательно
-                            договоримся о партнерстве.
-                        </p>
-                        <div className={'d-flex justify-content-center'}>
-                            <button className={s.btn_black} onClick={toggleReferral}>Оставить заявку</button>
-                        </div>
-                    </div>
-
-                    <div className={s.faq_block}>
-                        <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                        <LoyaltyFAQ title={'Как получить новый статус?'}>
-                            Чтобы перейти на следующий уровень, Вам необходимо совершить
-                            покупки на платформе Sellout на определенную сумму. Конкретные значения указаны выше.
-                        </LoyaltyFAQ>
-                        <LoyaltyFAQ title={'Как начисляются бонусы за каждую покупку?'}>
-                            При совершении заказа Вам будут начислены бонусы за каждую единицу товара в заказе. Количество начисляемых
-                            бонусов зависит от Вашего статуса и будет расти по мере достижения следующих уровней! Также Вы можете
-                            получать до 6000₽ бонусами, участвуя в нашей реферальной программе и приглашая Ваших друзей на нашу платформу!
-                        </LoyaltyFAQ>
-                        <LoyaltyFAQ title={'Как тратить накопленные бонусы?'}>
-                            Вы можете списывать накопленные бонусы при оформлении заказа. В корзине или на любом этапе оформления заказа у Вас
-                            будет возможность ввести число бонусов, которое Вы хотите списать и оплатить ими до 100% стоимости заказа!
-                        </LoyaltyFAQ>
-                        <LoyaltyFAQ title={'Когда сгорают бонусы?'}>
-                            Бонусы сгорают ровно спустя 365 дней со дня их начисления,
-                            поэтому успейте их потратить вовремя. Мы обязательно напомним Вам о приближающейся дате сгорания бонусов!
-                        </LoyaltyFAQ>
-                    </div>
-
-                    <div className={s.faq_block}>
-                        <h5 className={'text-center'}>Ответы на большинство вопросов
-                            Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
-                        <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
-                            можете обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span> и мы будем
-                            рады Вам помочь!</h5>
-                    </div>
-
-                    {
-                        showCopyBlock &&
-                        <div className={s.copy} ref={copyRef}>
-                            Текст скопирован
-                        </div>
-                    }
                 </div>
-                <ReferralModal isOpen={referralOpen} handleClose={closeReferral}/>
-                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
-            </AccountLayout>
+                <div className={'text-center my-4'}>
+                    <h5>Бонусов заработано: <span className={'green_text'}>{fetchedPromo.total_bonus}</span></h5>
+                    <h5>Людей приглашено: <span className={'green_text'}>{fetchedPromo.user_count}</span></h5>
+                </div>
+
+
+                <div className={'text-center'}>
+                    <h5>Размер бонуса и скидки в зависимости от суммы заказа:</h5>
+                    <hr/>
+                    <table width={'100%'} className={s.referral_table}>
+                        <tbody>
+                        <tr className={s.first_tr}>
+                            <td width={'33%'}>
+                                Сумма заказа
+                            </td>
+                            <td width={'33%'}>
+                                Вы получите бонусов
+                            </td>
+                            <td width={'33%'}>
+                                Приглашенный пользователь получит скидку
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 3000₽
+                            </td>
+                            <td>
+                                500₽
+                            </td>
+                            <td>
+                                500₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 5000₽
+                            </td>
+                            <td>
+                                750₽
+                            </td>
+                            <td>
+                                750₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 15000₽
+                            </td>
+                            <td>
+                                1000₽
+                            </td>
+                            <td>
+                                1000₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 35000₽
+                            </td>
+                            <td>
+                                1250₽
+                            </td>
+                            <td>
+                                1250₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 70000₽
+                            </td>
+                            <td>
+                                2000₽
+                            </td>
+                            <td>
+                                2000₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 130000₽
+                            </td>
+                            <td>
+                                2500₽
+                            </td>
+                            <td>
+                                2500₽
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                От 150000₽
+                            </td>
+                            <td>
+                                3000₽
+                            </td>
+                            <td>
+                                3000₽
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className={'text-center my-5'}>
+                    <h5>Вы можете использовать заготовленный ниже текст, чтобы
+                        удобнее рассказывать друзьям об акции:</h5>
+
+                    <div className={s.text_copy} ref={textRef}
+                    >
+                        Соверши свой первый заказ на платформе Sellout и введи мой промокод
+                        при оформелении заказа, чтобы получить скидку: при заказе от 3000₽ ты получишь 500₽, от 5000₽ - 750₽, от 15000₽ - 1000₽,
+                        от 35000₽ - 1250₽, от 70000₽ - 2000₽, от 130000₽ - 2500₽, от 150000₽ - 3000₽ &nbsp;
+                        <br/>
+                        Промокод: {promo}
+                    </div>
+
+                    <div className={'d-flex justify-content-center'}>
+                        <button className={s.btn} style={{width: 300}}
+                                onClick={() => copyValue(textRef)}
+                        >
+                            Скопировать
+                        </button>
+                    </div>
+                </div>
+
+                <div className={'mb-5'}>
+                    <div className={'d-flex justify-content-center mb-3'}>
+                        <Image src={megaphone} alt='' width={100}/>
+                    </div>
+                    <p className={s.exp_text}>Хотите стать амбассадором Sellout на взаимовыгодных условиях? Являетесь
+                        лидером мнений, блогером, инфлюенсером или есть аудитория, для которой наш продукт может быть полезным?
+                    </p>
+                    <p className={s.exp_text}>Мы можем предложить Вам огромную вариативность условий сотрудничества: от аффилированного маркетинга
+                        с мгновенными выплатами и с использованием наших
+                        статистических данных для повышения конверсии до полного спонсирования проведения маркетинговой кампании.
+                    </p>
+                    <p className={s.exp_text}>Оставляйте заявку даже если сомневаетесь, что охватываете достаточную аудиторию, мы поможем продвинуть Ваш блог
+                        за счет коллаборации. Свяжитесь с нами, и мы обязательно
+                        договоримся о партнерстве.
+                    </p>
+                    <div className={'d-flex justify-content-center'}>
+                        <button className={s.btn_black} onClick={toggleReferral}>Оставить заявку</button>
+                    </div>
+                </div>
+
+                <div className={'mb-5'}>
+                    <div className={'d-flex justify-content-center mb-3'}>
+                        <Image src={heart} alt='' width={100}/>
+                    </div>
+                    <p className={s.exp_text}>Мы искренне стремимся создать лучший продукт на рынке. Рекомендуя Sellout всем окружающим, Вы помогаете нам развиваться и улучшать платформу Sellout для Вас! Вы можете использовать любые инструменты привлечения клиентов будь то знакомые,
+                        социальные сети, блог и.т.д. <br/> Приглашайте новых пользователей и экономьте до 100% вместе с Sellout!</p>
+                </div>
+
+
+                <div className={s.faq_block}>
+                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                    <LoyaltyFAQ title={'Как получить новый статус?'}>
+                        Чтобы перейти на следующий уровень, Вам необходимо совершить
+                        покупки на платформе Sellout на определенную сумму. Конкретные значения указаны выше.
+                    </LoyaltyFAQ>
+                    <LoyaltyFAQ title={'Как начисляются бонусы за каждую покупку?'}>
+                        При совершении заказа Вам будут начислены бонусы за каждую единицу товара в заказе. Количество начисляемых
+                        бонусов зависит от Вашего статуса и будет расти по мере достижения следующих уровней! Также Вы можете
+                        получать до 6000₽ бонусами, участвуя в нашей реферальной программе и приглашая Ваших друзей на нашу платформу!
+                    </LoyaltyFAQ>
+                    <LoyaltyFAQ title={'Как тратить накопленные бонусы?'}>
+                        Вы можете списывать накопленные бонусы при оформлении заказа. В корзине или на любом этапе оформления заказа у Вас
+                        будет возможность ввести число бонусов, которое Вы хотите списать и оплатить ими до 100% стоимости заказа!
+                    </LoyaltyFAQ>
+                    <LoyaltyFAQ title={'Когда сгорают бонусы?'}>
+                        Бонусы сгорают ровно спустя 365 дней со дня их начисления,
+                        поэтому успейте их потратить вовремя. Мы обязательно напомним Вам о приближающейся дате сгорания бонусов!
+                    </LoyaltyFAQ>
+                </div>
+
+                <div className={s.faq_block}>
+                    <h5 className={'text-center'}>Ответы на большинство вопросов
+                        Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                    <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
+                        можете обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span> и мы будем
+                        рады Вам помочь!</h5>
+                </div>
+
+                {
+                    showCopyBlock &&
+                    <div className={s.copy} ref={copyRef}>
+                        Текст скопирован
+                    </div>
+                }
+            </div>
+            <ReferralModal isOpen={referralOpen} handleClose={closeReferral}/>
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </MainLayout>
     );
 };

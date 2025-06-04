@@ -61,7 +61,7 @@ export const getServerSideProps = async (context) => {
 const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
-    const [bonuses, setBonuses] = useState(`до ${product.max_bonus}`)
+    const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
     const changeBonusesString = (value) => {
         setBonuses(value)
@@ -191,15 +191,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         }
     }, [])
     const shouldRenderBonuses = () => {
-        const str = bonuses.toString()
-        const numbersOnly = str.replace(/[^\d.]+/g, ' ');
-        // Разделяем строку на массив чисел
-        const numbersArray = numbersOnly.trim().split(' ');
 
-        // Преобразуем строки в числа и возвращаем массив чисел
-        const numbers = numbersArray.map(Number);
-
-        return Number(numbers[0]) > 0;
+        return Number(product.price.bonus) > 0;
     }
     return (
         <MainLayout>

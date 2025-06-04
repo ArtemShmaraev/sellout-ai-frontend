@@ -133,7 +133,12 @@ const Loyalty = ({loyalty}) => {
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                </div>
+            </AccountLayout>
+            <div className={'custom_cont'}>
+                <div>
+                    <div>
                         <div className={s.table_block}>
                             {
                                 statusObj.text === 'Friends & Family' &&
@@ -525,8 +530,9 @@ const Loyalty = ({loyalty}) => {
                             рады Вам помочь!</h5>
                     </div>
                 </div>
+
                 <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
-            </AccountLayout>
+            </div>
         </MainLayout>
     );
 };

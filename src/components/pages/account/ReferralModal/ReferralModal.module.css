@@ -13,7 +13,7 @@
     border: 1px solid darkgrey;
     border-radius: 5px;
     outline: none;
-    padding: 5px 25px 5px 5px;
+    padding: 5px;
     width: 100%;
     margin: 7px 0;
 }
@@ -31,7 +31,7 @@
     border: 1px solid darkgrey;
     border-radius: 5px;
     outline: none;
-    padding: 5px 25px 5px 5px;
+    padding: 5px;
     width: 100%;
     resize: none;
     margin: 7px 0;

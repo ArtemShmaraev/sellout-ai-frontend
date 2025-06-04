@@ -283,6 +283,16 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     />
                                 </div>
                                 <button className={s.reg_btn} type={'submit'}>Зарегистрироваться</button>
+                                <div className='d-flex justify-content-center'>
+                                    <button className={s.forget_pass}
+                                            type={'button'}
+                                            onClick={() => {
+                                                setPassModalShown(true)
+                                                setShow(false)
+                                                document.body.classList.remove('body-scroll-clip')
+                                            }}
+                                    >Забыли пароль?</button>
+                                </div>
                             </Container>
                             :
                             <Container>

@@ -14,9 +14,9 @@
 .header {
     display: flex;
     font-size: 20px;
+    gap: 70px;
 }
 .header_text {
-    margin-right: 70px;
 }
 .info_block {
     display: flex;

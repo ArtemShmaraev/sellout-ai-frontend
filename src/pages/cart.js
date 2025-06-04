@@ -20,6 +20,7 @@ export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     let productUnits
+    let maxBonuses
     let cartArr = []
     if (cookies.cart) {
         cartArr = cookies['cart'].trim().split(' ')
@@ -44,16 +45,19 @@ export const getServerSideProps = async (context) => {
         finalPrice = cart.final_amount
         sale = cart.total_sale
         productUnits = cart
+        maxBonuses = cart.bonus
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     } else {
         const res = await fetchCartPrice(cartArr)
         defaultPrice = res.total_amount
         finalPrice = defaultPrice
+        maxBonuses = res.bonus
+        console.log(maxBonuses)
         sale = 0
     }
-    return { props: {productUnits, defaultPrice, finalPrice, sale, userData} }
+    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState('')
@@ -62,11 +66,13 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
-    console.log(productUnits)
+    const [willBonuses, setWillBonuses] = useState(maxBonuses)
     useEffect(() => {
         setDefAmount(defaultPrice)
         setFinAmount(finalPrice)
         setSaleAmount(sale)
+        setWillBonuses(maxBonuses)
+        console.log(maxBonuses)
     }, [Cookies.get('cart')]);
 
     const sendPromo = async (e) => {
@@ -149,8 +155,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
                                 productUnits.product_units.map((el, ind) =>
                                     <CartItem model={el.product.model}
                                               colorway={el.product.colorway}
-                                              brand={el.product.is_collab ? el.product.collab.name : el.product.brands[0].name}
-                                              price={el.final_price}
+                                              brand={el.product.collab?.name ? el.product.collab.name : el.product.brands[0].name}
+                                              price={el.price.final_price}
                                               productId={el.product.id}
                                               unitId={el.id}
                                               sizeId={el.view_size_platform}
@@ -184,6 +190,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
                                             value={bonuses}
                                             onClick={e => spendBonuses(e)}
                                 />
+                            }
+                            {
+                                Number(willBonuses) > 0 && <p>Вам будет начислено бонусов: {willBonuses} ₽</p>
                             }
                             {
                                 Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
