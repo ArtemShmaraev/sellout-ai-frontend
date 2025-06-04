@@ -62,7 +62,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData}) => {
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
-
+    console.log(productUnits)
     useEffect(() => {
         setDefAmount(defaultPrice)
         setFinAmount(finalPrice)

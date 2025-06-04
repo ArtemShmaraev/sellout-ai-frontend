@@ -63,7 +63,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.max_bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
-    console.log(product)
     const changeBonusesString = (value) => {
         setBonuses(value)
     }
@@ -153,9 +152,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         Cookies.set('cart', cart + ' ' + productStore.shipChosen, {expires: 2772})
         const arr = Cookies.get('cart').trim().split(' ')
         productStore.setText(arr, productStore.shipChosen)
-        console.log(productStore.shipChosen)
-        console.log(arr)
-        //TODO delete log
         if (userStore.isLogged) {
             const token = Cookies.get('access_token')
             const userId = userStore.id
@@ -194,6 +190,17 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             buttonRef.current.focus()
         }
     }, [])
+    const shouldRenderBonuses = () => {
+        const str = bonuses.toString()
+        const numbersOnly = str.replace(/[^\d.]+/g, ' ');
+        // Разделяем строку на массив чисел
+        const numbersArray = numbersOnly.trim().split(' ');
+
+        // Преобразуем строки в числа и возвращаем массив чисел
+        const numbers = numbersArray.map(Number);
+
+        return Number(numbers[0]) > 0;
+    }
     return (
         <MainLayout>
             <Head>
@@ -224,10 +231,13 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                     {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                 </div>
-                                <p className={s.bonuses_block}>
-                                    <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
-                                    в подарок!
-                                </p>
+                                {
+                                    shouldRenderBonuses() &&
+                                    <p className={s.bonuses_block}>
+                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                        в подарок!
+                                    </p>
+                                }
                             </>
                         }
                         {
@@ -366,20 +376,23 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     style={product.is_sale
                                         ? {textDecoration: 'line-through', fontSize: '16px'}
                                         : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price_without_sale} ₽</div>
+                                >от {product.price.start_price} ₽</div>
                                 <div className='d-flex align-items-center'>
                                     {product.is_sale &&
                                         <div className={s.price_sale}>
-                                            от {product.min_price} ₽
+                                            от {product.price.final_price} ₽
                                         </div>
                                     }
                                     {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                     {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                 </div>
-                                <p className={s.bonuses_block}>
-                                    <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
-                                    в подарок!
-                                </p>
+                                {
+                                    shouldRenderBonuses() &&
+                                    <p className={s.bonuses_block}>
+                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                        в подарок!
+                                    </p>
+                                }
                                 <div className={s.modals_block}>
                                     <SizeTable tables={product.size_table_platform.tables}/>
                                     <SizeHelp model={`${brandsDisplay()} ${product.model}`}
