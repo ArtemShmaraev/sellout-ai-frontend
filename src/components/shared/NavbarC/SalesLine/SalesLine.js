@@ -51,6 +51,17 @@ const SalesLine = () => {
                                 Получайте до 6000₽ за приведённого клиента. <Link href={''} className={s.link}>Подробнее</Link>
                             </SplideSlide>
                     }
+                    {
+                        isDesktop
+                            ?
+                            <SplideSlide className={s.splide}>
+                                Успейте воспользоваться бесплатной доставкой по Москве
+                            </SplideSlide>
+                            :
+                            <SplideSlide className={s.splide} style={{fontSize: 12}}>
+                                Успейте воспользоваться бесплатной доставкой по Москве
+                            </SplideSlide>
+                    }
                 </Splide>
             </div>
         </div>
