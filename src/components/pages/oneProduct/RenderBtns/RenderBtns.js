@@ -30,7 +30,7 @@ const RenderBtns = ({btns, changeBonuses}) => {
             const button = buttons[i];
             const content = (
                 <div className={`${s.content}`}>
-                    <div className={s.half_text}>{button.delivery.name}</div>
+                    <div className={s.half_text}>{button.delivery_view}</div>
                     <div className={s.display_none}>|</div>
                     {
                         button.is_sale

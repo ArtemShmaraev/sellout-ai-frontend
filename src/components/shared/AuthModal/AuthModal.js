@@ -6,7 +6,7 @@ import RadioGroup from "../UI/RadioGroup/RadioGroup";
 import CustomCheckbox from "../UI/CustoCheckbox/CustomCheckbox";
 import Image from 'next/image'
 import {confirmEmail, login, registration} from "@/http/userApi";
-import {updateCartFromCookies} from "@/http/cartApi";
+import {promoAuth, promoUnauth, updateCartFromCookies} from "@/http/cartApi";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import InputMask from "react-input-mask";
@@ -95,7 +95,11 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
             userStore.setGender(res.gender)
-
+            const promo = Cookies.get('promo')
+            if (promo) {
+                const cartArr = Cookies.get('cart').trim().split(' ')
+                const data = await promoAuth(promo, userStore.id, res.access)
+            }
 
             await confirmEmail(res.access, res.user_id, window.location.href)
             setShow(false)
@@ -136,6 +140,11 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setAccessToken(res.access)
             userStore.setGender(res.gender)
             setShow(false)
+            const promo = Cookies.get('promo')
+            if (promo) {
+                const cartArr = Cookies.get('cart').trim().split(' ')
+                const data = await promoAuth(promo, userStore.id, res.access)
+            }
         } catch (e) {
             setWrong(true)
         }

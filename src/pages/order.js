@@ -24,19 +24,22 @@ export const getServerSideProps = async (context) => {
     const defaultPrice = cart.total_amount
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
+    const maxBonuses = cart.bonus
+    const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return { props: {addresses, defaultPrice, finalPrice, sale, userData} }
+    return { props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo} }
 }
-const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
+const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo}) => {
     const router = useRouter()
     const {orderStore, userStore, cartStore} = useContext(Context)
-    const [promo, setPromo] = useState('')
+    const [promo, setPromo] = useState(defaultPromo)
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
     const [promoRes, setPromoRes] = useState(null)
     const [verifyEmail, setVerifyEmail] = useState(false)
+    const [willBonuses, setWillBonuses] = useState(maxBonuses)
     const renderStage = () => {
         const stage = orderStore.stage
         if (stage === 1) {
@@ -170,6 +173,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData}) => {
         setVerifyEmail(false)
         const order = await checkoutOrder(orderObj, id, token)
         Cookies.set('cart', '', {expires: 2772})
+        Cookies.set('promo', '', {expires: 2772})
         cartStore.setCartCnt(0)
         router.push(`order/complete?id=${order.id}`)
     }

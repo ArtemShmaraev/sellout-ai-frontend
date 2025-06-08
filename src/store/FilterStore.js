@@ -444,7 +444,7 @@ class FilterStore {
         return this._pageRef
     }
     handleScrollTo() {
-        const position = this.ref.current.offsetTop - 135;
+        const position = this.ref.current.offsetTop - 225;
         const currentScroll = window.scrollTop || document.documentElement.scrollTop
 
         if (currentScroll > position) {

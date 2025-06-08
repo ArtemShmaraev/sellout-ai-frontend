@@ -227,7 +227,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     shouldRenderBonuses() &&
                                     <p className={s.bonuses_block}>
-                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
                                         в подарок!
                                     </p>
                                 }
@@ -382,7 +382,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     shouldRenderBonuses() &&
                                     <p className={s.bonuses_block}>
-                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}</span> бонусов
+                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
                                         в подарок!
                                     </p>
                                 }

@@ -48,12 +48,12 @@ const PictureBlock = ({obj, className, type}) => {
 
 
                     <Image src={desktop} alt=''
-                           className={`${className} placeholder_img`} fill={true}
-                           style={isLoading ? {} : {opacity: 0}} sizes={'100%'}
+                           className={`placeholder_img ${className} ${s.desktop}`} fill={true} sizes={'100%'}
+                           style={isLoading ? {} : {opacity: 0}}
                     />
                     <Image src={mobile} alt=''
-                           className={`${className} placeholder_img`} fill={true}
-                           style={isLoading ? {} : {opacity: 0}} sizes={'100%'}
+                           className={`placeholder_img ${className} ${s.mobile}`} fill={true} sizes={'100%'}
+                           style={isLoading ? {} : {opacity: 0}}
                     />
                 </div>
             </div>

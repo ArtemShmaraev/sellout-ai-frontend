@@ -84,7 +84,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                     {selectedItem ?
                         <div className={s.dropdown_header_text}>
                             <div className={`${s.content}`}>
-                                <div className={s.half_text}>{selectedItem.delivery.name}</div>
+                                <div className={s.half_text}>{selectedItem.delivery_view}</div>
                                 <div className={s.display_none}>|</div>
                                 {
                                     selectedItem.is_sale
@@ -117,7 +117,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                                         disabled={inCartArr.includes(el.id)}
                                 >
                                     <div className={`${s.content}`}>
-                                        <div className={s.half_text}>{el.delivery.name}</div>
+                                        <div className={s.half_text}>{el.delivery_view}</div>
                                         <div className={s.display_none}>|</div>
                                         {
                                             el.is_sale

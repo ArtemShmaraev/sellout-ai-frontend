@@ -68,6 +68,12 @@
     justify-content: flex-start;
     padding-left: 30px;
 }
+.desktop {
+    display: block;
+}
+.mobile {
+    display: none;
+}
 @media (max-width: 1200px) {
     .main_block {
         margin: 45px 0;
@@ -93,5 +99,11 @@
     }
     .btn {
         margin-top: -10px;
+    }
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: block;
     }
 }

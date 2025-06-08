@@ -59,10 +59,12 @@
 .green_text {
     margin: 0 0;
     color: green;
+    font-size: 14px;
 }
 .red_text {
     margin: 0 0;
     color: #b61212;
+    font-size: 14px;
 }
 @media (max-width: 1200px) {
     .cont {

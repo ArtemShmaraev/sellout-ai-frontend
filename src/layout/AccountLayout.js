@@ -19,6 +19,7 @@ const AccountLayout = ({children}) => {
         Cookies.remove('refresh_token')
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('last_seen', '', {expires: 2772})
+        Cookies.set('promo', '', {expires: 2772})
         userStore.setIsLogged(false)
         userStore.setGender('')
         cartStore.setCartCnt(0)

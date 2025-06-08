@@ -38,6 +38,7 @@ export const getServerSideProps = async (context) => {
     let finalPrice
     let sale
     let userData = {}
+    let defaultPromo
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
@@ -47,20 +48,25 @@ export const getServerSideProps = async (context) => {
         productUnits = cart
         maxBonuses = cart.bonus
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+        defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     } else {
         const res = await fetchCartPrice(cartArr)
         defaultPrice = res.total_amount
         finalPrice = defaultPrice
         maxBonuses = res.bonus
-        console.log(maxBonuses)
         sale = 0
+        defaultPromo = ''
+        const promoStr = cookies['promo']
+        if (promoStr) {
+            defaultPromo = promoStr
+        }
     }
-    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses} }
+    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
-    const [promo, setPromo] = useState('')
+    const [promo, setPromo] = useState(defaultPromo)
     const [bonuses, setBonuses] = useState('')
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
@@ -72,7 +78,18 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
         setFinAmount(finalPrice)
         setSaleAmount(sale)
         setWillBonuses(maxBonuses)
-        console.log(maxBonuses)
+        const promo = Cookies.get('promo')
+        const token = Cookies.get('access_token')
+        if (promo && !token) {
+            const cartArr = Cookies.get('cart').trim().split(' ')
+            const res = promoUnauth(promo, cartArr).then(res => {
+                if (res.status) {
+                    setFinAmount(res.final_amount)
+                    setSaleAmount(res.total_sale)
+                }
+                setPromoRes(res)
+            })
+        }
     }, [Cookies.get('cart')]);
 
     const sendPromo = async (e) => {
@@ -87,6 +104,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
         } else {
             const cartArr = Cookies.get('cart').trim().split(' ')
             res = await promoUnauth(promo, cartArr)
+            Cookies.set('promo', promo, {expires: 2772})
         }
         if (res.status) {
             setFinAmount(res.final_amount)
@@ -192,10 +210,10 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                 />
                             }
                             {
-                                Number(willBonuses) > 0 && <p>Вам будет начислено бонусов: {willBonuses} ₽</p>
+                                Number(willBonuses) > 0 && <p className={'mt-2 mb-0'}>Вам будет начислено бонусов: {willBonuses} ₽</p>
                             }
                             {
-                                Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
+                                Number(saleAmount) > 0 && <p className={'my-0'}>Суммарная скидка: {saleAmount} ₽</p>
                             }
                             <hr/>
                             <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
