@@ -275,13 +275,13 @@ const Sidebar = ({photos}) => {
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Остались вопросы?</h4>
-                            <Link href={'/faq'} className={s.sidebar_links}>FAQ</Link>
-                            <p className={s.sidebar_text}>Или свяжитесь с нами</p>
+                            <Link href={'/faq'} className={s.sidebar_links}>Ответы на большинство из них: FAQ</Link>
+                            <p className={s.sidebar_text}>Или напишите нам</p>
                             <a href={'mailto:customerservice@sellout.su'}
                                className={s.footer_link}>Почта: customerservice@sellout.su</a>
                             <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                target={'_blank'}
-                               className={s.footer_link}>WhatsApp: написать +7 993 896-92-27</a>
+                               className={s.footer_link}>WhatsApp: +7 993 896-92-27</a>
                             <a href={'https://t.me/sellout_official'}
                                target={'_blank'}
                                className={s.footer_link}>Telegram: @sellout_official</a>

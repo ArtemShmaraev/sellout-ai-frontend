@@ -74,10 +74,10 @@ const Footer = () => {
                         <Col lg={4} className={s.footer_col}>
                             <h4>Остались вопросы?</h4>
                             <div>
-                                <Link href="/faq" className={s.footer_link}>FAQ</Link>
+                                <Link href="/faq" className={s.footer_link}>Ответы на большинство из них: FAQ</Link>
                             </div>
                             <div>
-                                <p className={s.footer_text}>Или свяжитесь с нами:</p>
+                                <p className={s.footer_text}>Или напишите нам:</p>
                             </div>
                             <div>
                                 <a href={'mailto:customerservice@sellout.su'}
@@ -86,7 +86,7 @@ const Footer = () => {
                             <div>
                                 <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                    target={'_blank'}
-                                   className={s.footer_link}>WhatsApp: написать +7 993 896-92-27</a>
+                                   className={s.footer_link}>WhatsApp: +7 993 896-92-27</a>
                             </div>
                             <div>
                                 <a href={'https://t.me/sellout_official'}
@@ -126,10 +126,10 @@ const Footer = () => {
                         </FooterDropdown>
                         <FooterDropdown header={'Остались вопросы?'}>
                             <div>
-                                <Link href="/faq" className={s.footer_link}>FAQ</Link>
+                                <Link href="/faq" className={s.footer_link}>Ответы на большинство из нихFAQ</Link>
                             </div>
                             <div>
-                                <p className={s.footer_text}>Или свяжитесь с нами:</p>
+                                <p className={s.footer_text}>Или напишите с нами:</p>
                             </div>
                             <div>
                                 <a href={'mailto:customerservice@sellout.su'}
@@ -138,7 +138,7 @@ const Footer = () => {
                             <div>
                                 <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                    target={'_blank'}
-                                   className={s.footer_link}>WhatsApp: написать +7 993 896-92-27</a>
+                                   className={s.footer_link}>WhatsApp: +7 993 896-92-27</a>
                             </div>
                             <div>
                                 <a href={'https://t.me/sellout_official'}

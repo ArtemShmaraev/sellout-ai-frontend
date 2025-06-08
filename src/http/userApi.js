@@ -169,9 +169,19 @@ export async function fetchPromo(token) {
     return data
 }
 export async function editPromo(promo, token) {
-    console.log(token)
     const obj = {promo}
     const {data} = await $host.put(`user/referral_promo`, JSON.stringify(obj), {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
+export async function addToMailingList(email) {
+    const obj = {email}
+    const {data} = await $host.post(`user/add_mailing`, JSON.stringify(obj))
+    return data
+}
+export async function addPartner(obj, token) {
+    const {data} = await $host.post(`user/add_partner`, JSON.stringify(obj), {
         headers: {Authorization: `Bearer ${token}`}
     })
     return data

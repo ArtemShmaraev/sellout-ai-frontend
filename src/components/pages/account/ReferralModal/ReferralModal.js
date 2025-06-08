@@ -5,7 +5,7 @@ import cross from "@/static/icons/x-lg.svg";
 import s from "./ReferralModal.module.css";
 import megaphone from "@/static/img/megaphone.svg";
 import Cookies from "js-cookie";
-import {fetchUserInfo2} from "@/http/userApi";
+import {addPartner, fetchUserInfo2} from "@/http/userApi";
 import {Context} from "@/context/AppWrapper";
 
 const ReferralModal = ({isOpen, handleClose}) => {
@@ -26,6 +26,20 @@ const ReferralModal = ({isOpen, handleClose}) => {
             })
         }
     }, [userStore.isLogged])
+    const [success,setSuccess] = useState(false)
+    const sendData = async (e) => {
+        e.preventDefault()
+        const obj = {
+            email: email,
+            name: name,
+            tg: tg,
+            chanels: promoting,
+            other: partnership
+        }
+        const token = Cookies.get('access_token')
+        const res = await addPartner(obj, token)
+        setSuccess(true)
+    }
     return (
         <Modal
             show={isOpen}
@@ -40,7 +54,7 @@ const ReferralModal = ({isOpen, handleClose}) => {
                     <Image src={megaphone} alt='' width={80}/>
                     <div className={s.text_cont}>
                         <h5>Заполните заявку и станьте нашим партнером</h5>
-                        <div>
+                        <form onSubmit={e => sendData(e)}>
                             <input
                                 className={s.input}
                                 value={name}
@@ -76,11 +90,12 @@ const ReferralModal = ({isOpen, handleClose}) => {
                                 value={partnership}
                                 onChange={e => setPartnership(e.target.value)}
                             />
-                            <button className={s.btn}>Отправить</button>
+                            <button className={s.btn} type={'submit'}>Отправить</button>
+                            {success && <p className={'green_text text-center'}>Ваша заявка отправлена</p>}
                             <p>Нажимая кнопку “Отправить”, Вы соглашаетесь
                                 на <a href={'/docs/Политика%20конфиденциальности.pdf'} target={'_blank'}
                                       className={'text-black'}>обработку персональных данных</a></p>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </Modal.Body>

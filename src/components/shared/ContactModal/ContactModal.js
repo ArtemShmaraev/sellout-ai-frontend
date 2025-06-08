@@ -22,7 +22,7 @@ const ContactModal = ({isOpen, handleClose}) => {
                 <div className={s.content}>
                     <Image src={headphones} alt='' width={60}/>
                     <div className={s.text_cont}>
-                        <h5>Вы всегда можете обратиться в службу поддержки и мы будем рады вам помочь</h5>
+                        <h5>Вы всегда можете написать в службу поддержки и мы будем рады вам помочь</h5>
                         <div>
                             <div>
                                 Почта: <a href={'mailto:customerservice@sellout.su'}
@@ -31,7 +31,7 @@ const ContactModal = ({isOpen, handleClose}) => {
                             <div>
                                 WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
                                    target={'_blank'}
-                                   className={s.link}>написать +7 993 896-92-27</a>
+                                   className={s.link}>+7 993 896-92-27</a>
                             </div>
                             <div>
                                 Telegram: <a href={'https://t.me/sellout_official'}
