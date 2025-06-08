@@ -33,6 +33,10 @@ import right from '@/static/icons/chevron-right.svg'
 import left from '@/static/icons/chevron-left.svg'
 import Head from "next/head";
 import gift from '@/static/icons/gift-green.svg'
+import how from '@/static/icons/question_circle.svg'
+import warranty from '@/static/icons/warranty.svg'
+import payment from '@/static/icons/payment.svg'
+import ret from '@/static/icons/return.svg'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -435,7 +439,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                             </>
                         }
                         <div className={s.link_block}>
-                            <TextModal title={'Как мы работаем?'} img={like}>
+                            <TextModal title={'Как мы работаем?'} img={how}>
                                 <p>SELLOUT - инновационная онлайн-платформа, предлагающая широчайший ассортимент
                                     брендовой одежды и обуви, аксессуаров и прочих товаров. У нас Вы сможете найти как лимитированные и
                                     труднодоступные модели и коллекции, так и отобранные нашими стилистами товары со всего мира.
@@ -445,7 +449,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     Подробнее Вы можете прочитать в разделе <a href="" className={s.link}>О нас</a>
                                 </p>
                             </TextModal>
-                            <TextModal title={'Гарантии оригинальности и качества'} img={like}>
+                            <TextModal title={'Гарантии оригинальности и качества'} img={warranty}>
                                 <>
                                     <p>
                                         SELLOUT продает только 100% оригинальные и новые вещи
@@ -461,7 +465,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </p>
                                 </>
                             </TextModal>
-                            <TextModal title={'Оплата'} img={like}>
+                            <TextModal title={'Оплата'} img={payment}>
                                 <p>
                                     При оплате товара средства на Вашей карте замораживаются, а не списываются. Далее мы должны подтвердить
                                     Ваш заказ, провести дополнительный ряд проверок, если требуется, и только после этого деньги с Вашего счета
@@ -470,7 +474,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     за ними в Личном Кабинете. В случае, если заказ не удастся подтвердить, вся сумма будет незамедлительно разморожена.
                                 </p>
                             </TextModal>
-                            <TextModal title={'Возврат'} img={like}>
+                            <TextModal title={'Возврат'} img={ret}>
                                 <p>
                                     Многие представленные на нашей платформе товары выкупаются специально под Вас у частных продавцов,
                                     коллекционеров или из разных иностранных бутиков и магазинов, поэтому мы не

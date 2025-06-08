@@ -25,7 +25,7 @@ const TextModal = ({children, title, img}) => {
                 className={s.toggle_btn}
                 onClick={handleShow}
             >
-                <Image src={img} alt="" className={s.icon}/>
+                <Image src={img} alt="" className={s.icon} width={30}/>
                 <div className={s.label}>
                     {title}
                 </div>

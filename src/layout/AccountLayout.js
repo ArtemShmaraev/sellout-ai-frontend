@@ -9,6 +9,10 @@ import Image from "next/image";
 import {observer} from "mobx-react-lite";
 import AccountNavbar from "@/components/pages/account/AccountNavbar/AccountNavbar";
 import Link from "next/link";
+import orders from '@/static/icons/orders.svg'
+import loyal from '@/static/icons/loyalty.svg'
+import referral from '@/static/icons/referral.svg'
+import heart from '@/static/icons/heart.svg'
 
 const AccountLayout = ({children}) => {
     const {userStore, cartStore} = useContext(Context)
@@ -73,22 +77,22 @@ const AccountLayout = ({children}) => {
                         <Link href="/account/orders" className={s.nav_link}
                         >
                             <div className={makeBold('orders')}>Заказы</div>
-                            <Image src={person} alt='' className={s.icon} width={20}/>
+                            <Image src={orders} alt='' className={s.icon} width={25}/>
                         </Link>
                         <Link href="/account/favorite-brands" className={s.nav_link}
                         >
                             <div className={makeBold('favorite-brands')}>Любимые бренды</div>
-                            <Image src={person} alt='' className={s.icon} width={20}/>
+                            <Image src={heart} alt='' className={s.icon} width={20}/>
                         </Link>
                         <Link href="/account/loyalty" className={s.nav_link}
                         >
                             <div className={makeBold('loyalty')}>Программа лояльности</div>
-                            <Image src={person} alt='' className={s.icon} width={20}/>
+                            <Image src={loyal} alt='' className={s.icon} width={25}/>
                         </Link>
                         <Link href="/account/referral" className={s.nav_link}
                         >
                             <div className={makeBold('referral')}>Реферальная программа</div>
-                            <Image src={person} alt='' className={s.icon} width={20}/>
+                            <Image src={referral} alt='' className={s.icon} width={25}/>
                         </Link>
                     </div>
                     :
