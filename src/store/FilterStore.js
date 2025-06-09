@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import cn from "classnames";
 
 class FilterStore {
     constructor() {
@@ -154,7 +155,7 @@ class FilterStore {
             d = d[key]
         })
         d.state = !d.state
-        this.toggleAll(item)
+        this.toggleAll2(item)
         if (d.state) {
             this._activeFilters.push(item)
         } else {
@@ -166,6 +167,8 @@ class FilterStore {
         this.handleScrollTo()
     }
     toggleAll(item) {
+        console.log(item.path)
+        console.log(item.text)
         if (item.hasOwnProperty('is_all')) {
             const deactivateList = []
             const obj = this.findObj(this.filters, item.path[item.path.length - 2], item.path)
@@ -187,6 +190,69 @@ class FilterStore {
             }
             for (let i = 0; i < deactivateList.length; i++) {
                 this._activeFilters = this._activeFilters.filter(el => el.query !== deactivateList[i].query)
+            }
+        }
+    }
+    toggleAll2(item) {
+        let isAll
+        let currObj = this.filters
+        let parentObj
+        if (!item.hasOwnProperty('is_all')) {
+            return null
+        } else {
+            isAll = item.is_all
+        }
+        const deactivateList = []
+        item.path.forEach((path, i) => {
+            currObj = currObj[path]
+            if (i === item.path.length - 2) {
+                parentObj = currObj
+            }
+            if (isAll) {
+                for (const key in currObj) {
+                    if (currObj[key].hasOwnProperty('state') && !currObj[key]['is_all']) {
+                        currObj[key]['state'] = false
+                        deactivateList.push(currObj[key])
+                    }
+                }
+            }
+            if (!isAll) {
+                for (const key in currObj) {
+                    if (currObj[key].hasOwnProperty('state') && currObj[key]['is_all']) {
+                        currObj[key]['state'] = false
+                        deactivateList.push(currObj[key])
+                    }
+                }
+            }
+            if (!parentObj) {
+                for (const key in currObj) {
+                    if (currObj[key].hasOwnProperty('state')) {
+                        currObj[key]['state'] = false
+                        deactivateList.push(currObj[key])
+                    }
+                }
+            }
+        })
+        console.log(parentObj)
+        this.deactivateFiltersBelow(parentObj)
+        for (let i = 0; i < deactivateList.length; i++) {
+            this._activeFilters = this._activeFilters.filter(el => el.query !== deactivateList[i].query)
+        }
+    }
+    deactivateFiltersBelow(d, cnt = 0) {
+        for (const key in d) {
+            if (key === 'path') {
+                console.log('skip')
+                continue
+            }
+            if (d[key].hasOwnProperty('state')) {
+                if (cnt) {
+                    console.log(d[key].text)
+                    d[key].state = false
+                    this._activeFilters = this._activeFilters.filter(el => el.query !== d[key].query)
+                }
+            } else {
+                this.deactivateFiltersBelow(d[key], cnt+1)
             }
         }
     }
