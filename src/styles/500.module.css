@@ -1,0 +1,13 @@
+.link {
+    background: black;
+    color: white;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    width: fit-content;
+    text-align: center;
+    text-decoration: none;
+    padding: 7px 100px;
+    margin: 20px 0;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
-import MainLayout from "@/layout/MainLayout";
-import s from '@/styles/500.module.css'
 import Link from "next/link";
+import s from "@/styles/500.module.css";
+import MainLayout from "@/layout/MainLayout";
 
-const Error500 = () => {
+const Error404 = () => {
     return (
         <MainLayout>
-            <h1 className={'text-center'}>Кажется, произошла какая то ошибка...</h1>
+            <h1 className={'text-center'}>Кажется, страница не существует...</h1>
             <div className={'d-flex justify-content-center'}>
                 <Link href={'/'} className={s.link}>На главную страницу</Link>
             </div>
@@ -14,4 +14,4 @@ const Error500 = () => {
     );
 };
 
-export default Error500;
+export default Error404;
