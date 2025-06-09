@@ -35,11 +35,18 @@ const ProductList = ({products, isAdmin}) => {
                                    brands={el.brands}
                                    colorway={el.colorway}
                                    collab={el.collab}
-                                   categories={el.categories}
+                                   categories={['el.categories']}
                                    lines={el.lines}
-                                   mainLine={el.main_line.view_name}
-                                   price={el.min_price_product_unit}
+                                   mainLine={'el.main_line.view_name'}
+                                   price={el.price}
                                    key={el.id}
+                                   slug={el.slug}
+                                   isFastShip={el.is_fast_shipping}
+                                   isReturn={el.is_return}
+                                   isSale={el.is_sale}
+                                   sale={el.sale_amount}
+                                   inWishlist={el.in_wishlist}
+                                   photosArr={el.bucket_link}
                                    cardList={true}
                         />
                     )

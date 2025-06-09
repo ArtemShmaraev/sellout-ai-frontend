@@ -10,23 +10,22 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import {deleteProduct, updateProduct} from "@/http/productsApi";
 import {useRouter} from "next/router";
+import truck from "@/static/icons/truck.svg";
+import re from "@/static/icons/arrow-return-left.svg";
 
-const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainLine}) => {
+const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainLine,
+                       photosArr, isSale, isReturn, inWishlist, collab, sale, key, cardList, slug, isFastShip
+}) => {
     const router = useRouter()
     const {adminStore} = useContext(Context)
     const [disabled, setDisabled] = useState(adminStore.submitDisabled)
-    const brandsDisplay = (brands) => {
-        if (!brands) {
-            return 'No brand'
+    const brandsDisplay = () => {
+        if (collab) {
+            return collab.name
+        } else {
+            console.log(brands[0])
+            return brands[0].name
         }
-        if (brands.length > 1) {
-            let str = brands[0].name
-            for (let i = 1; i < brands.length; i++) {
-                str += ` x ${brands[i].name}`
-            }
-            return str
-        }
-        return brands[0].name
     }
     const lineDisplay = () => {
         if (lines.length === 1) {
@@ -52,7 +51,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
             return str
         }
     }
-    const [brand, setBrands] = useState(brandsDisplay(brands))
+    const [brand, setBrands] = useState(brandsDisplay())
     const edit = () => {
         adminStore.checkActiveBrands(brands)
         adminStore.checkActiveCategories(categories)
@@ -89,6 +88,13 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
                 >
                     <Image src={cross} alt='' className={s.like}/>
                 </div>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    {isSale && <div className={s.sale}>
+                        -{Math.ceil(100 - (price.final_price/price.start_price) * 100)}%
+                    </div>}
+                    {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
+                    {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
+                </div>
             </div>
             <Carousel
                 variant='dark'
@@ -96,14 +102,14 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
                 interval={null}
                 slide={false}
             >
-                <Carousel.Item>
-                    <Image className={s.img}
-                         src={shoe} alt="shoe"/>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <Image className={s.img}
-                         src={shoe2} alt="shoe"/>
-                </Carousel.Item>
+                {
+                    photosArr.map(el =>
+
+                        <Carousel.Item className={s.image_container}>
+                            <Image src={el.url} alt='' fill={true} style={{objectFit: "contain"}}/>
+                        </Carousel.Item>
+                    )
+                }
             </Carousel>
             <div className='d-flex justify-content-center'>
                 <Image src={cross} alt='' className={s.like}/>
@@ -113,7 +119,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
                     className={s.tag}
                 >{brand}</div>
 
-                <ScrollableBDropdown toggleText={'Бренд'} isSearch={true} data={adminStore.brands}/>
+                {/*<ScrollableBDropdown toggleText={'Бренд'} isSearch={true} data={adminStore.brands}/>*/}
                 <input
                     className={s.name}
                     defaultValue={model}
@@ -124,13 +130,22 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
                     defaultValue={colorway}
                     onChange={(e) => adminStore.setColorway(e.target.value)}
                 />
-                <div>От {price}</div>
+                {
+                    isSale
+                        ?
+                        <div className={`${s.price}`}>
+                            <span className={s.crossed}>От {price.start_price} ₽</span>
+                            <span className={s.sale_price}>От {price.final_price} ₽</span>
+                        </div>
+                        :
+                        <div className={`${s.price}`}>От {price.final_price} ₽</div>
+                }
                 <div className='d-flex justify-content-between mb-1 flex-wrap'>
                     <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>
                     <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
                     <div>
-                        <div>Категория: {categoryDisplay()}</div>
-                        <div>Линейка: {mainLine}</div>
+                        {/*<div>Категория: {categoryDisplay()}</div>*/}
+                        {/*<div>Линейка: {mainLine}</div>*/}
                     </div>
                 </div>
                 <div className='d-flex justify-content-center my-3'>

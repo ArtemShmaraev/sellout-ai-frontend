@@ -34,7 +34,7 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
         if (collab) {
             return collab.name
         } else {
-            return brands[0].name
+            return brands.length ? brands[0].name : 'no brand'
         }
     }
     const [photos, setPhotos] = useState([])

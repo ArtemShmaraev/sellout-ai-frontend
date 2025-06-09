@@ -33,7 +33,7 @@ import right from '@/static/icons/chevron-right.svg'
 import left from '@/static/icons/chevron-left.svg'
 import Head from "next/head";
 import gift from '@/static/icons/gift-green.svg'
-import how from '@/static/icons/question_circle.svg'
+import how from '@/static/icons/question-circle.svg'
 import warranty from '@/static/icons/warranty.svg'
 import payment from '@/static/icons/payment.svg'
 import ret from '@/static/icons/return.svg'
