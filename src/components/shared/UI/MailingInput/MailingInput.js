@@ -20,7 +20,7 @@ const MailingInput = () => {
             return null
         }
         const res = await addToMailingList(email)
-        console.log(res)
+        setSuccess(true)
     }
     return (
         <div>
@@ -47,7 +47,7 @@ const MailingInput = () => {
             {!validEmail &&
                 <p className={s.validate}>Некорректный формат почты</p>
             }
-            {success && <p className={'green_text text-center'}>Ваша заявка отправлена</p>}
+            {success && <p className={'green_text my-0'}>Ваша заявка отправлена</p>}
         </div>
     );
 };

@@ -2,7 +2,7 @@
     position: relative;
     z-index: 6;
     width: 50%;
-    margin: 18px 0;
+    margin: 18px 0 5px 0;
 }
 .mailing {
     width: 100%;
@@ -26,6 +26,7 @@
 }
 .validate {
     color: #b61212;
+    margin: 0;
 }
 @media (max-width: 1200px) {
     .input, .mailing {
