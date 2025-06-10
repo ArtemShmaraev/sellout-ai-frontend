@@ -203,56 +203,41 @@ class FilterStore {
             isAll = item.is_all
         }
         const deactivateList = []
-        item.path.forEach((path, i) => {
-            currObj = currObj[path]
-            if (i === item.path.length - 2) {
-                parentObj = currObj
+        if (isAll && item.state) {
+            for (let i = 0; i < item.path.length - 2; i++) {
+                currObj = currObj[item.path[i]]
+                this.deactivateFiltersBelow(currObj, item.query)
             }
-            if (isAll) {
+        }
+        if (!isAll && item.state) {
+            item.path.forEach(el => {
+                currObj = currObj[el]
                 for (const key in currObj) {
-                    if (currObj[key].hasOwnProperty('state') && !currObj[key]['is_all']) {
-                        currObj[key]['state'] = false
+                    if (currObj[key].hasOwnProperty('is_all') && currObj[key].is_all) {
+                        currObj[key].state = false
                         deactivateList.push(currObj[key])
                     }
                 }
-            }
-            if (!isAll) {
-                for (const key in currObj) {
-                    if (currObj[key].hasOwnProperty('state') && currObj[key]['is_all']) {
-                        currObj[key]['state'] = false
-                        deactivateList.push(currObj[key])
-                    }
-                }
-            }
-            if (!parentObj) {
-                for (const key in currObj) {
-                    if (currObj[key].hasOwnProperty('state')) {
-                        currObj[key]['state'] = false
-                        deactivateList.push(currObj[key])
-                    }
-                }
-            }
-        })
-        console.log(parentObj)
-        this.deactivateFiltersBelow(parentObj)
+            })
+        }
+        // this.deactivateFiltersBelow(parentObj)
         for (let i = 0; i < deactivateList.length; i++) {
             this._activeFilters = this._activeFilters.filter(el => el.query !== deactivateList[i].query)
         }
     }
-    deactivateFiltersBelow(d, cnt = 0) {
+    deactivateFiltersBelow(d, query) {
         for (const key in d) {
             if (key === 'path') {
                 console.log('skip')
                 continue
             }
             if (d[key].hasOwnProperty('state')) {
-                if (cnt) {
-                    console.log(d[key].text)
+                if (d[key].query !== query) {
                     d[key].state = false
                     this._activeFilters = this._activeFilters.filter(el => el.query !== d[key].query)
                 }
             } else {
-                this.deactivateFiltersBelow(d[key], cnt+1)
+                this.deactivateFiltersBelow(d[key], query)
             }
         }
     }

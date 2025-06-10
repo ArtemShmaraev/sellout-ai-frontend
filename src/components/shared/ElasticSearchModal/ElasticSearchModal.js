@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './ElasticSearchModal.module.css'
 import search from '@/static/icons/search.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -33,18 +33,40 @@ const ElasticSearchModal = () => {
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
         setValue(str)
-        if (str) {
-            suggestSearch(str).then(res => setSuggs(res))
-        } else {
-            setSuggs([])
-        }
+        // if (str) {
+        //     suggestSearch(str).then(res => setSuggs(res))
+        // } else {
+        //     setSuggs([])
+        // }
     }
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (value) {
+                suggestSearch(value).then(res => setSuggs(res))
+            } else {
+                setSuggs([])
+            }
+        }, 250)
+        return () => clearTimeout(timeout)
+
+    }, [value]);
     const clearInput = () => {
         setValue('')
     }
     const clickOnSugg = () => {
         setIsOpen(false)
     }
+    useEffect(()  => {
+        function close(e) {
+            if (e.key === 'Escape') {
+                console.log(e.key)
+                setIsOpen(false)
+            }
+        }
+        window.addEventListener('keydown', close)
+        return () => window.removeEventListener('keydown', close)
+    }, [])
     return (
         <>
             <button

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './SearchModal.module.css'
 import search from '@/static/icons/search.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -31,8 +31,18 @@ const SearchModal = () => {
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
         setValue(str)
-        suggestSearch(str).then(res => setSuggs(res))
     }
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (value) {
+                suggestSearch(value).then(res => setSuggs(res))
+            } else {
+                setSuggs([])
+            }
+        }, 250)
+        return () => clearTimeout(timeout)
+
+    }, [value]);
     const clearInput = () => {
         setValue('')
     }
