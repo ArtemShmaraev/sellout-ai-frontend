@@ -52,7 +52,7 @@ const MainImgBlock = ({obj, className}) => {
             <div className={s.img_block}>
                 <div className={s.img_cont}>
                     <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
-                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
+                           onLoadingComplete={() => setIsLoading(true)} sizes={'100%'}
                     />
 
                     <Image src={desktop} alt=''

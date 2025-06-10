@@ -46,7 +46,7 @@
 }
 @media (max-width: 1200px) {
     .cont {
-        margin-top: 30px;
+        margin-top: 70px;
     }
     .big_pict_block {
         flex-wrap: wrap;

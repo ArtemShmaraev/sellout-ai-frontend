@@ -34,9 +34,9 @@ import left from '@/static/icons/chevron-left.svg'
 import Head from "next/head";
 import gift from '@/static/icons/gift-green.svg'
 import how from '@/static/icons/question-circle.svg'
-import warranty from '@/static/icons/warranty.svg'
-import payment from '@/static/icons/payment.svg'
-import ret from '@/static/icons/return.svg'
+import warranty from '@/static/icons/shield-check.svg'
+import payment from '@/static/icons/credit-card.svg'
+import ret from '@/static/icons/arrow-return-left.svg'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')

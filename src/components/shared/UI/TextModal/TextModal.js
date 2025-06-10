@@ -4,7 +4,7 @@ import {Modal} from "react-bootstrap";
 import close from "@/static/icons/x-lg.svg";
 import Image from 'next/image'
 
-const TextModal = ({children, title, img}) => {
+const TextModal = ({children, title, img, titleClassname}) => {
     const [show, setShow] = useState(false);
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -21,15 +21,21 @@ const TextModal = ({children, title, img}) => {
     };
     return (
         <>
-            <button
-                className={s.toggle_btn}
-                onClick={handleShow}
-            >
-                <Image src={img} alt="" className={s.icon} width={30}/>
-                <div className={s.label}>
-                    {title}
-                </div>
-            </button>
+            {
+                !titleClassname
+                ?
+                    <button
+                        className={s.toggle_btn}
+                        onClick={handleShow}
+                    >
+                        <Image src={img} alt="" className={s.icon} width={30}/>
+                        <div className={s.label}>
+                            {title}
+                        </div>
+                    </button>
+                    :
+                    <p className={titleClassname} onClick={handleShow}>{title}</p>
+            }
             <Modal
                 centered={true}
                 show={show}

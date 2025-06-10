@@ -23,8 +23,7 @@ const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainL
         if (collab) {
             return collab.name
         } else {
-            console.log(brands[0])
-            return brands[0].name
+            return brands.length ? brands[0].name : 'no brand'
         }
     }
     const lineDisplay = () => {
