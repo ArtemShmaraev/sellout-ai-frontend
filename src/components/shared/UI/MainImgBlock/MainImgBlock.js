@@ -4,8 +4,8 @@ import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
 import logo from '@/static/img/sellout_logo.svg'
 import Link from "next/link";
-import desktop from "@/static/img/desktop_background.svg";
-import mobile from "@/static/img/big_bg.svg";
+import desktop from "@/static/img/desktop_background.jpg";
+import mobile from "@/static/img/big_bg.jpg";
 const MainImgBlock = ({obj, className}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -52,7 +52,7 @@ const MainImgBlock = ({obj, className}) => {
             <div className={s.img_block}>
                 <div className={s.img_cont}>
                     <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
-                           onLoadingComplete={() => setIsLoading(true)} sizes={'100%'}
+                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
                     />
 
                     <Image src={desktop} alt=''

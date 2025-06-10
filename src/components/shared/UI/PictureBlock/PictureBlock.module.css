@@ -40,10 +40,10 @@
     object-position: right top;
 }
 .desktop {
-    display: block;
+    opacity: 1;
 }
 .mobile {
-    display: none;
+    opacity: 0;
 }
 @media (max-width: 1000px) {
     .main_block {
@@ -76,9 +76,9 @@
         object-position: center;
     }
     .desktop {
-        display: none;
+        opacity: 0;
     }
     .mobile {
-        display: block;
+        opacity: 1;
     }
 }

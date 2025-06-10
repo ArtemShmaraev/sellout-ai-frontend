@@ -154,6 +154,16 @@ const Sidebar = ({photos}) => {
                                 <Link className={s.section_block}
                                       href={{
                                           pathname: '/products',
+                                          query: {...queryGender}
+                                      }}
+                                      onClick={handleClose}
+                                >
+                                    <div>Все товары</div>
+                                    <Image src={arrow} alt=""/>
+                                </Link>
+                                <Link className={s.section_block}
+                                      href={{
+                                          pathname: '/products',
                                           query: {new: true, ...queryGender}
                                       }}
                                       onClick={handleClose}
@@ -220,16 +230,6 @@ const Sidebar = ({photos}) => {
                                 {/*    <div className={s.sale}>Скидки</div>*/}
                                 {/*    <Image src={arrow} alt=""/>*/}
                                 {/*</div>*/}
-                                <Link className={s.section_block}
-                                      href={{
-                                          pathname: '/products',
-                                          query: {...queryGender}
-                                      }}
-                                      onClick={handleClose}
-                                >
-                                    <div>Все товары</div>
-                                    <Image src={arrow} alt=""/>
-                                </Link>
                             </div>
                             :
                             <div className={s.section_container}>

@@ -105,6 +105,36 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             </p>
         )
         const params = product.parameters
+
+
+        // const order = product.parameters_order
+        // console.log(params)
+        // const paramsArr = []
+        // order.forEach(el => {
+        //     if (el in params) {
+        //         const param = [el, params[el]]
+        //         paramsArr.push(param)
+        //     }
+        // })
+        //
+        // paramsArr.forEach(el => {
+        //     if (el[1].length === 1) {
+        //         res.push(
+        //             <p className={s.characteristics}>{el[0]}:
+        //                 <span className={s.characteristics_text}>{el[1][0]}</span>
+        //             </p>
+        //         )
+        //     }
+        //     if (el[1].length > 1) {
+        //         res.push(
+        //             <p className={s.characteristics}>{el[0]}:
+        //                 <span className={s.characteristics_text}>{el[1].join(', ')}</span>
+        //             </p>
+        //         )
+        //     }
+        // })
+
+
         for (const key in params) {
             if (params[key].length === 1) {
                 res.push(

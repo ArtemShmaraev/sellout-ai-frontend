@@ -11,8 +11,8 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import Link from "next/link";
-import desktop from '@/static/img/desktop_background.svg'
-import mobile from '@/static/img/mobile_background.svg'
+import desktop from '@/static/img/desktop_background.jpg'
+import mobile from '@/static/img/mobile_background.jpg'
 
 
 const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale, sale = '',

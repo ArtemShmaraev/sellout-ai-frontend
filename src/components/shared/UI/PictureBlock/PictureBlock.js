@@ -3,8 +3,8 @@ import Image from "next/image";
 import s from './PictureBlock.module.css'
 import parse from "html-react-parser";
 import logo from "@/static/img/sellout_logo.svg";
-import desktop from "@/static/img/desktop_background.svg";
-import mobile from "@/static/img/big_bg.svg";
+import desktop from "@/static/img/desktop_background.jpg";
+import mobile from "@/static/img/big_bg.jpg";
 const PictureBlock = ({obj, className, type}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -48,11 +48,11 @@ const PictureBlock = ({obj, className, type}) => {
 
 
                     <Image src={desktop} alt=''
-                           className={`placeholder_img ${className} ${s.desktop}`} fill={true} sizes={'100%'}
+                           className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
                            style={isLoading ? {} : {opacity: 0}}
                     />
                     <Image src={mobile} alt=''
-                           className={`placeholder_img ${className} ${s.mobile}`} fill={true} sizes={'100%'}
+                           className={`placeholder_img ${s.mobile}`} fill={true} sizes={'100%'}
                            style={isLoading ? {} : {opacity: 0}}
                     />
                 </div>
