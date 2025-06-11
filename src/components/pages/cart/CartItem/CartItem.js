@@ -26,7 +26,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             setPrices(res)
         })
         cartStore.ships[cardId] = unitId
-    }, [Cookies.get('cart')])
+    }, [Cookies.get('cart'), price])
     const deleteFromCart = async () => {
         const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])

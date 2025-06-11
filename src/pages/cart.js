@@ -4,7 +4,15 @@ import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
 import {useRouter} from "next/router";
 import {parse} from "cookie";
-import {fetchCart, fetchCartPrice, fetchProductUnits, promoAuth, promoUnauth, useBonuses} from "@/http/cartApi";
+import {
+    fetchCart,
+    fetchCart2,
+    fetchCartPrice,
+    fetchProductUnits,
+    promoAuth,
+    promoUnauth,
+    useBonuses
+} from "@/http/cartApi";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import PromoInput from "@/components/pages/cart/PromoInput/PromoInput";
@@ -74,6 +82,34 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
     const [promoRes, setPromoRes] = useState(null)
     const [willBonuses, setWillBonuses] = useState(maxBonuses)
     useEffect(() => {
+        const checkIsBot = () => {
+            const userAgent = window.navigator.userAgent;
+            const botRegex = /bot|crawler|spider|googlebot|/i;
+            return botRegex.test(userAgent)
+        }
+        const updatePrices = async () => {
+            const token = Cookies.get('access_token')
+            if (!productUnits.actual_platform_price && token) {
+                const {user_id} = jwtDecode(token)
+                const interval = setInterval(async () => {
+                    const cart = await fetchCart2(user_id, token)
+                    console.log(cart.actual_platform_price)
+                    //TODO log
+                    if (cart.actual_platform_price) {
+                        clearInterval(interval)
+                        router.push('/cart')
+                    }
+
+                }, 5000)
+
+
+                return () => clearInterval(interval)
+            }
+        }
+        updatePrices()
+    }, [])
+    useEffect(() => {
+        cartStore.setCartCnt(productUnits.product_units.length)
         setDefAmount(defaultPrice)
         setFinAmount(finalPrice)
         setSaleAmount(sale)
@@ -90,7 +126,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                 setPromoRes(res)
             })
         }
-    }, [Cookies.get('cart')]);
+    }, [Cookies.get('cart'), productUnits]);
 
     const sendPromo = async (e) => {
         e.preventDefault()

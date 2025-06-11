@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
+import ret from '@/static/icons/arrow-return-left.svg'
 import like from '@/static/icons/heart.svg'
 import like_fill from '@/static/icons/heart-fill.svg'
 import SizeTable from "@/components/pages/oneProduct/SizeTable/SizeTable";
@@ -42,7 +43,6 @@ import gift from '@/static/icons/gift-green.svg'
 import how from '@/static/icons/question-circle.svg'
 import warranty from '@/static/icons/shield-check.svg'
 import payment from '@/static/icons/credit-card.svg'
-import ret from '@/static/icons/arrow-return-left.svg'
 import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
@@ -75,14 +75,21 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
+
     useEffect(() => {
-        if (!product.actual_platform_price) {
+        const checkIsBot = () => {
+            const userAgent = window.navigator.userAgent;
+            const botRegex = /bot|crawler|spider|googlebot|/i;
+            return botRegex.test(userAgent)
+        }
+        if (!checkIsBot() && !product.actual_platform_price) {
             const token = Cookies.get('access_token')
             const {slug} = router.query
             const interval = setInterval(() => {
                 fetchOneProduct(slug, token)
                     .then(product => {
                         console.log(product.actual_platform_price)
+                        //TODO log
                         if (product.actual_platform_price) {
                             clearInterval(interval)
                             const chosenSize = productStore.sizeChosen
@@ -95,6 +102,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                             fetchPrices(product.id, token).then((prices) => {
                                 const {view_size} = chosenSize
                                 console.log(product.price.start_price)
+                                //TODO log
                                 if (view_size) {
                                     let foundSelected = false
                                     prices.forEach(el => {
@@ -102,6 +110,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             console.log(prices)
                                             console.log(productStore.sizeChosen)
                                             console.log(el)
+                                            //TODO log
                                             productStore.setSizeChosen(el)
                                             foundSelected = true
                                         }

@@ -6,6 +6,12 @@ export async function fetchCart(id, cookies) {
     })
     return data
 }
+export async function fetchCart2(id, token) {
+    const {data} = await $host.get(`order/cart/${id}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function addToCart(userId, productUnitId, token) {
     const {data} = await $host.post(`order/cart/${userId}/${productUnitId}`, {},{
         headers: {Authorization: `Bearer ${token}`}
