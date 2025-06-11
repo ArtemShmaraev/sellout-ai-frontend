@@ -15,8 +15,16 @@ import desktop from '@/static/img/desktop_background.jpg'
 import mobile from '@/static/img/mobile_background.jpg'
 
 
-const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, isFastShip, isSale, sale = '',
-                         id, inWishlist, photosArr, cardList = false}) => {
+const ProductCard = ({cardList = false, product}) => {
+    const {id, model, slug, brands, collab, colorway, price} = product
+    const isFastShip = product.is_fast_shipping
+    const isReturn = product.is_return
+    const isSale = product.is_sale
+    const sale = product.sale_amount ?? ''
+    const inWishlist = product.in_wishlist
+    const photosArr = product.bucket_link
+
+
     const {userStore} = useContext(Context)
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
@@ -73,6 +81,26 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
         router.push({pathname, query}, undefined, {scroll: false})
     }
     const [isLoading, setIsLoading] = useState(true)
+
+    const [sizesIsShown, setSizesIsShown] = useState(false)
+    const showSizes = (e) => {
+        e.preventDefault()
+        if (product.available_sizes && product.available_sizes.sizes) {
+            setSizesIsShown(true)
+        }
+    }
+    const hideSizes = (e) => {
+        e.preventDefault()
+        if (product.available_sizes && product.available_sizes.sizes) {
+            setSizesIsShown(false)
+        }
+    }
+    const renderSizes = () => {
+        if (product.available_sizes && product.available_sizes.sizes) {
+            const sizes = product.available_sizes.sizes
+            return sizes.length <= 25 ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
+        }
+    }
     return (
         <Link className={cardList ? s.card_list : s.card}
            href={`/products/${slug}`}
@@ -147,24 +175,41 @@ const ProductCard = ({model, brands, collab, colorway, price, slug, isReturn, is
                     />
                 </div>
             }
-            <div className={s.text_block}>
-                <div className={s.info}>
-                    <div className={`${s.tag}`}>{brandsDisplay()}</div>
-                    <div className={`${s.brand}`}>{model || 'No model'}</div>
-                    <div className={`${s.name}`}>{colorway}</div>
-                </div>
-                <div className={`${s.price_block}`}>
-                    {
-                        isSale
+            <div className={s.text_block}
+                 onMouseEnter={showSizes}
+                 onMouseLeave={hideSizes}
+                 onTouchStart={showSizes}
+                 onTouchEnd={hideSizes}
+            >
+                {
+                    !sizesIsShown
                         ?
-                            <div className={`${s.price}`}>
-                                <span className={s.crossed}>От {price.start_price} ₽</span>
-                                <span className={s.sale_price}>От {price.final_price} ₽</span>
+                        <>
+                            <div className={s.info}>
+                                <div className={`${s.tag}`}>{brandsDisplay()}</div>
+                                <div className={`${s.brand}`}>{model || 'No model'}</div>
+                                <div className={`${s.name}`}>{colorway}</div>
                             </div>
-                            :
-                            <div className={`${s.price}`}>От {price.final_price} ₽</div>
-                    }
-                </div>
+                            <div className={`${s.price_block}`}>
+                                {
+                                    isSale
+                                        ?
+                                        <div className={`${s.price}`}>
+                                            <span className={s.crossed}>От {price.start_price} ₽</span>
+                                            <span className={s.sale_price}>От {price.final_price} ₽</span>
+                                        </div>
+                                        :
+                                        <div className={`${s.price}`}>От {price.final_price} ₽</div>
+                                }
+                            </div>
+                        </>
+                        :
+                        <div className={'text-black'}>
+                            <span className={'fw-bold'}>Доступные размеры {`(${product.available_sizes.filter_logo})`}:</span>
+                            <br/>
+                            {renderSizes()}
+                        </div>
+                }
             </div>
         </Link>
     );

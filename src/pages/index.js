@@ -75,19 +75,8 @@ export default function Home({data}) {
                 const scrollableBlockArr = []
                 el.products.forEach(product => {
                     scrollableBlockArr.push(
-                        <ProductCard model={product.model}
-                                     id={product.id}
-                                     slug={product.slug}
-                                     brands={product.brands}
-                                     collab={product.collab}
-                                     colorway={product.colorway}
-                                     price={product.price}
-                                     isFastShip={product.is_fast_shipping}
-                                     isReturn={product.is_return}
-                                     isSale={product.is_sale}
-                                     sale={el.sale_amount}
-                                     inWishlist={product.in_wishlist}
-                                     photosArr={product.bucket_link}
+                        <ProductCard
+                                     product={product}
                                      key={product.id}
                                      smallCard={true}
                         />

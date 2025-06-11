@@ -11,19 +11,8 @@ const ProductList = ({products, isAdmin}) => {
                 {!isAdmin
                 ?
                     products.map(el =>
-                        <ProductCard model={el.model}
-                                     id={el.id}
-                                     slug={el.slug}
-                                     brands={el.brands}
-                                     collab={el.collab}
-                                     colorway={el.colorway}
-                                     price={el.price}
-                                     isFastShip={el.is_fast_shipping}
-                                     isReturn={el.is_return}
-                                     isSale={el.is_sale}
-                                     sale={el.sale_amount}
-                                     inWishlist={el.in_wishlist}
-                                     photosArr={el.bucket_link}
+                        <ProductCard
+                                     product={el}
                                      key={el.id}
                                      cardList={true}
                         />

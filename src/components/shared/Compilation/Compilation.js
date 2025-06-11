@@ -23,6 +23,7 @@ const Compilation = ({arr, title}) => {
                                      sale={el.sale_amount}
                                      inWishlist={el.in_wishlist}
                                      photosArr={el.bucket_link}
+                                     product={el}
                                      key={el.id}
                         />
                     )
