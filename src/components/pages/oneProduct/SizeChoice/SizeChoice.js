@@ -12,6 +12,8 @@ import {addToWaitingList} from "@/http/userApi";
 import Cookies from "js-cookie";
 import close from "@/static/icons/x-lg.svg";
 import {useRouter} from "next/router";
+import parseHtml from 'html-react-parser'
+import {observer} from "mobx-react-lite";
 
 const SizeChoice = ({prices, productId, config}) => {
     const router = useRouter()
@@ -56,13 +58,13 @@ const SizeChoice = ({prices, productId, config}) => {
     }
     useEffect(() => {
         if (prices.length === 1) {
-            productStore.setSizeChosen(prices[0])
             productStore.setShipps([])
+            productStore.setSizeChosen(prices[0])
             selectItem(prices[0])
         } else {
             setSelectedItem(null)
         }
-    }, [router.asPath])
+    }, [router.asPath, prices])
     return (
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}
@@ -70,11 +72,11 @@ const SizeChoice = ({prices, productId, config}) => {
                  style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
             >
                 {
-                    selectedItem
+                    productStore.sizeChosen
                     ?
                         <>
                             <div className={s.size_block}>
-                                <div className={s.icons}>{productStore.sizeChosen.view_size}</div>
+                                <div className={s.icons}>{parseHtml(productStore.sizeChosen.view_size)}</div>
                                 {productStore.sizeChosen.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                 {productStore.sizeChosen.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
@@ -108,7 +110,7 @@ const SizeChoice = ({prices, productId, config}) => {
                                          key={el.id}
                                     >
                                         <div className={s.size_block}>
-                                            <div className={s.icons}>{el.view_size}</div>
+                                            <div className={s.icons}>{parseHtml(el.view_size)}</div>
                                             {el.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                             {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
@@ -129,7 +131,7 @@ const SizeChoice = ({prices, productId, config}) => {
                                     <div className={s.items_not}
                                     >
                                         <div className={s.size_block}>
-                                            <div className={s.crossed_text}>{el.view_size}</div>
+                                            <div className={s.crossed_text}>{parseHtml(el.view_size)}</div>
                                         </div>
                                         <div className='d-flex'>
                                             Распродано.
@@ -172,4 +174,4 @@ const SizeChoice = ({prices, productId, config}) => {
     );
 };
 
-export default SizeChoice;
+export default observer(SizeChoice);

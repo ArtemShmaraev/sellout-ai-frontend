@@ -3,7 +3,7 @@ import {observer} from "mobx-react-lite";
 import s from "./ShipDropdown.module.css";
 import {Context} from "@/context/AppWrapper";
 import Cookies from "js-cookie";
-import {addToCart, removeFromCart, updateProductUnit} from "@/http/cartApi";
+import {updateProductUnit} from "@/http/cartApi";
 import {useRouter} from "next/router";
 
 const ShipDropdown = ({cardId, unitId}) => {

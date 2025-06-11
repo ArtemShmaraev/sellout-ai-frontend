@@ -44,6 +44,7 @@ import how from '@/static/icons/question-circle.svg'
 import warranty from '@/static/icons/shield-check.svg'
 import payment from '@/static/icons/credit-card.svg'
 import {useRouter} from "next/router";
+import parseHtml from 'html-react-parser'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -75,6 +76,13 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
+    useEffect(() => {
+        productStore.clearAll()
+        if (prices.length === 1) {
+            productStore.setShipps([])
+            productStore.setSizeChosen(prices[0])
+        }
+    }, [router.asPath])
 
     useEffect(() => {
         const checkIsBot = () => {
@@ -132,9 +140,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const changeBonusesString = (value) => {
         setBonuses(value)
     }
-    useEffect(() => {
-        productStore.clearAll()
-    }, [])
     const brandsDisplay = () => {
         if (product.collab) {
             return product.collab.name
@@ -447,7 +452,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.col50}>
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
-                                    <div className={s.more_color}>{product.unit_common_name}</div>
+                                    <div className={s.more_color}>{parseHtml(product.unit_common_name)}</div>
                                     <p className={s.description}>
                                         {product.description}
                                     </p>

@@ -6,6 +6,7 @@ import refund from "@/static/icons/arrow-return-left.svg";
 import {Context} from "@/context/AppWrapper";
 import {fetchShippings} from "@/http/productsApi";
 import Cookies from "js-cookie";
+import parseHtml from 'html-react-parser'
 
 const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const {cartStore} = useContext(Context)
@@ -68,7 +69,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                     ?
                                     <div className='d-flex justify-content-between align-items-center w-100'>
                                         <div className='d-flex align-items-center'>
-                                            <div className={s.icons}>{selectedItem.view_size}</div>
+                                            <div className={s.icons}>{parseHtml(selectedItem.view_size)}</div>
                                             {selectedItem.is_fast_ship && <Image src={truck} alt="" className={s.icons}/>}
                                             {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
@@ -88,7 +89,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                     </div>
                                     :
                                     <div className={s.sold_out}>
-                                        <div className={s.cross}>{selectedItem.view_size}</div>
+                                        <div className={s.cross}>{parseHtml(selectedItem.view_size)}</div>
                                         <div className={s.fs13}>
                                             <div>Распродано</div>
                                             <a className={s.link}>Сообщить о поступлении</a>
@@ -118,7 +119,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                         ?
                                             <div className='d-flex justify-content-between align-items-center w-100'>
                                                 <div className='d-flex align-items-center'>
-                                                    <div className={s.size}>{el.view_size}</div>
+                                                    <div className={s.size}>{parseHtml(el.view_size)}</div>
                                                     {el.is_fast_ship && <Image src={truck} alt="" className={s.icons}/>}
                                                     {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                                 </div>
@@ -138,7 +139,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                                             </div>
                                             :
                                             <div className={s.sold_out}>
-                                                <div className={s.cross}>{el.view_size}</div>
+                                                <div className={s.cross}>{parseHtml(el.view_size)}</div>
                                                 <div className={s.fs13}>
                                                     <div>Распродано</div>
                                                     <a className={s.link}>Сообщить о поступлении</a>

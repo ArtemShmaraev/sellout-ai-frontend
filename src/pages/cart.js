@@ -89,7 +89,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
         }
         const updatePrices = async () => {
             const token = Cookies.get('access_token')
-            if (!productUnits.actual_platform_price && token) {
+            if (!checkIsBot() && !productUnits.actual_platform_price && token) {
                 const {user_id} = jwtDecode(token)
                 const interval = setInterval(async () => {
                     const cart = await fetchCart2(user_id, token)

@@ -84,22 +84,20 @@ const ProductCard = ({cardList = false, product}) => {
 
     const [sizesIsShown, setSizesIsShown] = useState(false)
     const showSizes = (e) => {
-        e.preventDefault()
+        e.stopPropagation()
         if (product.available_sizes && product.available_sizes.sizes) {
             setSizesIsShown(true)
         }
     }
     const hideSizes = (e) => {
-        e.preventDefault()
+        e.stopPropagation()
         if (product.available_sizes && product.available_sizes.sizes) {
             setSizesIsShown(false)
         }
     }
     const renderSizes = () => {
-        if (product.available_sizes && product.available_sizes.sizes) {
-            const sizes = product.available_sizes.sizes
-            return sizes.length <= 25 ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
-        }
+        const sizes = product.available_sizes.sizes
+        return sizes.length <= 25 ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
     }
     return (
         <Link className={cardList ? s.card_list : s.card}
