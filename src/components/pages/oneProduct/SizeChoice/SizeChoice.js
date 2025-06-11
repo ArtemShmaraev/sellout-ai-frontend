@@ -25,7 +25,7 @@ const SizeChoice = ({prices, productId, config}) => {
     const selectItem = async (item) => {
         setSelectedItem(item);
         setIsOpen(false);
-        productStore.setSizeChosen(true)
+        productStore.setSizeChosen(item)
         const token = Cookies.get('access_token')
         const ships = await fetchShippings(productId, item.size_for_api, token)
         productStore.setShipps(ships)
@@ -55,9 +55,9 @@ const SizeChoice = ({prices, productId, config}) => {
         addToWaitingList(token, productId, sizeArr)
     }
     useEffect(() => {
-        productStore.setSizeChosen(true)
-        productStore.setShipps([])
         if (prices.length === 1) {
+            productStore.setSizeChosen(prices[0])
+            productStore.setShipps([])
             selectItem(prices[0])
         } else {
             setSelectedItem(null)
@@ -74,20 +74,20 @@ const SizeChoice = ({prices, productId, config}) => {
                     ?
                         <>
                             <div className={s.size_block}>
-                                <div className={s.icons}>{selectedItem.view_size}</div>
-                                {selectedItem.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
-                                {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                <div className={s.icons}>{productStore.sizeChosen.view_size}</div>
+                                {productStore.sizeChosen.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                {productStore.sizeChosen.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
                             {
-                                selectedItem.is_sale
+                                productStore.sizeChosen.is_sale
                                     ?
                                     <div className={s.price}>
-                                        <span className={s.crossed}>От {selectedItem.min_price_without_sale} ₽</span>
-                                        <span className={s.sale_price}>От {selectedItem.min_price} ₽</span>
+                                        <span className={s.crossed}>От {productStore.sizeChosen.min_price_without_sale} ₽</span>
+                                        <span className={s.sale_price}>От {productStore.sizeChosen.min_price} ₽</span>
                                     </div>
                                     :
                                     <div className={s.price}>
-                                        от {selectedItem.min_price}
+                                        от {productStore.sizeChosen.min_price}
                                     </div>
                             }
                         </>

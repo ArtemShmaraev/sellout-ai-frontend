@@ -12,7 +12,13 @@ import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/QuestionsDropdown";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Image from 'next/image'
-import {fetchOneProduct, fetchPrices, fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
+import {
+    fetchOneProduct,
+    fetchPrices,
+    fetchProductsByArray,
+    fetchShippings,
+    fetchSimilarProducts
+} from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
@@ -37,6 +43,7 @@ import how from '@/static/icons/question-circle.svg'
 import warranty from '@/static/icons/shield-check.svg'
 import payment from '@/static/icons/credit-card.svg'
 import ret from '@/static/icons/arrow-return-left.svg'
+import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -63,10 +70,56 @@ export const getServerSideProps = async (context) => {
 }
 
 const OneProductPage = ({product, prices, lastSeen, compilations}) => {
+    const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
     const {productStore, userStore, cartStore} = useContext(Context)
+    useEffect(() => {
+        if (!product.actual_platform_price) {
+            const token = Cookies.get('access_token')
+            const {slug} = router.query
+            const interval = setInterval(() => {
+                fetchOneProduct(slug, token)
+                    .then(product => {
+                        console.log(product.actual_platform_price)
+                        if (product.actual_platform_price) {
+                            clearInterval(interval)
+                            const chosenSize = productStore.sizeChosen
+                            if (chosenSize) {
+                                fetchShippings(product.id, chosenSize.size_for_api, token)
+                                    .then(ships => {
+                                        productStore.setShipps(ships)
+                                    })
+                            }
+                            fetchPrices(product.id, token).then((prices) => {
+                                const {view_size} = chosenSize
+                                console.log(product.price.start_price)
+                                if (view_size) {
+                                    let foundSelected = false
+                                    prices.forEach(el => {
+                                        if (el.view_size === view_size) {
+                                            console.log(prices)
+                                            console.log(productStore.sizeChosen)
+                                            console.log(el)
+                                            productStore.setSizeChosen(el)
+                                            foundSelected = true
+                                        }
+                                    })
+                                    if (!foundSelected) {
+                                        productStore.setSizeChosen(null)
+                                    }
+                                }
+                            })
+                            router.push(`${router.asPath}`)
+                        }
+                    })
+                    .catch(err => console.log(err))
+            }, 5000)
+
+            return () => clearInterval(interval)
+        }
+    }, [])
     const changeBonusesString = (value) => {
         setBonuses(value)
     }
@@ -243,27 +296,32 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 >{brandsDisplay()}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
-                                <div
-                                    className={s.price_default}
-                                    style={product.is_sale
-                                        ? {textDecoration: 'line-through', fontSize: '16px'}
-                                        : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.min_price_without_sale} ₽</div>
-                                <div className='d-flex align-items-center'>
-                                    {product.is_sale &&
-                                        <div className={s.price_sale}>
-                                            от {product.min_price} ₽
-                                        </div>
-                                    }
-                                    {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
-                                    {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
-                                </div>
                                 {
-                                    shouldRenderBonuses() &&
-                                    <p className={s.bonuses_block}>
-                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
-                                        в подарок!
-                                    </p>
+                                    prices.length &&
+                                    <>
+                                        <div
+                                            className={s.price_default}
+                                            style={product.is_sale
+                                                ? {textDecoration: 'line-through', fontSize: '16px'}
+                                                : {textDecoration: 'none', fontSize: '19px'}}
+                                        >от {product.min_price_without_sale} ₽</div>
+                                        <div className='d-flex align-items-center'>
+                                            {product.is_sale &&
+                                                <div className={s.price_sale}>
+                                                    от {product.min_price} ₽
+                                                </div>
+                                            }
+                                            {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                            {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                        </div>
+                                        {
+                                            shouldRenderBonuses() &&
+                                            <p className={s.bonuses_block}>
+                                                <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
+                                                в подарок!
+                                            </p>
+                                        }
+                                    </>
                                 }
                             </>
                         }
@@ -318,12 +376,21 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         }
                         {!isDesktop &&
                             <>
-                                <div className={s.modals_block}>
-                                    <SizeTable tables={product.size_table_platform.tables}/>
-                                    <SizeHelp model={`${brandsDisplay()} ${product.model}`}
-                                              imgSrc={product.bucket_link[0].url}/>
-                                </div>
-                                <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                {
+                                    prices.length &&
+                                    <div className={s.modals_block}>
+                                        <SizeTable tables={product.size_table_platform.tables}/>
+                                        <SizeHelp model={`${brandsDisplay()} ${product.model}`}
+                                                  imgSrc={product.bucket_link[0].url}/>
+                                    </div>
+                                }
+                                {
+                                    prices.length
+                                    ?
+                                    <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                    :
+                                    <p className={s.grey_text}>Товара нет в наличии</p>
+                                }
                                 {
                                     productStore.sizeChosen &&
                                     <div className={s.btn_group}>
@@ -398,34 +465,48 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 >{brandsDisplay()}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
-                                <div
-                                    className={s.price_default}
-                                    style={product.is_sale
-                                        ? {textDecoration: 'line-through', fontSize: '16px'}
-                                        : {textDecoration: 'none', fontSize: '19px'}}
-                                >от {product.price.start_price} ₽</div>
-                                <div className='d-flex align-items-center'>
-                                    {product.is_sale &&
-                                        <div className={s.price_sale}>
-                                            от {product.price.final_price} ₽
-                                        </div>
-                                    }
-                                    {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
-                                    {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
-                                </div>
                                 {
-                                    shouldRenderBonuses() &&
-                                    <p className={s.bonuses_block}>
-                                        <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
-                                        в подарок!
-                                    </p>
+                                    prices.length &&
+                                    <>
+                                        <div
+                                            className={s.price_default}
+                                            style={product.is_sale
+                                                ? {textDecoration: 'line-through', fontSize: '16px'}
+                                                : {textDecoration: 'none', fontSize: '19px'}}
+                                        >от {product.price.start_price} ₽</div>
+                                        <div className='d-flex align-items-center'>
+                                            {product.is_sale &&
+                                                <div className={s.price_sale}>
+                                                    от {product.price.final_price} ₽
+                                                </div>
+                                            }
+                                            {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                            {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                        </div>
+                                        {
+                                            shouldRenderBonuses() &&
+                                            <p className={s.bonuses_block}>
+                                                <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
+                                                в подарок!
+                                            </p>
+                                        }
+                                    </>
                                 }
-                                <div className={s.modals_block}>
-                                    <SizeTable tables={product.size_table_platform.tables}/>
-                                    <SizeHelp model={`${brandsDisplay()} ${product.model}`}
-                                              imgSrc={product.bucket_link[0].url}/>
-                                </div>
-                                <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                {
+                                    prices.length &&
+                                    <div className={s.modals_block}>
+                                        <SizeTable tables={product.size_table_platform.tables}/>
+                                        <SizeHelp model={`${brandsDisplay()} ${product.model}`}
+                                                  imgSrc={product.bucket_link[0].url}/>
+                                    </div>
+                                }
+                                {
+                                    prices.length
+                                    ?
+                                    <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                    :
+                                    <p className={s.grey_text}>Товара нет в наличии</p>
+                                }
                                 {
                                     productStore.shipps.length > 0 &&
                                     <div className={s.btn_group}>

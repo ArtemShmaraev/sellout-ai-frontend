@@ -58,7 +58,7 @@ const SalesLine = () => {
                                 Успейте воспользоваться бесплатной доставкой по Москве
                             </SplideSlide>
                             :
-                            <SplideSlide className={s.splide} style={{fontSize: 12}}>
+                            <SplideSlide className={s.splide} style={{fontSize: '12px', paddingTop: '1px'}}>
                                 Успейте воспользоваться бесплатной доставкой по Москве
                             </SplideSlide>
                     }

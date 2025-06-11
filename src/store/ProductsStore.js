@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 class ProductsStore {
     constructor() {
-        this._sizeChosen = false
+        this._sizeChosen = null
         this._shipChosen = false
         this._shipps = []
         this._addToCartText = 'Добавить в корзину'
