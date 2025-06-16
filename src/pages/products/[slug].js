@@ -404,7 +404,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0
                                     ?
-                                    <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                    <SizeChoice prices={prices} productId={product.id} config={product.size_row_name}/>
                                     :
                                     <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -455,7 +455,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.col50}>
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
-                                    <div className={s.more_color}>{parseHtml(product.unit_common_name)}</div>
+                                    <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
                                     <p className={s.description}>
                                         {product.description}
                                     </p>
@@ -520,7 +520,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0
                                     ?
-                                    <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
+                                    <SizeChoice prices={prices} productId={product.id} config={product.size_row_name}/>
                                     :
                                     <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
