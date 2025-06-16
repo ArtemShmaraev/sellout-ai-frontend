@@ -43,14 +43,16 @@ const MainLayout = ({children}) => {
             <Head>
                 <meta name={'description'} content={'Купить кроссовки круто'}/>
             </Head>
-            <NavbarC/>
-            <div className={'cont_up'}>
-                {children}
+            <div className={'body'}>
+                <NavbarC/>
+                <div className={'cont_up'}>
+                    {children}
+                </div>
+                <Footer/>
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
             {desktopStore.animation && <AnimationSellout/>}
-            <Footer/>
         </>
     );
 };

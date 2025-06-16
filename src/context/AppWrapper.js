@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import {cartStore} from "@/store/CartStore";
 import {orderStore} from "@/store/OrderStore";
 import {useRouter} from "next/router";
-import {updateCartFromCookies} from "@/http/cartApi";
+import {fetchCart2, updateCartFromCookies} from "@/http/cartApi";
 
 export const Context = createContext(null);
 
@@ -91,6 +91,9 @@ export default function AppWrapper({ children }) {
                 } else {
                     userStore.setGender(userData.gender)
                 }
+                fetchCart2(userData.user_id, data.access).then(cart => {
+                    cartStore.setCartCnt(cart.product_units.length)
+                })
 
             }).catch(() => {
                 userStore.setIsLogged(false)
@@ -102,7 +105,7 @@ export default function AppWrapper({ children }) {
         authViaGoogle()
         const cart = Cookies.get('cart')
         const lastSeen = Cookies.get('last_seen')
-        if (cart) {
+        if (cart && !userStore.isLogged) {
             const cartCnt = cart.trim().split(' ').filter(el => el !== ' ' && el !== '').length
             cartStore.setCartCnt(cartCnt)
         }

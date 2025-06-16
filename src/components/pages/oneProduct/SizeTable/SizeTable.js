@@ -99,6 +99,7 @@ const SizeTable = ({tables}) => {
         return tablesArr
     }
     const [table, setTable] = useState(allTables()[0])
+    console.log(tables)
     return (
         <>
             <button
@@ -126,7 +127,7 @@ const SizeTable = ({tables}) => {
                             allTables().map(el =>
                                 <button className={s.btn}
                                         onClick={() => setTable(el)}
-                                        style={el.name === table.name ? {borderColor: '#000'} : '#CCCCCC'}
+                                        style={el.name === table.name ? {borderColor: '#000'} : {borderColor: '#CCCCCC'}}
                                 >
                                     {el.name}
                                 </button>

@@ -32,6 +32,9 @@ const ShipDropdown = ({cardId, unitId}) => {
                 setSelectedItem(null)
             }
         }
+        if (!changed) {
+            cartStore.setIsShipChosen(false)
+        }
     }, [cartStore.cart[cardId]])
 
     const toggleDropdown = () => {

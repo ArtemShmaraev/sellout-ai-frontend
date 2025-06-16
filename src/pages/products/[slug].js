@@ -136,7 +136,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         }
                     })
                     .catch(err => console.log(err))
-            }, 5000)
+            }, 4000)
 
             return () => clearInterval(interval)
         }

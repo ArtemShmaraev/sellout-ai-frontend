@@ -87,6 +87,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
             const botRegex = /bot|crawler|spider|googlebot|/i;
             return botRegex.test(userAgent)
         }
+        let intervalId
         const updatePrices = async () => {
             const token = Cookies.get('access_token')
             if (!productUnits.actual_platform_price && token) {
@@ -100,13 +101,15 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                         router.push('/cart')
                     }
 
-                }, 5000)
+                }, 4000)
+                intervalId = interval
 
 
                 return () => clearInterval(interval)
             }
         }
         updatePrices()
+        return () => clearInterval(intervalId)
     }, [])
     useEffect(() => {
         cartStore.setCartCnt(productUnits.product_units.length)

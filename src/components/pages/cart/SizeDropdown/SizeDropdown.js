@@ -7,9 +7,11 @@ import {Context} from "@/context/AppWrapper";
 import {fetchShippings} from "@/http/productsApi";
 import Cookies from "js-cookie";
 import parseHtml from 'html-react-parser'
+import {useRouter} from "next/router";
 
 const SizeDropdown = ({prices, productId, currentId, cardId}) => {
     const {cartStore} = useContext(Context)
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
@@ -22,6 +24,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                     cartStore.setSizeId(el.size_for_api)
                     fetchShippings(productId, cartStore.sizeId, token).then(res => {
                         cartStore.cart[cardId] = res
+                        router.push('/cart', undefined, {scroll: false})
                     })
                 }
             })

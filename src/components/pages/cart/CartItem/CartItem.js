@@ -86,8 +86,8 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             <div className={s.text}>{price} ₽</div>
                         </div>
                         <div className={s.ship_block}>
-                            <div className={s.brand}>Количество</div>
-                            <div className={s.text}>1</div>
+                            <div className={s.brand}></div>
+                            <div className={s.text}></div>
                         </div>
                         {userStore.isLogged
                             ?
