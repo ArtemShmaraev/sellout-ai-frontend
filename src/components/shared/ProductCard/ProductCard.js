@@ -83,21 +83,23 @@ const ProductCard = ({cardList = false, product}) => {
     const [isLoading, setIsLoading] = useState(true)
 
     const [sizesIsShown, setSizesIsShown] = useState(false)
-    const showSizes = (e) => {
-        e.stopPropagation()
+    const showSizes = () => {
         if (product.available_sizes && product.available_sizes.sizes) {
             setSizesIsShown(true)
         }
     }
-    const hideSizes = (e) => {
-        e.stopPropagation()
+    const hideSizes = () => {
         if (product.available_sizes && product.available_sizes.sizes) {
             setSizesIsShown(false)
         }
     }
+    const handleTouchCancel = () => {
+        hideSizes();
+    };
     const renderSizes = () => {
+        const n = isDesktop ? 25 : 10
         const sizes = product.available_sizes.sizes
-        return sizes.length <= 25 ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
+        return sizes.length <= n ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
     }
     return (
         <Link className={cardList ? s.card_list : s.card}
@@ -176,8 +178,6 @@ const ProductCard = ({cardList = false, product}) => {
             <div className={s.text_block}
                  onMouseEnter={showSizes}
                  onMouseLeave={hideSizes}
-                 onTouchStart={showSizes}
-                 onTouchEnd={hideSizes}
             >
                 {
                     !sizesIsShown
@@ -202,7 +202,8 @@ const ProductCard = ({cardList = false, product}) => {
                             </div>
                         </>
                         :
-                        <div className={'text-black'}>
+                        <div className={'text-black'}
+                        >
                             <span className={'fw-bold'}>Доступные размеры {`(${product.available_sizes.filter_logo})`}:</span>
                             <br/>
                             {renderSizes()}
