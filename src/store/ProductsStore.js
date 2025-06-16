@@ -4,6 +4,7 @@ class ProductsStore {
     constructor() {
         this._sizeChosen = null
         this._shipChosen = false
+        this._anim = false
         this._shipps = []
         this._addToCartText = 'Добавить в корзину'
         makeAutoObservable(this)
@@ -26,6 +27,12 @@ class ProductsStore {
     }
     get shipChosen() {
         return this._shipChosen
+    }
+    setAnim(value) {
+        this._anim = value
+    }
+    get anim() {
+        return this._anim
     }
     setShipps(arr) {
         this._shipps = arr

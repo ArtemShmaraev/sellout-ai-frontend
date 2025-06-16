@@ -19,23 +19,12 @@ const ProductList = ({products, isAdmin}) => {
                     )
                     :
                     products.map(el =>
-                        <AdminCard model={el.model}
-                                   id={el.id}
-                                   brands={el.brands}
-                                   colorway={el.colorway}
-                                   collab={el.collab}
+                        <AdminCard
                                    categories={['el.categories']}
                                    lines={el.lines}
                                    mainLine={'el.main_line.view_name'}
-                                   price={el.price}
+                                   product={el}
                                    key={el.id}
-                                   slug={el.slug}
-                                   isFastShip={el.is_fast_shipping}
-                                   isReturn={el.is_return}
-                                   isSale={el.is_sale}
-                                   sale={el.sale_amount}
-                                   inWishlist={el.in_wishlist}
-                                   photosArr={el.bucket_link}
                                    cardList={true}
                         />
                     )

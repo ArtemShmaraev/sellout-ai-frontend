@@ -53,7 +53,7 @@ export const getServerSideProps = async (context) => {
         categoriesArr, linesArr, lastSeen} }
 }
 
-const Admin = ({products, categories, lines, colors, collections, brandsArr, categoriesArr,
+const AdminPage = ({products, categories, lines, colors, collections, brandsArr, categoriesArr,
                    linesArr, lastSeen}) => {
     const productListRef = useRef(null)
     const router = useRouter()
@@ -182,4 +182,4 @@ const Admin = ({products, categories, lines, colors, collections, brandsArr, cat
     );
 };
 
-export default observer(Admin);
+export default observer(AdminPage);

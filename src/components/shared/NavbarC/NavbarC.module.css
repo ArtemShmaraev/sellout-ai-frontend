@@ -148,3 +148,35 @@
         display: none;
     }
 }
+
+.fraer {
+    background: rgb(236,39,18);
+    background: linear-gradient(90deg, rgba(236,39,18,1) 0%, rgba(244,126,8,1) 16%, rgba(232,255,2,1) 35%, rgba(62,234,18,1) 51%, rgba(0,228,255,1) 62%, rgba(23,36,203,1) 76%, rgba(193,9,248,1) 100%);
+    animation: skeleton 5s linear infinite, gradientChange 5s linear infinite;
+    text-align: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    font-size: 100px;
+    text-transform: uppercase;
+}
+
+@keyframes skeleton {
+    0%, 100% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: -100% 0;
+    }
+}
+@keyframes gradientChange {
+    0% {
+        background-size: 200% 100%;
+        background-position: 100% 0;
+    }
+    100% {
+        background-size: 200% 100%;
+        background-position: -100% 0;
+    }
+}

@@ -13,12 +13,18 @@ import {useRouter} from "next/router";
 import truck from "@/static/icons/truck.svg";
 import re from "@/static/icons/arrow-return-left.svg";
 
-const AdminCard = ({id, model, brands, colorway, categories, lines, price, mainLine,
-                       photosArr, isSale, isReturn, inWishlist, collab, sale, key, cardList, slug, isFastShip
+const AdminCard = ({categories, lines, mainLine, key, cardList, product
 }) => {
     const router = useRouter()
     const {adminStore} = useContext(Context)
     const [disabled, setDisabled] = useState(adminStore.submitDisabled)
+    const {id, model, slug, brands, collab, colorway, price} = product
+    const isFastShip = product.is_fast_shipping
+    const isReturn = product.is_return
+    const isSale = product.is_sale
+    const sale = product.sale_amount ?? ''
+    const inWishlist = product.in_wishlist
+    const photosArr = product.bucket_link
     const brandsDisplay = () => {
         if (collab) {
             return collab.name

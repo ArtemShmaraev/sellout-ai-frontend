@@ -5,7 +5,7 @@
     z-index: 3;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    max-height: 78vh;
+    max-height: 550px;
 }
 .container::-webkit-scrollbar {
     display: none;

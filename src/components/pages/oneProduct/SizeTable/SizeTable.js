@@ -79,24 +79,26 @@ const SizeTable = ({tables}) => {
 
     const allTables = () => {
         const tablesArr = []
-        if (tables.hasOwnProperty('main_regular_table')) {
+        const obj = {}
+        if (tables.hasOwnProperty('main_regular_table') && Object.keys(tables.main_regular_table).length) {
             const table = renderTable(tables.main_regular_table)
-            tablesArr.push(table)
+            tablesArr.push({name: 1, table: table})
         }
-        if (tables.hasOwnProperty('main_measurements_table')) {
+        if (tables.hasOwnProperty('main_measurements_table') && Object.keys(tables.main_measurements_table).length) {
             const table = renderTable(tables.main_measurements_table)
-            tablesArr.push(table)
+            tablesArr.push({name: 2, table: table})
         }
-        if (tables.hasOwnProperty('tables_recommendations')) {
+        if (tables.hasOwnProperty('tables_recommendations') && Object.keys(tables.tables_recommendations).length) {
             const table = renderTable(tables.tables_recommendations)
-            tablesArr.push(table)
+            tablesArr.push({name: 3, table: table})
         }
-        if (tables.hasOwnProperty('default_table')) {
+        if (tables.hasOwnProperty('default_table') && Object.keys(tables.default_table).length) {
             const table = renderTable(tables.default_table)
-            tablesArr.push(table)
+            tablesArr.push({name: 4, table: table})
         }
         return tablesArr
     }
+    const [table, setTable] = useState(allTables()[0])
     return (
         <>
             <button
@@ -119,9 +121,21 @@ const SizeTable = ({tables}) => {
                     </div>
                     <div className={s.header}>Jordan</div>
                     <div className={s.header}>Сбер молодцы</div>
+                    <div className={s.btns_block}>
+                        {
+                            allTables().map(el =>
+                                <button className={s.btn}
+                                        onClick={() => setTable(el)}
+                                        style={el.name === table.name ? {borderColor: '#000'} : '#CCCCCC'}
+                                >
+                                    {el.name}
+                                </button>
+                            )
+                        }
+                    </div>
                     <div className={s.table_block}>
                         {
-                            allTables()
+                            table.table
                         }
                     </div>
 

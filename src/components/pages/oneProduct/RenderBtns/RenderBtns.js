@@ -60,6 +60,10 @@ const RenderBtns = ({btns, changeBonuses}) => {
                     onClick={() => handleClick(button.id, button.bonus)}
                 >
                     {content}
+                    {
+                        productStore.anim &&
+                        <div className={[s.anim, productStore.shipChosen === button.id ? s.black_anim : s.white_anim].join(' ')}/>
+                    }
                 </button>
             );
 

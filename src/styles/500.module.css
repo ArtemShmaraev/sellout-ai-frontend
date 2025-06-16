@@ -1,3 +1,6 @@
+.cont {
+    margin-top: 160px;
+}
 .link {
     background: black;
     color: white;
@@ -10,4 +13,9 @@
     text-decoration: none;
     padding: 7px 100px;
     margin: 20px 0;
+}
+@media (max-width: 1000px) {
+    .cont {
+        margin-top: 90px;
+    }
 }

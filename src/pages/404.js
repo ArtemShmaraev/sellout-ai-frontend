@@ -6,9 +6,11 @@ import MainLayout from "@/layout/MainLayout";
 const Error404 = () => {
     return (
         <MainLayout>
-            <h1 className={'text-center'}>Кажется, страница не существует...</h1>
-            <div className={'d-flex justify-content-center'}>
-                <Link href={'/'} className={s.link}>На главную страницу</Link>
+            <div className={s.cont}>
+                <h1 className={'text-center'}>Кажется, страница не существует...</h1>
+                <div className={'d-flex justify-content-center'}>
+                    <Link href={'/'} className={s.link}>На главную страницу</Link>
+                </div>
             </div>
         </MainLayout>
     );

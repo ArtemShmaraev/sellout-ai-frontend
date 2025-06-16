@@ -90,7 +90,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             const botRegex = /bot|crawler|spider|googlebot|/i;
             return botRegex.test(userAgent)
         }
-        if (!checkIsBot() && !product.actual_platform_price) {
+        if (!product.actual_platform_price) {
             const token = Cookies.get('access_token')
             const {slug} = router.query
             const interval = setInterval(() => {
@@ -105,6 +105,10 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 fetchShippings(product.id, chosenSize.size_for_api, token)
                                     .then(ships => {
                                         productStore.setShipps(ships)
+                                        product.setAnim(true)
+                                        setTimeout(() => {
+                                            product.setAnim(false)
+                                        }, 3000)
                                     })
                             }
                             fetchPrices(product.id, token).then((prices) => {
@@ -292,7 +296,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
         }
     }, [])
     const shouldRenderBonuses = () => {
-
         return Number(product.price.bonus) > 0;
     }
     return (
@@ -311,18 +314,18 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 {
-                                    prices.length &&
+                                    prices.length > 0 &&
                                     <>
                                         <div
                                             className={s.price_default}
                                             style={product.is_sale
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
-                                        >от {product.min_price_without_sale} ₽</div>
+                                        >от {product.price.start_price} ₽</div>
                                         <div className='d-flex align-items-center'>
                                             {product.is_sale &&
                                                 <div className={s.price_sale}>
-                                                    от {product.min_price} ₽
+                                                    от {product.price.final_price} ₽
                                                 </div>
                                             }
                                             {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
@@ -391,7 +394,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         {!isDesktop &&
                             <>
                                 {
-                                    prices.length &&
+                                    prices.length > 0 &&
                                     <div className={s.modals_block}>
                                         <SizeTable tables={product.size_table_platform.tables}/>
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
@@ -399,7 +402,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </div>
                                 }
                                 {
-                                    prices.length
+                                    prices.length > 0
                                     ?
                                     <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
                                     :
@@ -480,7 +483,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
                                 {
-                                    prices.length &&
+                                    prices.length > 0 &&
                                     <>
                                         <div
                                             className={s.price_default}
@@ -507,7 +510,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </>
                                 }
                                 {
-                                    prices.length &&
+                                    prices.length > 0 &&
                                     <div className={s.modals_block}>
                                         <SizeTable tables={product.size_table_platform.tables}/>
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
@@ -515,7 +518,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </div>
                                 }
                                 {
-                                    prices.length
+                                    prices.length > 0
                                     ?
                                     <SizeChoice prices={prices} productId={product.id} config={product.main_size_row}/>
                                     :

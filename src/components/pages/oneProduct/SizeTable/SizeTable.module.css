@@ -21,6 +21,19 @@
 .header {
     font-size: 20px;
 }
+.btns_block {
+    display: flex;
+}
+.btn {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 15px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    flex: 1;
+}
 .table_block {
     color: #626161;
     text-align: center;

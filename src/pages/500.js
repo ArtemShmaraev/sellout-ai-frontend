@@ -6,9 +6,11 @@ import Link from "next/link";
 const Error500 = () => {
     return (
         <MainLayout>
-            <h1 className={'text-center'}>Кажется, произошла какая то ошибка...</h1>
-            <div className={'d-flex justify-content-center'}>
-                <Link href={'/'} className={s.link}>На главную страницу</Link>
+            <div className={s.cont}>
+                <h1 className={'text-center'}>Кажется, произошла какая то ошибка...</h1>
+                <div className={'d-flex justify-content-center'}>
+                    <Link href={'/'} className={s.link}>На главную страницу</Link>
+                </div>
             </div>
         </MainLayout>
     );

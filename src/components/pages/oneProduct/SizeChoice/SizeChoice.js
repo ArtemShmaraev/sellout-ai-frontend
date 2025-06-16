@@ -94,7 +94,7 @@ const SizeChoice = ({prices, productId, config}) => {
                             }
                         </>
                         :
-                        `Выберите конфигурацию ${(config && config !== 'undefined') ? `- (${config})` : ''}`
+                        `Выберите конфигурацию ${(config && config !== 'undefined') ? `- ${config}` : ''}`
                 }
             </div>
             <div className={s.dropdown_content}>
