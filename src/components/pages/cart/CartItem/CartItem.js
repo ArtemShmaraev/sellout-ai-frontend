@@ -15,8 +15,8 @@ import like from "@/static/icons/heart.svg";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
 
-const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL
-                  }) => {
+const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL, product,
+                  available}) => {
     const [prices, setPrices] = useState([])
     const {cartStore, userStore} = useContext(Context)
     const router = useRouter()
@@ -50,6 +50,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const data = await removeFromWishlist(userId, productId, token)
         setIsInWishlist(false)
     }
+    console.log(product)
     return (
         <div key={unitId}>
             <hr/>
@@ -73,10 +74,17 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                     <div className={s.col_dropdown}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Размер</div>
-                            <SizeDropdown prices={prices} productId={productId} currentId={sizeId} cardId={cardId}/>
+                            {
+                                product.available_flag &&
+                                <SizeDropdown prices={prices} productId={productId} currentId={sizeId}
+                                              cardId={cardId} manySizes={product.has_many_sizes}/>
+                            }
                             <div className={s.number_block}>
                                 <div className={s.brand}>Доставка</div>
-                                <ShipDropdown cardId={cardId} unitId={unitId}/>
+                                {
+                                    product.available_flag &&
+                                    <ShipDropdown cardId={cardId} unitId={unitId}/>
+                                }
                             </div>
                         </div>
                     </div>
@@ -119,6 +127,18 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                     />
                 </div>
             </div>
+            {
+                !available && (
+                    !product.available_flag
+                        ?
+                        <p className={'text-center red_text'}>К сожалению, данное предложение распродано, выберите другое</p>
+                        :
+                        <p className={'text-center red_text'}>К сожалению, данный товар распродан, удалите его из корзины
+                            <br/>
+                            Вы можете добавить товар в избранное, и мы уведомим Вас, как только он появится в наличии!
+                        </p>
+                )
+            }
         </div>
     );
 };

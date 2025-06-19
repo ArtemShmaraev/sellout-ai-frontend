@@ -101,7 +101,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                     <div className={s.filter_sort_row}>
                         <Col lg={10} className='d-flex align-items-stretch'>
                             <button className={s.border + ' fw-bold'}
-                                    onClick={() => setIsOpen(!isOpen)}
+                                    onClick={() => desktopStore.setFilterOpen(!desktopStore.filtersOpen)}
                             >Фильтры
                             </button>
                             {(filterStore.activeFilters.length !== 0 || router.query.price_min) &&
@@ -131,7 +131,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                     </div>
                 }
                 <div className={s.product_list_row} ref={productListRef}>
-                    {isOpen &&
+                    {desktopStore.filtersOpen &&
                         <FilterDropdowns/>
                     }
                     <ProductList products={products.results} isAdmin={false}/>

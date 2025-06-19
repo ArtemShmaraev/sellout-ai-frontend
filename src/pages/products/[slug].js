@@ -105,23 +105,19 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 fetchShippings(product.id, chosenSize.size_for_api, token)
                                     .then(ships => {
                                         productStore.setShipps(ships)
-                                        product.setAnim(true)
+                                        productStore.setAnim(true)
                                         setTimeout(() => {
-                                            product.setAnim(false)
-                                        }, 3000)
+                                            productStore.setAnim(false)
+                                        }, 1000)
                                     })
                             }
                             fetchPrices(product.id, token).then((prices) => {
                                 const {view_size} = chosenSize
-                                console.log(product.price.start_price)
                                 //TODO log
                                 if (view_size) {
                                     let foundSelected = false
                                     prices.forEach(el => {
                                         if (el.view_size === view_size) {
-                                            console.log(prices)
-                                            console.log(productStore.sizeChosen)
-                                            console.log(el)
                                             //TODO log
                                             productStore.setSizeChosen(el)
                                             foundSelected = true
@@ -131,14 +127,17 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                         productStore.setSizeChosen(null)
                                     }
                                 }
+                                router.push(`${router.asPath}`)
                             })
-                            router.push(`${router.asPath}`)
                         }
                     })
                     .catch(err => console.log(err))
             }, 4000)
 
-            return () => clearInterval(interval)
+            return () => {
+                clearInterval(interval)
+                productStore.setAnim(false)
+            }
         }
     }, [])
     const changeBonusesString = (value) => {
@@ -404,7 +403,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0
                                     ?
-                                    <SizeChoice prices={prices} productId={product.id} config={product.size_row_name}/>
+                                    <SizeChoice prices={prices} productId={product.id}
+                                                config={product.size_row_name} manySizes={product.has_many_sizes}/>
                                     :
                                     <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -520,7 +520,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0
                                     ?
-                                    <SizeChoice prices={prices} productId={product.id} config={product.size_row_name}/>
+                                    <SizeChoice prices={prices} productId={product.id}
+                                                config={product.size_row_name} manySizes={product.has_many_sizes}/>
                                     :
                                     <p className={s.grey_text}>Товара нет в наличии</p>
                                 }

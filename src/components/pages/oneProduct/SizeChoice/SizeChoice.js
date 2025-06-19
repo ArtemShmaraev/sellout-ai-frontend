@@ -15,7 +15,7 @@ import {useRouter} from "next/router";
 import parseHtml from 'html-react-parser'
 import {observer} from "mobx-react-lite";
 
-const SizeChoice = ({prices, productId, config}) => {
+const SizeChoice = ({prices, productId, config, manySizes}) => {
     const router = useRouter()
     const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,9 @@ const SizeChoice = ({prices, productId, config}) => {
         setIsOpen(false);
         productStore.setSizeChosen(item)
         const token = Cookies.get('access_token')
+        productStore.setAnim(true)
         const ships = await fetchShippings(productId, item.size_for_api, token)
+        productStore.setAnim(false)
         productStore.setShipps(ships)
     };
     useEffect(() => {
@@ -94,7 +96,7 @@ const SizeChoice = ({prices, productId, config}) => {
                             }
                         </>
                         :
-                        `Выберите конфигурацию ${(config && config !== 'undefined') ? `- ${config}` : ''}`
+                        `Выберите ${manySizes ? 'размер' : 'конфигурацию'} ${(config && config !== 'undefined') ? `- ${config}` : ''}`
                 }
             </div>
             <div className={s.dropdown_content}>

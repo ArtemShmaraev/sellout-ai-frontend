@@ -3,15 +3,8 @@ import {makeAutoObservable} from "mobx";
 class DesktopStore {
     constructor() {
         this._isDesktop = true
-        this._styleCont = {
-            marginRight: '3vw',
-            marginLeft: '3vw',
-        }
-        this._styleMob = {
-            marginRight: '0',
-            marginLeft: '0',
-        }
         this._animation = true
+        this._filtersOpen = false
         makeAutoObservable(this)
     }
     setIsDesktop(bool) {
@@ -25,6 +18,12 @@ class DesktopStore {
     }
     get animation() {
         return this._animation
+    }
+    setFilterOpen(bool) {
+        this._filtersOpen = bool
+    }
+    get filtersOpen() {
+        return this._filtersOpen
     }
 }
 

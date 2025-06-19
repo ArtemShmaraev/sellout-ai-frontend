@@ -30,7 +30,7 @@
 }
 body {
     overflow-x: clip;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
 }
 body.modal-open #navbar {
     width: calc(100% - 17px);

@@ -10,7 +10,7 @@
     flex-wrap: nowrap;
     align-items: center;
     white-space: nowrap;
-    height: 50px;
+    min-height: 51px;
 }
 .cross {
     cursor: pointer;

@@ -173,6 +173,12 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
             setCheckoutErr('Пожалуйста, выберите доставку для всех товаров')
         }
     }
+    const [isUpdate, setIsUpdate] = useState(false)
+    useEffect(() => {
+        if (productUnits.is_update) {
+            setIsUpdate(true)
+        }
+    }, [productUnits])
     return (
         <MainLayout>
             <Head>
@@ -221,6 +227,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                               imgSrc={el.product.bucket_link[0].url}
                                               slug={el.product.slug}
                                               inWL={el.product.in_wishlist}
+                                              product={el.product}
+                                              available={el.availability}
                                               key={el.id}
                                     />
                                 )
@@ -272,6 +280,12 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                 checkoutErr &&
                                 <p className={s.red_text}>
                                     {checkoutErr}
+                                </p>
+                            }
+                            {
+                                isUpdate &&
+                                <p className={s.red_text}>
+                                    Внимание! Ваше корзина обновилась
                                 </p>
                             }
                         </div>

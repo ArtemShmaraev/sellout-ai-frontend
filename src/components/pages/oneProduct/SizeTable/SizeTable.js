@@ -39,7 +39,15 @@ const SizeTable = ({tables}) => {
 
         return result;
     }
-    const renderTable = (table) => {
+    const renderTable = (tableObj) => {
+        let table = {}
+        if (tableObj.rows_order) {
+            for (const el of tableObj.rows_order) {
+                table[el] = tableObj.values[el]
+            }
+        } else {
+            table = tableObj
+        }
         const sizeRowsArr = []
         const rowsNameTr = []
         for (const tableKey in table) {
@@ -99,7 +107,7 @@ const SizeTable = ({tables}) => {
         return tablesArr
     }
     const [table, setTable] = useState(allTables()[0])
-    console.log(tables)
+    // console.log(tables)
     return (
         <>
             <button
@@ -136,7 +144,7 @@ const SizeTable = ({tables}) => {
                     </div>
                     <div className={s.table_block}>
                         {
-                            table.table
+                            table?.table
                         }
                     </div>
 

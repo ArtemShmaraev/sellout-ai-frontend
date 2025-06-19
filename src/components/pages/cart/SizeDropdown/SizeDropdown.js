@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import parseHtml from 'html-react-parser'
 import {useRouter} from "next/router";
 
-const SizeDropdown = ({prices, productId, currentId, cardId}) => {
+const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
     const {cartStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
@@ -102,7 +102,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId}) => {
                         </div>
                         :
                         <div className={s.dropdown_header_text}>
-                            Выберите размер
+                            Выберите ${manySizes ? 'размер' : 'конфигурацию'}
                         </div>
                     }
                 </div>

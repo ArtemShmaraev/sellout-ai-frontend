@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './Sidebar.module.css'
 import list from '@/static/icons/list2.svg'
 import close from '@/static/icons/x-lg.svg'
@@ -25,6 +25,11 @@ import warranty from "@/static/icons/warranty.svg";
 import payment from "@/static/icons/payment.svg";
 import ret from "@/static/icons/return.svg";
 import refund from "@/static/icons/arrow-return-left.svg";
+import Adidas from "@/components/shared/Sidebar/Sections/Adidas";
+import {fetchFilter} from "@/http/productsApi";
+import NewBalance from "@/components/shared/Sidebar/Sections/NewBalance";
+import Nike from "@/components/shared/Sidebar/Sections/Nike";
+import Jordan from "@/components/shared/Sidebar/Sections/Jordan";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -73,16 +78,26 @@ const Sidebar = ({photos}) => {
     //
     //     }
     // }
+    const sidebarRef = useRef(null)
+    const sectionRef = useRef(null)
     const handleClose = () => {
         setIsMenuOpen(false)
         setIsSectionOpen(false)
         document.body.classList.remove('body-scroll-clip')
     }
+    const [filters, setFilters] = useState(null)
+    useEffect(() => {
+        fetchFilter('tree_line').then(res => setFilters(res))
+    }, [])
     const sections = {
         brands: <Brand photo={photos.brand} handleClose={handleClose}/>,
         clothes: <Clothes photo={photos.clothes} handleClose={handleClose}/>,
         shoes: <Shoes photo={photos.shoes} handleClose={handleClose}/>,
-        accessories: <Accessories photo={photos.accessories} handleClose={handleClose}/>
+        accessories: <Accessories photo={photos.accessories} handleClose={handleClose}/>,
+        adidas: <Adidas filters={filters} handleClose={handleClose}/>,
+        newBalance: <NewBalance filters={filters} handleClose={handleClose}/>,
+        nike: <Nike filters={filters} handleClose={handleClose}/>,
+        jordan: <Jordan filters={filters} handleClose={handleClose}/>,
     }
 
     const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
@@ -94,6 +109,7 @@ const Sidebar = ({photos}) => {
     const closeContact = () => {
         setContactOpen(false)
     }
+
     return (
         <>
             <button className={s.toggle_btn}
@@ -109,7 +125,7 @@ const Sidebar = ({photos}) => {
                 <Image width={22} src={list} alt="" className={s.list_icon}/>
             </button>
             {isMenuOpen &&
-                <div className={s.sidebar}>
+                <div className={s.sidebar} ref={sidebarRef}>
                     <div className={s.header_block}>
                         <div className={s.sidebar_header}>
                             <Link href={'/'} onClick={handleClose}>
@@ -217,6 +233,42 @@ const Sidebar = ({photos}) => {
                                     <div>Аксессуары</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.adidas)
+                                     }}
+                                >
+                                    <div>adidas</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.jordan)
+                                     }}
+                                >
+                                    <div>Jordan</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.newBalance)
+                                     }}
+                                >
+                                    <div>New Balance</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.nike)
+                                     }}
+                                >
+                                    <div>Nike</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
                                 {/*<div className={s.section_block} onClick={goToFastShip}*/}
                                 {/*>*/}
                                 {/*    <div>*/}
@@ -232,11 +284,14 @@ const Sidebar = ({photos}) => {
                                 {/*</div>*/}
                             </div>
                             :
-                            <div className={s.section_container}>
+                            <div className={s.section_container} ref={sectionRef}>
                                 <div className={s.back_cont}>
                                     <button
                                         className={s.back_btn}
-                                        onClick={() => setIsSectionOpen(false)}
+                                        onClick={() => {
+                                            sidebarRef.current.scrollTo(0, 0)
+                                            setIsSectionOpen(false)
+                                        }}
                                     >
                                         <Image src={arrow} alt="" className={s.back_icon}/>
                                         <div>
