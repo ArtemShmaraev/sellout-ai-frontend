@@ -8,13 +8,12 @@ import {Carousel} from "react-bootstrap";
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
-import {deleteProduct, updateProduct} from "@/http/productsApi";
+import {deletePhoto, deleteProduct, updateProduct} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import truck from "@/static/icons/truck.svg";
 import re from "@/static/icons/arrow-return-left.svg";
 
-const AdminCard = ({categories, lines, mainLine, key, cardList, product
-}) => {
+const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
     const router = useRouter()
     const {adminStore} = useContext(Context)
     const [disabled, setDisabled] = useState(adminStore.submitDisabled)
@@ -58,9 +57,9 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product
     }
     const [brand, setBrands] = useState(brandsDisplay())
     const edit = () => {
-        adminStore.checkActiveBrands(brands)
-        adminStore.checkActiveCategories(categories)
-        adminStore.checkActiveLines(lines)
+        adminStore.checkActiveBrands(product.brands)
+        adminStore.checkActiveCategories(product.categories)
+        adminStore.checkActiveLines(product.lines)
         adminStore.clickEdit()
         setDisabled(false)
     }
@@ -81,8 +80,15 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
     }
+    const [photoId, setPhotoId] = useState(photosArr[0]?.id)
+    const removePhoto = () => {
+        deletePhoto(id, photoId).then((data) => console.log(data))
+        //TODO убрать console.log
+        const {path, query} = router
+        router.push({path, query}, undefined, {scroll: false})
+    }
     return (
-        <div className={s.card}>
+        <div className={s.card_list}>
             <div className={s.icons_block}>
                 <button
                     onClick={edit}
@@ -93,19 +99,22 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product
                 >
                     <Image src={cross} alt='' className={s.like}/>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    {isSale && <div className={s.sale}>
-                        -{Math.ceil(100 - (price.final_price/price.start_price) * 100)}%
-                    </div>}
-                    {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
-                    {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
-                </div>
+            </div>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+                {isSale && <div className={s.sale}>
+                    -{Math.ceil(100 - (price.final_price/price.start_price) * 100)}%
+                </div>}
+                {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
+                {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
             </div>
             <Carousel
                 variant='dark'
                 indicators={false}
                 interval={null}
                 slide={false}
+                onSlide={(eventKey) => {
+                    setPhotoId(photosArr[eventKey]?.id)
+                }}
             >
                 {
                     photosArr.map(el =>
@@ -117,14 +126,14 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product
                 }
             </Carousel>
             <div className='d-flex justify-content-center'>
-                <Image src={cross} alt='' className={s.like}/>
+                <Image src={cross} alt='' className={s.like} onClick={removePhoto}/>
             </div>
             <div className={s.text_block}>
                 <div
                     className={s.tag}
                 >{brand}</div>
 
-                {/*<ScrollableBDropdown toggleText={'Бренд'} isSearch={true} data={adminStore.brands}/>*/}
+                <ScrollableBDropdown toggleText={'Бренд'} isSearch={true} data={adminStore.brands}/>
                 <input
                     className={s.name}
                     defaultValue={model}
@@ -149,8 +158,12 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product
                     <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>
                     <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
                     <div>
-                        {/*<div>Категория: {categoryDisplay()}</div>*/}
-                        {/*<div>Линейка: {mainLine}</div>*/}
+                        <div>category_id: {product.category_id}</div>
+                        <div>category_name: {product.category_name}</div>
+                        <div>level1_category_id: {product.level1_category_id}</div>
+                        <div>level2_category_id: {product.level2_category_id}</div>
+                        <div>title: {product.platform_info?.poizon?.title}</div>
+                        <div>Линейка: {product.main_line.name}</div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-center my-3'>

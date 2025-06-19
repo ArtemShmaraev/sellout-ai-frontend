@@ -21,7 +21,7 @@
 }
 .card_list {
     width: 356px;
-    height: 340px;
+    height: fit-content;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -160,7 +160,7 @@
     }
     .card_list {
         width: 49%;
-        height: 275px;
+        height: fit-content;
         padding: 0;
         margin: 10px 0;
     }
@@ -176,6 +176,6 @@
         font-size: 14px;
     }
     .image_container {
-        height: 260px;
+        height: 180px;
     }
 }

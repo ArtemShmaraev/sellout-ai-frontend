@@ -84,11 +84,7 @@ const ProductCard = ({cardList = false, product}) => {
 
     const [sizesIsShown, setSizesIsShown] = useState(false)
     const showSizes = () => {
-        if (colorway === 'Undeniable 5.0') {
-            console.log(product.available_sizes)
-            console.log(product.available_sizes.sizes)
-        }
-        if (product.available_sizes?.length && product.available_sizes.sizes) {
+        if (product.available_sizes && product.available_sizes.sizes?.length) {
             setSizesIsShown(true)
         }
     }
@@ -208,7 +204,8 @@ const ProductCard = ({cardList = false, product}) => {
                         :
                         <div className={'text-black'}
                         >
-                            <span className={'fw-bold'}>Доступные размеры {`(${product.available_sizes.filter_logo})`}:</span>
+                            <span className={'fw-bold'}>Доступные
+                                размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
                             <br/>
                             {renderSizes()}
                         </div>

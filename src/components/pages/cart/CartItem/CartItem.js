@@ -129,7 +129,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             </div>
             {
                 !available && (
-                    !product.available_flag
+                    product.available_flag
                         ?
                         <p className={'text-center red_text'}>К сожалению, данное предложение распродано, выберите другое</p>
                         :

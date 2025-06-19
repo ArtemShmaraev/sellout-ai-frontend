@@ -34,7 +34,7 @@ class AdminStore {
     checkActiveBrands(brands) {
         this.brands.forEach(el => {
             for (let i = 0; i < brands.length; i++) {
-                if (el.name === brands[i].name) {
+                if (el.id === brands[i].id) {
                     el.state = true
                 }
             }
@@ -74,7 +74,7 @@ class AdminStore {
     checkActiveCategories(categories) {
         this.categories.forEach(el => {
             for (let i = 0; i < categories.length; i++) {
-                if (el.name === categories[i].name) {
+                if (el.id === categories[i].id) {
                     el.state = true
                 }
             }
@@ -108,7 +108,7 @@ class AdminStore {
     checkActiveLines(lines) {
         this.lines.forEach(el => {
             for (let i = 0; i < lines.length; i++) {
-                if (el.name === lines[i].name) {
+                if (el.id === lines[i].id) {
                     el.state = true
                 }
             }

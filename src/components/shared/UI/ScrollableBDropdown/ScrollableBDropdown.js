@@ -15,12 +15,12 @@ const ScrollableBDropdown = ({toggleText, isSearch = false, data}) => {
         <Dropdown>
             <Dropdown.Toggle>{toggleText}</Dropdown.Toggle>
             <Dropdown.Menu className={s.dropdown_menu}>
-                {
-                    isSearch &&
-                    <Dropdown.Item onClick={(e) => e.preventDefault()}>
-                        <SearchInput/>
-                    </Dropdown.Item>
-                }
+                {/*{*/}
+                {/*    isSearch &&*/}
+                {/*    <Dropdown.Item onClick={(e) => e.preventDefault()}>*/}
+                {/*        <SearchInput/>*/}
+                {/*    </Dropdown.Item>*/}
+                {/*}*/}
                 {
                     data.map(el =>
                         <Dropdown.Item onClick={(e) => {

@@ -22,6 +22,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                 if (el.id === unitId) {
                     setSelectedItem(el)
                     changed = true
+                    cartStore.setIsShipChosen(true)
                 }
                 if (cart.includes(el.id)) {
                     arr.push(el.id)

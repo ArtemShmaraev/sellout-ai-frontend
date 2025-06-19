@@ -171,7 +171,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
             return null
         }
         setVerifyEmail(false)
-        const order = await checkoutOrder(orderObj, id, token)
+        const order = checkoutOrder(orderObj, id, token).catch()
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
         cartStore.setCartCnt(0)

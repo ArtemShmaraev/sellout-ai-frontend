@@ -95,7 +95,7 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
 }
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .cont {
         margin: 90px 0 0 0;
         padding: 15px;

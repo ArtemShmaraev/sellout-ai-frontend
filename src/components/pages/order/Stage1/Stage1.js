@@ -24,6 +24,7 @@ const Stage1 = ({addresses, userData}) => {
     useEffect(() => {
         orderStore.setName(userData.first_name)
         orderStore.setSurname(userData.last_name)
+        orderStore.setPatronymic(userData.patronymic ?? '')
         orderStore.setEmail(userData.email)
         orderStore.setPhone(userData.phone_number)
     }, [])

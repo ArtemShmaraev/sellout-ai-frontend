@@ -80,6 +80,10 @@ export async function deleteProduct(id) {
     const {data} = await $host.delete(`product/update/${id}`)
     return data
 }
+export async function deletePhoto(productId, photoId) {
+    const {data} = await $host.get(`product/add_photo_black_list/${productId}/${photoId}`)
+    return data
+}
 export async function fetchOneProduct(slug, token = '') {
     if (!token) {
         const {data} = await $host.get(`product/slug/${slug}`)

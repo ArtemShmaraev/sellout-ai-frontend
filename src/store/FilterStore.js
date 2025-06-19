@@ -102,7 +102,7 @@ class FilterStore {
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
                 || key === 'price_min' || key === 'price_max' || key === 'is_collab'
-                || key === 'brand' || key === 'new' || key === 'recommendations') continue
+                || key === 'brand' || key === 'new' || key === 'recommendations' || key === 'adminka') continue
             if (key === 'q') {
                 this.setQ(query[key])
                 this._activeFilters.push(this.filters.q)
@@ -155,7 +155,29 @@ class FilterStore {
             d = d[key]
         })
         d.state = !d.state
-        this.toggleAll2(item)
+        if (item.path[0] === 'collab') {
+            const deactivateList = []
+            const obj = this.filters.collab
+            for (const key in obj) {
+                if (item.is_all) {
+                    if (!obj[key].is_all) {
+                        obj[key].state = false
+                        deactivateList.push(obj[key])
+                    }
+                } else {
+                    if (obj[key].is_all) {
+                        obj[key].state = false
+                        deactivateList.push(obj[key])
+                        break
+                    }
+                }
+            }
+            for (let i = 0; i < deactivateList.length; i++) {
+                this._activeFilters = this._activeFilters.filter(el => el.query !== deactivateList[i].query)
+            }
+        } else {
+            this.toggleAll2(item)
+        }
         if (d.state) {
             this._activeFilters.push(item)
         } else {
@@ -196,7 +218,6 @@ class FilterStore {
     toggleAll2(item) {
         let isAll
         let currObj = this.filters
-        let parentObj
         if (!item.hasOwnProperty('is_all')) {
             return null
         } else {
@@ -204,10 +225,24 @@ class FilterStore {
         }
         const deactivateList = []
         if (isAll && item.state) {
-            for (let i = 0; i < item.path.length - 2; i++) {
-                currObj = currObj[item.path[i]]
-                this.deactivateFiltersBelow(currObj, item.query)
+            for (let i = item.path.length-2; i > 0; i--) {
+                const {path} = item
+                for (let j = 0; j < i; j++) {
+                    currObj = currObj[path[j]]
+                }
+                for (const key in currObj) {
+                    if (currObj[key].is_all && currObj[key].query !== item.query) {
+                        currObj[key].state = false
+                        deactivateList.push(currObj[key])
+                    }
+                }
             }
+
+            currObj = this.filters
+            for (let j = 0; j < item.path.length-1; j++) {
+                currObj = currObj[item.path[j]]
+            }
+            this.deactivateFiltersBelow(currObj, item.query)
         }
         if (!isAll && item.state) {
             item.path.forEach(el => {

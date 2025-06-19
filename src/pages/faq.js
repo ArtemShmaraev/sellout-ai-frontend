@@ -13,23 +13,72 @@ const Faq = () => {
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 <h4>FAQs</h4>
-                <Section label={'Банальный вопрос - анальный ответ'}>
-                    <FaqDropdown label={'Вопрос'}>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae cumque
-                        cupiditate dicta eius,
-                        fugiat impedit nemo, nostrum perferendis quibusdam, reprehenderit repudiandae
-                        sunt suscipit vero. Amet mollitia qui quos!
+                <Section label={'SELLOUT - это…'}>
+                </Section>
+                <Section label={'Как оформить заказ?'}>
+                    <FaqDropdown label={'Как найти нужный товар?'}>
+                        <ol>
+                            <li>На платформе SELLOUT Вы можете найти сотни тысяч товаров любым удобным способом:</li>
+                            <ul>
+                                <li>С помощью поиска с удобными подсказками (в правом верхнем углу сайта)</li>
+                                <li>С помощью качественно проработанных фильтров на странице товаров. Фильтруйте по категориям, брендам, линейкам,
+                                    размерам и по множеству других параметров!</li>
+                                <li>С помощью разделов в меню хедера</li>
+                            </ul>
+                            <li>
+                                Чтобы выбрать подходящий Вам размер воспользуйтесь размерной сеткой, отображённой на странице
+                                товара, или обратитесь в службу поддержки за помощью! Подробнее прочитать про выбор подходящего размера
+                                Вы можете здесь
+                            </li>
+                            <li>
+                                Далее необходимо выбрать предпочитаемый срок доставки. Мы стараемся предложить как можно больше вариантов,
+                                чтобы Вы точно смогли найти подходящий! В зависимости от срока доставки будет отличаться цена. Подробнее прочитать про то,
+                                из-за чего отличаются цены для разных сроков доставки, а также на разные размеры Вы можете здесь
+                            </li>
+                            <li>
+                                Если Вы хотите приобрести сразу же несколько одинаковых товаров (одна и та же модель одного и того же размера), Вам
+                                необходимо оформить несколько заказов. Это связано с тем, что после того, как Вы приобретете товар, цена может поменяться,
+                                а может и вовсе пропасть из наличия данный размер, если Вы успели выкупить последний лот!
+                            </li>
+                        </ol>
                     </FaqDropdown>
                 </Section>
-                <Section label={'Банальный вопрос - анальный ответ'}>
-                    <FaqDropdown label={'Вопрос'}>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae cumque
-                        cupiditate dicta eius,
-                        fugiat impedit nemo, nostrum perferendis quibusdam, reprehenderit repudiandae
-                        sunt suscipit vero. Amet mollitia qui quos!
-                    </FaqDropdown>
+                <Section label={'Гарантии подлинности и качества товара'}>
                 </Section>
-
+                <Section label={'Почему отличаются сроки доставок и цены на один и тот же товар?'}>
+                </Section>
+                <Section label={'Почему изменилась цена или модель оказалась распроданной?'}>
+                </Section>
+                <Section label={'Доставка'}>
+                </Section>
+                <Section label={'Оплата'}>
+                </Section>
+                <Section label={'Как отслеживать статус своего заказа?'}>
+                </Section>
+                <Section label={'Возврат'}>
+                </Section>
+                <Section label={'Почему мой заказ отменили?'}>
+                </Section>
+                <Section label={'Как выбрать размер и узнать больше информации о товаре?'}>
+                </Section>
+                <Section label={'Как связаться с нами?'}>
+                </Section>
+                <Section label={'Аккаунт'}>
+                </Section>
+                <Section label={'Промокоды'}>
+                </Section>
+                <Section label={'Программа лояльности'}>
+                </Section>
+                <Section label={'Реферальная программа'}>
+                </Section>
+                <Section label={'Как стать нашим партнером?'}>
+                </Section>
+                <Section label={'Нашли тот же товар дешевле?'}>
+                </Section>
+                <Section label={'Сохранность персональных данных и иные документы'}>
+                </Section>
+                <Section label={'Контакты'}>
+                </Section>
             </div>
         </MainLayout>
     );

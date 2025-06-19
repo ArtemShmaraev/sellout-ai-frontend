@@ -38,7 +38,8 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     let lastSeen = []
     if (token) {
-        const {user_id} = jwtDecode(token)
+        const userData = await jwtDecode(token)
+        const {user_id} = userData
         lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
     } else {
         let arr
@@ -62,6 +63,7 @@ const AdminPage = ({products, categories, lines, colors, collections, brandsArr,
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore, adminStore} = useContext(Context)
+    console.log(products)
     useEffect(() => {
         filterStore.fillCat(categories)
         if (!filterStore.lineQ) {
