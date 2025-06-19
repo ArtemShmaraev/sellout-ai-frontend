@@ -174,36 +174,14 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                 <span className={s.characteristics_text}>{product.approximate_date}</span>
             </p>
         )
-        const params = product.parameters
-
-
-        // const order = product.parameters_order
-        // console.log(params)
-        // const paramsArr = []
-        // order.forEach(el => {
-        //     if (el in params) {
-        //         const param = [el, params[el]]
-        //         paramsArr.push(param)
-        //     }
-        // })
-        //
-        // paramsArr.forEach(el => {
-        //     if (el[1].length === 1) {
-        //         res.push(
-        //             <p className={s.characteristics}>{el[0]}:
-        //                 <span className={s.characteristics_text}>{el[1][0]}</span>
-        //             </p>
-        //         )
-        //     }
-        //     if (el[1].length > 1) {
-        //         res.push(
-        //             <p className={s.characteristics}>{el[0]}:
-        //                 <span className={s.characteristics_text}>{el[1].join(', ')}</span>
-        //             </p>
-        //         )
-        //     }
-        // })
-
+        const paramsObj = product.parameters
+        const order = paramsObj.parameters_order
+        const params = {}
+        for (const param of order) {
+            if (param in product.parameters.parameters) {
+                params[param] = paramsObj.parameters[param]
+            }
+        }
 
         for (const key in params) {
             if (params[key].length === 1) {

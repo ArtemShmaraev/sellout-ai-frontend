@@ -97,7 +97,12 @@ const DropdownCategory = ({ category, level = 0 , brand = false}) => {
             </div>
         );
     };
+    const arr = renderCategory(category, level)
+    if (brand) {
+        const brand424 = arr.shift()
+        arr.splice(12, 0, brand424)
+    }
 
-    return renderCategory(category, level);
+    return arr
 };
 export default observer(DropdownCategory)

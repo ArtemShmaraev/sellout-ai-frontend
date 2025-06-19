@@ -84,7 +84,11 @@ const ProductCard = ({cardList = false, product}) => {
 
     const [sizesIsShown, setSizesIsShown] = useState(false)
     const showSizes = () => {
-        if (product.available_sizes && product.available_sizes.sizes) {
+        if (colorway === 'Undeniable 5.0') {
+            console.log(product.available_sizes)
+            console.log(product.available_sizes.sizes)
+        }
+        if (product.available_sizes?.length && product.available_sizes.sizes) {
             setSizesIsShown(true)
         }
     }
