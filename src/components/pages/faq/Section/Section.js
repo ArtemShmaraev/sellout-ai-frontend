@@ -4,14 +4,14 @@ import Image from "next/image";
 import minus from "@/static/icons/dash-lg.svg";
 import plus from "@/static/icons/plus-lg.svg";
 
-const Section = ({label, children}) => {
+const Section = ({label, children, id}) => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => {
         setIsOpen(!isOpen)
     }
     return (
         <>
-            <div>
+            <div id={id}>
                 <hr/>
                 <div className={s.toggle} onClick={toggle}>
                     <div className={s.h}>{label}</div>
@@ -20,7 +20,7 @@ const Section = ({label, children}) => {
             </div>
             {
                 isOpen &&
-                <div className={s.content}>
+                <div>
                     {children}
                 </div>
             }

@@ -6,6 +6,39 @@
     text-transform: uppercase;
     font-weight: 700;
 }
+.cont ul {
+    list-style-type: disc;
+}
+.underline {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.table_cont {
+    display: flex;
+    justify-content: center;
+}
+.table_block {
+    width: 80%;
+}
+.referral_table .first_tr td {
+    padding: 7px 7px 10px 7px;
+    border-bottom: 1px solid black;
+}
+.referral_table td {
+    padding: 7px;
+    font-size: 14px;
+    text-align: center;
+}
+.table_header {
+    font-weight: 500;
+    margin: 15px 0;
+    text-align: center;
+}
+.simple_text {
+    margin: 0;
+    padding: 10px;
+}
 @media (max-width: 1200px) {
     .cont {
         margin-top: 70px;

@@ -17,9 +17,10 @@ const FaqDropdown = ({label, children}) => {
             </div>
             {
                 isOpen &&
-                <div className={s.text_block}>
+                <p className={s.text_block}>
                     {children}
-                </div>
+                    <hr/>
+                </p>
             }
         </>
     );
