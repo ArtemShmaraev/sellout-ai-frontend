@@ -102,7 +102,9 @@ class FilterStore {
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
                 || key === 'price_min' || key === 'price_max' || key === 'is_collab'
-                || key === 'brand' || key === 'new' || key === 'recommendations' || key === 'adminka') continue
+                || key === 'brand' || key === 'new' || key === 'recommendations' || key === 'adminka'
+                || key === 'category_id' || key === 'category_name' || key === 'level1_category_id' || key === 'level2_category_id'
+            ) continue
             if (key === 'q') {
                 this.setQ(query[key])
                 this._activeFilters.push(this.filters.q)
