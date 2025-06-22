@@ -87,6 +87,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
     }
+    console.log(product)
     return (
         <div className={s.card_list}>
             <div className={s.icons_block}>
@@ -158,6 +159,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>
                     <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
                     <div>
+                        <div>spu_id: {product.spu_id}</div>
                         <div>category_id: {product.category_id}</div>
                         <div>category_name: {product.category_name}</div>
                         <div>level1_category_id: {product.level1_category_id}</div>
