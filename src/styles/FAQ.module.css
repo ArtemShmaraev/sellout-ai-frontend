@@ -39,6 +39,21 @@
     margin: 0;
     padding: 10px;
 }
+.select_anim {
+    animation: select 1.5s ease;
+}
+
+@keyframes select {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 @media (max-width: 1200px) {
     .cont {
         margin-top: 70px;

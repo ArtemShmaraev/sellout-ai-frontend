@@ -5,6 +5,7 @@ class DesktopStore {
         this._isDesktop = true
         this._animation = true
         this._filtersOpen = false
+        this._faqCnt = 0
         makeAutoObservable(this)
     }
     setIsDesktop(bool) {
@@ -24,6 +25,12 @@ class DesktopStore {
     }
     get filtersOpen() {
         return this._filtersOpen
+    }
+    incrementFaqCnt() {
+        this._faqCnt++
+    }
+    get faqCnt() {
+        return this._faqCnt
     }
 }
 
