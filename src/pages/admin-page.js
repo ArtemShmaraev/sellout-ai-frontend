@@ -63,7 +63,6 @@ const AdminPage = ({products, categories, lines, colors, collections, brandsArr,
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore, adminStore} = useContext(Context)
-    console.log(products)
     useEffect(() => {
         filterStore.fillCat(categories)
         if (!filterStore.lineQ) {

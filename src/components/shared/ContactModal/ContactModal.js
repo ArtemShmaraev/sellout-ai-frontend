@@ -39,7 +39,7 @@ const ContactModal = ({isOpen, handleClose}) => {
                                    className={s.link}>@sellout_official</a>
                             </div>
                         </div>
-                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link}>FAQ</Link></h5>
+                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} onClick={handleClose}>FAQ</Link></h5>
                         <div>
                             <h5>Мы в социальных сетях:</h5>
                             <div className={s.icons_block}>

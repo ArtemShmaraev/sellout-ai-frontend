@@ -109,7 +109,11 @@ const Sidebar = ({photos}) => {
     const closeContact = () => {
         setContactOpen(false)
     }
-
+    useEffect(() => {
+        return () => {
+            document.body.classList.remove('body-scroll-clip')
+        }
+    }, [])
     return (
         <>
             <button className={s.toggle_btn}
@@ -308,8 +312,8 @@ const Sidebar = ({photos}) => {
                     }
                     <div className={s.sidebar_footer}>
                         <div className={s.col}>
-                            <Link href="" className={s.sidebar_links}>О нас</Link>
-                            <Link href="" className={s.sidebar_links}>Блог</Link>
+                            <Link href="" className={s.sidebar_links} onClick={handleClose}>О нас</Link>
+                            <Link href="" className={s.sidebar_links} onClick={handleClose}>Блог</Link>
                             <span className={s.sidebar_links}
                                   onClick={toggleContact}
                             >Контакты</span>
@@ -336,7 +340,7 @@ const Sidebar = ({photos}) => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="" className={s.link}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} onClick={handleClose}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
@@ -373,13 +377,13 @@ const Sidebar = ({photos}) => {
                                     значком <Image src={refund} alt=""/>. Мы уже предоставляем возврат даже на некоторые
                                     эксклюзивные коллекции и постоянно стремимися увеличить ассортимент товаров, подлежащих возврату,
                                     чтобы Ваши покупки с нами стали еще более удобными!
-                                    Подробнее про правила возврата читайте <a href="" className={s.link}>тут</a>
+                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link} onClick={handleClose}>тут</Link>
                                 </p>
                             </TextModal>
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Остались вопросы?</h4>
-                            <Link href={'/faq'} className={s.sidebar_links}>Ответы на большинство из них: FAQ</Link>
+                            <Link href={'/faq'} className={s.sidebar_links} onClick={handleClose}>Ответы на большинство из них: FAQ</Link>
                             <p className={s.sidebar_text}>Или напишите нам</p>
                             <a href={'mailto:customerservice@sellout.su'}
                                className={s.footer_link}>Почта: customerservice@sellout.su</a>

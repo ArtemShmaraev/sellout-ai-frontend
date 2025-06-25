@@ -87,7 +87,6 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
     }
-    console.log(product)
     return (
         <div className={s.card_list}>
             <div className={s.icons_block}>
