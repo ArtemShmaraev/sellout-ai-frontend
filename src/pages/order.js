@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from '@/styles/Order.module.css'
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
@@ -101,7 +101,11 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         }
     }
 
+
+
     const [fillAll, setFillAll] = useState(false)
+    const [order, setOrder] = useState({})
+    const checkoutRef = useRef(null)
     const checkout = async () => {
         const orderObj = {
             email: orderStore.email,
@@ -176,11 +180,14 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
             return null
         }
         setVerifyEmail(false)
-        const order = checkoutOrder(orderObj, id, token).catch()
+        const checkout = await checkoutOrder(orderObj, id, token).catch()
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
         cartStore.setCartCnt(0)
-        router.push(`order/complete?id=${order.id}`)
+        setOrder(checkout)
+        checkoutRef.current.submit()
+
+        // router.push(`order/complete?id=${order.id}`)
     }
     useEffect(() => {
         return () => {
@@ -247,7 +254,37 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice()} ₽</p>
+
+                        <form
+                            id="payment-form"
+                            method="POST"
+                            className="application"
+                            acceptCharset="UTF-8"
+                            action="https://partner.life-pay.ru/alba/input/"
+                            ref={checkoutRef}
+                        >
+                            <input type="hidden" name="key" defaultValue="JYnyhA++difLyeyfVfUnFKS4RXaMK4Q/K499nwibTtI=" />
+                            <input type="hidden" name="cost" value={order.final_amount.toString()} />
+                            <input type="hidden" name="name" value={order.id?.toString()} />
+                            <input type="hidden" name="default_email" value={order.email} />
+                            <input type="hidden" name="order_id" value={order.id?.toString()} />
+                            <input type="hidden" name="phone_number" value={order.phone_int} />
+                            <input type="hidden" name="email" value={order.email} />
+                            <input type="hidden" name="payment_type" defaultValue="spg_test" />
+                            <input type="hidden" name="url_success" defaultValue="http://127.0.0.1:8000/api/v1/order/signature" />
+                            {/*<input*/}
+                            {/*    type="image"*/}
+                            {/*    id="a1lite_button"*/}
+                            {/*    style={{ border: '0' }}*/}
+                            {/*    src="https://partner.life-pay.ru/gui/images/a1lite_buttons/button_small.png"*/}
+                            {/*    value="Оплатить"*/}
+                            {/*/>*/}
+                        </form>
+
                         <button className={s.order_btn} onClick={checkout}>Перейти к оплате</button>
+
+
+
                         {fillAll &&
                             <p className={'red_text'}>Заполните все поля</p>
                         }
