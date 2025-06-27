@@ -185,7 +185,10 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         Cookies.set('promo', '', {expires: 2772})
         cartStore.setCartCnt(0)
         setOrder(checkout)
-        checkoutRef.current.submit()
+        console.log(checkout)
+        setTimeout(() => {
+            checkoutRef.current.submit()
+        }, 100)
 
         // router.push(`order/complete?id=${order.id}`)
     }
@@ -264,7 +267,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             ref={checkoutRef}
                         >
                             <input type="hidden" name="key" defaultValue="JYnyhA++difLyeyfVfUnFKS4RXaMK4Q/K499nwibTtI=" />
-                            <input type="hidden" name="cost" value={order.final_amount.toString()} />
+                            <input type="hidden" name="cost" value={order.final_amount?.toString()} />
                             <input type="hidden" name="name" value={order.id?.toString()} />
                             <input type="hidden" name="default_email" value={order.email} />
                             <input type="hidden" name="order_id" value={order.id?.toString()} />
