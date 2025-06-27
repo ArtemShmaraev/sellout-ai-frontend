@@ -91,6 +91,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
         }
         if (selectedGender) {
             obj.gender = selectedGender[2]
+            userStore.setGender(selectedGender[2])
         }
         if (birthday) {
             obj.date = birthday
@@ -239,7 +240,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                     <div className={s.text_block}>
                         <div className={s.text_size}>
                             <h5 className={s.header}>Укажите ваши размеры</h5>
-                            <p>Вы можете указать свои размеры, чтобы мы искали для Вас
+                            <p className={'text-center'}>Вы можете указать свои размеры, чтобы мы искали для Вас
                                 специальные предложения в Ваших размерах,
                                 помогали с выбором размера на конкретные модели, а также упрощали
                                 процесс покупок на нашей платформе!</p>

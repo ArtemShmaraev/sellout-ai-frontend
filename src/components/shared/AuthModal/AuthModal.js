@@ -16,7 +16,8 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import PasswordInput from "@/components/shared/UI/PasswordInput/PasswordInput";
 import PassEmailModal from "@/components/shared/PassEmailModal/PassEmailModal";
 
-const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false, text = ''}) => {
+const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false, text = '',
+                   salesLine = false}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
 
@@ -175,9 +176,9 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
     }
     const [passModalShown, setPassModalShown] = useState(false)
     return (
-        <div>
+        <>
             <button
-                className={s.toggle_btn}
+                className={[s.toggle_btn, !salesLine ? s.w100 : s.h_auto].join(' ')}
                 onClick={handleShow}
                 style={inline ? {display: 'inline', ...style} : style}
             >
@@ -225,19 +226,19 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                         {isReg
                             ?
                             <Container>
-                                <h4 className={s.headers}>Зарегистрироваться с помощью...</h4>
-                                <div className={s.google_block}>
-                                    <a className={s.google_btn}
-                                       href={getGoogleLink()}
-                                       onClick={() => document.body.classList.remove('body-scroll-clip')}
-                                    >
-                                        <Image src={google} alt='' className={s.google_icon} width={20}/>
-                                        <div>
-                                            Google
-                                        </div>
-                                    </a>
-                                </div>
-                                <h4 className={s.headers}>Или зарегистрируйтесь по почте</h4>
+                                {/*<h4 className={s.headers}>Зарегистрироваться с помощью...</h4>*/}
+                                {/*<div className={s.google_block}>*/}
+                                {/*    <a className={s.google_btn}*/}
+                                {/*       href={getGoogleLink()}*/}
+                                {/*       onClick={() => document.body.classList.remove('body-scroll-clip')}*/}
+                                {/*    >*/}
+                                {/*        <Image src={google} alt='' className={s.google_icon} width={20}/>*/}
+                                {/*        <div>*/}
+                                {/*            Google*/}
+                                {/*        </div>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
+                                {/*<h4 className={s.headers}>Или зарегистрируйтесь по почте</h4>*/}
                                 <div className={s.input_block}>
                                     <label className={s.label1}>Имя:</label>
                                     <input type="text" className={s.input}
@@ -341,25 +342,25 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
 
 
 
-                                <h4 className={s.headers}>Войти с помощью...</h4>
-                                <div className={s.google_block}>
-                                    <a className={s.google_btn}
-                                       href={getGoogleLink()}
-                                       onClick={() => document.body.classList.remove('body-scroll-clip')}
-                                    >
-                                        <Image src={google} alt='' className={s.google_icon} width={20}/>
-                                        <div>
-                                            Google
-                                        </div>
-                                    </a>
-                                </div>
+                                {/*<h4 className={s.headers}>Войти с помощью...</h4>*/}
+                                {/*<div className={s.google_block}>*/}
+                                {/*    <a className={s.google_btn}*/}
+                                {/*       href={getGoogleLink()}*/}
+                                {/*       onClick={() => document.body.classList.remove('body-scroll-clip')}*/}
+                                {/*    >*/}
+                                {/*        <Image src={google} alt='' className={s.google_icon} width={20}/>*/}
+                                {/*        <div>*/}
+                                {/*            Google*/}
+                                {/*        </div>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
                             </Container>
                         }
                     </form>
                 </Modal.Body>
             </Modal>
             <PassEmailModal show={passModalShown} onHide={() => setPassModalShown(false)} defEmail={email}/>
-        </div>
+        </>
     );
 };
 

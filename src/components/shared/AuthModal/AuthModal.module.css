@@ -143,7 +143,10 @@
     left: 10px;
 }
 @media (max-width: 1000px) {
-    .toggle_btn {
+    .w100 {
         width: 100%;
+    }
+    .h_auto {
+       height: auto;
     }
 }

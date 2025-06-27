@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from '@/styles/Order.module.css'
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
@@ -14,6 +14,10 @@ import {fetchCart, promoAuth, promoUnauth, useBonuses} from "@/http/cartApi";
 import {useRouter} from "next/router";
 import Head from "next/head";
 import {checkoutOrder} from "@/http/orderApi";
+import TextModal from "@/components/shared/UI/TextModal/TextModal";
+import boxImg from '@/static/icons/box2.svg'
+import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -25,15 +29,16 @@ export const getServerSideProps = async (context) => {
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
     const maxBonuses = cart.bonus
+    const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return { props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo} }
+    return { props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo} }
 }
-const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo}) => {
+const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo}) => {
     const router = useRouter()
     const {orderStore, userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
-    const [bonuses, setBonuses] = useState('')
+    const [bonuses, setBonuses] = useState(Number(currBonuses) > 0 ? currBonuses : '')
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
@@ -177,6 +182,17 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         cartStore.setCartCnt(0)
         router.push(`order/complete?id=${order.id}`)
     }
+    useEffect(() => {
+        return () => {
+            orderStore.setShipType(null)
+            orderStore.setSelectedAddressId(null)
+            orderStore.setMethod(null)
+            orderStore.setDeliveryPrice(null)
+            orderStore.setComment('')
+            orderStore.setTarget('')
+            orderStore.setPvzAddress('')
+        }
+    }, []);
     return (
         <MainLayout>
             <Head>
@@ -210,6 +226,9 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             />
                         }
                         {
+                            Number(willBonuses) > 0 && <p className={'mt-2 mb-0'}>Всего будет начислено бонусов: {willBonuses} ₽</p>
+                        }
+                        {
                             Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
                         }
                         {
@@ -237,6 +256,54 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                                 на {userData.email}
                             </p>
                         }
+                        <div className={s.questions_block}>
+                            <TextModal title={'Вопросы по доставке'} img={boxImg}>
+                                <div className={s.faq_block}>
+                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ title={'Какие существуют варианты доставок с нашего склада в Москве до Вас?'}>
+                                        При оформлении заказа Вы указываете адрес и способ доставки. Мы доставляем, используя курьерскую службу Boxberry, а также на данный момент доставка по Москве бесплатная!
+                                        <br/>
+                                        Вы можете выбрать доставку до Пункта Выдачи Заказов (ПВЗ) Boxberry, отметив на карте нужный ПВЗ, или выбрать доставку курьером до двери.
+                                        <br/>
+                                        Самовывоза на данный момент нет, но скоро появится!
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как выбрать тип доставки?'}>
+                                        Если в Вашем заказе присутствует несколько позиций, прибывающих в разные даты, мы предлагаем на выбор два типа доставки:
+                                        <ol>
+                                            <li>Доставка всех позиций одновременно - мы дождёмся прибытия крайнего товара из Вашего заказа и отправим весь заказ целиком. Благодаря этому стоимость доставки уменьшается, однако придется дожидаться всего заказа, а не
+                                                получать его по частям.</li>
+                                            <li>Доставка каждой позиции по отдельности - Мы будем отправлять каждую позицию Вашего заказа сразу же по прибытии к нам на склад. Благодаря этому Вы сможете получать части заказа сразу же, однако стоимость доставки
+                                                увеличится.</li>
+                                        </ol>
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как рассчитывается стоимость доставки?'}>
+                                        Стоимость доставки рассчитываются автоматически на этапе оформления заказа. Она зависит от количества и веса товаров, способа и типа доставки, а также от адреса.
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Включены ли таможенные пошлины и налоги в стоимость заказа?'}>
+                                        Да, цена окончательная, никаких дополнительных платежей не потребуется!
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Куда мы доставляем?'}>
+                                        Мы доставляем по всей России службой курьерской доставки Boxberry. Очень скоро появится доставка в страны СНГ!
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Какая скорость доставки?'}>
+                                        В зависимости от Вашего города доставка занимает от одного до нескольких дней. Подробнее Вы сможете отслеживать на сайте или в приложении Boxberry.
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как отслеживать доставку?'}>
+                                        Как только Ваш заказ приедет на наш склад в Москве и будет отправлен курьерской службой Boxberry, Вам
+                                        придет уведомление на почту с информацией о трек-номере отправления, а также трек-номер появится в
+                                        личном кабинете в информации о Вашем заказе.
+                                        <br/>
+                                        Отследить заказ можно по
+                                        этой <a href="https://boxberry.ru/tracking-page" style={{color: 'inherit'}} target={'_blank'}>ссылке</a> или в мобильном приложении Boxberry. Отправление
+                                        автоматически появляется в приложении, если авторизоваться под теми же данными, под которыми был выполнен заказ на нашем сайте.
+
+                                    </LoyaltyFAQ>
+                                </div>
+                                <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                            </TextModal>
+                        </div>
                     </div>
                 </div>
             </div>

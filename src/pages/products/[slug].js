@@ -281,7 +281,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                 <title>{product.model}</title>
             </Head>
             <div className={s.container + ' custom_cont'}>
-                <BreadcrumbC list={product.list_lines}/>
+                {isDesktop && <BreadcrumbC list={product.list_lines}/>}
                 <div className={s.row}>
                     <div className={s.col1}>
                         {!isDesktop &&
@@ -322,39 +322,41 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         {
                             product.bucket_link.length > 1
                             ?
-                                <Splide aria-label="My Favorite Images"
-                                        options={{
-                                            type: 'loop',
-                                            pagination: false,
-                                            paginationKeyboard: true,
-                                            keyboard: true,
-                                            focus: 'center',
-                                            speed: isDesktop ? 800 : 400
-                                        }}
-                                        hasTrack={false}
-                                >
-                                    <SplideTrack>
-                                        {
-                                            product.bucket_link.map(el =>
-                                                <SplideSlide className={s.photo} key={el.id}>
-                                                    <Image src={el.url} alt=''
-                                                           fill={true}
-                                                           loading={'eager'}
-                                                           style={{objectFit: 'contain'}}
-                                                    />
-                                                </SplideSlide>
-                                            )
-                                        }
-                                    </SplideTrack>
-                                    <div className="splide__arrows">
-                                        <button className="splide__arrow splide__arrow--prev">
-                                            <Image src={left} alt='' width={20}/>
-                                        </button>
-                                        <button className="splide__arrow splide__arrow--next" ref={buttonRef}>
-                                            <Image src={right} alt='' width={20}/>
-                                        </button>
-                                    </div>
-                                </Splide>
+                                <div className={s.slider}>
+                                    <Splide aria-label="My Favorite Images"
+                                            options={{
+                                                type: 'loop',
+                                                pagination: false,
+                                                paginationKeyboard: true,
+                                                keyboard: true,
+                                                focus: 'center',
+                                                speed: isDesktop ? 800 : 400
+                                            }}
+                                            hasTrack={false}
+                                    >
+                                        <SplideTrack>
+                                            {
+                                                product.bucket_link.map(el =>
+                                                    <SplideSlide className={s.photo} key={el.id}>
+                                                        <Image src={el.url} alt=''
+                                                               fill={true}
+                                                               loading={'eager'}
+                                                               style={{objectFit: 'contain'}}
+                                                        />
+                                                    </SplideSlide>
+                                                )
+                                            }
+                                        </SplideTrack>
+                                        <div className="splide__arrows">
+                                            <button className="splide__arrow splide__arrow--prev">
+                                                <Image src={left} alt='' width={20}/>
+                                            </button>
+                                            <button className="splide__arrow splide__arrow--next" ref={buttonRef}>
+                                                <Image src={right} alt='' width={20}/>
+                                            </button>
+                                        </div>
+                                    </Splide>
+                                </div>
                                 :
                                 <div style={{position: "relative"}}
                                 >
@@ -431,6 +433,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}>
                             <div className={s.row}>
                                 <div className={s.col50}>
+                                    {!isDesktop && <BreadcrumbC list={product.list_lines}/>}
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
@@ -593,17 +596,17 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     Подробнее про правила возврата читайте <a href="" className={s.link}>тут</a>
                                 </p>
                             </TextModal>
-                            <QuestionsDropdown/>
+                            {/*<QuestionsDropdown/>*/}
                         </div>
                     </div>
                 </div>
-                {lastSeen.length > 0 &&
-                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
-                }
                 {
                     compilations.map(el =>
                         <Compilation arr={el.products} title={el.name}/>
                     )
+                }
+                {lastSeen.length > 0 &&
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
         </MainLayout>

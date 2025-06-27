@@ -20,7 +20,7 @@ const Shoes = ({photo, handleClose}) => {
         let queryObj = {}
         if (userStore.gender) {
             gender = userStore.gender
-            queryObj.gender = gender
+            queryObj.gender = gender[0].toUpperCase()
         }
         const colArr = []
         colArr.push(

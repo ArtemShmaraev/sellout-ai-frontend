@@ -16,7 +16,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
 
 const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL, product,
-                  available}) => {
+                  available, bonus}) => {
     const [prices, setPrices] = useState([])
     const {cartStore, userStore} = useContext(Context)
     const router = useRouter()
@@ -50,7 +50,6 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const data = await removeFromWishlist(userId, productId, token)
         setIsInWishlist(false)
     }
-    console.log(product)
     return (
         <div key={unitId}>
             <hr/>
@@ -97,6 +96,8 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             <div className={s.brand}></div>
                             <div className={s.text}></div>
                         </div>
+                        <div className={s.brand}>Начислено бонусов:</div>
+                        <div className={s.text}>{bonus} ₽</div>
                         {userStore.isLogged
                             ?
                             <div className={s.like_block}

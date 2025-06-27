@@ -24,7 +24,7 @@ const CompleteCard = ({order}) => {
                         Телефон: {order.phone}
                     </div>
                     <div className={s.prices}>
-                        Способо получения: {order.delivery}
+                        Способ получения: {order.delivery}
                     </div>
                 </div>
                 <div className={s.final_col}>

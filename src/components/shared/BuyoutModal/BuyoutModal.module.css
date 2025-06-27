@@ -39,6 +39,7 @@
 .title {
     font-size: 20px;
     font-weight: 700;
+    text-align: center;
 }
 .input {
     border: 1px solid darkgrey;

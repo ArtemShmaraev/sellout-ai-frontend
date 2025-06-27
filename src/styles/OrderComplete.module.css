@@ -37,6 +37,10 @@
 .link:hover {
     color: black;
 }
+.faq_block {
+    padding: 0 10%;
+    margin-bottom: 30px;
+}
 @media (max-width: 1200px) {
     .cont {
         margin-top: 70px;
@@ -54,5 +58,8 @@
     }
     .info_text {
         width: 100%;
+    }
+    .faq_block {
+        padding: 0;
     }
 }

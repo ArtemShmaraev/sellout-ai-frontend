@@ -177,9 +177,11 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
 @media (max-width: 1200px) {
     .cont {
         width: 100%;
+        margin-bottom: 0;
     }
     .above_card {
         font-size: 15px;
@@ -213,5 +215,8 @@
     }
     .faq_block {
         padding: 0;
+    }
+    .questions_text {
+        font-size: 16px;
     }
 }

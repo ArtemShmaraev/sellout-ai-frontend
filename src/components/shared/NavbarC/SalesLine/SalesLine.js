@@ -1,10 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './SalesLine.module.css'
 import {Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css'
 import Link from "next/link";
+import {Context} from "@/context/AppWrapper";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 const SalesLine = () => {
+    const {userStore} = useContext(Context)
     const [isDesktop, setIsDesktop] = useState(false)
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -44,11 +47,25 @@ const SalesLine = () => {
                         ?
                             <SplideSlide className={s.splide}>
                                 Зовите друзей на Sellout и зарабатывайте до 6000₽ за
-                                каждого приведённого клиента. <Link href={''} className={s.link}>Подробнее</Link>
+                                каждого приведённого
+                                клиента. { userStore.isLogged ?
+                                <Link href={'/account/referral'} className={s.link}>Подробнее</Link>
+                                :
+                                <AuthModal inline={true}>
+                                    <span className={s.link}>Подробнее</span>
+                                </AuthModal>
+                            }
                             </SplideSlide>
                             :
                             <SplideSlide className={s.splide} style={{fontSize: '11px', paddingTop: '2px'}}>
-                                Получайте до 6000₽ за приведённого клиента. <Link href={''} className={s.link}>Подробнее</Link>
+                                Получайте до 6000₽ за приведённого
+                                клиента. { userStore.isLogged ?
+                                <Link href={'/account/referral'} className={s.link}>Подробнее</Link>
+                                :
+                                <AuthModal inline={true} salesLine={true}>
+                                    <span className={s.link}>Подробнее</span>
+                                </AuthModal>
+                            }
                             </SplideSlide>
                     }
                     {

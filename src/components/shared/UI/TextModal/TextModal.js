@@ -24,15 +24,18 @@ const TextModal = ({children, title, img, titleClassname}) => {
             {
                 !titleClassname
                 ?
-                    <button
-                        className={s.toggle_btn}
-                        onClick={handleShow}
-                    >
-                        <Image src={img} alt="" className={s.icon} width={30}/>
-                        <div className={s.label}>
-                            {title}
-                        </div>
-                    </button>
+                    <>
+                        <button
+                            className={s.toggle_btn}
+                            onClick={handleShow}
+                        >
+                            <Image src={img} alt="" className={s.icon}/>
+                            <div className={s.label}>
+                                {title}
+                            </div>
+                        </button>
+                        <hr className={'my-2'}/>
+                    </>
                     :
                     <p className={titleClassname} onClick={handleShow}>{title}</p>
             }

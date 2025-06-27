@@ -24,8 +24,25 @@
     text-decoration: none;
     padding: 7px 100px;
 }
+.orders_block {
+    margin-bottom: 100px;
+}
+.faq_block {
+    padding: 0 10%;
+    margin-bottom: 30px;
+}
+.link_text {
+    text-decoration: underline;
+    cursor: pointer;
+}
 @media (max-width: 1200px) {
     .cont {
         width: 100%;
+    }
+    .faq_block {
+        padding: 0;
+    }
+    .questions_text {
+        font-size: 16px;
     }
 }
