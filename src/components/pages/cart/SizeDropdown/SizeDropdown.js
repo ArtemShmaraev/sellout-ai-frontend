@@ -72,7 +72,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                     ?
                                     <div className='d-flex justify-content-between align-items-center w-100'>
                                         <div className='d-flex align-items-center'>
-                                            <div className={s.icons}>{parseHtml(selectedItem.view_size)}</div>
+                                            <div className={s.size}>{parseHtml(selectedItem.view_size)}</div>
                                             {selectedItem.is_fast_ship && <Image src={truck} alt="" className={s.icons}/>}
                                             {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>

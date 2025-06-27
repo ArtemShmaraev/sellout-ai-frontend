@@ -290,33 +290,6 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 >{brandsDisplay()}</Link>
                                 <div className={s.model}>{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
-                                {
-                                    prices.length > 0 &&
-                                    <>
-                                        <div
-                                            className={s.price_default}
-                                            style={product.is_sale
-                                                ? {textDecoration: 'line-through', fontSize: '16px'}
-                                                : {textDecoration: 'none', fontSize: '19px'}}
-                                        >от {product.price.start_price} ₽</div>
-                                        <div className='d-flex align-items-center'>
-                                            {product.is_sale &&
-                                                <div className={s.price_sale}>
-                                                    от {product.price.final_price} ₽
-                                                </div>
-                                            }
-                                            {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
-                                            {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
-                                        </div>
-                                        {
-                                            shouldRenderBonuses() &&
-                                            <p className={s.bonuses_block}>
-                                                <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
-                                                в подарок!
-                                            </p>
-                                        }
-                                    </>
-                                }
                             </>
                         }
                         {
@@ -358,7 +331,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </Splide>
                                 </div>
                                 :
-                                <div style={{position: "relative"}}
+                                <div className={s.slider}
                                 >
                                     <div className={s.photo}>
                                         <Image src={product.bucket_link[0].url} alt=''
@@ -372,6 +345,33 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                         }
                         {!isDesktop &&
                             <>
+                                {
+                                    prices.length > 0 &&
+                                    <>
+                                        <div
+                                            className={s.price_default}
+                                            style={product.is_sale
+                                                ? {textDecoration: 'line-through', fontSize: '16px'}
+                                                : {textDecoration: 'none', fontSize: '19px'}}
+                                        >от {product.price.start_price} ₽</div>
+                                        <div className='d-flex align-items-center'>
+                                            {product.is_sale &&
+                                                <div className={s.price_sale}>
+                                                    от {product.price.final_price} ₽
+                                                </div>
+                                            }
+                                            {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
+                                            {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                        </div>
+                                        {
+                                            shouldRenderBonuses() &&
+                                            <p className={s.bonuses_block}>
+                                                <Image src={gift} alt='' className={s.bonus_icon}/> <span className={s.bonuses}> {bonuses}₽</span> бонусов
+                                                в подарок!
+                                            </p>
+                                        }
+                                    </>
+                                }
                                 {
                                     prices.length > 0 &&
                                     <div className={s.modals_block}>

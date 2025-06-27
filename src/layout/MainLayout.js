@@ -42,6 +42,7 @@ const MainLayout = ({children}) => {
         <>
             <Head>
                 <meta name={'description'} content={'Купить кроссовки круто'}/>
+                <meta name="theme-color" content="#000000"/>
             </Head>
             <div className={'body'}>
                 <NavbarC/>

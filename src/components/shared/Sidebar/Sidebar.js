@@ -205,6 +205,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.brands)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Бренды</div>
@@ -214,6 +215,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.shoes)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Обувь</div>
@@ -223,6 +225,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.clothes)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Одежда</div>
@@ -232,6 +235,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.accessories)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Аксессуары</div>
@@ -241,6 +245,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.adidas)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>adidas</div>
@@ -250,6 +255,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.jordan)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Jordan</div>
@@ -259,6 +265,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.newBalance)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>New Balance</div>
@@ -268,6 +275,7 @@ const Sidebar = ({photos}) => {
                                      onClick={() => {
                                          setIsSectionOpen(true)
                                          setCurrSection(sections.nike)
+                                         sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Nike</div>

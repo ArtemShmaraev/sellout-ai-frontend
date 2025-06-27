@@ -140,4 +140,8 @@
     .questions_text {
         font-size: 16px;
     }
+    .point_block {
+        width: 45%;
+        font-size: 13px;
+    }
 }
