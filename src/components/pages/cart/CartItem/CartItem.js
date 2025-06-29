@@ -96,8 +96,13 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             <div className={s.brand}></div>
                             <div className={s.text}></div>
                         </div>
-                        <div className={s.brand}>Начислено бонусов:</div>
-                        <div className={s.text}>{bonus} ₽</div>
+                        {
+                            Number(bonus) > 0 &&
+                            <>
+                                <div className={s.brand}>Начислено бонусов:</div>
+                                <div className={s.text}>{bonus} ₽</div>
+                            </>
+                        }
                         {userStore.isLogged
                             ?
                             <div className={s.like_block}

@@ -25,7 +25,7 @@ export const getServerSideProps = async (context) => {
     return {props : {order}}
 }
 const Complete = ({order}) => {
-    const {userStore} = useContext(Context)
+    const {userStore, cartStore} = useContext(Context)
     const router = useRouter()
 
     const [isDesktop, setIsDesktop] = useState(true)
@@ -42,6 +42,10 @@ const Complete = ({order}) => {
     const closeContact = () => {
         setContactOpen(false)
     }
+    useEffect(() => {
+        cartStore.setCartCnt(0)
+        console.log(cartStore.cartCnt)
+    }, [userStore.isLogged])
     return (
         <MainLayout>
             <div className={s.cont + ' custom_cont'}>

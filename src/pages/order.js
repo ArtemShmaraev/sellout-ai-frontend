@@ -183,7 +183,6 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         const checkout = await checkoutOrder(orderObj, id, token).catch()
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
-        cartStore.setCartCnt(0)
         setOrder(checkout)
         console.log(checkout)
         setTimeout(() => {
@@ -274,7 +273,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             <input type="hidden" name="phone_number" value={order.phone_int} />
                             <input type="hidden" name="email" value={order.email} />
                             <input type="hidden" name="payment_type" defaultValue="spg_test" />
-                            <input type="hidden" name="url_success" defaultValue="http://127.0.0.1:8000/api/v1/order/signature" />
+                            <input type="hidden" name="url_success" defaultValue="https://sellout.su/api/v1/order/signature" />
                             {/*<input*/}
                             {/*    type="image"*/}
                             {/*    id="a1lite_button"*/}

@@ -102,7 +102,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                         </div>
                         :
                         <div className={s.dropdown_header_text}>
-                            Выберите ${manySizes ? 'размер' : 'конфигурацию'}
+                            Выберите {manySizes ? 'размер' : 'конфигурацию'}
                         </div>
                     }
                 </div>

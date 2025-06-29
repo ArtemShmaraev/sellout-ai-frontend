@@ -8,9 +8,10 @@
     justify-content: space-between;
     align-items: baseline;
 }
-.link {
+.cart_link {
     color: #9a9999;
     cursor: pointer;
+    white-space: nowrap;
 }
 .text_underline {
     text-decoration: underline;

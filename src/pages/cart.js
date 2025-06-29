@@ -220,7 +220,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                 <div className={s.title_block}>
                     <h3>Корзина</h3>
                     <Link href={'/products'}
-                       className={s.link}
+                       className={s.cart_link}
                     >Продолжить покупки</Link>
                 </div>
                 <div>
