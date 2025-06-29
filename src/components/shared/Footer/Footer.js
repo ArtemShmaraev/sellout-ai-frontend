@@ -51,10 +51,10 @@ const Footer = () => {
                         <Col lg={4} className={s.footer_col}>
                             <h4>Sellout</h4>
                             <div>
-                                <Link href="" className={s.footer_link}>О нас</Link>
+                                <Link href="" className={s.footer_link} target={'_blank'}>О нас</Link>
                             </div>
                             <div>
-                                <Link href="" className={s.footer_link}>Блог</Link>
+                                <Link href="" className={s.footer_link} target={'_blank'}>Блог</Link>
                             </div>
                             <div>
                                 <span className={s.footer_link}
@@ -97,7 +97,7 @@ const Footer = () => {
                                     будут списаны. Обычно подтверждение заказа происходит в кратчайшие сроки. Обо всех изменениях статуса заказа
                                     Вы можете получать уведомления удобным для Вас способом, а также следить
                                     за ними в Личном Кабинете. В случае, если заказ не удастся подтвердить, вся сумма будет незамедлительно разморожена.
-                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link}>тут</Link>
+                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Возврат'} img={ret} titleClassname={s.footer_link}>
@@ -109,14 +109,14 @@ const Footer = () => {
                                     значком <Image src={refund} alt=""/>. Мы уже предоставляем возврат даже на некоторые
                                     эксклюзивные коллекции и постоянно стремимися увеличить ассортимент товаров, подлежащих возврату,
                                     чтобы Ваши покупки с нами стали еще более удобными!
-                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link}>тут</Link>
+                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                         </Col>
                         <Col lg={4} className={s.footer_col}>
                             <h4>Остались вопросы?</h4>
                             <div>
-                                <Link href="/faq" className={s.footer_link}>Ответы на большинство из них: FAQ</Link>
+                                <Link href="/faq" className={s.footer_link} target={'_blank'}>Ответы на большинство из них: FAQ</Link>
                             </div>
                             <div>
                                 <p className={s.footer_text}>Или напишите нам:</p>
@@ -141,10 +141,10 @@ const Footer = () => {
                     <>
                         <FooterDropdown header={'Sellout'}>
                             <div>
-                                <Link href="/faq" className={s.footer_link}>О нас</Link>
+                                <Link href="/faq" className={s.footer_link} target={'_blank'}>О нас</Link>
                             </div>
                             <div>
-                                <Link href="" className={s.footer_link}>Блог</Link>
+                                <Link href="" className={s.footer_link} target={'_blank'}>Блог</Link>
                             </div>
                             <div>
                                 <span className={s.footer_link}
@@ -160,7 +160,7 @@ const Footer = () => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} target={'_blank'}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
@@ -186,7 +186,7 @@ const Footer = () => {
                                     будут списаны. Обычно подтверждение заказа происходит в кратчайшие сроки. Обо всех изменениях статуса заказа
                                     Вы можете получать уведомления удобным для Вас способом, а также следить
                                     за ними в Личном Кабинете. В случае, если заказ не удастся подтвердить, вся сумма будет незамедлительно разморожена.
-                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link}>тут</Link>
+                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Возврат'} img={ret} titleClassname={s.footer_link}>
@@ -198,13 +198,13 @@ const Footer = () => {
                                     значком <Image src={refund} alt=""/>. Мы уже предоставляем возврат даже на некоторые
                                     эксклюзивные коллекции и постоянно стремимися увеличить ассортимент товаров, подлежащих возврату,
                                     чтобы Ваши покупки с нами стали еще более удобными!
-                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link}>тут</Link>
+                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                         </FooterDropdown>
                         <FooterDropdown header={'Остались вопросы?'}>
                             <div>
-                                <Link href="/faq" className={s.footer_link}>Ответы на большинство из них: FAQ</Link>
+                                <Link href="/faq" className={s.footer_link} target={'_blank'}>Ответы на большинство из них: FAQ</Link>
                             </div>
                             <div>
                                 <p className={s.footer_text}>Или напишите нам:</p>

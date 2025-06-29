@@ -432,7 +432,7 @@ const Referral = ({loyalty, fetchedPromo}) => {
 
                 <div className={s.faq_block}>
                     <h5 className={'text-center'}>Ответы на большинство вопросов
-                        Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                        Вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
                     <h5 className={'text-center'}>Если у Вас остались вопросы, Вы всегда
                         можете обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span> и мы будем
                         рады Вам помочь!</h5>

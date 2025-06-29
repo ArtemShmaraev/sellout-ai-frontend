@@ -47,6 +47,11 @@
 .link:hover {
     color: black;
 }
+.faq_block {
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
 @media (max-width: 1000px) {
     .toggle_btn {
         margin-top: 20px;

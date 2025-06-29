@@ -184,13 +184,16 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
         setOrder(checkout)
-        console.log(checkout)
-        setTimeout(() => {
-            checkoutRef.current.submit()
-        }, 100)
-
+        if (userData.user_status.base) {
+            setTimeout(() => {
+                checkoutRef.current.submit()
+            }, 100)
+        } else {
+            router.push(`order/complete?id=${order.id}`)
+        }
         // router.push(`order/complete?id=${order.id}`)
     }
+    console.log(userData)
     useEffect(() => {
         return () => {
             orderStore.setShipType(null)
@@ -340,7 +343,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
 
                                     </LoyaltyFAQ>
                                 </div>
-                                <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                                <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
                             </TextModal>
                         </div>
                     </div>

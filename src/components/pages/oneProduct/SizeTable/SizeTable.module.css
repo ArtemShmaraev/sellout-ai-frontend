@@ -21,11 +21,36 @@
 .header {
     font-size: 20px;
 }
+.info_block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0;
+}
+.img_cont {
+    width: 35%;
+    position: relative;
+    min-height: 100px;
+}
+.img {
+    object-fit: contain;
+    object-position: center;
+}
+.text_block {
+    flex: 1;
+}
+.description {
+    font-size: 12px;
+}
 .btns_block {
     display: flex;
+    overflow-x: auto;
+}
+.btns_block::-webkit-scrollbar {
+    display: none;
 }
 .btn {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     padding: 15px 0;
     background: transparent;
@@ -33,12 +58,17 @@
     border-bottom: 1px solid;
     outline: none;
     flex: 1;
+    min-width: 150px;
 }
 .table_block {
     color: #626161;
     text-align: center;
     max-height: 395px;
     overflow: auto;
+}
+.first_row {
+    color: black;
+    font-weight: 500;
 }
 .tr_gray {
     background: #d7d7d7;

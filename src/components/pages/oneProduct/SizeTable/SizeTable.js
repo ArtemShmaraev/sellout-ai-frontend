@@ -4,7 +4,7 @@ import {Modal} from "react-bootstrap";
 import close from '@/static/icons/x-lg.svg'
 import Image from "next/image";
 
-const SizeTable = ({tables}) => {
+const SizeTable = ({tables, photo}) => {
     const [show, setShow] = useState(false);
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -55,7 +55,7 @@ const SizeTable = ({tables}) => {
                 <td className={s.td}>{tableKey}</td>
             )
         }
-        const sizeRowsTr = <tr>{rowsNameTr}</tr>
+        const sizeRowsTr = <tr className={s.first_row}>{rowsNameTr}</tr>
         sizeRowsArr.push(sizeRowsTr)
         const sizesArr = Object.values(table)
 
@@ -90,31 +90,50 @@ const SizeTable = ({tables}) => {
         const obj = {}
         if (tables.hasOwnProperty('main_regular_table') && Object.keys(tables.main_regular_table).length) {
             const table = renderTable(tables.main_regular_table)
-            tablesArr.push({name: 1, table: table})
+            tablesArr.push({
+                name: tables.main_regular_table.table_name,
+                title: tables.main_regular_table.table_title,
+                description: tables.main_regular_table.table_description,
+                table: table
+            })
         }
         if (tables.hasOwnProperty('main_measurements_table') && Object.keys(tables.main_measurements_table).length) {
             const table = renderTable(tables.main_measurements_table)
-            tablesArr.push({name: 2, table: table})
+            tablesArr.push({
+                name: tables.main_measurements_table.table_name,
+                title: tables.main_measurements_table.table_title,
+                description: tables.main_measurements_table.table_description,
+                table: table
+            })
         }
         if (tables.hasOwnProperty('tables_recommendations') && Object.keys(tables.tables_recommendations).length) {
             const table = renderTable(tables.tables_recommendations)
-            tablesArr.push({name: 3, table: table})
+            tablesArr.push({
+                name: tables.tables_recommendations.table_name,
+                title: tables.tables_recommendations.table_title,
+                description: tables.tables_recommendations.table_description,
+                table: table
+            })
         }
         if (tables.hasOwnProperty('default_table') && Object.keys(tables.default_table).length) {
             const table = renderTable(tables.default_table)
-            tablesArr.push({name: 4, table: table})
+            tablesArr.push({
+                name: tables.default_table.table_name,
+                title: tables.default_table.table_title,
+                description: tables.default_table.table_description,
+                table: table
+            })
         }
         return tablesArr
     }
     const [table, setTable] = useState(allTables()[0])
-    // console.log(tables)
     return (
         <>
             <button
                 className={s.toggle_btn}
                 onClick={handleShow}
             >
-                Размерная сетка
+                Таблица размеров
             </button>
             <Modal
                 centered={true}
@@ -128,14 +147,25 @@ const SizeTable = ({tables}) => {
                         <div className={s.header}>Таблица размеров</div>
                         <Image src={close} alt="" onClick={handleClose} style={{cursor: 'pointer'}}/>
                     </div>
-                    <div className={s.header}>Jordan</div>
-                    <div className={s.header}>Сбер молодцы</div>
+                    <div className={s.info_block}>
+                        <div className={s.img_cont}>
+                            <Image src={photo} alt='' className={s.img} fill={true}
+                            />
+                        </div>
+                        <div className={s.text_block}>
+                            <div className={s.header}>{table.title}</div>
+                            <div className={s.description}>{table.description}</div>
+                        </div>
+                    </div>
                     <div className={s.btns_block}>
                         {
                             allTables().map(el =>
                                 <button className={s.btn}
                                         onClick={() => setTable(el)}
-                                        style={el.name === table.name ? {borderColor: '#000'} : {borderColor: '#CCCCCC'}}
+                                        style={el.name === table.name ?
+                                            {borderColor: '#000', color: '#000'}
+                                            :
+                                            {borderColor: '#CCCCCC', color: '#CCCCCC'}}
                                 >
                                     {el.name}
                                 </button>

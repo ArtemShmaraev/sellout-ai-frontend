@@ -49,7 +49,7 @@ const SalesLine = () => {
                                 Зовите друзей на Sellout и зарабатывайте до 6000₽ за
                                 каждого приведённого
                                 клиента. { userStore.isLogged ?
-                                <Link href={'/account/referral'} className={s.link}>Подробнее</Link>
+                                <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
                                 :
                                 <AuthModal inline={true}>
                                     <span className={s.link}>Подробнее</span>
@@ -60,7 +60,7 @@ const SalesLine = () => {
                             <SplideSlide className={s.splide} style={{fontSize: '11px', paddingTop: '2px'}}>
                                 Получайте до 6000₽ за приведённого
                                 клиента. { userStore.isLogged ?
-                                <Link href={'/account/referral'} className={s.link}>Подробнее</Link>
+                                <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
                                 :
                                 <AuthModal inline={true} salesLine={true}>
                                     <span className={s.link}>Подробнее</span>

@@ -168,14 +168,14 @@ const NavbarC = () => {
                             pathname: '/products',
                             query: {category: 'clothes', ...queryGender}
                         }} photos={photos} type={'clothes'}/>
-                        <Megamenu className={s.links} label={'Аксессуары'} link={{
-                            pathname: '/products',
-                            query: {category: 'accessories', ...queryGender}
-                        }} type={'accessories'} photos={photos}/>
                         <Megamenu className={s.links} label={'Сумки'} link={{
                             pathname: '/products',
                             query: {category: 'bags', ...queryGender}
                         }} type={'bags'} photos={photos}/>
+                        <Megamenu className={s.links} label={'Аксессуары'} link={{
+                            pathname: '/products',
+                            query: {category: 'accessories', ...queryGender}
+                        }} type={'accessories'} photos={photos}/>
                         {/*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
                         {/*   onClick={e => {*/}
                         {/*       e.preventDefault()*/}

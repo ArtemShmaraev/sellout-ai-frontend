@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import MainLayout from "@/layout/MainLayout";
 import s from '@/styles/OrderComplete.module.css'
 import check from '@/static/icons/check2-circle.svg'
-import info from '@/static/icons/info-circle.svg'
+import info from '@/static/icons/info.svg'
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import CompleteCard from "@/components/pages/order/CompleteCard/CompleteCard";
@@ -10,21 +10,22 @@ import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {parse} from "cookie";
-import {fetchOneOrder} from "@/http/userApi";
+import {fetchOneOrder, fetchUserInfo} from "@/http/userApi";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
-
+import heart from '@/static/icons/circle_heart.svg'
+import jwtDecode from "jwt-decode";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const {id} = context.query
-    console.log(id)
     const order = await fetchOneOrder(id, token)
-    console.log(order)
-    return {props : {order}}
+    const {user_id} = jwtDecode(token)
+    const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    return {props : {order, userData}}
 }
-const Complete = ({order}) => {
+const Complete = ({order, userData}) => {
     const {userStore, cartStore} = useContext(Context)
     const router = useRouter()
 
@@ -44,7 +45,6 @@ const Complete = ({order}) => {
     }
     useEffect(() => {
         cartStore.setCartCnt(0)
-        console.log(cartStore.cartCnt)
     }, [userStore.isLogged])
     return (
         <MainLayout>
@@ -91,7 +91,21 @@ const Complete = ({order}) => {
 
                     </LoyaltyFAQ>
                 </div>
+                {
+                    !userData.user_status.base &&
+                    <div className={s.info_block}>
+                        <Image src={info} alt='' width={isDesktop ? 80 : 40} className={s.icon}/>
+                        <div>
+                            Мы свяжемся с Вами по указанному контакту: {userData.extra_contact} для подтверждения и оплаты заказа!
+                            <br/>
+                            Обычно это занимает не более 24 часов. Если по какой-то причине мы долго Вам не пишем,
+                            <br/>
+                            просьба обратиться в <span className={s.link} onClick={toggleContact}>службу поддержки</span>
+                        </div>
+                    </div>
+                }
                 <div className={s.info_block}>
+                    <Image src={heart} alt='' width={isDesktop ? 80 : 40} className={s.icon}/>
                     <div>
                         Благодарим Вас за выбор нашего сервиса и доверие к Sellout!
                     </div>

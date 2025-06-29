@@ -275,6 +275,17 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const shouldRenderBonuses = () => {
         return Number(product.price.bonus) > 0;
     }
+    console.log(product)
+    const hasOneTable = () => {
+        let bool = false
+        Object.values(product.size_table_platform.tables).forEach(table => {
+            if (Object.keys(table).length > 0) {
+                console.log(Object.keys(table))
+                bool = true
+            }
+        })
+        return bool
+    }
     return (
         <MainLayout>
             <Head>
@@ -375,9 +386,13 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0 &&
                                     <div className={s.modals_block}>
-                                        <SizeTable tables={product.size_table_platform.tables}/>
+                                        {
+                                            hasOneTable() &&
+                                            <SizeTable tables={product.size_table_platform.tables} photo={product.bucket_link[0].url}/>
+                                        }
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
-                                                  imgSrc={product.bucket_link[0].url}/>
+                                                  imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}
+                                                  str={product.size_table_platform?.size_fit_recommendation ?? ''}/>
                                     </div>
                                 }
                                 {
@@ -493,9 +508,14 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 {
                                     prices.length > 0 &&
                                     <div className={s.modals_block}>
-                                        <SizeTable tables={product.size_table_platform.tables}/>
+                                        {
+                                            hasOneTable() &&
+                                            <SizeTable tables={product.size_table_platform.tables} photo={product.bucket_link[0].url}/>
+                                        }
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
-                                                  imgSrc={product.bucket_link[0].url}/>
+                                                  imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}
+                                                  str={product.size_table_platform?.size_fit_recommendation ?? ''}
+                                        />
                                     </div>
                                 }
                                 {

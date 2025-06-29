@@ -236,21 +236,21 @@ const Sidebar = ({photos}) => {
                                 <div className={s.section_block}
                                      onClick={() => {
                                          setIsSectionOpen(true)
-                                         setCurrSection(sections.accessories)
-                                         sidebarRef.current.scrollTo(0, 0)
-                                     }}
-                                >
-                                    <div>Аксессуары</div>
-                                    <Image src={arrow} alt=""/>
-                                </div>
-                                <div className={s.section_block}
-                                     onClick={() => {
-                                         setIsSectionOpen(true)
                                          setCurrSection(sections.bags)
                                          sidebarRef.current.scrollTo(0, 0)
                                      }}
                                 >
                                     <div>Сумки</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.accessories)
+                                         sidebarRef.current.scrollTo(0, 0)
+                                     }}
+                                >
+                                    <div>Аксессуары</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}
@@ -332,8 +332,8 @@ const Sidebar = ({photos}) => {
                     }
                     <div className={s.sidebar_footer}>
                         <div className={s.col}>
-                            <Link href="" className={s.sidebar_links} onClick={handleClose}>О нас</Link>
-                            <Link href="" className={s.sidebar_links} onClick={handleClose}>Блог</Link>
+                            <Link href="" className={s.sidebar_links} onClick={handleClose} target={'_blank'}>О нас</Link>
+                            <Link href="" className={s.sidebar_links} onClick={handleClose} target={'_blank'}>Блог</Link>
                             <span className={s.sidebar_links}
                                   onClick={toggleContact}
                             >Контакты</span>
@@ -360,7 +360,7 @@ const Sidebar = ({photos}) => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} onClick={handleClose}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} onClick={handleClose} target={'_blank'}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
@@ -386,7 +386,7 @@ const Sidebar = ({photos}) => {
                                     будут списаны. Обычно подтверждение заказа происходит в кратчайшие сроки. Обо всех изменениях статуса заказа
                                     Вы можете получать уведомления удобным для Вас способом, а также следить
                                     за ними в Личном Кабинете. В случае, если заказ не удастся подтвердить, вся сумма будет незамедлительно разморожена.
-                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link} onClick={handleClose}>тут</Link>
+                                    Подробнее про правила оплаты читайте <Link href="/faq" className={s.link} onClick={handleClose} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Возврат'} img={ret} titleClassname={s.footer_link}>
@@ -398,13 +398,13 @@ const Sidebar = ({photos}) => {
                                     значком <Image src={refund} alt=""/>. Мы уже предоставляем возврат даже на некоторые
                                     эксклюзивные коллекции и постоянно стремимися увеличить ассортимент товаров, подлежащих возврату,
                                     чтобы Ваши покупки с нами стали еще более удобными!
-                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link} onClick={handleClose}>тут</Link>
+                                    Подробнее про правила возврата читайте <Link href="/faq" className={s.link} onClick={handleClose} target={'_blank'}>тут</Link>
                                 </p>
                             </TextModal>
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Остались вопросы?</h4>
-                            <Link href={'/faq'} className={s.sidebar_links} onClick={handleClose}>Ответы на большинство из них: FAQ</Link>
+                            <Link href={'/faq'} className={s.sidebar_links} onClick={handleClose} target={'_blank'}>Ответы на большинство из них: FAQ</Link>
                             <p className={s.sidebar_text}>Или напишите нам</p>
                             <a href={'mailto:customerservice@sellout.su'}
                                className={s.footer_link}>Почта: customerservice@sellout.su</a>

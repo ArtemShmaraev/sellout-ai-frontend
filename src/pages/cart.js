@@ -496,7 +496,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
 
                             </LoyaltyFAQ>
                         </div>
-                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link}>FAQ</Link></h5>
+                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
                     </TextModal>
                     <TextModal title={'Бонусы'} img={gift}>
                         <Image src={gift_gard} alt='' width={80}/>
@@ -558,7 +558,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
 
                         <div className={s.faq_block}>
                             <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
-                                Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                                Вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
                             <h5 className={`text-center ${s.questions_text}`}>Если у Вас остались вопросы, Вы всегда
                                 можете обратиться в службу поддержки и мы будем
                                 рады Вам помочь!</h5>
@@ -596,7 +596,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
 
                                     </LoyaltyFAQ>
                                 </div>
-                                <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link}>FAQ</Link></h5>
+                                <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
                                 <div>
                                     <h5>Мы в социальных сетях:</h5>
                                     <div className={s.icons_block}>

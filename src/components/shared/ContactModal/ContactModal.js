@@ -39,14 +39,14 @@ const ContactModal = ({isOpen, handleClose}) => {
                                    className={s.link}>@sellout_official</a>
                             </div>
                         </div>
-                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} onClick={handleClose}>FAQ</Link></h5>
+                        <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} onClick={handleClose} target={'_blank'}>FAQ</Link></h5>
                         <div>
                             <h5>Мы в социальных сетях:</h5>
                             <div className={s.icons_block}>
-                                <a href={''}>
+                                <a href={''} target={'_blank'}>
                                     <Image src={tg} width={50} alt="" className={s.icon}/>
                                 </a>
-                                <a href={''}>
+                                <a href={''} target={'_blank'}>
                                     <Image src={vk} width={63} alt="" className={s.icon}/>
                                 </a>
                             </div>

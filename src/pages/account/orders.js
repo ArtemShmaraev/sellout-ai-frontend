@@ -9,6 +9,7 @@ import jwtDecode from "jwt-decode";
 import {fetchUserOrders} from "@/http/userApi";
 import Link from "next/link";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -76,7 +77,7 @@ const Orders = ({orders}) => {
                         </LoyaltyFAQ>
                         <LoyaltyFAQ title={'Как быстро обрабатываются заказы?'}>
                             После успешной оплаты заказа Ваш заказ получает статус “Принят”. Мы стремимся как можно быстрее обрабатывать заказы, обычно это происходят в течение нескольких часов,
-                            после чего Ваш заказ получает статус “В пути”. Подробнее про статусы заказов читайте ниже.
+                            после чего Ваш заказ получает статус “В пути”.
                         </LoyaltyFAQ>
                         <LoyaltyFAQ title={'Как получить трек номер посылки?'}>
                             Как только мы отправим Ваш заказ курьерской службой по России, мы присвоим ему трек-номер. Информацию о трек-номере Вы всегда сможете найти в деталях заказа, а также мы пришлем Вам письмо на почту с трек-номером.
@@ -91,13 +92,14 @@ const Orders = ({orders}) => {
                     </div>
                     <div className={s.faq_block}>
                         <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
-                            Вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
+                            Вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
                         <h5 className={`text-center ${s.questions_text}`}>Если у Вас остались вопросы, Вы всегда
                             можете обратиться в <span className={s.link_text} onClick={toggleContact}>службу поддержки</span> и мы будем
                             рады Вам помочь!</h5>
                     </div>
                 </div>
             </AccountLayout>
+            <ContactModal handleClose={closeContact} isOpen={contactOpen}/>
         </MainLayout>
     );
 };
