@@ -30,6 +30,7 @@ import {fetchFilter} from "@/http/productsApi";
 import NewBalance from "@/components/shared/Sidebar/Sections/NewBalance";
 import Nike from "@/components/shared/Sidebar/Sections/Nike";
 import Jordan from "@/components/shared/Sidebar/Sections/Jordan";
+import Bags from "@/components/shared/Sidebar/Sections/Bags";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -94,6 +95,7 @@ const Sidebar = ({photos}) => {
         clothes: <Clothes photo={photos.clothes} handleClose={handleClose}/>,
         shoes: <Shoes photo={photos.shoes} handleClose={handleClose}/>,
         accessories: <Accessories photo={photos.accessories} handleClose={handleClose}/>,
+        bags: <Bags photo={photos.bags} handleClose={handleClose}/>,
         adidas: <Adidas filters={filters} handleClose={handleClose}/>,
         newBalance: <NewBalance filters={filters} handleClose={handleClose}/>,
         nike: <Nike filters={filters} handleClose={handleClose}/>,
@@ -239,6 +241,16 @@ const Sidebar = ({photos}) => {
                                      }}
                                 >
                                     <div>Аксессуары</div>
+                                    <Image src={arrow} alt=""/>
+                                </div>
+                                <div className={s.section_block}
+                                     onClick={() => {
+                                         setIsSectionOpen(true)
+                                         setCurrSection(sections.bags)
+                                         sidebarRef.current.scrollTo(0, 0)
+                                     }}
+                                >
+                                    <div>Сумки</div>
                                     <Image src={arrow} alt=""/>
                                 </div>
                                 <div className={s.section_block}

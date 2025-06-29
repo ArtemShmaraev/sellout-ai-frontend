@@ -414,7 +414,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             >
                                                 <div className={s.icon_block}>
                                                     <Image src={isInWishlist ? like_fill : like} alt="" className={s.icons}/>
-                                                    <div>В избранное</div>
+                                                    <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
                                                 </div>
                                             </button>
                                             :
@@ -532,7 +532,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             >
                                                 <div className={s.icon_block}>
                                                     <Image src={isInWishlist ? like_fill : like} alt="" className={s.icons}/>
-                                                    <div>В избранное</div>
+                                                    <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
                                                 </div>
                                             </button>
                                             :

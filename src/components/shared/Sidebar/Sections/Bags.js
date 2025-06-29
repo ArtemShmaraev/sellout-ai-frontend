@@ -1,18 +1,18 @@
 import React, {useContext} from 'react';
-import headerJson from "@/components/shared/NavbarC/header.json";
 import {Context} from "@/context/AppWrapper";
-import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
-import Image from "next/image";
+import headerJson from "@/components/shared/NavbarC/header.json";
 import Link from "next/link";
+import s from "@/components/shared/Sidebar/Sidebar.module.css";
+import Image from "next/image";
 
-const Accessories = ({photo, handleClose}) => {
+const Bags = ({photo, handleClose}) => {
     const {userStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
     const accs = {}
-    accs.popularBrands = header["Популярные бренды аксессуаров"]
-    accs.popularCats = header["Популярные категории аксессуаров"]
+    accs.popularBrands = header["Популярные бренды сумок"]
+    accs.popularCats = header["Популярные категории сумок"]
     const fillCol = (colObj, query, secondQuery) => {
         const name = colObj.name
         let gender = 'any'
@@ -55,14 +55,14 @@ const Accessories = ({photo, handleClose}) => {
             <Link className={s.all_link}
                   href={{
                       pathname: '/products',
-                      query: {category: 'accessories', ...queryGender}
+                      query: {category: 'bags', ...queryGender}
                   }}
                   onClick={handleClose}
             >
-                Все аксессуары
+                Все cумки
             </Link>
             {
-                fillCol(accs.popularBrands, 'line', {category: 'accessories'})
+                fillCol(accs.popularBrands, 'line', {category: 'bags'})
             }
             {
                 fillCol(accs.popularCats, 'category')
@@ -74,4 +74,4 @@ const Accessories = ({photo, handleClose}) => {
     );
 };
 
-export default Accessories;
+export default Bags;

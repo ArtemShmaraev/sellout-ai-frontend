@@ -40,10 +40,13 @@ const ProductBlock = ({unit}) => {
                         <div className={s.brand}>Цена</div>
                         <div className={s.text}>{unit.final_price} ₽</div>
                     </div>
-                    {/*<div className={s.ship_block}>*/}
-                    {/*    <div className={s.brand}>Количество</div>*/}
-                    {/*    <div className={s.text}>1</div>*/}
-                    {/*</div>*/}
+                    {
+                        unit.track_number &&
+                        <div className={s.number_block}>
+                            <div className={s.brand}>Трек-номер</div>
+                            <div className={s.text}>{unit.track_number}</div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

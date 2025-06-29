@@ -5,6 +5,10 @@
     display: flex;
     flex-direction: column;
 }
+.cont {
+    margin-left: 3vw;
+    margin-right: calc(3vw + 16px);
+}
 .megamenu {
     position: absolute;
     z-index: 4;

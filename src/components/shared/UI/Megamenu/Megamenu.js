@@ -77,7 +77,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                     <div className={s.megamenu}
                          ref={ref}
                     >
-                        <div className={'custom_cont'}>
+                        <div className={s.cont}>
                             {
                                 type === 'brands' &&
                                 <div className={s.megamenu_row}>
@@ -212,10 +212,56 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                             'Популярные бренды', {category: 'accessories'}
                                         )
                                     }
+                                    {
+                                        renderMegamenu(15, 1,
+                                            header['Популярные категории аксессуаров'], 'category',
+                                            'Популярные категории'
+                                        )
+                                    }
                                     <div className={s.img_col}>
                                         <div className={'w-100'}>
                                             <div className={s.img_cont}>
                                                 <Image src={photos.accessories}
+                                                       alt=''
+                                                       fill={true}
+                                                       sizes={'100%'}
+                                                       className={s.img}
+                                                       loading={'eager'}
+                                                />
+                                            </div>
+                                            <div className={s.link_block}>
+                                                <Link className={s.img_link}
+                                                      href={{
+                                                          pathname: '/products',
+                                                          query: {category: 'accessories', ...queryGender}
+                                                      }}
+                                                >
+                                                    Все аксессуары
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {
+                                type === 'bags' &&
+                                <div className={s.megamenu_row}>
+                                    {
+                                        renderMegamenu(15, 2,
+                                            header['Популярные бренды сумок'], 'line',
+                                            'Популярные бренды', {category: 'bags'}
+                                        )
+                                    }
+                                    {
+                                        renderMegamenu(15, 1,
+                                            header['Популярные категории сумок'], 'category',
+                                            'Популярные категории'
+                                        )
+                                    }
+                                    <div className={s.img_col}>
+                                        <div className={'w-100'}>
+                                            <div className={s.img_cont}>
+                                                <Image src={photos.bags}
                                                        alt=''
                                                        fill={true}
                                                        sizes={'100%'}
