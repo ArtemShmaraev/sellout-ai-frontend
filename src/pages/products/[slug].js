@@ -322,7 +322,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                                 product.bucket_link.map(el =>
                                                     <SplideSlide className={s.photo} key={el.id}>
                                                         <Image src={el.url}
-                                                               alt={brandsDisplay()} {product.model} {product.colorway}
+                                                               alt={`${brandsDisplay()} ${product.model} ${product.colorway}`}
                                                                fill={true}
                                                                loading={'eager'}
                                                                style={{objectFit: 'contain'}}
@@ -345,7 +345,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.slider}
                                 >
                                     <div className={s.photo}>
-                                        <Image src={product.bucket_link[0].url} alt={brandsDisplay()} {product.model} {product.colorway}
+                                        <Image src={product.bucket_link[0].url} alt={`${brandsDisplay()} ${product.model} ${product.colorway}`}
                                                fill={true}
                                                loading={'eager'}
                                                style={{objectFit: 'contain'}}
