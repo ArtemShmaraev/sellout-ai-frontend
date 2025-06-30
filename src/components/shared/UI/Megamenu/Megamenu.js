@@ -127,7 +127,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                         )
                                     }
                                     {
-                                        renderMegamenu(13, 1,
+                                        renderMegamenu(15, 1,
                                             header['Популярные категории обуви'], 'category',
                                             'Категории'
                                         )
@@ -207,7 +207,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                 type === 'accessories' &&
                                 <div className={s.megamenu_row}>
                                     {
-                                        renderMegamenu(15, 2,
+                                        renderMegamenu(15, 3,
                                             header['Популярные бренды аксессуаров'], 'line',
                                             'Популярные бренды', {category: 'accessories'}
                                         )
@@ -247,7 +247,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                 type === 'bags' &&
                                 <div className={s.megamenu_row}>
                                     {
-                                        renderMegamenu(15, 2,
+                                        renderMegamenu(15, 3,
                                             header['Популярные бренды сумок'], 'line',
                                             'Популярные бренды', {category: 'bags'}
                                         )

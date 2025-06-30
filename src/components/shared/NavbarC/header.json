@@ -2408,8 +2408,24 @@
     ],
     "male": [
       {
+        "name": "Acne Studios",
+        "query_name": "acne_studios"
+      },
+      {
         "name": "Alexander McQueen",
         "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "alexander wang",
+        "query_name": "alexander_wang"
+      },
+      {
+        "name": "A.P.C",
+        "query_name": "a.p.c."
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
       },
       {
         "name": "Balmain",
@@ -2432,8 +2448,20 @@
         "query_name": "chanel"
       },
       {
+        "name": "Chloe",
+        "query_name": "chloe"
+      },
+      {
         "name": "Coach",
         "query_name": "coach"
+      },
+      {
+        "name": "DKNY",
+        "query_name": "dkny"
+      },
+      {
+        "name": "Dickies",
+        "query_name": "dickies"
       },
       {
         "name": "Diesel",
@@ -2444,8 +2472,16 @@
         "query_name": "dior"
       },
       {
+        "name": "Fendi",
+        "query_name": "fendi"
+      },
+      {
         "name": "Ferragamo",
         "query_name": "ferragamo"
+      },
+      {
+        "name": "Furla",
+        "query_name": "furla"
       },
       {
         "name": "Givenchy",
@@ -2468,12 +2504,16 @@
         "query_name": "hugo_boss"
       },
       {
-        "name": "JW Anderson",
-        "query_name": "jw_anderson"
+        "name": "Jacquemus",
+        "query_name": "jacquemus"
       },
       {
         "name": "Jil Sander",
         "query_name": "jil_sander"
+      },
+      {
+        "name": "JW Anderson",
+        "query_name": "jw_anderson"
       },
       {
         "name": "Loewe",
@@ -2500,6 +2540,18 @@
         "query_name": "moschino"
       },
       {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "Paco Rabanne",
+        "query_name": "paco_rabanne"
+      },
+      {
+        "name": "PINKO",
+        "query_name": "pinko"
+      },
+      {
         "name": "Polo Ralph Lauren",
         "query_name": "polo_ralph_lauren"
       },
@@ -2512,8 +2564,16 @@
         "query_name": "saint_laurent"
       },
       {
+        "name": "Stella McCartney",
+        "query_name": "stella_mccartney"
+      },
+      {
         "name": "Supreme",
         "query_name": "supreme"
+      },
+      {
+        "name": "The Row",
+        "query_name": "the_row"
       },
       {
         "name": "Tory Burch",
@@ -2530,8 +2590,28 @@
     ],
     "female": [
       {
+        "name": "Acne Studios",
+        "query_name": "acne_studios"
+      },
+      {
         "name": "Alexander McQueen",
         "query_name": "alexander_mcqueen"
+      },
+      {
+        "name": "alexander wang",
+        "query_name": "alexander_wang"
+      },
+      {
+        "name": "A.P.C",
+        "query_name": "a.p.c."
+      },
+      {
+        "name": "Balenciaga",
+        "query_name": "balenciaga"
+      },
+      {
+        "name": "Balmain",
+        "query_name": "balmain"
       },
       {
         "name": "Bottega Veneta",
@@ -2540,6 +2620,10 @@
       {
         "name": "Burberry",
         "query_name": "burberry"
+      },
+      {
+        "name": "Calvin Klein",
+        "query_name": "calvin_klein"
       },
       {
         "name": "Chanel",
@@ -2558,12 +2642,20 @@
         "query_name": "dkny"
       },
       {
+        "name": "Dickies",
+        "query_name": "dickies"
+      },
+      {
         "name": "Diesel",
         "query_name": "diesel"
       },
       {
         "name": "Dior",
         "query_name": "dior"
+      },
+      {
+        "name": "Fendi",
+        "query_name": "fendi"
       },
       {
         "name": "Ferragamo",
@@ -2578,6 +2670,10 @@
         "query_name": "givenchy"
       },
       {
+        "name": "Goyard",
+        "query_name": "goyard"
+      },
+      {
         "name": "Gucci",
         "query_name": "gucci"
       },
@@ -2586,8 +2682,8 @@
         "query_name": "hermes"
       },
       {
-        "name": "JW Anderson",
-        "query_name": "jw_anderson"
+        "name": "Hugo Boss",
+        "query_name": "hugo_boss"
       },
       {
         "name": "Jacquemus",
@@ -2596,6 +2692,10 @@
       {
         "name": "Jil Sander",
         "query_name": "jil_sander"
+      },
+      {
+        "name": "JW Anderson",
+        "query_name": "jw_anderson"
       },
       {
         "name": "Loewe",
@@ -2622,6 +2722,14 @@
         "query_name": "moschino"
       },
       {
+        "name": "Off-White",
+        "query_name": "off-white"
+      },
+      {
+        "name": "Paco Rabanne",
+        "query_name": "paco_rabanne"
+      },
+      {
         "name": "PINKO",
         "query_name": "pinko"
       },
@@ -2636,6 +2744,18 @@
       {
         "name": "Saint Laurent",
         "query_name": "saint_laurent"
+      },
+      {
+        "name": "Stella McCartney",
+        "query_name": "stella_mccartney"
+      },
+      {
+        "name": "Supreme",
+        "query_name": "supreme"
+      },
+      {
+        "name": "The Row",
+        "query_name": "the_row"
       },
       {
         "name": "Tory Burch",
