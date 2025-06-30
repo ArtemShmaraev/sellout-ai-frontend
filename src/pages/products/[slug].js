@@ -275,12 +275,10 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     const shouldRenderBonuses = () => {
         return Number(product.price.bonus) > 0;
     }
-    console.log(product)
     const hasOneTable = () => {
         let bool = false
         Object.values(product.size_table_platform.tables).forEach(table => {
             if (Object.keys(table).length > 0) {
-                console.log(Object.keys(table))
                 bool = true
             }
         })
@@ -289,7 +287,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     return (
         <MainLayout>
             <Head>
-                <title>{product.model}</title>
+                <title>{brandsDisplay()} {product.model} {product.colorway}</title>
+                <meta name={'description'} content={`Закажите ${brandsDisplay()} ${product.model} ${product.colorway} в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.`}/>
             </Head>
             <div className={s.container + ' custom_cont'}>
                 {isDesktop && <BreadcrumbC list={product.list_lines}/>}
@@ -322,7 +321,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                             {
                                                 product.bucket_link.map(el =>
                                                     <SplideSlide className={s.photo} key={el.id}>
-                                                        <Image src={el.url} alt=''
+                                                        <Image src={el.url}
+                                                               alt={brandsDisplay()} {product.model} {product.colorway}
                                                                fill={true}
                                                                loading={'eager'}
                                                                style={{objectFit: 'contain'}}
@@ -345,7 +345,7 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                 <div className={s.slider}
                                 >
                                     <div className={s.photo}>
-                                        <Image src={product.bucket_link[0].url} alt=''
+                                        <Image src={product.bucket_link[0].url} alt={brandsDisplay()} {product.model} {product.colorway}
                                                fill={true}
                                                loading={'eager'}
                                                style={{objectFit: 'contain'}}

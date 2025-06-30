@@ -42,6 +42,8 @@ const MainLayout = ({children}) => {
         <>
             <Head>
                 <meta name={'description'} content={'Купить кроссовки круто'}/>
+                <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />
+                <meta name="yandex-verification" content="82500b5b5e72aa3a" />
                 <meta name="theme-color" content="#000000"/>
                 <script
                     type="text/javascript"

@@ -67,7 +67,6 @@ export const getServerSideProps = async (context) => {
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
-        console.log(cart)
         defaultPrice = cart.total_amount
         finalPrice = cart.final_amount
         sale = cart.total_sale
