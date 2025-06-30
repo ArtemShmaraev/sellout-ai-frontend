@@ -63,14 +63,17 @@ export const getServerSideProps = async (context) => {
     let sale
     let userData = {}
     let defaultPromo
+    let firstOrder = 0
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
+        console.log(cart)
         defaultPrice = cart.total_amount
         finalPrice = cart.final_amount
         sale = cart.total_sale
         productUnits = cart
         maxBonuses = cart.bonus
+        firstOrder = cart.first_order_bonus
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
         defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     } else {
@@ -85,9 +88,9 @@ export const getServerSideProps = async (context) => {
             defaultPromo = promoStr
         }
     }
-    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo} }
+    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo, firstOrder} }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo}) => {
+const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuses, defaultPromo, firstOrder}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
@@ -288,6 +291,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                             value={bonuses}
                                             onClick={e => spendBonuses(e)}
                                 />
+                            }
+                            {
+                                Number(firstOrder) > 0 && <p className={'mt-2 mb-0'}>Подарок за первый заказ: {1000} ₽</p>
                             }
                             {
                                 Number(willBonuses) > 0 && <p className={'mt-2 mb-0'}>Всего будет начислено бонусов: {willBonuses} ₽</p>
