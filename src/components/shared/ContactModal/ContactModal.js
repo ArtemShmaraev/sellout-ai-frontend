@@ -22,7 +22,7 @@ const ContactModal = ({isOpen, handleClose}) => {
                 <div className={s.content}>
                     <Image src={headphones} alt='' width={60}/>
                     <div className={s.text_cont}>
-                        <h5>Вы всегда можете написать в службу поддержки и мы будем рады вам помочь</h5>
+                        <h5>Вы всегда можете написать в службу поддержки, и мы будем рады Вам помочь!</h5>
                         <div>
                             <div>
                                 Почта: <a href={'mailto:customerservice@sellout.su'}

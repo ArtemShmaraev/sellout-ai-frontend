@@ -1,10 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './SortDropdown.module.css'
 import sort from '@/static/icons/sort-alpha-down.svg'
 import Image from "next/image";
 import {useRouter} from "next/router";
+import {Context} from "@/context/AppWrapper";
 
 const SortDropdown = () => {
+    const {filterStore} = useContext(Context)
     const sorts = [
         ['По популярности', '-rel_num'],
         ['Случайная подборка', 'random'],
@@ -36,6 +38,7 @@ const SortDropdown = () => {
         query.ordering = sort
         query.page = 1
         router.push({path, query}, undefined, {scroll: false})
+        filterStore.handleScrollTo()
     }
     const toggleDropdown = () => {
         setIsOpen(!isOpen);

@@ -21,6 +21,29 @@ export async function fetchProductsPage(query, token = '') {
         return data
     }
 }
+export async function fetchPagesCnt(query, token = '') {
+    let allQuery = ''
+    Object.keys(query).forEach(key => {
+        if (typeof query[key] === "object") {
+            query[key].forEach(el => {
+                allQuery += `${key}=${el}&`
+            })
+        } else {
+            allQuery +=`${key}=${query[key]}&`
+        }
+    })
+    console.log(`product/products_count?${allQuery}`)
+    //TODO log
+    if (!token) {
+        const {data} = await $host.get(`product/products_count/?${allQuery}`)
+        return data
+    } else {
+        const {data} = await $host.get(`product/products_count/?${allQuery}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    }
+}
 export async function fetchFilter(filter) {
     const {data} = await $host.get(`product/${filter}`)
     return data
@@ -60,8 +83,6 @@ export async function fetchSizes(query, token = '') {
             allQuery +=`${key}=${query[key]}&`
         }
     })
-    console.log(`product/size_table?${allQuery}`)
-    //TODO log
     if (!token) {
         const {data} = await $host.get(`product/size_table?${allQuery}`)
         return data

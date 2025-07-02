@@ -1,8 +1,32 @@
 import {$host} from "@/http/index";
 
-export async function fetchMainPage() {
-    const {data} = await $host.get(`product/main_page`)
-    return data
+export async function fetchMainPage(token,next, newPage, page) {
+    let pageParam = 'page=1'
+    let nextParam
+    let newParam
+    const paramsArr = []
+    if (page) {
+        pageParam = `page=${page}`
+    }
+    paramsArr.push(pageParam)
+    if (nextParam) {
+        nextParam = 'next=true'
+        paramsArr.push(nextParam)
+    }
+    if (newPage) {
+        newParam = 'new=true'
+        paramsArr.push(newParam)
+    }
+    const str = paramsArr.join('&')
+    if (token) {
+        const {data} = await $host.get(`product/main_page?${str}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.get(`product/main_page?${str}`)
+        return data
+    }
 }
 export async function fetchMore(page) {
     const {data} = await $host.get(`product/main_page?page=${page}`)

@@ -38,6 +38,7 @@
 }
 .text_block {
     flex: 1;
+    min-height: 100px;
 }
 .description {
     font-size: 12px;

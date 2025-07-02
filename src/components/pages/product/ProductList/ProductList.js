@@ -32,7 +32,7 @@ const ProductList = ({products, isAdmin}) => {
                 {products.length === 0 &&
                     <div className={s.nothing}>
                         <div className='text-center'>
-                            Товары по вашему запросу не найдены
+                            Товары по Вашему запросу не найдены
                         </div>
                     </div>
                 }

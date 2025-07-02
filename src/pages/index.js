@@ -5,7 +5,7 @@ import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useEffect, useState} from "react";
 import Head from "next/head";
-import {fetchMore} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
 import {parse} from "cookie";
@@ -15,9 +15,13 @@ import {useRouter} from "next/router";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const page = cookies['index_page']
-    let n = page ? page : 1
-    console.log(n)
-    const data = await fetchMore(n)
+    const token = cookies['access_token']
+    let data
+    if (!page) {
+        data = await fetchMainPage(token, false, true, 1)
+    } else {
+        data = await fetchMainPage(token, false, false, page)
+    }
     return { props: {data} }
 }
 export default function Home({data}) {
@@ -39,25 +43,26 @@ export default function Home({data}) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
-    const [isPageReloaded, setIsPageReloaded] = useState(false);
-
-    useEffect(() => {
-        // Проверяем, была ли страница перезагружена, проверяя, есть ли объект performance в браузере
-        if (typeof window !== 'undefined' && window.performance) {
-            const navigation = window.performance.getEntriesByType('navigation')[0];
-            if (navigation.type === 'reload') {
-                setIsPageReloaded(true);
-                const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
-                Cookies.set('index_page', 1, {expires: fiveHours})
-                router.push('/')
-            }
-        }
-    }, []);
+    // const [isPageReloaded, setIsPageReloaded] = useState(false);
+    //
+    // useEffect(() => {
+    //     // Проверяем, была ли страница перезагружена, проверяя, есть ли объект performance в браузере
+    //     if (typeof window !== 'undefined' && window.performance) {
+    //         const navigation = window.performance.getEntriesByType('navigation')[0];
+    //         if (navigation.type === 'reload') {
+    //             setIsPageReloaded(true);
+    //             const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
+    //             Cookies.set('index_page', 1, {expires: fiveHours})
+    //             router.push('/')
+    //         }
+    //     }
+    // }, []);
     const getMore = async () => {
+        const token = Cookies.get('access_token')
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
-        const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
-        Cookies.set('index_page', Number(page) + 1, {expires: fiveHours})
-        const newData = await fetchMore(page)
+        const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
+        Cookies.set('index_page', Number(page) + 1, {expires: tenMinutes})
+        const newData = await fetchMainPage(token, true, false, Number(page)+1)
         const arr = [...(content), ...newData]
         setContent(arr)
     }

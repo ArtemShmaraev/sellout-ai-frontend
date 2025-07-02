@@ -39,7 +39,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
                    onClick={(e) => previousPage(e)}
                    style={currentPage > 1 ? {color: '#000'} : {color: '#E6E6E6'}}
                 >{'< Предыдущая'}</a>
-                <div className={s.page}>{`${currentPage} из ${getTotalPages(totalProducts)}`}</div>
+                <div className={s.page}>{`${currentPage} из ${totalProducts}`}</div>
                 <a className={s.next}
                    onClick={(e) => nextPage(e)}
                    style={currentPage < getTotalPages(totalProducts) ? {color: '#000'} : {color: '#E6E6E6'}}

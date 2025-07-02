@@ -10,7 +10,7 @@ import FilterDropdowns from "@/components/pages/product/FilterDropdowns/FilterDr
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
-import {fetchFilter, fetchProductsByArray, fetchProductsPage, fetchSizes} from "@/http/productsApi";
+import {fetchFilter, fetchPagesCnt, fetchProductsByArray, fetchProductsPage, fetchSizes} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
@@ -21,6 +21,7 @@ import Head from "next/head";
 import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
 import Compilation from "@/components/shared/Compilation/Compilation";
 import cross from '@/static/icons/x-lg.svg'
+import Cookies from "js-cookie";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -51,7 +52,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
-    const totalProducts = Number(products.count) || 1
+    const [totalProducts, setTotalProducts] = useState(' ')
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore} = useContext(Context)
@@ -88,7 +89,13 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         filterStore.deactivateFilters(filterStore.filters)
         router.push('/products', undefined, {scroll: false})
         filterStore.handleScrollTo()
+        filterStore.setPriceFrom('')
+        filterStore.setPriceTo('')
     }
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        fetchPagesCnt(router.query, token).then(res => setTotalProducts(res))
+    }, [router.asPath])
     return (
         <MainLayout>
             <Head>

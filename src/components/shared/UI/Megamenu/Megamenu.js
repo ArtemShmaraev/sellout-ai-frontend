@@ -273,7 +273,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
                                                 <Link className={s.img_link}
                                                       href={{
                                                           pathname: '/products',
-                                                          query: {category: 'accessories', ...queryGender}
+                                                          query: {category: 'bags', ...queryGender}
                                                       }}
                                                 >
                                                     Все аксессуары

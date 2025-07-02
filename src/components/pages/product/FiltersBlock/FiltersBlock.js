@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './FiltersBlock.module.css'
 import ScrollableBlock2 from "@/components/shared/UI/ScrollableBlock2/ScrollableBlock2";
 import {Context} from "@/context/AppWrapper";
@@ -38,8 +38,56 @@ const FiltersBlock = () => {
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
+    const renderPrice = () => {
+        let content = []
+        const query = router.query
+        if (query.price_min) {
+            content.push(`от ${query.price_min}₽`)
+        }
+        if (query.price_max) {
+            content.push(`до ${query.price_max}₽`)
+        }
+        return (
+            <div className={s.border}>
+                {content.join(' ')}
+                <span className={s.cross}>
+                        <Image src={close} alt=''
+                               onClick={() => {
+                                   clearPrice()
+                               }}
+                        />
+                </span>
+            </div>
+        )
+    }
+    const clearPrice = () => {
+        filterStore.setPriceFrom('')
+        filterStore.setPriceTo('')
+        const query = router.query
+        if (query.price_min) {
+            delete query.price_min
+        }
+        if (query.price_max) {
+            delete query.price_max
+        }
+        const {pathname} = router
+        router.push({pathname, query}, undefined, {scroll: false})
+    }
+    const [showPrice, setShowPrice] = useState(false)
+    useEffect(() => {
+        const {query} = router
+        if (query.price_min || query.price_max) {
+            setShowPrice(true)
+        } else {
+            setShowPrice(false)
+        }
+    }, [router.asPath])
     return (
         <ScrollableBlock2>
+            {
+                showPrice &&
+                renderPrice()
+            }
             {filterStore.activeFilters.map(el =>
                 <div className={s.border}>
                     {el.hasOwnProperty('viewName') ? el.viewName : el.text}
