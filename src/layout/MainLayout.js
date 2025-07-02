@@ -41,11 +41,16 @@ const MainLayout = ({children}) => {
     return (
         <>
             <Head>
+                <link rel={'icon'} type={'image/jpg'} sizes={"192x192"} href={'/favicon.jpg'}/>
+                <link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>
+                <link rel="apple-touch-icon" href="/favicon.jpg"/>
+                <link rel={'manifest'} href={'/manifest.json'}/>
                 <meta name={'description'} content={'Купить кроссовки круто'}/>
                 <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />
                 <meta name="yandex-verification" content="82500b5b5e72aa3a" />
                 <meta name="theme-color" content="#000000"/>
                 <script
+                    async
                     type="text/javascript"
                     dangerouslySetInnerHTML={{
                         __html: `
