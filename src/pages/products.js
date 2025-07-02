@@ -94,7 +94,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     }
     useEffect(() => {
         const token = Cookies.get('access_token')
-        fetchPagesCnt(router.query, token).then(res => setTotalProducts(res))
+        fetchPagesCnt(router.query, token).then(res => {
+            setTotalProducts(res.count)
+        })
     }, [router.asPath])
     return (
         <MainLayout>

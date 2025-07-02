@@ -35,10 +35,10 @@ export async function fetchPagesCnt(query, token = '') {
     console.log(`product/products_count?${allQuery}`)
     //TODO log
     if (!token) {
-        const {data} = await $host.get(`product/products_count/?${allQuery}`)
+        const {data} = await $host.get(`product/products_count?${allQuery}`)
         return data
     } else {
-        const {data} = await $host.get(`product/products_count/?${allQuery}`, {
+        const {data} = await $host.get(`product/products_count?${allQuery}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
         return data
