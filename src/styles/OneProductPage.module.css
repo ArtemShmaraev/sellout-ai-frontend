@@ -194,3 +194,153 @@
         margin-top: 0;
     }
 }
+
+
+.cont {
+    margin-top: 130px;
+    margin-bottom: 50px;
+    min-height: 25vh;
+}
+.title_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.cart_link {
+    color: #9a9999;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.text_underline {
+    text-decoration: underline;
+}
+.shop_button {
+    width: 200px;
+    padding: 10px;
+    background: black;
+    color: white;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    margin-top: 10px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+.login_block {
+    display: flex;
+}
+.main_block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.items_block {
+    width: 70%;
+}
+.promos_block {
+    width: 28%;
+}
+.big_text {
+    font-size: 20px;
+}
+.order_btn {
+    color: white;
+    background: black;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+.green_text {
+    margin: 0 0;
+    color: green;
+    font-size: 14px;
+}
+.red_text {
+    margin: 0 0;
+    color: #b61212;
+    font-size: 14px;
+}
+.questions_block {
+    margin-top: 10px;
+}
+.point_block {
+    width: 35%;
+    white-space: nowrap;
+}
+.line {
+    height: 3px;
+    background: linear-gradient(90deg, rgba(190,190,190,1) 0%, rgba(0,0,0,1) 100%);
+}
+.text {
+    font-weight: 500;
+}
+.faq_block {
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.text_cont {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.text_cont div {
+    font-size: 18px;
+}
+.link {
+    color: black;
+}
+.icons_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 30px;
+}
+.icon {
+    cursor: pointer;
+}
+.img_cont {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+.img {
+    object-fit: contain;
+}
+@media (max-width: 1200px) {
+    .cont {
+        margin-top: 80px;
+    }
+    .login_block {
+        display: inline;
+    }
+    .main_block {
+        flex-direction: column-reverse;
+    }
+    .items_block, .promos_block {
+        width: 100%;
+    }
+    .faq_block {
+        padding: 0;
+    }
+    .questions_text {
+        font-size: 16px;
+    }
+    .point_block {
+        width: 45%;
+        font-size: 13px;
+    }
+}
