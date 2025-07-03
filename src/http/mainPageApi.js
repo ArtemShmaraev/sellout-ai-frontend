@@ -1,6 +1,6 @@
 import {$host} from "@/http/index";
 
-export async function fetchMainPage(token,next, newPage, page) {
+export async function fetchMainPage(token, nextPage, newPage, page) {
     let pageParam = 'page=1'
     let nextParam
     let newParam
@@ -9,7 +9,7 @@ export async function fetchMainPage(token,next, newPage, page) {
         pageParam = `page=${page}`
     }
     paramsArr.push(pageParam)
-    if (nextParam) {
+    if (nextPage) {
         nextParam = 'next=true'
         paramsArr.push(nextParam)
     }
