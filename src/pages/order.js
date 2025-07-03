@@ -191,7 +191,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                 checkoutRef.current.submit()
             }, 100)
         } else {
-            router.push(`order/complete?id=${order.id}`)
+            router.push(`/order/complete?id=${order.id}`)
         }
         // router.push(`order/complete?id=${order.id}`)
     }

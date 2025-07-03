@@ -48,7 +48,7 @@ const Megamenu = ({className, label, link, type, photos}) => {
             )
         }
         const result = (
-            <div style={{minWidth: `${20*colNum}%`}} key={title}>
+            <div style={{minWidth: `${20* colNum}%`}} key={title}>
                 <h4 className={s.h_text}>{title}</h4>
                 <div className={s.cols_block}>
                     {cols}

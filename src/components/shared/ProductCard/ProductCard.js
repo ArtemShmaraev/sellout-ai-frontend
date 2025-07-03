@@ -102,10 +102,12 @@ const ProductCard = ({cardList = false, product}) => {
     }
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (sizesRef.current && !sizesRef.current.contains(event.target)) {
-                setSizesIsShown(false);
+            if (sizesRef.current && sizesRef.current.contains(event.target)) {
+                if (product.available_sizes && product.available_sizes.sizes?.length) {
+                    setSizesIsShown(true)
+                }
             } else {
-                setSizesIsShown(true)
+                setSizesIsShown(false)
             }
         };
 
