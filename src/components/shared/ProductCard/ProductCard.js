@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './ProductCard.module.css'
 import like from '@/static/icons/heart.svg'
 import like_fill from '@/static/icons/heart-fill.svg'
@@ -82,6 +82,7 @@ const ProductCard = ({cardList = false, product}) => {
     }
     const [isLoading, setIsLoading] = useState(true)
 
+    const sizesRef = useRef(null)
     const [sizesIsShown, setSizesIsShown] = useState(false)
     const showSizes = () => {
         if (product.available_sizes && product.available_sizes.sizes?.length) {
@@ -89,9 +90,7 @@ const ProductCard = ({cardList = false, product}) => {
         }
     }
     const hideSizes = () => {
-        if (product.available_sizes && product.available_sizes.sizes) {
-            setSizesIsShown(false)
-        }
+        setSizesIsShown(false)
     }
     const handleTouchCancel = () => {
         hideSizes();
@@ -101,6 +100,21 @@ const ProductCard = ({cardList = false, product}) => {
         const sizes = product.available_sizes.sizes
         return sizes.length <= n ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
     }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sizesRef.current && !sizesRef.current.contains(event.target)) {
+                setSizesIsShown(false);
+            } else {
+                setSizesIsShown(true)
+            }
+        };
+
+        document.addEventListener('mousemove', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousemove', handleClickOutside);
+        };
+    }, []);
     return (
         <Link className={cardList ? s.card_list : s.card}
            href={`/products/${slug}`}
@@ -176,8 +190,7 @@ const ProductCard = ({cardList = false, product}) => {
                 </div>
             }
             <div className={s.text_block}
-                 onMouseEnter={showSizes}
-                 onMouseLeave={hideSizes}
+                 ref={sizesRef}
             >
                 {
                     !sizesIsShown

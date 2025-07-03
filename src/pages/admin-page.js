@@ -13,7 +13,7 @@ import Viewed from "@/components/pages/product/Viewed/Viewed";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import Image from "next/image";
-import {fetchFilter, fetchProductsByArray, fetchProductsPage} from "@/http/productsApi";
+import {fetchFilter, fetchPagesCnt, fetchProductsByArray, fetchProductsPage} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
@@ -24,6 +24,7 @@ import cross from "@/static/icons/x-lg.svg";
 import jwtDecode from "jwt-decode";
 import {fetchLastSeen} from "@/http/userApi";
 import {parse} from "cookie";
+import Cookies from "js-cookie";
 
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
@@ -59,7 +60,7 @@ const AdminPage = ({products, categories, lines, colors, collections, brandsArr,
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
-    const totalProducts = Number(products.count) || 1
+    const [totalProducts, setTotalProducts] = useState(' ')
     const [isOpen , setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore, adminStore} = useContext(Context)
@@ -98,6 +99,12 @@ const AdminPage = ({products, categories, lines, colors, collections, brandsArr,
         router.push('/products', undefined, {scroll: false})
         filterStore.handleScrollTo()
     }
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        fetchPagesCnt(router.query, token).then(res => {
+            setTotalProducts(res.count)
+        })
+    }, [router.asPath])
     return (
         <MainLayout>
             <Head>

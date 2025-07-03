@@ -22,6 +22,7 @@ const Stage1 = ({addresses, userData}) => {
     const [phone, setPhone] = useState(userData.phone_number)
     const [comment, setComment] = useState('')
     useEffect(() => {
+        console.log(userData)
         orderStore.setName(userData.first_name)
         orderStore.setSurname(userData.last_name)
         orderStore.setPatronymic(userData.patronymic ?? '')
