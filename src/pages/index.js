@@ -28,6 +28,12 @@ export default function Home({data}) {
     const router = useRouter()
     const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
+    useEffect(() => {
+        if (!Cookies.get('index_page')) {
+            const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
+            Cookies.set('index_page', 1, {expires: tenMinutes})
+        }
+    }, [])
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {

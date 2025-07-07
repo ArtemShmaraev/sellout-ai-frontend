@@ -24,7 +24,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
     const nextPage = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        if (currentPage < getTotalPages(totalProducts)) {
+        if (currentPage < totalProducts) {
             const {pathname} = router
             const query = {...router.query}
             query.page = currentPage+1
