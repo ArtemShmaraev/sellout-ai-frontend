@@ -98,6 +98,16 @@ const Products = ({products, categories, lines, colors, collections, materials, 
             setTotalProducts(res.count)
         })
     }, [router.asPath])
+
+    const [isSend, setIsSend] = useState(false)
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false)
+    };
+    const handleShow = () => {
+        setShow(true)
+        setIsSend(false)
+    };
     return (
         <MainLayout>
             <Head>
@@ -152,9 +162,16 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
-            <BuyoutModal/>
-
-
+            <div className={s.text_container}>
+                <div className={s.text}>
+                    Не смогли найти на нашей платформе то, что искали? <br/>
+                    Оставьте заявку, и мы привезем Вам желаемый товар!
+                </div>
+                <div className={'d-flex justify-content-center'}>
+                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                </div>
+            </div>
+            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
 
             {modalOpen &&
                 <div className={s.modal}>

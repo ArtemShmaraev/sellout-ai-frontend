@@ -60,9 +60,11 @@ import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
 import Text from "@/components/pages/faq/Text/Text";
 import returnImg from "@/static/icons/arrow-return-left.svg";
-import cashStack from "@/static/icons/cash-stack 1.svg";
+import cashStack from "@/static/icons/cash-stack.svg";
+import cashStack1 from "@/static/icons/cash-stack 1.svg";
 import twoArrows from "@/static/icons/two_arrows.svg";
-
+import ffIcon from '@/static/icons/ff.png'
+import selloutIcon from '@/static/icons/favicon.svg'
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
@@ -612,26 +614,55 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
                                     </p>
                                 </>
                             </TextModal>
-                            <TextModal title={'Нашли тот же товар дешевле?'} img={change}>
-                                <Image src={cashStack} alt='' width={60}/>
+                            <TextModal title={'Нашли тот же товар дешевле?'} img={cashStack}>
+                                <Image src={cashStack1} alt='' width={80}/>
                                 <h4 className={'my-3'}>Нашли тот же товар дешевле?</h4>
+                                <div className={s.arrows_section}>
+                                    <Image src={ffIcon} alt='' width={100}/>
+                                    <div className={s.arrows_block}>
+                                        <div>
+                                            Информация о конкуренте
+                                        </div>
+                                        <div className={s.arrows_cont}>
+                                            <Image src={twoArrows} alt='' fill={true} className={s.arrow_img}/>
+                                        </div>
+                                        <div>
+                                            Лучшая цена
+                                        </div>
+                                    </div>
+                                    <Image src={selloutIcon} alt='' width={70}/>
+                                </div>
                                 <p className={s.text}>
                                     Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим клиентам лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и аксессуаров. Поэтому если Вы нашли более низкую цену у наших конкурентов, смело пишите нам, и мы обязательно сделаем для Вас наилучшее предложение!
 
                                 </p>
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                    <LoyaltyFAQ title={'После чего цена меняться не будет?'}>
-                                        После того, как Вы оформите заказ, цена для Вас будет зафиксирована и никаким изменениям не подлежит. Добавление товара в корзину или избранное, к сожалению, не позволяет нам зафиксировать цену по объективным причинам. Мы стараемся в каждый момент времени предлагать Вам наилучшую цену из возможных и делать Ваш шопинг с нами еще более удобным и выгодным, поэтому не откладывайте Ваши покупки на потом, чтобы не упустить приятные цены!
+                                    <LoyaltyFAQ title={'Цена в другом месте слишком низкая, и Вы думаете, что там продают подделки, что делать?'}>
+                                        Да, если цена разительно ниже нашей, то это явный признак неоригинального товара, однако все равно присылайте нам, где Вы наткнулись на подозрительное предложения, а мы в свою очередь расскажем Вам и объективно докажем, является ли данный магазин магазином подделок. Не стесняйтесь писать нам об этом, быть может, наши опытные специалисты
+                                        уберегут Вас от покупки подделки!
 
                                     </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Как часто могут меняться цены?'}>
-                                        Цена может не меняться как на протяжении долгого времени, так и постоянно оставаться волатильной. Она может как повыситься, так и понизиться. Вскоре мы добавим возможность следить за изменением цен, а также получать уведомления о появлении более выгодного предложения на интересующий Вас лот!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Почему модель оказалась распроданной?'}>
-                                        Так как многие размещенные на нашей платформе лоты являются коллекционными и редкими, может произойти такое, что какой-то конкретный размер или вся модель пропадет из наличия, поэтому не откладывайте свои покупки, чтобы успеть приобрести желанную модель!
-
+                                    <LoyaltyFAQ title={'Куда присылать информацию о том, что Вы нашли более выгодное предложение?'}>
+                                        Вы можете написать нам любым удобным для Вас способом и прислать в любом формате информацию о предложении конкурентов: ссылка,  контакы в соц. сетях, скриншот и.т.д.
+                                        <br/>
+                                        Наши контакты:
+                                        <div>
+                                            <div>
+                                                Почта: <a href={'mailto:customerservice@sellout.su'}
+                                                          className={'text-black'}>customerservice@sellout.su</a>
+                                            </div>
+                                            <div>
+                                                WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                                                             target={'_blank'}
+                                                             className={'text-black'}>+7 993 896-92-27</a>
+                                            </div>
+                                            <div>
+                                                Telegram: <a href={'https://t.me/sellout_official'}
+                                                             target={'_blank'}
+                                                             className={'text-black'}>@sellout_official</a>
+                                            </div>
+                                        </div>
                                     </LoyaltyFAQ>
                                 </div>
                                 <h5>Ответы на большинство вопросов Вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>

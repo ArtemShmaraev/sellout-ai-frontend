@@ -9,6 +9,7 @@ import Text from "@/components/pages/faq/Text/Text";
 import returnImg from '@/static/icons/arrow-return-left.svg'
 import ReferralModal from "@/components/pages/account/ReferralModal/ReferralModal";
 import Image from "next/image";
+import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 
 const Faq = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -59,7 +60,15 @@ const Faq = () => {
             el.classList.remove(s.select_anim)
         }, 4000)
     }
-    const sizeRef = useRef(null)
+    const [isSend, setIsSend] = useState(false)
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false)
+    };
+    const handleShow = () => {
+        setShow(true)
+        setIsSend(false)
+    };
     return (
         <MainLayout>
             <Head>
@@ -121,7 +130,7 @@ const Faq = () => {
                     </Text>
                     <Text title={'Что делать, если не удаётся найти желанный товар?'}>
                         Если Вы не нашли то, что искали, Вы всегда можете написать нам в службу поддержку с запросом на поиск желанной
-                        модели или оставить заявку, нажав сюда, и мы
+                        модели или оставить заявку, <span className={s.underline} onClick={handleShow}>нажав сюда</span>, и мы
                         обязательно постараемся найти для Вас искомый лот!
                     </Text>
                     <FaqDropdown label={'Из каких этапов состоит процесс оформления заказа?'}>
@@ -942,6 +951,7 @@ const Faq = () => {
 
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             <ReferralModal isOpen={referralOpen} handleClose={closeReferral}/>
+            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
         </MainLayout>
     );
 };

@@ -8,10 +8,8 @@ import {Context} from "@/context/AppWrapper";
 import {fetchUserInfo2} from "@/http/userApi";
 import Cookies from "js-cookie";
 
-const BuyoutModal = () => {
+const BuyoutModal = ({show, handleClose, isSend}) => {
     const {userStore} = useContext(Context)
-    const [isSend, setIsSend] = useState(false)
-    const [show, setShow] = useState(false);
     const [isDesktop, setIsDesktop] = useState(true)
     const [name, setName] = useState('');
     const [tg, setTg] = useState('');
@@ -36,88 +34,70 @@ const BuyoutModal = () => {
             setIsDesktop(false)
         }
     }, [isDesktop])
-    const handleClose = () => {
-        setShow(false)
-    };
-    const handleShow = () => {
-        setShow(true)
-        setIsSend(false)
-    };
     return (
-        <div style={{marginTop: '35px'}}>
-            <div className={s.text_container}>
-                <div className={s.text}>
-                    Не смогли найти на нашей платформе то, что искали? <br/>
-                    Оставьте заявку, и мы привезем Вам желаемый товар!
-                </div>
-                <div className={'d-flex justify-content-center'}>
-                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
-                </div>
-            </div>
-
-            <Modal show={show}
-                   onHide={handleClose}
-                   centered={true}
-                   fullscreen={!isDesktop && !isSend}
-            >
-                {!isSend ?
-                    <Modal.Body className='p-4'>
-                        <div className='d-flex justify-content-end'>
-                            <Image src={close} alt='' className={s.close} onClick={handleClose}/>
-                        </div>
-                        <Modal.Header className='mb-3'>
-                            <p className={s.title}>Не смогли найти на нашей платформе то, что искали?
-                                Оставьте заявку, и мы привезем Вам желаемый товар!</p>
-                        </Modal.Header>
-                        <Row className='gy-4'>
-                            <Col lg={12}>
-                                <input type="text"
-                                       placeholder={'Имя*'}
-                                       className={s.input}
-                                       value={name}
-                                       onChange={e => setName(e.target.value)}
-                                />
-                            </Col>
-                            <Col lg={6} sm={12}>
-                                <input type="text"
-                                       placeholder={'@telegram_nickname'}
-                                       className={s.input}
-                                       value={tg}
-                                       onChange={e => setTg(e.target.value)}
-                                />
-                            </Col>
-                            <Col lg={6} sm={12}>
-                                <input type="email"
-                                       placeholder={'Почта*'}
-                                       className={s.input}
-                                       value={email}
-                                       onChange={e => setEmail(e.target.value)}
-                                />
-                            </Col>
-                            <Col lg={12}>
-                                <InputMask mask="+7 999 999-99-99" maskChar={null}
-                                           placeholder={'Номер телефона*'}
-                                           value={phone}
-                                           onChange={e => setPhone(e.target.value)}
-                                >
-                                    {(inputProps) => <input {...inputProps} type="tel"
-                                                            className={s.input}
-                                    />}
-                                </InputMask>
-                            </Col>
-                            <Col lg={12}>
-                                <input type="text"
-                                       placeholder={'Ссылка на товар, бренд, магазин и.т.д.'}
-                                       className={s.input}
-                                       value={link}
-                                       onChange={e => setLink(e.target.value)}
-                                />
-                            </Col>
-                            <Col lg={12}>
-                                <Form.Label>Прикрепите фото товара</Form.Label>
-                                <Form.Control type="file" multiple={true}/>
-                            </Col>
-                            <Col lg={12}>
+        <Modal show={show}
+               onHide={handleClose}
+               centered={true}
+               fullscreen={!isDesktop && !isSend}
+        >
+            {!isSend ?
+                <Modal.Body className='p-4'>
+                    <div className='d-flex justify-content-end'>
+                        <Image src={close} alt='' className={s.close} onClick={handleClose}/>
+                    </div>
+                    <Modal.Header className='mb-3'>
+                        <p className={s.title}>Не смогли найти на нашей платформе то, что искали?
+                            Оставьте заявку, и мы привезем Вам желаемый товар!</p>
+                    </Modal.Header>
+                    <Row className='gy-4'>
+                        <Col lg={12}>
+                            <input type="text"
+                                   placeholder={'Имя*'}
+                                   className={s.input}
+                                   value={name}
+                                   onChange={e => setName(e.target.value)}
+                            />
+                        </Col>
+                        <Col lg={6} sm={12}>
+                            <input type="text"
+                                   placeholder={'@telegram_nickname'}
+                                   className={s.input}
+                                   value={tg}
+                                   onChange={e => setTg(e.target.value)}
+                            />
+                        </Col>
+                        <Col lg={6} sm={12}>
+                            <input type="email"
+                                   placeholder={'Почта*'}
+                                   className={s.input}
+                                   value={email}
+                                   onChange={e => setEmail(e.target.value)}
+                            />
+                        </Col>
+                        <Col lg={12}>
+                            <InputMask mask="+7 999 999-99-99" maskChar={null}
+                                       placeholder={'Номер телефона*'}
+                                       value={phone}
+                                       onChange={e => setPhone(e.target.value)}
+                            >
+                                {(inputProps) => <input {...inputProps} type="tel"
+                                                        className={s.input}
+                                />}
+                            </InputMask>
+                        </Col>
+                        <Col lg={12}>
+                            <input type="text"
+                                   placeholder={'Ссылка на товар, бренд, магазин и.т.д.'}
+                                   className={s.input}
+                                   value={link}
+                                   onChange={e => setLink(e.target.value)}
+                            />
+                        </Col>
+                        <Col lg={12}>
+                            <Form.Label>Прикрепите фото товара</Form.Label>
+                            <Form.Control type="file" multiple={true}/>
+                        </Col>
+                        <Col lg={12}>
                             <textarea
                                 rows={isDesktop ? 3 : 4}
                                 placeholder={'Укажите дополнительные сведения о товаре: наимонования/артикул/' +
@@ -126,25 +106,24 @@ const BuyoutModal = () => {
                                 value={info}
                                 onChange={e => setInfo(e.target.value)}
                             />
-                            </Col>
-                            <Col lg={12} className='d-flex justify-content-center'>
-                                <button onClick={() => setIsSend(true)} className={s.send}>Отправить</button>
-                            </Col>
-                            <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="" className={s.link}
-                            >обработку персональных данных</a></p>
-                        </Row>
-                    </Modal.Body>
-                    :
-                    <Modal.Body className='p-4'>
-                        <div className='d-flex justify-content-end'>
-                            <Image src={close} alt='' className={s.close} onClick={handleClose}/>
-                        </div>
-                        <p className={s.title}>Спасибо за оставленную заявку!
-                            Мы постараемся связаться с Вами как можно скорее!</p>
-                    </Modal.Body>
-                }
-            </Modal>
-        </div>
+                        </Col>
+                        <Col lg={12} className='d-flex justify-content-center'>
+                            <button onClick={() => setIsSend(true)} className={s.send}>Отправить</button>
+                        </Col>
+                        <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="" className={s.link}
+                        >обработку персональных данных</a></p>
+                    </Row>
+                </Modal.Body>
+                :
+                <Modal.Body className='p-4'>
+                    <div className='d-flex justify-content-end'>
+                        <Image src={close} alt='' className={s.close} onClick={handleClose}/>
+                    </div>
+                    <p className={s.title}>Спасибо за оставленную заявку!
+                        Мы постараемся связаться с Вами как можно скорее!</p>
+                </Modal.Body>
+            }
+        </Modal>
     );
 };
 

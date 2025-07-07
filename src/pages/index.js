@@ -107,6 +107,15 @@ export default function Home({data}) {
         })
         return arr
     }
+    const [isSend, setIsSend] = useState(false)
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false)
+    };
+    const handleShow = () => {
+        setShow(true)
+        setIsSend(false)
+    };
     return (
         <MainLayout>
             <Head>
@@ -118,7 +127,16 @@ export default function Home({data}) {
                     <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
                 </div>
             </div>
-            <BuyoutModal/>
+            <div className={s.text_container}>
+                <div className={s.text}>
+                    Не смогли найти на нашей платформе то, что искали? <br/>
+                    Оставьте заявку, и мы привезем Вам желаемый товар!
+                </div>
+                <div className={'d-flex justify-content-center'}>
+                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                </div>
+            </div>
+            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
         </MainLayout>
     )
 }
