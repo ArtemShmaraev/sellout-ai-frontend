@@ -271,7 +271,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         >
                             <input type="hidden" name="key" defaultValue="Bar0rLan2oZV7exfoj/Z6XsApxL+i2p07q781hVigb8=" />
                             <input type="hidden" name="cost" value={order.final_amount?.toString()} />
-                            <input type="hidden" name="name" value={order.id?.toString()} />
+                            <input type="hidden" name="name" value={`Заказ №${order.id?.toString()}`} />
                             <input type="hidden" name="default_email" value={order.email} />
                             <input type="hidden" name="order_id" value={order.id?.toString()} />
                             <input type="hidden" name="phone_number" value={order.phone_int} />
