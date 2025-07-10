@@ -159,12 +159,13 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     <ScrollableBDropdown toggleText={'Линейка'} data={adminStore.lines}/>
                     <div>
                         <div>spu_id: {product.spu_id}</div>
+                        <div>likes_count: {product.rel_num}</div>
                         <div>category_id: {product.category_id}</div>
                         <div>category_name: {product.category_name}</div>
                         <div>level1_category_id: {product.level1_category_id}</div>
                         <div>level2_category_id: {product.level2_category_id}</div>
                         <div>title: {product.platform_info?.poizon?.title}</div>
-                        <div>Линейка: {product.main_line.name}</div>
+                        {/*<div>Линейка: {product.main_line.name}</div>*/}
                     </div>
                 </div>
                 <div className='d-flex justify-content-center my-3'>
