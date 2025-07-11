@@ -160,6 +160,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     <div>
                         <div>spu_id: {product.spu_id}</div>
                         <div>likes_count: {product.rel_num}</div>
+                        <div>likes_count: {product.normalize_rel_num}</div>
                         <div>+likes: {product.likes_month}</div>
                         <div>score: {product.score_product_page}</div>
                         <div>category_id: {product.category_id}</div>
