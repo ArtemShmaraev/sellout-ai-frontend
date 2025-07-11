@@ -29,7 +29,7 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
-import {addLastSeen, fetchLastSeen} from "@/http/userApi";
+import {addLastSeen, fetchLastSeen, fetchLastSeen2} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
@@ -89,11 +89,14 @@ export const getServerSideProps = async (context) => {
     return { props: {product, prices, lastSeen, compilations} }
 }
 
-const OneProductPage = ({product, prices, lastSeen, compilations}) => {
+const OneProductPage = ({product, prices}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
+
+    const [compilations, setCompilations] = useState([])
+    const [lastSeen, setLastSeen] = useState([])
     const {productStore, userStore, cartStore} = useContext(Context)
     useEffect(() => {
         productStore.clearAll()
@@ -102,6 +105,27 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
             productStore.setSizeChosen(prices[0])
         }
     }, [router.asPath])
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        fetchSimilarProducts(product.id, token).then(res => {
+            setCompilations(res)
+        })
+
+
+        if (token) {
+            const {user_id} = jwtDecode(token)
+            fetchLastSeen2(token, user_id).then(res => setLastSeen(res))
+        } else {
+            let arr
+            if (Cookies.get('last_seen')) {
+                arr = Cookies.get('last_seen').trim().split(' ')
+                console.log(arr)
+                if (arr[0] !== '') {
+                    fetchProductsByArray(arr, token).then(res => setLastSeen(res))
+                }
+            }
+        }
+    }, [])
 
     useEffect(() => {
         const checkIsBot = () => {
@@ -307,7 +331,8 @@ const OneProductPage = ({product, prices, lastSeen, compilations}) => {
     return (
         <MainLayout>
             <Head>
-                <title>{brandsDisplay()} {product.model} {product.colorway}</title>
+                <title>{`${brandsDisplay()} ${product.model} ${product.colorway}`}</title>
+                <meta property="og:image" content={product.bucket_link[0].url}/>
                 <meta name={'description'} content={`Закажите ${brandsDisplay()} ${product.model} ${product.colorway} в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.`}/>
             </Head>
             <div className={s.container + ' custom_cont'}>

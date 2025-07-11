@@ -27,6 +27,7 @@ const SearchModal = () => {
         router.push({pathname, query})
         filterStore.setQ(value)
         setIsOpen(false)
+        document.body.classList.remove('body-scroll-clip')
     }
     const [suggs, setSuggs] = useState([])
     const fetchSuggs = (str) => {
@@ -48,6 +49,7 @@ const SearchModal = () => {
     }
     const clickOnSugg = () => {
         setIsOpen(false)
+        document.body.classList.remove('body-scroll-clip')
     }
     const toggleModal = () => {
         if (!isOpen) {

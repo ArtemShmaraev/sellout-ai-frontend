@@ -76,6 +76,12 @@ export async function fetchLastSeen(cookies, userId) {
     })
     return data
 }
+export async function fetchLastSeen2(token, userId) {
+    const {data} = await $authHost.get(`user/last_seen/${userId}`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function addLastSeen(token, userId, productId) {
     const obj = {product_id: productId}
     const {data} = await $host.post(`user/last_seen/${userId}`, JSON.stringify(obj),{
