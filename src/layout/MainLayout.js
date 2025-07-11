@@ -41,8 +41,8 @@ const MainLayout = ({children}) => {
     return (
         <>
             <Head>
-                <link rel={'icon'} type={'image/jpg'} sizes={"192x192"} href={'/favicon.jpg'}/>
-                <link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>
+                <link rel={'icon'} type={'image/png'} sizes={"192x192"} href={'/favicon.png'}/>
+                {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>
                 <link rel={'manifest'} href={'/manifest.json'}/>
                 <meta name={'description'} content={'Купить кроссовки круто'}/>

@@ -64,7 +64,7 @@
 .table_block {
     color: #626161;
     text-align: center;
-    max-height: 395px;
+    height: 395px;
     overflow: auto;
 }
 .first_row {
@@ -88,5 +88,9 @@
     }
     .table_block {
         max-height: 90vh;
+        height: auto;
+    }
+    .text_block {
+        height: 200px;
     }
 }

@@ -62,10 +62,10 @@ const Bags = ({photo, handleClose}) => {
                 Все cумки
             </Link>
             {
-                fillCol(accs.popularBrands, 'line', {category: 'bags'})
+                fillCol(accs.popularCats, 'category')
             }
             {
-                fillCol(accs.popularCats, 'category')
+                fillCol(accs.popularBrands, 'line', {category: 'bags'})
             }
             <div className={s.img_cont}>
                 <Image src={photo} alt='' fill={true} style={{objectFit: 'contain', objectPosition: 'left top'}}/>
