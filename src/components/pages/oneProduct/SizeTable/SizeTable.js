@@ -40,27 +40,39 @@ const SizeTable = ({tables, photo}) => {
         return result;
     }
     const renderTable = (tableObj) => {
-        let table = {}
+        let table = []
         if (tableObj.rows_order) {
             for (const el of tableObj.rows_order) {
-                table[el] = tableObj.values[el]
+                table.push(tableObj.values[el])
             }
         } else {
-            table = tableObj
+            table = Object.values(tableObj)
         }
         const sizeRowsArr = []
-        const rowsNameTr = []
-        for (const tableKey in table) {
-            rowsNameTr.push(
-                <td className={s.td}>{tableKey}</td>
-            )
+        let rowsNameTr = []
+
+        if (tableObj.rows_order) {
+            tableObj.rows_order.forEach(tableKey => {
+                rowsNameTr.push(
+                    <td className={s.td}>{tableKey}</td>
+                )
+            })
+        } else {
+            for (const tableKey in table) {
+                rowsNameTr.push(
+                    <td className={s.td}>{tableKey}</td>
+                )
+            }
         }
         const sizeRowsTr = <tr className={s.first_row}>{rowsNameTr}</tr>
         sizeRowsArr.push(sizeRowsTr)
-        const sizesArr = Object.values(table)
+        const sizesArr = Object.entries(table).map(el => el[1])
 
-        const newTable = transposeArray(sizesArr)
-
+        const newTable = transposeArray(table)
+        console.group()
+        console.log(tables)
+        console.groupEnd()
+        // return []
         for (let i = 0; i < newTable.length; i++) {
             const trArr = []
             for (let j = 0; j < newTable[i].length; j++) {
