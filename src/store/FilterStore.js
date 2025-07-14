@@ -539,6 +539,7 @@ class FilterStore {
             window.scrollTo({
                 top: position,
                 behavior: 'smooth',
+                duration: 1000,
             });
         }
     };
