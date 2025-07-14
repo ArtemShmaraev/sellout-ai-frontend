@@ -209,6 +209,7 @@ const ProductCard = ({cardList = false, product}) => {
                                         ?
                                         <div className={`${s.price}`}>
                                             <span className={s.crossed}>От {price.start_price} ₽</span>
+                                            <br/>
                                             <span className={s.sale_price}>От {price.final_price} ₽</span>
                                         </div>
                                         :

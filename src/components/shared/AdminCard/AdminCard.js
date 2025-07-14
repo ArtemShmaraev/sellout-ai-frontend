@@ -12,6 +12,8 @@ import {deletePhoto, deleteProduct, updateProduct} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import truck from "@/static/icons/truck.svg";
 import re from "@/static/icons/arrow-return-left.svg";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import Link from "next/link";
 
 const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
     const router = useRouter()
@@ -65,8 +67,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
     }
     const submit = async () => {
         const data = adminStore.getAllData()
-        await updateProduct(id, data).then((data) => console.log(data))
-        //TODO убрать console.log
+        updateProduct(id, data)
         adminStore.clearAll()
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
@@ -86,6 +87,10 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
         //TODO убрать console.log
         const {path, query} = router
         router.push({path, query}, undefined, {scroll: false})
+    }
+    const copyLink = async () => {
+        const host = location.host
+        await navigator.clipboard.writeText(`${host}/products/${product.slug}`)
     }
     return (
         <div className={s.card_list}>
@@ -120,7 +125,10 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     photosArr.map(el =>
 
                         <Carousel.Item className={s.image_container}>
-                            <Image src={el.url} alt='' fill={true} style={{objectFit: "contain"}}/>
+                            <Link href={`/products/${product.slug}`}>
+                                <Image src={el.url} alt='' fill={true} style={{objectFit: "contain"}}
+                                />
+                            </Link>
                         </Carousel.Item>
                     )
                 }
@@ -170,6 +178,11 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                         <div>title: {product.platform_info?.poizon?.title}</div>
                         {/*<div>Линейка: {product.main_line.name}</div>*/}
                     </div>
+                </div>
+                <div className='d-flex justify-content-center my-3'>
+                    <button onClick={copyLink}>
+                        Ссылка
+                    </button>
                 </div>
                 <div className='d-flex justify-content-center my-3'>
                     <button onClick={submit} disabled={disabled}>
