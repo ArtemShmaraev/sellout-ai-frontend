@@ -288,7 +288,15 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             {/*/>*/}
                         </form>
 
-                        <button className={s.order_btn} onClick={checkout}>Перейти к оплате</button>
+                        <button className={s.order_btn} onClick={checkout}>
+                            {
+                                userData.user_status.base
+                                ?
+                                    'Перейти к оплате'
+                                    :
+                                    'Оформить заказ'
+                            }
+                        </button>
 
 
 
