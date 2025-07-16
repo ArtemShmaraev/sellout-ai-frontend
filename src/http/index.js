@@ -12,7 +12,7 @@ const $dadata = axios.create({
 })
 
 $authHost.interceptors.request.use((config) => {
-    const accessToken = parse(config.headers.cookie).access_token
+    const accessToken = parse(String(config.headers.cookie)).access_token
     // const refreshToken = parse(config.headers.cookie).refresh_token
     if (accessToken) {
         config.headers.authorization = `Bearer ${accessToken}`
