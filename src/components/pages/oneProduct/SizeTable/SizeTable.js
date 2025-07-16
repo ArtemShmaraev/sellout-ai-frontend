@@ -66,13 +66,8 @@ const SizeTable = ({tables, photo}) => {
         }
         const sizeRowsTr = <tr className={s.first_row}>{rowsNameTr}</tr>
         sizeRowsArr.push(sizeRowsTr)
-        const sizesArr = Object.entries(table).map(el => el[1])
 
         const newTable = transposeArray(table)
-        console.group()
-        console.log(tables)
-        console.groupEnd()
-        // return []
         for (let i = 0; i < newTable.length; i++) {
             const trArr = []
             for (let j = 0; j < newTable[i].length; j++) {

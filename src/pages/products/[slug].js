@@ -139,8 +139,6 @@ const OneProductPage = ({product, prices}) => {
             const interval = setInterval(() => {
                 fetchOneProduct(slug, token)
                     .then(product => {
-                        console.log(product.actual_platform_price)
-                        //TODO log
                         if (product.actual_platform_price) {
                             clearInterval(interval)
                             const chosenSize = productStore.sizeChosen
@@ -156,12 +154,10 @@ const OneProductPage = ({product, prices}) => {
                             }
                             fetchPrices(product.id, token).then((prices) => {
                                 const {view_size} = chosenSize
-                                //TODO log
                                 if (view_size) {
                                     let foundSelected = false
                                     prices.forEach(el => {
                                         if (el.view_size === view_size) {
-                                            //TODO log
                                             productStore.setSizeChosen(el)
                                             foundSelected = true
                                         }
