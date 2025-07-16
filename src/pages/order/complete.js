@@ -7,7 +7,6 @@ import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
 import CompleteCard from "@/components/pages/order/CompleteCard/CompleteCard";
 import {observer} from "mobx-react-lite";
-import {useRouter} from "next/router";
 import Link from "next/link";
 import {parse} from "cookie";
 import {fetchOneOrder, fetchUserInfo} from "@/http/userApi";
@@ -27,7 +26,6 @@ export const getServerSideProps = async (context) => {
 }
 const Complete = ({order, userData}) => {
     const {userStore, cartStore} = useContext(Context)
-    const router = useRouter()
 
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
