@@ -71,22 +71,7 @@ export const getServerSideProps = async (context) => {
     const product = await fetchOneProduct(context.params.slug, token)
     const {id} = product
     const prices = await fetchPrices(id, token)
-
-    let lastSeen = []
-    if (token) {
-        const {user_id} = jwtDecode(token)
-        lastSeen = await fetchLastSeen(context.req.headers.cookie, user_id)
-    } else {
-        let arr
-        if (cookies.last_seen) {
-            arr = cookies['last_seen'].trim().split(' ')
-            if (arr[0] !== '') {
-                lastSeen = await fetchProductsByArray(arr, token)
-            }
-        }
-    }
-    const compilations = await fetchSimilarProducts(product.id, token)
-    return { props: {product, prices, lastSeen, compilations} }
+    return { props: {product, prices} }
 }
 
 const OneProductPage = ({product, prices}) => {
@@ -125,7 +110,7 @@ const OneProductPage = ({product, prices}) => {
                 }
             }
         }
-    }, [])
+    }, [router.asPath])
 
     useEffect(() => {
         const checkIsBot = () => {
@@ -178,7 +163,7 @@ const OneProductPage = ({product, prices}) => {
                 productStore.setAnim(false)
             }
         }
-    }, [])
+    }, [router.asPath])
     const changeBonusesString = (value) => {
         setBonuses(value)
     }
@@ -304,7 +289,7 @@ const OneProductPage = ({product, prices}) => {
         currArr.unshift(id)
         const newStr = currArr.join(' ')
         Cookies.set('last_seen', newStr, {expires: 2772})
-    }, [])
+    }, [router.asPath])
 
     const buttonRef = useRef(null)
     useEffect(() => {

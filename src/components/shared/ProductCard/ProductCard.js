@@ -213,7 +213,16 @@ const ProductCard = ({cardList = false, product}) => {
                                             <span className={s.sale_price}>От {price.final_price} ₽</span>
                                         </div>
                                         :
-                                        <div className={`${s.price}`}>От {price.final_price} ₽</div>
+                                        <div className={`${s.price}`}>
+                                            От {price.final_price} ₽
+                                            {
+                                                Number(price.final_price) > 0
+                                                ?
+                                                    `От ${price.final_price} ₽`
+                                                    :
+                                                    'Нет в наличии'
+                                            }
+                                        </div>
                                 }
                             </div>
                         </>
