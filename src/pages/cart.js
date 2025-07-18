@@ -116,7 +116,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                     //TODO log
                     if (cart.actual_platform_price) {
                         clearInterval(interval)
-                        router.push('/cart')
+                        router.push('/cart', undefined, {scroll: false})
                     }
 
                 }, 4000)

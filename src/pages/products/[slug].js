@@ -166,7 +166,7 @@ const OneProductPage = ({product, prices}) => {
                                         productStore.setSizeChosen(null)
                                     }
                                 }
-                                router.push(`${router.asPath}`)
+                                router.push(`${router.asPath}`, undefined, {scroll: false})
                             })
                         }
                     })
