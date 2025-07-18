@@ -214,7 +214,6 @@ const ProductCard = ({cardList = false, product}) => {
                                         </div>
                                         :
                                         <div className={`${s.price}`}>
-                                            От {price.final_price} ₽
                                             {
                                                 Number(price.final_price) > 0
                                                 ?
