@@ -2,7 +2,6 @@ import React from 'react';
 import s from './FullScreen.module.css'
 import close from '@/static/icons/x-lg.svg'
 import Image from "next/image";
-import ImageGallery from "react-image-gallery";
 import {Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
