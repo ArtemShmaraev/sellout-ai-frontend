@@ -122,9 +122,11 @@ const OneProductPage = ({product, prices}) => {
             const token = Cookies.get('access_token')
             const {slug} = router.query
             const interval = setInterval(() => {
+                console.log('load')
                 fetchOneProduct(slug, token)
                     .then(product => {
                         if (product.actual_platform_price) {
+                            console.log('ok')
                             clearInterval(interval)
                             const chosenSize = productStore.sizeChosen
                             if (chosenSize) {
