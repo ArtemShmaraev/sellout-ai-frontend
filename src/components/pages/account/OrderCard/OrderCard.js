@@ -21,7 +21,7 @@ const OrderCard = ({order}) => {
                 <div className={s.header_block}>
                     <div className={s.header_col}>
                         <div className={`${s.header_text} ${s.num}`}>
-                            № {order.id}
+                            № {order.number}
                         </div>
                         <div className={`${s.header_text} ${s.date}`}>
                             Дата: {order.formatted_date}
@@ -48,8 +48,14 @@ const OrderCard = ({order}) => {
                 <div className={s.details_block}>
                     <div className={s.order}>
                         {
-                            order.order_units.map(el =>
-                                <ProductBlock unit={el}/>
+                            order.order_units.map((el, ind) =>
+                                <>
+                                    <ProductBlock unit={el}/>
+                                    {
+                                        ind !== order.order_units.length - 1 &&
+                                        <hr className={s.hr}/>
+                                    }
+                                </>
                             )
                         }
                     </div>
@@ -62,25 +68,28 @@ const OrderCard = ({order}) => {
                                 Телефон: {order.phone}
                             </div>
                             <div className={s.prices}>
-                                Способо получения: {order.delivery}
+                                Способ получения: {order.delivery}
                             </div>
                         </div>
                         <div className={s.final_col}>
                             <div className={s.prices}>
                                 <div>Товаров на сумму:</div>
-                                <div>{order.total_amount}</div>
+                                <div>{order.total_amount} ₽</div>
                             </div>
-                            <div className={s.prices}>
-                                <div>Скидка:</div>
-                                <div>{order.total_sale}</div>
-                            </div>
+                            {
+                                Number(order.total_sale) > 0 &&
+                                <div className={s.prices}>
+                                    <div>Скидка:</div>
+                                    <div>{order.total_sale} ₽</div>
+                                </div>
+                            }
                             <div className={s.prices}>
                                 <div>Доставка:</div>
-                                <div>{order.delivery_view_price}</div>
+                                <div>{order.delivery_view_price} ₽</div>
                             </div>
                             <div className={s.prices}>
                                 <div>Итого:</div>
-                                <div>{order.final_amount}</div>
+                                <div>{order.final_amount} ₽</div>
                             </div>
                         </div>
                     </div>

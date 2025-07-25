@@ -1,5 +1,5 @@
 import NavbarC from "@/components/shared/NavbarC/NavbarC";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Footer from "@/components/shared/Footer/Footer";
 import ScrollUp from "@/components/shared/ScrollUp/ScrollUp";
 import Head from "next/head";
@@ -45,7 +45,7 @@ const MainLayout = ({children}) => {
                 {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>
                 <link rel={'manifest'} href={'/manifest.json'}/>
-                <meta name={'description'} content={'Купить кроссовки круто'}/>
+                <meta name={'description'} content={'Закажите одежду, обувь и аксессуары в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.'}/>
                 <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />
                 <meta name="yandex-verification" content="82500b5b5e72aa3a" />
                 <meta name="theme-color" content="#000000"/>

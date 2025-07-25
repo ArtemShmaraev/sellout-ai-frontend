@@ -125,7 +125,7 @@ export default function Home({data}) {
     return (
         <MainLayout>
             <Head>
-                <title>SELLOUT</title>
+                <title>Sellout - онлайн платформа покупки брендовой одежды</title>
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 {renderPage()}

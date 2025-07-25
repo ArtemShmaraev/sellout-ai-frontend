@@ -47,7 +47,6 @@
 
 }
 .order {
-    padding: 15px;
     border-bottom: 1px solid black;
 }
 .row {
@@ -98,6 +97,9 @@
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+}
+.hr {
+    visibility: hidden;
 }
 @media (max-width: 1200px) {
     .header_col {
@@ -153,5 +155,8 @@
     }
     .prices {
         font-size: 14px;
+    }
+    .hr {
+        visibility: visible;
     }
 }

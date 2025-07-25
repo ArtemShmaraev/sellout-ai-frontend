@@ -18,7 +18,7 @@ import {
     fetchPrices,
     fetchProductsByArray,
     fetchShippings,
-    fetchSimilarProducts
+    fetchSimilarProducts, updateOneProduct
 } from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {Context} from "@/context/AppWrapper";
@@ -65,6 +65,7 @@ import cashStack1 from "@/static/icons/cash-stack 1.svg";
 import twoArrows from "@/static/icons/two_arrows.svg";
 import ffIcon from '@/static/icons/ff.png'
 import selloutIcon from '@/static/icons/favicon.svg'
+import ImgSlider from "@/components/pages/oneProduct/ImgSlider/ImgSlider";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
@@ -76,7 +77,7 @@ export const getServerSideProps = async (context) => {
 
 const OneProductPage = ({product, prices}) => {
     const router = useRouter()
-    const [moreOpen, setMoreOpen] = useState(false)
+    const [moreOpen, setMoreOpen] = useState(true)
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
 
@@ -123,7 +124,7 @@ const OneProductPage = ({product, prices}) => {
             const {slug} = router.query
             const interval = setInterval(() => {
                 console.log('load')
-                fetchOneProduct(slug, token)
+                updateOneProduct(slug, token)
                     .then(product => {
                         if (product.actual_platform_price) {
                             console.log('ok')
@@ -294,11 +295,11 @@ const OneProductPage = ({product, prices}) => {
     }, [router.asPath])
 
     const buttonRef = useRef(null)
-    useEffect(() => {
-        if (product.bucket_link.length > 1) {
-            buttonRef.current.focus()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (product.bucket_link.length > 1) {
+    //         buttonRef.current.focus()
+    //     }
+    // }, [])
     const shouldRenderBonuses = () => {
         return Number(product.price.bonus) > 0;
     }
@@ -311,6 +312,13 @@ const OneProductPage = ({product, prices}) => {
         })
         return bool
     }
+    const infoRef = useRef(null)
+    useEffect(() => {
+        setMoreOpen(true)
+        if (infoRef && infoRef.current.clientHeight > 200) {
+            setMoreOpen(false)
+        }
+    }, [router.asPath])
     return (
         <MainLayout>
             <Head>
@@ -334,40 +342,41 @@ const OneProductPage = ({product, prices}) => {
                             product.bucket_link.length > 1
                             ?
                                 <div className={s.slider}>
-                                    <Splide aria-label="My Favorite Images"
-                                            options={{
-                                                type: 'loop',
-                                                pagination: false,
-                                                paginationKeyboard: true,
-                                                keyboard: true,
-                                                focus: 'center',
-                                                speed: isDesktop ? 800 : 400
-                                            }}
-                                            hasTrack={false}
-                                    >
-                                        <SplideTrack>
-                                            {
-                                                product.bucket_link.map(el =>
-                                                    <SplideSlide className={s.photo} key={el.id}>
-                                                        <Image src={el.url}
-                                                               alt={`${brandsDisplay()} ${product.model} ${product.colorway}`}
-                                                               fill={true}
-                                                               loading={'eager'}
-                                                               style={{objectFit: 'contain'}}
-                                                        />
-                                                    </SplideSlide>
-                                                )
-                                            }
-                                        </SplideTrack>
-                                        <div className="splide__arrows">
-                                            <button className="splide__arrow splide__arrow--prev">
-                                                <Image src={left} alt='' width={20}/>
-                                            </button>
-                                            <button className="splide__arrow splide__arrow--next" ref={buttonRef}>
-                                                <Image src={right} alt='' width={20}/>
-                                            </button>
-                                        </div>
-                                    </Splide>
+                                    {/*<Splide aria-label="My Favorite Images"*/}
+                                    {/*        options={{*/}
+                                    {/*            type: 'loop',*/}
+                                    {/*            pagination: false,*/}
+                                    {/*            paginationKeyboard: true,*/}
+                                    {/*            keyboard: true,*/}
+                                    {/*            focus: 'center',*/}
+                                    {/*            speed: isDesktop ? 800 : 400*/}
+                                    {/*        }}*/}
+                                    {/*        hasTrack={false}*/}
+                                    {/*>*/}
+                                    {/*    <SplideTrack>*/}
+                                    {/*        {*/}
+                                    {/*            product.bucket_link.map(el =>*/}
+                                    {/*                <SplideSlide className={s.photo} key={el.id}>*/}
+                                    {/*                    <Image src={el.url}*/}
+                                    {/*                           alt={`${brandsDisplay()} ${product.model} ${product.colorway}`}*/}
+                                    {/*                           fill={true}*/}
+                                    {/*                           loading={'eager'}*/}
+                                    {/*                           style={{objectFit: 'contain'}}*/}
+                                    {/*                    />*/}
+                                    {/*                </SplideSlide>*/}
+                                    {/*            )*/}
+                                    {/*        }*/}
+                                    {/*    </SplideTrack>*/}
+                                    {/*    <div className="splide__arrows">*/}
+                                    {/*        <button className="splide__arrow splide__arrow--prev">*/}
+                                    {/*            <Image src={left} alt='' width={20}/>*/}
+                                    {/*        </button>*/}
+                                    {/*        <button className="splide__arrow splide__arrow--next" ref={buttonRef}>*/}
+                                    {/*            <Image src={right} alt='' width={20}/>*/}
+                                    {/*        </button>*/}
+                                    {/*    </div>*/}
+                                    {/*</Splide>*/}
+                                    <ImgSlider photos={product.bucket_link}/>
                                 </div>
                                 :
                                 <div className={s.slider}
@@ -473,7 +482,7 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                             </>
                         }
-                        <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}>
+                        <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}} ref={infoRef}>
                             <div className={s.row}>
                                 <div className={s.col50}>
                                     {!isDesktop && <BreadcrumbC list={product.list_lines}/>}
@@ -490,14 +499,19 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='d-flex justify-content-center'>
-                            <button
-                                className={s.more_btn}
-                                onClick={()=> setMoreOpen(!moreOpen)}>
-                                <div className={s.more_text}>Подробнее</div>
-                                <Arrow isOpen={moreOpen}/>
-                            </button>
-                        </div>
+                        {
+                            infoRef.current?.clientHeight > 199 &&
+                            <div className='d-flex justify-content-center'>
+                                <button
+                                    className={s.more_btn}
+                                    onClick={()=> setMoreOpen(!moreOpen)}>
+                                    <div className={s.more_text}>
+                                        Подробнее
+                                        <Arrow isOpen={moreOpen}/>
+                                    </div>
+                                </button>
+                            </div>
+                        }
                     </div>
                     <div className={s.col2}>
                         {isDesktop &&

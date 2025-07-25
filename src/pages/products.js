@@ -108,10 +108,17 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         setShow(true)
         setIsSend(false)
     };
+    const getTitle = () => {
+        let title = desktopStore.isDesktop ? products.desktop.title : products.mobile.title
+        if (title === 'sellout') {
+            title = 'Sellout'
+        }
+        return title
+    }
     return (
         <MainLayout>
             <Head>
-                <title>Товары</title>
+                <title>{getTitle()}</title>
             </Head>
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={products.desktop} className={s.desktop}/>

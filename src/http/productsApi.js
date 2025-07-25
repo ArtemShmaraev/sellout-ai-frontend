@@ -116,6 +116,17 @@ export async function fetchOneProduct(slug, token = '') {
         return data
     }
 }
+export async function updateOneProduct(slug, token = '') {
+    if (!token) {
+        const {data} = await $host.get(`product/slug/${slug}?is_update=true`)
+        return data
+    } else {
+        const {data} = await $host.get(`product/slug/${slug}?is_update=true`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    }
+}
 export async function fetchPrices(id, token = '') {
     if (token) {
         const {data} = await $host.get(`product_unit/min_price/${id}`, {

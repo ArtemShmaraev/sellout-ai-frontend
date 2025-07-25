@@ -2,7 +2,7 @@
 
 }
 .order {
-    padding: 15px;
+
 }
 .row {
     min-height: 300px;
@@ -53,6 +53,9 @@
     display: flex;
     justify-content: space-between;
 }
+.hr {
+    visibility: hidden;
+}
 @media (max-width: 1200px) {
     .header_col {
         display: block;
@@ -92,5 +95,8 @@
     }
     .prices {
         font-size: 14px;
+    }
+    .hr {
+        visibility: visible;
     }
 }

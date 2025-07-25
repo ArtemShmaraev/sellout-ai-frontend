@@ -44,7 +44,12 @@ const ProductBlock = ({unit}) => {
                         unit.track_number &&
                         <div className={s.number_block}>
                             <div className={s.brand}>Трек-номер</div>
-                            <div className={s.text}>{unit.track_number}</div>
+                            <div className={s.text}>
+                                <a href={`https://1track.ru/tracking/${unit.track_number}`}
+                                   target={'_blank'}
+                                   className={'text-black'}
+                                >{unit.track_number}</a>
+                            </div>
                         </div>
                     }
                 </div>

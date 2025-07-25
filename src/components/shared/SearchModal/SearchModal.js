@@ -10,7 +10,7 @@ import {Context} from "@/context/AppWrapper";
 import Link from "next/link";
 
 const SearchModal = () => {
-    const {filterStore} = useContext(Context)
+    const {filterStore, userStore} = useContext(Context)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
@@ -22,6 +22,9 @@ const SearchModal = () => {
             if (filters[key]) {
                 query[key] = filters[key]
             }
+        }
+        if (userStore.gender) {
+            query.gender = userStore.gender[0].toUpperCase()
         }
         const pathname = '/products'
         router.push({pathname, query})

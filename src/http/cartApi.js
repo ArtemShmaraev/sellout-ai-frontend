@@ -12,6 +12,12 @@ export async function fetchCart2(id, token) {
     })
     return data
 }
+export async function updateCart2(id, token) {
+    const {data} = await $host.get(`order/cart/${id}?is_update=true`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function addToCart(userId, productUnitId, token) {
     const {data} = await $host.post(`order/cart/${userId}/${productUnitId}`, {},{
         headers: {Authorization: `Bearer ${token}`}

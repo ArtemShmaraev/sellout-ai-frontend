@@ -55,7 +55,7 @@ const Complete = ({order, userData}) => {
                 </div>
                 <div className={s.header}>
                     <div className={s.header_text}>
-                        Ваш заказ: № {order.id}
+                        Ваш заказ: № {order.number}
                     </div>
                     <div className={s.header_text}>
                         Дата: {order.formatted_date}

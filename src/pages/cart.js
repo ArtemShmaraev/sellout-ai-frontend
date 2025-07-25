@@ -10,7 +10,7 @@ import {
     fetchCartPrice,
     fetchProductUnits,
     promoAuth,
-    promoUnauth,
+    promoUnauth, updateCart2,
     useBonuses
 } from "@/http/cartApi";
 import {Context} from "@/context/AppWrapper";
@@ -111,7 +111,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
             if (!productUnits.actual_platform_price && token) {
                 const {user_id} = jwtDecode(token)
                 const interval = setInterval(async () => {
-                    const cart = await fetchCart2(user_id, token)
+                    const cart = await updateCart2(user_id, token)
                     console.log(cart.actual_platform_price)
                     //TODO log
                     if (cart.actual_platform_price) {

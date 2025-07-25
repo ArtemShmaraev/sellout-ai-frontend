@@ -303,7 +303,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                             }}
                                     >Забыли пароль?</button>
                                 </div>
-                                <p className={'text-center'} style={{fontSize: 12}}>Нажимая кнопку “Отправить”, Вы соглашаетесь
+                                <p className={'text-center'} style={{fontSize: 12}}>Нажимая кнопку “Зарегистрироваться”, Вы соглашаетесь
                                     на <a href={'/docs/Политика%20конфиденциальности.pdf'} target={'_blank'}
                                           className={'text-black'}>обработку персональных данных</a></p>
                             </Container>
