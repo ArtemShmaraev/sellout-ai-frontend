@@ -34,30 +34,35 @@ const SizeDropdown = () => {
         return arr
     }
     return (
-        <div>
-            <div className={s.dropdown}
-                 style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
-            >
-                <div
-                    onClick={() => toggleDropdown()}
-                    className={s.dropdown_toggle}
-                >
-                    <div className={s.dropdown_toggle_text}>
-                        Размер
-                        <Arrow isOpen={isOpen}/>
-                    </div>
-                </div>
-            </div>
-            {isOpen && (
+        <>
+            {
+                allCategories().length > 0 &&
                 <div>
-                    <div className={s.dropdown_items_block}>
-                        {allCategories().map(cat =>
-                            <SizeCategoryDropdown category={cat} catObj={filterStore.filters.size[cat]}/>
-                        )}
+                    <div className={s.dropdown}
+                         style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
+                    >
+                        <div
+                            onClick={() => toggleDropdown()}
+                            className={s.dropdown_toggle}
+                        >
+                            <div className={s.dropdown_toggle_text}>
+                                Размер
+                                <Arrow isOpen={isOpen}/>
+                            </div>
+                        </div>
                     </div>
+                    {isOpen && (
+                        <div>
+                            <div className={s.dropdown_items_block}>
+                                {allCategories().map(cat =>
+                                    <SizeCategoryDropdown category={cat} catObj={filterStore.filters.size[cat]}/>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
+            }
+        </>
     );
 };
 

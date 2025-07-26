@@ -181,3 +181,7 @@ export async function addFilterSearch(qStr) {
     const {data} = await $host.get(`product/add_filter_search?q=${qStr}`)
     return data
 }
+export async function buyout(formDataObj) {
+    const {data} = await $host.post(`product/ransom_request`, formDataObj)
+    return data
+}

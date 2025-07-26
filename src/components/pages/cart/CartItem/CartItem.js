@@ -50,6 +50,11 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const data = await removeFromWishlist(userId, productId, token)
         setIsInWishlist(false)
     }
+    // if (!product.available_flag || !available) {
+    //     console.group(brand, model)
+    //     console.log([available, product.available_flag])
+    //     console.groupEnd()
+    // }
     return (
         <div key={unitId}>
             <hr/>

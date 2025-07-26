@@ -313,11 +313,16 @@ const OneProductPage = ({product, prices}) => {
         return bool
     }
     const infoRef = useRef(null)
+    const [infoBtn, setInfoBtn] = useState(false)
     useEffect(() => {
+        setInfoBtn(false)
         setMoreOpen(true)
-        if (infoRef && infoRef.current.clientHeight > 200) {
+        setTimeout(() => {
+            if (infoRef && infoRef.current.clientHeight > 200) {
+                setInfoBtn(true)
+            }
             setMoreOpen(false)
-        }
+        }, 200)
     }, [router.asPath])
     return (
         <MainLayout>
@@ -500,7 +505,7 @@ const OneProductPage = ({product, prices}) => {
                             </div>
                         </div>
                         {
-                            infoRef.current?.clientHeight > 199 &&
+                            infoBtn &&
                             <div className='d-flex justify-content-center'>
                                 <button
                                     className={s.more_btn}

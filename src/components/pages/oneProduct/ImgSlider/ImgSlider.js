@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from './ImgSlider.module.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Zoom } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -28,8 +28,9 @@ const ImgSlider = ({photos}) => {
                 // pagination={{
                 //     type: 'progressbar',
                 // }}
+                zoom={true}
                 navigation={true}
-                modules={[Pagination, Navigation]}
+                modules={[Pagination, Navigation, Zoom]}
                 className={s.cont}
                 style={{
                     "--swiper-pagination-color": "#000",

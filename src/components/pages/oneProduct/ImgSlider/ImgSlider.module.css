@@ -4,6 +4,7 @@
 .photo_cont {
     width: 100%;
     height: 440px;
+    position: relative;
 }
 .photo {
     text-align: center;

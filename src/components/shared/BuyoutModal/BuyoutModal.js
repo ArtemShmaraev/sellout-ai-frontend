@@ -7,8 +7,10 @@ import InputMask from "react-input-mask";
 import {Context} from "@/context/AppWrapper";
 import {fetchUserInfo2} from "@/http/userApi";
 import Cookies from "js-cookie";
+import {buyout} from "@/http/productsApi";
 
-const BuyoutModal = ({show, handleClose, isSend}) => {
+const BuyoutModal = ({show, handleClose}) => {
+    const [isSend, setIsSend] = useState(false)
     const {userStore} = useContext(Context)
     const [isDesktop, setIsDesktop] = useState(true)
     const [name, setName] = useState('');
@@ -17,6 +19,7 @@ const BuyoutModal = ({show, handleClose, isSend}) => {
     const [phone, setPhone] = useState('');
     const [link, setLink] = useState('');
     const [info, setInfo] = useState('');
+    const [img, setImg] = useState(null)
     useEffect(() => {
         const token = Cookies.get('access_token')
         if (token && userStore.id) {
@@ -34,6 +37,18 @@ const BuyoutModal = ({show, handleClose, isSend}) => {
             setIsDesktop(false)
         }
     }, [isDesktop])
+    const send = async () => {
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('tg_name', tg)
+        formData.append('phone_number',phone)
+        formData.append('email', email)
+        formData.append('url', link)
+        formData.append('info', info)
+        formData.append('file', img)
+        const res = await buyout(formData)
+        setIsSend(true)
+    }
     return (
         <Modal show={show}
                onHide={handleClose}
@@ -95,7 +110,9 @@ const BuyoutModal = ({show, handleClose, isSend}) => {
                         </Col>
                         <Col lg={12}>
                             <Form.Label>Прикрепите фото товара</Form.Label>
-                            <Form.Control type="file" multiple={true}/>
+                            <Form.Control type="file" multiple={false   }
+                                          onChange={(e => setImg(e.target.files[0]))}
+                            />
                         </Col>
                         <Col lg={12}>
                             <textarea
@@ -108,7 +125,9 @@ const BuyoutModal = ({show, handleClose, isSend}) => {
                             />
                         </Col>
                         <Col lg={12} className='d-flex justify-content-center'>
-                            <button onClick={() => setIsSend(true)} className={s.send}>Отправить</button>
+                            <button onClick={() => {
+                                send()
+                            }} className={s.send}>Отправить</button>
                         </Col>
                         <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="" className={s.link}
                         >обработку персональных данных</a></p>
