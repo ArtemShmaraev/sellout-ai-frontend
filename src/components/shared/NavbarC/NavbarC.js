@@ -118,7 +118,7 @@ const NavbarC = () => {
                             <SearchModal/>
                         </div>
                     </div>
-                    <div className={s.block} style={{justifyContent: 'center'}}>
+                    <div className={s.logo_block} style={{justifyContent: 'center'}}>
                         <Link href={'/'}>
                             <Image className={s.logo} alt='' src={logo}/>
                             {/*<h1 className={s.fraer}>Фраер ебучий долбаеб любитель черных хуев</h1>*/}

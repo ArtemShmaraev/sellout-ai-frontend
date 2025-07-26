@@ -6,6 +6,7 @@ import { Pagination, Navigation, Zoom } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/zoom';
 
 import FullScreen from "@/components/pages/oneProduct/ImgSlider/FullScreen/FullScreen";
 import Image from "next/image";
@@ -19,7 +20,6 @@ const ImgSlider = ({photos}) => {
             document.body.classList.remove('body-scroll-clip')
         }
         setIsFull(!isFull)
-        console.log(isFull)
     }
     return (
         <>
