@@ -143,14 +143,7 @@
     .logo {
         font-size: 26px;
         transform: translateX(0px);
-        width: 100%;
-        height: auto;
-    }
-    .block {
-        width: auto;
-    }
-    .logo_block {
-        flex: 1;
+        height: 25px;
     }
     .icons {
         width: 25px;
@@ -158,6 +151,18 @@
     }
     .row2 {
         display: none;
+    }
+}
+@media (max-width: 600px) {
+    .block {
+        width: auto;
+    }
+    .logo_block {
+        flex: 1;
+    }
+    .logo {
+        width: 100%;
+        height: auto;
     }
 }
 
