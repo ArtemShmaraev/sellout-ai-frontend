@@ -159,6 +159,7 @@
     }
     .logo_block {
         flex: 1;
+        margin: 0 10px;
     }
     .logo {
         width: 100%;
