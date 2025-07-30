@@ -41,7 +41,7 @@ const ImgSlider = ({photos}) => {
             >
                 {photos.map(el =>
                     <SwiperSlide className={s.photo}>
-                        <div className={[s.photo_cont, 'swiper-zoom-container'].join(' ')}>
+                        <div className={s.photo_cont}>
                             <Image src={el.url}
                                    alt={``}
                                    fill={true}
