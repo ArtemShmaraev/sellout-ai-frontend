@@ -330,8 +330,7 @@ const OneProductPage = ({product, prices}) => {
                 <title>{`Заказать ${brandsDisplay()} ${product.model} ${product.colorway} по выгодной цене на SELLOUT!`}</title>
                 <meta property="og:image" content={product.bucket_link[0].url}/>
                 {/*<meta name={'description'} content={`Закажите ${brandsDisplay()} ${product.model} ${product.colorway} в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.`}/>*/}
-                <meta name={'description'} content={`Выберите стиль, выберите SELLOUT. ${brandsDisplay()} ${product.model} ${product.colorway} доступны для заказа. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
-
+                <meta name={'description'} content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} доступны для заказа. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
             </Head>
             <div className={s.container + ' custom_cont'}>
                 {isDesktop && <BreadcrumbC list={product.list_lines}/>}

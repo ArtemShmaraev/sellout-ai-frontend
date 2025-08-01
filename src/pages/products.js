@@ -118,7 +118,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     return (
         <MainLayout>
             <Head>
-                <title>{getTitle()}</title>
+                <title>Купить {getTitle()} на Sellout</title>
             </Head>
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={products.desktop} className={s.desktop}/>
