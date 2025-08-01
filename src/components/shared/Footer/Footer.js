@@ -139,7 +139,7 @@ const Footer = () => {
                     </Row>
                     :
                     <>
-                        <FooterDropdown header={'Sellout'}>
+                        <FooterDropdown header={'Sellout интернет-магазин'}>
                             <div>
                                 <Link href="/faq" className={s.footer_link} target={'_blank'}>О нас</Link>
                             </div>
@@ -250,7 +250,7 @@ const Footer = () => {
             <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
                     <div>
-                        <p className={s.footer_text}>&#9400; SELLOUT, 2023</p>
+                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин, 2023</p>
                     </div>
                     <div className={s.footer_bottom}>
                         <a href="/docs/Агентский%20договор%20SELLOUT.pdf" target={"_blank"}
