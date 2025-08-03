@@ -36,27 +36,32 @@ const PictureBlock = ({obj, className, type}) => {
                             <h3 className={'text-black'}>{obj.title}</h3>
                         }
                     </div>
-                    <div className={s.text}>
-                        {parse(obj.content)}
+                    {obj.photo &&
+                        <div className={s.text}>
+                            {parse(obj.content)}
+                        </div>
+                    }
+                </div>
+            </div>
+            {
+                obj.photo &&
+                <div className={s.img_block}>
+                    <div className={s.img_cont}>
+                        <Image src={obj.photo} alt='' fill={true} className={s.img}
+                               onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
+
+
+                        <Image src={desktop} alt=''
+                               className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
+                               style={isLoading ? {} : {opacity: 0}}
+                        />
+                        <Image src={mobile} alt=''
+                               className={`placeholder_img ${s.mobile}`} fill={true} sizes={'100%'}
+                               style={isLoading ? {} : {opacity: 0}}
+                        />
                     </div>
                 </div>
-            </div>
-            <div className={s.img_block}>
-                <div className={s.img_cont}>
-                    <Image src={obj.photo} alt='' fill={true} className={s.img}
-                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
-
-
-                    <Image src={desktop} alt=''
-                           className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
-                           style={isLoading ? {} : {opacity: 0}}
-                    />
-                    <Image src={mobile} alt=''
-                           className={`placeholder_img ${s.mobile}`} fill={true} sizes={'100%'}
-                           style={isLoading ? {} : {opacity: 0}}
-                    />
-                </div>
-            </div>
+            }
         </div>
     );
 };
