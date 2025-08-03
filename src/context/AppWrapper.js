@@ -123,6 +123,12 @@ export default function AppWrapper({ children }) {
             desktopStore.setAnimation(false)
         }, 4000)
     }, []);
+    useEffect(() => {
+        const referral = router.query.referral_id
+        if (referral) {
+            Cookies.set('referral_id', referral)
+        }
+    }, [])
     return (
         <Context.Provider value={sharedState}>
             {children}

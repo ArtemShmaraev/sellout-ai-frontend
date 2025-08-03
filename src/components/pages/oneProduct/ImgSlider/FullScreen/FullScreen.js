@@ -28,8 +28,8 @@ const FullScreen = ({toggle, photos}) => {
                     //     type: 'progressbar',
                     // }}
                     zoom={true}
-                    navigation={true}
-                    modules={[Pagination, Navigation, Zoom]}
+                    // navigation={true}
+                    modules={[Pagination, Zoom]}
                     className={s.cont}
                     style={{
                         "--swiper-pagination-color": "#000",

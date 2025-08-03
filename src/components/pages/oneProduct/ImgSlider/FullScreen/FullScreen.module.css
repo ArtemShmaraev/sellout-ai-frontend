@@ -6,12 +6,12 @@
     background: #fff;
     width: 100vw;
     height: 100vh;
-    padding: 20px;
 }
 .close_btn {
     outline: none;
     border: none;
     background: transparent;
+    margin: 20px;
 }
 .cont {
     position: relative;

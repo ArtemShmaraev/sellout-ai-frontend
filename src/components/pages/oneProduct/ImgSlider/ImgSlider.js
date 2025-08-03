@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './ImgSlider.module.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,14 +12,34 @@ import FullScreen from "@/components/pages/oneProduct/ImgSlider/FullScreen/FullS
 import Image from "next/image";
 
 const ImgSlider = ({photos}) => {
+    const [isDesktop, setIsDesktop] = useState(true)
+    const checkIsDesktop = () => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
+
+
     const [isFull, setIsFull] = useState(false)
     const toggleFullScreen = () => {
-        if (!isFull) {
-            document.body.classList.add('body-scroll-clip')
-        } else {
-            document.body.classList.remove('body-scroll-clip')
+        if (!isDesktop) {
+            if (!isFull) {
+                document.body.classList.add('body-scroll-clip')
+            } else {
+                document.body.classList.remove('body-scroll-clip')
+            }
+            setIsFull(!isFull)
         }
-        setIsFull(!isFull)
     }
     return (
         <>

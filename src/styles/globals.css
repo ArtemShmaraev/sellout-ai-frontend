@@ -35,6 +35,11 @@ body {
 body.modal-open #navbar {
     width: calc(100% - 17px);
 }
+@-moz-document url-prefix() {
+    body.modal-open #navbar {
+        width: 100%;
+    }
+}
 .modal-open {
     overflow-y: scroll;
 }

@@ -74,6 +74,10 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             gender: userStore.gender,
             is_mailing_list: isMailingList
         }
+        const referral = Cookies.get('referral_id')
+        if (referral) {
+            data.referral_id = referral
+        }
         try {
             const res = await registration(JSON.stringify(data))
             setEmailBusy(false)
