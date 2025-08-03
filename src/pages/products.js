@@ -118,7 +118,14 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     return (
         <MainLayout>
             <Head>
-                <title>Купить {getTitle()} на Sellout</title>
+                <title>
+                    {getTitle() !== "sellout" ? (
+                        `Купить ${getTitle()} на Sellout`
+                    ) : (
+                        // Заголовок для случая, когда getTitle() равно "sellout"
+                        "Sellout - Онлайн-платформа для ценителей стиля: уникальная брендовая одежда и обувь"
+                    )}
+                </title>
             </Head>
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={products.desktop} className={s.desktop}/>
