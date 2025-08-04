@@ -119,11 +119,11 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         <MainLayout>
             <Head>
                 <title>
-                    {getTitle() !== "sellout" ? (
+                    {getTitle() !== "Sellout" ? (
                         `Купить ${getTitle()} на Sellout`
                     ) : (
                         // Заголовок для случая, когда getTitle() равно "sellout"
-                        "Sellout - Онлайн-платформа для ценителей стиля: уникальная брендовая одежда и обувь"
+                        "Sellout - Онлайн-платформа для ценителей стиля: уникальная брендовая одежда, обувь и аксессуары"
                     )}
                 </title>
             </Head>
