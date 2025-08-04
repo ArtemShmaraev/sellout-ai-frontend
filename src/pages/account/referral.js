@@ -1,10 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import MainLayout from "@/layout/MainLayout";
 import AccountLayout from "@/layout/AccountLayout";
 import s from '@/styles/Referral.module.css'
 import Image from "next/image";
 import {parse} from "cookie";
-import {editPromo, fetchLoyaltyInfo, fetchPromo} from "@/http/userApi";
+import {editPromo, fetchLoyaltyInfo, fetchPromo, fetchRefData} from "@/http/userApi";
 import amethystBg from "../../../public/img/Amethyst.jpg";
 import logo from "@/static/img/bold_logo.svg";
 import sapBg from "../../../public/img/Sap.jpg";
@@ -29,9 +29,10 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const loyalty = await fetchLoyaltyInfo(token)
     const fetchedPromo = await fetchPromo(token)
-    return { props: {loyalty, fetchedPromo} }
+    const refData = await fetchRefData(token)
+    return { props: {loyalty, fetchedPromo, refData} }
 }
-const Referral = ({loyalty, fetchedPromo}) => {
+const Referral = ({loyalty, fetchedPromo, refData}) => {
     const config = {
         Amethyst: {
             img: amethystBg,
@@ -143,6 +144,107 @@ const Referral = ({loyalty, fetchedPromo}) => {
     const closeReferral = () => {
         setReferralOpen(false)
     }
+    
+    const renderTable = () => {
+        const arr = []
+        const firstTrArr = []
+        let cnt = 0
+        for (const key in refData) {
+            if (key === 'promo_text') {
+                continue
+            }
+            if (refData[key]) {
+                cnt++
+            }
+        }
+        if (refData.order_amounts) {
+            firstTrArr.push(
+                <td width={100 / cnt}>
+                    Сумма заказа
+                </td>
+            )
+            arr.push(refData.order_amounts)
+        }
+        if (refData.partner_bonus_amounts) {
+            firstTrArr.push(
+                <td width={100 / cnt}>
+                    Вы получите бонусов
+                </td>
+            )
+            arr.push(refData.partner_bonus_amounts)
+        }
+        if (refData.client_sale_amounts) {
+            firstTrArr.push(
+                <td width={100 / cnt}>
+                    Приглашенный пользователь получит скидку
+                </td>
+            )
+            arr.push(refData.client_sale_amounts)
+        }
+        if (refData.client_bonus_amounts) {
+            firstTrArr.push(
+                <td width={100 / cnt}>
+                    Приглашенный пользователь получит бонусов
+                </td>
+            )
+            arr.push(refData.client_bonus_amounts)
+        }
+        const res = [
+            <tr className={s.first_tr}>
+                {firstTrArr}
+            </tr>
+        ]
+        for (let i = 0; i < arr[0].length; i++) {
+            const trArr = []
+            for (let j = 0; j < arr.length; j++) {
+                if (j === 0) {
+                    trArr.push(
+                        <td>
+                            {`От ${arr[j][i]}₽`}
+                        </td>
+                    )
+                } else {
+                    trArr.push(
+                        <td>
+                            {`${arr[j][i]}₽`}
+                        </td>
+                    )
+                }
+            }
+            res.push(
+                <tr>
+                    {trArr}
+                </tr>
+            )
+        }
+        return res
+    }
+
+    const [isDesktop, setIsDesktop] = useState(true)
+    const checkIsDesktop = () => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
+    const scroll = (id) => {
+        const el = document.getElementById(id)
+        const scrollPosition = el.offsetTop
+        const num = isDesktop ? 160 : 95
+        window.scrollTo({
+            top: scrollPosition - num,
+            behavior: 'smooth',
+        });
+    }
     return (
         <MainLayout>
             <AccountLayout>
@@ -173,7 +275,7 @@ const Referral = ({loyalty, fetchedPromo}) => {
                 <div className={s.explanation_block}>
                     <h4 className={'text-center mb-4'}>
                         Приглашайте Ваших друзей на платформу Sellout и получайте
-                        до <span className={'fw-bold'}>6000₽</span> бонусов
+                        до <span className={'fw-bold'}>7000₽</span> бонусов
                     </h4>
                     <div className={'d-flex justify-content-center'}>
                         <div className={s.exp_item}>
@@ -192,7 +294,7 @@ const Referral = ({loyalty, fetchedPromo}) => {
                                     1
                                 </div>
                             </div>
-                            <p className={s.exp_text}>Получите уникальный промокод ниже и поделитесь им со всеми</p>
+                            <p className={s.exp_text}>Получите уникальный промокод и ссылку ниже и поделитесь ими со всеми</p>
                         </div>
                         <div className={s.exp_item}>
                             <div className={s.circle}>
@@ -200,7 +302,7 @@ const Referral = ({loyalty, fetchedPromo}) => {
                                     2
                                 </div>
                             </div>
-                            <p className={s.exp_text}>Пользователь совершает свой первый заказ и указывает при его оформлении Ваш промокод</p>
+                            <p className={s.exp_text}>Пользователь совершает свой первый заказ по вашей ссылке или указывает при его оформлении ваш промокод</p>
                         </div>
                     </div>
                     <div className={'d-flex justify-content-center'}>
@@ -210,10 +312,27 @@ const Referral = ({loyalty, fetchedPromo}) => {
                                     3
                                 </div>
                             </div>
-                            <p className={s.exp_text}>Вы получаете бонусы в виде рублей на свой счет, а
-                                приглашенный Вами пользователь дополнительную скидку!</p>
+                            <p className={s.exp_text}>Вы получаете бонусы в виде рублей на свой счет,
+                                а приглашенный вами пользователь может получить дополнительную скидку или бонусы!</p>
                         </div>
                     </div>
+                </div>
+
+
+                <div className={'text-center my-5'}>
+                    <h5>Размер бонуса и скидки в зависимости от суммы заказа:</h5>
+                    <hr/>
+                    <table width={'100%'} className={s.referral_table}>
+                        <tbody>
+                        {renderTable()}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className={'text-center my-5'}>
+                    <h5>Мы всегда готовы обсудить с вами индивидуальные условия реферальной программы,
+                        оставляйте заявку <span onClick={() => scroll('request')} className={s.link}>ниже</span>,
+                        и мы обязательно с вами свяжемся!</h5>
                 </div>
 
                 <div className={'d-flex flex-column align-items-center'}>
@@ -234,11 +353,11 @@ const Referral = ({loyalty, fetchedPromo}) => {
                             >
                                 Скопировать
                             </button>
-                            <button className={s.btn}
-                                    onClick={handleSecondBtnClick}
-                            >
-                                {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}
-                            </button>
+                            {/*<button className={s.btn}*/}
+                            {/*        onClick={handleSecondBtnClick}*/}
+                            {/*>*/}
+                            {/*    {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}*/}
+                            {/*</button>*/}
                         </div>
                         {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
                         {error && <p className={'red_text text-center'}>{error}</p>}
@@ -250,126 +369,28 @@ const Referral = ({loyalty, fetchedPromo}) => {
                 </div>
 
 
-                <div className={'text-center'}>
-                    <h5>Размер бонуса и скидки в зависимости от суммы заказа:</h5>
-                    <hr/>
-                    <table width={'100%'} className={s.referral_table}>
-                        <tbody>
-                        <tr className={s.first_tr}>
-                            <td width={'33%'}>
-                                Сумма заказа
-                            </td>
-                            <td width={'33%'}>
-                                Вы получите бонусов
-                            </td>
-                            <td width={'33%'}>
-                                Приглашенный пользователь получит скидку
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 3000₽
-                            </td>
-                            <td>
-                                500₽
-                            </td>
-                            <td>
-                                500₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 5000₽
-                            </td>
-                            <td>
-                                750₽
-                            </td>
-                            <td>
-                                750₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 15000₽
-                            </td>
-                            <td>
-                                1000₽
-                            </td>
-                            <td>
-                                1000₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 35000₽
-                            </td>
-                            <td>
-                                1250₽
-                            </td>
-                            <td>
-                                1250₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 70000₽
-                            </td>
-                            <td>
-                                2000₽
-                            </td>
-                            <td>
-                                2000₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 130000₽
-                            </td>
-                            <td>
-                                2500₽
-                            </td>
-                            <td>
-                                2500₽
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                От 150000₽
-                            </td>
-                            <td>
-                                3000₽
-                            </td>
-                            <td>
-                                3000₽
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    refData.promo_text &&
+                    <div className={'text-center my-5'}>
+                        <h5>Вы можете использовать заготовленный ниже текст, чтобы
+                            удобнее рассказывать друзьям об акции:</h5>
 
-                <div className={'text-center my-5'}>
-                    <h5>Вы можете использовать заготовленный ниже текст, чтобы
-                        удобнее рассказывать друзьям об акции:</h5>
-
-                    <div className={s.text_copy} ref={textRef}
-                    >
-                        Соверши свой первый заказ на платформе Sellout и введи мой промокод
-                        при оформелении заказа, чтобы получить скидку: при заказе от 3000₽ ты получишь 500₽, от 5000₽ - 750₽, от 15000₽ - 1000₽,
-                        от 35000₽ - 1250₽, от 70000₽ - 2000₽, от 130000₽ - 2500₽, от 150000₽ - 3000₽ &nbsp;
-                        <br/>
-                        Промокод: {promo}
-                    </div>
-
-                    <div className={'d-flex justify-content-center'}>
-                        <button className={s.btn} style={{width: 300}}
-                                onClick={() => copyValue(textRef)}
+                        <div className={s.text_copy} ref={textRef}
                         >
-                            Скопировать
-                        </button>
-                    </div>
-                </div>
+                            {refData.promo_text}
+                        </div>
 
-                <div className={'mb-5'}>
+                        <div className={'d-flex justify-content-center'}>
+                            <button className={s.btn} style={{width: 300}}
+                                    onClick={() => copyValue(textRef)}
+                            >
+                                Скопировать
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <div className={'mb-5'} id={'request'}>
                     <div className={'d-flex justify-content-center mb-3'}>
                         <Image src={megaphone} alt='' width={100}/>
                     </div>

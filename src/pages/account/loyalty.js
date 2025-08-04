@@ -200,14 +200,14 @@ const Loyalty = ({loyalty}) => {
                                             <div className={s.first_row_td}>
                                                 <div className={`${s.circle} ${s.sapphire_circle}`}></div>
                                                 <div className={s.sapphire_text}>Sapphire</div>
-                                                <div className={s.sapphire_text}>15000₽</div>
+                                                <div className={s.sapphire_text}>30000₽</div>
                                             </div>
                                         </td>
                                         <td>
                                             <div className={s.first_row_td}>
                                                 <div className={`${s.circle} ${s.emerald_circle}`}></div>
                                                 <div className={s.emerald_text}>Emerald</div>
-                                                <div className={s.emerald_text}>45000₽</div>
+                                                <div className={s.emerald_text}>50000₽</div>
                                             </div>
                                         </td>
                                         <td>
@@ -366,16 +366,16 @@ const Loyalty = ({loyalty}) => {
                                             Бесплатная доставка
                                         </td>
                                         <td>
-                                            <div className={s.amethyst_text}>От 20000₽</div>
+                                            <div className={s.amethyst_text}>От 35000₽</div>
                                         </td>
                                         <td>
-                                            <div className={s.sapphire_text}>От 20000₽</div>
+                                            <div className={s.sapphire_text}>От 30000₽</div>
                                         </td>
                                         <td>
-                                            <div className={s.emerald_text}>От 15000₽</div>
+                                            <div className={s.emerald_text}>От 25000₽</div>
                                         </td>
                                         <td>
-                                            <div className={s.ruby_text}>От 15000₽</div>
+                                            <div className={s.ruby_text}>От 20000₽</div>
                                         </td>
                                         <td>
                                             <div className={s.diamond_text}>От 15000₽</div>

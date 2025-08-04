@@ -174,6 +174,12 @@ export async function fetchPromo(token) {
     })
     return data
 }
+export async function fetchRefData(token) {
+    const {data} = await $host.get(`user/referral_program`, {
+        headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+}
 export async function editPromo(promo, token) {
     const obj = {promo}
     const {data} = await $host.put(`user/referral_promo`, JSON.stringify(obj), {
