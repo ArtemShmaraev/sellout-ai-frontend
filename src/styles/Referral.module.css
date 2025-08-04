@@ -108,6 +108,16 @@
     background: transparent;
     color: black;
     height: 50px;
+    width: 49%;
+    font-size: 14px;
+}
+.btn2 {
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid black;
+    background: transparent;
+    color: black;
+    height: 50px;
     width: 100%;
     font-size: 14px;
 }

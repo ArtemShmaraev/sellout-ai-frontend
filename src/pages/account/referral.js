@@ -96,6 +96,7 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
     const [promo, setPromo] = useState(fetchedPromo.string_representation)
     const [readOnly, setReadOnly] = useState(true)
     const promoRef = useRef(null)
+    const linkRef = useRef(null)
 
     const handleSecondBtnClick = async () => {
         if (readOnly) {
@@ -150,7 +151,7 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
         const firstTrArr = []
         let cnt = 0
         for (const key in refData) {
-            if (key === 'promo_text') {
+            if (key === 'promo_text' || key === 'promo_link') {
                 continue
             }
             if (refData[key]) {
@@ -353,16 +354,45 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
                             >
                                 Скопировать
                             </button>
+                            <button className={s.btn}
+                                    onClick={handleSecondBtnClick}
+                            >
+                                {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}
+                            </button>
+                        </div>
+                        {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
+                        {error && <p className={'red_text text-center'}>{error}</p>}
+                    </div>
+                </div>
+
+                <div className={'d-flex flex-column align-items-center mt-5'}>
+                    <h5 className={'text-center'}>Ваша ссылка:</h5>
+                    <div className={s.input_block}>
+                        <input
+                            placeholder={'Ссылка'}
+                            className={s.textarea}
+                            value={refData.promo_link}
+                            // onChange={e => setPromo(e.target.value)}
+                            readOnly={readOnly}
+                            ref={linkRef}
+                            id={'promoCopy'}
+                        />
+                        <div className={'d-flex justify-content-between'}>
+                            <button className={s.btn2}
+                                    onClick={() => copyValue(linkRef)}
+                            >
+                                Скопировать
+                            </button>
                             {/*<button className={s.btn}*/}
                             {/*        onClick={handleSecondBtnClick}*/}
                             {/*>*/}
                             {/*    {readOnly ? 'Изменить промокод' : ' Сохранить изменения'}*/}
                             {/*</button>*/}
                         </div>
-                        {saved && <p className={'green_text text-center'}>Изменения сохранены</p>}
-                        {error && <p className={'red_text text-center'}>{error}</p>}
                     </div>
                 </div>
+
+
                 <div className={'text-center my-4'}>
                     <h5>Бонусов заработано: <span className={'green_text'}>{fetchedPromo.total_bonus}</span></h5>
                     <h5>Людей приглашено: <span className={'green_text'}>{fetchedPromo.user_count}</span></h5>

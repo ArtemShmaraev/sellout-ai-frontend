@@ -32,13 +32,13 @@ const SalesLine = () => {
                     pagination: false,
                     arrows: false,
                     drag: false,
-                    interval: 20000,
+                    interval: 2000,
                     autoplay: true
                 }} className={'d-flex align-items-center'}
                 >
-                    <SplideSlide className={s.splide}>
-                        Бесплатная доставка от 20000₽
-                    </SplideSlide>
+                    {/*<SplideSlide className={s.splide}>*/}
+                    {/*    Бесплатная доставка от 20000₽*/}
+                    {/*</SplideSlide>*/}
                     <SplideSlide className={s.splide}>
                         1000₽ в подарок за первый заказ
                     </SplideSlide>
@@ -46,7 +46,7 @@ const SalesLine = () => {
                         isDesktop
                         ?
                             <SplideSlide className={s.splide}>
-                                Зовите друзей на Sellout и зарабатывайте до 6000₽ за
+                                Зовите друзей на Sellout и зарабатывайте до 7000₽ за
                                 каждого приведённого
                                 клиента. { userStore.isLogged ?
                                 <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
@@ -58,7 +58,7 @@ const SalesLine = () => {
                             </SplideSlide>
                             :
                             <SplideSlide className={s.splide} style={{fontSize: '11px', paddingTop: '2px'}}>
-                                Получайте до 6000₽ за приведённого
+                                Получайте до 7000₽ за приведённого
                                 клиента. { userStore.isLogged ?
                                 <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
                                 :
@@ -72,11 +72,11 @@ const SalesLine = () => {
                         isDesktop
                             ?
                             <SplideSlide className={s.splide}>
-                                Успейте воспользоваться бесплатной доставкой по Москве
+                                Воспользуйтесь бесплатной доставкой по Москве! В другие города бесплатная доставка от 35000₽
                             </SplideSlide>
                             :
-                            <SplideSlide className={s.splide} style={{fontSize: '12px', paddingTop: '1px'}}>
-                                Успейте воспользоваться бесплатной доставкой по Москве
+                            <SplideSlide className={s.splide} style={{fontSize: '9px', paddingTop: '1px'}}>
+                                Бесплатная доставка по Москве! В другие города бесплатная доставка от 35000₽
                             </SplideSlide>
                     }
                 </Splide>
