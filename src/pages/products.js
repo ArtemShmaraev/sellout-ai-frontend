@@ -22,6 +22,7 @@ import PictureBlock from "@/components/shared/UI/PictureBlock/PictureBlock";
 import Compilation from "@/components/shared/Compilation/Compilation";
 import cross from '@/static/icons/x-lg.svg'
 import Cookies from "js-cookie";
+import cn from "classnames";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -115,6 +116,22 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         }
         return title
     }
+
+    const [visible, setVisible] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    const checkScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollPos > currentScrollPos;
+
+        setPrevScrollPos(currentScrollPos);
+        setVisible(visible);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', checkScroll);
+        return () => window.removeEventListener('scroll', checkScroll);
+    }, [prevScrollPos]);
     return (
         <MainLayout>
             <Head>
@@ -131,7 +148,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                 <PictureBlock obj={products.desktop} className={s.desktop}/>
                 <PictureBlock obj={products.mobile} className={s.mobile}/>
                 {desktopStore.isDesktop &&
-                    <div className={s.filter_sort_row}>
+                    <div className={cn(s.filter_sort_row)}
+                         style={desktopStore.navbarVisible ? {top: 150} : {top: 0}}
+                    >
                         <Col lg={10} className='d-flex align-items-stretch'>
                             <button className={s.border + ' fw-bold'}
                                     onClick={() => desktopStore.setFilterOpen(!desktopStore.filtersOpen)}
@@ -153,7 +172,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                     </div>
                 }
                 {!desktopStore.isDesktop &&
-                    <div className='d-flex justify-content-evenly align-items-center'>
+                    <div className={['d-flex justify-content-evenly align-items-center', s.mobile_sort_row].join(' ')}
+                         style={desktopStore.navbarVisible ? {top: 80} : {top: 0}}
+                    >
                         <button className={s.filter_toggle}
                                 onClick={handleClick}
                         >

@@ -24,45 +24,53 @@ const PictureBlock = ({obj, className, type}) => {
     }
     const [isLoading, setIsLoading] = useState(true)
     return (
-        <div className={`${className} ${s.main_block} ${getDirection()}`} style={obj.photo ? {} : {minHeight: 'fit-content'}}>
-            <div className={s.text_block}>
-                {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
-                <div className={s.text_cont}>
-                    <div>
-                        {obj.title === 'sellout'
-                            ?
-                            <Image src={logo} alt='' className={s.logo} width={200}/>
-                            :
-                            <h3 className={'text-black'}>{obj.title}</h3>
+        <>
+            {
+                obj.photo
+                ?
+                    <div className={`${className} ${s.main_block} ${getDirection()}`}>
+                        <div className={s.text_block}>
+                            {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
+                            <div className={s.text_cont}>
+                                <div>
+                                    {obj.title === 'sellout'
+                                        ?
+                                        <Image src={logo} alt='' className={s.logo} width={200}/>
+                                        :
+                                        <h3 className={'text-black'}>{obj.title}</h3>
+                                    }
+                                </div>
+                                {obj.photo &&
+                                    <div className={s.text}>
+                                        {parse(obj.content)}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        {
+                            obj.photo &&
+                            <div className={s.img_block}>
+                                <div className={s.img_cont}>
+                                    <Image src={obj.photo} alt='' fill={true} className={s.img}
+                                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
+
+
+                                    <Image src={desktop} alt=''
+                                           className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
+                                           style={isLoading ? {} : {opacity: 0}}
+                                    />
+                                    <Image src={mobile} alt=''
+                                           className={`placeholder_img ${s.mobile}`} fill={true} sizes={'100%'}
+                                           style={isLoading ? {} : {opacity: 0}}
+                                    />
+                                </div>
+                            </div>
                         }
                     </div>
-                    {obj.photo &&
-                        <div className={s.text}>
-                            {parse(obj.content)}
-                        </div>
-                    }
-                </div>
-            </div>
-            {
-                obj.photo &&
-                <div className={s.img_block}>
-                    <div className={s.img_cont}>
-                        <Image src={obj.photo} alt='' fill={true} className={s.img}
-                               onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
-
-
-                        <Image src={desktop} alt=''
-                               className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
-                               style={isLoading ? {} : {opacity: 0}}
-                        />
-                        <Image src={mobile} alt=''
-                               className={`placeholder_img ${s.mobile}`} fill={true} sizes={'100%'}
-                               style={isLoading ? {} : {opacity: 0}}
-                        />
-                    </div>
-                </div>
+                    :
+                    <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title}</h3>
             }
-        </div>
+        </>
     );
 };
 

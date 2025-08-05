@@ -42,8 +42,21 @@
     background: white;
     padding: 10px 0;
     position: sticky;
+    top: 0px;
+    z-index: 6;
+
+    transition: 0.3s;
+    opacity: 1;
+}
+.filter_sort_row.visible {
+    opacity: 1;
+}
+.mobile_sort_row {
+    position: sticky;
+    background: white;
     top: 150px;
     z-index: 6;
+    transition: 0.3s;
 }
 .product_list_row {
     display: flex;

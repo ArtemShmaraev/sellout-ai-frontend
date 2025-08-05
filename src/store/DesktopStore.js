@@ -5,6 +5,7 @@ class DesktopStore {
         this._isDesktop = true
         this._animation = true
         this._filtersOpen = false
+        this._navbarVisible = true
         this._faqCnt = 0
         makeAutoObservable(this)
     }
@@ -13,6 +14,12 @@ class DesktopStore {
     }
     get isDesktop() {
         return this._isDesktop
+    }
+    setNavbarVisible(bool) {
+        this._navbarVisible = bool
+    }
+    get navbarVisible() {
+        return this._navbarVisible
     }
     setAnimation(bool) {
         this._animation = bool

@@ -1,11 +1,12 @@
 .container {
     width: 317px;
     position: sticky;
-    top: 230px;
+    top: 400px;
     z-index: 3;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     max-height: calc(100vh - 230px);
+    transition: 0.3s;
 }
 .container::-webkit-scrollbar {
     display: none;

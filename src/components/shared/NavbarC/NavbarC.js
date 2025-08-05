@@ -20,10 +20,11 @@ import {fetchNavbarPhoto} from "@/http/mainPageApi";
 import Link from "next/link";
 import SalesLine from "@/components/shared/NavbarC/SalesLine/SalesLine";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
+import cn from 'classnames';
 
 
 const NavbarC = () => {
-    const {userStore} = useContext(Context)
+    const {userStore, desktopStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
     const [photos, setPhotos] = useState({
@@ -100,8 +101,24 @@ const NavbarC = () => {
     const closeContact = () => {
         setContactOpen(false)
     }
+
+    const [visible, setVisible] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    const checkScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollPos > currentScrollPos;
+
+        setPrevScrollPos(currentScrollPos);
+        desktopStore.setNavbarVisible(visible)
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', checkScroll);
+        return () => window.removeEventListener('scroll', checkScroll);
+    }, [prevScrollPos]);
     return (
-        <header className={s.header} id={'navbar'}>
+        <header className={cn(s.header, { [s.visible]: desktopStore.navbarVisible })} id={'navbar'}>
             <SalesLine/>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
@@ -151,28 +168,28 @@ const NavbarC = () => {
                             pathname: '/products',
                             query: {new: 'true', ...queryGender}
                         }}
-                           className={s.links}>Новинки</Link>
+                              className={s.links}>Новинки</Link>
                         <Link href={{
                             pathname: '/products',
                             query: {recommendations: 'true', ...queryGender}
                         }}
-                           className={s.links}>Рекомендации</Link>
-                        <Megamenu className={s.links} label={'Бренды'} link={{
+                              className={s.links}>Рекомендации</Link>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{
                             pathname: '/brands',
                         }} photos={photos} type={'brands'}/>
-                        <Megamenu className={s.links} label={'Обувь'} link={{
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{
                             pathname: '/products',
                             query: {category: 'shoes_category', ...queryGender}
                         }} photos={photos} type={'shoes'}/>
-                        <Megamenu className={s.links} label={'Одежда'} link={{
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{
                             pathname: '/products',
                             query: {category: 'clothes', ...queryGender}
                         }} photos={photos} type={'clothes'}/>
-                        <Megamenu className={s.links} label={'Сумки'} link={{
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{
                             pathname: '/products',
                             query: {category: 'bags', ...queryGender}
                         }} type={'bags'} photos={photos}/>
-                        <Megamenu className={s.links} label={'Аксессуары'} link={{
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{
                             pathname: '/products',
                             query: {category: 'accessories', ...queryGender}
                         }} type={'accessories'} photos={photos}/>
