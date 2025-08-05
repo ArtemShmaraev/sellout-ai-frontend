@@ -51,7 +51,7 @@ const Footer = () => {
                         <Col lg={4} className={s.footer_col}>
                             <h4>Sellout</h4>
                             <div>
-                                <Link href="" className={s.footer_link} target={'_blank'}>О нас</Link>
+                                <Link href="/about" className={s.footer_link} target={'_blank'}>О нас</Link>
                             </div>
                             <div>
                                 <Link href="" className={s.footer_link} target={'_blank'}>Блог</Link>
@@ -71,7 +71,7 @@ const Footer = () => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="" className={s.link}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/about" className={s.link}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
@@ -141,7 +141,7 @@ const Footer = () => {
                     <>
                         <FooterDropdown header={'Sellout интернет-магазин'}>
                             <div>
-                                <Link href="/faq" className={s.footer_link} target={'_blank'}>О нас</Link>
+                                <Link href="/about" className={s.footer_link} target={'_blank'}>О нас</Link>
                             </div>
                             <div>
                                 <Link href="" className={s.footer_link} target={'_blank'}>Блог</Link>
@@ -160,7 +160,7 @@ const Footer = () => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} target={'_blank'}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/about" className={s.link} target={'_blank'}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>

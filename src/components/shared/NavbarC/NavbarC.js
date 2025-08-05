@@ -107,8 +107,11 @@ const NavbarC = () => {
 
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
-        const visible = prevScrollPos > currentScrollPos;
+        let visible = prevScrollPos > currentScrollPos;
 
+        if (currentScrollPos <= 0) {
+            visible = true
+        }
         setPrevScrollPos(currentScrollPos);
         desktopStore.setNavbarVisible(visible)
     };

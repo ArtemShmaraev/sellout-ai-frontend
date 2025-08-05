@@ -1,5 +1,5 @@
 .cont {
-    margin-top: 150px;
+    margin-top: 120px;
     display: flex;
     flex-direction: column;
 }
@@ -10,6 +10,7 @@
 .nav_block {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     margin: 20px 0;
 }
 .link {
@@ -22,5 +23,8 @@
 @media (max-width: 1200px) {
     .cont {
         margin-top: 90px;
+    }
+    .link {
+        font-size: 14px;
     }
 }

@@ -173,7 +173,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                 }
                 {!desktopStore.isDesktop &&
                     <div className={['d-flex justify-content-evenly align-items-center', s.mobile_sort_row].join(' ')}
-                         style={desktopStore.navbarVisible ? {top: 80} : {top: 0}}
+                         style={desktopStore.navbarVisible ? {top: 90} : {top: 0}}
                     >
                         <button className={s.filter_toggle}
                                 onClick={handleClick}
@@ -209,7 +209,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
             <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
 
             {modalOpen &&
-                <div className={s.modal}>
+                <div className={s.modal}
+                     style={desktopStore.navbarVisible ? {top: 84} : {top: 0}}
+                >
                     <Container>
                         <div className='d-flex justify-content-between'>
                             <div className={s.modal_header}>

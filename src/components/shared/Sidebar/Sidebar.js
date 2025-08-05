@@ -332,7 +332,7 @@ const Sidebar = ({photos}) => {
                     }
                     <div className={s.sidebar_footer}>
                         <div className={s.col}>
-                            <Link href="" className={s.sidebar_links} onClick={handleClose} target={'_blank'}>О нас</Link>
+                            <Link href="/about" className={s.sidebar_links} onClick={handleClose} target={'_blank'}>О нас</Link>
                             <Link href="" className={s.sidebar_links} onClick={handleClose} target={'_blank'}>Блог</Link>
                             <span className={s.sidebar_links}
                                   onClick={toggleContact}
@@ -360,7 +360,7 @@ const Sidebar = ({photos}) => {
                                     Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
                                     а также сами проводим проверку на оригинальность. Только после этого мы доставляем Ваш заказ. </p>
                                 <p>
-                                    Подробнее Вы можете прочитать в разделе <Link href="/faq" className={s.link} onClick={handleClose} target={'_blank'}>О нас</Link>
+                                    Подробнее Вы можете прочитать в разделе <Link href="/about" className={s.link} onClick={handleClose} target={'_blank'}>О нас</Link>
                                 </p>
                             </TextModal>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
