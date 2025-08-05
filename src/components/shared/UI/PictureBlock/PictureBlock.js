@@ -24,7 +24,7 @@ const PictureBlock = ({obj, className, type}) => {
     }
     const [isLoading, setIsLoading] = useState(true)
     return (
-        <div className={`${className} ${s.main_block} ${getDirection()}`}>
+        <div className={`${className} ${s.main_block} ${getDirection()}`} style={obj.photo ? {} : {minHeight: 'fit-content'}}>
             <div className={s.text_block}>
                 {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
                 <div className={s.text_cont}>

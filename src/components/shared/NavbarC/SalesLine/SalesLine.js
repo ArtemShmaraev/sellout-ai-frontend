@@ -32,7 +32,7 @@ const SalesLine = () => {
                     pagination: false,
                     arrows: false,
                     drag: false,
-                    interval: 2000,
+                    interval: 20000,
                     autoplay: true
                 }} className={'d-flex align-items-center'}
                 >
