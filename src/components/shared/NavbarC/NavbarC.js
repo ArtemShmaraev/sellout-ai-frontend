@@ -124,7 +124,7 @@ const NavbarC = () => {
                 <div className={s.row1}>
                     <div className={s.block}>
                         <div className={'desktop_d'}>
-                            <Link href="" className={s.links}>О нас</Link>
+                            <Link href="/about" className={s.links}>О нас</Link>
                             <Link href="" className={s.links}>Блог</Link>
                             <span className={s.links}
                                   onClick={toggleContact}
