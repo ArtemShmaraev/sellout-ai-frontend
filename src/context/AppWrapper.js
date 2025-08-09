@@ -119,8 +119,10 @@ export default function AppWrapper({ children }) {
 
     useEffect(() => {
         desktopStore.setAnimation(true)
+        document.body.classList.add('body-scroll-clip')
         setTimeout(() => {
             desktopStore.setAnimation(false)
+            document.body.classList.remove('body-scroll-clip')
         }, 4000)
     }, []);
     useEffect(() => {

@@ -165,3 +165,16 @@
     flex-direction: column;
     align-items: center;
 }
+.faq_block {
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+.text {
+    font-weight: 500;
+}
+@media (max-width: 1000px) {
+    .faq_block {
+        padding: 0;
+    }
+}

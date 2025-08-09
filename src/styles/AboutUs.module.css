@@ -20,11 +20,18 @@
     font-weight: 500;
     text-decoration: none;
 }
+.wrap {
+    width: 100%;
+    display: none;
+}
 @media (max-width: 1200px) {
     .cont {
-        margin-top: 90px;
+        margin-top: 70px;
     }
     .link {
-        font-size: 14px;
+        font-size: 18px;
+    }
+    .wrap {
+        display: block;
     }
 }

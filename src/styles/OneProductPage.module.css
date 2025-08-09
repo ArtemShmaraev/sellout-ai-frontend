@@ -6,10 +6,10 @@
     justify-content: space-between;
 }
 .col1 {
-    width: 58%;
+    width: 60%;
 }
 .col2 {
-    width: 40%;
+    width: 37%;
 }
 .col50 {
     width: 50%;
@@ -171,6 +171,7 @@
 }
 .slider {
     position: relative;
+    margin-top: 40px;
 }
 @media (max-width: 1200px) {
     .container {

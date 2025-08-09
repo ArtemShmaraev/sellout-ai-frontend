@@ -26,7 +26,7 @@
 .body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 body {
     overflow-x: clip;
@@ -34,6 +34,9 @@ body {
 }
 body.modal-open #navbar {
     width: calc(100% - 17px);
+}
+.modal-open {
+    overflow-y: hidden;
 }
 @-moz-document url-prefix() {
     body.modal-open #navbar {

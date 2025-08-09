@@ -17,6 +17,7 @@ const About = () => {
                         >Как мы работаем</a>
                         <a href={'#warranty'} className={s.link}
                         >Гарантии подлинности</a>
+                        <div className={s.wrap}></div>
                         <a href={'#team'} className={s.link}
                         >Наша команда</a>
                         <a href={'#phylosophy'} className={s.link}
