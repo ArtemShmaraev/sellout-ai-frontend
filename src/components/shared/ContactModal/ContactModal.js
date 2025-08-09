@@ -43,10 +43,10 @@ const ContactModal = ({isOpen, handleClose}) => {
                         <div>
                             <h5>Мы в социальных сетях:</h5>
                             <div className={s.icons_block}>
-                                <a href={''} target={'_blank'}>
+                                <a href={'https://t.me/selloutsu'} target={'_blank'}>
                                     <Image src={tg} width={50} alt="" className={s.icon}/>
                                 </a>
-                                <a href={''} target={'_blank'}>
+                                <a href={'https://vk.com/sellout_official'} target={'_blank'}>
                                     <Image src={vk} width={63} alt="" className={s.icon}/>
                                 </a>
                             </div>

@@ -129,7 +129,7 @@ const BuyoutModal = ({show, handleClose}) => {
                                 send()
                             }} className={s.send}>Отправить</button>
                         </Col>
-                        <p className={s.description}>Нажимая кнопку “Отправить”, вы соглашаетесь на <a href="" className={s.link}
+                        <p className={s.description}>Нажимая кнопку “Отправить”, вы соглашаетесь на <a href="/docs/Пользовательское_соглашение_SELLOUT.pdf" className={s.link}
                         >обработку персональных данных</a></p>
                     </Row>
                 </Modal.Body>
