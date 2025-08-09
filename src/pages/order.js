@@ -28,7 +28,7 @@ export const getServerSideProps = async (context) => {
     const defaultPrice = cart.total_amount
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
-    const maxBonuses = cart.bonus
+    const maxBonuses = cart.bonus + cart.promo_bonus
     const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
@@ -276,7 +276,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             <input type="hidden" name="order_id" value={order.id?.toString()} />
                             <input type="hidden" name="phone_number" value={order.phone_int} />
                             <input type="hidden" name="email" value={order.email} />
-                            <input type="hidden" name="payment_type" defaultValue="spg" />
+                    1        <input type="hidden" name="payment_type" defaultValue="spg" />
                             <input type='hidden' name='invoice_data' value={order.invoice_data} />
                             <input type="hidden" name="url_success" defaultValue="https://sellout.su/api/v1/order/signature" />
                             {/*<input*/}

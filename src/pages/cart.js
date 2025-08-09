@@ -71,7 +71,7 @@ export const getServerSideProps = async (context) => {
         finalPrice = cart.final_amount
         sale = cart.total_sale
         productUnits = cart
-        maxBonuses = cart.bonus
+        maxBonuses = cart.bonus + cart.promo_bonus
         firstOrder = cart.first_order_bonus
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
         defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
