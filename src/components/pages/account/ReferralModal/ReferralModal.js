@@ -78,21 +78,21 @@ const ReferralModal = ({isOpen, handleClose}) => {
                             <textarea
                                 rows={3}
                                 placeholder={'Укажите все каналы продвижения, которые ' +
-                                    'планируете использовать, в удобном Вам формате (соц. сети, блог, сообщества и.т.д)'}
+                                    'планируете использовать, в удобном вам формате (соц. сети, блог, сообщества и.т.д)'}
                                 className={s.textarea}
                                 value={promoting}
                                 onChange={e => setPromoting(e.target.value)}
                             />
                             <textarea
                                 rows={3}
-                                placeholder={'Расскажите, как Вы видите наше партнерство (необязательно)'}
+                                placeholder={'Расскажите, как вы видите наше партнерство (необязательно)'}
                                 className={s.textarea}
                                 value={partnership}
                                 onChange={e => setPartnership(e.target.value)}
                             />
                             <button className={s.btn} type={'submit'}>Отправить</button>
                             {success && <p className={'green_text text-center'}>Ваша заявка отправлена</p>}
-                            <p>Нажимая кнопку “Отправить”, Вы соглашаетесь
+                            <p>Нажимая кнопку “Отправить”, вы соглашаетесь
                                 на <a href={'/docs/Политика%20конфиденциальности.pdf'} target={'_blank'}
                                       className={'text-black'}>обработку персональных данных</a></p>
                         </form>

@@ -62,7 +62,7 @@ const BuyoutModal = ({show, handleClose}) => {
                     </div>
                     <Modal.Header className='mb-3'>
                         <p className={s.title}>Не смогли найти на нашей платформе то, что искали?
-                            Оставьте заявку, и мы привезем Вам желаемый товар!</p>
+                            Оставьте заявку, и мы привезем вам желаемый товар!</p>
                     </Modal.Header>
                     <Row className='gy-4'>
                         <Col lg={12}>
@@ -129,7 +129,7 @@ const BuyoutModal = ({show, handleClose}) => {
                                 send()
                             }} className={s.send}>Отправить</button>
                         </Col>
-                        <p className={s.description}>Нажимая кнопку “Отправить”, Вы соглашаетесь на <a href="" className={s.link}
+                        <p className={s.description}>Нажимая кнопку “Отправить”, вы соглашаетесь на <a href="" className={s.link}
                         >обработку персональных данных</a></p>
                     </Row>
                 </Modal.Body>
@@ -139,7 +139,7 @@ const BuyoutModal = ({show, handleClose}) => {
                         <Image src={close} alt='' className={s.close} onClick={handleClose}/>
                     </div>
                     <p className={s.title}>Спасибо за оставленную заявку!
-                        Мы постараемся связаться с Вами как можно скорее!</p>
+                        Мы постараемся связаться с вами как можно скорее!</p>
                 </Modal.Body>
             }
         </Modal>

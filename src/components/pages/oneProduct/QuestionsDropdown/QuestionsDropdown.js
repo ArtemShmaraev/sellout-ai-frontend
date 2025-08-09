@@ -15,8 +15,8 @@ const QuestionsDropdown = () => {
             </button>
             {isOpen &&
                 <div className={s.text_block}>
-                    <p className={s.text}>Ответы на большинство вопросов Вы сможете найти здесь: <Link href="/faq" className={s.link}>FAQ</Link></p>
-                    <p className={s.text}>Если у Вас остались вопросы, напишите в поддержку, мы обязательно Вам поможем:</p>
+                    <p className={s.text}>Ответы на большинство вопросов вы сможете найти здесь: <Link href="/faq" className={s.link}>FAQ</Link></p>
+                    <p className={s.text}>Если у вас остались вопросы, напишите в поддержку, мы обязательно вам поможем:</p>
                     <div>
                         <a href={'mailto:customerservice@sellout.su'}
                            className={s.text}>Почта: customerservice@sellout.su</a>
