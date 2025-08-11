@@ -71,6 +71,7 @@ import patch from "@/static/icons/patch-check 1.svg";
 import personCheck from "@/static/icons/person-check 1.svg";
 import file from '@/static/icons/file-earmark-check 1.svg'
 import creditCard from '@/static/icons/credit-card 2.svg'
+import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
@@ -332,6 +333,13 @@ const OneProductPage = ({product, prices}) => {
             setMoreOpen(false)
         }, 200)
     }, [router.asPath])
+    const [howOpen, setHowOpen] = useState(false)
+    const toggleHow = () => {
+        setHowOpen(!howOpen)
+    }
+    const closeHow = () => {
+        setHowOpen(false)
+    }
     return (
         <MainLayout>
             <Head>
@@ -625,16 +633,16 @@ const OneProductPage = ({product, prices}) => {
                             </>
                         }
                         <div className={s.link_block}>
-                            <TextModal title={'Как мы работаем?'} img={how}>
-                                <p>SELLOUT - инновационная онлайн-платформа, предлагающая широчайший ассортимент
-                                    брендовой одежды и обуви, аксессуаров и прочих товаров. У нас вы сможете найти как лимитированные и
-                                    труднодоступные модели и коллекции, так и отобранные нашими стилистами товары со всего мира.
-                                    Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
-                                    а также сами проводим проверку на оригинальность. Только после этого мы доставляем ваш заказ. </p>
-                                <p>
-                                    Подробнее вы можете прочитать в разделе <Link href="/about" className={s.link}>О нас</Link>
-                                </p>
-                            </TextModal>
+                            <button
+                                className={s.how_btn}
+                                onClick={toggleHow}
+                            >
+                                <Image src={how} alt="" className={s.icon_how}/>
+                                <div className={s.label}>
+                                    Как мы работаем?
+                                </div>
+                            </button>
+                            <hr className={'my-2'}/>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty}>
                                 <Image src={shield} alt='' width={60}/>
                                 <h4 className={'my-3'}>Гарантии оригинальности и качества</h4>
@@ -1035,6 +1043,7 @@ const OneProductPage = ({product, prices}) => {
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
+            <HowWeWorkModal show={howOpen} onHide={closeHow}/>
         </MainLayout>
     );
 };

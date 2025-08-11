@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import s from './Footer.module.css'
 import {Col, Row} from "react-bootstrap";
-import tg from '@/static/icons/tg_black.svg'
-import vk from '@/static/icons/vk_black.svg'
+import tg from '@/static/icons/tg.svg'
+import vk from '@/static/icons/vk.svg'
+import tgBlack from '@/static/icons/tg_black.svg'
+import vkBlack from '@/static/icons/vk_black.svg'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'
@@ -25,6 +27,7 @@ import creditCard from "@/static/icons/credit-card 2.svg";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import truck from "@/static/icons/truck.svg";
 import returnImg from "@/static/icons/arrow-return-left.svg";
+import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 
 const Footer = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -50,6 +53,14 @@ const Footer = () => {
     const closeContact = () => {
         setContactOpen(false)
     }
+
+    const [howOpen, setHowOpen] = useState(false)
+    const toggleHow = () => {
+        setHowOpen(!howOpen)
+    }
+    const closeHow = () => {
+        setHowOpen(false)
+    }
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>
@@ -72,16 +83,9 @@ const Footer = () => {
                         </Col>
                         <Col lg={4} className={s.footer_col}>
                             <h4>Помощь</h4>
-                            <TextModal title={'Как мы работаем?'} img={how} titleClassname={s.footer_link}>
-                                <p>SELLOUT - инновационная онлайн-платформа, предлагающая широчайший ассортимент
-                                    брендовой одежды и обуви, аксессуаров и прочих товаров. У нас вы сможете найти как лимитированные и
-                                    труднодоступные модели и коллекции, так и отобранные нашими стилистами товары со всего мира.
-                                    Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
-                                    а также сами проводим проверку на оригинальность. Только после этого мы доставляем ваш заказ. </p>
-                                <p>
-                                    Подробнее вы можете прочитать в разделе <Link href="/about" className={s.link}>О нас</Link>
-                                </p>
-                            </TextModal>
+                            <div>
+                                <span className={s.footer_link} onClick={toggleHow}>Как мы работаем?</span>
+                            </div>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
                                 <>
                                     <Image src={shield} alt='' width={60}/>
@@ -93,10 +97,10 @@ const Footer = () => {
                                     <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть отзывы, подробнее прочитать <Link href={'/about'} className={s.link} target={'_blank'}>про нашу компанию</Link>, а также изучить отзывы на интернет ресурсах</h5>
                                     <div className={s.icons_block}>
                                         <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tg} width={50} alt="" className={s.icon}/>
+                                            <Image src={tgBlack} width={50} alt="" className={s.icon}/>
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vk} width={63} alt="" className={s.icon}/>
+                                            <Image src={vkBlack} width={63} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
@@ -300,16 +304,9 @@ const Footer = () => {
                             </div>
                         </FooterDropdown>
                         <FooterDropdown header={'Помощь'}>
-                            <TextModal title={'Как мы работаем?'} img={how} titleClassname={s.footer_link}>
-                                <p>SELLOUT - инновационная онлайн-платформа, предлагающая широчайший ассортимент
-                                    брендовой одежды и обуви, аксессуаров и прочих товаров. У нас вы сможете найти как лимитированные и
-                                    труднодоступные модели и коллекции, так и отобранные нашими стилистами товары со всего мира.
-                                    Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
-                                    а также сами проводим проверку на оригинальность. Только после этого мы доставляем ваш заказ. </p>
-                                <p>
-                                    Подробнее вы можете прочитать в разделе <Link href="/about" className={s.link} target={'_blank'}>О нас</Link>
-                                </p>
-                            </TextModal>
+                            <div>
+                                <span className={s.footer_link} onClick={toggleHow}>Как мы работаем?</span>
+                            </div>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
                                 <>
                                     <Image src={shield} alt='' width={60}/>
@@ -321,10 +318,10 @@ const Footer = () => {
                                     <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть отзывы, подробнее прочитать <Link href={'/about'} className={s.link} target={'_blank'}>про нашу компанию</Link>, а также изучить отзывы на интернет ресурсах</h5>
                                     <div className={s.icons_block}>
                                         <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tg} width={50} alt="" className={s.icon}/>
+                                            <Image src={tgBlack} width={50} alt="" className={s.icon}/>
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vk} width={63} alt="" className={s.icon}/>
+                                            <Image src={vkBlack} width={63} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
@@ -557,6 +554,7 @@ const Footer = () => {
                 </div>
             </div>
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+            <HowWeWorkModal show={howOpen} onHide={closeHow}/>
         </footer>
     );
 };

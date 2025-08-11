@@ -10,6 +10,10 @@ import warranty from '@/static/img/aboutUs/Гарантии.png'
 import mWarranty from '@/static/img/aboutUs/Гарантии-моб.jpg'
 import team from '@/static/img/aboutUs/Команда.jpg'
 import mTeam from '@/static/img/aboutUs/Команда-моб.jpg'
+import phyl from '@/static/img/aboutUs/Философия.jpg'
+import mPhyl from '@/static/img/aboutUs/Философия-моб.jpg'
+import aims from '@/static/img/aboutUs/Цели.png'
+import mAims from '@/static/img/aboutUs/Цели-моб.png'
 
 const About = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -50,6 +54,8 @@ const About = () => {
                 <Image src={isDesktop ? howWeWork : mHowWeWork} alt='' className={s.photo} id={'how'}/>
                 <Image src={isDesktop ? warranty : mWarranty} alt='' className={s.photo} id={'warranty'}/>
                 <Image src={isDesktop ? team : mTeam} alt='' className={s.photo} id={'team'}/>
+                <Image src={isDesktop ? phyl : mPhyl} alt='' className={s.photo} id={'phylosophy'}/>
+                <Image src={isDesktop ? aims : mAims} alt='' className={s.photo} id={'aims'}/>
             </div>
         </MainLayout>
     );

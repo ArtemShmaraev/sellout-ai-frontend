@@ -372,3 +372,26 @@
 .arrow_img {
     object-fit: contain;
 }
+.how_btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: #727272;
+    transition: 0.3s;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+.how_btn:hover {
+    color: #444444;
+}
+.label {
+    text-align: left;
+}
+.icon_how {
+    margin: 0 10px;
+    min-width: 25px;
+    height: auto;
+}

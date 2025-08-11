@@ -1,0 +1,29 @@
+.close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.p0 {
+    padding: 0;
+}
+.img {
+    width: 100%;
+    height: auto;
+}
+.text {
+    background: black;
+    text-align: center;
+    color: #BBBBBB;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 0 0 7px 7px;
+}
+.link {
+    color: #BBBBBB;
+}
+@media (max-width: 1000px) {
+    .text {
+        font-size: 16px;
+        border-radius: 0;
+    }
+}

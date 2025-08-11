@@ -177,15 +177,6 @@ const NavbarC = () => {
                             query: {recommendations: 'true', ...queryGender}
                         }}
                               className={s.links}>Рекомендации</Link>
-                        <Link href={{
-                            pathname: '/products',
-                            query: {...queryGender, is_sale: 'is_sale'}
-                        }}
-                              className={s.sale_link}
-
-                        >
-                            Скидки
-                        </Link>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{
                             pathname: '/brands',
                         }} photos={photos} type={'brands'}/>
@@ -228,6 +219,15 @@ const NavbarC = () => {
 
                         >
                             Все товары
+                        </Link>
+                        <Link href={{
+                            pathname: '/products',
+                            query: {...queryGender, is_sale: 'is_sale'}
+                        }}
+                              className={s.sale_link}
+
+                        >
+                            Скидки
                         </Link>
                     </div>
                     <div>

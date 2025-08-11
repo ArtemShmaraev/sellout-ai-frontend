@@ -4,7 +4,10 @@ import list from '@/static/icons/list2.svg'
 import close from '@/static/icons/x-lg.svg'
 import person from '@/static/icons/person-circle.svg'
 import arrow from '@/static/icons/chevron-right.svg'
-import tg from "@/static/icons/tg.svg";
+import tg from '@/static/icons/tg.svg'
+import vk from '@/static/icons/vk.svg'
+import tgBlack from '@/static/icons/tg_black.svg'
+import vkBlack from '@/static/icons/vk_black.svg'
 import AuthModal from "../AuthModal/AuthModal";
 import Image from "next/image";
 import {Context} from "@/context/AppWrapper";
@@ -17,7 +20,6 @@ import Clothes from "@/components/shared/Sidebar/Sections/Clothes";
 import Shoes from "@/components/shared/Sidebar/Sections/Shoes";
 import Accessories from "@/components/shared/Sidebar/Sections/Аccessories";
 import Link from "next/link";
-import vk from "@/static/icons/vk.svg";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import how from "@/static/icons/question-circle.svg";
@@ -39,6 +41,7 @@ import patch from "@/static/icons/patch-check 1.svg";
 import personCheck from "@/static/icons/person-check 1.svg";
 import file from "@/static/icons/file-earmark-check 1.svg";
 import creditCard from "@/static/icons/credit-card 2.svg";
+import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -124,6 +127,13 @@ const Sidebar = ({photos}) => {
             document.body.classList.remove('body-scroll-clip')
         }
     }, [])
+    const [howOpen, setHowOpen] = useState(false)
+    const toggleHow = () => {
+        setHowOpen(!howOpen)
+    }
+    const closeHow = () => {
+        setHowOpen(false)
+    }
     return (
         <>
             <button className={s.toggle_btn}
@@ -209,6 +219,17 @@ const Sidebar = ({photos}) => {
                                       onClick={handleClose}
                                 >
                                     <div>Рекомендации</div>
+                                    <Image src={arrow} alt=""/>
+                                </Link>
+                                <Link className={s.section_block}
+                                      href={{
+                                          pathname: '/products',
+                                          query: {is_sale: 'is_sale', ...queryGender}
+                                      }}
+                                      onClick={handleClose}
+                                      style={{color: '#b61212'}}
+                                >
+                                    <div>Скидки</div>
                                     <Image src={arrow} alt=""/>
                                 </Link>
                                 <div className={s.section_block}
@@ -309,11 +330,6 @@ const Sidebar = ({photos}) => {
                                 {/*    </div>*/}
                                 {/*    <Image src={arrow} alt=""/>*/}
                                 {/*</div>*/}
-                                {/*<div className={s.section_block} onClick={goToSale}*/}
-                                {/*>*/}
-                                {/*    <div className={s.sale}>Скидки</div>*/}
-                                {/*    <Image src={arrow} alt=""/>*/}
-                                {/*</div>*/}
                             </div>
                             :
                             <div className={s.section_container} ref={sectionRef}>
@@ -361,16 +377,9 @@ const Sidebar = ({photos}) => {
                         </div>
                         <div className={s.col}>
                             <h4 className='text-white'>Помощь</h4>
-                            <TextModal title={'Как мы работаем?'} img={how} titleClassname={s.footer_link}>
-                                <p>SELLOUT - инновационная онлайн-платформа, предлагающая широчайший ассортимент
-                                    брендовой одежды и обуви, аксессуаров и прочих товаров. У нас вы сможете найти как лимитированные и
-                                    труднодоступные модели и коллекции, так и отобранные нашими стилистами товары со всего мира.
-                                    Мы сотрудничаем только с проверенными бутиками, магазинами и продавцами,
-                                    а также сами проводим проверку на оригинальность. Только после этого мы доставляем ваш заказ. </p>
-                                <p>
-                                    Подробнее вы можете прочитать в разделе <Link href="/about" className={s.link} onClick={handleClose} target={'_blank'}>О нас</Link>
-                                </p>
-                            </TextModal>
+                            <div>
+                                <span className={s.footer_link} onClick={toggleHow}>Как мы работаем?</span>
+                            </div>
                             <TextModal title={'Гарантии оригинальности и качества'} img={warranty} titleClassname={s.footer_link}>
                                 <>
                                     <Image src={shield} alt='' width={60}/>
@@ -382,10 +391,10 @@ const Sidebar = ({photos}) => {
                                     <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть отзывы, подробнее прочитать <Link href={'/about'} className={s.link} target={'_blank'}>про нашу компанию</Link>, а также изучить отзывы на интернет ресурсах</h5>
                                     <div className={s.icons_block}>
                                         <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tg} width={50} alt="" className={s.icon}/>
+                                            <Image src={tgBlack} width={50} alt="" className={s.icon}/>
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vk} width={63} alt="" className={s.icon}/>
+                                            <Image src={vkBlack} width={63} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
@@ -566,6 +575,7 @@ const Sidebar = ({photos}) => {
                 </div>
             }
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+            <HowWeWorkModal show={howOpen} onHide={closeHow}/>
         </>
     );
 };
