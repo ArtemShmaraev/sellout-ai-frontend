@@ -200,7 +200,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
             <div className={s.text_container}>
                 <div className={s.text}>
                     Не смогли найти на нашей платформе то, что искали? <br/>
-                    Оставьте заявку, и мы привезем Вам желаемый товар!
+                    Оставьте заявку, и мы привезем вам желаемый товар!
                 </div>
                 <div className={'d-flex justify-content-center'}>
                     <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>

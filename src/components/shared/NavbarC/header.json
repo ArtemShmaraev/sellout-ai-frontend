@@ -1857,6 +1857,10 @@
     "name": "Одежда",
     "any": [
       {
+        "name": "Все худи и толстовки",
+        "query_name": "hoodie_sweatshirts_"
+      },
+      {
         "name": "Худи с капюшоном",
         "query_name": "hoodie"
       },
@@ -1971,13 +1975,13 @@
       {
         "name": "Пляжная одежда",
         "query_name": "beach_wear"
-      },
-      {
-        "name": "Нижнее бельё и домашняя одежда",
-        "query_name": "underwear_home_wear"
       }
     ],
     "male": [
+      {
+        "name": "Все худи и толстовки",
+        "query_name": "hoodie_sweatshirts_"
+      },
       {
         "name": "Худи с капюшоном",
         "query_name": "hoodie"
@@ -2093,13 +2097,13 @@
       {
         "name": "Пляжная одежда",
         "query_name": "beach_wear"
-      },
-      {
-        "name": "Нижнее бельё и домашняя одежда",
-        "query_name": "underwear_home_wear"
       }
     ],
     "female": [
+      {
+        "name": "Все худи и толстовки",
+        "query_name": "hoodie_sweatshirts_"
+      },
       {
         "name": "Худи с капюшоном",
         "query_name": "hoodie"
@@ -2215,10 +2219,6 @@
       {
         "name": "Пляжная одежда",
         "query_name": "beach_wear"
-      },
-      {
-        "name": "Нижнее бельё и домашняя одежда",
-        "query_name": "underwear_home_wear"
       }
     ]
   },

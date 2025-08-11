@@ -128,7 +128,7 @@ const NavbarC = () => {
                     <div className={s.block}>
                         <div className={'desktop_d'}>
                             <Link href="/about" className={s.links}>О нас</Link>
-                            <Link href="" className={s.links}>Блог</Link>
+                            <Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>
                             <span className={s.links}
                                   onClick={toggleContact}
                             >Связаться с нами</span>
