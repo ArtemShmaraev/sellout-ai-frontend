@@ -1,16 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '@/styles/AboutUs.module.css'
 import MainLayout from "@/layout/MainLayout";
-import howWeWork from '@/static/img/aboutUs/Как мы работаем.png'
+import howWeWork from '@/static/img/aboutUs/Как мы работаем.jpg'
+import mHowWeWork from '@/static/img/aboutUs/Как мы работаем-моб.jpg'
 import Image from "next/image";
-import title from '@/static/img/aboutUs/Заголовок.png'
+import title from '@/static/img/aboutUs/Заголовок.jpg'
+import mTitle from '@/static/img/aboutUs/Заголовок-моб.jpg'
 import warranty from '@/static/img/aboutUs/Гарантии.png'
+import mWarranty from '@/static/img/aboutUs/Гарантии-моб.jpg'
+import team from '@/static/img/aboutUs/Команда.jpg'
+import mTeam from '@/static/img/aboutUs/Команда-моб.jpg'
 
 const About = () => {
+    const [isDesktop, setIsDesktop] = useState(true)
+    const checkIsDesktop = () => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setIsDesktop(false)
+        } else {
+            setIsDesktop(true)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("resize", checkIsDesktop);
+        // Call handler right away so state gets updated with initial window size
+        checkIsDesktop();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", checkIsDesktop);
+    })
     return (
         <MainLayout>
             <div className={[s.cont].join(' ')}>
-                <Image src={title} alt='' className={s.photo}/>
+                <Image src={isDesktop ? title : mTitle} alt='' className={s.photo}/>
                 <div className={'bg-black'}>
                     <div className={['custom_cont', s.nav_block].join(' ')}>
                         <a href={'#how'} className={s.link}
@@ -26,8 +47,9 @@ const About = () => {
                         >Цели</a>
                     </div>
                 </div>
-                <Image src={howWeWork} alt='' className={s.photo} id={'how'}/>
-                <Image src={warranty} alt='' className={s.photo} id={'warranty'}/>
+                <Image src={isDesktop ? howWeWork : mHowWeWork} alt='' className={s.photo} id={'how'}/>
+                <Image src={isDesktop ? warranty : mWarranty} alt='' className={s.photo} id={'warranty'}/>
+                <Image src={isDesktop ? team : mTeam} alt='' className={s.photo} id={'team'}/>
             </div>
         </MainLayout>
     );

@@ -122,4 +122,7 @@
     .square {
         width: 100%;
     }
+    .img_cont {
+        height: 190px;
+    }
 }

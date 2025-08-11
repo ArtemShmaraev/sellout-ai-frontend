@@ -51,7 +51,9 @@ const SalesLine = () => {
                                 клиента. { userStore.isLogged ?
                                 <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
                                 :
-                                <AuthModal inline={true}>
+                                <AuthModal inline={true}
+                                           text={'Войдите или зарегистрируйтесь, чтобы стать участником реферальной программы и получать до 7000₽ за каждого приведённого клиента'}
+                                >
                                     <span className={s.link}>Подробнее</span>
                                 </AuthModal>
                             }

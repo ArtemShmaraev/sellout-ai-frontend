@@ -186,8 +186,8 @@ const Faq = () => {
                         Мы собираем отзывы на всяческих ресурсах:
                         <ul>
                             <li>Отзовики</li>
-                            <li>Telegram</li>
-                            <li>VK</li>
+                            <li><a href="https://t.me/selloutsu" target={'_blank'} className={s.underline}>Telegram</a></li>
+                            <li><a href="https://vk.com/sellout_official" target={'_blank'} className={s.underline}>VK</a></li>
                             <li>И другие соц. сети ;)</li>
                         </ul>
                         Подробнее познакомиться с нашим брендом и узнать о наших основателях с многолетним опытом и

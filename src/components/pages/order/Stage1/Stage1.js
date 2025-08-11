@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import {fetchDeliveryInfo} from "@/http/orderApi";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 const Stage1 = ({addresses, userData}) => {
     const router = useRouter()
@@ -96,6 +97,14 @@ const Stage1 = ({addresses, userData}) => {
         const data = await fetchDeliveryInfo(obj, token)
         orderStore.setDeliveryPrice(data)
     }
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
+
     return (
         <div>
             <div className={s.stage_block}>
@@ -299,10 +308,10 @@ const Stage1 = ({addresses, userData}) => {
                 </div>
                 <p className={'text-center mt-2'}>
                     Мы готовы сформировать для вас индивидуальные условия отправления,
-                    поэтому вы всегда можете написать нам в <Link href={''} style={{color: 'black'}}>службу поддержку</Link> свой запрос и мы обязательно вам поможем!
+                    поэтому вы всегда можете написать нам в <span style={{color: 'black', textDecoration: 'underline', cursor: 'pointer'}} onClick={toggleContact}>службу поддержку</span> свой запрос и мы обязательно вам поможем!
                 </p>
             </div>
-
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </div>
     );
 };

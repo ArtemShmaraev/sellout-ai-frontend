@@ -1858,7 +1858,7 @@
     "any": [
       {
         "name": "Все худи и толстовки",
-        "query_name": "hoodie_sweatshirts_"
+        "query_name": "hoodie_sweatshirts"
       },
       {
         "name": "Худи с капюшоном",
@@ -1980,7 +1980,7 @@
     "male": [
       {
         "name": "Все худи и толстовки",
-        "query_name": "hoodie_sweatshirts_"
+        "query_name": "hoodie_sweatshirts"
       },
       {
         "name": "Худи с капюшоном",
@@ -2102,7 +2102,7 @@
     "female": [
       {
         "name": "Все худи и толстовки",
-        "query_name": "hoodie_sweatshirts_"
+        "query_name": "hoodie_sweatshirts"
       },
       {
         "name": "Худи с капюшоном",

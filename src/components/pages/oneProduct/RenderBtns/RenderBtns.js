@@ -37,6 +37,7 @@ const RenderBtns = ({btns, changeBonuses}) => {
                         ?
                             <div className={s.half_text}>
                                 <span className={s.crossed}>{button.start_price} ₽</span>
+                                <br/>
                                 <span className={s.sale_price}>{button.final_price} ₽</span>
                             </div>
                             :

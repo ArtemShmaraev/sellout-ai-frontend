@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import s from './Footer.module.css'
 import {Col, Row} from "react-bootstrap";
-import tg from '@/static/icons/tg.svg'
-import vk from '@/static/icons/vk.svg'
+import tg from '@/static/icons/tg_black.svg'
+import vk from '@/static/icons/vk_black.svg'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
 import Image from 'next/image'

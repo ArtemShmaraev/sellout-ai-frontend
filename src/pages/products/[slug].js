@@ -189,6 +189,9 @@ const OneProductPage = ({product, prices}) => {
         } else {
             query.line = product.brands[0].query_name
         }
+        if (userStore.gender) {
+            query.gender = userStore.gender[0].toUpperCase()
+        }
         return {
             pathname: '/products',
             query: query

@@ -113,7 +113,7 @@
 }
 @media (max-width: 1200px) {
     .dropdown, .dropdown_items_block {
-        width: 100%;
+        width: 200px;
     }
     .dropdown_header_text, .dropdown_item, .dropdown_item2 {
         font-size: 12px;

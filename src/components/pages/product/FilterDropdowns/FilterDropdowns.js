@@ -17,7 +17,7 @@ const FilterDropdowns = () => {
     return (
         <div>
             <div className={s.container}
-                 style={desktopStore.navbarVisible ? {top: 230} : {top: 80, maxHeight: 'calc(100vh-80px)'}}>
+                 style={desktopStore.navbarVisible ? {top: 230} : {top: 80, maxHeight: 'calc(100vh - 80px)'}}>
                 <CategoryDropdown/>
                 <BrandDropdown/>
                 <CollectionsDropdown/>
@@ -27,7 +27,7 @@ const FilterDropdowns = () => {
                 <MaterialsDropdown/>
                 <PriceDropdown/>
                 {/*<FastShip/>*/}
-                {/*<Sale/>*/}
+                <Sale/>
             </div>
         </div>
     );

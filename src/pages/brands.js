@@ -27,7 +27,7 @@ export const getServerSideProps = async (context) => {
 }
 const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
-    const {userStore} = useContext(Context)
+    const {userStore, desktopStore} = useContext(Context)
     const [brands, setBrands] = useState(brandsArr)
 
     const [isDesktop, setIsDesktop] = useState(true)
@@ -142,7 +142,9 @@ const Brands = ({brandsArr}) => {
                 <title>Бренды</title>
             </Head>
             <div className={s.cont + ' custom_cont'}>
-                <div className={s.alphabet_block}>
+                <div className={s.alphabet_block}
+                     style={desktopStore.navbarVisible ? {} : {top: 0}}
+                >
                     <div className={s.alphabet}>
                         { isDesktop
                             ?
@@ -182,7 +184,9 @@ const Brands = ({brandsArr}) => {
                 </div>
                 <div className={s.main_block}>
                     <div>
-                        <div className={s.search_block}>
+                        <div className={s.search_block}
+                             style={desktopStore.navbarVisible ? {} : {top: 40}}
+                        >
                             <SearchInput w100={true}
                                          value={query}
                                          onChange={e => setQuery(e.target.value)}

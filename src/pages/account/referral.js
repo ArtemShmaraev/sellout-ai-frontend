@@ -23,6 +23,7 @@ import Link from "next/link";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import Cookies from "js-cookie";
 import ReferralModal from "@/components/pages/account/ReferralModal/ReferralModal";
+import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -33,6 +34,7 @@ export const getServerSideProps = async (context) => {
     return { props: {loyalty, fetchedPromo, refData} }
 }
 const Referral = ({loyalty, fetchedPromo, refData}) => {
+    const router = useRouter()
     const config = {
         Amethyst: {
             img: amethystBg,
@@ -106,16 +108,18 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
             setReadOnly(true)
             const token = Cookies.get('access_token')
             const res = await editPromo(promo, token)
-            console.log(res)
             if ('message' in res) {
                 setError(res.message)
                 setSaved(false)
             } else {
                 setSaved(true)
                 setError('')
+                const {pathname} = router
+                router.push({pathname}, undefined, {scroll: false})
             }
         }
     }
+    console.log(refData)
     const copyRef = useRef(null)
     const textRef = useRef(null)
     const [saved, setSaved] = useState(false)

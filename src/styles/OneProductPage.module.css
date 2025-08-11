@@ -346,6 +346,9 @@
         width: 45%;
         font-size: 13px;
     }
+    .img_cont {
+        height: 200px;
+    }
 }
 
 .arrows_section {
