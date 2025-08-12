@@ -119,12 +119,12 @@ const ProductCard = ({cardList = false, product}) => {
     }, []);
     return (
         <Link className={cardList ? s.card_list : s.card}
-           href={`/products/${slug}`}
+              href={`/products/${slug}`}
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     {isSale && <div className={s.sale}>
-                        -{Math.ceil(100 - (price.final_price/price.start_price) * 100)}%
+                        -{Math.ceil(100 - (price.final_price / price.start_price) * 100)}%
                     </div>}
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
@@ -132,11 +132,11 @@ const ProductCard = ({cardList = false, product}) => {
                 {userStore.isLogged
                     ?
                     <div className={s.like_block}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            isInWishlist ? deleteFromWL() : addToWL()
-                    }}>
+                         onClick={(e) => {
+                             e.preventDefault()
+                             e.stopPropagation()
+                             isInWishlist ? deleteFromWL() : addToWL()
+                         }}>
                         <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
                     </div>
                     :
@@ -203,20 +203,27 @@ const ProductCard = ({cardList = false, product}) => {
                                 <div className={`${s.brand}`}>{model || 'No model'}</div>
                                 <div className={`${s.name}`}>{colorway}</div>
                             </div>
+
                             <div className={`${s.price_block}`}>
                                 {
                                     isSale
                                         ?
-                                        <div className={`${s.price}`}>
-                                            <span className={s.crossed}>От {price.start_price} ₽</span>
-                                            <br/>
-                                            <span className={s.sale_price}>От {price.final_price} ₽</span>
-                                        </div>
+                                        Number(price.final_price) > 0
+                                            ?
+                                            <div className={`${s.price}`}>
+                                                <span className={s.crossed}>От {price.start_price} ₽</span>
+                                                <br/>
+                                                <span className={s.sale_price}>От {price.final_price} ₽</span>
+                                            </div>
+                                            :
+                                            <div className={`${s.price}`}>
+                                                Нет в наличии
+                                            </div>
                                         :
                                         <div className={`${s.price}`}>
                                             {
                                                 Number(price.final_price) > 0
-                                                ?
+                                                    ?
                                                     `От ${price.final_price} ₽`
                                                     :
                                                     'Нет в наличии'
@@ -224,6 +231,7 @@ const ProductCard = ({cardList = false, product}) => {
                                         </div>
                                 }
                             </div>
+
                         </>
                         :
                         <div className={'text-black'}
