@@ -114,6 +114,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                 <div>
                     <div className={s.dropdown_items_block}>
                         {
+                            cartStore.cart[cardId] &&
                             cartStore.cart[cardId].map((el, ind) =>
                                 <button className={ind !== cartStore.cart[cardId].length-1 ? s.dropdown_item : s.dropdown_item2}
                                         onClick={() => selectItem(el)}

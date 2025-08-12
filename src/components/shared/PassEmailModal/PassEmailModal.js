@@ -7,6 +7,7 @@ import {sendPassEmail} from "@/http/userApi";
 
 const PassEmailModal = ({show, onHide, defEmail}) => {
     const [email, setEmail] = useState(defEmail)
+    const [sentEmail, setSentEmail] = useState('')
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -21,6 +22,7 @@ const PassEmailModal = ({show, onHide, defEmail}) => {
         }
         setValidEmail(true)
         await sendPassEmail(email)
+        setSentEmail(email)
         setSent(true)
     }
     return (
@@ -53,7 +55,7 @@ const PassEmailModal = ({show, onHide, defEmail}) => {
                             <div className={'red_text text-center mt-2'}>Некорректный формат почты</div>
                         }
                         {sent &&
-                            <div className={'green_text text-center mt-2'}>Письмо отправлено на почту {email}</div>
+                            <div className={'green_text text-center mt-2'}>Письмо отправлено на почту {sentEmail}</div>
                         }
                     </form>
                 </Modal.Body>
