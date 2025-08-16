@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './FullScreen.module.css'
 import close from '@/static/icons/x-lg.svg'
 import Image from "next/image";
-import {Navigation, Pagination, Zoom} from "swiper/modules";
+import {Navigation, Pagination, Scrollbar, A11y, Zoom} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -23,13 +23,13 @@ const FullScreen = ({toggle, photos}) => {
 
             <div>
                 <Swiper
-                    loop={true}
-                    // pagination={{
-                    //     type: 'progressbar',
-                    // }}
+                    modules={[Navigation, Pagination, Scrollbar, A11y, Zoom]}
+                    spaceBetween={100}
                     zoom={true}
-                    // navigation={true}
-                    modules={[Pagination, Zoom]}
+                    loop={true}
+                    pagination={{clickable: true}}
+                    // scrollbar={{ draggable: true }}
+                    // modules={[Pagination, Zoom]}
                     className={s.cont}
                     style={{
                         "--swiper-pagination-color": "#000",
