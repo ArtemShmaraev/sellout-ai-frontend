@@ -43,6 +43,7 @@ const ImgSlider = ({photos}) => {
     }
     return (
         <>
+
             <Swiper
                 loop={true}
                 // pagination={{
@@ -134,6 +135,7 @@ const ImgSlider = ({photos}) => {
             {/*</Swiper>*/}
             {
                 isFull &&
+                // <Carousel images={photos}/>
                 <FullScreen toggle={toggleFullScreen} photos={photos}/>
             }
         </>
