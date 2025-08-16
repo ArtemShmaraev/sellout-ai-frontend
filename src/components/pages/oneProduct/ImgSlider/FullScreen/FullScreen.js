@@ -4,8 +4,6 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import s from './FullScreen.module.css'
 import close from '@/static/icons/x-lg.svg'
 import Image from "next/image";
-import {Navigation, Pagination, Scrollbar, A11y, Zoom} from "swiper/modules";
-import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
