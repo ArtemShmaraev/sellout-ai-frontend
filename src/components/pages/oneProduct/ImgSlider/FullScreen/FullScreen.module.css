@@ -7,6 +7,7 @@
     width: 100vw;
     height: 100vh;
 }
+
 .close_btn {
     outline: none;
     border: none;
@@ -14,11 +15,16 @@
     margin: 20px;
 }
 .cont {
-    position: relative;
+    position: fixed;
+    top: 45%;
+    transform: translateY(-45%);
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
 }
 .photo_cont {
     width: auto;
     height: 90vh;
+    overflow: auto;
 }
 .photo {
     text-align: center;
