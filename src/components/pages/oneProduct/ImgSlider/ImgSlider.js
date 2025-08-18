@@ -13,6 +13,7 @@ import Image from "next/image";
 
 const ImgSlider = ({photos}) => {
     const [isDesktop, setIsDesktop] = useState(true)
+    const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -31,7 +32,8 @@ const ImgSlider = ({photos}) => {
 
 
     const [isFull, setIsFull] = useState(false)
-    const toggleFullScreen = () => {
+
+    const toggleFullScreen = (index) => {
         if (!isDesktop) {
             if (!isFull) {
                 document.body.classList.add('body-scroll-clip')
@@ -39,6 +41,7 @@ const ImgSlider = ({photos}) => {
                 document.body.classList.remove('body-scroll-clip')
             }
             setIsFull(!isFull)
+            setSelectedPhotoIndex(index)
         }
     }
     return (
@@ -60,8 +63,12 @@ const ImgSlider = ({photos}) => {
                 }}
                 onClick={toggleFullScreen}
             >
-                {photos.map(el =>
-                    <SwiperSlide className={s.photo}>
+                {photos.map((el, index)=>
+                    <SwiperSlide
+                        key={index}
+                        className={s.photo}
+                        onClick={() => toggleFullScreen(index)}
+                    >
                         <div className={s.photo_cont}>
                             <Image src={el.url}
                                    alt={``}
@@ -74,69 +81,10 @@ const ImgSlider = ({photos}) => {
                 )
                 }
             </Swiper>
-            {/*<Swiper*/}
-            {/*    style={{*/}
-            {/*        '--swiper-navigation-color': '#fff',*/}
-            {/*        '--swiper-pagination-color': '#fff',*/}
-            {/*    }}*/}
-            {/*    zoom={true}*/}
-            {/*    navigation={true}*/}
-            {/*    pagination={{*/}
-            {/*        clickable: true,*/}
-            {/*    }}*/}
-            {/*    modules={[Zoom, Navigation, Pagination]}*/}
-            {/*    className="mySwiper"*/}
-            {/*>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*    <SwiperSlide>*/}
-            {/*        <div className="swiper-zoom-container">*/}
-            {/*            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />*/}
-            {/*        </div>*/}
-            {/*    </SwiperSlide>*/}
-            {/*</Swiper>*/}
+
             {
                 isFull &&
-                // <Carousel images={photos}/>
-                <FullScreen toggle={toggleFullScreen} photos={photos}/>
+                <FullScreen toggle={toggleFullScreen} photos={photos} initialIndex={selectedPhotoIndex}/>
             }
         </>
     );

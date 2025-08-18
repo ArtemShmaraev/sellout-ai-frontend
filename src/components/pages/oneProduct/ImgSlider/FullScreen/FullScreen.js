@@ -9,8 +9,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/zoom';
 
+const FullScreen = ({ toggle, photos, initialIndex}) => {
 
-const FullScreen = ({toggle, photos}) => {
     const galleryItems = photos.map((photo) => ({
         original: photo.url,
         description: `Photo ${photo.id}`
@@ -19,11 +19,9 @@ const FullScreen = ({toggle, photos}) => {
     return (
         <div className={s.fullscreen}>
             <div className={'d-flex justify-content-end'}>
-                <button className={s.close_btn}
-                        onClick={toggle}
-                >
-                    <Image src={close} alt={''}
-                    /></button>
+                <button className={s.close_btn} onClick={toggle}>
+                    <Image src={close} alt={''} />
+                </button>
             </div>
             <div className={s.cont}>
                 <Gallery
@@ -33,15 +31,17 @@ const FullScreen = ({toggle, photos}) => {
                     showPlayButton={false}
                     showFullscreenButton={false}
                     showThumbnails={false}
-                    // useBrowserFullscreen={false}
+                    // isRTL={true}
+                    startIndex={initialIndex.realIndex
+                    }
+                    useBrowserFullscreen={false}
                     renderItem={(item) => (
                         <div className="image-gallery-image">
                             <img
                                 src={item.original}
                                 alt={item.description}
                                 draggable={false}
-
-                                style={{ maxWidth: '100%', height: 'auto' }}
+                                style={{ maxWidth: '100%', height: 'auto'}}
                             />
                         </div>
                     )}
@@ -50,7 +50,6 @@ const FullScreen = ({toggle, photos}) => {
         </div>
     );
 };
-
 
 export default FullScreen;
 
