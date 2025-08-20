@@ -533,7 +533,7 @@ const Footer = () => {
             <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
                     <div>
-                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин, 2023</p>
+                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин, 2024</p>
                     </div>
                     <div className={s.footer_bottom}>
                         <a href="/docs/Агентский%20договор%20SELLOUT.pdf" target={"_blank"}
