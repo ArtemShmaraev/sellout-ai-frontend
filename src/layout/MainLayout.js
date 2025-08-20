@@ -51,6 +51,29 @@ const MainLayout = ({children}) => {
                 <meta name="yandex-verification" content="82500b5b5e72aa3a" />
                 <meta name="theme-color" content="#000000"/>
                 <meta name="mailru-verification" content="2d636d2d3b28c14a" />
+                <script
+                    type="text/javascript"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+            var _tmr = window._tmr || (window._tmr = []);
+            _tmr.push({id: "3470916", type: "pageView", start: (new Date()).getTime()});
+            (function (d, w, id) {
+                if (d.getElementById(id)) return;
+                var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+                ts.src = "https://top-fwz1.mail.ru/js/code.js";
+                var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+                if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+            })(document, window, "tmr-code");
+        `,
+                    }}
+                />
+                <noscript>
+                    <div>
+                        <img src="https://top-fwz1.mail.ru/counter?id=3470916;js=na" style={{position: 'absolute', left: '-9999px'}} alt="Top.Mail.Ru" />
+                    </div>
+                </noscript>
+                <!-- /Top.Mail.Ru counter -->
+
                 {/*<meta name="google-site-verification" content="N9kK5FGqkUH2WCQCjRsNPhP-jyCRNa4oWTjkS_Ll_nc" />*/}
                 <script
                     async
