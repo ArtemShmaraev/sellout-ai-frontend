@@ -29,7 +29,6 @@ const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
     const {userStore, desktopStore} = useContext(Context)
     const [brands, setBrands] = useState(brandsArr)
-
     const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -108,7 +107,6 @@ const Brands = ({brandsArr}) => {
         const timeOutId = setTimeout(() => {
             setSearchValue(query)
             search(query).then(res => setBrands(res))
-            console.log(brands)
         }, 200);
         return () => clearTimeout(timeOutId);
     }, [query]);
