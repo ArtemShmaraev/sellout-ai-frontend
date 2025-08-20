@@ -47,10 +47,11 @@ const MainLayout = ({children}) => {
                 <link rel={'manifest'} href={'/manifest.json'}/>
                 <meta name={'description'} content={'Закажите одежду, обувь и аксессуары в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.'}/>
                 <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />
+                {/*<meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />*/}
                 <meta name="yandex-verification" content="82500b5b5e72aa3a" />
                 <meta name="theme-color" content="#000000"/>
                 <meta name="mailru-verification" content="2d636d2d3b28c14a" />
-                <meta name="google-site-verification" content="N9kK5FGqkUH2WCQCjRsNPhP-jyCRNa4oWTjkS_Ll_nc" />
+                {/*<meta name="google-site-verification" content="N9kK5FGqkUH2WCQCjRsNPhP-jyCRNa4oWTjkS_Ll_nc" />*/}
                 <script
                     async
                     type="text/javascript"
