@@ -71,6 +71,7 @@ import patch from "@/static/icons/patch-check 1.svg";
 import personCheck from "@/static/icons/person-check 1.svg";
 import file from '@/static/icons/file-earmark-check 1.svg'
 import creditCard from '@/static/icons/credit-card 2.svg'
+import aboutUs from '@/static/icons/aboutus.svg'
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -633,11 +634,77 @@ const OneProductPage = ({product, prices}) => {
                             </>
                         }
                         <div className={s.link_block}>
+                            <TextModal title={'Нужно узнать больше о товаре или остались другие вопросы?'} img={how}>
+                                <div className={s.content}>
+                                    <Image src={headphones} alt='' width={60}/>
+                                    <div className={s.text_cont}>
+                                        <h5>Если у вас остались вопросы в том числе по данному товару, вы всегда можете
+                                            написать в службу поддержки, и мы будем рады вам помочь!</h5>
+                                        <div>
+                                            <div>
+                                                Почта: <a href={'mailto:customerservice@sellout.su'}
+                                                          className={s.link}>customerservice@sellout.su</a>
+                                            </div>
+                                            <div>
+                                                WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                                                             target={'_blank'}
+                                                             className={s.link}>+7 993 896-92-27</a>
+                                            </div>
+                                            <div>
+                                                Telegram: <a href={'https://t.me/sellout_official'}
+                                                             target={'_blank'}
+                                                             className={s.link}>@sellout_official</a>
+                                            </div>
+                                        </div>
+                                        <div className={s.faq_block}>
+                                            <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                            <LoyaltyFAQ title={'Что делать, если у выбранного товара отсутствует ваш размер?'}>
+                                                Так как многие представленные на нашей платформе товары являются лимитированными, некоторые размеры
+                                                товара могут отсутствовать. Однако не стоит отчаиваться, вы всегда можете написать нам в службу поддержки, и мы постараемся найти
+                                                желанный лот в вашем размере или предложить похожий товар в качестве альтернативы!
+
+                                            </LoyaltyFAQ>
+                                            <LoyaltyFAQ title={'Можно ли оформить заказ, позвонив или написав нам?'}>
+                                                Да, вы всегда можете написать нам в службу поддержки, и мы поможем вам и выбрать, и оформить заказ.
+                                                Вы также можете написать нам, какой товар ищете, и мы сами найдем его для вас и предложим к заказу!
+
+                                            </LoyaltyFAQ>
+                                            <LoyaltyFAQ title={'Где узнать больше информации о товаре?'}>
+                                                Если вы хотите узнать больше о составе, комплектации и иных характеристиках товара, вы всегда можете обратиться к нам, и наши специалисты ответят на все вопросы и
+                                                предоставят исчерпывающую информацию о товаре!
+
+                                            </LoyaltyFAQ>
+                                            <LoyaltyFAQ title={'Можно ли примерить товар перед приобретением?'}>
+                                                К сожалению, на данный момент услуга примерки товара недоступна. Мы собираем предложения со всего мира, поэтому предоставить возможность примерить товар перед покупкой не получится. Мы ежедневно работаем над тем, чтобы улучшить сервис и сделать примерку осуществимой! Однако вы можете самостоятельно посетить другой магазин или бутик бренда и примерить интересующую модель или похожую, чтобы
+                                                определиться с размером, а затем заказать на нашей платформе по лучшей цене ;)
+
+                                            </LoyaltyFAQ>
+                                            <LoyaltyFAQ title={'Где можно примерить товар перед приобретением?'}>
+                                                Вы всегда можете обратиться в службу поддержки, и наши специалисты постараются помочь вам с выбором размера и подскажут, где можно померить интересующую модель
+                                                или похожую, чтобы затем заказать на нашей платформе по лучшей цене ;)
+
+                                            </LoyaltyFAQ>
+                                        </div>
+                                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
+                                        <div>
+                                            <h5>Мы в социальных сетях:</h5>
+                                            <div className={s.icons_block}>
+                                                <a href={'https://t.me/selloutsu'}>
+                                                    <Image src={tg} width={50} alt="" className={s.icon}/>
+                                                </a>
+                                                <a href={'https://vk.com/sellout_official'}>
+                                                    <Image src={vk} width={63} alt="" className={s.icon}/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </TextModal>
                             <button
                                 className={s.how_btn}
                                 onClick={toggleHow}
                             >
-                                <Image src={how} alt="" className={s.icon_how}/>
+                                <Image src={aboutUs} alt="" className={s.icon_about_us}/>
                                 <div className={s.label}>
                                     Как мы работаем?
                                 </div>
@@ -963,72 +1030,6 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                                 <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
 
-                            </TextModal>
-                            <TextModal title={'Остались вопросы?'} img={how}>
-                                <div className={s.content}>
-                                    <Image src={headphones} alt='' width={60}/>
-                                    <div className={s.text_cont}>
-                                        <h5>Если у вас остались вопросы в том числе по данному товару, вы всегда можете
-                                            написать в службу поддержки, и мы будем рады вам помочь!</h5>
-                                        <div>
-                                            <div>
-                                                Почта: <a href={'mailto:customerservice@sellout.su'}
-                                                          className={s.link}>customerservice@sellout.su</a>
-                                            </div>
-                                            <div>
-                                                WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
-                                                             target={'_blank'}
-                                                             className={s.link}>+7 993 896-92-27</a>
-                                            </div>
-                                            <div>
-                                                Telegram: <a href={'https://t.me/sellout_official'}
-                                                             target={'_blank'}
-                                                             className={s.link}>@sellout_official</a>
-                                            </div>
-                                        </div>
-                                        <div className={s.faq_block}>
-                                            <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                            <LoyaltyFAQ title={'Что делать, если у выбранного товара отсутствует ваш размер?'}>
-                                                Так как многие представленные на нашей платформе товары являются лимитированными, некоторые размеры
-                                                товара могут отсутствовать. Однако не стоит отчаиваться, вы всегда можете написать нам в службу поддержки, и мы постараемся найти
-                                                желанный лот в вашем размере или предложить похожий товар в качестве альтернативы!
-
-                                            </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Можно ли оформить заказ, позвонив или написав нам?'}>
-                                                Да, вы всегда можете написать нам в службу поддержки, и мы поможем вам и выбрать, и оформить заказ.
-                                                Вы также можете написать нам, какой товар ищете, и мы сами найдем его для вас и предложим к заказу!
-
-                                            </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Где узнать больше информации о товаре?'}>
-                                                Если вы хотите узнать больше о составе, комплектации и иных характеристиках товара, вы всегда можете обратиться к нам, и наши специалисты ответят на все вопросы и
-                                                предоставят исчерпывающую информацию о товаре!
-
-                                            </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Можно ли примерить товар перед приобретением?'}>
-                                                К сожалению, на данный момент услуга примерки товара недоступна. Мы собираем предложения со всего мира, поэтому предоставить возможность примерить товар перед покупкой не получится. Мы ежедневно работаем над тем, чтобы улучшить сервис и сделать примерку осуществимой! Однако вы можете самостоятельно посетить другой магазин или бутик бренда и примерить интересующую модель или похожую, чтобы
-                                                определиться с размером, а затем заказать на нашей платформе по лучшей цене ;)
-
-                                            </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Где можно примерить товар перед приобретением?'}>
-                                                Вы всегда можете обратиться в службу поддержки, и наши специалисты постараются помочь вам с выбором размера и подскажут, где можно померить интересующую модель
-                                                или похожую, чтобы затем заказать на нашей платформе по лучшей цене ;)
-
-                                            </LoyaltyFAQ>
-                                        </div>
-                                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
-                                        <div>
-                                            <h5>Мы в социальных сетях:</h5>
-                                            <div className={s.icons_block}>
-                                                <a href={'https://t.me/selloutsu'}>
-                                                    <Image src={tg} width={50} alt="" className={s.icon}/>
-                                                </a>
-                                                <a href={'https://vk.com/sellout_official'}>
-                                                    <Image src={vk} width={63} alt="" className={s.icon}/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </TextModal>
                             {/*<QuestionsDropdown/>*/}
                         </div>

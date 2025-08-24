@@ -397,3 +397,9 @@
     min-width: 25px;
     height: auto;
 }
+.icon_about_us {
+    margin: 0 10px;
+    min-width: 25px;
+    height: 25px;
+    width: 25px;
+}
