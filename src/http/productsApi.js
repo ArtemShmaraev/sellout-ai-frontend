@@ -173,9 +173,16 @@ export async function fetchSimilarProducts(productId, token = '') {
         return data
     }
 }
-export async function suggestSearch(qStr) {
-    const {data} = await $host.get(`product/suggest_search?q=${qStr}`)
-    return data
+export async function suggestSearch(qStr, token = '') {
+    if (token) {
+        const {data} = await $host.get(`product/suggest_search?q=${qStr}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data
+    } else {
+        const {data} = await $host.get(`product/suggest_search?q=${qStr}`)
+        return data
+    }
 }
 export async function addFilterSearch(qStr) {
     const {data} = await $host.get(`product/add_filter_search?q=${qStr}`)

@@ -46,7 +46,11 @@ const ElasticSearchModal = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (value) {
-                suggestSearch(value).then(res => setSuggs(res))
+                if (userStore.accessToken) {
+                    suggestSearch(value, userStore.accessToken).then(res => setSuggs(res))
+                } else {
+                    suggestSearch(value).then(res => setSuggs(res))
+                }
             } else {
                 setSuggs([])
             }

@@ -11,6 +11,7 @@ import Link from "next/link";
 
 const SearchModal = () => {
     const {filterStore, userStore} = useContext(Context)
+    console.log(userStore)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
@@ -36,10 +37,16 @@ const SearchModal = () => {
     const fetchSuggs = (str) => {
         setValue(str)
     }
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (value) {
-                suggestSearch(value).then(res => setSuggs(res))
+                if (userStore.accessToken) {
+                    suggestSearch(value, userStore.accessToken).then(res => setSuggs(res))
+                } else {
+                    suggestSearch(value).then(res => setSuggs(res))
+                }
+
             } else {
                 setSuggs([])
             }
