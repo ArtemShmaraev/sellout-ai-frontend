@@ -45,12 +45,14 @@ const MainLayout = ({children}) => {
                 {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>
                 <link rel={'manifest'} href={'/manifest.json'}/>
-                <meta name={'description'} content={'Закажите одежду, обувь и аксессуары в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.'}/>
-                <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />
+                <meta name={'description'}
+                      content={'Закажите одежду, обувь и аксессуары в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.'}/>
+                <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E"/>
                 {/*<meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />*/}
-                <meta name="yandex-verification" content="82500b5b5e72aa3a" />
+                <meta name="yandex-verification" content="82500b5b5e72aa3a"/>
                 <meta name="theme-color" content="#000000"/>
-                <meta name="mailru-verification" content="2d636d2d3b28c14a" />
+                <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
+
                 <script
                     type="text/javascript"
                     dangerouslySetInnerHTML={{
@@ -67,12 +69,13 @@ const MainLayout = ({children}) => {
         `,
                     }}
                 />
-                <noscript>
-                    <div>
-                        <img src="https://top-fwz1.mail.ru/counter?id=3470916;js=na" style={{position: 'absolute', left: '-9999px'}} alt="Top.Mail.Ru" />
-                    </div>
-                </noscript>
-                <!-- /Top.Mail.Ru counter -->
+                {/*<noscript>*/}
+                {/*    <div>*/}
+                {/*        <img src="https://top-fwz1.mail.ru/counter?id=3470916;js=na"*/}
+                {/*             style={{position: 'absolute', left: '-9999px'}} alt="Top.Mail.Ru"/>*/}
+                {/*    </div>*/}
+                {/*</noscript>*/}
+
 
                 {/*<meta name="google-site-verification" content="N9kK5FGqkUH2WCQCjRsNPhP-jyCRNa4oWTjkS_Ll_nc" />*/}
                 <script
