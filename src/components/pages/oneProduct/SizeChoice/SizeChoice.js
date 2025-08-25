@@ -83,7 +83,7 @@ const SizeChoice = ({prices, productId, config, manySizes}) => {
                                 {productStore.sizeChosen.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
                             {
-                                productStore.sizeChosen.is_sale
+                                (productStore.sizeChosen.is_sale && productStore.sizeChosen.min_price_without_sale > productStore.sizeChosen.min_price)
                                     ?
                                     <div className={s.price}>
                                         <span className={s.crossed}>От {productStore.sizeChosen.min_price_without_sale} ₽</span>
@@ -117,7 +117,7 @@ const SizeChoice = ({prices, productId, config, manySizes}) => {
                                             {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
                                         {
-                                            el.is_sale
+                                            (el.is_sale && el.min_price_without_sale > el.min_price)
                                             ?
                                                 <div className={s.price}>
                                                     <span className={s.crossed}>От {el.min_price_without_sale} ₽</span>

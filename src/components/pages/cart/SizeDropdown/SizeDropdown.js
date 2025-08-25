@@ -77,7 +77,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                             {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
                                         {
-                                            selectedItem.is_sale
+                                            (selectedItem.is_sale && selectedItem.min_price_without_sale > selectedItem.min_price)
                                                 ?
                                                 <div className={s.price}>
                                                     <span className={s.crossed}>От {selectedItem.min_price_without_sale} ₽</span>
@@ -127,7 +127,7 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                                     {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                                 </div>
                                                 {
-                                                    el.is_sale
+                                                    (el.is_sale && el.min_price_without_sale > el.min_price)
                                                         ?
                                                         <div className={s.price}>
                                                             <span className={s.crossed}>От {el.min_price_without_sale} ₽</span>
