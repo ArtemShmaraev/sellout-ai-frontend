@@ -38,6 +38,7 @@ import headphones from "@/static/icons/headphones-circle.svg";
 import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
 import map from '@/static/img/map.jpg'
+import inst_star from "@/static/icons/instagram_star.svg";
 
 
 export const getServerSideProps = async (context) => {
@@ -463,6 +464,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                                         <a href={'https://vk.com/sellout_official'}>
                                                             <Image src={vk} width={63} alt="" className={s.icon}/>
                                                         </a>
+                                                        <a href={'https://www.instagram.com/sellout.su'}>
+                                                            <Image src={inst_star} width={55} alt="" className={s.icon}/>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -610,6 +614,9 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
                                             <Image src={vk} width={63} alt="" className={s.icon}/>
+                                        </a>
+                                        <a href={'https://www.instagram.com/sellout.su'}>
+                                            <Image src={inst_star} width={55} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                 </div>

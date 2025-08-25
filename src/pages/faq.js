@@ -188,6 +188,7 @@ const Faq = () => {
                             <li>Отзовики</li>
                             <li><a href="https://t.me/selloutsu" target={'_blank'} className={s.underline}>Telegram</a></li>
                             <li><a href="https://vk.com/sellout_official" target={'_blank'} className={s.underline}>VK</a></li>
+                            <li><a href="https://www.instagram.com/sellout.su" target={'_blank'} className={s.underline}>IG*</a></li>
                             <li>И другие соц. сети ;)</li>
                         </ul>
                         Подробнее познакомиться с нашим брендом и узнать о наших основателях с многолетним опытом и
@@ -604,6 +605,10 @@ const Faq = () => {
                             <div>
                                 <a href={'https://vk.com/sellout_official'}
                                           className={s.underline}>VK</a>
+                            </div>
+                            <div>
+                                <a href={'https://www.instagram.com/sellout.su'}
+                                   className={s.underline}>IG*</a>
                             </div>
                         </div>
                     </Text>

@@ -6,6 +6,7 @@ import person from '@/static/icons/person-circle.svg'
 import arrow from '@/static/icons/chevron-right.svg'
 import tg from '@/static/icons/tg.svg'
 import vk from '@/static/icons/vk.svg'
+import inst_star_white from '@/static/icons/instagram_star_white.svg'
 import tgBlack from '@/static/icons/tg_black.svg'
 import vkBlack from '@/static/icons/vk_black.svg'
 import AuthModal from "../AuthModal/AuthModal";
@@ -42,6 +43,7 @@ import personCheck from "@/static/icons/person-check 1.svg";
 import file from "@/static/icons/file-earmark-check 1.svg";
 import creditCard from "@/static/icons/credit-card 2.svg";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import inst_star from "@/static/icons/instagram_star.svg";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -372,6 +374,9 @@ const Sidebar = ({photos}) => {
                                     <a href={'https://vk.com/sellout_official'}>
                                         <Image src={vk} width={38} alt="" className={s.icon}/>
                                     </a>
+                                    <a href={'https://www.instagram.com/sellout.su'}>
+                                        <Image src={inst_star_white} width={35} alt="" className={s.icon}/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -395,6 +400,9 @@ const Sidebar = ({photos}) => {
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
                                             <Image src={vkBlack} width={63} alt="" className={s.icon}/>
+                                        </a>
+                                        <a href={'https://www.instagram.com/sellout.su'}>
+                                            <Image src={inst_star} width={50} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
