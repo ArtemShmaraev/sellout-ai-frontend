@@ -733,6 +733,17 @@ const OneProductPage = ({product, prices}) => {
                                         <Image src={inst_star} width={50} alt="" className={s.icon}/>
                                     </a>
                                 </div>
+                                <div className={s.icons_block}>
+                                    <iframe
+                                        src="https://www.yandex.ru/sprav/widget/rating-badge/108238948174?type=rating&theme=dark"
+                                        width="150" height="50" frameBorder="0"></iframe>
+                                    <a id="zoon_widget_210x40_dark"
+                                       href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">
+                                        <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"
+                                             alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"
+                                             width="210" height="40"/>
+                                    </a>
+                                </div>
                                 <Image src={patch} alt='' width={60} className={'mt-3'}/>
                                 <h5 className={'my-3'}>Какие этапы проверки проходит каждый товар?</h5>
                                 <Image src={personCheck} alt='' width={60}/>
