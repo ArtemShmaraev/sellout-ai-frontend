@@ -73,6 +73,7 @@ import file from '@/static/icons/file-earmark-check 1.svg'
 import creditCard from '@/static/icons/credit-card 2.svg'
 import aboutUs from '@/static/icons/aboutus.svg'
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import inst_star from "@/static/icons/instagram_star.svg";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
@@ -695,6 +696,9 @@ const OneProductPage = ({product, prices}) => {
                                                 <a href={'https://vk.com/sellout_official'}>
                                                     <Image src={vk} width={63} alt="" className={s.icon}/>
                                                 </a>
+                                                <a href={'https://www.instagram.com/sellout.su'}>
+                                                    <Image src={inst_star} width={50} alt="" className={s.icon}/>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -724,6 +728,9 @@ const OneProductPage = ({product, prices}) => {
                                     </a>
                                     <a href={'https://vk.com/sellout_official'}>
                                         <Image src={vk} width={63} alt="" className={s.icon}/>
+                                    </a>
+                                    <a href={'https://www.instagram.com/sellout.su'}>
+                                        <Image src={inst_star} width={50} alt="" className={s.icon}/>
                                     </a>
                                 </div>
                                 <Image src={patch} alt='' width={60} className={'mt-3'}/>
