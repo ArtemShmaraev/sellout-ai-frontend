@@ -73,7 +73,7 @@ const Faq = () => {
     return (
         <MainLayout>
             <Head>
-                <title>FAQ</title>
+                <title>FAQ — ответы на часто задаваемые вопросы</title>
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 <h4>FAQs</h4>
