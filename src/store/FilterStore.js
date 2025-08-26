@@ -112,10 +112,16 @@ class FilterStore {
             }
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
-                    this.dfsActivate(this.filters[key], el)
+                    if (key in this.filters){
+                        this.dfsActivate(this.filters[key], el)
+                    }
+
                 })
             } else {
-                this.dfsActivate(this.filters[key], query[key])
+                if (key in this.filters){
+                    this.dfsActivate(this.filters[key], query[key])
+                }
+
             }
         }
         this.dfsPath(this.filters, [])
