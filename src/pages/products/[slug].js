@@ -278,6 +278,17 @@ const OneProductPage = ({product, prices}) => {
             const userId = userStore.id
             const data = await addToCart(userId, productStore.shipChosen, token)
         }
+        const priceAsString = String(product.price.final_price);
+        const productIdAsString = String(product.id);
+
+        window._tmr = window._tmr || [];
+        window._tmr.push({
+            type: "reachGoal",
+            id: 3470916,
+            value: priceAsString, // Замените "VALUE" на необходимое значение
+            goal: "addToCart",
+            params: { product_id: productIdAsString } // Замените "PRODUCT_ID" на необходимое значение
+        });
         cartStore.setCartCnt(cartStore.cartCnt + 1)
     }
 
@@ -342,6 +353,30 @@ const OneProductPage = ({product, prices}) => {
     const closeHow = () => {
         setHowOpen(false)
     }
+
+    useEffect(() => {
+        // Проверяем, что скрипт еще не добавлен
+        if (!document.getElementById('boxberry-script')) {
+            // Создаем элемент script
+
+            // Преобразуем значения в строки, если они ожидаются как строки
+            const priceAsString = String(product.price.final_price);
+            const productIdAsString = String(product.id);
+
+            // Отправляем событие goal tracking при загрузке компонента
+            window._tmr = window._tmr || [];
+            window._tmr.push({
+                type: "reachGoal",
+                id: 3470916,
+                value: priceAsString,
+                goal: "viewProduct",
+                params: { product_id: productIdAsString }
+            });
+
+            // Функция очистки (вызывается при размонтировании компонента)
+        }
+    }, []); // Пустой массив зависимостей гарантирует выполнение эффекта только один раз при монтировании компонента
+
     return (
         <MainLayout>
             <Head>
@@ -364,7 +399,7 @@ const OneProductPage = ({product, prices}) => {
                         }
                         {
                             product.bucket_link.length > 1
-                            ?
+                                ?
                                 <div className={s.slider}>
                                     {/*<Splide aria-label="My Favorite Images"*/}
                                     {/*        options={{*/}
@@ -422,12 +457,12 @@ const OneProductPage = ({product, prices}) => {
                                     <>
                                         <div
                                             className={s.price_default}
-                                            style={product.is_sale
+                                            style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
                                         >от {product.price.start_price} ₽</div>
                                         <div className='d-flex align-items-center'>
-                                            {product.is_sale &&
+                                            {(product.is_sale && product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
                                                     от {product.price.final_price} ₽
                                                 </div>
@@ -458,11 +493,11 @@ const OneProductPage = ({product, prices}) => {
                                 }
                                 {
                                     prices.length > 0
-                                    ?
-                                    <SizeChoice prices={prices} productId={product.id}
-                                                config={product.size_row_name} manySizes={product.has_many_sizes}/>
-                                    :
-                                    <p className={s.grey_text}>Товара нет в наличии</p>
+                                        ?
+                                        <SizeChoice prices={prices} productId={product.id}
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes}/>
+                                        :
+                                        <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
                                 {
                                     productStore.sizeChosen &&
@@ -549,12 +584,12 @@ const OneProductPage = ({product, prices}) => {
                                     <>
                                         <div
                                             className={s.price_default}
-                                            style={product.is_sale
+                                            style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
                                         >от {product.price.start_price} ₽</div>
                                         <div className='d-flex align-items-center'>
-                                            {product.is_sale &&
+                                            {(product.is_sale && product.price.start_price > product.price.final_price)  &&
                                                 <div className={s.price_sale}>
                                                     от {product.price.final_price} ₽
                                                 </div>
@@ -586,11 +621,11 @@ const OneProductPage = ({product, prices}) => {
                                 }
                                 {
                                     prices.length > 0
-                                    ?
-                                    <SizeChoice prices={prices} productId={product.id}
-                                                config={product.size_row_name} manySizes={product.has_many_sizes}/>
-                                    :
-                                    <p className={s.grey_text}>Товара нет в наличии</p>
+                                        ?
+                                        <SizeChoice prices={prices} productId={product.id}
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes}/>
+                                        :
+                                        <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
                                 {
                                     productStore.shipps.length > 0 &&
@@ -610,7 +645,7 @@ const OneProductPage = ({product, prices}) => {
                                     </button>
                                     {
                                         userStore.isLogged
-                                        ?
+                                            ?
                                             <button className={s.fav_btn}
                                                     onClick={() => {
                                                         isInWishlist ? deleteFromWL() : addToWL()
