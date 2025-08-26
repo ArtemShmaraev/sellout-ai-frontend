@@ -185,11 +185,12 @@ const Faq = () => {
                         Платформа SELLOUT стремительно развивается и мы каждый день радуем своих клиентов новыми приобретениями через нашу платформу!
                         Мы собираем отзывы на всяческих ресурсах:
                         <ul>
-                            <li>Отзовики</li>
                             <li><a href="https://t.me/selloutsu" target={'_blank'} className={s.underline}>Telegram</a></li>
-                            <li><a href="https://vk.com/sellout_official" target={'_blank'} className={s.underline}>VK</a></li>
                             <li><a href="https://www.instagram.com/sellout.su" target={'_blank'} className={s.underline}>IG*</a></li>
-                            <li>И другие соц. сети ;)</li>
+                            <li><a href="https://yandex.ru/profile/108238948174" target={'_blank'} className={s.underline}>Yandex</a></li>
+                            <li><a href="https://zoon.ru/msk/stores/internet-magazin_sellout/" target={'_blank'} className={s.underline}>Zoon</a></li>
+                            <li><a href="https://g.co/kgs/11j1YL2" target={'_blank'} className={s.underline}>Google</a></li>
+                            <li><a href="https://vk.com/sellout_official" target={'_blank'} className={s.underline}>VK</a></li>
                         </ul>
                         Подробнее познакомиться с нашим брендом и узнать о наших основателях с многолетним опытом и
                         большим числом довольных клиентов и команде вы можете <Link href={'/about'} className={s.underline}>здесь</Link>
