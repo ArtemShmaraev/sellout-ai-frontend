@@ -25,6 +25,7 @@ import privilegedIcon from '@/static/icons/privileged.svg'
 import info from '@/static/icons/info.svg'
 import {Context} from "@/context/AppWrapper";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -104,9 +105,13 @@ const Loyalty = ({loyalty}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Программа лояльности</title>
+                <meta name="description" content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
+            </Head>
             <AccountLayout>
                 <div className={s.cont}>
-                    <h4 className={s.title}>Программа лояльноси</h4>
+                    <h4 className={s.title}>Программа лояльности</h4>
                     <div>
                         <h4 className={'text-center'}>Ваш статус <span className={statusObj.className}>{statusObj.text}</span></h4>
                         <div className={'d-flex justify-content-center'}>

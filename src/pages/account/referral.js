@@ -24,6 +24,7 @@ import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import Cookies from "js-cookie";
 import ReferralModal from "@/components/pages/account/ReferralModal/ReferralModal";
 import {useRouter} from "next/router";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -252,6 +253,10 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
     }
     return (
         <MainLayout>
+            <Head>
+                <title>Программа лояльности</title>
+                <meta name="description" content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
+            </Head>
             <AccountLayout>
                 <div className={s.cont}>
                     <h4 className={s.title}>Реферальная программа</h4>
