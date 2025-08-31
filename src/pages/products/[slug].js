@@ -1016,7 +1016,7 @@ const OneProductPage = ({product, prices}) => {
                                         Standard (PCI DSS), что обеспечивает безопасную обработку реквизитов Банковской
                                         карты Держателя. Применяемая технология передачи данных гарантирует безопасность
                                         по сделкам с Банковскими картами путем использования протоколов Secure Sockets
-                                        Layer (SSL), Verifiedby Visa, Secure Code,и закрытых банковских сетей, имеющих
+                                        Layer (SSL), Verifiedby Visa, Secure Code, и закрытых банковских сетей, имеющих
                                         высшую степень защиты.
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Какие есть способы оплаты?'}>
