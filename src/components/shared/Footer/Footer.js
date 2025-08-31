@@ -12,6 +12,7 @@ import Link from "next/link";
 import visa from '@/static/icons/payment/visa.svg'
 import mastercard from '@/static/icons/payment/mastercard.svg'
 import mir from '@/static/icons/payment/mir.svg'
+import payKeeper from '@/static/icons/payment/paykeeper.png'
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import how from "@/static/icons/question-circle.svg";
@@ -256,6 +257,21 @@ const Footer = () => {
                                 </p>
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ title={'Безопасная оплата'}>
+                                        При оплате заказа банковской картой, обработка платежа (включая ввод номера
+                                        карты) происходит на защищенной странице процессинговой системы, которая прошла
+                                        международную сертификацию. Это значит, что Ваши конфиденциальные данные
+                                        (реквизиты карты, регистрационные данные и др.) не поступают в интернет-магазин,
+                                        их обработка полностью защищена и никто, в том числе наш интернет-магазин, не
+                                        может получить персональные и банковские данные клиента. При работе с карточными
+                                        данными применяется стандарт защиты информации, разработанный международными
+                                        платёжными системами Visa и Masterсard-Payment Card Industry Data Security
+                                        Standard (PCI DSS), что обеспечивает безопасную обработку реквизитов Банковской
+                                        карты Держателя. Применяемая технология передачи данных гарантирует безопасность
+                                        по сделкам с Банковскими картами путем использования протоколов Secure Sockets
+                                        Layer (SSL), Verifiedby Visa, Secure Code,и закрытых банковских сетей, имеющих
+                                        высшую степень защиты.
+                                    </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Какие есть способы оплаты?'}>
                                         Мы принимаем всевозможные способы оплаты: МИР, Visa, Mastercard, Yandex Pay,
                                         СБП. Возможна оплата частями от сервиса BNPL.
@@ -601,6 +617,21 @@ const Footer = () => {
                                 </p>
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ title={'Безопасная оплата'}>
+                                        При оплате заказа банковской картой, обработка платежа (включая ввод номера
+                                        карты) происходит на защищенной странице процессинговой системы, которая прошла
+                                        международную сертификацию. Это значит, что Ваши конфиденциальные данные
+                                        (реквизиты карты, регистрационные данные и др.) не поступают в интернет-магазин,
+                                        их обработка полностью защищена и никто, в том числе наш интернет-магазин, не
+                                        может получить персональные и банковские данные клиента. При работе с карточными
+                                        данными применяется стандарт защиты информации, разработанный международными
+                                        платёжными системами Visa и Masterсard-Payment Card Industry Data Security
+                                        Standard (PCI DSS), что обеспечивает безопасную обработку реквизитов Банковской
+                                        карты Держателя. Применяемая технология передачи данных гарантирует безопасность
+                                        по сделкам с Банковскими картами путем использования протоколов Secure Sockets
+                                        Layer (SSL), Verifiedby Visa, Secure Code,и закрытых банковских сетей, имеющих
+                                        высшую степень защиты.
+                                    </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Какие есть способы оплаты?'}>
                                         Мы принимаем всевозможные способы оплаты: МИР, Visa, Mastercard, Yandex Pay,
                                         СБП. Возможна оплата частями от сервиса BNPL.
@@ -802,6 +833,7 @@ const Footer = () => {
                     <Image src={mastercard} alt=''/>
                     <Image src={visa} alt=''/>
                     <Image src={mir} alt=''/>
+                    <Image src={payKeeper} alt='' height={14}/>
                 </div>
             </div>
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
