@@ -50,9 +50,6 @@ const ContactModal = ({isOpen, handleClose}) => {
                                 <a href={'https://vk.com/sellout_official'} target={'_blank'}>
                                     <Image src={vk} width={63} alt="" className={s.icon}/>
                                 </a>
-                                <a href={'https://www.instagram.com/sellout.su'} target={'_blank'}>
-                                    <Image src={inst_star} width={55} alt="" className={s.icon}/>
-                                </a>
                             </div>
                         </div>
                     </div>

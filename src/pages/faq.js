@@ -186,7 +186,7 @@ const Faq = () => {
                         Мы собираем отзывы на всяческих ресурсах:
                         <ul>
                             <li><a href="https://t.me/selloutsu" target={'_blank'} className={s.underline}>Telegram</a></li>
-                            <li><a href="https://www.instagram.com/sellout.su" target={'_blank'} className={s.underline}>IG*</a></li>
+                            {/*<li><a href="https://www.instagram.com/sellout.su" target={'_blank'} className={s.underline}>IG*</a></li>*/}
                             <li><a href="https://yandex.ru/profile/108238948174" target={'_blank'} className={s.underline}>Yandex</a></li>
                             <li><a href="https://zoon.ru/msk/stores/internet-magazin_sellout/" target={'_blank'} className={s.underline}>Zoon</a></li>
                             <li><a href="https://g.co/kgs/11j1YL2" target={'_blank'} className={s.underline}>Google</a></li>
@@ -607,10 +607,10 @@ const Faq = () => {
                                 <a href={'https://vk.com/sellout_official'}
                                           className={s.underline}>VK</a>
                             </div>
-                            <div>
-                                <a href={'https://www.instagram.com/sellout.su'}
-                                   className={s.underline}>IG*</a>
-                            </div>
+                            {/*<div>*/}
+                            {/*    <a href={'https://www.instagram.com/sellout.su'}*/}
+                            {/*       className={s.underline}>IG*</a>*/}
+                            {/*</div>*/}
                         </div>
                     </Text>
                 </Section>

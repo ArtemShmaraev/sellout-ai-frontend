@@ -731,9 +731,6 @@ const OneProductPage = ({product, prices}) => {
                                                 <a href={'https://vk.com/sellout_official'}>
                                                     <Image src={vk} width={63} alt="" className={s.icon}/>
                                                 </a>
-                                                <a href={'https://www.instagram.com/sellout.su'}>
-                                                    <Image src={inst_star} width={50} alt="" className={s.icon}/>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -764,9 +761,9 @@ const OneProductPage = ({product, prices}) => {
                                     <a href={'https://vk.com/sellout_official'}>
                                         <Image src={vk} width={63} alt="" className={s.icon}/>
                                     </a>
-                                    <a href={'https://www.instagram.com/sellout.su'}>
-                                        <Image src={inst_star} width={50} alt="" className={s.icon}/>
-                                    </a>
+                                    {/*<a href={'https://www.instagram.com/sellout.su'}>*/}
+                                    {/*    <Image src={inst_star} width={50} alt="" className={s.icon}/>*/}
+                                    {/*</a>*/}
                                 </div>
                                 <div className={s.icons_block}>
                                     <iframe

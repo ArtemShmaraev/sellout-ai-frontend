@@ -115,9 +115,6 @@ const Footer = () => {
                                         <a href={'https://vk.com/sellout_official'}>
                                             <Image src={vkBlack} width={63} alt="" className={s.icon}/>
                                         </a>
-                                        <a href={'https://www.instagram.com/sellout.su'}>
-                                            <Image src={inst_star} width={55} alt="" className={s.icon}/>
-                                        </a>
                                     </div>
                                     <div className={s.icons_block}>
                                         <iframe
@@ -463,9 +460,6 @@ const Footer = () => {
                                         <a href={'https://vk.com/sellout_official'}>
                                             <Image src={vkBlack} width={63} alt="" className={s.icon}/>
                                         </a>
-                                        <a href={'https://www.instagram.com/sellout.su'}>
-                                            <Image src={inst_star} width={50} alt="" className={s.icon}/>
-                                        </a>
                                     </div>
                                     <div className={s.icons_block}>
                                         <iframe
@@ -776,14 +770,6 @@ const Footer = () => {
                                 <a href={'https://vk.com/sellout_official'}>
                                     <Image src={vk} height={27} alt="" className={s.icon}/>
                                 </a>
-                                <div style={{display: "flex", alignItems: "center"}}>
-                                    <a href={'https://www.instagram.com/sellout.su'}>
-                                        <Image src={inst_star_white} height={35} alt="" className={s.icon}/>
-                                    </a>
-                                    <div style={{fontSize: 7, width: 70}}>
-                                        Meta запрещена на территории РФ
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </Col>

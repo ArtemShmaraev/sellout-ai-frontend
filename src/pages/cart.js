@@ -464,9 +464,6 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                                         <a href={'https://vk.com/sellout_official'}>
                                                             <Image src={vk} width={63} alt="" className={s.icon}/>
                                                         </a>
-                                                        <a href={'https://www.instagram.com/sellout.su'}>
-                                                            <Image src={inst_star} width={55} alt="" className={s.icon}/>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -614,9 +611,6 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                         </a>
                                         <a href={'https://vk.com/sellout_official'}>
                                             <Image src={vk} width={63} alt="" className={s.icon}/>
-                                        </a>
-                                        <a href={'https://www.instagram.com/sellout.su'}>
-                                            <Image src={inst_star} width={55} alt="" className={s.icon}/>
                                         </a>
                                     </div>
                                 </div>
