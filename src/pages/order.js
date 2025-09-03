@@ -273,10 +273,10 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             <input type="hidden" name="cost" value={order.final_amount?.toString()} />
                             <input type="hidden" name="name" value={`Заказ №${order.number?.toString()}`} />
                             <input type="hidden" name="default_email" value={order.email} />
-                            <input type="hidden" name="order_id" value={order.id?.toString()} />
+                            <input type="hidden" name="order_id" value={order.number?.toString()} />
                             <input type="hidden" name="phone_number" value={order.phone_int} />
                             <input type="hidden" name="email" value={order.email} />
-                            <input type="hidden" name="payment_type" defaultValue="spg" />
+                            <input type="hidden" name="payment_type" value="spg" />
                             <input type='hidden' name='invoice_data' value={order.invoice_data} />
                             <input type="hidden" name="url_success" defaultValue="https://sellout.su/api/v1/order/signature" />
                             {/*<input*/}

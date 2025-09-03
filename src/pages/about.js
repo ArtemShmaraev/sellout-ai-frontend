@@ -14,6 +14,7 @@ import phyl from '@/static/img/aboutUs/Философия.jpg'
 import mPhyl from '@/static/img/aboutUs/Философия-моб.jpg'
 import aims from '@/static/img/aboutUs/Цели.png'
 import mAims from '@/static/img/aboutUs/Цели-моб.png'
+import Head from "next/head";
 
 const About = () => {
     const [isDesktop, setIsDesktop] = useState(true)
@@ -34,6 +35,10 @@ const About = () => {
     })
     return (
         <MainLayout>
+            <Head>
+                <title>Sellout: Про нас</title>
+                <meta name="description" content="Как мы работаем и аутентифицируем, о нашей команде, философии и целях"/>
+            </Head>
             <div className={[s.cont].join(' ')}>
                 <Image src={isDesktop ? title : mTitle} alt='' className={s.photo}/>
                 <div className={'bg-black'}>

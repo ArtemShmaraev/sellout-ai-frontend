@@ -247,13 +247,14 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                         </div>
                     </div>
                     <div className={s.size_block}>
+
                         <div className={s.col_dropdown}>
                             <h5>Обувь</h5>
-                            <SizeDropdown catObj={sizeTable.size_tables[0]} typeIsShoes={true} currSizeId={sizeInfo.shoes_size}/>
+                            <SizeDropdown catObj={sizeTable.size_tables[1]} typeIsShoes={false} currSizeId={sizeInfo.clothes_size}/>
                         </div>
                         <div className={s.col_dropdown}>
                             <h5>Одежда</h5>
-                            <SizeDropdown catObj={sizeTable.size_tables[1]} typeIsShoes={false} currSizeId={sizeInfo.clothes_size}/>
+                            <SizeDropdown catObj={sizeTable.size_tables[0]} typeIsShoes={true} currSizeId={sizeInfo.shoes_size}/>
                         </div>
                         <div className={s.col_input}>
                             <div>

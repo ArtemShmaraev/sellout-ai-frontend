@@ -132,10 +132,16 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         window.addEventListener('scroll', checkScroll);
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
+
+
+    // title_and_description = Взять из json файла (как это сделать)
     return (
         <MainLayout>
             <Head>
                 <title>
+                    {/*{title_and_description[getTitle()]}*/}
+
+
                     {getTitle() !== "Sellout" ? (
                         `Купить ${getTitle()} на Sellout`
                     ) : (

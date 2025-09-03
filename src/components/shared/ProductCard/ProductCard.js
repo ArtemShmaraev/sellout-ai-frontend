@@ -123,7 +123,7 @@ const ProductCard = ({cardList = false, product}) => {
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {isSale && price.final_price > 0 && <div className={s.sale}>
+                    {(isSale && price.start_price > price.final_price) && price.final_price > 0 && <div className={s.sale}>
                         -{Math.ceil(100 - (price.final_price / price.start_price) * 100)}%
                     </div>}
                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
@@ -206,7 +206,7 @@ const ProductCard = ({cardList = false, product}) => {
 
                             <div className={`${s.price_block}`}>
                                 {
-                                    isSale
+                                    (isSale && price.start_price > price.final_price)
                                         ?
                                         Number(price.final_price) > 0
                                             ?
