@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const SearchModal = () => {
     const {filterStore, userStore} = useContext(Context)
-    console.log(userStore)
+    // console.log(userStore)
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')

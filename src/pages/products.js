@@ -9,6 +9,7 @@ import SortDropdown from "@/components/pages/product/SortDropdown/SortDropdown";
 import FilterDropdowns from "@/components/pages/product/FilterDropdowns/FilterDropdowns";
 import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
+import TitleAndDescriptionSEO from '@/components/shared/Products/seo_title_description.json'
 import Image from "next/image";
 import {fetchFilter, fetchPagesCnt, fetchProductsByArray, fetchProductsPage, fetchSizes} from "@/http/productsApi";
 import {useRouter} from "next/router";
@@ -111,11 +112,14 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     };
     const getTitle = () => {
         let title = desktopStore.isDesktop ? products.desktop.title : products.mobile.title
-        if (title === 'sellout') {
+        if (title === 'sellout' || title === "") {
             title = 'Sellout'
         }
+        // console.log(title);
         return title
+
     }
+
 
     const [visible, setVisible] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -134,21 +138,35 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     }, [prevScrollPos]);
 
 
+
+
+
+
     // title_and_description = Взять из json файла (как это сделать)
     return (
         <MainLayout>
             <Head>
                 <title>
+
                     {/*{title_and_description[getTitle()]}*/}
 
-
-                    {getTitle() !== "Sellout" ? (
-                        `Купить ${getTitle()} на Sellout`
+                    {getTitle() in TitleAndDescriptionSEO ? (
+                        TitleAndDescriptionSEO[getTitle()]['title']
                     ) : (
                         // Заголовок для случая, когда getTitle() равно "sellout"
                         "Sellout - Онлайн-платформа для ценителей стиля: уникальная брендовая одежда, обувь и аксессуары"
                     )}
                 </title>
+                <meta name={'description'} content=
+                    {getTitle() in TitleAndDescriptionSEO ? (
+                        TitleAndDescriptionSEO[getTitle()]['description']
+                    ) : (
+                        // Заголовок для случая, когда getTitle() равно "sellout"
+                        "1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                    )}/>
+
+
+
             </Head>
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={products.desktop} className={s.desktop}/>
