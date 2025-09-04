@@ -44,8 +44,16 @@
     margin-right: 7px;
 }
 .icons {
-    margin: 0 7px;
+    margin-left: 7px;
+
 }
+.love_in_mobile {
+    margin-left: 11px; /* Устанавливаем auto-марджины для центрирования */
+    /*display: block; !* Обеспечиваем блочный элемент *!*/
+    /*max-width: 100%; !* Не дает изображению быть шире родительского блока *!*/
+    /*max-height: 100%; !* Не дает изображению быть выше родительского блока *!*/
+}
+
 .bonuses_block {
     display: inline;
     align-items: center;
@@ -86,7 +94,7 @@
     background: black;
     color: white;
     min-height: 40px;
-    width: 64%;
+    width: 88%;
     transition: 0.3s;
 }
 .cart_btn:disabled {
@@ -99,7 +107,7 @@
     background: white;
     color: black;
     min-height: 40px;
-    width: 34%;
+    width: 40px;
 }
 .fav_btn2 {
     border: 1px solid black;
@@ -108,10 +116,11 @@
     background: white;
     color: black;
     min-height: 40px;
-    width: 34%;
+    width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .icon_block {
     display: flex;

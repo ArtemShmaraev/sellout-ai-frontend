@@ -524,16 +524,16 @@ const OneProductPage = ({product, prices}) => {
                                                     }}
                                             >
                                                 <div className={s.icon_block}>
-                                                    <Image src={isInWishlist ? like_fill : like} alt="" className={s.icons}/>
-                                                    <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
+                                                    <Image src={isInWishlist ? like_fill : like} alt="" />
+                                                    {/*<div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>*/}
                                                 </div>
                                             </button>
                                             :
                                             <div className={s.fav_btn2}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={like} alt="" className={s.icons}/>
-                                                        <div>В избранное</div>
+                                                        <Image src={like} alt="" className={s.love_in_mobile}/>
+                                                        {/*<div>В избранное</div>*/}
                                                     </div>
                                                 </AuthModal>
                                             </div>
