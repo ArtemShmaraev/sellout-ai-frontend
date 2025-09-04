@@ -833,7 +833,7 @@ const Footer = () => {
                     <Image src={mastercard} alt=''/>
                     <Image src={visa} alt=''/>
                     <Image src={mir} alt=''/>
-                    <Image src={payKeeper} alt='' height={14}/>
+                    {/*<Image src={payKeeper} alt='' height={14}/>*/}
                 </div>
             </div>
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
