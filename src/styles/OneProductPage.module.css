@@ -131,6 +131,9 @@
     color: black;
     min-height: 44px;
     width: 34%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /*border: 1px solid black;*/
     /*outline: none;*/
     /*border-radius: 7px;*/
