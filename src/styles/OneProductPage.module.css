@@ -93,11 +93,25 @@
     border-radius: 7px;
     background: black;
     color: white;
-    min-height: 40px;
-    width: 88%;
+    min-height: 44px;
+    width: 86%;
     transition: 0.3s;
 }
 .cart_btn:disabled {
+    background: #8d8d8d;
+}
+
+.cart_btn2 {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    background: black;
+    color: white;
+    min-height: 44px;
+    width: 64%;
+    transition: 0.3s;
+}
+.cart_btn2:disabled {
     background: #8d8d8d;
 }
 .fav_btn {
@@ -106,8 +120,8 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 40px;
-    width: 40px;
+    min-height: 44px;
+    width: 44px;
 }
 .fav_btn2 {
     border: 1px solid black;
@@ -115,11 +129,18 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 40px;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 44px;
+    width: 34%;
+    /*border: 1px solid black;*/
+    /*outline: none;*/
+    /*border-radius: 7px;*/
+    /*background: white;*/
+    /*color: black;*/
+    /*min-height: 40px;*/
+    /*width: 34%;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
 
 }
 .icon_block {

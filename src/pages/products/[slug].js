@@ -637,7 +637,7 @@ const OneProductPage = ({product, prices}) => {
                                     <HowToChoose/>
                                 </div>
                                 <div className={s.btn_group}>
-                                    <button className={s.cart_btn}
+                                    <button className={s.cart_btn2}
                                             disabled={!productStore.shipChosen || productStore.text[0] === 'У'}
                                             onClick={cartAdd}
                                     >
@@ -646,7 +646,7 @@ const OneProductPage = ({product, prices}) => {
                                     {
                                         userStore.isLogged
                                             ?
-                                            <button className={s.fav_btn}
+                                            <button className={s.fav_btn2}
                                                     onClick={() => {
                                                         isInWishlist ? deleteFromWL() : addToWL()
                                                     }}
