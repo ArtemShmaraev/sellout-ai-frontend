@@ -12,7 +12,7 @@ import Link from "next/link";
 import visa from '@/static/icons/payment/visa.svg'
 import mastercard from '@/static/icons/payment/mastercard.svg'
 import mir from '@/static/icons/payment/mir.svg'
-import payKeeper from '@/static/icons/payment/paykeeper.png'
+// import payKeeper from '@/static/icons/payment/paykeeper.png'
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import how from "@/static/icons/question-circle.svg";
