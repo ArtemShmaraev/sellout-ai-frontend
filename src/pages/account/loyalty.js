@@ -118,10 +118,10 @@ const Loyalty = ({loyalty}) => {
                             <div className={s.card_container}>
                                 <div className={s.above_card}>
                                     <div>
-                                        Всего потрачено: {loyalty.total}₽
+                                        Всего потрачено: {loyalty.total.toLocaleString()} ₽
                                     </div>
                                     <div>
-                                        До следующего статуса: {loyalty.until_next_status}₽
+                                        До следующего статуса: {loyalty.until_next_status.toLocaleString()} ₽
                                     </div>
                                 </div>
                                 <div className={`${s.card} ${statusObj.shadow}`}>
@@ -132,7 +132,7 @@ const Loyalty = ({loyalty}) => {
                                             ****{loyalty.number_card}
                                         </div>
                                         <div>
-                                            Накоплено бонусов: {loyalty.bonuses}₽
+                                            Накоплено бонусов: {loyalty.bonuses.toLocaleString()} ₽
                                         </div>
                                     </div>
                                 </div>

@@ -94,12 +94,12 @@ const ShipDropdown = ({cardId, unitId}) => {
                                     (selectedItem.is_sale && selectedItem.start_price > selectedItem.final_price)
                                         ?
                                         <div className={s.half_text}>
-                                            <span className={s.crossed}>{selectedItem.start_price} ₽</span>
+                                            <span className={s.crossed}>{selectedItem.start_price.toLocaleString()} ₽</span>
                                             <br/>
-                                            <span className={s.sale_price}>{selectedItem.final_price} ₽</span>
+                                            <span className={s.sale_price}>{selectedItem.final_price.toLocaleString()} ₽</span>
                                         </div>
                                         :
-                                        <div className={s.half_text}>{selectedItem.final_price} ₽</div>
+                                        <div className={s.half_text}>{selectedItem.final_price.toLocaleString()} ₽</div>
                                 }
                             </div>
                         </div>
@@ -128,12 +128,12 @@ const ShipDropdown = ({cardId, unitId}) => {
                                             (el.is_sale && el.start_price > el.final_price)
                                                 ?
                                                 <div className={s.half_text}>
-                                                    <span className={s.crossed}>{el.start_price} ₽</span>
+                                                    <span className={s.crossed}>{el.start_price.toLocaleString()} ₽</span>
                                                     <br/>
-                                                    <span className={s.sale_price}>{el.final_price} ₽</span>
+                                                    <span className={s.sale_price}>{el.final_price.toLocaleString()} ₽</span>
                                                 </div>
                                                 :
-                                                <div className={s.half_text}>{el.final_price} ₽</div>
+                                                <div className={s.half_text}>{el.final_price.toLocaleString()} ₽</div>
                                         }
                                     </div>
                                     <div>{inCartArr.includes(el.id) && 'Уже в корзине'}</div>

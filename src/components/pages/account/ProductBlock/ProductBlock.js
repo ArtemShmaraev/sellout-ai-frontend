@@ -38,7 +38,7 @@ const ProductBlock = ({unit}) => {
                 <div className={s.col}>
                     <div className={s.dropdowns}>
                         <div className={s.brand}>Цена</div>
-                        <div className={s.text}>{unit.final_price} ₽</div>
+                        <div className={s.text}>{unit.final_price.toLocaleString()} ₽</div>
                     </div>
                     {
                         unit.track_number &&

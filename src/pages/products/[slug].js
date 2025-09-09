@@ -87,7 +87,7 @@ const OneProductPage = ({product, prices}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(true)
     const [isDesktop, setIsDesktop] = useState(true)
-    const [bonuses, setBonuses] = useState(`до ${product.price.bonus}`)
+    const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
@@ -460,11 +460,11 @@ const OneProductPage = ({product, prices}) => {
                                             style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
-                                        >от {product.price.start_price} ₽</div>
+                                        >От {product.price.start_price.toLocaleString()} ₽</div>
                                         <div className='d-flex align-items-center'>
                                             {(product.is_sale && product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
-                                                    от {product.price.final_price} ₽
+                                                    От {product.price.final_price.toLocaleString()} ₽
                                                 </div>
                                             }
                                             {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
@@ -587,11 +587,11 @@ const OneProductPage = ({product, prices}) => {
                                             style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
-                                        >от {product.price.start_price} ₽</div>
+                                        >От {product.price.start_price.toLocaleString()} ₽</div>
                                         <div className='d-flex align-items-center'>
                                             {(product.is_sale && product.price.start_price > product.price.final_price)  &&
                                                 <div className={s.price_sale}>
-                                                    от {product.price.final_price} ₽
+                                                    От {product.price.final_price.toLocaleString()} ₽
                                                 </div>
                                             }
                                             {product.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}

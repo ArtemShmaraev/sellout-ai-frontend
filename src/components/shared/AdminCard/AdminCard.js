@@ -156,11 +156,11 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     isSale
                         ?
                         <div className={`${s.price}`}>
-                            <span className={s.crossed}>От {price.start_price} ₽</span>
-                            <span className={s.sale_price}>От {price.final_price} ₽</span>
+                            <span className={s.crossed}>От {price.start_price.toLocaleString()} ₽</span>
+                            <span className={s.sale_price}>От {price.final_price.toLocaleString()} ₽</span>
                         </div>
                         :
-                        <div className={`${s.price}`}>От {price.final_price} ₽</div>
+                        <div className={`${s.price}`}>От {price.final_price.toLocaleString()} ₽</div>
                 }
                 <div className='d-flex justify-content-between mb-1 flex-wrap'>
                     <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>

@@ -85,6 +85,7 @@
 .price {
     color: #222222;
     margin-top: auto;
+    font-weight: 500;
 }
 .crossed {
     text-decoration: line-through;
