@@ -45,6 +45,7 @@
 }
 .icons {
     margin-left: 7px;
+    margin-right: 7px;
 
 }
 .love_in_mobile {
@@ -122,6 +123,10 @@
     color: black;
     min-height: 44px;
     width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .fav_btn2 {
     border: 1px solid black;
