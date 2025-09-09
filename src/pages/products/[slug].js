@@ -669,6 +669,12 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                             </>
                         }
+                        {!isDesktop && compilations.map(el =>
+                            <Compilation arr={el.products} title={el.name}/>
+                        )}
+                        {!isDesktop && lastSeen.length > 0 &&
+                            <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+                        }
                         <div className={s.link_block}>
                             <TextModal title={'Нужно узнать больше о товаре или остались другие вопросы?'} img={how}>
                                 <div className={s.content}>
@@ -1100,12 +1106,10 @@ const OneProductPage = ({product, prices}) => {
                         </div>
                     </div>
                 </div>
-                {
-                    compilations.map(el =>
-                        <Compilation arr={el.products} title={el.name}/>
-                    )
-                }
-                {lastSeen.length > 0 &&
+                {isDesktop && compilations.map(el =>
+                    <Compilation arr={el.products} title={el.name}/>
+                )}
+                {isDesktop && lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
