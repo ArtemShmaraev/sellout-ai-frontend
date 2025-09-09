@@ -529,7 +529,7 @@ const OneProductPage = ({product, prices}) => {
                                                 </div>
                                             </button>
                                             :
-                                            <div className={s.fav_btn2}>
+                                            <div className={s.fav_btn}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
                                                         <Image src={like} alt="" className={s.love_in_mobile}/>
