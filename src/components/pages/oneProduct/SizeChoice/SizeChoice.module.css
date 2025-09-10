@@ -20,7 +20,10 @@
 }
 .text {
     min-height: 50px;
-    padding: 13px;
+    /*padding: 1px;*/
+    align-items: center;
+    margin-left: 12px;
+
     display: flex;
     justify-content: space-between;
     cursor: pointer;
