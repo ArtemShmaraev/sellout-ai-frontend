@@ -218,7 +218,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                     </div>
                     <div className={s.promos_block}>
                         <h4>Ваш заказ:</h4>
-                        <p>Cтоимость: {defAmount} ₽</p>
+                        <p>Cтоимость: {defAmount.toLocaleString()} ₽</p>
                         <PromoInput placeholder={'Введите промокод'}
                                     onChange={(e) => setPromo(e.target.value)}
                                     value={promo}
@@ -232,7 +232,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         }
                         {
                             userStore.isLogged &&
-                            <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount})`}
+                            <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}
                                         onChange={(e) => changeBonuses(e.target.value)}
                                         value={bonuses}
                                         onClick={e => spendBonuses(e)}
@@ -251,15 +251,15 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                                 ?
                                     orderStore.method === 1
                                     ?
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all} ₽</p>
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all.toLocaleString()} ₽</p>
                                     :
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_part} ₽</p>
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_part.toLocaleString()} ₽</p>
                                 :
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all} ₽</p>
+                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all.toLocaleString()} ₽</p>
                             )
                         }
                         <hr/>
-                        <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice()} ₽</p>
+                        <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice().toLocaleString()} ₽</p>
 
                         <form
                             id="payment-form"

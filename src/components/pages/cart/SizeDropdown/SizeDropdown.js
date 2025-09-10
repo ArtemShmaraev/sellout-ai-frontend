@@ -80,13 +80,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                             (selectedItem.is_sale && selectedItem.min_price_without_sale > selectedItem.min_price)
                                                 ?
                                                 <div className={s.price}>
-                                                    <span className={s.crossed}>От {selectedItem.min_price_without_sale} ₽</span>
+                                                    <span className={s.crossed}>От {selectedItem.min_price_without_sale.toLocaleString()} ₽</span>
                                                     <br/>
-                                                    <span className={s.sale_price}>От {selectedItem.min_price} ₽</span>
+                                                    <span className={s.sale_price}>От {selectedItem.min_price.toLocaleString()} ₽</span>
                                                 </div>
                                                 :
                                                 <div className={s.price}>
-                                                    от {selectedItem.min_price} ₽
+                                                    От {selectedItem.min_price.toLocaleString()} ₽
                                                 </div>
                                         }
                                     </div>
@@ -130,13 +130,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                                     (el.is_sale && el.min_price_without_sale > el.min_price)
                                                         ?
                                                         <div className={s.price}>
-                                                            <span className={s.crossed}>От {el.min_price_without_sale} ₽</span>
+                                                            <span className={s.crossed}>От {el.min_price_without_sale.toLocaleString()} ₽</span>
                                                             <br/>
-                                                            <span className={s.sale_price}>От {el.min_price} ₽</span>
+                                                            <span className={s.sale_price}>От {el.min_price.toLocaleString()} ₽</span>
                                                         </div>
                                                         :
                                                         <div className={s.price}>
-                                                            от {el.min_price} ₽
+                                                            От {el.min_price.toLocaleString()} ₽
                                                         </div>
                                                 }
                                             </div>

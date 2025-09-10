@@ -95,7 +95,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                     <div className={`${s.col}`}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Цена</div>
-                            <div className={s.text}>{price} ₽</div>
+                            <div className={s.text}>{price.toLocaleString()} ₽</div>
                         </div>
                         <div className={s.ship_block}>
                             <div className={s.brand}></div>
@@ -105,7 +105,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             Number(bonus) > 0 &&
                             <>
                                 <div className={s.brand}>Начислено бонусов:</div>
-                                <div className={s.text}>{bonus} ₽</div>
+                                <div className={s.text}>{bonus.toLocaleString()} ₽</div>
                             </>
                         }
                         {userStore.isLogged

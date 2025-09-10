@@ -42,10 +42,10 @@ const FiltersBlock = () => {
         let content = []
         const query = router.query
         if (query.price_min) {
-            content.push(`от ${query.price_min}₽`)
+            content.push(`От ${query.price_min.toLocaleString()} ₽`)
         }
         if (query.price_max) {
-            content.push(`до ${query.price_max}₽`)
+            content.push(`до ${query.price_max.toLocaleString()} ₽`)
         }
         return (
             <div className={s.border}>

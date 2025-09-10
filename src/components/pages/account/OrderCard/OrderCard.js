@@ -29,7 +29,7 @@ const OrderCard = ({order}) => {
                     </div>
                     <div className={s.header_col2}>
                         <div className={`${s.header_text} ${s.sum}`}>
-                            Сумма: {order.final_amount}
+                            Сумма: {order.final_amount.toLocaleString()} ₽
                         </div>
                         <div className={`${s.header_text} ${s.status}`}>
                             Статус: {order.status.name}
@@ -74,22 +74,22 @@ const OrderCard = ({order}) => {
                         <div className={s.final_col}>
                             <div className={s.prices}>
                                 <div>Товаров на сумму:</div>
-                                <div>{order.total_amount} ₽</div>
+                                <div>{order.total_amount.toLocaleString()} ₽</div>
                             </div>
                             {
                                 Number(order.total_sale) > 0 &&
                                 <div className={s.prices}>
                                     <div>Скидка:</div>
-                                    <div>{order.total_sale} ₽</div>
+                                    <div>{order.total_sale.toLocaleString()} ₽</div>
                                 </div>
                             }
                             <div className={s.prices}>
                                 <div>Доставка:</div>
-                                <div>{order.delivery_view_price} ₽</div>
+                                <div>{order.delivery_view_price.toLocaleString()} ₽</div>
                             </div>
                             <div className={s.prices}>
                                 <div>Итого:</div>
-                                <div>{order.final_amount} ₽</div>
+                                <div>{order.final_amount.toLocaleString()} ₽</div>
                             </div>
                         </div>
                     </div>

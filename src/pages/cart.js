@@ -272,7 +272,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                         </div>
                         <div className={s.promos_block}>
                             <h4>Ваш заказ:</h4>
-                            <p>Cтоимость: {defAmount} ₽</p>
+                            <p>Cтоимость: {defAmount.toLocaleString()} ₽</p>
                             <PromoInput placeholder={'Введите промокод'}
                                         onChange={(e) => setPromo(e.target.value)}
                                         value={promo}
@@ -286,7 +286,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                             }
                             {
                                 userStore.isLogged &&
-                                <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount})`}
+                                <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}
                                             onChange={(e) => changeBonuses(e.target.value)}
                                             value={bonuses}
                                             onClick={e => spendBonuses(e)}
@@ -302,7 +302,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                 Number(saleAmount) > 0 && <p className={'my-0'}>Суммарная скидка: {saleAmount} ₽</p>
                             }
                             <hr/>
-                            <p className={s.big_text}>Промежуточный итог: {finAmount} ₽</p>
+                            <p className={s.big_text}>Промежуточный итог: {finAmount.toLocaleString()} ₽</p>
                             {
                                 userStore.isLogged
                                     ?

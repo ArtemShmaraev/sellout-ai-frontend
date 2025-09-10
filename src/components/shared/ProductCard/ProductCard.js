@@ -211,9 +211,9 @@ const ProductCard = ({cardList = false, product}) => {
                                         Number(price.final_price) > 0
                                             ?
                                             <div className={`${s.price}`}>
-                                                <span className={s.crossed}>От {price.start_price} ₽</span>
+                                                <span className={s.crossed}>От {price.start_price.toLocaleString()} ₽</span>
                                                 <br/>
-                                                <span className={s.sale_price}>От {price.final_price} ₽</span>
+                                                <span className={s.sale_price}>От {price.final_price.toLocaleString()} ₽</span>
                                             </div>
                                             :
                                             <div className={`${s.price}`}>
@@ -224,7 +224,7 @@ const ProductCard = ({cardList = false, product}) => {
                                             {
                                                 Number(price.final_price) > 0
                                                     ?
-                                                    `От ${price.final_price} ₽`
+                                                    `От ${price.final_price.toLocaleString()} ₽`
                                                     :
                                                     'Нет в наличии'
                                             }

@@ -36,12 +36,12 @@ const RenderBtns = ({btns, changeBonuses}) => {
                         (button.is_sale && button.start_price > button.final_price)
                         ?
                             <div className={s.half_text}>
-                                <span className={s.crossed}>{button.start_price} ₽</span>
+                                <span className={s.crossed}>{button.start_price.toLocaleString()} ₽</span>
                                 <br/>
-                                <span className={s.sale_price}>{button.final_price} ₽</span>
+                                <span className={s.sale_price}>{button.final_price.toLocaleString()} ₽</span>
                             </div>
                             :
-                            <div className={s.half_text}>{button.final_price} ₽</div>
+                            <div className={s.half_text}>{button.final_price.toLocaleString()} ₽</div>
                     }
                 </div>
             )
