@@ -74,7 +74,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    margin: 10px 0;
+    margin: 8px 0px 0px 0px;
     flex-wrap: wrap;
 }
 .grey_text {
@@ -84,7 +84,7 @@
     margin-top: 20px;
 }
 .how {
-    margin: 10px 0;
+    margin: 8px 0px 12px 0px;
     display: flex;
     justify-content: center;
 }
@@ -94,10 +94,12 @@
     border-radius: 7px;
     background: black;
     color: white;
-    min-height: 44px;
-    width: 86%;
+    min-height: 50px;
+    flex: 1; /* Растянуть на всё оставшееся пространство */
+    margin-right: 8px; /* Добавить немного отступа между кнопками */
     transition: 0.3s;
 }
+
 .cart_btn:disabled {
     background: #8d8d8d;
 }
@@ -121,8 +123,8 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 44px;
-    width: 44px;
+    min-height: 50px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +136,7 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 44px;
+    min-height: 50px;
     width: 34%;
     display: flex;
     align-items: center;
