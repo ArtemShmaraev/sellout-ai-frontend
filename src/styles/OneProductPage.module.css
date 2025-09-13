@@ -98,6 +98,7 @@
     flex: 1; /* Растянуть на всё оставшееся пространство */
     margin-right: 8px; /* Добавить немного отступа между кнопками */
     transition: 0.3s;
+    font-size: 14pt;
 }
 
 .cart_btn:disabled {
@@ -113,6 +114,8 @@
     min-height: 44px;
     width: 64%;
     transition: 0.3s;
+    font-size: 13pt;
+
 }
 .cart_btn2:disabled {
     background: #8d8d8d;
@@ -157,7 +160,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 13pt;
 }
 .link_block {
     display: flex;

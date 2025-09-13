@@ -532,7 +532,7 @@ const OneProductPage = ({product, prices}) => {
                                                     }}
                                             >
                                                 <div className={s.icon_block}>
-                                                    <Image src={isInWishlist ? like_fill : like} alt=""/>
+                                                    <Image src={isInWishlist ? like_fill : like} alt="" style={{ width: '25px', height: '25px' }}/>
                                                     {/*<div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>*/}
                                                 </div>
                                             </button>
@@ -670,7 +670,7 @@ const OneProductPage = ({product, prices}) => {
                                             >
                                                 <div className={s.icon_block}>
                                                     <Image src={isInWishlist ? like_fill : like} alt=""
-                                                           className={s.icons}/>
+                                                           className={s.icons} style={{ width: '20px', height: '20px' }}/>
                                                     <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
                                                 </div>
                                             </button>
@@ -678,7 +678,7 @@ const OneProductPage = ({product, prices}) => {
                                             <div className={s.fav_btn2}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={like} alt="" className={s.icons}/>
+                                                        <Image src={like} alt="" className={s.icons} style={{ width: '20px', height: '20px' }}/>
                                                         <div>В избранное</div>
                                                     </div>
                                                 </AuthModal>
