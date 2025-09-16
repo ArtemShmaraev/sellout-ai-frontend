@@ -552,7 +552,7 @@ const OneProductPage = ({product, prices}) => {
 
                         <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}
                              ref={infoRef}>
-                            <hr/>
+                            {!isDesktop && <hr/>}
                             <div className={s.row}>
                                 <div className={s.col50}>
                                     {!isDesktop && <BreadcrumbC list={product.list_lines}/>}
