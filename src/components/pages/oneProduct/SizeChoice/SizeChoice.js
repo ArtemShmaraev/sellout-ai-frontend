@@ -15,7 +15,7 @@ import {useRouter} from "next/router";
 import parseHtml from 'html-react-parser'
 import {observer} from "mobx-react-lite";
 
-const SizeChoice = ({prices, productId, config, manySizes}) => {
+const SizeChoice = ({prices, productId, config, manySizes, isDesktop}) => {
     const router = useRouter()
     const {productStore} = useContext(Context)
     const [isOpen, setIsOpen] = useState(false);
@@ -71,8 +71,10 @@ const SizeChoice = ({prices, productId, config, manySizes}) => {
         <div ref={dropdownRef} className={s.dropdown}>
             <div className={s.text}
                  onClick={toggleDropdown}
-                 style={isOpen ? {borderRadius: '7px 7px 0 0'} : {borderRadius: '7px'}}
-            >
+                 style={{
+                     borderRadius: isOpen ? '7px 7px 0 0' : '7px',
+                     fontSize: isDesktop ? '12pt' : '11pt',
+                 }}>
                 {
                     productStore.sizeChosen
                     ?

@@ -23,7 +23,7 @@
     object-fit: contain;
 }
 .brand {
-    font-size: 15px;
+    font-size: 16px;
     color: #727272;
     cursor: pointer;
 }
@@ -32,7 +32,7 @@
     font-size: 20px;
 }
 .color {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 42px;
 }
 .price_default {
@@ -94,7 +94,7 @@
     border-radius: 7px;
     background: black;
     color: white;
-    min-height: 50px;
+    min-height: 48px;
     flex: 1; /* Растянуть на всё оставшееся пространство */
     margin-right: 8px; /* Добавить немного отступа между кнопками */
     transition: 0.3s;
@@ -113,8 +113,8 @@
     border-radius: 7px;
     background: black;
     color: white;
-    min-height: 44px;
-    width: 64%;
+    min-height: 48px;
+    width: 65%;
     transition: 0.3s;
     font-size: 13pt;
     font-weight: 500;
@@ -129,8 +129,8 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 50px;
-    width: 50px;
+    min-height: 48px;
+    width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +142,7 @@
     border-radius: 7px;
     background: white;
     color: black;
-    min-height: 50px;
+    min-height: 48px;
     width: 34%;
     display: flex;
     align-items: center;

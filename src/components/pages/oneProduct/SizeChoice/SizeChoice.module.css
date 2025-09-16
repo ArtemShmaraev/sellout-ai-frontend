@@ -19,17 +19,18 @@
     scrollbar-width: none;  /* Firefox */
 }
 .text {
-    min-height: 50px;
+    min-height: 48px;
     /*padding: 1px;*/
     align-items: center;
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-right: 15px;
+    padding-left: 15px;
     /*margin-left: 12px;*/
     /*margin-right: 12px;*/
-    font-size: 12pt;
+    /*font-size: 11pt;*/
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    /*color: #6A6B6B;*/
     font-weight: 500;
 }
 .text:hover {

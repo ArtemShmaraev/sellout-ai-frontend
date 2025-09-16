@@ -502,7 +502,7 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -638,7 +638,7 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -691,9 +691,7 @@ const OneProductPage = ({product, prices}) => {
                         {!isDesktop && compilations.map(el =>
                             <Compilation arr={el.products} title={el.name}/>
                         )}
-                        {!isDesktop && lastSeen.length > 0 &&
-                            <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
-                        }
+
 
                         <div className={s.link_block}>
                             <TextModal title={'Нужно узнать больше о товаре или остались другие вопросы?'} img={how}>
@@ -1303,6 +1301,9 @@ const OneProductPage = ({product, prices}) => {
                             </TextModal>
                             {/*<QuestionsDropdown/>*/}
                         </div>
+                        {!isDesktop && lastSeen.length > 0 &&
+                            <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+                        }
                     </div>
                 </div>
                 {isDesktop && compilations.map(el =>
