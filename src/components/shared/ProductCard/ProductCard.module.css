@@ -17,20 +17,37 @@
     justify-content: flex-start;
     cursor: pointer;
     text-decoration: none;
+    transition: box-shadow 0.5s, transform 0.5s;
+    border-radius: 15px;
 }
+/*.card_list:hover {*/
+/*    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0);*/
+/*    !*background: linear-gradient(to right, #ff5733, #6b7aff);*!*/
+/*    transform: scale(1);*/
+/*    border-radius: 15px;*/
+/*}*/
 .icons_block {
     display: flex;
     justify-content: space-between;
     margin: 5px 0;
 }
 .sale {
-    background: #E6E6E6;
+    /*background: rgba(255, 0, 0, 0.08);*/
     color: #b61212;
-    font-size: 14px;
+    font-size: 13px;
     user-select: none;
     padding: 3px;
-    border-radius: 7px;
-    margin-right: 5px;
+    border-radius: 10px;
+    width: 50px;
+
+    font-weight: 600;
+    border-width: 2px; /* Толщина границы */
+    border-color: rgba(0, 0, 0, 0.62); /* Цвет границы (в данном случае, красный) */
+    border-style: solid; /* Стиль границы (по умолчанию, сплошная линия) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*margin-right: 5px;*/
 }
 .truck {
     margin-right: 5px;
@@ -86,12 +103,21 @@
     color: #222222;
     margin-top: auto;
     font-weight: 500;
+    /*font-size: 14pt;*/
 }
 .crossed {
     text-decoration: line-through;
+    /*color: rgba(0, 0, 0, 0.8);*/
+    font-weight: 100;
+    /*font-size: 14pt;*/
+
 }
 .sale_price {
     color: #b61212;
+    font-size: 120%;
+    /*font-size: 16pt;*/
+    /*font-weight: 600;*/
+    /*font-size: 20px;*/
 }
 .image_container {
     position: relative;

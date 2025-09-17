@@ -117,9 +117,22 @@ const ProductCard = ({cardList = false, product}) => {
             document.removeEventListener('mousemove', handleClickOutside);
         };
     }, []);
+
+
     return (
+
         <Link className={cardList ? s.card_list : s.card}
               href={`/products/${slug}`}
+              onTouchStart={e => {
+                  e.stopPropagation()
+                  handleMouseEnter()
+              }}
+              onTouchEnd={e => {
+                  e.stopPropagation()
+                  handleMouseLeave()
+              }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
@@ -153,16 +166,7 @@ const ProductCard = ({cardList = false, product}) => {
             </div>
             {photosArr && photosArr.length > 0 &&
                 <div className={s.image_container}
-                     onTouchStart={e => {
-                         e.stopPropagation()
-                         handleMouseEnter()
-                     }}
-                     onTouchEnd={e => {
-                         e.stopPropagation()
-                         handleMouseLeave()
-                     }}
-                     onMouseEnter={handleMouseEnter}
-                     onMouseLeave={handleMouseLeave}
+
                 >
                     <Image
                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
@@ -195,7 +199,7 @@ const ProductCard = ({cardList = false, product}) => {
                  ref={sizesRef}
             >
                 {
-                    !sizesIsShown
+                    !isHovered
                         ?
                         <>
                             <div className={s.info}>
@@ -211,9 +215,12 @@ const ProductCard = ({cardList = false, product}) => {
                                         Number(price.final_price) > 0
                                             ?
                                             <div className={`${s.price}`}>
-                                                <span className={s.crossed}>От {price.start_price.toLocaleString()} ₽</span>
-                                                <br/>
-                                                <span className={s.sale_price}>От {price.final_price.toLocaleString()} ₽</span>
+
+                                                <span className={s.sale_price}>от {price.final_price.toLocaleString()} ₽ &nbsp;</span>
+                                                {!isDesktop && <br/>}
+                                                <span className={s.crossed}>{price.start_price.toLocaleString()} ₽</span>
+                                                {/*<br/>*/}
+
                                             </div>
                                             :
                                             <div className={`${s.price}`}>
@@ -224,7 +231,7 @@ const ProductCard = ({cardList = false, product}) => {
                                             {
                                                 Number(price.final_price) > 0
                                                     ?
-                                                    `От ${price.final_price.toLocaleString()} ₽`
+                                                    `от ${price.final_price.toLocaleString()} ₽`
                                                     :
                                                     'Нет в наличии'
                                             }
@@ -234,10 +241,9 @@ const ProductCard = ({cardList = false, product}) => {
 
                         </>
                         :
-                        <div className={'text-black'}
-                        >
-                            <span className={'fw-bold'}>Доступные
-                                размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
+                        <div className={'text-black'}>
+                            <span className={'fw-bold'}>
+                                Доступныe размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
                             <br/>
                             {renderSizes()}
                         </div>
