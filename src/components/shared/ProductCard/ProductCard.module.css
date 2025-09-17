@@ -42,7 +42,7 @@
 
     font-weight: 600;
     border-width: 2px; /* Толщина границы */
-    border-color: rgba(0, 0, 0, 0.62); /* Цвет границы (в данном случае, красный) */
+    border-color: rgba(0, 0, 0, 0.7); /* Цвет границы (в данном случае, красный) */
     border-style: solid; /* Стиль границы (по умолчанию, сплошная линия) */
     display: flex;
     justify-content: center;
