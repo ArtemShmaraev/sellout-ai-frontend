@@ -107,13 +107,17 @@ const NavbarC = () => {
 
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
+        const scrolledMoreThan100Pixels = Math.abs(prevScrollPos - currentScrollPos) > 100;
         let visible = prevScrollPos > currentScrollPos;
 
         if (currentScrollPos <= 0) {
-            visible = true
+            visible = true;
         }
-        setPrevScrollPos(currentScrollPos);
-        desktopStore.setNavbarVisible(visible)
+
+        if (scrolledMoreThan100Pixels) {
+            setPrevScrollPos(currentScrollPos);
+            desktopStore.setNavbarVisible(visible);
+        }
     };
 
     useEffect(() => {
