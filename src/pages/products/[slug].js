@@ -540,7 +540,8 @@ const OneProductPage = ({product, prices}) => {
                                             <div className={s.fav_btn}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={like} alt="" style={{ width: '22px', height: '22px' }}/>
+                                                        <Image src={like} alt="" style={{ width: '22px', height: '22px', marginLeft: '12px'}} />
+                                                        {/*<Image src={like} alt="" style={{ width: '22px', height: '22px'}}/>*/}
                                                         {/*<div>В избранное</div>*/}
                                                     </div>
                                                 </AuthModal>

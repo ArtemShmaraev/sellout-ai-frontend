@@ -122,6 +122,7 @@ export default function Home({data}) {
         setShow(true)
         setIsSend(false)
     };
+
     return (
         <MainLayout>
             <Head>
