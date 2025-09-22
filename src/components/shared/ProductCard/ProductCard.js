@@ -200,7 +200,7 @@ const ProductCard = ({cardList = false, product}) => {
                  ref={sizesRef}
             >
                 {
-                    !isHovered && isDesktop
+                    !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
                         ?
                         <>
                             <div className={s.info}>

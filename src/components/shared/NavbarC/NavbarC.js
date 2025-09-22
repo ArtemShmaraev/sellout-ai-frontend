@@ -107,7 +107,7 @@ const NavbarC = () => {
 
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
-        const scrolledMoreThan100Pixels = Math.abs(prevScrollPos - currentScrollPos) > 100;
+        const scrolledMoreThan100Pixels = (currentScrollPos - prevScrollPos > 200) || (currentScrollPos - prevScrollPos <= 0);
         let visible = prevScrollPos > currentScrollPos;
 
         if (currentScrollPos <= 0) {
