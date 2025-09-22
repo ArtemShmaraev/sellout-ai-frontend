@@ -1,6 +1,6 @@
 .modal {
     width: 320px;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     border-radius: 7px;
     display: flex;
     justify-content: space-between;
@@ -10,6 +10,7 @@
     position: fixed;
     bottom: 30px;
     left: calc(50% - 160px);
+    z-index: 1000;
 }
 .text {
     color: white;
