@@ -123,16 +123,7 @@ const ProductCard = ({cardList = false, product}) => {
 
         <Link className={cardList ? s.card_list : s.card}
               href={`/products/${slug}`}
-              onTouchStart={e => {
-                  e.stopPropagation()
-                  handleMouseEnter()
-              }}
-              onTouchEnd={e => {
-                  e.stopPropagation()
-                  handleMouseLeave()
-              }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+
         >
             <div className={s.icons_block}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
@@ -166,13 +157,23 @@ const ProductCard = ({cardList = false, product}) => {
             </div>
             {photosArr && photosArr.length > 0 &&
                 <div className={s.image_container}
+                     onTouchStart={e => {
+                         e.stopPropagation()
+                         handleMouseEnter()
+                     }}
+                     onTouchEnd={e => {
+                         e.stopPropagation()
+                         handleMouseLeave()
+                     }}
+                     onMouseEnter={handleMouseEnter}
+                     onMouseLeave={handleMouseLeave}
 
                 >
                     <Image
                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                         loading={'eager'}
                         fill={true}
-                        className={isHovered && photos[1] ? 'opacity-0' : ''}
+                        className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
                         onLoadingComplete={() => setIsLoading(false)}
                         src={photosArr[0].url} alt="shoe"
                         sizes={'100%'}
@@ -182,7 +183,7 @@ const ProductCard = ({cardList = false, product}) => {
                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                             loading={'eager'}
                             fill={true}
-                            className={isHovered ? '' : 'opacity-0'}
+                            className={isHovered && isDesktop? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
                             src={photos[1]} alt="shoe"
                             sizes={'100%'}
@@ -199,7 +200,7 @@ const ProductCard = ({cardList = false, product}) => {
                  ref={sizesRef}
             >
                 {
-                    !isHovered
+                    !isHovered && isDesktop
                         ?
                         <>
                             <div className={s.info}>
