@@ -36,13 +36,13 @@
     color: rgba(182, 18, 18, 0.85);
     font-size: 12px;
     user-select: none;
-    padding: 2px;
+    padding: 3px 0px 2px 0px;
     border-radius: 9px;
     width: 46px;
 
     font-weight: 600;
-    border-width: 2px; /* Толщина границы */
-    border-color: rgba(0, 0, 0, 0.7); /* Цвет границы (в данном случае, красный) */
+    border-width: 1px; /* Толщина границы */
+    border-color: rgb(0, 0, 0); /* Цвет границы (в данном случае, красный) */
     border-style: solid; /* Стиль границы (по умолчанию, сплошная линия) */
     display: flex;
     justify-content: center;
