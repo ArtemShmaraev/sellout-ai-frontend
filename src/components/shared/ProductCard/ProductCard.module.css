@@ -32,7 +32,7 @@
     margin: 5px 0;
 }
 .sale {
-    /*background: rgba(255, 0, 0, 0.08);*/
+    background: rgba(255, 0, 0, 0.08);
     color: rgba(182, 18, 18, 0.85);
     font-size: 12px;
     user-select: none;
@@ -41,9 +41,9 @@
     width: 46px;
 
     font-weight: 600;
-    border-width: 1px; /* Толщина границы */
-    border-color: rgb(0, 0, 0); /* Цвет границы (в данном случае, красный) */
-    border-style: solid; /* Стиль границы (по умолчанию, сплошная линия) */
+    /*border-width: 1px; !* Толщина границы *!*/
+    /*border-color: rgb(0, 0, 0); !* Цвет границы (в данном случае, красный) *!*/
+    /*border-style: solid; !* Стиль границы (по умолчанию, сплошная линия) *!*/
     display: flex;
     justify-content: center;
     align-items: center;
