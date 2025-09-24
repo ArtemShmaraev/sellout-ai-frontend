@@ -176,7 +176,7 @@ const ProductCard = ({cardList = false, product}) => {
                         height: '100%',
                         position: 'relative',
                         transformStyle: 'preserve-3d',
-                        transition: 'transform 5s',
+                        // transition: 'transform 5s',
                         // transform: isHovered ? 'rotateY(90deg)' : 'rotateY(0deg)',
                     }}
                 >
@@ -186,7 +186,7 @@ const ProductCard = ({cardList = false, product}) => {
                             width: '100%',
                             height: '100%',
                             transformStyle: 'preserve-3d',
-                            transition: 'transform 0.3s',
+                            transition: 'transform 0.5s',
                             transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
                         }}
                     >
