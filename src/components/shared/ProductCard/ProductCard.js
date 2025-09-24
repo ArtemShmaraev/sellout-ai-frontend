@@ -156,45 +156,116 @@ const ProductCard = ({cardList = false, product}) => {
                 }
             </div>
             {photosArr && photosArr.length > 0 &&
-                <div className={s.image_container}
-                     onTouchStart={e => {
-                         e.stopPropagation()
-                         handleMouseEnter()
-                     }}
-                     onTouchEnd={e => {
-                         e.stopPropagation()
-                         handleMouseLeave()
-                     }}
-                     onMouseEnter={handleMouseEnter}
-                     onMouseLeave={handleMouseLeave}
+                <div
 
+
+                    className={`image-container ${isHovered && 'flipped'}`}
+                    onTouchStart={e => {
+                        e.stopPropagation()
+                        handleMouseEnter()
+                    }}
+                    onTouchEnd={e => {
+                        e.stopPropagation()
+                        handleMouseLeave()
+                    }}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                        perspective: '1000px',
+                        width: '200px', // Укажите ширину и высоту карточки по вашему выбору
+                        height: '300px',
+                        position: 'relative',
+                        transformStyle: 'preserve-3d',
+                        transition: 'transform 5s',
+                        // transform: isHovered ? 'rotateY(90deg)' : 'rotateY(0deg)',
+                    }}
                 >
-                    <Image
-                        style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                        loading={'eager'}
-                        fill={true}
-                        className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
-                        onLoadingComplete={() => setIsLoading(false)}
-                        src={photosArr[0].url} alt="shoe"
-                        sizes={'100%'}
-                    />
-                    {photos[1] &&
+                    <div
+                        className="card-inner"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            transformStyle: 'preserve-3d',
+                            transition: 'transform 0.3s',
+                            transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                        }}
+                    >
+                        {/* Ваш текущий код изображения здесь */}
                         <Image
-                            style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+                            style={{
+                                position: 'absolute',
+                                objectFit: 'contain',
+                                objectPosition: 'center bottom',
+                                width: '100%',
+                                height: '100%',
+                            }}
                             loading={'eager'}
                             fill={true}
-                            className={isHovered && isDesktop? '' : 'opacity-0'}
+                            className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
                             onLoadingComplete={() => setIsLoading(false)}
-                            src={photos[1]} alt="shoe"
-                            sizes={'100%'}
+                            src={photosArr[0].url}
+                            alt="shoe"
                         />
-                    }
-                    <Image src={isDesktop ? desktop : mobile} alt=''
-                           className={'placeholder_img'} fill={true}
-                           style={isLoading ? {} : {opacity: 0}}
-                           sizes={'100%'}
-                    />
+                        {/* Здесь может быть другое содержимое обратной стороны карточки */}
+                        {photos[1] && (
+                            <Image
+                                style={{
+                                    position: 'absolute',
+                                    objectFit: 'contain',
+                                    objectPosition: 'center bottom',
+                                    width: '100%',
+                                    height: '100%',
+                                    transform: 'scaleX(-1)'
+                                }}
+                                loading={'eager'}
+                                fill={true}
+                                className={isHovered && isDesktop ? '' : 'opacity-0'}
+                                onLoadingComplete={() => setIsLoading(false)}
+                                src={photos[1]}
+                                alt="shoe"
+                            />
+                        )}
+                    </div>
                 </div>
+                // <div className={`image-container ${isHovered && 'flipped'}`}
+                //      onTouchStart={e => {
+                //          e.stopPropagation()
+                //          handleMouseEnter()
+                //      }}
+                //      onTouchEnd={e => {
+                //          e.stopPropagation()
+                //          handleMouseLeave()
+                //      }}
+                //      onMouseEnter={handleMouseEnter}
+                //      onMouseLeave={handleMouseLeave}
+                //
+                // >
+                //     <Image
+                //         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+                //         loading={'eager'}
+                //         fill={true}
+                //         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+                //         onLoadingComplete={() => setIsLoading(false)}
+                //         src={photosArr[0].url} alt="shoe"
+                //         sizes={'100%'}
+                //     />
+                //     {photos[1] &&
+                //         <Image
+                //             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+                //             loading={'eager'}
+                //             fill={true}
+                //             className={isHovered && isDesktop? '' : 'opacity-0'}
+                //             onLoadingComplete={() => setIsLoading(false)}
+                //             src={photos[1]} alt="shoe"
+                //             sizes={'100%'}
+                //         />
+                //     }
+                //     <Image src={isDesktop ? desktop : mobile} alt=''
+                //            className={'placeholder_img'} fill={true}
+                //            style={isLoading ? {} : {opacity: 0}}
+                //            sizes={'100%'}
+                //     />
+                // </div>
             }
             <div className={s.text_block}
                  ref={sizesRef}
