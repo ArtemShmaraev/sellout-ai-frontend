@@ -172,8 +172,8 @@ const ProductCard = ({cardList = false, product}) => {
                     onMouseLeave={handleMouseLeave}
                     style={{
                         perspective: '1000px',
-                        width: '200px', // Укажите ширину и высоту карточки по вашему выбору
-                        height: '300px',
+                        width: '100%', // Укажите ширину и высоту карточки по вашему выбору
+                        height: '100%',
                         position: 'relative',
                         transformStyle: 'preserve-3d',
                         transition: 'transform 5s',
