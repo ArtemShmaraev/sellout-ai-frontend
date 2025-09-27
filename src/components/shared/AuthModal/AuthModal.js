@@ -66,7 +66,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         }
         setValidEmail(true);
         const data = {
-            username: email,
+            username: email.toLowerCase().trim(),
             password: password,
             first_name: firstName,
             last_name: lastName,
@@ -119,9 +119,9 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         }
         setValidEmail(true);
         const data = {
-            username: email,
+            username: email.toLowerCase().trim(),
             password: password,
-        }
+        };
         try {
             const res = await login(JSON.stringify(data))
             setWrong(false)
