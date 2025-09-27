@@ -269,6 +269,7 @@ const ProductCard = ({cardList = false, product}) => {
             }
             <div className={s.text_block}
                  ref={sizesRef}
+
             >
                 {
                     !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
@@ -280,36 +281,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 <div className={`${s.name}`}>{colorway}</div>
                             </div>
 
-                            <div className={`${s.price_block}`}>
-                                {
-                                    (isSale && price.start_price > price.final_price)
-                                        ?
-                                        Number(price.final_price) > 0
-                                            ?
-                                            <div className={`${s.price}`}>
 
-                                                <span className={s.sale_price}>от {price.final_price.toLocaleString()} ₽ &nbsp;</span>
-                                                {!isDesktop && <br/>}
-                                                <span className={s.crossed}>{price.start_price.toLocaleString()} ₽</span>
-                                                {/*<br/>*/}
-
-                                            </div>
-                                            :
-                                            <div className={`${s.price}`}>
-                                                Нет в наличии
-                                            </div>
-                                        :
-                                        <div className={`${s.price}`}>
-                                            {
-                                                Number(price.final_price) > 0
-                                                    ?
-                                                    `от ${price.final_price.toLocaleString()} ₽`
-                                                    :
-                                                    'Нет в наличии'
-                                            }
-                                        </div>
-                                }
-                            </div>
 
                         </>
                         :
@@ -320,6 +292,36 @@ const ProductCard = ({cardList = false, product}) => {
                             {renderSizes()}
                         </div>
                 }
+                <div className={`${s.price_block}`}>
+                    {
+                        (isSale && price.start_price > price.final_price)
+                            ?
+                            Number(price.final_price) > 0
+                                ?
+                                <div className={`${s.price}`}>
+
+                                    <span className={s.sale_price}>от {price.final_price.toLocaleString()} ₽ &nbsp;</span>
+                                    {!isDesktop && <br/>}
+                                    <span className={s.crossed}>{price.start_price.toLocaleString()} ₽</span>
+                                    {/*<br/>*/}
+
+                                </div>
+                                :
+                                <div className={`${s.price}`}>
+                                    Нет в наличии
+                                </div>
+                            :
+                            <div className={`${s.price}`}>
+                                {
+                                    Number(price.final_price) > 0
+                                        ?
+                                        `от ${price.final_price.toLocaleString()} ₽`
+                                        :
+                                        'Нет в наличии'
+                                }
+                            </div>
+                    }
+                </div>
             </div>
         </Link>
     );
