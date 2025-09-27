@@ -131,11 +131,13 @@ const NavbarC = () => {
                 <div className={s.row1}>
                     <div className={s.block}>
                         <div className={'desktop_d'}>
+                            <Link href="/about" className={s.links}>Мужское</Link>
+                            <Link href="/about" className={s.links}>Женское</Link>
                             <Link href="/about" className={s.links}>О нас</Link>
-                            <Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>
-                            <span className={s.links}
-                                  onClick={toggleContact}
-                            >Связаться с нами</span>
+                            {/*<Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>*/}
+                            {/*<span className={s.links}*/}
+                            {/*      onClick={toggleContact}*/}
+                            {/*>Связаться с нами</span>*/}
                         </div>
                         <div className={'mobile_d align-items-center'}>
                             <Sidebar photos={photos}/>

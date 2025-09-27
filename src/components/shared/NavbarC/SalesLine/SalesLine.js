@@ -32,7 +32,7 @@ const SalesLine = () => {
                     pagination: false,
                     arrows: false,
                     drag: false,
-                    interval: 20000,
+                    interval: 3000,
                     autoplay: true
                 }} className={'d-flex align-items-center'}
                 >
@@ -59,7 +59,7 @@ const SalesLine = () => {
                             }
                             </SplideSlide>
                             :
-                            <SplideSlide className={s.splide} style={{fontSize: '11px', paddingTop: '2px'}}>
+                            <SplideSlide className={s.splide} style={{fontSize: '12px', paddingTop: '2px'}}>
                                 Получайте до 7000₽ за приведённого
                                 клиента. { userStore.isLogged ?
                                 <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
@@ -77,7 +77,7 @@ const SalesLine = () => {
                                 Воспользуйтесь бесплатной доставкой по Москве! В другие города бесплатная доставка от 35000₽
                             </SplideSlide>
                             :
-                            <SplideSlide className={s.splide} style={{fontSize: '9px', paddingTop: '1px'}}>
+                            <SplideSlide className={s.splide} style={{fontSize: '9px', paddingTop: '4px'}}>
                                 Бесплатная доставка по Москве! В другие города бесплатная доставка от 35000₽
                             </SplideSlide>
                     }

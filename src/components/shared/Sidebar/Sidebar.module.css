@@ -4,9 +4,11 @@
     background: transparent;
     margin: 0 10px 0 5px;
 }
+
 .list_icon {
 
 }
+
 .sidebar {
     position: absolute;
     z-index: 6;
@@ -18,6 +20,7 @@
     padding: 130px 0 0 0;
     overflow-y: scroll;
 }
+
 .header_block {
     padding-top: 20px;
     position: fixed;
@@ -26,15 +29,58 @@
     top: 0;
     z-index: 3;
 }
+
 .sidebar_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 20px;
 }
+
+.genderButtons {
+    text-align: center;
+    display: flex;
+    padding-bottom: 7px;
+}
+
+.genderHalf {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.genderLine {
+    width: 100%; /* Adjust width as needed */
+    height: 1px; /* Adjust height as needed */
+    border: none;
+    border-top: 1px solid #ccc; /* Match the default color of the <hr> element */
+}
+
+.genderButton {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px; /* Adjust padding as needed */
+    margin: 0 10px; /* Adjust margin as needed */
+    color: #7B7C81;
+}
+
+.genderSeparator {
+    width: 1px; /* Width of the separator */
+    height: 50px; /* Height of the separator, adjust as needed */
+    background-color: #ccc; /* Color of the separator, similar to hr color */
+    margin: 0 5px; /* Adjust margin as needed */
+}
+
+.selectedGender {
+    text-decoration: underline; /* Underline the text */
+    color: black;
+}
+
 .header_block hr {
     margin-bottom: 0;
 }
+
 .auth_block {
     display: flex;
     justify-content: space-between;
@@ -44,18 +90,28 @@
     width: 100%;
     text-decoration: none;
 }
+
 .person_block {
     display: flex;
     align-items: center;
 }
+
 .person_icon {
     width: 20px;
     margin-right: 10px;
 }
+
+.hrBottom {
+    border: none;
+    border-top: 1px solid #999; /* Gray line */
+    margin-top: 50px; /* Adjust margin as needed */
+}
+
 .section_container {
     padding: 0 20px;
     position: relative;
 }
+
 .back_cont {
     position: fixed;
     padding: 15px 20px 5px 20px;
@@ -65,6 +121,7 @@
     width: 100%;
     z-index: 1;
 }
+
 .back_btn {
     display: flex;
     align-items: center;
@@ -72,10 +129,12 @@
     border: none;
     background: transparent;
 }
+
 .back_icon {
     transform: rotate(180deg);
     margin-right: 10px;
 }
+
 .section_block {
     display: flex;
     justify-content: space-between;
@@ -83,9 +142,11 @@
     text-decoration: none;
     color: black;
 }
+
 .section_block:active {
     background: #e3e3e3;
 }
+
 .all_link_block {
     position: sticky;
     width: 100%;
@@ -93,47 +154,58 @@
     z-index: 1;
     padding: 10px 0;
 }
+
 .all_link {
     color: #8d8d8d;
     font-size: 18px;
 }
+
 .img_cont {
     position: relative;
     width: 100%;
     height: 60vh;
 }
+
 .col {
     margin: 20px 0;
 }
+
 .truck {
     margin-left: 7px;
 }
+
 .sale {
     color: #b61212;
 }
+
 .sidebar_footer {
     background: black;
     height: 100%;
     margin-top: 10px;
     padding: 4px 20px;
 }
+
 .sidebar h4 {
     font-size: 18px;
 }
+
 .sidebar_text {
     color: #c4c0c0;
     display: block;
     margin: 10px 0;
 }
-.sidebar_links{
+
+.sidebar_links {
     text-decoration: none;
     color: #c4c0c0;
     display: block;
     margin: 10px 0;
 }
+
 .sidebar_links:hover {
     color: #9a9999;
 }
+
 .icons_block {
     display: flex;
     margin-top: 20px;
@@ -141,15 +213,18 @@
     align-items: center;
     justify-content: center;
 }
+
 .icon {
     cursor: pointer;
 }
+
 .link {
     margin: 15px 0;
     color: black;
     display: block;
     text-decoration: none;
 }
+
 .footer_link {
     text-decoration: none;
     color: #c4c0c0;
@@ -157,9 +232,11 @@
     margin: 10px 0;
     transition: 0.3s;
 }
+
 .footer_link:active {
     color: #9a9999;
 }
+
 .social_media {
     width: 100%;
     text-align: center;
@@ -167,14 +244,17 @@
     flex-direction: column;
     align-items: center;
 }
+
 .faq_block {
     padding: 0;
     margin-bottom: 30px;
     text-align: left;
 }
+
 .text {
     font-weight: 500;
 }
+
 @media (max-width: 1000px) {
     .faq_block {
         padding: 0;

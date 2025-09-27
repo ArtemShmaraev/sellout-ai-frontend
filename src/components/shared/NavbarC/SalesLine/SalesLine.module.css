@@ -1,14 +1,14 @@
 .line {
     width: 100%;
-    background: black;
+    background: #751627;
     margin-bottom: 20px;
-    padding: 5px 0;
+    padding: 9px 0;
 }
 .splide {
     color: white;
     text-align: center;
     /*letter-spacing: 2px;*/
-    font-size: 14px;
+    font-size: 15px;
 }
 .link {
     color: #8d8d8d;
