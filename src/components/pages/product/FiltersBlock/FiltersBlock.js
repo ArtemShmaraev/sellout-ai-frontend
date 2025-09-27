@@ -38,14 +38,16 @@ const FiltersBlock = () => {
         query.page = 1
         router.push({pathname, query}, undefined, {scroll: false})
     }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     const renderPrice = () => {
         let content = []
         const query = router.query
         if (query.price_min) {
-            content.push(`От ${query.price_min.toLocaleString()} ₽`)
+            content.push(`От ${addSpacesToNumber(query.price_min)} ₽`)
         }
         if (query.price_max) {
-            content.push(`до ${query.price_max.toLocaleString()} ₽`)
+            content.push(`до ${addSpacesToNumber(query.price_max)} ₽`)
         }
         return (
             <div className={s.border}>

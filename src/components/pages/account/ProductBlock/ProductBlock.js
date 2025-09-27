@@ -11,6 +11,8 @@ const ProductBlock = ({unit}) => {
             return unit.product.brands[0].name
         }
     }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <div className={s.row}>
             <Link href={`/products/${unit.product.slug}`} className={s.col1}>
@@ -38,7 +40,7 @@ const ProductBlock = ({unit}) => {
                 <div className={s.col}>
                     <div className={s.dropdowns}>
                         <div className={s.brand}>Цена</div>
-                        <div className={s.text}>{unit.final_price.toLocaleString()} ₽</div>
+                        <div className={s.text}>{addSpacesToNumber(unit.final_price)} ₽</div>
                     </div>
                     {
                         unit.track_number &&

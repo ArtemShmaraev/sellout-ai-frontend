@@ -56,6 +56,9 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+
     return (
         <div ref={dropdownRef}>
             <div className={s.dropdown}
@@ -80,13 +83,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                             (selectedItem.is_sale && selectedItem.min_price_without_sale > selectedItem.min_price)
                                                 ?
                                                 <div className={s.price}>
-                                                    <span className={s.crossed}>От {selectedItem.min_price_without_sale.toLocaleString()} ₽</span>
+                                                    <span className={s.crossed}>От {addSpacesToNumber(selectedItem.min_price_without_sale)} ₽</span>
                                                     <br/>
-                                                    <span className={s.sale_price}>От {selectedItem.min_price.toLocaleString()} ₽</span>
+                                                    <span className={s.sale_price}>От {addSpacesToNumber(selectedItem.min_price)} ₽</span>
                                                 </div>
                                                 :
                                                 <div className={s.price}>
-                                                    От {selectedItem.min_price.toLocaleString()} ₽
+                                                    От {addSpacesToNumber(selectedItem.min_price)} ₽
                                                 </div>
                                         }
                                     </div>
@@ -130,13 +133,13 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                                     (el.is_sale && el.min_price_without_sale > el.min_price)
                                                         ?
                                                         <div className={s.price}>
-                                                            <span className={s.crossed}>От {el.min_price_without_sale.toLocaleString()} ₽</span>
+                                                            <span className={s.crossed}>От {addSpacesToNumber(el.min_price_without_sale)} ₽</span>
                                                             <br/>
-                                                            <span className={s.sale_price}>От {el.min_price.toLocaleString()} ₽</span>
+                                                            <span className={s.sale_price}>От {addSpacesToNumber(el.min_price)} ₽</span>
                                                         </div>
                                                         :
                                                         <div className={s.price}>
-                                                            От {el.min_price.toLocaleString()} ₽
+                                                            От {addSpacesToNumber(el.min_price)} ₽
                                                         </div>
                                                 }
                                             </div>

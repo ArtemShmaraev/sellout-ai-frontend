@@ -197,8 +197,8 @@ class FilterStore {
         this.handleScrollTo()
     }
     toggleAll(item) {
-        console.log(item.path)
-        console.log(item.text)
+        // console.log(item.path)
+        // console.log(item.text)
         if (item.hasOwnProperty('is_all')) {
             const deactivateList = []
             const obj = this.findObj(this.filters, item.path[item.path.length - 2], item.path)
@@ -271,7 +271,7 @@ class FilterStore {
     deactivateFiltersBelow(d, query) {
         for (const key in d) {
             if (key === 'path') {
-                console.log('skip')
+                // console.log('skip')
                 continue
             }
             if (d[key].hasOwnProperty('state')) {

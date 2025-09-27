@@ -117,6 +117,8 @@ const ProductCard = ({cardList = false, product}) => {
             document.removeEventListener('mousemove', handleClickOutside);
         };
     }, []);
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 
 
     return (
@@ -156,120 +158,48 @@ const ProductCard = ({cardList = false, product}) => {
                 }
             </div>
             {photosArr && photosArr.length > 0 &&
-                <div
+                <div className={s.image_container}
+                     onTouchStart={e => {
+                         e.stopPropagation()
+                         handleMouseEnter()
+                     }}
+                     onTouchEnd={e => {
+                         e.stopPropagation()
+                         handleMouseLeave()
+                     }}
+                     onMouseEnter={handleMouseEnter}
+                     onMouseLeave={handleMouseLeave}
 
-
-                    className={`image-container ${isHovered && 'flipped'}`}
-                    onTouchStart={e => {
-                        e.stopPropagation()
-                        handleMouseEnter()
-                    }}
-                    onTouchEnd={e => {
-                        e.stopPropagation()
-                        handleMouseLeave()
-                    }}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    style={{
-                        perspective: '1000px',
-                        width: '100%', // Укажите ширину и высоту карточки по вашему выбору
-                        height: '100%',
-                        position: 'relative',
-                        transformStyle: 'preserve-3d',
-                        // transition: 'transform 5s',
-                        // transform: isHovered ? 'rotateY(90deg)' : 'rotateY(0deg)',
-                    }}
                 >
-                    <div
-                        className="card-inner"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            transformStyle: 'preserve-3d',
-                            transition: 'transform 0.5s',
-                            transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                        }}
-                    >
-                        {/* Ваш текущий код изображения здесь */}
+                    <Image
+                        style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+                        loading={'eager'}
+                        fill={true}
+                        className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+                        onLoadingComplete={() => setIsLoading(false)}
+                        src={photosArr[0].url} alt="shoe"
+                        sizes={'100%'}
+                    />
+                    {photos[1] &&
                         <Image
-                            style={{
-                                position: 'absolute',
-                                objectFit: 'contain',
-                                objectPosition: 'center bottom',
-                                width: '100%',
-                                height: '100%',
-                            }}
+                            style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                             loading={'eager'}
                             fill={true}
-                            className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+                            className={isHovered && isDesktop? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
-                            src={photosArr[0].url}
-                            alt="shoe"
+                            src={photos[1]} alt="shoe"
+                            sizes={'100%'}
                         />
-                        {/* Здесь может быть другое содержимое обратной стороны карточки */}
-                        {photos[1] && (
-                            <Image
-                                style={{
-                                    position: 'absolute',
-                                    objectFit: 'contain',
-                                    objectPosition: 'center bottom',
-                                    width: '100%',
-                                    height: '100%',
-                                    transform: 'scaleX(-1)'
-                                }}
-                                loading={'eager'}
-                                fill={true}
-                                className={isHovered && isDesktop ? '' : 'opacity-0'}
-                                onLoadingComplete={() => setIsLoading(false)}
-                                src={photos[1]}
-                                alt="shoe"
-                            />
-                        )}
-                    </div>
+                    }
+                    <Image src={isDesktop ? desktop : mobile} alt=''
+                           className={'placeholder_img'} fill={true}
+                           style={isLoading ? {} : {opacity: 0}}
+                           sizes={'100%'}
+                    />
                 </div>
-                // <div className={`image-container ${isHovered && 'flipped'}`}
-                //      onTouchStart={e => {
-                //          e.stopPropagation()
-                //          handleMouseEnter()
-                //      }}
-                //      onTouchEnd={e => {
-                //          e.stopPropagation()
-                //          handleMouseLeave()
-                //      }}
-                //      onMouseEnter={handleMouseEnter}
-                //      onMouseLeave={handleMouseLeave}
-                //
-                // >
-                //     <Image
-                //         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                //         loading={'eager'}
-                //         fill={true}
-                //         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
-                //         onLoadingComplete={() => setIsLoading(false)}
-                //         src={photosArr[0].url} alt="shoe"
-                //         sizes={'100%'}
-                //     />
-                //     {photos[1] &&
-                //         <Image
-                //             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                //             loading={'eager'}
-                //             fill={true}
-                //             className={isHovered && isDesktop? '' : 'opacity-0'}
-                //             onLoadingComplete={() => setIsLoading(false)}
-                //             src={photos[1]} alt="shoe"
-                //             sizes={'100%'}
-                //         />
-                //     }
-                //     <Image src={isDesktop ? desktop : mobile} alt=''
-                //            className={'placeholder_img'} fill={true}
-                //            style={isLoading ? {} : {opacity: 0}}
-                //            sizes={'100%'}
-                //     />
-                // </div>
             }
             <div className={s.text_block}
                  ref={sizesRef}
-
             >
                 {
                     !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
@@ -300,9 +230,9 @@ const ProductCard = ({cardList = false, product}) => {
                                 ?
                                 <div className={`${s.price}`}>
 
-                                    <span className={s.sale_price}>от {price.final_price.toLocaleString()} ₽ &nbsp;</span>
+                                    <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
                                     {!isDesktop && <br/>}
-                                    <span className={s.crossed}>{price.start_price.toLocaleString()} ₽</span>
+                                    <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
                                     {/*<br/>*/}
 
                                 </div>
@@ -315,7 +245,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 {
                                     Number(price.final_price) > 0
                                         ?
-                                        `от ${price.final_price.toLocaleString()} ₽`
+                                        `от ${addSpacesToNumber(price.final_price)} ₽`
                                         :
                                         'Нет в наличии'
                                 }
@@ -328,3 +258,213 @@ const ProductCard = ({cardList = false, product}) => {
 };
 
 export default ProductCard;
+
+
+
+//     return (
+//
+//         <Link className={cardList ? s.card_list : s.card}
+//               href={`/products/${slug}`}
+//
+//         >
+//             <div className={s.icons_block}>
+//                 <div style={{display: 'flex', alignItems: 'center'}}>
+//                     {(isSale && price.start_price > price.final_price) && price.final_price > 0 && <div className={s.sale}>
+//                         -{Math.ceil(100 - (price.final_price / price.start_price) * 100)}%
+//                     </div>}
+//                     {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
+//                     {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
+//                 </div>
+//                 {userStore.isLogged
+//                     ?
+//                     <div className={s.like_block}
+//                          onClick={(e) => {
+//                              e.preventDefault()
+//                              e.stopPropagation()
+//                              isInWishlist ? deleteFromWL() : addToWL()
+//                          }}>
+//                         <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
+//                     </div>
+//                     :
+//                     <div onClick={e => {
+//                         e.preventDefault()
+//                         e.stopPropagation()
+//                     }} className={s.like_block}>
+//                         <AuthModal fromWishlist={true}>
+//                             <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}
+//                             />
+//                         </AuthModal>
+//                     </div>
+//                 }
+//             </div>
+//             {photosArr && photosArr.length > 0 &&
+//                 // <div
+//                 //     className={`image-container ${isHovered && 'flipped'}`}
+//                 //     onTouchStart={e => {
+//                 //         e.stopPropagation()
+//                 //         handleMouseEnter()
+//                 //     }}
+//                 //     onTouchEnd={e => {
+//                 //         e.stopPropagation()
+//                 //         handleMouseLeave()
+//                 //     }}
+//                 //     onMouseEnter={handleMouseEnter}
+//                 //     onMouseLeave={handleMouseLeave}
+//                 //     style={{
+//                 //         // perspective: '1000px',
+//                 //         width: '100%', // Укажите ширину и высоту карточки по вашему выбору
+//                 //         height: '100%',
+//                 //         position: 'relative',
+//                 //         transformStyle: 'preserve-3d',
+//                 //         // transition: 'transform 5s',
+//                 //         // transform: isHovered ? 'rotateY(90deg)' : 'rotateY(0deg)',
+//                 //     }}
+//                 // >
+//                 //     <div
+//                 //
+//                 //         style={{
+//                 //             width: '100%',
+//                 //             height: '100%',
+//                 //             transformStyle: 'preserve-3d',
+//                 //             transition: 'transform 0.5s',
+//                 //             transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
+//                 //         }}
+//                 //     >
+//                 //         {/* Ваш текущий код изображения здесь */}
+//                 //         <Image
+//                 //             style={{
+//                 //                 position: 'absolute',
+//                 //                 objectFit: 'contain',
+//                 //                 objectPosition: 'center bottom',
+//                 //                 width: '100%',
+//                 //                 height: '100%',
+//                 //             }}
+//                 //             loading={'eager'}
+//                 //             fill={true}
+//                 //             className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+//                 //             onLoadingComplete={() => setIsLoading(false)}
+//                 //             src={photosArr[0].url}
+//                 //             alt="shoe"
+//                 //         />
+//                 //         {/* Здесь может быть другое содержимое обратной стороны карточки */}
+//                 //         {photos[1] && (
+//                 //             <Image
+//                 //                 style={{
+//                 //                     position: 'absolute',
+//                 //                     objectFit: 'contain',
+//                 //                     objectPosition: 'center bottom',
+//                 //                     width: '100%',
+//                 //                     height: '100%',
+//                 //                     transform: 'scaleX(-1)'
+//                 //                 }}
+//                 //                 loading={'eager'}
+//                 //                 fill={true}
+//                 //                 className={isHovered && isDesktop ? '' : 'opacity-0'}
+//                 //                 onLoadingComplete={() => setIsLoading(false)}
+//                 //                 src={photos[1]}
+//                 //                 alt="shoe"
+//                 //             />
+//                 //         )}
+//                 //     </div>
+//                 // </div>
+//                 <div className={`image-container ${isHovered && 'flipped'}`}
+//                      onTouchStart={e => {
+//                          e.stopPropagation()
+//                          handleMouseEnter()
+//                      }}
+//                      onTouchEnd={e => {
+//                          e.stopPropagation()
+//                          handleMouseLeave()
+//                      }}
+//                      onMouseEnter={handleMouseEnter}
+//                      onMouseLeave={handleMouseLeave}
+//
+//                 >
+//                     <Image
+//                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+//                         loading={'eager'}
+//                         fill={true}
+//                         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+//                         onLoadingComplete={() => setIsLoading(false)}
+//                         src={photosArr[0].url} alt="shoe"
+//                         sizes={'100%'}
+//                     />
+//                     {photos[1] &&
+//                         <Image
+//                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+//                             loading={'eager'}
+//                             fill={true}
+//                             className={isHovered && isDesktop? '' : 'opacity-0'}
+//                             onLoadingComplete={() => setIsLoading(false)}
+//                             src={photos[1]} alt="shoe"
+//                             sizes={'100%'}
+//                         />
+//                     }
+//                     <Image src={isDesktop ? desktop : mobile} alt=''
+//                            className={'placeholder_img'} fill={true}
+//                            style={isLoading ? {} : {opacity: 0}}
+//                            sizes={'100%'}
+//                     />
+//                 </div>
+//             }
+//             <div className={s.text_block}
+//                  ref={sizesRef}
+//
+//             >
+//                 {
+//                     !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
+//                         ?
+//                         <>
+//                             <div className={s.info}>
+//                                 <div className={`${s.tag}`}>{brandsDisplay()}</div>
+//                                 <div className={`${s.brand}`}>{model || 'No model'}</div>
+//                                 <div className={`${s.name}`}>{colorway}</div>
+//                             </div>
+//
+//
+//
+//                         </>
+//                         :
+//                         <div className={'text-black'}>
+//                             <span className={'fw-bold'}>
+//                                 Доступныe размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
+//                             <br/>
+//                             {renderSizes()}
+//                         </div>
+//                 }
+//                 <div className={`${s.price_block}`}>
+//                     {
+//                         (isSale && price.start_price > price.final_price)
+//                             ?
+//                             Number(price.final_price) > 0
+//                                 ?
+//                                 <div className={`${s.price}`}>
+//
+//                                     <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+//                                     {!isDesktop && <br/>}
+//                                     <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+//                                     {/*<br/>*/}
+//
+//                                 </div>
+//                                 :
+//                                 <div className={`${s.price}`}>
+//                                     Нет в наличии
+//                                 </div>
+//                             :
+//                             <div className={`${s.price}`}>
+//                                 {
+//                                     Number(price.final_price) > 0
+//                                         ?
+//                                         `от ${addSpacesToNumber(price.final_price)} ₽`
+//                                         :
+//                                         'Нет в наличии'
+//                                 }
+//                             </div>
+//                     }
+//                 </div>
+//             </div>
+//         </Link>
+//     );
+// };
+//
+// export default ProductCard;

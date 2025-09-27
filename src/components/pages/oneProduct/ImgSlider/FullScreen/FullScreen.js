@@ -4,10 +4,10 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import s from './FullScreen.module.css'
 import close from '@/static/icons/x-lg.svg'
 import Image from "next/image";
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/zoom';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
+// import 'swiper/css/zoom';
 
 const FullScreen = ({ toggle, photos, initialIndex}) => {
 

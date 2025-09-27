@@ -22,6 +22,8 @@ const RenderBtns = ({btns, changeBonuses}) => {
         productStore.setText(cart, id)
         changeBonuses(bonuses)
     }, []);
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 
     const renderBtns = (buttons) => {
         const rows = [];
@@ -36,12 +38,12 @@ const RenderBtns = ({btns, changeBonuses}) => {
                         (button.is_sale && button.start_price > button.final_price)
                         ?
                             <div className={s.half_text}>
-                                <span className={s.crossed}>{button.start_price.toLocaleString()} ₽</span>
+                                <span className={s.crossed}>{addSpacesToNumber(button.start_price)} ₽</span>
                                 <br/>
-                                <span className={s.sale_price}>{button.final_price.toLocaleString()} ₽</span>
+                                <span className={s.sale_price}>{addSpacesToNumber(button.final_price)} ₽</span>
                             </div>
                             :
-                            <div className={s.half_text}>{button.final_price.toLocaleString()} ₽</div>
+                            <div className={s.half_text}>{addSpacesToNumber(button.final_price)} ₽</div>
                     }
                 </div>
             )

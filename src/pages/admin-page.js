@@ -26,6 +26,7 @@ import {fetchLastSeen} from "@/http/userApi";
 import {parse} from "cookie";
 import Cookies from "js-cookie";
 
+
 export const getServerSideProps = async (context) => {
     const products = await fetchProductsPage(context.query)
     const categories = await fetchFilter('tree_cat')

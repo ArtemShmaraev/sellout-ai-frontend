@@ -25,6 +25,48 @@ export const getServerSideProps = async (context) => {
     return {props : {order, userData}}
 }
 const Complete = ({order, userData}) => {
+    useEffect(() => {
+
+        const priceAsString = String(product.price.final_price);
+        const productIdAsString = String(product.id);
+
+        window._tmr = window._tmr || [];
+        window._tmr.push({
+            type: "reachGoal",
+            id: 3470916,
+            value: priceAsString, // Замените "VALUE" на необходимое значение
+            goal: "addToCart",
+            params: { product_id: productIdAsString } // Замените "PRODUCT_ID" на необходимое значение
+        });
+        const orderItems = order.order_units
+        // const idList = [];
+
+        for (const orderItem of orderItems) {
+            // Предположим, что у каждой позиции заказа есть свойство "id"
+            const itemId = orderItem.product.id;
+            window._tmr = window._tmr || [];
+            window._tmr.push({
+                type: "reachGoal",
+                id: 3470916,
+                value: String(orderItem.final_price), // Замените "VALUE" на необходимое значение
+                goal: "addToCart",
+                params: { product_id: String(itemId) } // Замените "PRODUCT_ID" на необходимое значение
+            });
+
+            // Преобразуем ID в строку и добавляем в список
+            // idList.push(String(itemId));
+        }
+
+        // Получаем текущий путь
+        const currentPath = window.location.pathname;
+
+        // Добавляем логику для отслеживания откуда совершен переход
+        console.log(`Переход на страницу из: ${currentPath}`);
+
+        // Другие действия, которые вы хотите выполнить при загрузке компонента
+
+    }, []); // Пустой массив зависимостей означает, что эффект будет выполнен только при монтировании компонента
+
     const {userStore, cartStore} = useContext(Context)
 
     const [isDesktop, setIsDesktop] = useState(true)

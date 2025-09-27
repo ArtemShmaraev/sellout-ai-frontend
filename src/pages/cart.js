@@ -214,6 +214,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <MainLayout>
             <Head>
@@ -272,7 +274,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                         </div>
                         <div className={s.promos_block}>
                             <h4>Ваш заказ:</h4>
-                            <p>Cтоимость: {defAmount.toLocaleString()} ₽</p>
+                            <p>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
                             <PromoInput placeholder={'Введите промокод'}
                                         onChange={(e) => setPromo(e.target.value)}
                                         value={promo}
@@ -302,7 +304,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, maxBonuse
                                 Number(saleAmount) > 0 && <p className={'my-0'}>Суммарная скидка: {saleAmount} ₽</p>
                             }
                             <hr/>
-                            <p className={s.big_text}>Промежуточный итог: {finAmount.toLocaleString()} ₽</p>
+                            <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(finAmount)} ₽</p>
                             {
                                 userStore.isLogged
                                     ?

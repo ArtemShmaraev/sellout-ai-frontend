@@ -55,6 +55,9 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     //     console.log([available, product.available_flag])
     //     console.groupEnd()
     // }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+
     return (
         <div key={unitId}>
             <hr/>
@@ -95,7 +98,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                     <div className={`${s.col}`}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Цена</div>
-                            <div className={s.text}>{price.toLocaleString()} ₽</div>
+                            <div className={s.text}>{addSpacesToNumber(price)} ₽</div>
                         </div>
                         <div className={s.ship_block}>
                             <div className={s.brand}></div>
@@ -105,7 +108,7 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             Number(bonus) > 0 &&
                             <>
                                 <div className={s.brand}>Начислено бонусов:</div>
-                                <div className={s.text}>{bonus.toLocaleString()} ₽</div>
+                                <div className={s.text}>{addSpacesToNumber(bonus)} ₽</div>
                             </>
                         }
                         {userStore.isLogged

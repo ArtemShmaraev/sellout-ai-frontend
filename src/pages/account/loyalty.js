@@ -103,6 +103,8 @@ const Loyalty = ({loyalty}) => {
     const closeContact = () => {
         setContactOpen(false)
     }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <MainLayout>
             <Head>
@@ -118,10 +120,10 @@ const Loyalty = ({loyalty}) => {
                             <div className={s.card_container}>
                                 <div className={s.above_card}>
                                     <div>
-                                        Всего потрачено: {loyalty.total.toLocaleString()} ₽
+                                        Всего потрачено: {addSpacesToNumber(loyalty.total)} ₽
                                     </div>
                                     <div>
-                                        До следующего статуса: {loyalty.until_next_status.toLocaleString()} ₽
+                                        До следующего статуса: {addSpacesToNumber(loyalty.until_next_status)} ₽
                                     </div>
                                 </div>
                                 <div className={`${s.card} ${statusObj.shadow}`}>
@@ -132,7 +134,7 @@ const Loyalty = ({loyalty}) => {
                                             ****{loyalty.number_card}
                                         </div>
                                         <div>
-                                            Накоплено бонусов: {loyalty.bonuses.toLocaleString()} ₽
+                                            Накоплено бонусов: {addSpacesToNumber(loyalty.bonuses)} ₽
                                         </div>
                                     </div>
                                 </div>

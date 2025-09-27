@@ -354,6 +354,8 @@ const OneProductPage = ({product, prices}) => {
     const closeHow = () => {
         setHowOpen(false)
     }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
 
     useEffect(() => {
         // Проверяем, что скрипт еще не добавлен
@@ -463,12 +465,12 @@ const OneProductPage = ({product, prices}) => {
                                             style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
-                                        >От {product.price.start_price.toLocaleString()} ₽
+                                        >От {addSpacesToNumber(product.price.start_price)} ₽
                                         </div>
                                         <div className='d-flex align-items-center'>
                                             {(product.is_sale && product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
-                                                    От {product.price.final_price.toLocaleString()} ₽
+                                                    От {addSpacesToNumber(product.price.final_price)} ₽
                                                 </div>
                                             }
                                             {product.is_fast_shipping &&
@@ -599,12 +601,12 @@ const OneProductPage = ({product, prices}) => {
                                             style={(product.is_sale && product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
-                                        >От {product.price.start_price.toLocaleString()} ₽
+                                        >От {addSpacesToNumber(product.price.start_price)} ₽
                                         </div>
                                         <div className='d-flex align-items-center'>
                                             {(product.is_sale && product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
-                                                    От {product.price.final_price.toLocaleString()} ₽
+                                                    От {addSpacesToNumber(product.price.final_price)} ₽
                                                 </div>
                                             }
                                             {product.is_fast_shipping &&

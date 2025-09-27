@@ -206,6 +206,8 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
             orderStore.setPvzAddress('')
         }
     }, []);
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <MainLayout>
             <Head>
@@ -218,7 +220,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                     </div>
                     <div className={s.promos_block}>
                         <h4>Ваш заказ:</h4>
-                        <p>Cтоимость: {defAmount.toLocaleString()} ₽</p>
+                        <p>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
                         <PromoInput placeholder={'Введите промокод'}
                                     onChange={(e) => setPromo(e.target.value)}
                                     value={promo}
@@ -251,15 +253,15 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                                 ?
                                     orderStore.method === 1
                                     ?
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all.toLocaleString()} ₽</p>
+                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
                                     :
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_part.toLocaleString()} ₽</p>
+                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_part)} ₽</p>
                                 :
-                                    <p>Сумма доставки: {orderStore.deliveryPrice.sum_all.toLocaleString()} ₽</p>
+                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
                             )
                         }
                         <hr/>
-                        <p className={s.big_text}>Промежуточный итог: {calculateFinalPrice().toLocaleString()} ₽</p>
+                        <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
 
                         <form
                             id="payment-form"

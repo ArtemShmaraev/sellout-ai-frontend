@@ -5,6 +5,8 @@ import s from './CompleteCard.module.css'
 import ProductBlock from "@/components/pages/account/ProductBlock/ProductBlock";
 
 const CompleteCard = ({order}) => {
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <div className={s.details_block}>
             <div className={s.order}>
@@ -24,7 +26,7 @@ const CompleteCard = ({order}) => {
             <div className={s.final_block}>
                 <div className={s.final_col}>
                     <div className={s.prices}>
-                        Адрес: {order.pvz_address ? order.pvz_address: order.address.address}
+                        Адрес: {order.pvz_address ? order.pvz_address : order.address.address}
                     </div>
                     <div className={s.prices}>
                         Телефон: {order.phone}
@@ -36,7 +38,7 @@ const CompleteCard = ({order}) => {
                 <div className={s.final_col}>
                     <div className={s.prices}>
                         <div>Товаров на сумму:</div>
-                        <div>{order.total_amount.toLocaleString()} ₽</div>
+                        <div>{addSpacesToNumber(order.total_amount)} ₽</div>
                     </div>
                     {
                         Number(order.total_sale) > 0 &&
@@ -47,16 +49,17 @@ const CompleteCard = ({order}) => {
                     }
                     <div className={s.prices}>
                         <div>Доставка:</div>
-                        <div>{order.delivery_view_price.toLocaleString()} ₽</div>
+                        <div>{addSpacesToNumber(order.delivery_view_price)} ₽</div>
                     </div>
                     <div className={s.prices}>
                         <div>Итого:</div>
-                        <div>{order.final_amount.toLocaleString()} ₽</div>
+                        <div>{addSpacesToNumber(order.final_amount)} ₽</div>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 };
 
 export default CompleteCard;

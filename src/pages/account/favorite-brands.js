@@ -14,7 +14,7 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const {user_id} = jwtDecode(token)
     const brands = await fetchFavoriteBrands(token, user_id)
-    console.log(brands)
+    // console.log(brands)
     return { props: {brands} }
 }
 

@@ -92,6 +92,8 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
         const host = location.host
         await navigator.clipboard.writeText(`${host}/products/${product.slug}`)
     }
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     return (
         <div className={s.card_list}>
             <div className={s.icons_block}>
@@ -156,11 +158,11 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     isSale
                         ?
                         <div className={`${s.price}`}>
-                            <span className={s.crossed}>От {price.start_price.toLocaleString()} ₽</span>
-                            <span className={s.sale_price}>От {price.final_price.toLocaleString()} ₽</span>
+                            <span className={s.crossed}>От {addSpacesToNumber(price.start_price)} ₽</span>
+                            <span className={s.sale_price}>От {addSpacesToNumber(price.final_price)} ₽</span>
                         </div>
                         :
-                        <div className={`${s.price}`}>От {price.final_price.toLocaleString()} ₽</div>
+                        <div className={`${s.price}`}>От {addSpacesToNumber(price.final_price)} ₽</div>
                 }
                 <div className='d-flex justify-content-between mb-1 flex-wrap'>
                     <ScrollableBDropdown toggleText={'Категория'} data={adminStore.categories}/>
@@ -168,7 +170,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                     <div>
                         <div>spu_id: {product.spu_id}</div>
                         <div>likes_count: {product.rel_num}</div>
-                        <div>likes_count: {product.normalize_rel_num}</div>
+                        <div>normalize likes_count: {product.normalize_rel_num}</div>
                         <div>+likes: {product.likes_month}</div>
                         <div>score: {product.score_product_page}</div>
                         <div>category_id: {product.category_id}</div>
@@ -176,6 +178,7 @@ const AdminCard = ({categories, lines, mainLine, key, cardList, product}) => {
                         <div>level1_category_id: {product.level1_category_id}</div>
                         <div>level2_category_id: {product.level2_category_id}</div>
                         <div>title: {product.platform_info?.poizon?.title}</div>
+                        <div>title: {product.up_score}</div>
                         {/*<div>Линейка: {product.main_line.name}</div>*/}
                     </div>
                 </div>
