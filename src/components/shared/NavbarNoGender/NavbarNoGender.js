@@ -89,34 +89,47 @@ const NavbarNoGender = () => {
     //     return () => window.removeEventListener('scroll', checkScroll);
     // }, [prevScrollPos]);
     return (
-        <header className={s.navbar}>
-            <div className={`${s.container} custom_cont`}>
-                <div>
-                    <div className={s.links}>
-                        <Link href="/about" className={s.leftLinks}>
-                            Мужское
-                        </Link>
-                        <Link href="/about" className={s.leftLinks}>
-                            Женское
+        <div>
+            {isDesktop ?
+                <header className={s.navbar}>
+                    <div className={`${s.container} custom_cont`}>
+                        <div>
+                            <div className={s.links}>
+                                <Link href="/about" className={s.leftLinks}>
+                                    Мужское
+                                </Link>
+                                <Link href="/about" className={s.leftLinks}>
+                                    Женское
+                                </Link>
+                            </div>
+                        </div>
+                        <div className={`${s.logo}`}>
+                            <Link href="/">
+                                <Image src={logo3} alt="Logo" width={350} height={50}/>
+                            </Link>
+                        </div>
+                        <div>
+                            <div className={s.links}>
+                                <Link href="/about" className={s.rightLinks}>
+                                    О нас
+                                </Link>
+                                <span className={s.rightLinks} onClick={toggleContact}>Связаться с нами</span>
+                            </div>
+                        </div>
+                        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+                    </div>
+                </header>
+                :
+                <header className={s.navbarMob}>
+                    <div className={`${s.logoMob}`}>
+                        <Link href="/">
+                            <Image src={logo} alt="Logo" width={350} height={50}/>
                         </Link>
                     </div>
-                </div>
-                <div className={`${s.logo}`}>
-                    <Link href="/">
-                        <Image src={logo3} alt="Logo" width={350} height={50}/>
-                    </Link>
-                </div>
-                <div>
-                    <div className={s.links}>
-                        <Link href="/about" className={s.rightLinks}>
-                            О нас
-                        </Link>
-                        <span className={s.rightLinks} onClick={toggleContact}>Связаться с нами</span>
-                    </div>
-                </div>
-                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
-            </div>
-        </header>);
+                </header>
+            }
+        </div>
+    );
 };
 
 export default observer(NavbarNoGender);

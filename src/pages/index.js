@@ -15,8 +15,11 @@ import {useRouter} from "next/router";
 import NavbarC from "@/components/shared/NavbarC/NavbarC";
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import kylie from "/src/static/img/kylie.png"
+import kylieBig from "/src/static/img/kylieBig.png"
 import man from "/src/static/img/man.png"
+import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
+import mainbigMob from "/src/static/img/Group 74.png"
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -159,42 +162,80 @@ export default function Home({data}) {
                 </div>
             ) : (
                 <div>
-                    <div>
-                        <div className={s.main} style={{width: '50%', margin: '0 auto', padding: 0, float: "left"}}>
-                            <a href="/about">
-                                <Image
-                                    src={kylie}
-                                    alt="Description of your image"
-                                    style={{float: "left"}}
-                                    layout="responsive"
-                                    loading={'eager'}
-                                />
-                            </a>
+                    {isDesktop ?
+                        <div>
+                            <div>
+                                <div className={s.main}
+                                     style={{width: '50%', margin: '0 auto', padding: 0, float: "left"}}>
+                                    <a href="/about">
+                                        <Image
+                                            src={kylie}
+                                            alt="Description of your image"
+                                            style={{float: "left"}}
+                                            layout="responsive"
+                                            loading={'eager'}
+                                        />
+                                    </a>
+                                </div>
+                                <div style={{width: '50%', margin: '0 auto', padding: 0, float: "right"}}>
+                                    <a href="/about">
+                                        <Image
+                                            src={man}
+                                            alt="Description of your image"
+                                            style={{float: "left"}}
+                                            layout="responsive"
+                                            loading={'eager'}
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                    <a href="/about">
+                                        <Image
+                                            src={mainbig}
+                                            alt="Description of your image"
+                                            layout="responsive"
+                                            loading={'eager'}
+                                        />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div style={{width: '50%', margin: '0 auto', padding: 0, float: "right"}}>
-                            <a href="/about">
-                                <Image
-                                    src={man}
-                                    alt="Description of your image"
-                                    style={{float: "left"}}
-                                    layout="responsive"
-                                    loading={'eager'}
-                                />
-                            </a>
+                        :
+                        <div>
+                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                <a href="/about">
+                                    <Image
+                                        src={kylieBig}
+                                        alt="Description of your image"
+                                        layout="responsive"
+                                        loading={'eager'}
+                                    />
+                                </a>
+                            </div>
+                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                <a href="/about">
+                                    <Image
+                                        src={manBig}
+                                        alt="Description of your image"
+                                        layout="responsive"
+                                        loading={'eager'}
+                                    />
+                                </a>
+                            </div>
+                            <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                <a href="/about">
+                                    <Image
+                                        src={mainbigMob}
+                                        alt="Description of your image"
+                                        layout="responsive"
+                                        loading={'eager'}
+                                    />
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                            <a href="/about">
-                                <Image
-                                    src={mainbig}
-                                    alt="Description of your image"
-                                    layout="responsive"
-                                    loading={'eager'}
-                                />
-                            </a>
-                        </div>
-                    </div>
+                    }
                 </div>
             )}
         </MainLayout>

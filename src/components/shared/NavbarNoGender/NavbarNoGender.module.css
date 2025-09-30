@@ -6,6 +6,15 @@
     background-position: center;
 }
 
+.navbarMob {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-image: url("https://storage.yandexcloud.net/sellout-photos/MailPhotos/template_images/bgnogmob.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -66,4 +75,9 @@
 
 .logo {
     position: relative; /* Establish positioning context */
+}
+
+.logoMob {
+    display: flex;
+    justify-content: center;
 }
