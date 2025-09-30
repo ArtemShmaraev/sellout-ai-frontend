@@ -126,6 +126,8 @@ const NavbarC = () => {
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
 
+    const selectedGender = Cookies.get('selected_gender')
+
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender);
@@ -148,10 +150,10 @@ const NavbarC = () => {
                 <div className={s.row1}>
                     <div className={s.block}>
                         <div className={'desktop_d'}>
-                            <Link href="/" className={s.links} onClick={(e) => {
+                            <Link href="/" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={(e) => {
                                 handleGenderSelection('M');
                                 window.location.href = e.currentTarget.href;}}>Мужское </Link>
-                            <Link href="/" className={s.links} onClick={(e) => {
+                            <Link href="/" className={selectedGender === 'F' ? s.selectedGender : s.genderButton} onClick={(e) => {
                                 handleGenderSelection('F');
                                 window.location.href = e.currentTarget.href;
                             }}>Женское </Link>
