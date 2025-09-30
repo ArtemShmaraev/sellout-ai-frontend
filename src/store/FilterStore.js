@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import cn from "classnames";
+import Cookies from "js-cookie";
 
 class FilterStore {
     constructor() {
@@ -86,9 +87,12 @@ class FilterStore {
         return this._activeFilters
     }
     deactivateFilters(d) {
+
+
         for (const key in d) {
             if (key === 'path') continue
             if (d[key] && typeof d[key] === 'object') {
+
                 if (d[key].hasOwnProperty('state')) {
                     d[key]['state'] = false;
                 } else {
@@ -96,9 +100,17 @@ class FilterStore {
                 }
             }
         }
-        this._activeFilters = [];
+
+        this._activeFilters = []
     }
-    reactivateFilters(query) {
+    reactivateFilters(query){ {
+        if (!query.hasOwnProperty('gender'))
+        {
+            const selectedGender = Cookies.get('selected_gender');
+            if (selectedGender === 'M' || selectedGender === 'F') {
+                query['gender'] = selectedGender
+            }
+        }
         for (const key in query) {
             if (key === 'page' || key === 'price' || key === 'ordering'
                 || key === 'price_min' || key === 'price_max' || key === 'is_collab'
@@ -110,6 +122,7 @@ class FilterStore {
                 this._activeFilters.push(this.filters.q)
                 continue
             }
+
             if (Array.isArray(query[key])) {
                 query[key].forEach(el => {
                     if (key in this.filters){
@@ -130,7 +143,8 @@ class FilterStore {
                 return JSON.stringify(o) === JSON.stringify(obj);
             }) === index;
         });
-    }
+    }}
+
     dfsActivate(d, queryValue) {
         if (!d.hasOwnProperty('query')) {
             for (const key in d) {
@@ -422,21 +436,46 @@ class FilterStore {
         return checkedCat
     }
     get gender() {
-        const arr = []
+        const arr = [];
+
         for (const key in this.filters.gender) {
-            arr.push({...this.filters.gender[key]})
+            arr.push({ ...this.filters.gender[key] });
         }
-        return arr
+
+        // Добавляем selected_gender, если он не включен в фильтры
+        // if (arr.length === 0) {
+        //     const selectedGender = Cookies.get('selected_gender');
+        //     if (selectedGender) {
+        //         arr.push({ value: selectedGender, label: selectedGender });
+        //     }
+        // }
+
+        return arr;
     }
+
     get checkedGendersQuery() {
-        const checkedGenders = []
+        const checkedGenders = [];
+
         for (const key in this.activeFilters) {
             if (this.activeFilters[key].path[0] === 'gender') {
-                checkedGenders.push(this.activeFilters[key].query)
+                checkedGenders.push(this.activeFilters[key].query);
             }
         }
-        return checkedGenders
+
+
+
+        // Добавляем selected_gender, если он не включен в активные фильтры
+        if (checkedGenders.length === 0) {
+
+            const selectedGender = Cookies.get('selected_gender');
+            if (selectedGender === 'M' || selectedGender === 'F') {
+                checkedGenders.push(selectedGender);
+            }
+        }
+
+        return checkedGenders;
     }
+
     fillColors(colors) {
         colors.forEach(el => {
             this.filters.color[el.name] = {

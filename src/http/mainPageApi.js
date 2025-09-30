@@ -1,6 +1,6 @@
 import {$host} from "@/http/index";
 
-export async function fetchMainPage(token, nextPage, newPage, page) {
+export async function fetchMainPage(token, nextPage, newPage, page, selected_gender) {
     let pageParam = 'page=1'
     let nextParam
     let newParam
@@ -15,6 +15,10 @@ export async function fetchMainPage(token, nextPage, newPage, page) {
     }
     if (newPage) {
         newParam = 'new=true'
+        paramsArr.push(newParam)
+    }
+    if (selected_gender){
+        newParam = `selected_gender=${selected_gender}`
         paramsArr.push(newParam)
     }
     const str = paramsArr.join('&')

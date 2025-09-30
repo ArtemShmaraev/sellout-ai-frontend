@@ -23,6 +23,7 @@ const MainLayout = ({children}) => {
         if (!Cookies.get('cookie_message')) {
             setCookieOpen(true)
         }
+
     }, [])
     const checkIsDesktop = () => {
         const width = window.innerWidth
@@ -33,7 +34,9 @@ const MainLayout = ({children}) => {
         }
     }
 
-    const userGender = 'A';
+    // const selectedGender = "M";
+    const selectedGender = Cookies.get('selected_gender')
+
 
     // Inside your component
     const router = useRouter();
@@ -119,12 +122,12 @@ const MainLayout = ({children}) => {
                 />
             </Head>
             <div className={'body'}>
-                {userGender === 'M' || userGender === 'F' || !isMainPage ? (
+                {selectedGender === 'M' || selectedGender === 'F' || !isMainPage ? (
                     <NavbarC/>
                 ) : (
                     <NavbarNoGender/>
                 )}
-                {userGender === 'M' || userGender === 'F' || !isMainPage ? (
+                {selectedGender === 'M' || selectedGender === 'F' || !isMainPage ? (
                     <div className={'cont_up'}>
                         {children}
                     </div>

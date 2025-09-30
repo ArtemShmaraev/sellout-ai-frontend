@@ -2,10 +2,10 @@ import axios from 'axios'
 import {parse} from "cookie";
 
 const $host = axios.create({
-    baseURL: 'https://sellout.su/api/v1/'
+    baseURL: 'http://127.0.0.1:8000/api/v1/'
 })
 const $authHost = axios.create({
-    baseURL: 'https://sellout.su/api/v1/'
+    baseURL: 'http://127.0.0.1:8000/api/v1/'
 })
 const $dadata = axios.create({
     baseURL: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address'

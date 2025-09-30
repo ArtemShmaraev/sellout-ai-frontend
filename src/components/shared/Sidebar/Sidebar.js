@@ -44,6 +44,7 @@ import file from "@/static/icons/file-earmark-check 1.svg";
 import creditCard from "@/static/icons/credit-card 2.svg";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import inst_star from "@/static/icons/instagram_star.svg";
+import Cookies from "js-cookie";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -119,10 +120,12 @@ const Sidebar = ({photos}) => {
 
     const [contactOpen, setContactOpen] = useState(false)
 
-    const [selectedGender, setSelectedGender] = useState('Man');
+    // const [selectedGender, setSelectedGender] = useState('M');
+    const selectedGender = Cookies.get('selected_gender')
 
     const handleGenderSelection = (gender) => {
-        setSelectedGender(gender);
+        // setSelectedGender(gender);
+        Cookies.set('selected_gender', gender);
     };
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -203,17 +206,17 @@ const Sidebar = ({photos}) => {
                                 <div style={{marginTop: -6.3}}>
                                     <div className={s.genderButtons}>
                                         <div className={s.genderHalf}>
-                                            <button
-                                                className={selectedGender === 'Man' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
-                                                onClick={() => handleGenderSelection('Man')}>Мужское
-                                            </button>
+                                            <a href={'/'}
+                                                className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                onClick={() => handleGenderSelection('M')}>Мужское
+                                            </a>
                                         </div>
                                         <div className={s.genderSeparator}></div>
                                         <div className={s.genderHalf}>
-                                            <button
-                                                className={selectedGender === 'Woman' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
-                                                onClick={() => handleGenderSelection('Woman')}>Женское
-                                            </button>
+                                            <a href={'/'}
+                                                className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                onClick={() => handleGenderSelection('F')}>Женское
+                                            </a>
                                         </div>
                                     </div>
                                     <div className={s.genderLine}></div>

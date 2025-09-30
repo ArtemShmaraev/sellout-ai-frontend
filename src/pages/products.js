@@ -71,6 +71,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         filterStore.fillSizes(sizes)
         filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)
+
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)
         filterStore.setRef(productListRef)
@@ -89,7 +90,13 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     }
     const clearFilters = () => {
         filterStore.deactivateFilters(filterStore.filters)
-        router.push('/products', undefined, {scroll: false})
+        if (!query.hasOwnProperty('gender'))
+        {
+            const selectedGender = Cookies.get('selected_gender');
+            if (selectedGender === 'M' || selectedGender === 'F') {
+                router.push(`/products${selectedGender}`, undefined, {scroll: false})
+            }
+        }
         filterStore.handleScrollTo()
         filterStore.setPriceFrom('')
         filterStore.setPriceTo('')

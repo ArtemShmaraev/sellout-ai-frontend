@@ -181,6 +181,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         }
         setVerifyEmail(false)
         const checkout = await checkoutOrder(orderObj, id, token).catch()
+        console.log(checkout)
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
         const invoiceStr = JSON.stringify(checkout.invoice_data)
@@ -207,6 +208,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         }
     }, []);
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    // console.log(order.final_amount)
 
     return (
         <MainLayout>
@@ -262,33 +264,44 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
-
-                        <form
-                            id="payment-form"
-                            method="POST"
-                            className="application"
-                            acceptCharset="UTF-8"
-                            action="https://partner.life-pay.ru/alba/input/"
-                            ref={checkoutRef}
-                        >
-                            <input type="hidden" name="key" defaultValue="Bar0rLan2oZV7exfoj/Z6XsApxL+i2p07q781hVigb8=" />
-                            <input type="hidden" name="cost" value={order.final_amount?.toString()} />
-                            <input type="hidden" name="name" value={`Заказ №${order.number?.toString()}`} />
-                            <input type="hidden" name="default_email" value={order.email} />
-                            <input type="hidden" name="order_id" value={order.number?.toString()} />
-                            <input type="hidden" name="phone_number" value={order.phone_int} />
-                            <input type="hidden" name="email" value={order.email} />
-                            <input type="hidden" name="payment_type" value="spg" />
-                            <input type='hidden' name='invoice_data' value={order.invoice_data} />
-                            <input type="hidden" name="url_success" defaultValue="https://sellout.su/api/v1/order/signature" />
-                            {/*<input*/}
-                            {/*    type="image"*/}
-                            {/*    id="a1lite_button"*/}
-                            {/*    style={{ border: '0' }}*/}
-                            {/*    src="https://partner.life-pay.ru/gui/images/a1lite_buttons/button_small.png"*/}
-                            {/*    value="Оплатить"*/}
-                            {/*/>*/}
+                        <form method="POST" action="https://demo.paykeeper.ru/create/" id="payment-form" ref={checkoutRef}>
+                            <input type="hidden" name="sum" value={String(order.final_amount)} />
+                            <input type="hidden" name="clientid" value={order.user?.id?.toString()} />
+                            <input type="hidden" name="orderid" value={order.number?.toString()} />
+                            <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
+                            <input type="hidden" name="client_email" value={order.email} />
+                            <input type="hidden" name="client_phone" value={order.phone_int} />
+                            <input type="hidden" name="user_result_callback" value={`http://127.0.0.1:8000/api/v1/order/fact_of_payment?id=${order.id}`} />
+                            {/*<input type="submit" value="Перейти к оплате" />*/}
                         </form>
+
+
+                        {/*<form*/}
+                        {/*    id="payment-form"*/}
+                        {/*    method="POST"*/}
+                        {/*    className="application"*/}
+                        {/*    acceptCharset="UTF-8"*/}
+                        {/*    action="https://partner.life-pay.ru/alba/input/"*/}
+                        {/*    ref={checkoutRef}*/}
+                        {/*>*/}
+                        {/*    <input type="hidden" name="key" defaultValue="Bar0rLan2oZV7exfoj/Z6XsApxL+i2p07q781hVigb8=" />*/}
+                        {/*    <input type="hidden" name="cost" value={order.final_amount?.toString()} />*/}
+                        {/*    <input type="hidden" name="name" value={`Заказ №${order.number?.toString()}`} />*/}
+                        {/*    <input type="hidden" name="default_email" value={order.email} />*/}
+                        {/*    <input type="hidden" name="order_id" value={order.number?.toString()} />*/}
+                        {/*    <input type="hidden" name="phone_number" value={order.phone_int} />*/}
+                        {/*    <input type="hidden" name="email" value={order.email} />*/}
+                        {/*    <input type="hidden" name="payment_type" value="spg" />*/}
+                        {/*    <input type='hidden' name='invoice_data' value={order.invoice_data} />*/}
+                        {/*    <input type="hidden" name="url_success" defaultValue="https://sellout.su/api/v1/order/signature" />*/}
+                        {/*    <input*/}
+                        {/*        type="image"*/}
+                        {/*        id="a1lite_button"*/}
+                        {/*        style={{ border: '0' }}*/}
+                        {/*        src="https://partner.life-pay.ru/gui/images/a1lite_buttons/button_small.png"*/}
+                        {/*        value="Оплатить"*/}
+                        {/*    />*/}
+                        {/*</form>*/}
 
                         <button className={s.order_btn} onClick={checkout}>
                             {

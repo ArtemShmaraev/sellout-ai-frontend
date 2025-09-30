@@ -118,7 +118,14 @@ const ProductCard = ({cardList = false, product}) => {
         };
     }, []);
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const [currentIndex, setCurrentIndex] = useState(1);
+    const handlePrevClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + photosArr.length) % photosArr.length);
+    };
 
+    const handleNextClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % photosArr.length);
+    };
 
 
     return (
@@ -157,6 +164,78 @@ const ProductCard = ({cardList = false, product}) => {
                     </div>
                 }
             </div>
+            {/*{photosArr && photosArr.length > 0 &&*/}
+            {/*    <div className={s.image_container}*/}
+            {/*         onTouchStart={e => {*/}
+            {/*             e.stopPropagation()*/}
+            {/*             handleMouseEnter()*/}
+            {/*         }}*/}
+            {/*         onTouchEnd={e => {*/}
+            {/*             e.stopPropagation()*/}
+            {/*             handleMouseLeave()*/}
+            {/*         }}*/}
+            {/*         onMouseEnter={handleMouseEnter}*/}
+            {/*         onMouseLeave={handleMouseLeave}*/}
+
+            {/*    >*/}
+            {/*        <Image*/}
+            {/*            style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
+            {/*            loading={'eager'}*/}
+            {/*            fill={true}*/}
+            {/*            className={isHovered && photosArr[1] && isDesktop ? 'opacity-0' : ''}*/}
+            {/*            onLoadingComplete={() => setIsLoading(false)}*/}
+            {/*            src={photosArr[0].url}*/}
+            {/*            alt="shoe"*/}
+            {/*            sizes={'100%'}*/}
+            {/*        />*/}
+            {/*        {photosArr[1] && (*/}
+            {/*            <Image*/}
+            {/*                style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
+            {/*                loading={'eager'}*/}
+            {/*                fill={true}*/}
+            {/*                className={isHovered && isDesktop ? '' : 'opacity-0'}*/}
+            {/*                onLoadingComplete={() => setIsLoading(false)}*/}
+            {/*                src={photosArr[currentIndex].url}*/}
+            {/*                alt="shoe"*/}
+            {/*                sizes={'100%'}*/}
+            {/*            />*/}
+            {/*        )}*/}
+            {/*        <Image*/}
+            {/*            src={isDesktop ? desktop : mobile}*/}
+            {/*            alt=""*/}
+            {/*            className={'placeholder_img'}*/}
+            {/*            fill={true}*/}
+            {/*            style={isLoading ? {} : { opacity: 0 }}*/}
+            {/*            sizes={'100%'}*/}
+            {/*        />*/}
+            {/*        {isHovered && photosArr.length > 1 && (*/}
+            {/*            <>*/}
+            {/*                <div*/}
+            {/*                    style={{*/}
+            {/*                        position: 'absolute',*/}
+            {/*                        top: '50%',*/}
+            {/*                        left: '10px',*/}
+            {/*                        transform: 'translateY(-50%)',*/}
+            {/*                        cursor: 'pointer',*/}
+            {/*                    }}*/}
+            {/*                    onClick={handlePrevClick}*/}
+            {/*                >*/}
+            {/*                    &lt; /!* Left arrow *!/*/}
+            {/*                </div>*/}
+            {/*                <div*/}
+            {/*                    style={{*/}
+            {/*                        position: 'absolute',*/}
+            {/*                        top: '50%',*/}
+            {/*                        right: '10px',*/}
+            {/*                        transform: 'translateY(-50%)',*/}
+            {/*                        cursor: 'pointer',*/}
+            {/*                    }}*/}
+            {/*                    onClick={handleNextClick}*/}
+            {/*                >*/}
+            {/*                    &gt; /!* Right arrow *!/*/}
+            {/*                </div>*/}
+            {/*            </>*/}
+            {/*        )}*/}
             {photosArr && photosArr.length > 0 &&
                 <div className={s.image_container}
                      onTouchStart={e => {

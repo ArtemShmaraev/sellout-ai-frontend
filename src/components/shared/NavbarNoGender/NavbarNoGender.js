@@ -18,12 +18,13 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import headerJson from './header.json'
 import CartIcon from "@/components/shared/CartIcon/CartIcon";
-import {fetchNavbarPhoto} from "@/http/mainPageApi";
+import {fetchMainPage, fetchNavbarPhoto} from "@/http/mainPageApi";
 import Link from "next/link";
 import SalesLine from "@/components/shared/NavbarC/SalesLine/SalesLine";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import cn from 'classnames';
 import {log} from "next/dist/server/typescript/utils";
+import Cookies from "js-cookie";
 
 
 const NavbarNoGender = () => {
@@ -88,6 +89,23 @@ const NavbarNoGender = () => {
     //     window.addEventListener('scroll', checkScroll);
     //     return () => window.removeEventListener('scroll', checkScroll);
     // }, [prevScrollPos]);
+    const handleGenderSelection = async (gender) => {
+        // Сохраняем выбранный гендер в куках
+        Cookies.set('selected_gender', gender);
+
+        // // Отправляем запрос на сервер с выбранным гендером
+        // const page = Cookies.get('index_page');
+        // const token = Cookies.get('access_token');
+        // const newData = await fetchMainPage(token, false, !page, page || 1, gender);
+        //
+        // // Обновляем состояние компонента новыми данными
+        // setContent(newData);
+        //
+        // // Закрываем модальное окно
+        // setShowGenderModal(false);
+    };
+
+
     return (
         <div>
             {isDesktop ?
@@ -95,10 +113,10 @@ const NavbarNoGender = () => {
                     <div className={`${s.container} custom_cont`}>
                         <div>
                             <div className={s.links}>
-                                <Link href="/about" className={s.leftLinks}>
+                                <Link href="/" className={s.leftLinks} onClick={() => handleGenderSelection('M')}>
                                     Мужское
                                 </Link>
-                                <Link href="/about" className={s.leftLinks}>
+                                <Link href="/" className={s.leftLinks} onClick={() => handleGenderSelection('F')}>
                                     Женское
                                 </Link>
                             </div>
