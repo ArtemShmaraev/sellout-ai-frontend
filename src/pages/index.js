@@ -8,9 +8,15 @@ import Head from "next/head";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
+import Image from "next/image";
 import {parse} from "cookie";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
+import NavbarC from "@/components/shared/NavbarC/NavbarC";
+import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
+import kylie from "/src/static/img/kylie.png"
+import man from "/src/static/img/man.png"
+import mainbig from "/src/static/img/mainbig.png"
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -22,7 +28,7 @@ export const getServerSideProps = async (context) => {
     } else {
         data = await fetchMainPage(token, false, false, page)
     }
-    return { props: {data} }
+    return {props: {data}}
 }
 export default function Home({data}) {
     const router = useRouter()
@@ -68,7 +74,7 @@ export default function Home({data}) {
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
         const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
         Cookies.set('index_page', Number(page) + 1, {expires: tenMinutes})
-        const newData = await fetchMainPage(token, true, false, Number(page)+1)
+        const newData = await fetchMainPage(token, true, false, Number(page) + 1)
         const arr = [...(content), ...newData]
         setContent(arr)
     }
@@ -82,14 +88,14 @@ export default function Home({data}) {
                 arr.push(
                     <MainImgBlock obj={el.mobile} className={s.mobile}/>
                 )
-            } else {
+            } else if (el.type === 'selection') {
                 const scrollableBlockArr = []
                 el.products.forEach(product => {
                     scrollableBlockArr.push(
                         <ProductCard
-                                     product={product}
-                                     key={product.id}
-                                     smallCard={true}
+                            product={product}
+                            key={product.id}
+                            smallCard={true}
                         />
                     )
                 })
@@ -123,28 +129,74 @@ export default function Home({data}) {
         setIsSend(false)
     };
 
+    const userGender = 'a';
+
     return (
         <MainLayout>
             <Head>
                 <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
-                <meta name="description" content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
+                <meta name="description"
+                      content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
             </Head>
-            <div className={s.cont + ' custom_cont'}>
-                {renderPage()}
-                <div className={'d-flex justify-content-center my-5'}>
-                    <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
+            {userGender === 'M' || userGender === 'F' ? (
+                <div>
+                    <div className={s.cont + ' custom_cont'}>
+                        {renderPage()}
+                        <div className={'d-flex justify-content-center my-5'}>
+                            <button onClick={getMore} className={s.more_btn}>Посмотреть ещё</button>
+                        </div>
+                    </div>
+                    <div className={s.text_container}>
+                        <div className={s.text}>
+                            Не смогли найти на нашей платформе то, что искали? <br/>
+                            Оставьте заявку, и мы привезем вам желаемый товар!
+                        </div>
+                        <div className={'d-flex justify-content-center'}>
+                            <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                        </div>
+                    </div>
+                    <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
                 </div>
-            </div>
-            <div className={s.text_container}>
-                <div className={s.text}>
-                    Не смогли найти на нашей платформе то, что искали? <br/>
-                    Оставьте заявку, и мы привезем вам желаемый товар!
+            ) : (
+                <div>
+                    <div>
+                        <div className={s.main} style={{width: '50%', margin: '0 auto', padding: 0, float: "left"}}>
+                            <a href="/about">
+                                <Image
+                                    src={kylie}
+                                    alt="Description of your image"
+                                    style={{float: "left"}}
+                                    layout="responsive"
+                                    loading={'eager'}
+                                />
+                            </a>
+                        </div>
+                        <div style={{width: '50%', margin: '0 auto', padding: 0, float: "right"}}>
+                            <a href="/about">
+                                <Image
+                                    src={man}
+                                    alt="Description of your image"
+                                    style={{float: "left"}}
+                                    layout="responsive"
+                                    loading={'eager'}
+                                />
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                            <a href="/about">
+                                <Image
+                                    src={mainbig}
+                                    alt="Description of your image"
+                                    layout="responsive"
+                                    loading={'eager'}
+                                />
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div className={'d-flex justify-content-center'}>
-                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
-                </div>
-            </div>
-            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
+            )}
         </MainLayout>
     )
 }

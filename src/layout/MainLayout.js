@@ -8,6 +8,8 @@ import CookieComponent from "@/components/shared/CookieComponent/CookieComponent
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSellout";
+import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
+import { useRouter } from 'next/router'; // Assuming you're using Next.js
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
@@ -30,6 +32,13 @@ const MainLayout = ({children}) => {
             desktopStore.setIsDesktop(true)
         }
     }
+
+    const userGender = 'A';
+
+    // Inside your component
+    const router = useRouter();
+    const isMainPage = router.pathname === '/';
+
     useEffect(() => {
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
@@ -110,10 +119,20 @@ const MainLayout = ({children}) => {
                 />
             </Head>
             <div className={'body'}>
-                <NavbarC/>
-                <div className={'cont_up'}>
-                    {children}
-                </div>
+                {userGender === 'M' || userGender === 'F' || !isMainPage ? (
+                    <NavbarC/>
+                ) : (
+                    <NavbarNoGender/>
+                )}
+                {userGender === 'M' || userGender === 'F' || !isMainPage ? (
+                    <div className={'cont_up'}>
+                        {children}
+                    </div>
+                ) : (
+                    <div>
+                        {children}
+                    </div>
+                )}
                 <Footer/>
             </div>
             <ScrollUp/>

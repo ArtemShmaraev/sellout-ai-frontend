@@ -1,0 +1,69 @@
+.navbar {
+    padding-top: 20px;
+    background-image: url("https://storage.yandexcloud.net/sellout-photos/MailPhotos/template_images/header_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+}
+
+.leftLinks {
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.rightLinks {
+    color: #D9D7D5;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.leftLinks:hover, .rightLinks:hover {
+    color: #8d8d8d;
+}
+
+.leftLinks::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #8d8d8d;
+    transition: width 0.4s ease;
+}
+
+.leftLinks:hover::before {
+    width: 100%;
+}
+
+/*.leftLinks:hover{*/
+/*    text-decoration: underline;*/
+/*}*/
+
+.leftLinks {
+    margin-right: 60px;
+}
+
+.rightLinks {
+    margin-left: 60px;
+}
+
+.logo {
+    position: relative; /* Establish positioning context */
+}
