@@ -412,13 +412,17 @@ export default function Home({data}) {
                             <div>
                                 <div>
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'left' }}>
-                                        <Image src={kylie} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('F')}/>
+                                        <Image src={kylie} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
+                                            handleGenderSelection('M');
+                                            window.location.href = e.currentTarget.href;}}/>
 
                                     </div>
 
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'right' }}>
 
-                                        <Image src={man} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('M')}/>
+                                        <Image src={man} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
+                                            handleGenderSelection('M');
+                                            window.location.href = e.currentTarget.href;}}/>
 
                                     </div>
                                 </div>
