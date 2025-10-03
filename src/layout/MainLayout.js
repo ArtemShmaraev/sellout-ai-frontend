@@ -13,8 +13,10 @@ import { useRouter } from 'next/router'; // Assuming you're using Next.js
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
+    const router = useRouter();
 
     const [cookieOpen, setCookieOpen] = useState(false)
+    const [selectedGender, setSelectedGender] = useState("")
     const closeCookie = () => {
         Cookies.set('cookie_message', true, {expires: 2772})
         setCookieOpen(false)
@@ -22,6 +24,13 @@ const MainLayout = ({children}) => {
     useEffect(() => {
         if (!Cookies.get('cookie_message')) {
             setCookieOpen(true)
+        }
+
+    }, [])
+
+    useEffect(() => {
+        if (Cookies.get('selected_gender')) {
+            setSelectedGender(Cookies.get('selected_gender'))
         }
 
     }, [])
@@ -35,12 +44,11 @@ const MainLayout = ({children}) => {
     }
 
     // const selectedGender = "M";
-    const selectedGender = Cookies.get('selected_gender')
-
 
     // Inside your component
-    const router = useRouter();
+
     const isMainPage = router.pathname === '/';
+
 
     useEffect(() => {
         window.addEventListener("resize", checkIsDesktop);
@@ -49,6 +57,8 @@ const MainLayout = ({children}) => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
+
+
 
     return (
         <>

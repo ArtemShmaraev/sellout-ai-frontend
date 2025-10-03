@@ -144,6 +144,7 @@ const NavbarC = () => {
         // setShowGenderModal(false);
     };
     return (
+
         <header className={cn(s.header, { [s.visible]: desktopStore.navbarVisible })} id={'navbar'}>
             <SalesLine/>
             <div className={'custom_cont'}>
