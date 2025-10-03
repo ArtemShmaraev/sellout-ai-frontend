@@ -405,6 +405,7 @@ export default function Home({data}) {
                     content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                 />
             </Head>
+            <div>
             {showGenderModal ? (
                     <div>
                         {isDesktop ?
@@ -437,24 +438,12 @@ export default function Home({data}) {
                             :
                             <div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                    <a href="/about">
-                                        <Image
-                                            src={kylieBig}
-                                            alt="Description of your image"
-                                            layout="responsive"
-                                            loading={'eager'}
-                                        />
-                                    </a>
+                                    <Image src={kylieBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('F')}/>
+
                                 </div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                    <a href="/about">
-                                        <Image
-                                            src={manBig}
-                                            alt="Description of your image"
-                                            layout="responsive"
-                                            loading={'eager'}
-                                        />
-                                    </a>
+                                    <Image src={manBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('M')}/>
+
                                 </div>
                                 <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
                                     <a href="/about">
@@ -493,7 +482,7 @@ export default function Home({data}) {
                         Оставьте заявку
                     </button>
                 </div>
-            </div>
+            </div></div>
         </MainLayout>
     );
 };
