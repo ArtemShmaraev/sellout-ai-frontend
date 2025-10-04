@@ -264,7 +264,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         }
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
-                        <form method="POST" action="https://demo.paykeeper.ru/create/" id="payment-form" ref={checkoutRef}>
+                        <form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form" ref={checkoutRef}>
                             <input type="hidden" name="sum" value={String(order.final_amount)} />
                             <input type="hidden" name="clientid" value={order.user?.id?.toString()} />
                             <input type="hidden" name="orderid" value={order.number?.toString()} />
