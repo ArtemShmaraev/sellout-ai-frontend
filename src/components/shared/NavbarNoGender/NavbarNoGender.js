@@ -113,13 +113,13 @@ const NavbarNoGender = () => {
                     <div className={`${s.container} custom_cont`}>
                         <div>
                             <div className={s.links}>
-                                <Link href="/" className={s.leftLinks} onClick={(e) => {
+                                <Link href="/" className={s.leftLinks} onClick={() => {
                                     handleGenderSelection('M');
                                     window.location.href = e.currentTarget.href;}}>
                                     Мужское
                                 </Link>
                                 <Link href="/" className={s.leftLinks} onClick={(e) => {
-                                    handleGenderSelection('M');
+                                    handleGenderSelection('F');
                                     window.location.href = e.currentTarget.href;}}>
                                     Женское
                                 </Link>

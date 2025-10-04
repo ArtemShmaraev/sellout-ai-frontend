@@ -20,6 +20,7 @@ import man from "/src/static/img/man.png"
 import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
 import mainbigMob from "/src/static/img/Group 74.png"
+import { selectedGender, setSelectedGender } from "@/layout/MainLayout";
 
 // export const getServerSideProps = async (context) => {
 //     const cookies = parse(context.req.headers.cookie || '')
@@ -272,7 +273,7 @@ export default function Home({data}) {
     const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
     const [showGenderModal, setShowGenderModal] = useState(false);
-    const [selectedGender, setSelectedGender] = useState('');
+    // const [selectedGender, setSelectedGender] = useState('');
 
     useEffect(() => {
         // Check if the gender is already selected in cookies
@@ -295,6 +296,7 @@ export default function Home({data}) {
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender);
+        setSelectedGender(gender)
 
         // Отправляем запрос на сервер с выбранным гендером
         const page = Cookies.get('index_page');
@@ -412,18 +414,16 @@ export default function Home({data}) {
                             <div>
                                 <div>
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'left' }}>
-                                        <a href={'/'}>
-                                        <Image src={kylie} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
-                                            handleGenderSelection('M');
-                                            window.location.href = e.currentTarget.href;}}/></a>
+
+                                        <Image src={kylie} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => {
+                                            handleGenderSelection('F')}}/>
 
                                     </div>
 
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'right' }}>
-                                        <a href={'/'}>
-                                        <Image src={man} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
-                                            handleGenderSelection('M');
-                                            window.location.href = e.currentTarget.href;}}/></a>
+
+                                        <Image src={man} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => {
+                                            handleGenderSelection('M')}}/>
 
                                     </div>
                                 </div>
@@ -443,15 +443,15 @@ export default function Home({data}) {
                             :
                             <div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                    <a href={'/'}>
+
                                     <Image src={kylieBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('F')}/>
-                                    </a>
+
 
                                 </div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                    <a href={'/'}>
+
                                     <Image src={manBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('M')}/>
-                                    </a>
+
 
                                 </div>
                                 <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>

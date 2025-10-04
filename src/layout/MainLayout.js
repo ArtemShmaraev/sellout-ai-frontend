@@ -33,7 +33,7 @@ const MainLayout = ({children}) => {
             setSelectedGender(Cookies.get('selected_gender'))
         }
 
-    }, [])
+    })
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -157,3 +157,5 @@ const MainLayout = ({children}) => {
 };
 
 export default observer(MainLayout);
+export const setSelectedGender = (gender) => {
+};

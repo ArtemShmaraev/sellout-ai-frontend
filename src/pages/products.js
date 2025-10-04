@@ -95,6 +95,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         //
         // }
         const selectedGender = Cookies.get('selected_gender');
+
         if (selectedGender === 'M' || selectedGender === 'F') {
             router.push(`/products?gender=${selectedGender}`, undefined, {scroll: false})
         }

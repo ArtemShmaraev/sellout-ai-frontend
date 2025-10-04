@@ -58,11 +58,15 @@
 }
 
 .genderButton {
-    background-color: transparent;
-    border: none;
     padding: 10px 20px; /* Adjust padding as needed */
     margin: 0 10px; /* Adjust margin as needed */
     color: #7B7C81;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+    transition: 0.3s;
+    text-decoration: none;
 }
 
 .genderSeparator {
@@ -76,6 +80,11 @@
     text-decoration: underline; /* Underline the text */
     color: black;
 }
+
+
+
+
+
 
 .header_block hr {
     margin-bottom: 0;
