@@ -412,17 +412,18 @@ export default function Home({data}) {
                             <div>
                                 <div>
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'left' }}>
+                                        <a href={'/'}>
                                         <Image src={kylie} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
                                             handleGenderSelection('M');
-                                            window.location.href = e.currentTarget.href;}}/>
+                                            window.location.href = e.currentTarget.href;}}/></a>
 
                                     </div>
 
                                     <div className={s.main} style={{ width: '50%', margin: '0 auto', padding: 0, float: 'right' }}>
-
+                                        <a href={'/'}>
                                         <Image src={man} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={(e) => {
                                             handleGenderSelection('M');
-                                            window.location.href = e.currentTarget.href;}}/>
+                                            window.location.href = e.currentTarget.href;}}/></a>
 
                                     </div>
                                 </div>
@@ -442,11 +443,15 @@ export default function Home({data}) {
                             :
                             <div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                    <a href={'/'}>
                                     <Image src={kylieBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('F')}/>
+                                    </a>
 
                                 </div>
                                 <div style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                    <a href={'/'}>
                                     <Image src={manBig} alt="Description of your image" style={{ float: 'left' }} layout="responsive" loading={'eager'} onClick={() => handleGenderSelection('M')}/>
+                                    </a>
 
                                 </div>
                                 <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
