@@ -96,7 +96,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         // }
         const selectedGender = Cookies.get('selected_gender');
         if (selectedGender === 'M' || selectedGender === 'F') {
-            router.push(`/products?=${selectedGender}`, undefined, {scroll: false})
+            router.push(`/products?gender=${selectedGender}`, undefined, {scroll: false})
         }
         filterStore.handleScrollTo()
         filterStore.setPriceFrom('')
