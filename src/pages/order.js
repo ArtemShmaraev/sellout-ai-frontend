@@ -271,6 +271,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
                             <input type="hidden" name="client_email" value={order.email} />
                             <input type="hidden" name="client_phone" value={order.phone_int} />
+                            <input type="hidden" name="pstype" value='sbp_default' />
                             <input type="hidden" name="user_result_callback" value={`http://127.0.0.1:8000/api/v1/order/fact_of_payment?id=${order.id}`} />
                             {/*<input type="submit" value="Перейти к оплате" />*/}
                         </form>
