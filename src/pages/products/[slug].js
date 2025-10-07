@@ -328,11 +328,17 @@ const OneProductPage = ({product, prices}) => {
     }
     const hasOneTable = () => {
         let bool = false
-        Object.values(product.size_table_platform.tables).forEach(table => {
-            if (Object.keys(table).length > 0) {
-                bool = true
-            }
-        })
+        if (Array.isArray(product.size_table_platform)){
+            bool = product.size_table_platform.length > 0
+        }
+        else {
+            Object.values(product.size_table_platform.tables).forEach(table => {
+                if (Object.keys(table).length > 0) {
+                    bool = true
+                }
+            })
+        }
+
         return bool
     }
     const infoRef = useRef(null)
@@ -492,7 +498,7 @@ const OneProductPage = ({product, prices}) => {
                                     <div className={s.modals_block}>
                                         {
                                             hasOneTable() &&
-                                            <SizeTable tables={product.size_table_platform.tables}
+                                            <SizeTable tables={product.size_table_platform}
                                                        photo={product.bucket_link[0].url}/>
                                         }
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
@@ -628,7 +634,7 @@ const OneProductPage = ({product, prices}) => {
                                     <div className={s.modals_block}>
                                         {
                                             hasOneTable() &&
-                                            <SizeTable tables={product.size_table_platform.tables}
+                                            <SizeTable tables={product.size_table_platform}
                                                        photo={product.bucket_link[0].url}/>
                                         }
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}

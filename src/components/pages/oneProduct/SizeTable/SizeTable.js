@@ -95,42 +95,59 @@ const SizeTable = ({tables, photo}) => {
     const allTables = () => {
         const tablesArr = []
         const obj = {}
-        if (tables.hasOwnProperty('main_regular_table') && Object.keys(tables.main_regular_table).length) {
-            const table = renderTable(tables.main_regular_table)
-            tablesArr.push({
-                name: tables.main_regular_table.table_name,
-                title: tables.main_regular_table.table_title,
-                description: tables.main_regular_table.table_description,
-                table: table
-            })
+        console.log(tables)
+        if (Array.isArray(tables)){
+            tables.forEach((table_json) => {
+                const table = renderTable(table_json.table)
+                tablesArr.push({
+                    name: table_json.name,
+                    title: table_json.title,
+                    description: table_json.description,
+                    table: table
+                })
+
+            });
         }
-        if (tables.hasOwnProperty('main_measurements_table') && Object.keys(tables.main_measurements_table).length) {
-            const table = renderTable(tables.main_measurements_table)
-            tablesArr.push({
-                name: tables.main_measurements_table.table_name,
-                title: tables.main_measurements_table.table_title,
-                description: tables.main_measurements_table.table_description,
-                table: table
-            })
+        else {
+            if (tables.hasOwnProperty('main_regular_table') && Object.keys(tables.main_regular_table).length) {
+                const table = renderTable(tables.main_regular_table)
+                tablesArr.push({
+                    name: tables.main_regular_table.table_name,
+                    title: tables.main_regular_table.table_title,
+                    description: tables.main_regular_table.table_description,
+                    table: table
+                })
+            }
+            if (tables.hasOwnProperty('main_measurements_table') && Object.keys(tables.main_measurements_table).length) {
+                const table = renderTable(tables.main_measurements_table)
+                tablesArr.push({
+                    name: tables.main_measurements_table.table_name,
+                    title: tables.main_measurements_table.table_title,
+                    description: tables.main_measurements_table.table_description,
+                    table: table
+                })
+            }
+            if (tables.hasOwnProperty('tables_recommendations') && Object.keys(tables.tables_recommendations).length) {
+                const table = renderTable(tables.tables_recommendations)
+                tablesArr.push({
+                    name: tables.tables_recommendations.table_name,
+                    title: tables.tables_recommendations.table_title,
+                    description: tables.tables_recommendations.table_description,
+                    table: table
+                })
+            }
+            if (tables.hasOwnProperty('default_table') && Object.keys(tables.default_table).length) {
+                const table = renderTable(tables.default_table)
+                tablesArr.push({
+                    name: tables.default_table.table_name,
+                    title: tables.default_table.table_title,
+                    description: tables.default_table.table_description,
+                    table: table
+                })
+            }
+
         }
-        if (tables.hasOwnProperty('tables_recommendations') && Object.keys(tables.tables_recommendations).length) {
-            const table = renderTable(tables.tables_recommendations)
-            tablesArr.push({
-                name: tables.tables_recommendations.table_name,
-                title: tables.tables_recommendations.table_title,
-                description: tables.tables_recommendations.table_description,
-                table: table
-            })
-        }
-        if (tables.hasOwnProperty('default_table') && Object.keys(tables.default_table).length) {
-            const table = renderTable(tables.default_table)
-            tablesArr.push({
-                name: tables.default_table.table_name,
-                title: tables.default_table.table_title,
-                description: tables.default_table.table_description,
-                table: table
-            })
-        }
+
         return tablesArr
     }
     const [table, setTable] = useState(allTables()[0])
