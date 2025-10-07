@@ -125,7 +125,7 @@ const Sidebar = ({photos}) => {
 
     const handleGenderSelection = (gender) => {
         // setSelectedGender(gender);
-        Cookies.set('selected_gender', gender);
+        Cookies.set('selected_gender', gender, {expires: 2772});
     };
     const toggleContact = () => {
         setContactOpen(!contactOpen)

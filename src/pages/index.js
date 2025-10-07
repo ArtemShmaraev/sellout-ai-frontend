@@ -295,7 +295,7 @@ export default function Home({data}) {
 
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
-        Cookies.set('selected_gender', gender);
+        Cookies.set('selected_gender', gender, {expires: 2772});
         setSelectedGender(gender)
 
         // Отправляем запрос на сервер с выбранным гендером

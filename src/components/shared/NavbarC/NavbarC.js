@@ -130,7 +130,7 @@ const NavbarC = () => {
 
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
-        Cookies.set('selected_gender', gender);
+        Cookies.set('selected_gender', gender, {expires: 2772});
 
         // // Отправляем запрос на сервер с выбранным гендером
         // const page = Cookies.get('index_page');
