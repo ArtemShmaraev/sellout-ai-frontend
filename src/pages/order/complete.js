@@ -27,20 +27,20 @@ export const getServerSideProps = async (context) => {
 const Complete = ({order, userData}) => {
     useEffect(() => {
 
-        const priceAsString = String(product.price.final_price);
-        const productIdAsString = String(product.id);
-
-        window._tmr = window._tmr || [];
-        window._tmr.push({
-            type: "reachGoal",
-            id: 3470916,
-            value: priceAsString, // Замените "VALUE" на необходимое значение
-            goal: "addToCart",
-            params: { product_id: productIdAsString } // Замените "PRODUCT_ID" на необходимое значение
-        });
+        // const priceAsString = String(product.price.final_price);
+        // const productIdAsString = String(product.id);
+        //
+        // window._tmr = window._tmr || [];
+        // window._tmr.push({
+        //     type: "reachGoal",
+        //     id: 3470916,
+        //     value: priceAsString, // Замените "VALUE" на необходимое значение
+        //     goal: "addToCart",
+        //     params: { product_id: productIdAsString } // Замените "PRODUCT_ID" на необходимое значение
+        // });
         const orderItems = order.order_units
-        // const idList = [];
-
+        const idList = [];
+        //
         for (const orderItem of orderItems) {
             // Предположим, что у каждой позиции заказа есть свойство "id"
             const itemId = orderItem.product.id;
