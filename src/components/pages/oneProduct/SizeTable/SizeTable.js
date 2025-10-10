@@ -128,7 +128,7 @@ const SizeTable = ({tables, photo}) => {
                 })
             }
             if (tables2.hasOwnProperty('tables_recommendations') && Object.keys(tables2.tables_recommendations).length) {
-                const table = renderTable(tables.tables_recommendations)
+                const table = renderTable(tables2.tables_recommendations)
                 tablesArr.push({
                     name: tables2.tables_recommendations.table_name,
                     title: tables2.tables_recommendations.table_title,
