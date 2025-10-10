@@ -343,7 +343,8 @@ export default function Home({data}) {
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
         const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
         Cookies.set('index_page', Number(page) + 1, {expires: tenMinutes})
-        const newData = await fetchMainPage(token, true, false, Number(page) + 1)
+        const gender = Cookies.get('selected_gender')
+        const newData = await fetchMainPage(token, true, false, Number(page) + 1, gender)
         const arr = [...(content), ...newData]
         setContent(arr)
     }

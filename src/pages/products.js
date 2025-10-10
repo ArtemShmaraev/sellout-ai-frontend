@@ -128,6 +128,15 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         return title
 
     }
+    const getTitleWithGender = () => {
+        let title = desktopStore.isDesktop ? products.desktop.title_with_gender : products.mobile.title_with_gender
+        if (title === 'sellout' || title === "") {
+            title = 'Sellout'
+        }
+        // console.log(title);
+        return title
+
+    }
 
 
     const [visible, setVisible] = useState(true);
@@ -189,7 +198,8 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                                     onClick={() => desktopStore.setFilterOpen(!desktopStore.filtersOpen)}
                             >Фильтры
                             </button>
-                            {(filterStore.activeFilters.length !== 0 || router.query.price_min) &&
+                            {(filterStore.activeFilters.length !== 0 &&
+                                    filterStore.activeFilters.some(el => !["M", "F", "K"].includes(el.query))  || router.query.price_min) &&
                                 <button
                                     className={s.border}
                                     onClick={clearFilters}

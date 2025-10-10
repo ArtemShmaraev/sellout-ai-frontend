@@ -1,17 +1,21 @@
 .toggle_btn {
-    width: 200px;
-    border: 1px solid darkgrey;
+    width: 220px;
+    border: 1px solid #000000;
     border-radius: 5px;
     outline: none;
     position: relative;
     z-index: 7;
+
+
     font-style: italic;
     font-size: 14px;
     color: #9a9999;
     background: white;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 }
 .btn_text {
+    color: black;
+    /*font-weight: bold;*/
     width: 100%;
     display: flex;
     justify-content: space-between;

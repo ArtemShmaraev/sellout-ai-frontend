@@ -34,7 +34,7 @@ const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) =>
                     className={s.search}
                     style={
                     (w100 && clearFunc)
-                        ? {width: '100%' ,padding: '5px 25px 5px 28px'}
+                        ? {width: '100%' ,padding: '5px 25px 5px 32px'}
                         :
                         w100 ? {width: '100%'} : {}
                 }

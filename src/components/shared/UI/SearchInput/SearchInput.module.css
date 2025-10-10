@@ -4,27 +4,32 @@
 }
 .search {
     width: 200px;
-    border: 1px solid darkgrey;
-    border-radius: 5px;
+    border: 1px solid #000000;
+    border-radius: 8px;
     outline: none;
+    height: 44px;
     padding: 5px 5px 5px 28px;
+    margin-right: 15px;
+    /*margin-right: 10px;*/
+    /*margin-left: 10px;*/
 }
 .search::placeholder {
     font-style: italic;
     font-size: 14px;
+    color: black;
 }
 .input .icon {
     position: absolute;
     cursor: pointer;
     top: 50%;
-    left: 6px;
+    left: 10px;
     transform: translateY(-50%);
 }
 .cross {
     position: absolute;
     cursor: pointer;
     top: 50%;
-    right: 6px;
+    right: 12px;
     transform: translateY(-50%);
 }
 @media (max-width: 1000px) {

@@ -90,19 +90,26 @@ const FiltersBlock = () => {
                 showPrice &&
                 renderPrice()
             }
-            {filterStore.activeFilters.map(el =>
-                <div className={s.border}>
-                    {el.hasOwnProperty('viewName') ? el.viewName : el.text}
-                    <span className={s.cross}>
-                        <Image src={close} alt=''
-                               onClick={() => {
-                                   filterStore.toggleFilter(el)
-                                   reloadPage()
-                               }}
-                        />
-                    </span>
-                </div>
-            )}
+            {filterStore.activeFilters.map(el => {
+                if (el.query !== "M" && el.query !== "F" && el.query !== "K") {
+                    return (
+                        <div className={s.border}>
+                            {el.hasOwnProperty('viewName') ? el.viewName : el.text}
+                            <span className={s.cross}>
+                                <Image
+                                    src={close}
+                                    alt=''
+                                    onClick={() => {
+                                        filterStore.toggleFilter(el);
+                                        reloadPage();
+                                    }}
+                                />
+                            </span>
+                        </div>
+                    );
+                }
+                return null; // Если условие не выполняется, возвращаем null или другой пустой элемент
+            })}
         </ScrollableBlock2>
     );
 };

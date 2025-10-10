@@ -33,7 +33,7 @@ const PictureBlock = ({obj, className, type}) => {
                             {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
                             <div className={s.text_cont}>
                                 <div>
-                                    {obj.title === 'sellout'
+                                    {obj.title_with_gender === 'sellout'
                                         ?
                                         <Image src={logo} alt='' className={s.logo} width={200}/>
                                         :
