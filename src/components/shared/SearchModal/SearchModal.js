@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import {addFilterSearch, suggestSearch} from "@/http/productsApi";
 import {Context} from "@/context/AppWrapper";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const SearchModal = () => {
     const {filterStore, userStore} = useContext(Context)
@@ -24,8 +25,9 @@ const SearchModal = () => {
                 query[key] = filters[key]
             }
         }
-        if (userStore.gender) {
-            query.gender = userStore.gender[0].toUpperCase()
+        const selected_gender = Cookies.get('selected_gender')
+        if (selected_gender) {
+            query.gender = selected_gender.toUpperCase();
         }
         const pathname = '/products'
         router.push({pathname, query})
