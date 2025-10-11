@@ -16,6 +16,7 @@ const MainLayout = ({children}) => {
     const router = useRouter();
 
     const [cookieOpen, setCookieOpen] = useState(false)
+    const [headerCustom, setHeaderCustom] = useState(true)
     const [selectedGender, setSelectedGender] = useState("")
     const closeCookie = () => {
         Cookies.set('cookie_message', true, {expires: 2772})
@@ -28,10 +29,17 @@ const MainLayout = ({children}) => {
 
     }, [])
 
+    useEffect( () => {
+        if (Cookies.get('selected_gender')) {
+            setSelectedGender(Cookies.get('selected_gender'))
+        }
+    })
+
     useEffect(() => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
+        setHeaderCustom(selectedGender === 'M' || selectedGender === 'F' || !isMainPage )
 
     })
     const checkIsDesktop = () => {
@@ -73,7 +81,9 @@ const MainLayout = ({children}) => {
                 {/*<meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />*/}
                 <meta name="yandex-verification" content="82500b5b5e72aa3a"/>
                 <meta name="theme-color" content="#000000"/>
+                {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
+
 
                 <script
                     type="text/javascript"
@@ -132,12 +142,12 @@ const MainLayout = ({children}) => {
                 />
             </Head>
             <div className={'body'}>
-                {selectedGender === 'M' || selectedGender === 'F' || !isMainPage ? (
+                {headerCustom ? (
                     <NavbarC/>
                 ) : (
                     <NavbarNoGender/>
                 )}
-                {selectedGender === 'M' || selectedGender === 'F' || !isMainPage ? (
+                {headerCustom ? (
                     <div className={'cont_up'}>
                         {children}
                     </div>
