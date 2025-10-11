@@ -68,7 +68,7 @@ const PictureBlock = ({obj, className, type}) => {
                         }
                     </div>
                     :
-                    <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title}</h3>
+                    <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title_with_gender}</h3>
             }
         </>
     );
