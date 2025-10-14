@@ -23,7 +23,6 @@ import mainbigMob from "/src/static/img/Group 74.png"
 import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
-import mainJson from "/src/pages/temp_main_women.json"
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
