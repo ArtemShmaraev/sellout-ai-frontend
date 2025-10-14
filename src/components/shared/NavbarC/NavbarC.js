@@ -54,47 +54,6 @@ const NavbarC = () => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
-    
-    const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = '') => {
-        const cols = []
-        let gender = 'any'
-        let genderQuery = ''
-        if (userStore.gender) {
-            gender = userStore.gender
-            genderQuery = `gender=${gender[0].toUpperCase()}&`
-        }
-        let obj = basicObj[gender]
-        const keys = Object.keys(obj)
-        for (let i = 0; i < colNum; i++) {
-            let rows = []
-            for (let j = 0; j < numInCol; j++) {
-                const dataInd = i * numInCol + j
-                const rowObj = obj[keys[dataInd]]
-                rows.push(
-                    <a
-                        href={`/products?${genderQuery}${query}=${rowObj.query_name}${constantQuery}`}
-                        className={s.megamenu_links}
-                    >
-                        {rowObj.name}</a>
-                )
-            }
-            cols.push(
-                <div style={{minWidth: `${100/colNum}%`}}>
-                    {rows}
-                </div>
-            )
-        }
-        const result = (
-            <div style={{minWidth: `${20*colNum}%`}} key={title}>
-                <h4 className={s.h_text}>{title}</h4>
-                <div className={s.cols_block}>
-                    {cols}
-                </div>
-            </div>
-        )
-        return result
-    }
-    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()}  : {}
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -172,7 +131,6 @@ const NavbarC = () => {
                     <div className={s.logo_block} style={{justifyContent: 'center'}}>
                         <Link href={'/'}>
                             <Image className={s.logo} alt='' src={logo}/>
-                            {/*<h1 className={s.fraer}>Фраер ебучий долбаеб любитель черных хуев</h1>*/}
                         </Link>
                     </div>
                     <div className={s.block} style={{justifyContent: 'flex-end'}}>
@@ -200,12 +158,12 @@ const NavbarC = () => {
                     <div className={s.block1}>
                         <Link href={{
                             pathname: '/products',
-                            query: {new: 'true', ...queryGender}
+                            query: {new: 'true'}
                         }}
                               className={s.links}>Новинки</Link>
                         <Link href={{
                             pathname: '/products',
-                            query: {recommendations: 'true', ...queryGender}
+                            query: {recommendations: 'true'}
                         }}
                               className={s.links}>Рекомендации</Link>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{
@@ -213,19 +171,19 @@ const NavbarC = () => {
                         }} photos={photos} type={'brands'}/>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{
                             pathname: '/products',
-                            query: {category: 'shoes_category', ...queryGender}
+                            query: {category: 'shoes_category'}
                         }} photos={photos} type={'shoes'}/>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{
                             pathname: '/products',
-                            query: {category: 'clothes', ...queryGender}
+                            query: {category: 'clothes'}
                         }} photos={photos} type={'clothes'}/>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{
                             pathname: '/products',
-                            query: {category: 'bags', ...queryGender}
+                            query: {category: 'bags'}
                         }} type={'bags'} photos={photos}/>
                         <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{
                             pathname: '/products',
-                            query: {category: 'accessories', ...queryGender}
+                            query: {category: 'accessories'}
                         }} type={'accessories'} photos={photos}/>
                         {/*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
                         {/*   onClick={e => {*/}
@@ -243,8 +201,7 @@ const NavbarC = () => {
                         {/*   }}*/}
                         {/*>Скидки</a>*/}
                         <Link href={{
-                            pathname: '/products',
-                            query: {...queryGender}
+                            pathname: '/products'
                         }}
                               className={s.links}
 
@@ -253,7 +210,7 @@ const NavbarC = () => {
                         </Link>
                         <Link href={{
                             pathname: '/products',
-                            query: {...queryGender, is_sale: 'is_sale'}
+                            query: {is_sale: 'is_sale'}
                         }}
                               className={s.sale_link}
 

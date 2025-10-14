@@ -809,13 +809,14 @@
         "query_name": "new_balance_327"
       },
       {
-        "name": "New Balance 550",
-        "query_name": "new_balance_550"
-      },
-      {
         "name": "New Balance 530",
         "query_name": "new_balance_530"
       },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -931,13 +932,14 @@
         "query_name": "new_balance_327"
       },
       {
-        "name": "New Balance 550",
-        "query_name": "new_balance_550"
-      },
-      {
         "name": "New Balance 530",
         "query_name": "new_balance_530"
       },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -1053,13 +1055,14 @@
         "query_name": "new_balance_327"
       },
       {
-        "name": "New Balance 550",
-        "query_name": "new_balance_550"
-      },
-      {
         "name": "New Balance 530",
         "query_name": "new_balance_530"
       },
+      {
+        "name": "New Balance 550",
+        "query_name": "new_balance_550"
+      },
+
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -1245,10 +1248,7 @@
         "name": "Converse",
         "query_name": "converse"
       },
-      {
-        "name": "Gucci",
-        "query_name": "gucci"
-      },
+
       {
         "name": "Jimmy Choo",
         "query_name": "jimmy_choo"
@@ -1288,6 +1288,10 @@
       {
         "name": "Stuart Weitzman",
         "query_name": "stuart_weitzman"
+      },
+      {
+        "name": "UGG",
+        "query_name": "ugg"
       },
       {
         "name": "Vans",
@@ -2038,10 +2042,12 @@
         "name": "Пиджаки",
         "query_name": "jackets"
       },
+
       {
-        "name": "Костюмы",
-        "query_name": "suits"
+        "name": "Верхняя одежда",
+        "query_name": "outerwear"
       },
+
       {
         "name": "Куртки",
         "query_name": "coats_jackets"
@@ -2173,8 +2179,8 @@
         "query_name": "dresses"
       },
       {
-        "name": "Комбинезоны и боди",
-        "query_name": "overalls"
+        "name": "Верхняя одежда",
+        "query_name": "outerwear"
       },
       {
         "name": "Куртки",

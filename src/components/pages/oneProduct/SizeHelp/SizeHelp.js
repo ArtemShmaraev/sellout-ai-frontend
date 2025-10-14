@@ -69,7 +69,7 @@ const SizeHelp = ({model, imgSrc, manySizes, str}) => {
                                 <Image src={imgSrc} alt="" fill={true} style={{objectFit: 'contain'}}/>
                             </div>
                             <p className={s.description}>{model}</p>
-                            <p className={s.text}>{parseHtml(str)}. Чтобы мы всегда знали,
+                            <p className={s.text}>{parseHtml(str)}Чтобы мы всегда знали,
                                 какой размер рекомендовать, советуем
                                 заполнить в Личном Кабинете {
                                     userStore.isLogged

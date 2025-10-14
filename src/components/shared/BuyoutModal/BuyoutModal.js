@@ -61,7 +61,7 @@ const BuyoutModal = ({show, handleClose}) => {
                         <Image src={close} alt='' className={s.close} onClick={handleClose}/>
                     </div>
                     <Modal.Header className='mb-3'>
-                        <p className={s.title}>Не смогли найти на нашей платформе то, что искали?
+                        <p className={s.title}>Не нашли то, что искали?
                             Оставьте заявку, и мы привезем вам желаемый товар!</p>
                     </Modal.Header>
                     <Row className='gy-4'>

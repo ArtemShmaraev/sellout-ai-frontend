@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import headerJson from "@/components/shared/NavbarC/header.json";
 import {Context} from "@/context/AppWrapper";
+import Cookies from 'js-cookie'
 
 const Megamenu = ({className, label, link, type, photos, visible}) => {
     const {userStore} = useContext(Context)
@@ -15,10 +16,9 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = {}) => {
         const cols = []
         let gender = 'any'
-        let queryObj = {}
-        if (userStore.gender) {
-            gender = userStore.gender
-            queryObj.gender = gender[0].toUpperCase()
+        const genders = {'M': 'male', 'F': 'female'}
+        if (Cookies.get("selected_gender")) {
+            gender = genders[Cookies.get("selected_gender")]
         }
         let obj = basicObj[gender]
         const keys = Object.keys(obj)
@@ -27,7 +27,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
             for (let j = 0; j < numInCol; j++) {
                 const dataInd = i * numInCol + j
                 const rowObj = obj[keys[dataInd]]
-                const linkQuery = {...queryObj, ...constantQuery}
+                const linkQuery = {...constantQuery}
                 linkQuery[query] = rowObj.query_name
                 rows.push(
                     <Link
@@ -57,7 +57,6 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
         )
         return result
     }
-    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()}  : {}
 
     let timeoutId;
     const handleMouseEnter = () => {
@@ -174,7 +173,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
                                                     <Link className={s.img_link}
                                                           href={{
                                                               pathname: '/products',
-                                                              query: {category: 'shoes_category', ...queryGender}
+                                                              query: {category: 'shoes_category'}
                                                           }}
                                                     >
                                                         Вся обувь
@@ -214,7 +213,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
                                                     <Link className={s.img_link}
                                                           href={{
                                                               pathname: '/products',
-                                                              query: {category: 'clothes', ...queryGender}
+                                                              query: {category: 'clothes'}
                                                           }}
                                                     >
                                                         Вся одежда
@@ -254,7 +253,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
                                                     <Link className={s.img_link}
                                                           href={{
                                                               pathname: '/products',
-                                                              query: {category: 'accessories', ...queryGender}
+                                                              query: {category: 'accessories'}
                                                           }}
                                                     >
                                                         Все аксессуары
@@ -294,7 +293,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
                                                     <Link className={s.img_link}
                                                           href={{
                                                               pathname: '/products',
-                                                              query: {category: 'bags', ...queryGender}
+                                                              query: {category: 'bags'}
                                                           }}
                                                     >
                                                         Все аксессуары

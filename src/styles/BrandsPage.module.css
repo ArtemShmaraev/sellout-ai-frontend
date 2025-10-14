@@ -108,7 +108,7 @@
     .alphabet_block {
         position: fixed;
         left: 0;
-        top: 75px;
+        top: 85px;
         z-index: 7;
     }
     .letter {

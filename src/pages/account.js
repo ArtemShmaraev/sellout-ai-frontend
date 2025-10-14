@@ -250,14 +250,14 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
 
                         <div className={s.col_dropdown}>
                             <h5>Обувь</h5>
-                            <SizeDropdown catObj={sizeTable.size_tables[1]} typeIsShoes={false} currSizeId={sizeInfo.clothes_size}/>
-                        </div>
-                        <div className={s.col_dropdown}>
-                            <h5>Одежда</h5>
                             <SizeDropdown catObj={sizeTable.size_tables[0]} typeIsShoes={true} currSizeId={sizeInfo.shoes_size}/>
                         </div>
+                        <div className={s.col_dropdown} style={{marginTop: 30}}>
+                            <h5>Одежда</h5>
+                            <SizeDropdown catObj={sizeTable.size_tables[1]} typeIsShoes={false} currSizeId={sizeInfo.clothes_size}/>
+                        </div>
                         <div className={s.col_input}>
-                            <div>
+                            <div style={{marginTop: 30}}>
                                 <h5>Рост</h5>
                                 <input
                                     className={s.size_input}
@@ -265,7 +265,7 @@ const Account = ({userData, sizeTable, sizeInfo}) => {
                                     value={height}
                                 />
                             </div>
-                            <div>
+                            <div style={{marginTop: 30}}>
                                 <h5>Вес</h5>
                                 <input
                                     className={s.size_input}

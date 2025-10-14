@@ -58,7 +58,6 @@ const NavbarNoGender = () => {
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
 
-    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)

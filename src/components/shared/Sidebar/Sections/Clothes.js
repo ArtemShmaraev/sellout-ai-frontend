@@ -5,6 +5,7 @@ import s from '../Sidebar.module.css'
 import {useRouter} from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const Clothes = ({photo, handleClose}) => {
     const {userStore} = useContext(Context)
@@ -16,10 +17,9 @@ const Clothes = ({photo, handleClose}) => {
     const fillCol = (colObj, query, secondQuery) => {
         const name = colObj.name
         let gender = 'any'
-        let queryObj = {}
-        if (userStore.gender) {
-            gender = userStore.gender
-            queryObj.gender = gender[0].toUpperCase()
+        const genders = {'M': 'male', 'F': 'female'}
+        if (Cookies.get("selected_gender")) {
+            gender = genders[Cookies.get("selected_gender")]
         }
         const colArr = []
         colArr.push(
@@ -28,7 +28,7 @@ const Clothes = ({photo, handleClose}) => {
         const links = colObj[gender]
         for (const key in links) {
             const link = links[key]
-            const linkQuery = {...queryObj, ...secondQuery}
+            const linkQuery = {...secondQuery}
             linkQuery[query] = link.query_name
             colArr.push(
                 <Link
@@ -49,13 +49,12 @@ const Clothes = ({photo, handleClose}) => {
             </div>
         )
     }
-    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
     return (
         <div style={{marginTop: 15}}>
             <Link className={s.all_link}
                   href={{
                       pathname: '/products',
-                      query: {category: 'clothes', ...queryGender}
+                      query: {category: 'clothes'}
                   }}
                   onClick={handleClose}
             >

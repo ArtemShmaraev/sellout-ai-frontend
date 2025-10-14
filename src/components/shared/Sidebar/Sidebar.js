@@ -116,7 +116,6 @@ const Sidebar = ({photos}) => {
         jordan: <Jordan filters={filters} handleClose={handleClose}/>,
     }
 
-    const queryGender = userStore.gender ? {gender: userStore.gender[0].toUpperCase()} : {}
 
     const [contactOpen, setContactOpen] = useState(false)
 
@@ -223,8 +222,7 @@ const Sidebar = ({photos}) => {
                                 </div>
                                 <Link className={s.section_block}
                                       href={{
-                                          pathname: '/products',
-                                          query: {...queryGender}
+                                          pathname: '/products'
                                       }}
                                       onClick={handleClose}
                                 >
@@ -234,7 +232,7 @@ const Sidebar = ({photos}) => {
                                 <Link className={s.section_block}
                                       href={{
                                           pathname: '/products',
-                                          query: {new: true, ...queryGender}
+                                          query: {new: true}
                                       }}
                                       onClick={handleClose}
                                 >
@@ -244,7 +242,7 @@ const Sidebar = ({photos}) => {
                                 <Link className={s.section_block}
                                       href={{
                                           pathname: '/products',
-                                          query: {recommendations: true, ...queryGender}
+                                          query: {recommendations: true}
                                       }}
                                       onClick={handleClose}
                                 >
@@ -254,7 +252,7 @@ const Sidebar = ({photos}) => {
                                 <Link className={s.section_block}
                                       href={{
                                           pathname: '/products',
-                                          query: {is_sale: 'is_sale', ...queryGender}
+                                          query: {is_sale: 'is_sale'}
                                       }}
                                       onClick={handleClose}
                                       style={{color: '#b61212'}}

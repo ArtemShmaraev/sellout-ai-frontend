@@ -1246,10 +1246,6 @@
         "query_name": "converse"
       },
       {
-        "name": "Gucci",
-        "query_name": "gucci"
-      },
-      {
         "name": "Jimmy Choo",
         "query_name": "jimmy_choo"
       },
@@ -1288,6 +1284,10 @@
       {
         "name": "Stuart Weitzman",
         "query_name": "stuart_weitzman"
+      },
+      {
+        "name": "UGG",
+        "query_name": "ugg"
       },
       {
         "name": "Vans",

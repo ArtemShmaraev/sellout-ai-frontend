@@ -250,12 +250,14 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label1}>Имя:</label>
                                     <input type="text" className={s.input}
                                            value={firstName}
+                                           placeholder={"Kanye"}
                                            onChange={(e) => setFirstName(e.target.value)}
                                     />
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Фамилия:</label>
                                     <input type="text" className={s.input}
+                                           placeholder={"West"}
                                            value={lastName}
                                            onChange={(e) => setLastName(e.target.value)}
                                     />
@@ -275,6 +277,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Почта:</label>
                                     <input type="text" className={s.input}
                                            value={email}
+                                           placeholder={"KendallJenner@mail.ru"}
                                            onChange={(e) => setEmail(e.target.value)}/>
                                     {!validEmail &&
                                         <p className={s.validate}>Некорректный формат почты</p>
@@ -295,7 +298,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 <div className='d-flex mt-5' onClick={() => setIsMailingList(!isMailingList)}>
                                     <CustomCheckbox checked={isMailingList}
                                                     reversed={true}
-                                                    labelText={'Хочу получать индивидуальные предложения и новости'}
+                                                    labelText={isMailingList ? 'Получайте индивидуальные предложения с подборками и скидками' : 'Это очень зря... Не упускайте дополнительные привилегии!'}
                                                     labelClass={s.sub}
                                     />
                                 </div>

@@ -242,18 +242,18 @@ const Products = ({products, categories, lines, colors, collections, materials, 
             </div>
             <div className={s.text_container}>
                 <div className={s.text}>
-                    Не смогли найти на нашей платформе то, что искали? <br/>
-                    Оставьте заявку, и мы привезем вам желаемый товар!
+                    Не нашли то, что искали? <br/>
+                    Мы привезем для вас желанный лот!
                 </div>
                 <div className={'d-flex justify-content-center'}>
-                    <button onClick={handleShow} className={s.toggle_btn}>Оставьте заявку</button>
+                    <button onClick={handleShow} className={s.toggle_btn}>Оставить заявку</button>
                 </div>
             </div>
             <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
 
             {modalOpen &&
                 <div className={s.modal}
-                     style={desktopStore.navbarVisible ? {top: 84} : {top: 0}}
+                     style={desktopStore.navbarVisible ? {top: 92} : {top: 0}}
                 >
                     <Container>
                         <div className='d-flex justify-content-between'>

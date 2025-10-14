@@ -1,0 +1,170 @@
+.outerContainer {
+
+}
+
+.blockTitle {
+    text-align: center;
+    font-weight: 500;
+    font-size: 32px;
+    margin-top: 100px;
+}
+
+
+
+.imageContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.productsImagesContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+}
+
+.imageLink {
+    text-decoration: none; /* Remove underline from links */
+    color: black;
+}
+
+.image {
+    width: 100%;
+    max-width: 100%;
+    height: auto; /* To maintain aspect ratio */
+    border-radius: 3px;
+}
+
+.textContainer {
+    text-align: left;
+}
+
+.title, .subTitle, .text {
+    margin-bottom: 0;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.subTitle {
+    font-weight: 450;
+    font-size: 16px;
+    color: #484848;
+}
+
+.text {
+    font-size: 15px;
+    color: #7B7C81;
+}
+
+.selections_title_block {
+    max-width: 50%;
+}
+
+
+.selections_title {
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 0;
+}
+
+.selection_link {
+    text-decoration: underline;
+    font-size: 14px;
+    color: #888888;
+}
+
+.selection_link:hover {
+    color: #464646;
+}
+
+.container {
+    display: flex;
+    margin-top: 50px;
+}
+
+.videoContainer {
+    width: 33%;
+}
+
+.videoProductsBlock {
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+.smallPicturesContainer {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.smallPicture {
+    width: calc(33.333% - 10px); /* Adjust as needed */
+    margin: 5px; /* Adjust as needed */
+}
+
+.subTitleProds {
+    margin-top: 30px;
+}
+
+
+@media (max-width: 1200px) {
+    .videoContainer {
+        width: 49%;
+    }
+
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .blockTitle {
+        font-size: 28px;
+        margin-top: 50px;
+    }
+
+    .selections_title {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .title {
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .subTitle {
+        font-weight: 450;
+        font-size: 14px;
+        color: #484848;
+    }
+
+    .text {
+        font-size: 13px;
+        color: #7B7C81;
+        margin-bottom: 10px;
+    }
+
+    .productsImagesContainer {
+        justify-content: space-around;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .image {
+        margin-top: 10px;
+    }
+
+    .subTitleProds {
+        margin-top: 10px;
+    }
+}

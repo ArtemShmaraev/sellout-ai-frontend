@@ -1,6 +1,6 @@
 .card {
     width: 356px;
-    height: 340px;
+    height: 400px;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -9,8 +9,8 @@
     text-decoration: none;
 }
 .card_list {
-    width: 356px;
-    height: 340px;
+    width: 25%;
+    height: 400px;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -76,33 +76,34 @@
     align-self: center;
 }
 .text_block {
-    height: 85%; /* Occupy remaining space within the card */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: 15px;
+    min-height: 123px;
 }
 .price_block {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     flex: 1;
 }
 .info {
     max-height: 93px;
+    height: 93px;
     overflow-y: clip;
 }
 .tag {
     color: #727272;
 }
 .brand {
-    font-weight: 700;
+    font-weight: 500;
     color: #222222;
 }
 .name {
     color: #222222;
 }
 .price {
-    color: #222222;
+    color: #545454;
     margin-top: auto;
     font-weight: 500;
     /*font-size: 14pt;*/
@@ -125,7 +126,7 @@
     position: relative;
     min-width: 100%;
     max-width: 100%;
-    height: 370px;
+    height: 100%;
 }
 .sm_image_container {
     position: relative;
@@ -170,21 +171,24 @@
 /*}*/
 @media (max-width: 1200px) {
     .card_list {
-        width: 30%;
+        width: 33%;
     }
 }
 @media (max-width: 650px) {
     .card {
-        width: 180px;
-        height: 350px;
+        width: 190px;
+        height: 370px;
         padding: 0;
         margin: 10px 10px;
     }
     .card_list {
         width: 49%;
-        height: 310px;
+        height: 370px;
         padding: 0;
         margin: 10px 0;
+    }
+    .text_block {
+        height: 85%;
     }
     .img {
         height: 85px;
