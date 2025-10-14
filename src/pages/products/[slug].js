@@ -193,8 +193,9 @@ const OneProductPage = ({product, prices}) => {
         } else {
             query.line = product.brands[0].query_name
         }
-        if (userStore.gender) {
-            query.gender = userStore.gender[0].toUpperCase()
+        const selected_gender = Cookies.get('selected_gender')
+        if (selected_gender) {
+            query.gender = selected_gender.toUpperCase();
         }
         return {
             pathname: '/products',
