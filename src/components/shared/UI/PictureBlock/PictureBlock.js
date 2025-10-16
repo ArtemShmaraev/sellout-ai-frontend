@@ -25,6 +25,7 @@ const PictureBlock = ({obj, className, type}) => {
         return s.row
     }
     const [isLoading, setIsLoading] = useState(true)
+    const subTitle = "Еще более 40'000 <a href={'/products?category=bags'} style={{color: \"black\"}}>сумок</a>";
     return (
         <>
             {
@@ -75,14 +76,13 @@ const PictureBlock = ({obj, className, type}) => {
                         {
                             obj.subTitle
                                 ?
-                                <div className={s.desktop}>
-                                    obj.subTitle
+                                <div className={className}>
+                                    <div style={{display: "inline"}}>
+                                        {parse(obj.subTitle)}
+                                    </div>
                                 </div>
                                 :
-                                <div className={className}>
-                                    Цвет Peach Fuzz отражает наше желание заботиться о себе и других. Это бархатистый нежный персиковый тон, всеобъемлющий дух которого обогащает разум, тело и душу. В поисках дома, который отражал бы наше врожденное стремление к близости и единству, Pantone выбрали цвет, излучающий тепло и современную элегантность. Оттенок, который вызывает сочувствие, предлагает тактильные объятия и без усилий соединяет молодость с вневременным.
-                                    Больше товаров на весну смотрите в <Link href={'/products?category=winter_sneakers_and_shoes'} style={{color: "black"}}>теплых кроссовок</Link>, <Link href={'/products?category=knitwear'} style={{color: "black"}}>свитерах</Link>, <Link href={'/products?category=hoodie_sweatshirts'} style={{color: "black"}}>худи</Link> и <Link href={'/products?category=windbreakers'} style={{color: "black"}}>ветровках</Link>
-                                </div>
+                                <></>
                         }
                     </>
 

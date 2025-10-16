@@ -110,12 +110,12 @@ const NavbarC = () => {
                 <div className={s.row1}>
                     <div className={s.block}>
                         <div className={'desktop_d'}>
-                            <Link href="/" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={(e) => {
-                                handleGenderSelection('M');
-                            }}>Мужское </Link>
                             <Link href="/" className={selectedGender === 'F' ? s.selectedGender : s.genderButton} onClick={(e) => {
                                 handleGenderSelection('F');
                             }}>Женское </Link>
+                            <Link href="/" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={(e) => {
+                                handleGenderSelection('M');
+                            }}>Мужское </Link>
                             <Link href="/about" className={s.links}>О нас</Link>
                             {/*<Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>*/}
                             {/*<span className={s.links}*/}
