@@ -5,6 +5,8 @@ import parse from "html-react-parser";
 import logo from "@/static/img/sellout_logo.svg";
 import desktop from "@/static/img/desktop_background.jpg";
 import mobile from "@/static/img/big_bg.jpg";
+import Link from "next/link";
+
 const PictureBlock = ({obj, className, type}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -27,7 +29,7 @@ const PictureBlock = ({obj, className, type}) => {
         <>
             {
                 obj.photo
-                ?
+                    ?
                     <div className={`${className} ${s.main_block} ${getDirection()}`}>
                         <div className={s.text_block}>
                             {/*<Image src={logo} alt='' className={s.logo} width={200}/>*/}
@@ -68,7 +70,23 @@ const PictureBlock = ({obj, className, type}) => {
                         }
                     </div>
                     :
-                    <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title_with_gender}</h3>
+                    <>
+                        <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title_with_gender}</h3>
+                        {
+                            obj.subTitle
+                                ?
+                                <div className={s.desktop}>
+                                    obj.subTitle
+                                </div>
+                                :
+                                <div className={className}>
+                                    Цвет Peach Fuzz отражает наше желание заботиться о себе и других. Это бархатистый нежный персиковый тон, всеобъемлющий дух которого обогащает разум, тело и душу. В поисках дома, который отражал бы наше врожденное стремление к близости и единству, Pantone выбрали цвет, излучающий тепло и современную элегантность. Оттенок, который вызывает сочувствие, предлагает тактильные объятия и без усилий соединяет молодость с вневременным.
+                                    Больше товаров на весну смотрите в <Link href={'/products?category=winter_sneakers_and_shoes'} style={{color: "black"}}>теплых кроссовок</Link>, <Link href={'/products?category=knitwear'} style={{color: "black"}}>свитерах</Link>, <Link href={'/products?category=hoodie_sweatshirts'} style={{color: "black"}}>худи</Link> и <Link href={'/products?category=windbreakers'} style={{color: "black"}}>ветровках</Link>
+                                </div>
+                        }
+                    </>
+
+
             }
         </>
     );
