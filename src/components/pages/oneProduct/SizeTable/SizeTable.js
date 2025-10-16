@@ -51,6 +51,7 @@ const SizeTable = ({tables, photo}) => {
         const sizeRowsArr = []
         let rowsNameTr = []
 
+        console.log(tableObj)
         if (tableObj.rows_order) {
             tableObj.rows_order.forEach(tableKey => {
                 rowsNameTr.push(
@@ -58,7 +59,7 @@ const SizeTable = ({tables, photo}) => {
                 )
             })
         } else {
-            for (const tableKey in table) {
+            for (const tableKey in tableObj) {
                 rowsNameTr.push(
                     <td className={s.td}>{tableKey}</td>
                 )
