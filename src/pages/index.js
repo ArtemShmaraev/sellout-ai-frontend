@@ -131,7 +131,7 @@ export default function Home({data}) {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlock') {
+            if (el.type === 'firstMainBlocka') {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftSmallVideo": el.leftSmallVideo,
