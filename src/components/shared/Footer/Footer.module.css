@@ -102,6 +102,7 @@
     .social_media {
         width: 100%;
         text-align: center;
+        padding-left: 20px;
     }
     .payment_block {
         margin-top: 50px;
