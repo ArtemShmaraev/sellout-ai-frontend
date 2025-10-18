@@ -159,7 +159,7 @@ export default function Home({data}) {
                 arr.push(
                     <MainImgBlock obj={el.mobile} className={s.mobile}/>
                 )
-            } else {
+            } else if (el.type === 'selection') {
                 const scrollableBlockArr = []
                 el.products.forEach(product => {
                     scrollableBlockArr.push(
