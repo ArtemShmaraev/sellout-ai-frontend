@@ -73,7 +73,7 @@ const Footer = () => {
                         <Col lg={4} className={s.footer_col}>
                             <h4>Sellout</h4>
                             <div>
-                                <Link href="/about" className={s.footer_link} target={'_blank'}>О нас</Link>
+                                <Link href="/about" className={s.footer_link}>О нас</Link>
                             </div>
                             <div>
                                 <Link href="https://t.me/selloutsu" className={s.footer_link}
@@ -438,7 +438,7 @@ const Footer = () => {
                             Sellout
                         </div>
                         <div>
-                            <Link href="/about" className={s.footer_link} target={'_blank'}>О нас</Link>
+                            <Link href="/about" className={s.footer_link}>О нас</Link>
                         </div>
                         <div className={s.footer_link}>
                             <span className={s.footer_link} onClick={toggleHow}>Как мы работаем?</span>

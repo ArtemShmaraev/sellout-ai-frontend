@@ -96,26 +96,26 @@ const ComplexMainPageBlock = ({obj}) => {
                 </div>
             )}
 
-            {obj.videosInRow && obj.videosInRow.length > 0 && (
-                <div className={s.imageContainer}>
-                    {obj.videosInRow.map((imageData, index) => (
-                        <Link key={index} href={imageData.url} className={s.imageLink} style={{width: videoWidth}}>
-                            <video style={{borderRadius: 7}}
-                                   autoPlay muted loop className={s.image}>
-                                <source src={imageData.video} type="video/mp4"/>
-                                Your browser does not support the video tag.
-                            </video>
-                            <div className={s.textContainer}>
-                                {imageData.title &&
-                                    <p className={s.title} style={{textDecoration: "underline"}}>{imageData.title}</p>}
-                                {imageData.subTitle && <p className={s.subTitle}>{imageData.subTitle}</p>}
-                                {imageData.text && <p className={s.text}
-                                                      style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            )}
+            {/*{obj.videosInRow && obj.videosInRow.length > 0 && (*/}
+            {/*    <div className={s.imageContainer}>*/}
+            {/*        {obj.videosInRow.map((imageData, index) => (*/}
+            {/*            <Link key={index} href={imageData.url} className={s.imageLink} style={{width: videoWidth}}>*/}
+            {/*                <video style={{borderRadius: 7}}*/}
+            {/*                       autoPlay muted loop className={s.image}>*/}
+            {/*                    <source src={imageData.video} type="video/mp4"/>*/}
+            {/*                    Your browser does not support the video tag.*/}
+            {/*                </video>*/}
+            {/*                <div className={s.textContainer}>*/}
+            {/*                    {imageData.title &&*/}
+            {/*                        <p className={s.title} style={{textDecoration: "underline"}}>{imageData.title}</p>}*/}
+            {/*                    {imageData.subTitle && <p className={s.subTitle}>{imageData.subTitle}</p>}*/}
+            {/*                    {imageData.text && <p className={s.text}*/}
+            {/*                                          style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}*/}
+            {/*                </div>*/}
+            {/*            </Link>*/}
+            {/*        ))}*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
             {obj.productsBlocks && Object.keys(obj.productsBlocks).length > 0 && (
                 <div className={s.productsImagesContainer}>
