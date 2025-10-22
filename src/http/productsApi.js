@@ -174,6 +174,7 @@ export async function fetchSimilarProducts(productId, token = '') {
     }
 }
 export async function suggestSearch(qStr, token = '') {
+
     if (token) {
         const {data} = await $host.get(`product/suggest_search?q=${qStr}`, {
             headers: {Authorization: `Bearer ${token}`}

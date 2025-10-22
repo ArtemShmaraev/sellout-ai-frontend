@@ -89,21 +89,32 @@ export default function Home({data}) {
         // Закрываем модальное окно
         setShowGenderModal(false);
     };
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
     useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
+        const checkIsDesktop = () => {
+            const width = window.innerWidth;
+            setIsDesktop(width > 1200);
+        };
+
+        // Вызываем функцию при загрузке страницы
         checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+
+        // Подписываемся на изменения размера окна
+        window.addEventListener('resize', checkIsDesktop);
+
+        // Отписываемся при размонтировании компонента
+        return () => {
+            window.removeEventListener('resize', checkIsDesktop);
+        };
+    }, []); // Пустой массив зависимостей, чтобы useEffect вызывался только один раз
+
+    // useEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
+
     // const [isPageReloaded, setIsPageReloaded] = useState(false);
     //
     // useEffect(() => {

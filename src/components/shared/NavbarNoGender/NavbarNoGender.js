@@ -126,7 +126,7 @@ const NavbarNoGender = () => {
                         </div>
                         <div className={`${s.logo}`}>
                             <Link href="/">
-                                <Image src={logo3} alt="Logo" width={350} height={50}/>
+                                <Image src={logo3} alt="Logo" width={'30%'} height={50}/>
                             </Link>
                         </div>
                         <div>
