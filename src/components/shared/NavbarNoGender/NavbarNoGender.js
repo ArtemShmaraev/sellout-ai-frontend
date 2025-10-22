@@ -144,7 +144,7 @@ const NavbarNoGender = () => {
                 <header className={s.navbarMob}>
                     <div className={`${s.logoMob}`}>
                         <Link href="/">
-                            <Image src={logo} alt="Logo" width={350} height={50}/>
+                            <Image src={logo} alt="Logo" width={"90%"} height={50}/>
                         </Link>
                     </div>
                 </header>
