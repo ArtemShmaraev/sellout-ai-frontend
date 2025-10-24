@@ -91,7 +91,9 @@ const NavbarC = () => {
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender, {expires: 2772});
-        window.location.reload();
+        router.push('/').then(() => window.location.reload());
+
+        // window.location.reload();
 
         // // Отправляем запрос на сервер с выбранным гендером
         // const page = Cookies.get('index_page');
@@ -113,13 +115,17 @@ const NavbarC = () => {
                     <div className={s.block}>
                         <div className={'desktop_d'}>
                             <Link href="/" className={selectedGender === 'F' ? s.selectedGender : s.genderButton} onClick={(e) => {
-                                e.preventDefault(); // Предотвращаем стандартное поведение ссылки
+                                e.preventDefault();
                                 handleGenderSelection('F');
+
                             }}>Женское</Link>
+
                             <Link href="/" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={(e) => {
-                                e.preventDefault(); // Предотвращаем стандартное поведение ссылки
+                                e.preventDefault();
                                 handleGenderSelection('M');
+
                             }}>Мужское</Link>
+
                             <Link href="/about" className={s.links}>О нас</Link>
                             {/*<Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>*/}
                             {/*<span className={s.links}*/}
