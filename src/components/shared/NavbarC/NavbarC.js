@@ -38,22 +38,23 @@ const NavbarC = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useLayoutEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    // const [isDesktop, setIsDesktop] = useState(true)
+
+    // const checkIsDesktop = () => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setIsDesktop(false)
+    //     } else {
+    //         setIsDesktop(true)
+    //     }
+    // }
+    // useLayoutEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -62,8 +63,8 @@ const NavbarC = () => {
         setContactOpen(false)
     }
 
-    const [visible, setVisible] = useState(true);
-    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true)
+    const [prevScrollPos, setPrevScrollPos] = useState(0)
 
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
@@ -139,7 +140,7 @@ const NavbarC = () => {
                         <Link href={'/wishlist'}>
                             <Image width={25} src={like} alt="" className={s.icons}/>
                         </Link>
-                        {isDesktop &&
+                        {desktopStore.isDesktop &&
                         userStore.isLogged
                             ?
                             <Link href={'/account'} className={s.auth_block}>
@@ -147,7 +148,7 @@ const NavbarC = () => {
                                 <div className={s.name}>{userStore.firstName}</div>
                             </Link>
                             :
-                            isDesktop &&
+                            desktopStore.isDesktop &&
                             <AuthModal>
                                 <Image width={25} src={person} alt="" className={s.icons}/>
                                 <div className={s.name}>Войдите</div>
