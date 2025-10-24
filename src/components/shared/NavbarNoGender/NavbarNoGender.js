@@ -126,7 +126,14 @@ const NavbarNoGender = () => {
                         </div>
                         <div className={`${s.logo}`}>
                             <Link href="/">
-                                <Image src={logo3} alt="Logo" width={'30%'} height={50}/>
+                                <Image src={logo3} alt="Logo" style={{
+                                    width: '350px',
+                                    height: '50px',
+                                    '@media (max-width: 600px)': { // Пример медиа-запроса для мобильных устройств (ширина экрана до 600px)
+                                        width: '50%',
+                                        height: 'auto', // Чтобы сохранить соотношение сторон
+                                    },
+                                }}/>
                             </Link>
                         </div>
                         <div>
@@ -144,7 +151,7 @@ const NavbarNoGender = () => {
                 <header className={s.navbarMob}>
                     <div className={`${s.logoMob}`}>
                         <Link href="/">
-                            <Image src={logo} alt="Logo" width={"90%"} height={50}/>
+                            <Image src={logo} alt="Logo" style={{ width: '350px', height: '50px' }}/>
                         </Link>
                     </div>
                 </header>
