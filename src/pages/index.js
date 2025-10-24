@@ -3,7 +3,7 @@ import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import Head from "next/head";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
@@ -53,7 +53,21 @@ export default function Home({data}) {
     const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
     const [showGenderModal, setShowGenderModal] = useState(false);
-    // const [selectedGender, setSelectedGender] = useState('');
+
+    useLayoutEffect(() => {
+        const checkIsDesktop = () => {
+            const width = window.innerWidth;
+            setIsDesktop(width > 1200);
+        };
+        checkIsDesktop();
+
+        window.addEventListener('resize', checkIsDesktop);
+        return () => {
+            window.removeEventListener('resize', checkIsDesktop);
+        };
+
+    }, []);
+
 
     useEffect(() => {
         // Check if the gender is already selected in cookies
@@ -89,23 +103,7 @@ export default function Home({data}) {
         // Закрываем модальное окно
         setShowGenderModal(false);
     };
-    useEffect(() => {
-        const checkIsDesktop = () => {
-            const width = window.innerWidth;
-            setIsDesktop(width > 1200);
-        };
-
-        // Вызываем функцию при загрузке страницы
-        checkIsDesktop();
-
-        // Подписываемся на изменения размера окна
-        window.addEventListener('resize', checkIsDesktop);
-
-        // Отписываемся при размонтировании компонента
-        return () => {
-            window.removeEventListener('resize', checkIsDesktop);
-        };
-    }, []); // Пустой массив зависимостей, чтобы useEffect вызывался только один раз
+     // Пустой массив зависимостей, чтобы useEffect вызывался только один раз
 
     // useEffect(() => {
     //     window.addEventListener("resize", checkIsDesktop);
@@ -335,7 +333,7 @@ export default function Home({data}) {
                 }
             </div>
         </MainLayout>
-    );
+    )
 };
 
 

@@ -1,5 +1,5 @@
 import NavbarC from "@/components/shared/NavbarC/NavbarC";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import Footer from "@/components/shared/Footer/Footer";
 import ScrollUp from "@/components/shared/ScrollUp/ScrollUp";
 import Head from "next/head";
@@ -29,13 +29,13 @@ const MainLayout = ({children}) => {
 
     }, [])
 
-    useEffect( () => {
-        if (Cookies.get('selected_gender')) {
-            setSelectedGender(Cookies.get('selected_gender'))
-        }
-    })
+    // useEffect( () => {
+    //     if (Cookies.get('selected_gender')) {
+    //         setSelectedGender(Cookies.get('selected_gender'))
+    //     }
+    // })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
@@ -58,7 +58,7 @@ const MainLayout = ({children}) => {
     const isMainPage = router.pathname === '/';
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();

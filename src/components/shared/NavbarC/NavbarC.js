@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import s from './NavbarC.module.css'
 import like from '@/static/icons/heart.svg'
 import person from '@/static/icons/person-circle.svg'
@@ -47,7 +47,7 @@ const NavbarC = () => {
             setIsDesktop(true)
         }
     }
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();

@@ -92,7 +92,7 @@ const OneProductPage = ({product, prices}) => {
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
-    const {productStore, userStore, cartStore} = useContext(Context)
+    const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
     useEffect(() => {
         productStore.clearAll()
         if (prices.length === 1) {
@@ -246,13 +246,13 @@ const OneProductPage = ({product, prices}) => {
             setIsDesktop(true)
         }
     }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    // useEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
     const [isInWishlist, setIsInWishlist] = useState(product.in_wishlist)
     const addToWL = async () => {
         const token = Cookies.get('access_token')
@@ -395,8 +395,8 @@ const OneProductPage = ({product, prices}) => {
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row}>
                     <div className={s.col1}>
-                        {isDesktop && <BreadcrumbC list={product.list_lines}/>}
-                        {!isDesktop &&
+                        {desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}
+                        {!desktopStore.isDesktop &&
                             <>
                                 <Link href={clickBrand()} className={s.brand}
                                 >{brandsDisplay()}</Link>
@@ -458,7 +458,7 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
 
                         }
-                        {!isDesktop &&
+                        {!desktopStore.isDesktop &&
                             <>
                                 {
                                     prices.length > 0 &&
@@ -507,7 +507,7 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={isDesktop}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={desktopStore.isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -558,10 +558,10 @@ const OneProductPage = ({product, prices}) => {
 
                         <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}
                              ref={infoRef}>
-                            {!isDesktop && <hr/>}
+                            {!desktopStore.isDesktop && <hr/>}
                             <div className={s.row}>
                                 <div className={s.col50}>
-                                    {!isDesktop && <BreadcrumbC list={product.list_lines}/>}
+                                    {!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
@@ -590,7 +590,7 @@ const OneProductPage = ({product, prices}) => {
                         }
                     </div>
                     <div className={s.col2}>
-                        {isDesktop &&
+                        {desktopStore.isDesktop &&
                             <>
                                 <Link href={clickBrand()} className={s.brand}
                                 >{brandsDisplay()}</Link>
@@ -644,7 +644,7 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={isDesktop}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={desktopStore.isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -694,7 +694,7 @@ const OneProductPage = ({product, prices}) => {
                             </>
                         }
 
-                        {!isDesktop && compilations.map(el =>
+                        {!desktopStore.isDesktop && compilations.map(el =>
                             <Compilation arr={el.products} title={el.name}/>
                         )}
 
@@ -1307,15 +1307,15 @@ const OneProductPage = ({product, prices}) => {
                             </TextModal>
                             {/*<QuestionsDropdown/>*/}
                         </div>
-                        {!isDesktop && lastSeen.length > 0 &&
+                        {!desktopStore.isDesktop && lastSeen.length > 0 &&
                             <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                         }
                     </div>
                 </div>
-                {isDesktop && compilations.map(el =>
+                {desktopStore.isDesktop && compilations.map(el =>
                     <Compilation arr={el.products} title={el.name}/>
                 )}
-                {isDesktop && lastSeen.length > 0 &&
+                {desktopStore.isDesktop && lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
                 }
             </div>
