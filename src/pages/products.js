@@ -171,7 +171,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                         TitleAndDescriptionSEO[getTitle()]['title']
                     ) : (
                         // Заголовок для случая, когда getTitle() равно "sellout"
-                        "Sellout - Онлайн-платформа для ценителей стиля: уникальная брендовая одежда, обувь и аксессуары"
+                        "Sellout: онлайн-платформа брендовой одежды и обуви"
                     )}
                 </title>
                 <meta name={'description'} content=

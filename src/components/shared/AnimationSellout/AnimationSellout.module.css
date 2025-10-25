@@ -1,7 +1,7 @@
 .block {
-    margin: -10%;
-    width: 120vw;
-    height: 120vh;
+
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;

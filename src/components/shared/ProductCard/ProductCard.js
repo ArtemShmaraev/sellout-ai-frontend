@@ -252,7 +252,7 @@ const ProductCard = ({cardList = false, product}) => {
                 >
                     <Image
                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                        loading={'eager'}
+                        // loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
                         onLoadingComplete={() => setIsLoading(false)}
@@ -262,7 +262,7 @@ const ProductCard = ({cardList = false, product}) => {
                     {photos[1] &&
                         <Image
                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                            loading={'eager'}
+                            // loading={'eager'}
                             fill={true}
                             className={isHovered && isDesktop? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
