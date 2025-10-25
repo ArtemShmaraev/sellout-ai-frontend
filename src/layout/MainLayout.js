@@ -160,7 +160,7 @@ const MainLayout = ({children}) => {
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
-            {desktopStore.animation && <AnimationSellout/>}
+            {(desktopStore.animation) && <AnimationSellout/>}
             <div style={{display: 'none'}}>Front-end by Mikhail Valuev</div>
         </>
     );

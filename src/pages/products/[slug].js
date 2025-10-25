@@ -498,9 +498,9 @@ const OneProductPage = ({product, prices}) => {
                                             <SizeTable tables={product.size_table_platform}
                                                        photo={product.bucket_link[0].url}/>
                                         }
-                                        <SizeHelp model={`${brandsDisplay()} ${product.model}`}
-                                                  imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}
-                                                  str={product.size_table_platform?.size_fit_recommendation ?? ''}/>
+                                        {/*<SizeHelp model={`${brandsDisplay()} ${product.model}`}*/}
+                                        {/*          imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}*/}
+                                        {/*          str={product.size_table_platform?.size_fit_recommendation ?? ''}/>*/}
                                     </div>
                                 }
                                 {
