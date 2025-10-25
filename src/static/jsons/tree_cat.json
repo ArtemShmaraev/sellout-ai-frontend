@@ -1,0 +1,1704 @@
+[
+  {
+    "id": 228,
+    "name": "Обувь",
+    "eng_name": "shoes_category_",
+    "is_all": false,
+    "full_name": "Обувь",
+    "score": 0,
+    "score_product_page": 0,
+    "parent_category": null,
+    "children": [
+      {
+        "id": 229,
+        "name": "Вся обувь",
+        "eng_name": "shoes_category",
+        "is_all": true,
+        "full_name": "Обувь | Вся обувь",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 230,
+        "name": "Кроссовки",
+        "eng_name": "sneakers_",
+        "is_all": false,
+        "full_name": "Обувь | Кроссовки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 228,
+        "children": [
+          {
+            "id": 231,
+            "name": "Все кроссовки",
+            "eng_name": "sneakers",
+            "is_all": true,
+            "full_name": "Обувь | Кроссовки | Все кроссовки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 230
+          },
+          {
+            "id": 232,
+            "name": "Высокие кроссовки",
+            "eng_name": "high_top_sneakers",
+            "is_all": false,
+            "full_name": "Обувь | Кроссовки | Высокие кроссовки",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 230
+          },
+          {
+            "id": 233,
+            "name": "Низкие кроссовки",
+            "eng_name": "low_top_sneakers",
+            "is_all": false,
+            "full_name": "Обувь | Кроссовки | Низкие кроссовки",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 230
+          },
+          {
+            "id": 234,
+            "name": "Баскетбольные кроссовки",
+            "eng_name": "basketball_sneakers",
+            "is_all": false,
+            "full_name": "Обувь | Кроссовки | Баскетбольные кроссовки",
+            "score": 3,
+            "score_product_page": 0,
+            "parent_category": 230
+          },
+          {
+            "id": 235,
+            "name": "Футбольные бутсы",
+            "eng_name": "football_boots",
+            "is_all": false,
+            "full_name": "Обувь | Кроссовки | Футбольные бутсы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 230
+          },
+          {
+            "id": 236,
+            "name": "Другие кроссовки для спорта",
+            "eng_name": "other_sport_shoes",
+            "is_all": false,
+            "full_name": "Обувь | Кроссовки | Другие кроссовки для спорта",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 230
+          }
+        ]
+      },
+      {
+        "id": 237,
+        "name": "Кеды",
+        "eng_name": "canvas_shoes",
+        "is_all": false,
+        "full_name": "Обувь | Кеды",
+        "score": 3,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 238,
+        "name": "Лоферы",
+        "eng_name": "loafers",
+        "is_all": false,
+        "full_name": "Обувь | Лоферы",
+        "score": 3,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 239,
+        "name": "Мокасины и топсайдеры",
+        "eng_name": "moccasins_and_topsiders",
+        "is_all": false,
+        "full_name": "Обувь | Мокасины и топсайдеры",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 240,
+        "name": "Слипоны",
+        "eng_name": "slip_ons",
+        "is_all": false,
+        "full_name": "Обувь | Слипоны",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 241,
+        "name": "Эспадрильи",
+        "eng_name": "espadrilles",
+        "is_all": false,
+        "full_name": "Обувь | Эспадрильи",
+        "score": 1,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 242,
+        "name": "Сандалии и босоножки",
+        "eng_name": "sandals",
+        "is_all": false,
+        "full_name": "Обувь | Сандалии и босоножки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 243,
+        "name": "Пляжные сандалии",
+        "eng_name": "beach_sandals",
+        "is_all": false,
+        "full_name": "Обувь | Пляжные сандалии",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 244,
+        "name": "Шлёпки и тапки",
+        "eng_name": "slippers",
+        "is_all": false,
+        "full_name": "Обувь | Шлёпки и тапки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 245,
+        "name": "Мюли и сабо",
+        "eng_name": "mules_and_clogs",
+        "is_all": false,
+        "full_name": "Обувь | Мюли и сабо",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 228
+      },
+      {
+        "id": 246,
+        "name": "Туфли",
+        "eng_name": "shoes_",
+        "is_all": false,
+        "full_name": "Обувь | Туфли",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 228,
+        "children": [
+          {
+            "id": 247,
+            "name": "Все туфли",
+            "eng_name": "shoes",
+            "is_all": true,
+            "full_name": "Обувь | Туфли | Все туфли",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 248,
+            "name": "Туфли на высоком каблуке",
+            "eng_name": "high_heels",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Туфли на высоком каблуке",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 249,
+            "name": "Туфли на среднем каблуке",
+            "eng_name": "medium_heels",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Туфли на среднем каблуке",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 250,
+            "name": "Туфли на низком каблуке",
+            "eng_name": "low_heels",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Туфли на низком каблуке",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 251,
+            "name": "Туфли на танкетке",
+            "eng_name": "wedge_shoes",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Туфли на танкетке",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 252,
+            "name": "Мужские туфли",
+            "eng_name": "mens_shoes",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Мужские туфли",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 253,
+            "name": "Дерби",
+            "eng_name": "derby",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Дерби",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 254,
+            "name": "Оксфорды",
+            "eng_name": "oxford",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Оксфорды",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 255,
+            "name": "Броги",
+            "eng_name": "brogues",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Броги",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          },
+          {
+            "id": 256,
+            "name": "Монки",
+            "eng_name": "monks",
+            "is_all": false,
+            "full_name": "Обувь | Туфли | Монки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 246
+          }
+        ]
+      },
+      {
+        "id": 257,
+        "name": "Ботинки",
+        "eng_name": "boots_",
+        "is_all": false,
+        "full_name": "Обувь | Ботинки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 228,
+        "children": [
+          {
+            "id": 258,
+            "name": "Все ботинки",
+            "eng_name": "boots",
+            "is_all": true,
+            "full_name": "Обувь | Ботинки | Все ботинки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 259,
+            "name": "Ботинки на толстой подошве",
+            "eng_name": "thick-soled_shoes",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Ботинки на толстой подошве",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 260,
+            "name": "Высокие ботинки и ботфорты",
+            "eng_name": "high_boots_and_jackboots",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Высокие ботинки и ботфорты",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 261,
+            "name": "Средние ботинки",
+            "eng_name": "medium_boots",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Средние ботинки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 262,
+            "name": "Короткие ботинки и ботильоны",
+            "eng_name": "short_boots_and_ankle_boots",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Короткие ботинки и ботильоны",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 263,
+            "name": "Челси",
+            "eng_name": "chelsea_boots",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Челси",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 264,
+            "name": "Мартинсы",
+            "eng_name": "martins",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Мартинсы",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 265,
+            "name": "Тимберленды",
+            "eng_name": "timberlands",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Тимберленды",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 266,
+            "name": "Дезерты",
+            "eng_name": "deserts",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Дезерты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          },
+          {
+            "id": 267,
+            "name": "Казаки",
+            "eng_name": "cossacks",
+            "is_all": false,
+            "full_name": "Обувь | Ботинки | Казаки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 257
+          }
+        ]
+      },
+      {
+        "id": 268,
+        "name": "Зимние кроссовки и ботинки",
+        "eng_name": "winter_sneakers_and_shoes",
+        "is_all": false,
+        "full_name": "Обувь | Зимние кроссовки и ботинки",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 228
+      }
+    ]
+  },
+  {
+    "id": 269,
+    "name": "Одежда",
+    "eng_name": "clothes_",
+    "is_all": false,
+    "full_name": "Одежда",
+    "score": 0,
+    "score_product_page": 0,
+    "parent_category": null,
+    "children": [
+      {
+        "id": 270,
+        "name": "Вся одежда",
+        "eng_name": "clothes",
+        "is_all": true,
+        "full_name": "Одежда | Вся одежда",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 271,
+        "name": "Футболки",
+        "eng_name": "tshirts",
+        "is_all": false,
+        "full_name": "Одежда | Футболки",
+        "score": 10,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 272,
+        "name": "Лонгсливы",
+        "eng_name": "longsleeves",
+        "is_all": false,
+        "full_name": "Одежда | Лонгсливы",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 273,
+        "name": "Худи и толстовки",
+        "eng_name": "hoodie_sweatshirts_",
+        "is_all": false,
+        "full_name": "Одежда | Худи и толстовки",
+        "score": 10,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 274,
+            "name": "Все худи и толстовки",
+            "eng_name": "hoodie_sweatshirts",
+            "is_all": true,
+            "full_name": "Одежда | Худи и толстовки | Все худи и толстовки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 273
+          },
+          {
+            "id": 275,
+            "name": "Худи с капюшоном",
+            "eng_name": "hoodie",
+            "is_all": false,
+            "full_name": "Одежда | Худи и толстовки | Худи с капюшоном",
+            "score": 10,
+            "score_product_page": 0,
+            "parent_category": 273
+          },
+          {
+            "id": 276,
+            "name": "Толстовки на молнии",
+            "eng_name": "zip_hoodie",
+            "is_all": false,
+            "full_name": "Одежда | Худи и толстовки | Толстовки на молнии",
+            "score": 10,
+            "score_product_page": 0,
+            "parent_category": 273
+          },
+          {
+            "id": 277,
+            "name": "Свитшоты",
+            "eng_name": "sweatshirts",
+            "is_all": false,
+            "full_name": "Одежда | Худи и толстовки | Свитшоты",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 273
+          }
+        ]
+      },
+      {
+        "id": 278,
+        "name": "Свитеры и трикотаж",
+        "eng_name": "knitwear_",
+        "is_all": false,
+        "full_name": "Одежда | Свитеры и трикотаж",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 279,
+            "name": "Все свитеры и трикотаж",
+            "eng_name": "knitwear",
+            "is_all": true,
+            "full_name": "Одежда | Свитеры и трикотаж | Все свитеры и трикотаж",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 278
+          },
+          {
+            "id": 280,
+            "name": "Свитеры",
+            "eng_name": "sweaters",
+            "is_all": false,
+            "full_name": "Одежда | Свитеры и трикотаж | Свитеры",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 278
+          },
+          {
+            "id": 281,
+            "name": "Кардиганы",
+            "eng_name": "cardigans",
+            "is_all": false,
+            "full_name": "Одежда | Свитеры и трикотаж | Кардиганы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 278
+          },
+          {
+            "id": 282,
+            "name": "Водолазки",
+            "eng_name": "turtlenecks",
+            "is_all": false,
+            "full_name": "Одежда | Свитеры и трикотаж | Водолазки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 278
+          },
+          {
+            "id": 283,
+            "name": "Жилеты",
+            "eng_name": "knit_vests",
+            "is_all": false,
+            "full_name": "Одежда | Свитеры и трикотаж | Жилеты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 278
+          }
+        ]
+      },
+      {
+        "id": 284,
+        "name": "Шорты",
+        "eng_name": "shorts",
+        "is_all": false,
+        "full_name": "Одежда | Шорты",
+        "score": 10,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 285,
+        "name": "Треники",
+        "eng_name": "sweatpants",
+        "is_all": false,
+        "full_name": "Одежда | Треники",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 286,
+        "name": "Спортивная одежда",
+        "eng_name": "sport_clothes_",
+        "is_all": false,
+        "full_name": "Одежда | Спортивная одежда",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 287,
+            "name": "Вся спортивная одежда",
+            "eng_name": "sport_clothes",
+            "is_all": true,
+            "full_name": "Одежда | Спортивная одежда | Вся спортивная одежда",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 288,
+            "name": "Баскетбольные джерси",
+            "eng_name": "basketball_jerseys",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Баскетбольные джерси",
+            "score": 2,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 289,
+            "name": "Баскетбольные шорты",
+            "eng_name": "basketball_shorts",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Баскетбольные шорты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 290,
+            "name": "Футбольные майки",
+            "eng_name": "football_shirts",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Футбольные майки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 291,
+            "name": "Футбольные шорты",
+            "eng_name": "football_shorts",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Футбольные шорты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 292,
+            "name": "Спортивные майки",
+            "eng_name": "sport_vests",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Спортивные майки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 293,
+            "name": "Спортивные шорты",
+            "eng_name": "sport_shorts",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Спортивные шорты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 294,
+            "name": "Спортивные топы",
+            "eng_name": "sport_tops",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Спортивные топы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 295,
+            "name": "Спортивные костюмы",
+            "eng_name": "tracksuits",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Спортивные костюмы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          },
+          {
+            "id": 296,
+            "name": "Легинсы и термобелье",
+            "eng_name": "leggings_thermal_underwear",
+            "is_all": false,
+            "full_name": "Одежда | Спортивная одежда | Легинсы и термобелье",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 286
+          }
+        ]
+      },
+      {
+        "id": 297,
+        "name": "Топы",
+        "eng_name": "tops",
+        "is_all": false,
+        "full_name": "Одежда | Топы",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 298,
+        "name": "Майки",
+        "eng_name": "vest_shirt",
+        "is_all": false,
+        "full_name": "Одежда | Майки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 299,
+        "name": "Поло",
+        "eng_name": "polo",
+        "is_all": false,
+        "full_name": "Одежда | Поло",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 300,
+        "name": "Джинсы",
+        "eng_name": "jeans",
+        "is_all": false,
+        "full_name": "Одежда | Джинсы",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 301,
+        "name": "Юбки",
+        "eng_name": "skirts",
+        "is_all": false,
+        "full_name": "Одежда | Юбки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 302,
+        "name": "Платья",
+        "eng_name": "dresses",
+        "is_all": false,
+        "full_name": "Одежда | Платья",
+        "score": 1,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 303,
+        "name": "Рубашки",
+        "eng_name": "shirts",
+        "is_all": false,
+        "full_name": "Одежда | Рубашки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 304,
+        "name": "Брюки",
+        "eng_name": "trousers",
+        "is_all": false,
+        "full_name": "Одежда | Брюки",
+        "score": 1,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 305,
+        "name": "Пиджаки",
+        "eng_name": "jackets",
+        "is_all": false,
+        "full_name": "Одежда | Пиджаки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 306,
+        "name": "Костюмы",
+        "eng_name": "suits",
+        "is_all": false,
+        "full_name": "Одежда | Костюмы",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 307,
+        "name": "Деним",
+        "eng_name": "denim",
+        "is_all": false,
+        "full_name": "Одежда | Деним",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 308,
+        "name": "Комбинезоны и боди",
+        "eng_name": "overalls",
+        "is_all": false,
+        "full_name": "Одежда | Комбинезоны и боди",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 309,
+        "name": "Зимние штаны",
+        "eng_name": "winter_pants",
+        "is_all": false,
+        "full_name": "Одежда | Зимние штаны",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269
+      },
+      {
+        "id": 310,
+        "name": "Верхняя одежда",
+        "eng_name": "outerwear_",
+        "is_all": false,
+        "full_name": "Одежда | Верхняя одежда",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 311,
+            "name": "Вся верхняя одежда",
+            "eng_name": "outerwear",
+            "is_all": true,
+            "full_name": "Одежда | Верхняя одежда | Вся верхняя одежда",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 312,
+            "name": "Куртки",
+            "eng_name": "coats_jackets",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Куртки",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 313,
+            "name": "Кожаные куртки",
+            "eng_name": "leather_jackets",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Кожаные куртки",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 314,
+            "name": "Джинсовые куртки",
+            "eng_name": "denim_jackets",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Джинсовые куртки",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 315,
+            "name": "Бейсбольные куртки",
+            "eng_name": "baseball_jackets",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Бейсбольные куртки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 316,
+            "name": "Жилетки",
+            "eng_name": "vests",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Жилетки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 317,
+            "name": "Ветровки",
+            "eng_name": "windbreakers",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Ветровки",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 318,
+            "name": "Плащи",
+            "eng_name": "trench",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Плащи",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 319,
+            "name": "Пальто",
+            "eng_name": "coats",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Пальто",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 320,
+            "name": "Пуховики",
+            "eng_name": "down_jackets",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Пуховики",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 321,
+            "name": "Шубы",
+            "eng_name": "fur_coats",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Шубы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          },
+          {
+            "id": 322,
+            "name": "Лыжные костюмы",
+            "eng_name": "ski_suit",
+            "is_all": false,
+            "full_name": "Одежда | Верхняя одежда | Лыжные костюмы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 310
+          }
+        ]
+      },
+      {
+        "id": 323,
+        "name": "Пляжная одежда",
+        "eng_name": "beach_wear_",
+        "is_all": false,
+        "full_name": "Одежда | Пляжная одежда",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 324,
+            "name": "Вся пляжная одежда",
+            "eng_name": "beach_wear",
+            "is_all": true,
+            "full_name": "Одежда | Пляжная одежда | Вся пляжная одежда",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 323
+          },
+          {
+            "id": 325,
+            "name": "Мужские плавки",
+            "eng_name": "mens_swimming_trunks",
+            "is_all": false,
+            "full_name": "Одежда | Пляжная одежда | Мужские плавки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 323
+          },
+          {
+            "id": 326,
+            "name": "Женские купальники",
+            "eng_name": "womens_swimsuits",
+            "is_all": false,
+            "full_name": "Одежда | Пляжная одежда | Женские купальники",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 323
+          },
+          {
+            "id": 327,
+            "name": "Сплошные купальники",
+            "eng_name": "one_piece_swimsuits",
+            "is_all": false,
+            "full_name": "Одежда | Пляжная одежда | Сплошные купальники",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 323
+          }
+        ]
+      },
+      {
+        "id": 328,
+        "name": "Нижнее бельё и домашняя одежда",
+        "eng_name": "underwear_home_wear_",
+        "is_all": false,
+        "full_name": "Одежда | Нижнее бельё и домашняя одежда",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 269,
+        "children": [
+          {
+            "id": 329,
+            "name": "Все нижнее бельё и домашняя одежда",
+            "eng_name": "underwear_home_wear",
+            "is_all": true,
+            "full_name": "Одежда | Нижнее бельё и домашняя одежда | Все нижнее бельё и домашняя одежда",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 328
+          },
+          {
+            "id": 330,
+            "name": "Домашняя одежда",
+            "eng_name": "home_clothes",
+            "is_all": false,
+            "full_name": "Одежда | Нижнее бельё и домашняя одежда | Домашняя одежда",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 328
+          },
+          {
+            "id": 331,
+            "name": "Носки",
+            "eng_name": "socks",
+            "is_all": false,
+            "full_name": "Одежда | Нижнее бельё и домашняя одежда | Носки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 328
+          },
+          {
+            "id": 332,
+            "name": "Бюстгальтеры",
+            "eng_name": "bras",
+            "is_all": false,
+            "full_name": "Одежда | Нижнее бельё и домашняя одежда | Бюстгальтеры",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 328
+          },
+          {
+            "id": 333,
+            "name": "Трусы",
+            "eng_name": "underpants",
+            "is_all": false,
+            "full_name": "Одежда | Нижнее бельё и домашняя одежда | Трусы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 328
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 334,
+    "name": "Сумки",
+    "eng_name": "bags_",
+    "is_all": false,
+    "full_name": "Сумки",
+    "score": 10,
+    "score_product_page": 0,
+    "parent_category": null,
+    "children": [
+      {
+        "id": 335,
+        "name": "Все сумки",
+        "eng_name": "bags",
+        "is_all": true,
+        "full_name": "Сумки | Все сумки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 336,
+        "name": "Сумки через плечо",
+        "eng_name": "crossbody_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки через плечо",
+        "score": 10,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 337,
+        "name": "Сумки на плечо",
+        "eng_name": "shoulder_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки на плечо",
+        "score": 10,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 338,
+        "name": "Сумки с ручками",
+        "eng_name": "handbags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки с ручками",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 339,
+        "name": "Сумки на грудь",
+        "eng_name": "chest_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки на грудь",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 340,
+        "name": "Сумки на пояс",
+        "eng_name": "waist_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки на пояс",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 341,
+        "name": "Сумки тоут",
+        "eng_name": "tote_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки тоут",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 342,
+        "name": "Сумки хобо",
+        "eng_name": "hobo_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки хобо",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 343,
+        "name": "Сумки вёдра",
+        "eng_name": "bucket_bags",
+        "is_all": false,
+        "full_name": "Сумки | Сумки вёдра",
+        "score": 1,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 344,
+        "name": "Рюкзаки",
+        "eng_name": "backpacks",
+        "is_all": false,
+        "full_name": "Сумки | Рюкзаки",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 345,
+        "name": "Портфели",
+        "eng_name": "formal_case",
+        "is_all": false,
+        "full_name": "Сумки | Портфели",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 346,
+        "name": "Клатчи",
+        "eng_name": "clutches",
+        "is_all": false,
+        "full_name": "Сумки | Клатчи",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 347,
+        "name": "Кошельки",
+        "eng_name": "wallets",
+        "is_all": false,
+        "full_name": "Сумки | Кошельки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 348,
+        "name": "Кардхолдеры",
+        "eng_name": "cardholders",
+        "is_all": false,
+        "full_name": "Сумки | Кардхолдеры",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 349,
+        "name": "Обложки на паспорт",
+        "eng_name": "passport_covers",
+        "is_all": false,
+        "full_name": "Сумки | Обложки на паспорт",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 350,
+        "name": "Косметички",
+        "eng_name": "makeup_bags",
+        "is_all": false,
+        "full_name": "Сумки | Косметички",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 351,
+        "name": "Спортивные сумки",
+        "eng_name": "sport_bags",
+        "is_all": false,
+        "full_name": "Сумки | Спортивные сумки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 352,
+        "name": "Чемоданы и дорожные сумки",
+        "eng_name": "suitcases",
+        "is_all": false,
+        "full_name": "Сумки | Чемоданы и дорожные сумки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      },
+      {
+        "id": 353,
+        "name": "Аксессуары для сумок",
+        "eng_name": "bags_accessories",
+        "is_all": false,
+        "full_name": "Сумки | Аксессуары для сумок",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 334
+      }
+    ]
+  },
+  {
+    "id": 354,
+    "name": "Аксессуары",
+    "eng_name": "accessories_",
+    "is_all": false,
+    "full_name": "Аксессуары",
+    "score": 0,
+    "score_product_page": 0,
+    "parent_category": null,
+    "children": [
+      {
+        "id": 355,
+        "name": "Все аксессуары",
+        "eng_name": "accessories",
+        "is_all": true,
+        "full_name": "Аксессуары | Все аксессуары",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 356,
+        "name": "Ремни",
+        "eng_name": "belts",
+        "is_all": false,
+        "full_name": "Аксессуары | Ремни",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 357,
+        "name": "Шарфы",
+        "eng_name": "scarfs",
+        "is_all": false,
+        "full_name": "Аксессуары | Шарфы",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 358,
+        "name": "Перчатки",
+        "eng_name": "gloves",
+        "is_all": false,
+        "full_name": "Аксессуары | Перчатки",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 359,
+        "name": "Головные уборы",
+        "eng_name": "all_hats_",
+        "is_all": false,
+        "full_name": "Аксессуары | Головные уборы",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 354,
+        "children": [
+          {
+            "id": 360,
+            "name": "Все головные уборы",
+            "eng_name": "all_hats",
+            "is_all": true,
+            "full_name": "Аксессуары | Головные уборы | Все головные уборы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 359
+          },
+          {
+            "id": 361,
+            "name": "Кепки",
+            "eng_name": "caps",
+            "is_all": false,
+            "full_name": "Аксессуары | Головные уборы | Кепки",
+            "score": 5,
+            "score_product_page": 0,
+            "parent_category": 359
+          },
+          {
+            "id": 362,
+            "name": "Шапки",
+            "eng_name": "hats",
+            "is_all": false,
+            "full_name": "Аксессуары | Головные уборы | Шапки",
+            "score": 7,
+            "score_product_page": 0,
+            "parent_category": 359
+          },
+          {
+            "id": 363,
+            "name": "Панамы",
+            "eng_name": "panamas",
+            "is_all": false,
+            "full_name": "Аксессуары | Головные уборы | Панамы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 359
+          },
+          {
+            "id": 364,
+            "name": "Шляпы",
+            "eng_name": "sun_hats",
+            "is_all": false,
+            "full_name": "Аксессуары | Головные уборы | Шляпы",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 359
+          },
+          {
+            "id": 365,
+            "name": "Береты",
+            "eng_name": "berets_hats",
+            "is_all": false,
+            "full_name": "Аксессуары | Головные уборы | Береты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 359
+          }
+        ]
+      },
+      {
+        "id": 366,
+        "name": "Спортивные товары",
+        "eng_name": "sport_goods_",
+        "is_all": false,
+        "full_name": "Аксессуары | Спортивные товары",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354,
+        "children": [
+          {
+            "id": 367,
+            "name": "Все спортивные товары",
+            "eng_name": "sport_goods",
+            "is_all": true,
+            "full_name": "Аксессуары | Спортивные товары | Все спортивные товары",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 368,
+            "name": "Баскетбольные мячи",
+            "eng_name": "basketballs",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Баскетбольные мячи",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 369,
+            "name": "Футбольные мячи",
+            "eng_name": "footballs",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Футбольные мячи",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 370,
+            "name": "Волейбольные мячи",
+            "eng_name": "volleyballs",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Волейбольные мячи",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 371,
+            "name": "Спортивные перчатки",
+            "eng_name": "sports_gloves",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Спортивные перчатки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 372,
+            "name": "Спортивная экипировка",
+            "eng_name": "sports_equipment",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Спортивная экипировка",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          },
+          {
+            "id": 373,
+            "name": "Другие спортивные товары",
+            "eng_name": "other_sport_goods",
+            "is_all": false,
+            "full_name": "Аксессуары | Спортивные товары | Другие спортивные товары",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 366
+          }
+        ]
+      },
+      {
+        "id": 374,
+        "name": "Украшения",
+        "eng_name": "jewelries_",
+        "is_all": false,
+        "full_name": "Аксессуары | Украшения",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354,
+        "children": [
+          {
+            "id": 375,
+            "name": "Все украшения",
+            "eng_name": "jewelries",
+            "is_all": true,
+            "full_name": "Аксессуары | Украшения | Все украшения",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 376,
+            "name": "Цепочки",
+            "eng_name": "necklaces",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Цепочки",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 377,
+            "name": "Браслеты",
+            "eng_name": "bracelets",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Браслеты",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 378,
+            "name": "Кольца",
+            "eng_name": "rings",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Кольца",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 379,
+            "name": "Серьги",
+            "eng_name": "earrings",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Серьги",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 380,
+            "name": "Кулоны",
+            "eng_name": "pendants",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Кулоны",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 381,
+            "name": "Брошь",
+            "eng_name": "brooch",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Брошь",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          },
+          {
+            "id": 382,
+            "name": "Другие украшения",
+            "eng_name": "other_jewelries",
+            "is_all": false,
+            "full_name": "Аксессуары | Украшения | Другие украшения",
+            "score": 0,
+            "score_product_page": 0,
+            "parent_category": 374
+          }
+        ]
+      },
+      {
+        "id": 383,
+        "name": "Bearbricks и другие коллекционные предметы",
+        "eng_name": "collectibles",
+        "is_all": false,
+        "full_name": "Аксессуары | Bearbricks и другие коллекционные предметы",
+        "score": 5,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 384,
+        "name": "Солнцезащитные очки",
+        "eng_name": "sunglasses",
+        "is_all": false,
+        "full_name": "Аксессуары | Солнцезащитные очки",
+        "score": 2,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 385,
+        "name": "Оправы для очков",
+        "eng_name": "optical_glasses",
+        "is_all": false,
+        "full_name": "Аксессуары | Оправы для очков",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 386,
+        "name": "Очешники",
+        "eng_name": "glasses_cases",
+        "is_all": false,
+        "full_name": "Аксессуары | Очешники",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 387,
+        "name": "Галстуки",
+        "eng_name": "ties",
+        "is_all": false,
+        "full_name": "Аксессуары | Галстуки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 388,
+        "name": "Часы",
+        "eng_name": "watches",
+        "is_all": false,
+        "full_name": "Аксессуары | Часы",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 389,
+        "name": "Духи",
+        "eng_name": "perfumes",
+        "is_all": false,
+        "full_name": "Аксессуары | Духи",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 390,
+        "name": "Косметика",
+        "eng_name": "cosmetics",
+        "is_all": false,
+        "full_name": "Аксессуары | Косметика",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 391,
+        "name": "Брелоки",
+        "eng_name": "keychains",
+        "is_all": false,
+        "full_name": "Аксессуары | Брелоки",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 392,
+        "name": "Чехлы для телефона",
+        "eng_name": "phone_cases",
+        "is_all": false,
+        "full_name": "Аксессуары | Чехлы для телефона",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 393,
+        "name": "Аксессуары для техники",
+        "eng_name": "tech_accessories",
+        "is_all": false,
+        "full_name": "Аксессуары | Аксессуары для техники",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      },
+      {
+        "id": 394,
+        "name": "Другие аксессуары",
+        "eng_name": "other_accessories",
+        "is_all": false,
+        "full_name": "Аксессуары | Другие аксессуары",
+        "score": 0,
+        "score_product_page": 0,
+        "parent_category": 354
+      }
+    ]
+  }
+]

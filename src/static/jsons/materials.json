@@ -1,0 +1,72 @@
+[
+  {
+    "id": 15,
+    "name": "Пух",
+    "eng_name": "feather"
+  },
+  {
+    "id": 16,
+    "name": "Хлопок",
+    "eng_name": "cotton"
+  },
+  {
+    "id": 17,
+    "name": "Кожа",
+    "eng_name": "leather"
+  },
+  {
+    "id": 18,
+    "name": "Кашемир",
+    "eng_name": "cashmere"
+  },
+  {
+    "id": 19,
+    "name": "Шерсть",
+    "eng_name": "wool"
+  },
+  {
+    "id": 20,
+    "name": "Нейлон",
+    "eng_name": "nylon"
+  },
+  {
+    "id": 21,
+    "name": "Полиэстер",
+    "eng_name": "polyester"
+  },
+  {
+    "id": 22,
+    "name": "Ткань",
+    "eng_name": "fabric"
+  },
+  {
+    "id": 23,
+    "name": "Деним",
+    "eng_name": "denim"
+  },
+  {
+    "id": 24,
+    "name": "Шёлк",
+    "eng_name": "silk"
+  },
+  {
+    "id": 25,
+    "name": "Замша",
+    "eng_name": "suede"
+  },
+  {
+    "id": 26,
+    "name": "Мех",
+    "eng_name": "fur"
+  },
+  {
+    "id": 27,
+    "name": "Атлас",
+    "eng_name": "satin"
+  },
+  {
+    "id": 28,
+    "name": "Другой",
+    "eng_name": "other_material"
+  }
+]

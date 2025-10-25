@@ -1,5 +1,9 @@
 import {$host} from "@/http/index";
-
+import collabs_filter_data from '@/static/jsons/collabs.json'
+import tree_cat_filter_data from '@/static/jsons/tree_cat.json'
+import tree_line_filter_data from '@/static/jsons/tree_line.json'
+import colors_filter_data from '@/static/jsons/colors.json'
+import materials_filter_data from '@/static/jsons/materials.json'
 export async function fetchProductsPage(query, token = '') {
     let allQuery = ''
     Object.keys(query).forEach(key => {
@@ -11,6 +15,7 @@ export async function fetchProductsPage(query, token = '') {
             allQuery +=`${key}=${query[key]}&`
         }
     })
+    console.log(allQuery)
     if (!token) {
         const {data} = await $host.get(`product/products/?${allQuery}`)
         return data
@@ -32,7 +37,7 @@ export async function fetchPagesCnt(query, token = '') {
             allQuery +=`${key}=${query[key]}&`
         }
     })
-    console.log(`product/products_count?${allQuery}`)
+    // console.log(`product/products_count?${allQuery}`)
     //TODO log
     if (!token) {
         const {data} = await $host.get(`product/products_count?${allQuery}`)
@@ -45,6 +50,22 @@ export async function fetchPagesCnt(query, token = '') {
     }
 }
 export async function fetchFilter(filter) {
+    if (filter==="colors"){
+        return colors_filter_data
+    }
+    if (filter==="tree_cat"){
+        return tree_cat_filter_data
+    }
+    if (filter==="tree_line"){
+        return tree_line_filter_data
+    }
+    if (filter==="materials"){
+        return materials_filter_data
+    }
+    if (filter==="collabs"){
+        return collabs_filter_data
+    }
+
     const {data} = await $host.get(`product/${filter}`)
     return data
 }

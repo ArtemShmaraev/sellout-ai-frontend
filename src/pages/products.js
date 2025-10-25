@@ -28,7 +28,17 @@ import cn from "classnames";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
-    const products = await fetchProductsPage(context.query, token)
+    const gender = cookies['selected_gender']; // Получаем 'gender' из куки или устанавливаем значение по умолчанию 'all'
+    let products;
+    if (gender && !("gender" in context.query)){
+        products = await fetchProductsPage({...context.query, gender}, token);
+    }
+    else{
+        products = await fetchProductsPage(context.query, token)
+    }
+
+
+
     const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
     const colors = await fetchFilter('colors')
@@ -128,15 +138,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         return title
 
     }
-    const getTitleWithGender = () => {
-        let title = desktopStore.isDesktop ? products.desktop.title_with_gender : products.mobile.title_with_gender
-        if (title === 'sellout' || title === "") {
-            title = 'Sellout'
-        }
-        // console.log(title);
-        return title
-
-    }
 
 
     const [visible, setVisible] = useState(true);
@@ -154,8 +155,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         window.addEventListener('scroll', checkScroll);
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
-
-
 
 
 
