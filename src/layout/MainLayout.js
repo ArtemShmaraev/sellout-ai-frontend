@@ -63,7 +63,7 @@ const MainLayout = ({children}) => {
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();
         // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
+        // return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
 
 
