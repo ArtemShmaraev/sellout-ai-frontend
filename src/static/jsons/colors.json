@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "white",
+    "is_main_color": true,
+    "russian_name": "Белый",
+    "hex": "#ffffff"
+  },
+  {
+    "id": 2,
+    "name": "silver",
+    "is_main_color": true,
+    "russian_name": "Серебряный",
+    "hex": "#D9DADB"
+  },
+  {
+    "id": 3,
+    "name": "neutrals",
+    "is_main_color": true,
+    "russian_name": "Нейтральный",
+    "hex": "#fce5cd"
+  },
+  {
+    "id": 4,
+    "name": "yellow",
+    "is_main_color": true,
+    "russian_name": "Жёлтый",
+    "hex": "#FFEB3B"
+  },
+  {
+    "id": 5,
+    "name": "gold",
+    "is_main_color": true,
+    "russian_name": "Золотой",
+    "hex": "#E7CF27"
+  },
+  {
+    "id": 6,
+    "name": "green",
+    "is_main_color": true,
+    "russian_name": "Зелёный",
+    "hex": "#4CAF50"
+  },
+  {
+    "id": 7,
+    "name": "orange",
+    "is_main_color": true,
+    "russian_name": "Оранжевый",
+    "hex": "#F57C00"
+  },
+  {
+    "id": 8,
+    "name": "pink",
+    "is_main_color": true,
+    "russian_name": "Розовый",
+    "hex": "#F06292"
+  },
+  {
+    "id": 9,
+    "name": "red",
+    "is_main_color": true,
+    "russian_name": "Красный",
+    "hex": "#D50000"
+  },
+  {
+    "id": 10,
+    "name": "blue",
+    "is_main_color": true,
+    "russian_name": "Синий",
+    "hex": "#0288D1"
+  },
+  {
+    "id": 11,
+    "name": "purple",
+    "is_main_color": true,
+    "russian_name": "Фиолетовый",
+    "hex": "#6A1B9A"
+  },
+  {
+    "id": 16,
+    "name": "grey",
+    "is_main_color": true,
+    "russian_name": "Серый",
+    "hex": "#757575"
+  },
+  {
+    "id": 13,
+    "name": "black",
+    "is_main_color": true,
+    "russian_name": "Черный",
+    "hex": "#000000"
+  },
+  {
+    "id": 14,
+    "name": "brown",
+    "is_main_color": true,
+    "russian_name": "Коричневый",
+    "hex": "#6D4C41"
+  },
+  {
+    "id": 15,
+    "name": "multicolour",
+    "is_main_color": true,
+    "russian_name": "Разноцветный",
+    "hex": "conic-gradient(red, orange, yellow, green, skyblue, blue, red)"
+  }
+]

@@ -38,22 +38,23 @@ const NavbarC = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useLayoutEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    // const [isDesktop, setIsDesktop] = useState(true)
+
+    // const checkIsDesktop = () => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setIsDesktop(false)
+    //     } else {
+    //         setIsDesktop(true)
+    //     }
+    // }
+    // useLayoutEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -62,8 +63,8 @@ const NavbarC = () => {
         setContactOpen(false)
     }
 
-    const [visible, setVisible] = useState(true);
-    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true)
+    const [prevScrollPos, setPrevScrollPos] = useState(0)
 
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
@@ -90,7 +91,9 @@ const NavbarC = () => {
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender, {expires: 2772});
-        window.location.reload();
+        router.push('/').then(() => window.location.reload());
+
+        // window.location.reload();
 
         // // Отправляем запрос на сервер с выбранным гендером
         // const page = Cookies.get('index_page');
@@ -112,13 +115,17 @@ const NavbarC = () => {
                     <div className={s.block}>
                         <div className={'desktop_d'}>
                             <Link href="/" className={selectedGender === 'F' ? s.selectedGender : s.genderButton} onClick={(e) => {
-                                e.preventDefault(); // Предотвращаем стандартное поведение ссылки
+                                e.preventDefault();
                                 handleGenderSelection('F');
+
                             }}>Женское</Link>
+
                             <Link href="/" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={(e) => {
-                                e.preventDefault(); // Предотвращаем стандартное поведение ссылки
+                                e.preventDefault();
                                 handleGenderSelection('M');
+
                             }}>Мужское</Link>
+
                             <Link href="/about" className={s.links}>О нас</Link>
                             {/*<Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>*/}
                             {/*<span className={s.links}*/}
@@ -139,7 +146,7 @@ const NavbarC = () => {
                         <Link href={'/wishlist'}>
                             <Image width={25} src={like} alt="" className={s.icons}/>
                         </Link>
-                        {isDesktop &&
+                        {desktopStore.isDesktop &&
                         userStore.isLogged
                             ?
                             <Link href={'/account'} className={s.auth_block}>
@@ -147,7 +154,7 @@ const NavbarC = () => {
                                 <div className={s.name}>{userStore.firstName}</div>
                             </Link>
                             :
-                            isDesktop &&
+                            desktopStore.isDesktop &&
                             <AuthModal>
                                 <Image width={25} src={person} alt="" className={s.icons}/>
                                 <div className={s.name}>Войдите</div>

@@ -63,7 +63,7 @@ const MainLayout = ({children}) => {
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();
         // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
+        // return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
 
 
@@ -160,7 +160,7 @@ const MainLayout = ({children}) => {
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
-            {desktopStore.animation && <AnimationSellout/>}
+            {(desktopStore.animation) && <AnimationSellout/>}
             <div style={{display: 'none'}}>Front-end by Mikhail Valuev</div>
         </>
     );

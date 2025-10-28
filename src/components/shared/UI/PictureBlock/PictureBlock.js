@@ -38,7 +38,7 @@ const PictureBlock = ({obj, className, type}) => {
                                 <div>
                                     {obj.title_with_gender === 'sellout'
                                         ?
-                                        <Image src={logo} alt='' className={s.logo} width={200}/>
+                                        <Image src={logo} alt='' className={s.logo} width={200} loading={"eager"}/>
                                         :
                                         <h3 className={'text-black'}>{obj.title_with_gender}</h3>
                                     }
@@ -55,7 +55,7 @@ const PictureBlock = ({obj, className, type}) => {
                             <div className={s.img_block}>
                                 <div className={s.img_cont}>
                                     <Image src={obj.photo} alt='' fill={true} className={s.img}
-                                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}/>
+                                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'} loading={"eager"}/>
 
 
                                     <Image src={desktop} alt=''
