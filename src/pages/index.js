@@ -148,7 +148,7 @@ export default function Home({data}) {
                         "bigVideo": el.bigVideo
                     }}/>
                 )
-            } else if (el.type === 'complexMainPageBlockSTOPPED') {
+            } else if (el.type === 'complexMainPageBlock') {
                 arr.push(
                     <ComplexMainPageBlock obj={{
                         "title": el.title,
@@ -248,14 +248,14 @@ export default function Home({data}) {
                                     </div>
                                     <div>
                                         <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                            <a href="/about">
+                                            <Link href="/about">
                                                 <Image
                                                     src={mainbig}
                                                     alt="Description of your image"
                                                     layout="responsive"
                                                     loading={'eager'}
                                                 />
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -280,14 +280,14 @@ export default function Home({data}) {
 
                                     </div>
                                     <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                        <a href="/about">
+                                        <Link href="/about">
                                             <Image
                                                 src={mainbigMob}
                                                 alt="Description of your image"
                                                 layout="responsive"
                                                 loading={'eager'}
                                             />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>}
                             <div className={s.text_container} style={{marginTop: 0}}>

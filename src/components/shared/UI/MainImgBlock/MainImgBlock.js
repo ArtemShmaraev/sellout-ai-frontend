@@ -51,7 +51,7 @@ const MainImgBlock = ({obj, className}) => {
             </div>
             <div className={s.img_block}>
                 <div className={s.img_cont}>
-                    <Image src={obj.photo} alt='' fill={true} loading={'eager'} className={s.img}
+                    <Image src={obj.photo} alt='' fill={true} loading={'lazy'} className={s.img}
                            onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
                     />
 
