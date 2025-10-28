@@ -140,7 +140,7 @@ export default function Home({data}) {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlocka') {
+            if (el.type === 'firstMainBlockSTOPPED') {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftSmallVideo": el.leftSmallVideo,
@@ -148,7 +148,7 @@ export default function Home({data}) {
                         "bigVideo": el.bigVideo
                     }}/>
                 )
-            } else if (el.type === 'complexMainPageBlock') {
+            } else if (el.type === 'complexMainPageBlockSTOPPED') {
                 arr.push(
                     <ComplexMainPageBlock obj={{
                         "title": el.title,
