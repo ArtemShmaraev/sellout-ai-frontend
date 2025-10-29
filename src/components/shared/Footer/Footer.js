@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './Footer.module.css'
 import {Col, Row} from "react-bootstrap";
 import tg from '@/static/icons/tg.svg'
@@ -31,24 +31,26 @@ import returnImg from "@/static/icons/arrow-return-left.svg";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import inst_star from "@/static/icons/instagram_star.svg";
 import inst_star_white from "@/static/icons/instagram_star_white.svg";
+import {Context} from "@/context/AppWrapper";
 
 const Footer = () => {
-    const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+
+    const {desktopStore} = useContext(Context)
+    // const checkIsDesktop = () => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setIsDesktop(false)
+    //     } else {
+    //         setIsDesktop(true)
+    //     }
+    // }
+    // useEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -67,7 +69,7 @@ const Footer = () => {
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>
-                {isDesktop
+                {desktopStore.isDesktop
                     ?
                     <Row>
                         <Col lg={4} className={s.footer_col}>
@@ -776,13 +778,13 @@ const Footer = () => {
                 <Row className={'w-100'}>
                     <Col lg={4}>
                         <div className={s.social_media}>
-                            <h4 className={s.row2} style={isDesktop ? {} : {fontSize:24}}>Мы в социальных сетях:</h4>
+                            <h4 className={s.row2} style={desktopStore.isDesktop ? {} : {fontSize:24}}>Мы в социальных сетях:</h4>
                             <div className={s.icons_block}>
                                 <a href={'https://t.me/selloutsu'}>
-                                    <Image src={tg} height={isDesktop ? 27 : 40} alt="" className={s.icon}/>
+                                    <Image src={tg} height={desktopStore.isDesktop ? 27 : 40} alt="" className={s.icon}/>
                                 </a>
                                 <a href={'https://vk.com/sellout_official'}>
-                                    <Image src={vk} height={isDesktop ? 27 : 40} alt="" className={s.icon}/>
+                                    <Image src={vk} height={desktopStore.isDesktop ? 27 : 40} alt="" className={s.icon}/>
                                 </a>
                             </div>
                         </div>
