@@ -140,7 +140,7 @@ export default function Home({data}) {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlocka') {
+            if (el.type === 'firstMainBlockSTOPPED') {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftSmallVideo": el.leftSmallVideo,
@@ -248,14 +248,14 @@ export default function Home({data}) {
                                     </div>
                                     <div>
                                         <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                            <a href="/about">
+                                            <Link href="/about">
                                                 <Image
                                                     src={mainbig}
                                                     alt="Description of your image"
                                                     layout="responsive"
                                                     loading={'eager'}
                                                 />
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -280,14 +280,14 @@ export default function Home({data}) {
 
                                     </div>
                                     <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                        <a href="/about">
+                                        <Link href="/about">
                                             <Image
                                                 src={mainbigMob}
                                                 alt="Description of your image"
                                                 layout="responsive"
                                                 loading={'eager'}
                                             />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>}
                             <div className={s.text_container} style={{marginTop: 0}}>

@@ -6,6 +6,8 @@ import kylie from "/src/static/img/kylie.png"
 import shoe from "/src/static/img/shoe.png"
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
+import desktop from "@/static/img/desktop_background.jpg";
+import mobile from "@/static/img/big_bg.jpg";
 
 const ComplexMainPageScroll = ({obj}) => {
     const scrollableBlockArr = []
@@ -63,15 +65,39 @@ const ComplexMainPageBlock = ({obj}) => {
             )}
 
             {obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (
-                <div>
-                    <Link href={obj.fullWidthImage.url}>
-                        <img
-                            src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
-                            alt="Image"
-                            style={{width: '100%', marginTop: 70, borderRadius: 4}}
+                <div className={s.img_block}>
+                    <div className={s.img_cont}>
+                        <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''
+                               fill={true} loading={'lazy'} className={s.img}
+                               sizes={'100%'} quality={100}
                         />
-                    </Link>
+                    </div>
                 </div>
+                // <div>
+                //     <Link href={obj.fullWidthImage.url}>
+                //         <img
+                //             src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
+                //             alt="Image"
+                //             style={isDesktop ? {width: '100%', marginTop: 70, borderRadius: 4} : {
+                //                 width: '100%',
+                //                 marginTop: 70,
+                //                 borderRadius: 4,
+                //                 display: "none"
+                //             }}
+                //         />
+                //         <img
+                //             src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
+                //             alt="Image"
+                //             style={isDesktop ? {
+                //                 width: '100%',
+                //                 marginTop: 70,
+                //                 borderRadius: 4,
+                //                 display: "none"
+                //             } : {width: '100%', marginTop: 70, borderRadius: 4}}
+                //         />
+                //     </Link>
+                // </div>
+
             )}
 
             {obj.imagesInRow && obj.imagesInRow.length > 0 && (
@@ -82,6 +108,7 @@ const ComplexMainPageBlock = ({obj}) => {
                                 src={isDesktop ? imageData.imageDesktop : imageData.imageMobile}
                                 alt={imageData.text}
                                 className={s.image}
+                                loading={"lazy"}
                             />
                             <div className={s.textContainer}>
                                 {imageData.title &&
@@ -120,7 +147,8 @@ const ComplexMainPageBlock = ({obj}) => {
             {obj.productsBlocks && Object.keys(obj.productsBlocks).length > 0 && (
                 <div className={s.productsImagesContainer}>
                     {obj.productsBlocks.blocks.map((imageData, index) => (
-                        <Link key={index} href={imageData.url} className={s.imageLink} style={{width: productBlocksWidth}}>
+                        <Link key={index} href={imageData.url} className={s.imageLink}
+                              style={{width: productBlocksWidth}}>
                             <img
                                 src={imageData.image}
                                 alt={imageData.text}

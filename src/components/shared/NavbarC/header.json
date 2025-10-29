@@ -816,7 +816,6 @@
         "name": "New Balance 550",
         "query_name": "new_balance_550"
       },
-
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -939,7 +938,6 @@
         "name": "New Balance 550",
         "query_name": "new_balance_550"
       },
-
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -991,14 +989,6 @@
         "query_name": "adidas_yeezy_350"
       },
       {
-        "name": "adidas Yeezy 500",
-        "query_name": "adidas_yeezy_500"
-      },
-      {
-        "name": "adidas Yeezy 700",
-        "query_name": "adidas_yeezy_700"
-      },
-      {
         "name": "adidas Yeezy Slide",
         "query_name": "adidas_yeezy_slide"
       },
@@ -1017,6 +1007,10 @@
       {
         "name": "adidas Gazelle",
         "query_name": "adidas_gazelle"
+      },
+      {
+        "name": "adidas Samba",
+        "query_name": "adidas_samba"
       },
       {
         "name": "Converse Chuck Taylor",
@@ -1062,7 +1056,6 @@
         "name": "New Balance 550",
         "query_name": "new_balance_550"
       },
-
       {
         "name": "New Balance 990",
         "query_name": "new_balance_990"
@@ -1106,6 +1099,10 @@
       {
         "name": "Vans Old Skool",
         "query_name": "vans_old_skool"
+      },
+      {
+        "name": "Vans Knu Skool",
+        "query_name": "vans_knu"
       }
     ]
   },
@@ -1248,7 +1245,6 @@
         "name": "Converse",
         "query_name": "converse"
       },
-
       {
         "name": "Jimmy Choo",
         "query_name": "jimmy_choo"
@@ -2042,12 +2038,10 @@
         "name": "Пиджаки",
         "query_name": "jackets"
       },
-
       {
         "name": "Верхняя одежда",
         "query_name": "outerwear"
       },
-
       {
         "name": "Куртки",
         "query_name": "coats_jackets"
