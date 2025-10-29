@@ -65,14 +65,17 @@ const ComplexMainPageBlock = ({obj}) => {
             )}
 
             {obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (
-                <div className={s.img_block}>
-                    <div className={s.img_cont}>
-                        <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''
-                               fill={true} loading={'lazy'} className={s.img}
-                               sizes={'100%'} quality={100}
-                        />
-                    </div>
+                <div className={s.animation_container}>
+                    <img src={obj.fullWidthImage.mobile} alt="Image 1"/>
                 </div>
+                // <div className={s.img_block}>
+                //     <div className={s.img_cont}>
+                //         <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''
+                //                fill={true} loading={'lazy'} className={s.img}
+                //                sizes={'100%'} quality={100}
+                //         />
+                //     </div>
+                // </div>
                 // <div>
                 //     <Link href={obj.fullWidthImage.url}>
                 //         <img

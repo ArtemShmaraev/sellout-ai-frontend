@@ -56,7 +56,7 @@ const NavbarNoGender = () => {
         checkIsDesktop();
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    }, [])
 
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
@@ -102,6 +102,7 @@ const NavbarNoGender = () => {
         //
         // // Закрываем модальное окно
         // setShowGenderModal(false);
+        desktopStore.setShowGenderModal(false)
     };
 
 
@@ -113,13 +114,11 @@ const NavbarNoGender = () => {
                         <div>
                             <div className={s.links}>
                                 <Link href="/" className={s.leftLinks} onClick={() => {
-                                    handleGenderSelection('M');
-                                    window.location.href = e.currentTarget.href;}}>
+                                    handleGenderSelection('M');}}>
                                     Мужское
                                 </Link>
-                                <Link href="/" className={s.leftLinks} onClick={(e) => {
-                                    handleGenderSelection('F');
-                                    window.location.href = e.currentTarget.href;}}>
+                                <Link href="/" className={s.leftLinks} onClick={() => {
+                                    handleGenderSelection('F');}}>
                                     Женское
                                 </Link>
                             </div>

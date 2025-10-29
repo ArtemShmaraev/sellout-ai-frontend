@@ -3,7 +3,7 @@ import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import Head from "next/head";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
@@ -23,6 +23,8 @@ import mainbigMob from "/src/static/img/Group 74.png"
 import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
+import {observer} from "mobx-react-lite";
+import {Context} from "@/context/AppWrapper";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -48,7 +50,8 @@ export const getServerSideProps = async (context) => {
     }
     return {props: {data}};
 }
-export default function Home({data}) {
+const Home = ({data}) => {
+    const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
@@ -75,6 +78,7 @@ export default function Home({data}) {
         if (savedGender) {
             // Gender is already selected, you can use it as needed
             setSelectedGender(savedGender);
+            setShowGenderModal(false);
         } else {
             // Gender is not selected, show the gender selection modal
             setShowGenderModal(true);
@@ -90,7 +94,6 @@ export default function Home({data}) {
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender, {expires: 2772});
-        setSelectedGender(gender)
 
         // Отправляем запрос на сервер с выбранным гендером
         const page = Cookies.get('index_page');
@@ -103,6 +106,12 @@ export default function Home({data}) {
         // Закрываем модальное окно
         setShowGenderModal(false);
     };
+
+    useEffect(() => {
+        if (Cookies.get('selected_gender')) {
+            handleGenderSelection(Cookies.get('selected_gender'))
+        }
+    }, [desktopStore.showGenderModal])
      // Пустой массив зависимостей, чтобы useEffect вызывался только один раз
 
     // useEffect(() => {
@@ -219,7 +228,7 @@ export default function Home({data}) {
                 />
             </Head>
             <div>
-                {showGenderModal ? (
+                {desktopStore.showGenderModal ? (
                         <div>
                             {isDesktop ?
                                 <div>
@@ -290,6 +299,7 @@ export default function Home({data}) {
                                         </Link>
                                     </div>
                                 </div>}
+                            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
                             <div className={s.text_container} style={{marginTop: 0}}>
                                 <div className={s.text}>
                                     Не нашли то, что искали? <br/>
@@ -335,7 +345,7 @@ export default function Home({data}) {
         </MainLayout>
     )
 };
-
+export default observer(Home)
 
 
 

@@ -7,6 +7,7 @@ class DesktopStore {
         this._filtersOpen = false
         this._navbarVisible = true
         this._faqCnt = 0
+        this._showGenderModal = true
         makeAutoObservable(this)
     }
     setIsDesktop(bool) {
@@ -38,6 +39,12 @@ class DesktopStore {
     }
     get faqCnt() {
         return this._faqCnt
+    }
+    get showGenderModal() {
+        return this._showGenderModal
+    }
+    setShowGenderModal(gender) {
+        this._showGenderModal = gender
     }
 }
 
