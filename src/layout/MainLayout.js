@@ -9,8 +9,7 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSellout";
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
-import {useRouter} from 'next/router';
-import {commands} from "next/dist/lib/commands"; // Assuming you're using Next.js
+import { useRouter } from 'next/router'; // Assuming you're using Next.js
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
@@ -35,15 +34,14 @@ const MainLayout = ({children}) => {
     //         setSelectedGender(Cookies.get('selected_gender'))
     //     }
     // })
-    const isMainPage = router.pathname === '/';
 
     useLayoutEffect(() => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
-        desktopStore.setShowGenderModal(!(selectedGender === 'M' || selectedGender === 'F' || !isMainPage))
+        setHeaderCustom(selectedGender === 'M' || selectedGender === 'F' || router.pathname !== '/' )
 
-    }, [])
+    })
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -58,6 +56,7 @@ const MainLayout = ({children}) => {
     // Inside your component
 
 
+
     useLayoutEffect(() => {
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
@@ -65,6 +64,7 @@ const MainLayout = ({children}) => {
         // Remove event listener on cleanup
         // return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
+
 
 
     return (
@@ -141,17 +141,17 @@ const MainLayout = ({children}) => {
                 />
             </Head>
             <div className={'body'}>
-                {desktopStore.showGenderModal ? (
-                    <NavbarNoGender/>
-                ) : (
+                {headerCustom ? (
                     <NavbarC/>
+                ) : (
+                    <NavbarNoGender/>
                 )}
-                {desktopStore.showGenderModal ? (
-                    <div>
+                {headerCustom ? (
+                    <div className={'cont_up'}>
                         {children}
                     </div>
                 ) : (
-                    <div className={'cont_up'}>
+                    <div>
                         {children}
                     </div>
                 )}
