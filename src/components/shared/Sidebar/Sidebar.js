@@ -205,14 +205,14 @@ const Sidebar = ({photos}) => {
                                 <div style={{marginTop: -6.3}}>
                                     <div className={s.genderButtons}>
                                         <div className={s.genderHalf}>
-                                            <a href={'/'}
+                                            <a href={'/men'}
                                                 className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
                                                 onClick={() => handleGenderSelection('M')}>Мужское
                                             </a>
                                         </div>
                                         <div className={s.genderSeparator}></div>
                                         <div className={s.genderHalf}>
-                                            <a href={'/'}
+                                            <a href={'/women'}
                                                 className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
                                                 onClick={() => handleGenderSelection('F')}>Женское
                                             </a>

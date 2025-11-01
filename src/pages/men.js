@@ -49,7 +49,7 @@ export const getServerSideProps = async (context) => {
     }
     return {props: {data}};
 }
-const Home = ({data}) => {
+const Men = ({data}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
@@ -197,8 +197,7 @@ const Home = ({data}) => {
                             </div>
                             <div>
                                 <Link href={'/products?' + el.url} className={s.link}
-                                >{el.productsAmount ? <span>Все {el.productsAmount} моделей</span> :
-                                    <span>Посмотреть все</span>}</Link>
+                                >{el.productsAmount ? <span>Все {el.productsAmount} моделей</span> : <span>Посмотреть все</span>}</Link>
                             </div>
                         </div>
                         <ScrollableBlock>
@@ -230,102 +229,123 @@ const Home = ({data}) => {
                 />
             </Head>
             <div>
-
-                <div>
-                    {isDesktop ?
+                {!(Cookies.get('selected_gender') === 'M' || Cookies.get('selected_gender') === 'F') ? (
                         <div>
-                            <div>
-                                <div className={s.main}
-                                     style={{width: '50%', margin: '0 auto', padding: 0, float: 'left'}}>
-                                    <Link href="/women">
+                            {isDesktop ?
+                                <div>
+                                    <div>
+                                        <div className={s.main}
+                                             style={{width: '50%', margin: '0 auto', padding: 0, float: 'left'}}>
 
-                                    <Image src={kylie} alt="Description of your image"
-                                           style={{float: 'left', cursor: 'pointer'}}
-                                           layout="responsive" loading={'eager'} onClick={() => {
-                                        handleGenderSelection('F')
-                                    }}/></Link>
+                                            <Image src={kylie} alt="Description of your image"
+                                                   style={{float: 'left', cursor: 'pointer'}}
+                                                   layout="responsive" loading={'eager'} onClick={() => {
+                                                handleGenderSelection('F')
+                                            }}/>
 
+                                        </div>
+
+                                        <div className={s.main}
+                                             style={{width: '50%', margin: '0 auto', padding: 0, float: 'right'}}>
+
+                                            <Image src={man} alt="Description of your image"
+                                                   style={{float: 'left', cursor: 'pointer'}}
+                                                   layout="responsive" loading={'eager'} onClick={() => {
+                                                handleGenderSelection('M')
+                                            }}/>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                            <Link href="/about">
+                                                <Image
+                                                    src={mainbig}
+                                                    alt="Description of your image"
+                                                    layout="responsive"
+                                                    loading={'eager'}
+                                                />
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </div>
+                                :
+                                <div>
+                                    <div style={{width: '100%', margin: '0 auto', padding: 0}}>
 
-                                <div className={s.main}
-                                     style={{width: '50%', margin: '0 auto', padding: 0, float: 'right'}}>
-                                    <Link href="/men">
+                                        <Image src={kylieBig} alt="Description of your image"
+                                               style={{float: 'left', cursor: 'pointer'}}
+                                               layout="responsive" loading={'eager'}
+                                               onClick={() => handleGenderSelection('F')}/>
 
-                                    <Image src={man} alt="Description of your image"
-                                           style={{float: 'left', cursor: 'pointer'}}
-                                           layout="responsive" loading={'eager'} onClick={() => {
-                                        handleGenderSelection('M')
-                                    }}/></Link>
 
+                                    </div>
+                                    <div style={{width: '100%', margin: '0 auto', padding: 0}}>
+
+                                        <Image src={manBig} alt="Description of your image"
+                                               style={{float: 'left', cursor: "pointer"}}
+                                               layout="responsive" loading={'eager'}
+                                               onClick={() => handleGenderSelection('M')}/>
+
+
+                                    </div>
+                                    <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                        <Link href="/about">
+                                            <Image
+                                                src={mainbigMob}
+                                                alt="Description of your image"
+                                                layout="responsive"
+                                                loading={'eager'}
+                                            />
+                                        </Link>
+                                    </div>
+                                </div>}
+                            <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
+                            <div className={s.text_container} style={{marginTop: 0}}>
+                                <div className={s.text}>
+                                    Не нашли то, что искали? <br/>
+                                    Мы привезем для вас желанный лот!
                                 </div>
-                            </div>
-                            <div>
-                                <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                    <Link href="/about">
-                                        <Image
-                                            src={mainbig}
-                                            alt="Description of your image"
-                                            layout="responsive"
-                                            loading={'eager'}
-                                        />
-                                    </Link>
+                                <div className={'d-flex justify-content-center'}>
+                                    <button onClick={handleShow} className={s.toggle_btn}>
+                                        Оставить заявку
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        :
-                        <div>
-                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                <Link href="/women">
+                    )
+                    :
+                    <div>
+                        <div className={s.cont + ' custom_cont'}>
+                            <>
+                                {/* Your existing code for rendering the main content */}
+                                {renderPage()}
+                                <div className={'d-flex justify-content-center my-5'}>
+                                    <button onClick={getMore} className={s.more_btn}>
+                                        Посмотреть ещё
+                                    </button>
+                                </div>
 
-                                <Image src={kylieBig} alt="Description of your image"
-                                       style={{float: 'left', cursor: 'pointer'}}
-                                       layout="responsive" loading={'eager'}
-                                       onClick={() => handleGenderSelection('F')}/>
-                                </Link>
-
-
-                            </div>
-                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                <Link href="/men">
-
-                                <Image src={manBig} alt="Description of your image"
-                                       style={{float: 'left', cursor: "pointer"}}
-                                       layout="responsive" loading={'eager'}
-                                       onClick={() => handleGenderSelection('M')}/></Link>
-
-
-                            </div>
-                            <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                <Link href="/about">
-                                    <Image
-                                        src={mainbigMob}
-                                        alt="Description of your image"
-                                        layout="responsive"
-                                        loading={'eager'}
-                                    />
-                                </Link>
-                            </div>
-                        </div>}
-                    <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
-                    <div className={s.text_container} style={{marginTop: 0}}>
-                        <div className={s.text}>
-                            Не нашли то, что искали? <br/>
-                            Мы привезем для вас желанный лот!
+                                <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
+                            </>
                         </div>
-                        <div className={'d-flex justify-content-center'}>
-                            <button onClick={handleShow} className={s.toggle_btn}>
-                                Оставить заявку
-                            </button>
+                        <div className={s.text_container}>
+                            <div className={s.text}>
+                                Не нашли то, что искали? <br/>
+                                Мы привезем для вас желанный лот!
+                            </div>
+                            <div className={'d-flex justify-content-center'}>
+                                <button onClick={handleShow} className={s.toggle_btn}>
+                                    Оставить заявку
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                }
             </div>
         </MainLayout>
     )
 };
-export default observer(Home);
 
-
-
+export default Men;
 

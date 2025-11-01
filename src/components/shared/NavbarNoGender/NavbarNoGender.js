@@ -42,21 +42,21 @@ const NavbarNoGender = () => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
     const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    }, [])
+    // const checkIsDesktop = () => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setIsDesktop(false)
+    //     } else {
+    //         setIsDesktop(true)
+    //     }
+    // }
+    // useEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
 
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
@@ -113,11 +113,11 @@ const NavbarNoGender = () => {
                     <div className={`${s.container} custom_cont`}>
                         <div>
                             <div className={s.links}>
-                                <Link href="/" className={s.leftLinks} onClick={() => {
+                                <Link href="/men" className={s.leftLinks} onClick={() => {
                                     handleGenderSelection('M');}}>
                                     Мужское
                                 </Link>
-                                <Link href="/" className={s.leftLinks} onClick={() => {
+                                <Link href="/women" className={s.leftLinks} onClick={() => {
                                     handleGenderSelection('F');}}>
                                     Женское
                                 </Link>

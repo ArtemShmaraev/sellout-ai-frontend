@@ -16,8 +16,9 @@ const MainLayout = ({children}) => {
     const router = useRouter();
 
     const [cookieOpen, setCookieOpen] = useState(false)
-    const [headerCustom, setHeaderCustom] = useState(true)
     const [selectedGender, setSelectedGender] = useState("")
+    const [headerCustom, setHeaderCustom] = useState(true)
+
     const closeCookie = () => {
         Cookies.set('cookie_message', true, {expires: 2772})
         setCookieOpen(false)
@@ -39,9 +40,11 @@ const MainLayout = ({children}) => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
-        setHeaderCustom(selectedGender === 'M' || selectedGender === 'F' || router.pathname !== '/' )
+        setHeaderCustom(router.pathname !== '/' )
+        // console.log("Вот", headerCustom)
 
     })
+
     const checkIsDesktop = () => {
         const width = window.innerWidth
         if (width <= 1200) {
@@ -58,9 +61,11 @@ const MainLayout = ({children}) => {
 
 
     useLayoutEffect(() => {
+        // console.log("Сейчас будет анимация")
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();
+        console.log(desktopStore.isDesktop)
         // Remove event listener on cleanup
         // return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
