@@ -57,6 +57,7 @@ const Women = ({data}) => {
     const [showGenderModal, setShowGenderModal] = useState(false);
 
     useLayoutEffect(() => {
+        Cookies.set('selected_gender', "M", {expires: 2772})
         const checkIsDesktop = () => {
             const width = window.innerWidth;
             setIsDesktop(width > 1200);
@@ -90,53 +91,7 @@ const Women = ({data}) => {
         }
     }, []);
 
-    const handleGenderSelection = async (gender) => {
-        // Сохраняем выбранный гендер в куках
-        Cookies.set('selected_gender', gender, {expires: 2772});
 
-        // Отправляем запрос на сервер с выбранным гендером
-        const page = Cookies.get('index_page');
-        const token = Cookies.get('access_token');
-        const newData = await fetchMainPage(token, false, !page, page || 1, gender);
-
-        // Обновляем состояние компонента новыми данными
-        setContent(newData);
-
-        // Закрываем модальное окно
-        setShowGenderModal(false);
-    };
-
-    // useEffect(() => {
-    //     if (Cookies.get('selected_gender')) {
-    //         handleGenderSelection(Cookies.get('selected_gender'))
-    //     }
-    // }, [desktopStore.showGenderModal])
-
-
-    // Пустой массив зависимостей, чтобы useEffect вызывался только один раз
-
-    // useEffect(() => {
-    //     window.addEventListener("resize", checkIsDesktop);
-    //     // Call handler right away so state gets updated with initial window size
-    //     checkIsDesktop();
-    //     // Remove event listener on cleanup
-    //     return () => window.removeEventListener("resize", checkIsDesktop);
-    // })
-
-    // const [isPageReloaded, setIsPageReloaded] = useState(false);
-    //
-    // useEffect(() => {
-    //     // Проверяем, была ли страница перезагружена, проверяя, есть ли объект performance в браузере
-    //     if (typeof window !== 'undefined' && window.performance) {
-    //         const navigation = window.performance.getEntriesByType('navigation')[0];
-    //         if (navigation.type === 'reload') {
-    //             setIsPageReloaded(true);
-    //             const fiveHours = new Date(new Date().getTime() + 300 * 60 * 1000);
-    //             Cookies.set('index_page', 1, {expires: fiveHours})
-    //             router.push('/')
-    //         }
-    //     }
-    // }, []);
     const getMore = async () => {
         const token = Cookies.get('access_token')
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
