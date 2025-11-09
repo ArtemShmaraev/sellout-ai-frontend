@@ -64,44 +64,44 @@ const ComplexMainPageBlock = ({obj}) => {
                 </div>
             )}
 
-            {obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (
-                <div className={s.animation_container}>
-                    <img src={obj.fullWidthImage.mobile} alt="Image 1"/>
-                </div>
-                // <div className={s.img_block}>
-                //     <div className={s.img_cont}>
-                //         <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''
-                //                fill={true} loading={'lazy'} className={s.img}
-                //                sizes={'100%'} quality={100}
-                //         />
-                //     </div>
-                // </div>
-                // <div>
-                //     <Link href={obj.fullWidthImage.url}>
-                //         <img
-                //             src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
-                //             alt="Image"
-                //             style={isDesktop ? {width: '100%', marginTop: 70, borderRadius: 4} : {
-                //                 width: '100%',
-                //                 marginTop: 70,
-                //                 borderRadius: 4,
-                //                 display: "none"
-                //             }}
-                //         />
-                //         <img
-                //             src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
-                //             alt="Image"
-                //             style={isDesktop ? {
-                //                 width: '100%',
-                //                 marginTop: 70,
-                //                 borderRadius: 4,
-                //                 display: "none"
-                //             } : {width: '100%', marginTop: 70, borderRadius: 4}}
-                //         />
-                //     </Link>
-                // </div>
+            {/*{obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (*/}
+            {/*    <div className={s.animation_container}>*/}
+            {/*        <img src={obj.fullWidthImage.mobile} alt="Image 1"/>*/}
+            {/*    </div>*/}
+            {/*    <div className={s.img_block}>*/}
+            {/*        <div className={s.img_cont}>*/}
+            {/*            <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''*/}
+            {/*                   fill={true} loading={'lazy'} className={s.img}*/}
+            {/*                   sizes={'100%'} quality={100}*/}
+            {/*            />*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*    <div>*/}
+            {/*        <Link href={obj.fullWidthImage.url}>*/}
+            {/*            <img*/}
+            {/*                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
+            {/*                alt="Image"*/}
+            {/*                style={isDesktop ? {width: '100%', marginTop: 70, borderRadius: 4} : {*/}
+            {/*                    width: '100%',*/}
+            {/*                    marginTop: 70,*/}
+            {/*                    borderRadius: 4,*/}
+            {/*                    display: "none"*/}
+            {/*                }}*/}
+            {/*            />*/}
+            {/*            <img*/}
+            {/*                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
+            {/*                alt="Image"*/}
+            {/*                style={isDesktop ? {*/}
+            {/*                    width: '100%',*/}
+            {/*                    marginTop: 70,*/}
+            {/*                    borderRadius: 4,*/}
+            {/*                    display: "none"*/}
+            {/*                } : {width: '100%', marginTop: 70, borderRadius: 4}}*/}
+            {/*            />*/}
+            {/*        </Link>*/}
+            {/*    </div>*/}
 
-            )}
+            {/*)}*/}
 
             {obj.imagesInRow && obj.imagesInRow.length > 0 && (
                 <div className={s.imageContainer}>
