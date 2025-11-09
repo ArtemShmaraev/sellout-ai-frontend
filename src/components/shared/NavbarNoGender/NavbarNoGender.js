@@ -41,22 +41,7 @@ const NavbarNoGender = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    const [isDesktop, setIsDesktop] = useState(true)
-    // const checkIsDesktop = () => {
-    //     const width = window.innerWidth
-    //     if (width <= 1200) {
-    //         setIsDesktop(false)
-    //     } else {
-    //         setIsDesktop(true)
-    //     }
-    // }
-    // useEffect(() => {
-    //     window.addEventListener("resize", checkIsDesktop);
-    //     // Call handler right away so state gets updated with initial window size
-    //     checkIsDesktop();
-    //     // Remove event listener on cleanup
-    //     return () => window.removeEventListener("resize", checkIsDesktop);
-    // })
+
 
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
@@ -66,28 +51,7 @@ const NavbarNoGender = () => {
         setContactOpen(false)
     }
 
-    // const [visible, setVisible] = useState(true);
-    // const [prevScrollPos, setPrevScrollPos] = useState(0);
-    //
-    // const checkScroll = () => {
-    //     const currentScrollPos = window.pageYOffset;
-    //     const scrolledMoreThan100Pixels = (currentScrollPos - prevScrollPos > 200) || (currentScrollPos - prevScrollPos <= 0);
-    //     let visible = prevScrollPos > currentScrollPos;
-    //
-    //     if (currentScrollPos <= 0) {
-    //         visible = true;
-    //     }
-    //
-    //     if (scrolledMoreThan100Pixels) {
-    //         setPrevScrollPos(currentScrollPos);
-    //         desktopStore.setNavbarVisible(visible);
-    //     }
-    // };
-    //
-    // useEffect(() => {
-    //     window.addEventListener('scroll', checkScroll);
-    //     return () => window.removeEventListener('scroll', checkScroll);
-    // }, [prevScrollPos]);
+
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender, {expires: 2772});
@@ -108,7 +72,7 @@ const NavbarNoGender = () => {
 
     return (
         <div>
-            {isDesktop ?
+            {desktopStore.isDesktop ?
                 <header className={s.navbar}>
                     <div className={`${s.container} custom_cont`}>
                         <div>

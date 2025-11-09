@@ -38,7 +38,6 @@ const Home = ({data}) => {
             } else {
                 router.push("/women")
             }
-
         }
         const checkIsDesktop = () => {
             const width = window.innerWidth;
@@ -47,10 +46,6 @@ const Home = ({data}) => {
         checkIsDesktop();
 
     }, []);
-
-
-
-
 
 
     const [isSend, setIsSend] = useState(false)
