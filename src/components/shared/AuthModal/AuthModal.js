@@ -147,6 +147,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
             userStore.setGender(res.gender)
+            Cookies.set('selected_gender', res.gender === "male" ? "M": "F", {expires: 2772});
             setShow(false)
             const promo = Cookies.get('promo')
             if (promo) {

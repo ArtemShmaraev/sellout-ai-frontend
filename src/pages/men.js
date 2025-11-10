@@ -49,7 +49,7 @@ export const getServerSideProps = async (context) => {
     }
     return {props: {data}};
 }
-const Women = ({data}) => {
+const Men = ({data}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
@@ -219,4 +219,4 @@ const Women = ({data}) => {
     )
 };
 
-export default Women;
+export default Men;

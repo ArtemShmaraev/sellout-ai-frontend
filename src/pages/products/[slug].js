@@ -90,6 +90,7 @@ const OneProductPage = ({product, prices}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
 
+
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
     const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
