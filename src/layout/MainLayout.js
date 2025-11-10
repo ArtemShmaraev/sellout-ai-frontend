@@ -30,17 +30,13 @@ const MainLayout = ({children}) => {
 
     }, [])
 
-    // useEffect( () => {
-    //     if (Cookies.get('selected_gender')) {
-    //         setSelectedGender(Cookies.get('selected_gender'))
-    //     }
-    // })
+
 
     useLayoutEffect(() => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
-        setHeaderCustom(router.pathname !== '/' )
+        setHeaderCustom(router.pathname !== '/' || selectedGender === "M" || selectedGender === "F")
         // console.log("Вот", headerCustom)
 
     })

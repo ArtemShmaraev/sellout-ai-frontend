@@ -58,31 +58,20 @@ const Women = ({data}) => {
 
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "F", {expires: 2772})
-        const checkIsDesktop = () => {
-            const width = window.innerWidth;
-            setIsDesktop(width > 1200);
-        };
-        checkIsDesktop();
-
-        window.addEventListener('resize', checkIsDesktop);
-        return () => {
-            window.removeEventListener('resize', checkIsDesktop);
-        };
-
     }, []);
 
 
     useEffect(() => {
         // Check if the gender is already selected in cookies
-        const savedGender = Cookies.get('selected_gender');
-        if (savedGender) {
-            // Gender is already selected, you can use it as needed
-            setSelectedGender(savedGender);
-            setShowGenderModal(false);
-        } else {
-            // Gender is not selected, show the gender selection modal
-            setShowGenderModal(true);
-        }
+        // const savedGender = Cookies.get('selected_gender');
+        // if (savedGender) {
+        //     // Gender is already selected, you can use it as needed
+        //     setSelectedGender(savedGender);
+        //     setShowGenderModal(false);
+        // } else {
+        //     // Gender is not selected, show the gender selection modal
+        //     setShowGenderModal(true);
+        // }
 
         // Check if the user visited the page within the last 10 minutes
         if (!Cookies.get('index_page')) {
