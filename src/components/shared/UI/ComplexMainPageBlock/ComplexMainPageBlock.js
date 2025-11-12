@@ -72,7 +72,6 @@ const ComplexMainPageBlock = ({obj}) => {
                                 src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
                                 alt="Image"
                                 style={{width: '100%', marginTop: 70, borderRadius: 4}}
-
                             />
                         </Link>
 
