@@ -60,48 +60,82 @@ const ComplexMainPageBlock = ({obj}) => {
         <div className={s.outerContainer}>
             {obj.title && (
                 <div className={s.blockTitle}>
-                    <p>{obj.title}</p>
+                    {obj.title}
                 </div>
             )}
 
-            {/*{obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (*/}
-            {/*    <div className={s.animation_container}>*/}
-            {/*        <img src={obj.fullWidthImage.mobile} alt="Image 1"/>*/}
-            {/*    </div>*/}
-            {/*    <div className={s.img_block}>*/}
-            {/*        <div className={s.img_cont}>*/}
-            {/*            <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''*/}
-            {/*                   fill={true} loading={'lazy'} className={s.img}*/}
-            {/*                   sizes={'100%'} quality={100}*/}
-            {/*            />*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*        <Link href={obj.fullWidthImage.url}>*/}
-            {/*            <img*/}
-            {/*                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
-            {/*                alt="Image"*/}
-            {/*                style={isDesktop ? {width: '100%', marginTop: 70, borderRadius: 4} : {*/}
-            {/*                    width: '100%',*/}
-            {/*                    marginTop: 70,*/}
-            {/*                    borderRadius: 4,*/}
-            {/*                    display: "none"*/}
-            {/*                }}*/}
-            {/*            />*/}
-            {/*            <img*/}
-            {/*                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
-            {/*                alt="Image"*/}
-            {/*                style={isDesktop ? {*/}
-            {/*                    width: '100%',*/}
-            {/*                    marginTop: 70,*/}
-            {/*                    borderRadius: 4,*/}
-            {/*                    display: "none"*/}
-            {/*                } : {width: '100%', marginTop: 70, borderRadius: 4}}*/}
-            {/*            />*/}
-            {/*        </Link>*/}
-            {/*    </div>*/}
+            {obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (
+                <>
+                    <div>
+                        <Link href={obj.fullWidthImage.url}>
+                            <img
+                                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
+                                alt="Image"
+                                style={{width: '100%', marginTop: 70, borderRadius: 4}}
 
-            {/*)}*/}
+                            />
+                        </Link>
+
+                        {/*<img src={desktop} alt=''*/}
+                        {/*       className={`placeholder_img ${s.desktop}`}*/}
+                        {/*       style={isLoading ? {} : {opacity: 0}}*/}
+                        {/*/>*/}
+                        {/*<img src={mobile} alt=''*/}
+                        {/*       className={`placeholder_img ${s.mobile}`}*/}
+                        {/*       style={isLoading ? {} : {opacity: 0}}*/}
+                        {/*/>*/}
+                    </div>
+
+                    {/*<div style={{width: '100%', position: 'relative'}}>*/}
+                    {/*    <div style={{paddingBottom: '100%' /* 1:1 aspect ratio *!/}></div>*/}
+                    {/*    <div style={{position: 'absolute', width: '100%', height: '100%'}}>*/}
+                    {/*        <Image*/}
+                    {/*            src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
+                    {/*            alt="image"*/}
+                    {/*            layout="fill"*/}
+                    {/*            objectFit="contain" // Adjust as per your requirement (contain, cover, etc.)*/}
+                    {/*            unoptimized*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div>*/}
+                    {/*    <Link href={obj.fullWidthImage.url}>*/}
+                    {/*        <img*/}
+                    {/*            src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
+                    {/*            alt="Image"*/}
+                    {/*            style={isDesktop ? {width: '100%', marginTop: 70, borderRadius: 4} : {*/}
+                    {/*                width: '100%',*/}
+                    {/*                marginTop: 70,*/}
+                    {/*                borderRadius: 4,*/}
+                    {/*                display: "none"*/}
+                    {/*            }}*/}
+                    {/*        />*/}
+                    {/*        <img*/}
+                    {/*            src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}*/}
+                    {/*            alt="Image"*/}
+                    {/*            style={isDesktop ? {*/}
+                    {/*                width: '100%',*/}
+                    {/*                marginTop: 70,*/}
+                    {/*                borderRadius: 4,*/}
+                    {/*                display: "none"*/}
+                    {/*            } : {width: '100%', marginTop: 70, borderRadius: 4}}*/}
+                    {/*        />*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
+                </>
+
+                // <div className={s.animation_container}>
+                //     <img src={obj.fullWidthImage.mobile} alt="Image 1"/>
+                // </div>
+                // <div className={s.img_block}>
+                //     <div className={s.img_cont}>
+                //         <Image src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile} alt=''
+                //                fill={true} loading={'lazy'} className={s.img}
+                //                sizes={'100%'} quality={100}
+                //         />
+                //     </div>
+                // </div>
+            )}
 
             {obj.imagesInRow && obj.imagesInRow.length > 0 && (
                 <div className={s.imageContainer}>
