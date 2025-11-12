@@ -93,6 +93,7 @@ const OneProductPage = ({product, prices}) => {
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
+
     const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
     useEffect(() => {
         productStore.clearAll()
@@ -122,6 +123,9 @@ const OneProductPage = ({product, prices}) => {
             }
         }
     }, [router.asPath])
+    useEffect(() => {
+
+    }, []);
 
     useEffect(() => {
         const checkIsBot = () => {
@@ -255,6 +259,11 @@ const OneProductPage = ({product, prices}) => {
     //     return () => window.removeEventListener("resize", checkIsDesktop);
     // })
     const [isInWishlist, setIsInWishlist] = useState(product.in_wishlist)
+    useEffect(() => {
+        setIsInWishlist(product.in_wishlist)
+    }, [router.asPath])
+
+
     const addToWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
@@ -443,7 +452,7 @@ const OneProductPage = ({product, prices}) => {
                                     {/*        </button>*/}
                                     {/*    </div>*/}
                                     {/*</Splide>*/}
-                                    <ImgSlider photos={product.bucket_link}/>
+                                    <ImgSlider photos={product.bucket_link} key={router.asPath}/>
                                 </div>
                                 :
                                 <div className={s.slider}
@@ -537,7 +546,7 @@ const OneProductPage = ({product, prices}) => {
                                                         isInWishlist ? deleteFromWL() : addToWL()
                                                     }}
                                             >
-                                                <div className={s.icon_block}>
+                                                <div className={s.icon_block} key={router.asPath}>
                                                     <Image src={isInWishlist ? like_fill : like} alt="" style={{ width: '22px', height: '22px' }}/>
                                                     {/*<div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>*/}
                                                 </div>
@@ -676,7 +685,7 @@ const OneProductPage = ({product, prices}) => {
                                                     }}
                                             >
                                                 <div className={s.icon_block}>
-                                                    <Image src={isInWishlist ? like_fill : like} alt=""
+                                                    <Image  src={isInWishlist ? like_fill : like} alt=""
                                                            className={s.icons} style={{ width: '20px', height: '20px' }}/>
                                                     <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
                                                 </div>
