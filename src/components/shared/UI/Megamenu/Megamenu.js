@@ -11,6 +11,7 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
     const ref = useRef(null)
     const [isShown, setIsShown] = useState(false)
     const header = headerJson
+    // let gender = 'any'
 
 
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = {}) => {
@@ -20,6 +21,10 @@ const Megamenu = ({className, label, link, type, photos, visible}) => {
         if (Cookies.get("selected_gender")) {
             gender = genders[Cookies.get("selected_gender")]
         }
+        // if (selectedGender) {
+        //     gender = genders[selectedGender]
+        // }
+        console.log(gender)
         let obj = basicObj[gender]
         const keys = Object.keys(obj)
         for (let i = 0; i < colNum; i++) {

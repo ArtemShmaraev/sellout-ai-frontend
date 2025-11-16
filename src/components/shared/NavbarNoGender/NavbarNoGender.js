@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import s from './NavbarNoGender.module.css'
 import like from '@/static/icons/heart.svg'
 import person from '@/static/icons/person-circle.svg'
@@ -51,24 +51,23 @@ const NavbarNoGender = () => {
         setContactOpen(false)
     }
 
+    const selectedGender = Cookies.get('selected_gender')
 
-    const handleGenderSelection = async (gender) => {
-        // Сохраняем выбранный гендер в куках
-        Cookies.set('selected_gender', gender, {expires: 2772});
-
-        // // Отправляем запрос на сервер с выбранным гендером
-        // const page = Cookies.get('index_page');
-        // const token = Cookies.get('access_token');
-        // const newData = await fetchMainPage(token, false, !page, page || 1, gender);
-        //
-        // // Обновляем состояние компонента новыми данными
-        // setContent(newData);
-        //
-        // // Закрываем модальное окно
-        // setShowGenderModal(false);
-        desktopStore.setShowGenderModal(false)
-    };
-
+    // const handleGenderSelection = async (gender) => {
+    //     // Сохраняем выбранный гендер в куках
+    //     Cookies.set('selected_gender', gender, {expires: 2772});
+    //
+    //     // // Отправляем запрос на сервер с выбранным гендером
+    //     // const page = Cookies.get('index_page');
+    //     // const token = Cookies.get('access_token');
+    //     // const newData = await fetchMainPage(token, false, !page, page || 1, gender);
+    //     //
+    //     // // Обновляем состояние компонента новыми данными
+    //     // setContent(newData);
+    //     //
+    //     // // Закрываем модальное окно
+    //     // setShowGenderModal(false);
+    // };
 
     return (
         <div>
@@ -77,18 +76,16 @@ const NavbarNoGender = () => {
                     <div className={`${s.container} custom_cont`}>
                         <div>
                             <div className={s.links}>
-                                <Link href="/women" className={s.leftLinks} onClick={() => {
-                                    handleGenderSelection('F');}}>
+                                <Link href="/women" className={s.leftLinks}>
                                     Женское
                                 </Link>
-                                <Link href="/men" className={s.leftLinks} onClick={() => {
-                                    handleGenderSelection('M');}}>
+                                <Link href="/men" className={s.leftLinks}>
                                     Мужское
                                 </Link>
                             </div>
                         </div>
                         <div className={`${s.logo}`}>
-                            <Link href="/">
+                            <Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>
                                 <Image src={logo3} alt="Logo" style={{
                                     width: '350px',
                                     height: '50px',
@@ -114,7 +111,7 @@ const NavbarNoGender = () => {
                 <header className={s.navbarMob}>
                     <div className={`${s.logoMob}`}>
                         <Link href="/">
-                            <Image src={logo} alt="Logo" style={{ width: '350px', height: '50px' }}/>
+                            <Image src={logo} alt="Logo" style={{width: '350px', height: '50px'}}/>
                         </Link>
                     </div>
                 </header>

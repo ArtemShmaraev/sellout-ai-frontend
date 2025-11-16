@@ -107,7 +107,7 @@ const NavbarC = () => {
     };
     return (
 
-        <header className={cn(s.header, { [s.visible]: desktopStore.navbarVisible })} id={'navbar'}>
+        <header className={cn(s.header, {[s.visible]: desktopStore.navbarVisible})} id={'navbar'}>
             <SalesLine/>
             <div className={'custom_cont'}>
                 <div className={s.row1}>
@@ -136,7 +136,8 @@ const NavbarC = () => {
                     </div>
                     <div className={s.logo_block} style={{justifyContent: 'center'}}>
 
-                        <Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>
+                        {/*<Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>*/}
+                        <Link href="/">
 
                             <Image className={s.logo} alt='' src={logo}/>
 
@@ -163,75 +164,75 @@ const NavbarC = () => {
                         <CartIcon/>
                     </div>
                 </div>
-                <div className={s.row2}>
-                    <div className={s.block1}>
-                        <Link href={{
-                            pathname: '/products',
-                            query: {new: 'true'}
-                        }}
-                              className={s.links}>Новинки</Link>
-                        <Link href={{
-                            pathname: '/products',
-                            query: {recommendations: 'true'}
-                        }}
-                              className={s.links}>Рекомендации</Link>
-                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{
-                            pathname: '/brands',
-                        }} photos={photos} type={'brands'}/>
-                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{
-                            pathname: '/products',
-                            query: {category: 'shoes_category'}
-                        }} photos={photos} type={'shoes'}/>
-                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{
-                            pathname: '/products',
-                            query: {category: 'clothes'}
-                        }} photos={photos} type={'clothes'}/>
-                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{
-                            pathname: '/products',
-                            query: {category: 'bags'}
-                        }} type={'bags'} photos={photos}/>
-                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{
-                            pathname: '/products',
-                            query: {category: 'accessories'}
-                        }} type={'accessories'} photos={photos}/>
-                        {/*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
-                        {/*   onClick={e => {*/}
-                        {/*       e.preventDefault()*/}
-                        {/*       goToFastShip()*/}
-                        {/*   }}*/}
-                        {/*>*/}
-                        {/*    Мгновенная доставка*/}
-                        {/*    <Image src={truck} alt="" className={s.truck}/>*/}
-                        {/*</Link>*/}
-                        {/*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*/}
-                        {/*   onClick={e => {*/}
-                        {/*       e.preventDefault()*/}
-                        {/*       goToSale()*/}
-                        {/*   }}*/}
-                        {/*>Скидки</a>*/}
-                        <Link href={{
-                            pathname: '/products'
-                        }}
-                              className={s.links}
+                {/*<div className={s.row2}>*/}
+                {/*    <div className={s.block1}>*/}
+                {/*        <Link href={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {new: 'true'}*/}
+                {/*        }}*/}
+                {/*              className={s.links}>Новинки</Link>*/}
+                {/*        <Link href={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {recommendations: 'true'}*/}
+                {/*        }}*/}
+                {/*              className={s.links}>Рекомендации</Link>*/}
+                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{*/}
+                {/*            pathname: '/brands',*/}
+                {/*        }} photos={photos} type={'brands'}/>*/}
+                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {category: 'shoes_category'}*/}
+                {/*        }} photos={photos} type={'shoes'}/>*/}
+                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {category: 'clothes'}*/}
+                {/*        }} photos={photos} type={'clothes'}/>*/}
+                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {category: 'bags'}*/}
+                {/*        }} type={'bags'} photos={photos}/>*/}
+                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {category: 'accessories'}*/}
+                {/*        }} type={'accessories'} photos={photos}/>*/}
+                {/*        /!*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*!/*/}
+                {/*        /!*   onClick={e => {*!/*/}
+                {/*        /!*       e.preventDefault()*!/*/}
+                {/*        /!*       goToFastShip()*!/*/}
+                {/*        /!*   }}*!/*/}
+                {/*        /!*>*!/*/}
+                {/*        /!*    Мгновенная доставка*!/*/}
+                {/*        /!*    <Image src={truck} alt="" className={s.truck}/>*!/*/}
+                {/*        /!*</Link>*!/*/}
+                {/*        /!*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*!/*/}
+                {/*        /!*   onClick={e => {*!/*/}
+                {/*        /!*       e.preventDefault()*!/*/}
+                {/*        /!*       goToSale()*!/*/}
+                {/*        /!*   }}*!/*/}
+                {/*        /!*>Скидки</a>*!/*/}
+                {/*        <Link href={{*/}
+                {/*            pathname: '/products'*/}
+                {/*        }}*/}
+                {/*              className={s.links}*/}
 
-                        >
-                            Все товары
-                        </Link>
-                        <Link href={{
-                            pathname: '/products',
-                            query: {is_sale: 'is_sale'}
-                        }}
-                              className={s.sale_link}
+                {/*        >*/}
+                {/*            Все товары*/}
+                {/*        </Link>*/}
+                {/*        <Link href={{*/}
+                {/*            pathname: '/products',*/}
+                {/*            query: {is_sale: 'is_sale'}*/}
+                {/*        }}*/}
+                {/*              className={s.sale_link}*/}
 
-                        >
-                            Скидки
-                        </Link>
-                    </div>
-                    <div>
-                        <ElasticSearchModal/>
-                        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
-                    </div>
-                </div>
+                {/*        >*/}
+                {/*            Скидки*/}
+                {/*        </Link>*/}
+                {/*    </div>*/}
+                {/*    <div>*/}
+                {/*        <ElasticSearchModal/>*/}
+                {/*        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </header>
     );

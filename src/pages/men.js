@@ -19,7 +19,6 @@ import man from "/src/static/img/man.png"
 import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
 import mainbigMob from "/src/static/img/Group 74.png"
-import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
@@ -54,7 +53,6 @@ const Men = ({data}) => {
     const router = useRouter()
     const [content, setContent] = useState(data)
     const [isDesktop, setIsDesktop] = useState(true)
-    const [showGenderModal, setShowGenderModal] = useState(false);
 
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
@@ -73,17 +71,6 @@ const Men = ({data}) => {
 
 
     useEffect(() => {
-        // Check if the gender is already selected in cookies
-        const savedGender = Cookies.get('selected_gender');
-        if (savedGender) {
-            // Gender is already selected, you can use it as needed
-            setSelectedGender(savedGender);
-            setShowGenderModal(false);
-        } else {
-            // Gender is not selected, show the gender selection modal
-            setShowGenderModal(true);
-        }
-
         // Check if the user visited the page within the last 10 minutes
         if (!Cookies.get('index_page')) {
             const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);

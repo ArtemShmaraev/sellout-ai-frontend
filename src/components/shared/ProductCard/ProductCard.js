@@ -270,11 +270,11 @@ const ProductCard = ({cardList = false, product}) => {
                             sizes={'100%'}
                         />
                     }
-                    {/*<Image src={isDesktop ? desktop : mobile} alt=''*/}
-                    {/*       className={'placeholder_img'} fill={true}*/}
-                    {/*       style={isLoading ? {} : {opacity: 0}}*/}
-                    {/*       sizes={'100%'}*/}
-                    {/*/>*/}
+                    <Image src={isDesktop ? desktop : mobile} alt=''
+                           className={'placeholder_img'} fill={true}
+                           style={isLoading ? {} : {opacity: 0}}
+                           sizes={'100%'}
+                    />
                 </div>
             }
             <div className={s.text_block}

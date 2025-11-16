@@ -19,7 +19,6 @@ import man from "/src/static/img/man.png"
 import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
 import mainbigMob from "/src/static/img/Group 74.png"
-import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";

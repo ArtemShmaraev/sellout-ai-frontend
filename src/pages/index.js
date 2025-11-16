@@ -30,22 +30,22 @@ const Home = ({data}) => {
     const router = useRouter()
     const [isDesktop, setIsDesktop] = useState(true)
 
-    useLayoutEffect(() => {
-        const savedGender = Cookies.get('selected_gender');
-        if (savedGender) {
-            if (savedGender == "M"){
-                router.push("/men")
-            } else {
-                router.push("/women")
-            }
-        }
-        const checkIsDesktop = () => {
-            const width = window.innerWidth;
-            setIsDesktop(width > 1200);
-        };
-        checkIsDesktop();
-
-    }, []);
+    // useLayoutEffect(() => {
+    //     const savedGender = Cookies.get('selected_gender');
+    //     // if (savedGender) {
+    //     //     if (savedGender === "M") {
+    //     //         router.push("/men")
+    //     //     } else {
+    //     //         router.push("/women")
+    //     //     }
+    //     // }
+    //     const checkIsDesktop = () => {
+    //         const width = window.innerWidth;
+    //         setIsDesktop(width > 1200);
+    //     };
+    //     checkIsDesktop();
+    //
+    // }, []);
 
 
     const [isSend, setIsSend] = useState(false)
@@ -79,9 +79,7 @@ const Home = ({data}) => {
 
                                         <Image src={kylie} alt="Description of your image"
                                                style={{float: 'left', cursor: 'pointer'}}
-                                               layout="responsive" loading={'eager'} onClick={() => {
-                                            handleGenderSelection('F')
-                                        }}/></Link>
+                                               layout="responsive" loading={'eager'}/></Link>
 
                                 </div>
 
@@ -91,9 +89,7 @@ const Home = ({data}) => {
 
                                         <Image src={man} alt="Description of your image"
                                                style={{float: 'left', cursor: 'pointer'}}
-                                               layout="responsive" loading={'eager'} onClick={() => {
-                                            handleGenderSelection('M')
-                                        }}/></Link>
+                                               layout="responsive" loading={'eager'}/></Link>
 
                                 </div>
                             </div>
@@ -117,8 +113,7 @@ const Home = ({data}) => {
 
                                     <Image src={kylieBig} alt="Description of your image"
                                            style={{float: 'left', cursor: 'pointer'}}
-                                           layout="responsive" loading={'eager'}
-                                           onClick={() => handleGenderSelection('F')}/>
+                                           layout="responsive" loading={'eager'}/>
                                 </Link>
 
 
@@ -128,8 +123,7 @@ const Home = ({data}) => {
 
                                     <Image src={manBig} alt="Description of your image"
                                            style={{float: 'left', cursor: "pointer"}}
-                                           layout="responsive" loading={'eager'}
-                                           onClick={() => handleGenderSelection('M')}/></Link>
+                                           layout="responsive" loading={'eager'}/></Link>
 
 
                             </div>

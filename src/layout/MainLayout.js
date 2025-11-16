@@ -9,7 +9,7 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSellout";
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
-import { useRouter } from 'next/router'; // Assuming you're using Next.js
+import {useRouter} from 'next/router'; // Assuming you're using Next.js
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
@@ -31,7 +31,6 @@ const MainLayout = ({children}) => {
     }, [])
 
 
-
     useLayoutEffect(() => {
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
@@ -50,23 +49,15 @@ const MainLayout = ({children}) => {
         }
     }
 
-    // const selectedGender = "M";
-
-    // Inside your component
-
-
 
     useLayoutEffect(() => {
         // console.log("Сейчас будет анимация")
         window.addEventListener("resize", checkIsDesktop);
         // Call handler right away so state gets updated with initial window size
         checkIsDesktop();
-        console.log(desktopStore.isDesktop)
         // Remove event listener on cleanup
         // return () => window.removeEventListener("resize", checkIsDesktop);
     }, [])
-
-
 
     return (
         <>
@@ -142,6 +133,8 @@ const MainLayout = ({children}) => {
                 />
             </Head>
             <div className={'body'}>
+                {/*<NavbarNoGender/>*/}
+                {/*<NavbarC/>*/}
                 {headerCustom ? (
                     <NavbarC/>
                 ) : (
@@ -167,5 +160,4 @@ const MainLayout = ({children}) => {
 };
 
 export default observer(MainLayout);
-export const setSelectedGender = (gender) => {
-};
+
