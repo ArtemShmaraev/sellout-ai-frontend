@@ -6,7 +6,7 @@ import kylie from "/src/static/img/kylie.png"
 import shoe from "/src/static/img/shoe.png"
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
-import desktop from "@/static/img/desktop_background.jpg";
+import desktop from "@/static/img/desktop_background_old.jpg";
 import mobile from "@/static/img/big_bg.jpg";
 
 const ComplexMainPageScroll = ({obj}) => {
