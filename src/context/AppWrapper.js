@@ -122,6 +122,8 @@ export default function AppWrapper({ children }) {
         document.body.classList.add('body-scroll-clip')
         setTimeout(() => {
             desktopStore.setAnimation(false)
+        }, 4000)
+        setTimeout(() => {
             document.body.classList.remove('body-scroll-clip')
         }, 2000)
     }, []);
