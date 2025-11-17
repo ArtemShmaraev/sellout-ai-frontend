@@ -204,19 +204,19 @@ const Sidebar = ({photos}) => {
                             <div>
                                 <div style={{marginTop: -6.3}}>
                                     <div className={s.genderButtons}>
-                                        {/*<div className={s.genderHalf}>*/}
-                                        {/*    <Link href={'/men'}*/}
-                                        {/*        className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}*/}
-                                        {/*        onClick={() => handleGenderSelection('M')}>Мужское*/}
-                                        {/*    </Link>*/}
-                                        {/*</div>*/}
-                                        {/*<div className={s.genderSeparator}></div>*/}
-                                        {/*<div className={s.genderHalf}>*/}
-                                        {/*    <Link href={'/women'}*/}
-                                        {/*        className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}*/}
-                                        {/*        onClick={() => handleGenderSelection('F')}>Женское*/}
-                                        {/*    </Link>*/}
-                                        {/*</div>*/}
+                                        <div className={s.genderHalf}>
+                                            <Link href={'/men'}
+                                                className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                onClick={() => handleGenderSelection('M')}>Мужское
+                                            </Link>
+                                        </div>
+                                        <div className={s.genderSeparator}></div>
+                                        <div className={s.genderHalf}>
+                                            <Link href={'/women'}
+                                                className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                onClick={() => handleGenderSelection('F')}>Женское
+                                            </Link>
+                                        </div>
                                     </div>
                                     <div className={s.genderLine}></div>
                                 </div>

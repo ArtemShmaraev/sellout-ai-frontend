@@ -1,4 +1,4 @@
-import {createContext, useEffect} from "react";
+import {createContext, useEffect, useLayoutEffect} from "react";
 import {productStore} from "@/store/ProductsStore";
 import {desktopStore} from "@/store/DesktopStore";
 import {filterStore} from "@/store/FilterStore";
@@ -117,13 +117,13 @@ export default function AppWrapper({ children }) {
         }
     }, [])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         desktopStore.setAnimation(true)
         document.body.classList.add('body-scroll-clip')
         setTimeout(() => {
             desktopStore.setAnimation(false)
             document.body.classList.remove('body-scroll-clip')
-        }, 4000)
+        }, 2000)
     }, []);
     useEffect(() => {
         const referral = router.query.referral_id
