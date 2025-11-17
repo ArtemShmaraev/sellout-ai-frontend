@@ -12,13 +12,7 @@ import Image from "next/image";
 import {parse} from "cookie";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
-
-import kylie from "/src/static/img/kylie.png"
-import kylieBig from "/src/static/img/kylieBig.png"
-import man from "/src/static/img/man.png"
-import manBig from "/src/static/img/manBig.png"
-import mainbig from "/src/static/img/mainbig.png"
-import mainbigMob from "/src/static/img/Group 74.png"
+import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
@@ -52,25 +46,13 @@ const Men = ({data}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
-    const [isDesktop, setIsDesktop] = useState(true)
+
 
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
-        const checkIsDesktop = () => {
-            const width = window.innerWidth;
-            setIsDesktop(width > 1200);
-        };
-        checkIsDesktop();
+        const savedGender = "M";
+        setSelectedGender(savedGender);
 
-        window.addEventListener('resize', checkIsDesktop);
-        return () => {
-            window.removeEventListener('resize', checkIsDesktop);
-        };
-
-    }, []);
-
-
-    useEffect(() => {
         // Check if the user visited the page within the last 10 minutes
         if (!Cookies.get('index_page')) {
             const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
@@ -84,7 +66,7 @@ const Men = ({data}) => {
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
         const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
         Cookies.set('index_page', Number(page) + 1, {expires: tenMinutes})
-        const gender = Cookies.get('selected_gender')
+        const gender = "M"
         const newData = await fetchMainPage(token, true, false, Number(page) + 1, gender)
         const arr = [...(content), ...newData]
         setContent(arr)

@@ -12,13 +12,7 @@ import Image from "next/image";
 import {parse} from "cookie";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
-
-import kylie from "/src/static/img/kylie.png"
-import kylieBig from "/src/static/img/kylieBig.png"
-import man from "/src/static/img/man.png"
-import manBig from "/src/static/img/manBig.png"
-import mainbig from "/src/static/img/mainbig.png"
-import mainbigMob from "/src/static/img/Group 74.png"
+import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
@@ -52,25 +46,12 @@ const Women = ({data}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
-    const [isDesktop, setIsDesktop] = useState(true)
-    const [showGenderModal, setShowGenderModal] = useState(false);
+
 
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "F", {expires: 2772})
-    }, []);
-
-
-    useEffect(() => {
-        // Check if the gender is already selected in cookies
-        // const savedGender = Cookies.get('selected_gender');
-        // if (savedGender) {
-        //     // Gender is already selected, you can use it as needed
-        //     setSelectedGender(savedGender);
-        //     setShowGenderModal(false);
-        // } else {
-        //     // Gender is not selected, show the gender selection modal
-        //     setShowGenderModal(true);
-        // }
+        const savedGender = "F";
+        setSelectedGender(savedGender);
 
         // Check if the user visited the page within the last 10 minutes
         if (!Cookies.get('index_page')) {
@@ -85,7 +66,7 @@ const Women = ({data}) => {
         const page = Cookies.get('index_page') ? Cookies.get('index_page') : 1
         const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
         Cookies.set('index_page', Number(page) + 1, {expires: tenMinutes})
-        const gender = Cookies.get('selected_gender')
+        const gender = "F"
         const newData = await fetchMainPage(token, true, false, Number(page) + 1, gender)
         const arr = [...(content), ...newData]
         setContent(arr)
