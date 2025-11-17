@@ -6,25 +6,19 @@ import headerJson from "@/components/shared/NavbarC/header.json";
 import {Context} from "@/context/AppWrapper";
 import Cookies from 'js-cookie'
 
-const Megamenu = ({className, label, link, type, photos, visible}) => {
+const Megamenu = ({className, label, link, type, photos, visible, selected_gender}) => {
     const {userStore} = useContext(Context)
     const ref = useRef(null)
     const [isShown, setIsShown] = useState(false)
     const header = headerJson
-    // let gender = 'any'
 
 
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = {}) => {
         const cols = []
         let gender = 'any'
-        const genders = {'M': 'male', 'F': 'female'}
-        if (Cookies.get("selected_gender")) {
-            gender = genders[Cookies.get("selected_gender")]
-        }
-        // if (selectedGender) {
-        //     gender = genders[selectedGender]
-        // }
-        console.log(gender)
+        const genders = {'M': 'male', 'F': 'female', "any": "any"}
+        gender = genders[selected_gender]
+
         let obj = basicObj[gender]
         const keys = Object.keys(obj)
         for (let i = 0; i < colNum; i++) {

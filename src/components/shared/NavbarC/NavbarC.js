@@ -22,12 +22,14 @@ import SalesLine from "@/components/shared/NavbarC/SalesLine/SalesLine";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import cn from 'classnames';
 import Cookies from "js-cookie";
+// import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 
 
 const NavbarC = () => {
     const {userStore, desktopStore} = useContext(Context)
     const router = useRouter()
     const header = headerJson
+    const [selectedGender, setSelectedGender] = useState("any")
     const [photos, setPhotos] = useState({
         brand: "",
         shoes: "",
@@ -38,23 +40,7 @@ const NavbarC = () => {
     useEffect(() => {
         fetchNavbarPhoto().then(res => setPhotos(res))
     }, [])
-    // const [isDesktop, setIsDesktop] = useState(true)
 
-    // const checkIsDesktop = () => {
-    //     const width = window.innerWidth
-    //     if (width <= 1200) {
-    //         setIsDesktop(false)
-    //     } else {
-    //         setIsDesktop(true)
-    //     }
-    // }
-    // useLayoutEffect(() => {
-    //     window.addEventListener("resize", checkIsDesktop);
-    //     // Call handler right away so state gets updated with initial window size
-    //     checkIsDesktop();
-    //     // Remove event listener on cleanup
-    //     return () => window.removeEventListener("resize", checkIsDesktop);
-    // })
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -83,14 +69,16 @@ const NavbarC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
+        setSelectedGender(Cookies.get('selected_gender'))
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
 
-    const selectedGender = Cookies.get('selected_gender')
+
 
     const handleGenderSelection = async (gender) => {
         // Сохраняем выбранный гендер в куках
         Cookies.set('selected_gender', gender, {expires: 2772});
+        setSelectedGender(gender)
 
         // window.location.reload();
 
@@ -164,75 +152,75 @@ const NavbarC = () => {
                         <CartIcon/>
                     </div>
                 </div>
-                {/*<div className={s.row2}>*/}
-                {/*    <div className={s.block1}>*/}
-                {/*        <Link href={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {new: 'true'}*/}
-                {/*        }}*/}
-                {/*              className={s.links}>Новинки</Link>*/}
-                {/*        <Link href={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {recommendations: 'true'}*/}
-                {/*        }}*/}
-                {/*              className={s.links}>Рекомендации</Link>*/}
-                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{*/}
-                {/*            pathname: '/brands',*/}
-                {/*        }} photos={photos} type={'brands'}/>*/}
-                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {category: 'shoes_category'}*/}
-                {/*        }} photos={photos} type={'shoes'}/>*/}
-                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {category: 'clothes'}*/}
-                {/*        }} photos={photos} type={'clothes'}/>*/}
-                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {category: 'bags'}*/}
-                {/*        }} type={'bags'} photos={photos}/>*/}
-                {/*        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {category: 'accessories'}*/}
-                {/*        }} type={'accessories'} photos={photos}/>*/}
-                {/*        /!*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*!/*/}
-                {/*        /!*   onClick={e => {*!/*/}
-                {/*        /!*       e.preventDefault()*!/*/}
-                {/*        /!*       goToFastShip()*!/*/}
-                {/*        /!*   }}*!/*/}
-                {/*        /!*>*!/*/}
-                {/*        /!*    Мгновенная доставка*!/*/}
-                {/*        /!*    <Image src={truck} alt="" className={s.truck}/>*!/*/}
-                {/*        /!*</Link>*!/*/}
-                {/*        /!*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*!/*/}
-                {/*        /!*   onClick={e => {*!/*/}
-                {/*        /!*       e.preventDefault()*!/*/}
-                {/*        /!*       goToSale()*!/*/}
-                {/*        /!*   }}*!/*/}
-                {/*        /!*>Скидки</a>*!/*/}
-                {/*        <Link href={{*/}
-                {/*            pathname: '/products'*/}
-                {/*        }}*/}
-                {/*              className={s.links}*/}
+                <div className={s.row2}>
+                    <div className={s.block1}>
+                        <Link href={{
+                            pathname: '/products',
+                            query: {new: 'true'}
+                        }}
+                              className={s.links}>Новинки</Link>
+                        <Link href={{
+                            pathname: '/products',
+                            query: {recommendations: 'true'}
+                        }}
+                              className={s.links}>Рекомендации</Link>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Бренды'} link={{
+                            pathname: '/brands',
+                        }} photos={photos} type={'brands'} selected_gender={selectedGender}/>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Обувь'} link={{
+                            pathname: '/products',
+                            query: {category: 'shoes_category'}
+                        }} photos={photos} type={'shoes'} selected_gender={selectedGender}/>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Одежда'} link={{
+                            pathname: '/products',
+                            query: {category: 'clothes'}
+                        }} photos={photos} type={'clothes'} selected_gender={selectedGender}/>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Сумки'} link={{
+                            pathname: '/products',
+                            query: {category: 'bags'}
+                        }} type={'bags'} photos={photos} selected_gender={selectedGender}/>
+                        <Megamenu visible={desktopStore.navbarVisible} className={s.links} label={'Аксессуары'} link={{
+                            pathname: '/products',
+                            query: {category: 'accessories'}
+                        }} type={'accessories'} photos={photos} selected_gender={selectedGender}/>
+                        {/*<Link href="/products?is_fast_ship=is_fast_ship" className={s.links}*/}
+                        {/*   onClick={e => {*/}
+                        {/*       e.preventDefault()*/}
+                        {/*       goToFastShip()*/}
+                        {/*   }}*/}
+                        {/*>*/}
+                        {/*    Мгновенная доставка*/}
+                        {/*    <Image src={truck} alt="" className={s.truck}/>*/}
+                        {/*</Link>*/}
+                        {/*<a href={`/products?${queryGender}is_sale=is_sale`} className={s.sale_link}*/}
+                        {/*   onClick={e => {*/}
+                        {/*       e.preventDefault()*/}
+                        {/*       goToSale()*/}
+                        {/*   }}*/}
+                        {/*>Скидки</a>*/}
+                        <Link href={{
+                            pathname: '/products'
+                        }}
+                              className={s.links}
 
-                {/*        >*/}
-                {/*            Все товары*/}
-                {/*        </Link>*/}
-                {/*        <Link href={{*/}
-                {/*            pathname: '/products',*/}
-                {/*            query: {is_sale: 'is_sale'}*/}
-                {/*        }}*/}
-                {/*              className={s.sale_link}*/}
+                        >
+                            Все товары
+                        </Link>
+                        <Link href={{
+                            pathname: '/products',
+                            query: {is_sale: 'is_sale'}
+                        }}
+                              className={s.sale_link}
 
-                {/*        >*/}
-                {/*            Скидки*/}
-                {/*        </Link>*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <ElasticSearchModal/>*/}
-                {/*        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                        >
+                            Скидки
+                        </Link>
+                    </div>
+                    <div>
+                        <ElasticSearchModal/>
+                        <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+                    </div>
+                </div>
             </div>
         </header>
     );
