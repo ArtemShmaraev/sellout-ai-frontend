@@ -28,7 +28,8 @@ export const getServerSideProps = async (context) => {
 }
 const Home = ({data}) => {
     const router = useRouter()
-    const [isDesktop, setIsDesktop] = useState(true)
+    const {desktopStore} = useContext(Context)
+    // const [isDesktop, setIsDesktop] = useState(true)
 
     // useLayoutEffect(() => {
     //     const savedGender = Cookies.get('selected_gender');
@@ -70,7 +71,7 @@ const Home = ({data}) => {
             <div>
 
                 <div>
-                    {isDesktop ?
+                    {desktopStore.isDesktop ?
                         <div>
                             <div>
                                 <div className={s.main}
