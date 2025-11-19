@@ -124,9 +124,7 @@ const NavbarC = () => {
                     </div>
                     <div className={s.logo_block} style={{justifyContent: 'center'}}>
 
-                        {/*<Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>*/}
-                        <Link href="/">
-
+                        <Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>
                             <Image className={s.logo} alt='' src={logo}/>
 
                         </Link>
