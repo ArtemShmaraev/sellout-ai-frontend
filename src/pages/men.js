@@ -51,7 +51,7 @@ const Men = ({data}) => {
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
         const savedGender = "M";
-        setSelectedGender(savedGender);
+        // setSelectedGender(savedGender);
 
         // Check if the user visited the page within the last 10 minutes
         if (!Cookies.get('index_page')) {
