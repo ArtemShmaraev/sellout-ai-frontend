@@ -1,5 +1,6 @@
 import {$host} from "@/http/index";
 
+
 export async function fetchMainPage(token, nextPage, newPage, page, selected_gender) {
     let pageParam = 'page=1'
     let nextParam

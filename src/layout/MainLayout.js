@@ -161,3 +161,5 @@ const MainLayout = ({children}) => {
 
 export default observer(MainLayout);
 
+export const setSelectedGender = (gender) => {
+};
