@@ -39,20 +39,49 @@ const ComplexMainPageScroll = ({obj}) => {
     )
 }
 
-const ComplexMainPageBlock = ({obj, isDesktop}) => {
+const ComplexMainPageBlock = ({obj}) => {
     // const [isDesktop, setIsDesktop] = useState(true)
-    // const {desktopStore} = useContext(Context)
+    const {desktopStore} = useContext(Context)
+    const [imageWidth, setImageWidth] = useState('100%');
+    const [videoWidth, setVideoWidth] = useState('100%');
+    const [productBlocksWidth, setProductBlocksWidth] = useState('100%');
+
+    const checkIsDesktop = () => {
+
+        const width = window.innerWidth
+        console.log(width)
+
+        if (width <= 1200) {
+            desktopStore.setIsDesktop(false)
+        } else {
+            desktopStore.setIsDesktop(true)
+        }
+    }
+
+
+    useLayoutEffect(() => {
+
+        // window.addEventListener('resize', checkIsDesktop);
+        // checkIsDesktop();
+        setImageWidth(desktopStore.isDesktop ?
+            (obj.imagesInRowAmount ? `calc((100% / ${obj.imagesInRowAmount}) - 0.5%)` : '100%') :
+            '49%')
+        setVideoWidth(desktopStore.isDesktop ?
+            (obj.videosInRowAmount ? `calc((100% / ${obj.videosInRowAmount}) - 0.5%)` : '100%') :
+            '49%')
+        setProductBlocksWidth(desktopStore.isDesktop ?
+            obj.productsBlocks ? `calc((100% / ${obj.productsBlocks.blocksAmount}) - 0.5%)` : '100%' :
+            obj.productsBlocks.blocksAmount === 4 ? '49%' : '32%')
+
+        // // Убираем обработчик события при размонтировании компонента
+        // return () => {
+        //     window.removeEventListener('resize', checkIsDesktop);
+        // };
+    }, [])
+
 
     const [isLoading, setIsLoading] = useState(true)
-    let imageWidth = isDesktop ?
-        (obj.imagesInRowAmount ? `calc((100% / ${obj.imagesInRowAmount}) - 0.5%)` : '100%') :
-        '49%';
-    let videoWidth = isDesktop ?
-        (obj.videosInRowAmount ? `calc((100% / ${obj.videosInRowAmount}) - 0.5%)` : '100%') :
-        '49%';
-    let productBlocksWidth = isDesktop ?
-        obj.productsBlocks ? `calc((100% / ${obj.productsBlocks.blocksAmount}) - 0.5%)` : '100%' :
-        obj.productsBlocks.blocksAmount === 4 ? '49%' : '32%';
+
     return (
         <div className={s.outerContainer}>
             {obj.title && (
@@ -66,7 +95,7 @@ const ComplexMainPageBlock = ({obj, isDesktop}) => {
                     <div>
                         <Link href={obj.fullWidthImage.url}>
                             <img
-                                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
+                                src={desktopStore.isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
                                 alt="Image"
                                 style={{width: '100%', marginTop: 70, borderRadius: 4}}
                             />
@@ -138,7 +167,7 @@ const ComplexMainPageBlock = ({obj, isDesktop}) => {
                     {obj.imagesInRow.map((imageData, index) => (
                         <Link key={index} href={imageData.url} className={s.imageLink} style={{width: imageWidth}}>
                             <img
-                                src={isDesktop ? imageData.imageDesktop : imageData.imageMobile}
+                                    src={desktopStore.isDesktop ? imageData.imageDesktop : imageData.imageMobile}
                                 alt={imageData.text}
                                 className={s.image}
                                 loading={"lazy"}

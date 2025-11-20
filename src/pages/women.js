@@ -45,10 +45,13 @@ export const getServerSideProps = async (context) => {
 }
 const Women = ({data}) => {
     const {desktopStore} = useContext(Context)
+
+
     const router = useRouter()
     const [content, setContent] = useState(data)
 
     useLayoutEffect(() => {
+
         Cookies.set('selected_gender', "F", {expires: 2772})
         const savedGender = "F";
         // setSelectedGender(savedGender);
@@ -92,7 +95,7 @@ const Women = ({data}) => {
                         "productsSelection": el.productsSelection,
                         "videosInRowAmount": el.videosInRowAmount,
                         "videosInRow": el.videosInRow
-                    }} isDesktopp={desktopStore.isDesktop}/>
+                    }}/>
                 )
             } else if (el.type === 'photo') {
                 arr.push(
