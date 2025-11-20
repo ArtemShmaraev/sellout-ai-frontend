@@ -94,7 +94,7 @@ const Men = ({data}) => {
                         "productsSelection": el.productsSelection,
                         "videosInRowAmount": el.videosInRowAmount,
                         "videosInRow": el.videosInRow
-                    }} isDesktop={desktopStore.isDesktop}/>
+                    }}/>
                 )
             } else if (el.type === 'photo') {
                 arr.push(
