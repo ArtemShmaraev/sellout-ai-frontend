@@ -125,25 +125,25 @@ const NavbarC = () => {
                     <div className={s.logo_block} style={{justifyContent: 'center'}}>
 
                         <Link href={selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/'}>
-                            <Image className={s.logo} alt='' src={logo}/>
+                            <Image className={s.logo} alt='' src={logo} loading={"eager"}/>
 
                         </Link>
                     </div>
                     <div className={s.block} style={{justifyContent: 'flex-end'}}>
                         <Link href={'/wishlist'}>
-                            <Image width={25} src={like} alt="" className={s.icons}/>
+                            <Image width={25} src={like} alt="" className={s.icons} loading={"eager"}/>
                         </Link>
                         {desktopStore.isDesktop &&
                         userStore.isLogged
                             ?
                             <Link href={'/account'} className={s.auth_block}>
-                                <Image width={25} src={person} alt="" className={s.icons}/>
+                                <Image width={25} src={person} alt="" className={s.icons} loading={"eager"}/>
                                 <div className={s.name}>{userStore.firstName}</div>
                             </Link>
                             :
                             desktopStore.isDesktop &&
                             <AuthModal>
-                                <Image width={25} src={person} alt="" className={s.icons}/>
+                                <Image width={25} src={person} alt="" className={s.icons} loading={"eager"}/>
                                 <div className={s.name}>Войдите</div>
                             </AuthModal>
                         }

@@ -24,8 +24,95 @@ const PictureBlock = ({obj, className, type}) => {
         }
         return s.row
     }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     const [isLoading, setIsLoading] = useState(true)
-    const subTitle = "Еще более 40'000 <a href={'/products?category=bags'} style={{color: \"black\"}}>сумок</a>";
+    const genders = obj.gender
+    const title = obj.title
+    const subtitle = obj.subtitle
+    const query = obj.q
+    const lines = obj.line
+    const categories = obj.category
+    const collabs = obj.collab
+    const collection = obj.collection
+    const genderTransforms = {
+        "M": "Мужское",
+        "F": "Женское",
+        "K": "Детское"
+    }
+    const genderTransforms2 = {
+        "M": "Мужская",
+        "F": "Женская",
+        "K": "Детская"
+    }
+    const genderTransforms3 = {
+        "M": "мужчин",
+        "F": "женщин",
+        "K": "детей"
+    }
+
+    const getGenderLine = (genders, photo = false, mix = false) => {
+        if (!photo && !mix) {
+            if (genders.length === 0 || genders.length === 3) {
+                return "Женское, мужское и детское"
+            } else if (genders.length === 1) {
+                return genderTransforms[genders[0]]
+            } else {
+                return `${genderTransforms[genders[0]]} и ${genderTransforms[genders[1]]}`
+            }
+        } else if (photo && !mix) {
+            if (genders.length === 0 || genders.length === 3) {
+                return ["", "Женское, мужское и детское"]
+            } else if (genders.length === 1) {
+                return [`${genderTransforms2[genders[0]]} коллекция`, ""]
+            } else {
+                return ["", `${genderTransforms[genders[0]]} и ${genderTransforms[genders[1]]}`]
+            }
+        } else if (mix) {
+            if (genders.length === 0 || genders.length === 3) {
+                return [`${title}`, "Женское, мужское и детское"]
+            } else if (genders.length === 1) {
+                return [`${title}`, `${genderTransforms[genders[0]]}`]
+            } else {
+                return [`${title}`, `${genderTransforms[genders[0]]} и ${genderTransforms[genders[1]].toLowerCase()}`]
+            }
+        }
+    }
+
+    let firstLine;
+    let secondLine;
+
+    if (collection.length !== 0) {
+        firstLine = title
+        if (subtitle) {
+            secondLine = subtitle
+        } else {
+            secondLine = getGenderLine(genders)
+        }
+    } else if (query) {
+        firstLine = capitalizeFirstLetter(query)
+        secondLine = getGenderLine(genders)
+    } else if (obj.photo) {
+        [firstLine, secondLine] = getGenderLine(genders, true)
+    } else if (lines.length === 1 && categories.length !== 1) {
+        if (genders.length === 1) {
+            firstLine = `${genderTransforms2[genders[0]]} коллекция ${title}`
+            secondLine = ""
+        } else {
+            firstLine = title
+            secondLine = getGenderLine(genders)
+        }
+    } else if (!title) {
+        firstLine = getGenderLine(genders)
+        secondLine = ""
+    } else {
+        [firstLine, secondLine] = getGenderLine(genders, false, true)
+        console.log(obj)
+    }
+
     return (
         <>
             {
@@ -40,14 +127,20 @@ const PictureBlock = ({obj, className, type}) => {
                                         ?
                                         <Image src={logo} alt='' className={s.logo} width={200} loading={"eager"}/>
                                         :
-                                        <h3 className={'text-black'}>{obj.title_with_gender}</h3>
+                                        <h3 className={'text-black'}>{obj.title}</h3>
                                     }
+                                    {firstLine && (
+                                        <div className={s.firstLinePhoto}>{firstLine}</div>
+                                    )}
                                 </div>
                                 {obj.photo &&
                                     <div className={s.text}>
                                         {parse(obj.content)}
                                     </div>
                                 }
+                                {secondLine && (
+                                    <div className={s.secondLinePhoto}>{secondLine}</div>
+                                )}
                             </div>
                         </div>
                         {
@@ -55,7 +148,8 @@ const PictureBlock = ({obj, className, type}) => {
                             <div className={s.img_block}>
                                 <div className={s.img_cont}>
                                     <Image src={obj.photo} alt='' fill={true} className={s.img}
-                                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'} loading={"eager"}/>
+                                           onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
+                                           loading={"eager"}/>
 
 
                                     <Image src={desktop} alt=''
@@ -71,22 +165,14 @@ const PictureBlock = ({obj, className, type}) => {
                         }
                     </div>
                     :
-                    <>
-                        <h3 className={['text-black', className, s.single_text].join(' ')}>{obj.title_with_gender}</h3>
-                        {
-                            obj.subTitle
-                                ?
-                                <div className={className}>
-                                    <div style={{display: "inline"}}>
-                                        {parse(obj.subTitle)}
-                                    </div>
-                                </div>
-                                :
-                                <></>
-                        }
-                    </>
-
-
+                    <div className={`${className} ${s.texts}`}>
+                        {firstLine && (
+                            <div className={s.firstLine}>{firstLine}</div>
+                        )}
+                        {secondLine && (
+                            <div className={s.secondLine}>{secondLine}</div>
+                        )}
+                    </div>
             }
         </>
     );

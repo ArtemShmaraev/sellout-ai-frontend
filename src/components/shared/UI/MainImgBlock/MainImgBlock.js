@@ -34,7 +34,7 @@ const MainImgBlock = ({obj, className}) => {
                     <div>
                         {obj.title === 'sellout'
                             ?
-                            <Image src={logo} alt='' className={s.logo} width={200}/>
+                            <Image src={logo} alt='' className={s.logo} width={200} loading={"eager"}/>
                             :
                             <h3 className={'text-black'}>{obj.title}</h3>
                         }

@@ -203,13 +203,13 @@
     }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1300px) {
     .card_list {
         width: 280px;
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1210px) {
     .card_list {
         width: 33%;
     }
