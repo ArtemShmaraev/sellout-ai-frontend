@@ -23,6 +23,7 @@ export const getServerSideProps = async (context) => {
     const page = cookies['index_page']
     const token = cookies['access_token']
 
+
     const selected_gender = "F"; // Добавляем получение выбранного гендера из кук
 
     let data;
@@ -47,7 +48,6 @@ const Women = ({data}) => {
     const router = useRouter()
     const [content, setContent] = useState(data)
 
-
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "F", {expires: 2772})
         const savedGender = "F";
@@ -59,7 +59,6 @@ const Women = ({data}) => {
             Cookies.set('index_page', 1, {expires: tenMinutes});
         }
     }, []);
-
 
     const getMore = async () => {
         const token = Cookies.get('access_token')
@@ -93,7 +92,7 @@ const Women = ({data}) => {
                         "productsSelection": el.productsSelection,
                         "videosInRowAmount": el.videosInRowAmount,
                         "videosInRow": el.videosInRow
-                    }}/>
+                    }} isDesktopp={desktopStore.isDesktop}/>
                 )
             } else if (el.type === 'photo') {
                 arr.push(

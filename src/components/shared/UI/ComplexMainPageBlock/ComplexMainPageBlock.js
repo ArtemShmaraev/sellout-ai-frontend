@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import Image from "next/image";
 import s from './ComplexMainPageBlock.module.css'
 import Link from "next/link";
@@ -39,23 +39,18 @@ const ComplexMainPageScroll = ({obj}) => {
     )
 }
 
-const ComplexMainPageBlock = ({obj}) => {
+const ComplexMainPageBlock = ({obj, isDesktop}) => {
     // const [isDesktop, setIsDesktop] = useState(true)
-    const {desktopStore} = useContext(Context)
-    // useEffect(() => {
-    //     const width = window.innerWidth
-    //     if (width <= 1200) {
-    //         setIsDesktop(false)
-    //     }
-    // }, [])
+    // const {desktopStore} = useContext(Context)
+
     const [isLoading, setIsLoading] = useState(true)
-    let imageWidth = desktopStore.isDesktop ?
+    let imageWidth = isDesktop ?
         (obj.imagesInRowAmount ? `calc((100% / ${obj.imagesInRowAmount}) - 0.5%)` : '100%') :
         '49%';
-    let videoWidth = desktopStore.isDesktop ?
+    let videoWidth = isDesktop ?
         (obj.videosInRowAmount ? `calc((100% / ${obj.videosInRowAmount}) - 0.5%)` : '100%') :
         '49%';
-    let productBlocksWidth = desktopStore.isDesktop ?
+    let productBlocksWidth = isDesktop ?
         obj.productsBlocks ? `calc((100% / ${obj.productsBlocks.blocksAmount}) - 0.5%)` : '100%' :
         obj.productsBlocks.blocksAmount === 4 ? '49%' : '32%';
     return (
@@ -71,7 +66,7 @@ const ComplexMainPageBlock = ({obj}) => {
                     <div>
                         <Link href={obj.fullWidthImage.url}>
                             <img
-                                src={desktopStore.isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
+                                src={isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
                                 alt="Image"
                                 style={{width: '100%', marginTop: 70, borderRadius: 4}}
                             />
@@ -143,7 +138,7 @@ const ComplexMainPageBlock = ({obj}) => {
                     {obj.imagesInRow.map((imageData, index) => (
                         <Link key={index} href={imageData.url} className={s.imageLink} style={{width: imageWidth}}>
                             <img
-                                src={desktopStore.isDesktop ? imageData.imageDesktop : imageData.imageMobile}
+                                src={isDesktop ? imageData.imageDesktop : imageData.imageMobile}
                                 alt={imageData.text}
                                 className={s.image}
                                 loading={"lazy"}
