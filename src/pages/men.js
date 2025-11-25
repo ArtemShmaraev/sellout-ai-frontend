@@ -17,6 +17,7 @@ import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
+import {desktopStore} from "@/store/DesktopStore";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -43,7 +44,7 @@ export const getServerSideProps = async (context) => {
     return {props: {data}};
 }
 const Men = ({data}) => {
-    const {desktopStore} = useContext(Context)
+    // const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
 

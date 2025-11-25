@@ -69,7 +69,10 @@ const NavbarC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
-        setSelectedGender(Cookies.get('selected_gender'))
+        if (Cookies.get('selected_gender')){
+            setSelectedGender(Cookies.get('selected_gender'))
+        }
+
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
 

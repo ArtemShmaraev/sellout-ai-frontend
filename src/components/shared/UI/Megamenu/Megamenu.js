@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import s from './Megamenu.module.css'
 import Link from "next/link";
 import Image from "next/image";
@@ -13,12 +13,14 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
     const header = headerJson
 
 
+
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = {}) => {
         const cols = []
-        let gender = 'any'
-        const genders = {'M': 'male', 'F': 'female', "any": "any"}
-        gender = genders[selected_gender]
 
+
+        let gender
+        const genders = {'M': 'male', 'F': 'female', 'any': "any"}
+        gender = genders[selected_gender]
         let obj = basicObj[gender]
         const keys = Object.keys(obj)
         for (let i = 0; i < colNum; i++) {
@@ -55,6 +57,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
             </div>
         )
         return result
+
+
+
     }
 
     let timeoutId;
