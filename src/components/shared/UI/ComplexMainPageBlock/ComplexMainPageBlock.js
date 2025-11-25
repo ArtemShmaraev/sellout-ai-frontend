@@ -56,13 +56,6 @@ const ComplexMainPageBlock = ({obj}) => {
         } else {
             desktopStore.setIsDesktop(true)
         }
-    }
-
-
-    useLayoutEffect(() => {
-
-        // window.addEventListener('resize', checkIsDesktop);
-        // checkIsDesktop();
         setImageWidth(desktopStore.isDesktop ?
             (obj.imagesInRowAmount ? `calc((100% / ${obj.imagesInRowAmount}) - 0.5%)` : '100%') :
             '49%')
@@ -72,11 +65,19 @@ const ComplexMainPageBlock = ({obj}) => {
         setProductBlocksWidth(desktopStore.isDesktop ?
             obj.productsBlocks ? `calc((100% / ${obj.productsBlocks.blocksAmount}) - 0.5%)` : '100%' :
             obj.productsBlocks.blocksAmount === 4 ? '49%' : '32%')
+    }
+
+
+    useEffect(() => {
+
+        window.addEventListener('resize', checkIsDesktop);
+        checkIsDesktop();
+
 
         // // Убираем обработчик события при размонтировании компонента
-        // return () => {
-        //     window.removeEventListener('resize', checkIsDesktop);
-        // };
+        return () => {
+            window.removeEventListener('resize', checkIsDesktop);
+        };
     }, [])
 
 
