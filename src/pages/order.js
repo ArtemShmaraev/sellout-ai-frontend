@@ -266,8 +266,8 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         <hr/>
                         <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
                         <form method="POST" action="https://sellout.su/api/v1/order/payment" id="payment-form" ref={checkoutRef}>
-                            {/*<input type="hidden" name="sum" value={String(order.final_amount)} />*/}
-                            <input type="hidden" name="sum" value={"10"} />
+                            <input type="hidden" name="sum" value={String(order.final_amount)} />
+                            {/*<input type="hidden" name="sum" value={"10"} />*/}
                             <input type="hidden" name="clientid" value={order.user?.id?.toString()} />
                             <input type="hidden" name="orderid" value={order.number?.toString()} />
                             <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
@@ -276,7 +276,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                             <input type="hidden" name="pstype" value='sbp_default' />
                             <input type="hidden" name="json" value='true' />
                             <input type="hidden" name="user_result_callback" value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`} />
-                            {/*<input type="hidden" name="cart" value={order.invoice_data} />*/}
+                            <input type="hidden" name="cart" value={order.invoice_data} />
                             {/*<input type="submit" value="Перейти к оплате" />*/}
                         </form>
 
