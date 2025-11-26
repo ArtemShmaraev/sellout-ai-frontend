@@ -88,7 +88,7 @@ const PictureBlock = ({obj, className, type}) => {
     if (collection.length !== 0) {
         firstLine = title
         if (subtitle) {
-            secondLine = subtitle
+            secondLine = parse(subtitle)
         } else {
             secondLine = getGenderLine(genders)
         }
