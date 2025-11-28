@@ -83,6 +83,17 @@ const ComplexMainPageBlock = ({obj}) => {
 
     const [isLoading, setIsLoading] = useState(true)
 
+    const noMargin = obj.hasOwnProperty('noMargin') ? obj.noMargin : false;
+    const slidesInVideo = obj.hasOwnProperty('slidesInVideo') ? obj.slidesInVideo : 0;
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slidesInVideo);
+        }, 3000); // Change image every 2 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className={s.outerContainer}>
             {obj.title && (
@@ -164,7 +175,7 @@ const ComplexMainPageBlock = ({obj}) => {
             )}
 
             {obj.imagesInRow && obj.imagesInRow.length > 0 && (
-                <div className={s.imageContainer}>
+                <div className={s.imageContainer} style={noMargin ? desktopStore.isDesktop ? {marginTop: 10} : {marginTop: 0} : {}}>
                     {obj.imagesInRow.map((imageData, index) => (
                         <Link key={index} href={imageData.url} className={s.imageLink} style={{width: imageWidth}}>
                             <img
@@ -180,6 +191,32 @@ const ComplexMainPageBlock = ({obj}) => {
                                                           style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.subTitle}</p>}
                                 {imageData.text && <p className={s.text}
                                                       style={imageData.title || imageData.subTitle ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            )}
+
+            {obj.videosInRow && obj.videosInRow.length > 0 && (
+                <div className={s.imageContainer}>
+                    {obj.videosInRow.map((imageData, index) => (
+                        <Link key={index} href={imageData.url} className={s.imageLink} style={{width: videoWidth}}>
+                            <div className={s.videoContainer}>
+                                {imageData.video.map((image, index) => (
+                                    <img
+                                        key={index}
+                                        src={image}
+                                        alt={`Image ${index + 1}`}
+                                        className={index === currentImageIndex ? s.active : ''}
+                                    />
+                                ))}
+                            </div>
+                            <div className={s.textContainer}>
+                                {imageData.title &&
+                                    <p className={s.title} style={{textDecoration: "underline"}}>{imageData.title}</p>}
+                                {imageData.subTitle && <p className={s.subTitle}>{imageData.subTitle}</p>}
+                                {imageData.text && <p className={s.text}
+                                                      style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
                             </div>
                         </Link>
                     ))}

@@ -78,9 +78,9 @@ const Men = ({data}) => {
             if (el.type === 'firstMainBlockSTOPPED') {
                 arr.push(
                     <FirstMainBlock obj={{
-                        "leftSmallVideo": el.leftSmallVideo,
-                        "rightSmallVideo": el.rightSmallVideo,
-                        "bigVideo": el.bigVideo
+                        "leftImages": el.leftImages,
+                        "rightImages": el.rightImages,
+                        "bigImage": el.bigVideo
                     }}/>
                 )
             } else if (el.type === 'complexMainPageBlock') {
@@ -88,11 +88,13 @@ const Men = ({data}) => {
                     <ComplexMainPageBlock obj={{
                         "title": el.title,
                         "fullWidthImage": el.fullWidthImage,
+                        "noMargin": el.hasOwnProperty('noMargin'),
                         "imagesInRowAmount": el.imagesInRowAmount,
                         "imagesInRow": el.imagesInRow,
                         "productsBlocks": el.productsBlocks,
                         "productsSelection": el.productsSelection,
                         "videosInRowAmount": el.videosInRowAmount,
+                        "slidesInVideo": el.hasOwnProperty('slidesInVideo'),
                         "videosInRow": el.videosInRow
                     }}/>
                 )
