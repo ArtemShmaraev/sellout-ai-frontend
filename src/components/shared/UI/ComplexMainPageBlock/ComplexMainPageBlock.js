@@ -94,8 +94,6 @@ const ComplexMainPageBlock = ({obj}) => {
         return () => clearInterval(interval);
     }, []);
 
-    console.log(slidesInVideo + " jj")
-
     return (
         <div className={s.outerContainer}>
             {obj.title && (
