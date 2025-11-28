@@ -49,7 +49,6 @@ const ComplexMainPageBlock = ({obj}) => {
     const checkIsDesktop = () => {
 
         const width = window.innerWidth
-        console.log(width)
 
         if (width <= 1200) {
             desktopStore.setIsDesktop(false)
@@ -84,7 +83,8 @@ const ComplexMainPageBlock = ({obj}) => {
     const [isLoading, setIsLoading] = useState(true)
 
     const noMargin = obj.hasOwnProperty('noMargin') ? obj.noMargin : false;
-    const slidesInVideo = obj.hasOwnProperty('slidesInVideo') ? obj.slidesInVideo : 0;
+    // const slidesInVideo = obj.hasOwnProperty('slidesInVideo') ? obj.slidesInVideo : 0;
+    const slidesInVideo = obj.slidesInVideo;
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => {
@@ -93,6 +93,8 @@ const ComplexMainPageBlock = ({obj}) => {
 
         return () => clearInterval(interval);
     }, []);
+
+    console.log(slidesInVideo + " jj")
 
     return (
         <div className={s.outerContainer}>

@@ -75,7 +75,7 @@ const Men = ({data}) => {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlockSTOPPED') {
+            if (el.type === 'firstMainBlock') {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
@@ -94,7 +94,7 @@ const Men = ({data}) => {
                         "productsBlocks": el.productsBlocks,
                         "productsSelection": el.productsSelection,
                         "videosInRowAmount": el.videosInRowAmount,
-                        "slidesInVideo": el.hasOwnProperty('slidesInVideo'),
+                        "slidesInVideo": el.hasOwnProperty('slidesInVideo') ? el.slidesInVideo : 0,
                         "videosInRow": el.videosInRow
                     }}/>
                 )
