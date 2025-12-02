@@ -138,6 +138,10 @@
 
 
 @media (max-width: 1200px) {
+    .videoContainer img {
+        margin-top: 10px;
+    }
+
     .container {
         flex-wrap: wrap;
     }
