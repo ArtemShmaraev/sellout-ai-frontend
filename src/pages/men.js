@@ -80,7 +80,7 @@ const Men = ({data}) => {
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
                         "rightImages": el.rightImages,
-                        "bigImage": el.bigVideo
+                        "bigImage": el.bigImage
                     }}/>
                 )
             } else if (el.type === 'complexMainPageBlock') {

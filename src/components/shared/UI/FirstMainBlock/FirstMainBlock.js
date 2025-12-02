@@ -18,7 +18,7 @@ const FirstMainBlock = ({obj}) => {
 
     const leftImages = obj.leftImages
     const rightImages = obj.rightImages
-    const bigImage = obj.bigVideo
+    const bigImage = obj.bigImage
     const bigImageTemp = "https://sellout.su/sellout-photos/MainPage/Frame%205.png"
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
