@@ -125,7 +125,7 @@ export default function AppWrapper({ children }) {
         }, 4000)
         setTimeout(() => {
             document.body.classList.remove('body-scroll-clip')
-        }, 2000)
+        }, 1000)
     }, []);
     useEffect(() => {
         const referral = router.query.referral_id
