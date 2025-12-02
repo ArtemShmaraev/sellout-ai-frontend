@@ -80,6 +80,10 @@
     padding-bottom: 20px;
 }
 
+.secondLine a {
+    color: grey;
+}
+
 @media (max-width: 1000px) {
     .firstLine {
         margin-top: 30px;

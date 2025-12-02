@@ -76,12 +76,12 @@ const Women = ({data}) => {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlockSTOPPED') {
+            if (el.type === 'firstMainBlock' && desktopStore.isDesktop) {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
                         "rightImages": el.rightImages,
-                        "bigImage": el.bigVideo
+                        "bigImage": el.bigImage
                     }}/>
                 )
             } else if (el.type === 'complexMainPageBlock') {

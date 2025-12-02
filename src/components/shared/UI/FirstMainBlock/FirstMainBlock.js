@@ -19,37 +19,9 @@ const FirstMainBlock = ({obj}) => {
     const leftImages = obj.leftImages
     const rightImages = obj.rightImages
     const bigImage = obj.bigImage
-    const bigImageTemp = "https://sellout.su/sellout-photos/MainPage/Frame%205.png"
+    const bigImageT = "https://sellout.su/sellout-photos/MainPage/Frame%208.png"
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const images = [
-        "https://sellout.su/sellout-photos/MainPage/Left.jpg",
-        "https://sellout.su/sellout-photos/MainPage/Right.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20394.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20413.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20415.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20416.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20417.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20419.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20395.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20418.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20414.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20398.jpg"
-    ];
-    const images2 = [
-        "https://sellout.su/sellout-photos/MainPage/image%20404.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20403.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20399.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20402.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20406.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20401.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20409.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20407.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20412.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20411.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20405.jpg",
-        "https://sellout.su/sellout-photos/MainPage/image%20408.jpg"
-    ];
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         const interval = setInterval(() => {

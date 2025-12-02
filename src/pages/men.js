@@ -48,7 +48,7 @@ const Men = ({data}) => {
     const router = useRouter()
     const [content, setContent] = useState(data)
 
-
+    const {desktopStore} = useContext(Context)
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
         const savedGender = "M";
@@ -75,7 +75,7 @@ const Men = ({data}) => {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlock') {
+            if (el.type === 'firstMainBlock' && desktopStore.isDesktop) {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
