@@ -100,7 +100,7 @@ const Men = ({data}) => {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlock' && viewVideo) {
+            if (el.type === 'firstMainBlockSTOPPED' && viewVideo) {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
