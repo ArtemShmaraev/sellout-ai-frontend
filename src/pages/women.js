@@ -49,6 +49,30 @@ const Women = ({data}) => {
 
     const router = useRouter()
     const [content, setContent] = useState(data)
+    const [viewVideo, setViewVideo] = useState(false)
+
+    const checkIsViewVideo = () => {
+        const width = window.innerWidth
+        if (width <= 1200) {
+            setViewVideo(false)
+        } else {
+            setViewVideo(true)
+        }
+
+    }
+
+
+    useEffect(() => {
+
+        window.addEventListener('resize', checkIsViewVideo);
+        checkIsViewVideo();
+
+
+        // // Убираем обработчик события при размонтировании компонента
+        return () => {
+            window.removeEventListener('resize', checkIsViewVideo);
+        };
+    }, [])
 
     useLayoutEffect(() => {
 
@@ -76,7 +100,7 @@ const Women = ({data}) => {
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
-            if (el.type === 'firstMainBlock' && desktopStore.isDesktop) {
+            if (el.type === 'firstMainBlock' && viewVideo) {
                 arr.push(
                     <FirstMainBlock obj={{
                         "leftImages": el.leftImages,
