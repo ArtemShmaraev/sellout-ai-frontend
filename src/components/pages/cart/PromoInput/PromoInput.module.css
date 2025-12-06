@@ -6,7 +6,7 @@
 }
 .mailing {
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.81);
     border-radius: 7px;
     outline: none;
     padding: 10px 10px 10px 10px;

@@ -3,7 +3,7 @@ import s from './Arrow.module.css'
 
 const Arrow = ({isOpen, white = false}) => {
     return (
-        <div style={isOpen ? {transform: 'rotate(180deg) translateY(-3px)',} : {transform: 'none'}}>
+        <div style={isOpen ? {transform: 'rotate(180deg)',} : {transform: 'none'}}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={white ? 'white' : 'currentColor'}
                  className="bi bi-chevron-down" viewBox="0 0 16 16">
                 <path fillRule="evenodd"
