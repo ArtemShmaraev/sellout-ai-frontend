@@ -95,7 +95,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                                 <div className={s.half_text}>{selectedItem.delivery_view}</div>
                                 <div className={s.display_none}>|</div>
                                 {
-                                    (selectedItem.is_sale && selectedItem.start_price > selectedItem.final_price)
+                                    (selectedItem.start_price > selectedItem.final_price)
                                         ?
                                         <div className={s.half_text}>
                                             <span className={s.crossed}>{addSpacesToNumber(selectedItem.start_price)} ₽</span>
@@ -129,7 +129,7 @@ const ShipDropdown = ({cardId, unitId}) => {
                                         <div className={s.half_text}>{el.delivery_view}</div>
                                         <div className={s.display_none}>|</div>
                                         {
-                                            (el.is_sale && el.start_price > el.final_price)
+                                            (el.start_price > el.final_price)
                                                 ?
                                                 <div className={s.half_text}>
                                                     <span className={s.crossed}>{addSpacesToNumber(el.start_price)} ₽</span>

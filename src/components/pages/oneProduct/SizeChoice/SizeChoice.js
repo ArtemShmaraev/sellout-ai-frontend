@@ -88,7 +88,7 @@ const SizeChoice = ({prices, productId, config, manySizes, isDesktop}) => {
                                 {productStore.sizeChosen.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
                             {
-                                (productStore.sizeChosen.is_sale && productStore.sizeChosen.min_price_without_sale > productStore.sizeChosen.min_price)
+                                (productStore.sizeChosen.min_price_without_sale > productStore.sizeChosen.min_price)
                                     ?
                                     <div className={s.price}>
                                         <span className={s.crossed}>От {addSpacesToNumber(productStore.sizeChosen.min_price_without_sale)} ₽</span>
@@ -122,7 +122,7 @@ const SizeChoice = ({prices, productId, config, manySizes, isDesktop}) => {
                                             {el.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
                                         {
-                                            (el.is_sale && el.min_price_without_sale > el.min_price)
+                                            (el.min_price_without_sale > el.min_price)
                                             ?
                                                 <div className={s.price}>
                                                     <span className={s.crossed}>От {addSpacesToNumber(el.min_price_without_sale)} ₽</span>

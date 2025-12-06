@@ -475,13 +475,13 @@ const OneProductPage = ({product, prices}) => {
                                     <>
                                         <div
                                             className={s.price_default}
-                                            style={(product.is_sale && product.price.start_price > product.price.final_price)
+                                            style={(product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
                                         >От {addSpacesToNumber(product.price.start_price)} ₽
                                         </div>
                                         <div className='d-flex align-items-center'>
-                                            {(product.is_sale && product.price.start_price > product.price.final_price) &&
+                                            {(product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
                                                     От {addSpacesToNumber(product.price.final_price)} ₽
                                                 </div>
@@ -611,13 +611,13 @@ const OneProductPage = ({product, prices}) => {
                                     <>
                                         <div
                                             className={s.price_default}
-                                            style={(product.is_sale && product.price.start_price > product.price.final_price)
+                                            style={(product.price.start_price > product.price.final_price)
                                                 ? {textDecoration: 'line-through', fontSize: '16px'}
                                                 : {textDecoration: 'none', fontSize: '19px'}}
                                         >От {addSpacesToNumber(product.price.start_price)} ₽
                                         </div>
                                         <div className='d-flex align-items-center'>
-                                            {(product.is_sale && product.price.start_price > product.price.final_price) &&
+                                            {(product.price.start_price > product.price.final_price) &&
                                                 <div className={s.price_sale}>
                                                     От {addSpacesToNumber(product.price.final_price)} ₽
                                                 </div>

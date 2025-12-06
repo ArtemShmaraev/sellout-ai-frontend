@@ -174,12 +174,14 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                 setFinAmount(res.final_amount)
                 setSaleAmount(res.total_sale)
                 router.push('/cart', undefined, {scroll: false})
+
             } else {
                 const cartArr = Cookies.get('cart').trim().split(' ')
                 res = await promoUnauth(promo, cartArr)
                 console.log(res)
                 Cookies.set('promo', promo, {expires: 2772})
             }
+
             setFinAmount(res.final_amount)
             setSaleAmount(res.total_sale)
             // setWillBonuses(bonuses)

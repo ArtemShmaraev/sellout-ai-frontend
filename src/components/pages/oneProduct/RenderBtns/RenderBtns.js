@@ -35,7 +35,7 @@ const RenderBtns = ({btns, changeBonuses}) => {
                     <div className={s.half_text}>{button.delivery_view}</div>
                     <div className={s.display_none}>|</div>
                     {
-                        (button.is_sale && button.start_price > button.final_price)
+                        (button.start_price > button.final_price)
                         ?
                             <div className={s.half_text}>
                                 <span className={s.crossed}>{addSpacesToNumber(button.start_price)} ₽</span>
