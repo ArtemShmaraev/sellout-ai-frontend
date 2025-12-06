@@ -79,19 +79,19 @@ const SizeDropdown = ({prices, productId, currentId, cardId, manySizes}) => {
                                             {selectedItem.is_fast_ship && <Image src={truck} alt="" className={s.icons}/>}
                                             {selectedItem.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                         </div>
-                                        {
-                                            (selectedItem.min_price_without_sale > selectedItem.min_price)
-                                                ?
-                                                <div className={s.price}>
-                                                    <span className={s.crossed}>От {addSpacesToNumber(selectedItem.min_price_without_sale)} ₽</span>
-                                                    <br/>
-                                                    <span className={s.sale_price}>От {addSpacesToNumber(selectedItem.min_price)} ₽</span>
-                                                </div>
-                                                :
-                                                <div className={s.price}>
-                                                    От {addSpacesToNumber(selectedItem.min_price)} ₽
-                                                </div>
-                                        }
+                                        {/*{*/}
+                                        {/*    (selectedItem.min_price_without_sale > selectedItem.min_price)*/}
+                                        {/*        ?*/}
+                                        {/*        <div className={s.price}>*/}
+                                        {/*            <span className={s.crossed}>От {addSpacesToNumber(selectedItem.min_price_without_sale)} ₽</span>*/}
+                                        {/*            <br/>*/}
+                                        {/*            <span className={s.sale_price}>От {addSpacesToNumber(selectedItem.min_price)} ₽</span>*/}
+                                        {/*        </div>*/}
+                                        {/*        :*/}
+                                        {/*        <div className={s.price}>*/}
+                                        {/*            От {addSpacesToNumber(selectedItem.min_price)} ₽*/}
+                                        {/*        </div>*/}
+                                        {/*}*/}
                                     </div>
                                     :
                                     <div className={s.sold_out}>
