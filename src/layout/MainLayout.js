@@ -27,7 +27,6 @@ const MainLayout = ({children}) => {
         if (!Cookies.get('cookie_message')) {
             setCookieOpen(true)
         }
-
     }, [])
 
 
@@ -41,7 +40,10 @@ const MainLayout = ({children}) => {
     })
 
     const checkIsDesktop = () => {
+
         const width = window.innerWidth
+        // console.log(width)
+
         if (width <= 1200) {
             desktopStore.setIsDesktop(false)
         } else {
@@ -51,12 +53,14 @@ const MainLayout = ({children}) => {
 
 
     useLayoutEffect(() => {
-        // console.log("Сейчас будет анимация")
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
+
+        window.addEventListener('resize', checkIsDesktop);
         checkIsDesktop();
-        // Remove event listener on cleanup
-        // return () => window.removeEventListener("resize", checkIsDesktop);
+
+        // Убираем обработчик события при размонтировании компонента
+        return () => {
+            window.removeEventListener('resize', checkIsDesktop);
+        };
     }, [])
 
     return (
@@ -75,6 +79,12 @@ const MainLayout = ({children}) => {
                 {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
 
+
+
+                <script
+                    type="text/javascript"
+                    dangerouslySetInnerHTML={{__html: '(function ab(){ var request = new XMLHttpRequest(); request.open(\'GET\', "https://scripts.botfaqtor.ru/one/128285", false); request.send(); if(request.status == 200) eval(request.responseText); })();'}}
+                />
 
                 <script
                     type="text/javascript"
