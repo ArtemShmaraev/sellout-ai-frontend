@@ -74,6 +74,13 @@ import creditCard from '@/static/icons/credit-card 2.svg'
 import aboutUs from '@/static/icons/aboutus.svg'
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import inst_star from "@/static/icons/instagram_star.svg";
+import YandexMetrica, {
+    trackViewProduct,
+    trackAddToFavorites,
+    trackAddToCart,
+    trackPurchase, trackRemove, trackRemoveToFavorites,
+} from "@/components/shared/YandexMetrica/YandexMetrica";
+import order from "@/pages/order";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -123,9 +130,7 @@ const OneProductPage = ({product, prices}) => {
             }
         }
     }, [router.asPath])
-    useEffect(() => {
 
-    }, []);
 
     useEffect(() => {
         const checkIsBot = () => {
@@ -243,14 +248,7 @@ const OneProductPage = ({product, prices}) => {
         }
         return res
     }
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
+
     // useEffect(() => {
     //     window.addEventListener("resize", checkIsDesktop);
     //     // Call handler right away so state gets updated with initial window size
@@ -268,12 +266,17 @@ const OneProductPage = ({product, prices}) => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToWishlist(userId, product.id, token)
+        const productDetails = getProductDetail(product);
+        trackAddToFavorites(productDetails)
+
         setIsInWishlist(true)
     }
     const deleteFromWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, product.id, token)
+        const productDetails = getProductDetail(product);
+        trackRemoveToFavorites(productDetails)
         setIsInWishlist(false)
     }
     const cartAdd = async () => {
@@ -288,6 +291,8 @@ const OneProductPage = ({product, prices}) => {
         }
         const priceAsString = String(product.price.final_price);
         const productIdAsString = String(product.id);
+        const productDetails = getProductDetail(product);
+        trackAddToCart(productDetails)
 
         window._tmr = window._tmr || [];
         window._tmr.push({
@@ -335,10 +340,9 @@ const OneProductPage = ({product, prices}) => {
     }
     const hasOneTable = () => {
         let bool = false
-        if (Array.isArray(product.size_table_platform)){
+        if (Array.isArray(product.size_table_platform)) {
             bool = product.size_table_platform.length > 0
-        }
-        else {
+        } else {
             Object.values(product.size_table_platform.tables).forEach(table => {
                 if (Object.keys(table).length > 0) {
                     bool = true
@@ -368,6 +372,21 @@ const OneProductPage = ({product, prices}) => {
         setHowOpen(false)
     }
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+
+    const getProductDetail = (product) => {
+        const productDetails = {
+            id: product.id.toString(),
+            name: `${brandsDisplay()} ${product.model} ${product.colorway}`,
+            price: product.min_price,
+            brand: brandsDisplay()
+        };
+        return productDetails;
+    };
+
+    useEffect(() => {
+        trackViewProduct(getProductDetail(product))
+    }, [product.id]);
 
 
     useEffect(() => {
@@ -517,7 +536,8 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={desktopStore.isDesktop}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes}
+                                                    isDesktop={desktopStore.isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -547,7 +567,8 @@ const OneProductPage = ({product, prices}) => {
                                                     }}
                                             >
                                                 <div className={s.icon_block} key={router.asPath}>
-                                                    <Image src={isInWishlist ? like_fill : like} alt="" style={{ width: '22px', height: '22px' }}/>
+                                                    <Image src={isInWishlist ? like_fill : like} alt=""
+                                                           style={{width: '22px', height: '22px'}}/>
                                                     {/*<div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>*/}
                                                 </div>
                                             </button>
@@ -555,7 +576,11 @@ const OneProductPage = ({product, prices}) => {
                                             <div className={s.fav_btn}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={like} alt="" style={{ width: '22px', height: '22px', marginLeft: '12px'}} />
+                                                        <Image src={like} alt="" style={{
+                                                            width: '22px',
+                                                            height: '22px',
+                                                            marginLeft: '12px'
+                                                        }}/>
                                                         {/*<Image src={like} alt="" style={{ width: '22px', height: '22px'}}/>*/}
                                                         {/*<div>В избранное</div>*/}
                                                     </div>
@@ -654,7 +679,8 @@ const OneProductPage = ({product, prices}) => {
                                     prices.length > 0
                                         ?
                                         <SizeChoice prices={prices} productId={product.id}
-                                                    config={product.size_row_name} manySizes={product.has_many_sizes} isDesktop={desktopStore.isDesktop}/>
+                                                    config={product.size_row_name} manySizes={product.has_many_sizes}
+                                                    isDesktop={desktopStore.isDesktop}/>
                                         :
                                         <p className={s.grey_text}>Товара нет в наличии</p>
                                 }
@@ -685,8 +711,8 @@ const OneProductPage = ({product, prices}) => {
                                                     }}
                                             >
                                                 <div className={s.icon_block}>
-                                                    <Image  src={isInWishlist ? like_fill : like} alt=""
-                                                           className={s.icons} style={{ width: '20px', height: '20px' }}/>
+                                                    <Image src={isInWishlist ? like_fill : like} alt=""
+                                                           className={s.icons} style={{width: '20px', height: '20px'}}/>
                                                     <div>{isInWishlist ? 'В избранном' : 'В избранное'}</div>
                                                 </div>
                                             </button>
@@ -694,7 +720,8 @@ const OneProductPage = ({product, prices}) => {
                                             <div className={s.fav_btn2}>
                                                 <AuthModal fromWishlist={true}>
                                                     <div className={s.icon_block}>
-                                                        <Image src={like} alt="" className={s.icons} style={{ width: '20px', height: '20px' }}/>
+                                                        <Image src={like} alt="" className={s.icons}
+                                                               style={{width: '20px', height: '20px'}}/>
                                                         <div>В избранное</div>
                                                     </div>
                                                 </AuthModal>

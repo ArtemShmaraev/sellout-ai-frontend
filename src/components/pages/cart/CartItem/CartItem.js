@@ -14,6 +14,11 @@ import like_fill from "@/static/icons/heart-fill.svg";
 import like from "@/static/icons/heart.svg";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import {observer} from "mobx-react-lite";
+import {
+    trackAddToFavorites,
+    trackRemoveToCart,
+    trackRemoveToFavorites
+} from "@/components/shared/YandexMetrica/YandexMetrica";
 
 const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL, product,
                   available, bonus}) => {
@@ -35,6 +40,8 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
         }
         cartStore.setCartCnt(newCart.length)
+        const productDetails = getProductDetail(product);
+        trackRemoveToCart(productDetails)
         router.push('/cart', undefined, {scroll: false})
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)
@@ -42,12 +49,16 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToWishlist(userId, productId, token)
+        const productDetails = getProductDetail(product);
+        trackAddToFavorites(productDetails)
         setIsInWishlist(true)
     }
     const deleteFromWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, productId, token)
+        const productDetails = getProductDetail(product);
+        trackRemoveToFavorites(productDetails)
         setIsInWishlist(false)
     }
     // if (!product.available_flag || !available) {

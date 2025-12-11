@@ -13,6 +13,7 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import Link from "next/link";
 import desktop from '@/static/img/desktop_background.jpg'
 import mobile from '@/static/img/mobile_background.jpg'
+import {trackAddToFavorites, trackRemoveToFavorites} from "@/components/shared/YandexMetrica/YandexMetrica";
 
 
 const ProductCard = ({cardList = false, product}) => {
@@ -70,6 +71,8 @@ const ProductCard = ({cardList = false, product}) => {
         const data = await addToWishlist(userId, id, token)
         setIsInWishlist(true)
         const {pathname, query} = router
+        const productDetails = getProductDetail(product);
+        trackAddToFavorites(productDetails)
         router.push({pathname, query}, undefined, {scroll: false})
     }
     const deleteFromWL = async () => {
@@ -78,6 +81,8 @@ const ProductCard = ({cardList = false, product}) => {
         const data = await removeFromWishlist(userId, id, token)
         setIsInWishlist(false)
         const {pathname, query} = router
+        const productDetails = getProductDetail(product);
+        trackRemoveToFavorites(productDetails)
         router.push({pathname, query}, undefined, {scroll: false})
     }
     const [isLoading, setIsLoading] = useState(true)

@@ -9,7 +9,8 @@ import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
 import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSellout";
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
-import {useRouter} from 'next/router'; // Assuming you're using Next.js
+import {useRouter} from 'next/router';
+import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
 
 const MainLayout = ({children}) => {
     const {desktopStore} = useContext(Context)
@@ -116,28 +117,19 @@ const MainLayout = ({children}) => {
                     type="text/javascript"
                     dangerouslySetInnerHTML={{
                         __html: `
-            (function(m,e,t,r,i,k,a){
-              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {
-                if (document.scripts[j].src === r) {
-                  return;
-                }
-              }
-              k=e.createElement(t);
-              a=e.getElementsByTagName(t)[0];
-              k.async=1;
-              k.src=r;
-              a.parentNode.insertBefore(k,a);
-            })
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-            ym(95264330, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              webvisor:true
-            });
+   ym(95264330, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
           `,
                     }}
                 />
@@ -163,6 +155,7 @@ const MainLayout = ({children}) => {
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
+            <YandexMetrica/>
             {(desktopStore.animation) && <AnimationSellout/>}
             <div style={{display: 'none'}}>Front-end by Mikhail Valuev</div>
         </>
