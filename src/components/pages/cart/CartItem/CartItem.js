@@ -32,6 +32,18 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         })
         cartStore.ships[cardId] = unitId
     }, [Cookies.get('cart'), price])
+
+    const getProductDetail = (product) => {
+        const productDetails = {
+            id: product.id.toString(),
+            name: `${brand} ${product.model} ${product.colorway}`,
+            price: product.min_price,
+            brand: brand
+        };
+        return productDetails;
+    };
+
+
     const deleteFromCart = async () => {
         const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
@@ -45,6 +57,9 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         router.push('/cart', undefined, {scroll: false})
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)
+
+
+
     const addToWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id

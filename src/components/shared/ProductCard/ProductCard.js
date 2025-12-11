@@ -65,6 +65,16 @@ const ProductCard = ({cardList = false, product}) => {
         setIsHovered(false);
     };
 
+    const getProductDetail = (product) => {
+        const productDetails = {
+            id: product.id.toString(),
+            name: `${brandsDisplay()} ${product.model} ${product.colorway}`,
+            price: product.min_price,
+            brand: brandsDisplay()
+        };
+        return productDetails;
+    };
+
     const addToWL = async () => {
         const token = Cookies.get('access_token')
         const userId = userStore.id

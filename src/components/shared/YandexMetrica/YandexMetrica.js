@@ -73,7 +73,7 @@ export const trackPurchase = (purchaseDetails) => {
     });
 };
 
-export const trackRemoveToFavorites = (purchaseDetails) => {
+export const trackRemoveToFavorites = (productDetails) => {
     window.dataLayer.push({
         "event": "removeToFavorites",
         "ecommerce": {

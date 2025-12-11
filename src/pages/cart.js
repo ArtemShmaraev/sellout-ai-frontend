@@ -21,7 +21,7 @@ import {observer} from "mobx-react-lite";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
-import {fetchUserInfo} from "@/http/userApi";
+import {fetchLastSeen2, fetchUserInfo} from "@/http/userApi";
 import how from "@/static/icons/question-circle.svg";
 import change from "@/static/icons/arrow-down-up.svg";
 import gift from "@/static/icons/gift.svg";
@@ -39,6 +39,8 @@ import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
 import map from '@/static/img/map.jpg'
 import inst_star from "@/static/icons/instagram_star.svg";
+import Compilation from "@/components/shared/Compilation/Compilation";
+import {fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
 
 
 export const getServerSideProps = async (context) => {
@@ -97,6 +99,7 @@ export const getServerSideProps = async (context) => {
 }
 const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, promoBonuses, defaultPromo, firstOrder}) => {
     const router = useRouter()
+    const [lastSeen, setLastSeen] = useState([])
     const {userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
     const [bonusesSale, setBonusesSale] = useState(Number(productUnits.bonus_sale) > 0 ? productUnits.bonus_sale : '')
@@ -107,6 +110,23 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
     const [willBonuses, setWillBonuses] = useState(bonuses)
     const [willPromoBonuses, setWillPromoBonuses] = useState(promoBonuses)
     const [totalBonuses, setTotalBonuses] = useState(promoBonuses + bonuses)
+
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        if (token) {
+            const {user_id} = jwtDecode(token)
+            fetchLastSeen2(token, user_id).then(res => setLastSeen(res))
+        } else {
+            let arr
+            if (Cookies.get('last_seen')) {
+                arr = Cookies.get('last_seen').trim().split(' ')
+                console.log(arr)
+                if (arr[0] !== '') {
+                    fetchProductsByArray(arr, token).then(res => setLastSeen(res))
+                }
+            }
+        }
+    }, [router.asPath])
     useEffect(() => {
         const checkIsBot = () => {
             const userAgent = window.navigator.userAgent;
@@ -508,7 +528,18 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                             }
                         </div>
                     </div>
+
+
                 }
+                {isDesktop && lastSeen.length > 0 && (
+                    <div>
+                        <br/>
+                        <br/>
+                        {/*<hr/>*/}
+                        <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+
+                    </div>
+                )}
             </div>
             {!isDesktop &&
                 <div className={s.questions_block}>
@@ -653,7 +684,19 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                         </div>
                     </TextModal>
                 </div>
+
             }
+
+                {!isDesktop && lastSeen.length > 0 && (
+                    <div className={s.cont + ' custom_cont'}>
+                        {/*<hr/>*/}
+                        <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+
+                    </div>
+                )}
+
+
+
         </MainLayout>
     );
 };
