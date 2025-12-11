@@ -30,13 +30,11 @@ export const getServerSideProps = async (context) => {
     const token = cookies['access_token']
     const gender = cookies['selected_gender']; // Получаем 'gender' из куки или устанавливаем значение по умолчанию 'all'
     let products;
-    if (gender && !("gender" in context.query)){
+    if (gender && !("gender" in context.query)) {
         products = await fetchProductsPage({...context.query, gender}, token);
-    }
-    else{
+    } else {
         products = await fetchProductsPage(context.query, token)
     }
-
 
 
     const categories = await fetchFilter('tree_cat')
@@ -58,14 +56,14 @@ export const getServerSideProps = async (context) => {
             }
         }
     }
-    return { props: {products, categories, lines, colors, collections, materials, sizes, lastSeen} }
+    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen}}
 }
 const Products = ({products, categories, lines, colors, collections, materials, sizes, lastSeen}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
     const [totalProducts, setTotalProducts] = useState(' ')
-    const [isOpen , setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore} = useContext(Context)
     useEffect(() => {
@@ -157,8 +155,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     }, [prevScrollPos]);
 
 
-
-
     // title_and_description = Взять из json файла (как это сделать)
     return (
         <MainLayout>
@@ -169,9 +165,9 @@ const Products = ({products, categories, lines, colors, collections, materials, 
 
                     {getTitle() in TitleAndDescriptionSEO ? (
                         TitleAndDescriptionSEO[getTitle()]['title']
-                    ) : (
-                        // Заголовок для случая, когда getTitle() равно "sellout"
-                        "Sellout: онлайн-платформа брендовой одежды и обуви"
+                    ) : (products.desktop.title ? `Купите ${products.desktop.title} по лучшей цене в РФ на Sellout` :
+                            // Заголовок для случая, когда getTitle() равно "sellout"
+                            "Sellout: онлайн-платформа брендовой одежды и обуви"
                     )}
                 </title>
                 <meta name={'description'} content=
@@ -181,7 +177,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                         // Заголовок для случая, когда getTitle() равно "sellout"
                         "1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                     )}/>
-
 
 
             </Head>
@@ -198,7 +193,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                             >Фильтры
                             </button>
                             {(filterStore.activeFilters.length !== 0 &&
-                                    filterStore.activeFilters.some(el => !["M", "F", "K"].includes(el.query))  || router.query.price_min) &&
+                                    filterStore.activeFilters.some(el => !["M", "F", "K"].includes(el.query)) || router.query.price_min) &&
                                 <button
                                     className={s.border}
                                     onClick={clearFilters}
@@ -263,7 +258,8 @@ const Products = ({products, categories, lines, colors, collections, materials, 
                                 </div>
                                 <button className={s.modal_btn}
                                         onClick={clearFilters}
-                                >Сбросить все</button>
+                                >Сбросить все
+                                </button>
                             </div>
                             <Image src={cross} alt='' onClick={handleClick} className={'cursor-pointer'}/>
                         </div>
