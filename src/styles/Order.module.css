@@ -1,3 +1,15 @@
+.bonus_icon {
+    margin-top: -3px;
+}
+.bonuses_block {
+    display: inline;
+    align-items: center;
+}
+.bonuses {
+    margin: 3px 0;
+    color: green;
+}
+
 .cont {
     margin-top: 150px;
     margin-bottom: 70px;

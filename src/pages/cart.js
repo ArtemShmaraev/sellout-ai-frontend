@@ -25,6 +25,7 @@ import {fetchLastSeen2, fetchUserInfo} from "@/http/userApi";
 import how from "@/static/icons/question-circle.svg";
 import change from "@/static/icons/arrow-down-up.svg";
 import gift from "@/static/icons/gift.svg";
+import green_gift from "@/static/icons/gift-green.svg"
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import gift_gard from '@/static/icons/gift-gard.svg'
 import smile from '@/static/icons/emoji-smile 1.svg'
@@ -347,11 +348,24 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                             onClick={e => spendBonuses(e)}
                                 />
                             }
-                            {
-                                Number(firstOrder) > 0 && <p className={'mt-2 mb-0'}>Подарок за первый заказ: {1000} ₽</p>
+
+                            {Number(firstOrder) > 0 &&
+                                <p className={'mt-2 mb-0'}>
+
+                                    Подарок за первый заказ:  <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
+                                    className={s.bonuses}> {willBonuses}₽</span> бонусов
+                                </p>
+                                // Number(willBonuses) > 0 &&
+                                // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
                             }
-                            {
-                                Number(1) > 0 && <p className={'mt-2 mb-0'}>Всего будет начислено бонусов: {totalBonuses} ₽</p>
+                            {Number(1) > 0 &&
+                                <p className={'mt-2 mb-0'}>
+
+                                    Всего будет начислено:  <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
+                                    className={s.bonuses}> {willBonuses}₽</span> бонусов
+                                </p>
+                                // Number(willBonuses) > 0 &&
+                                // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
                             }
                             {
                                 Number(saleAmount) > 0 && <p className={'my-0'}>Суммарная скидка: {saleAmount} ₽</p>

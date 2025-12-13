@@ -18,6 +18,11 @@ import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import boxImg from '@/static/icons/box2.svg'
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import Link from "next/link";
+import Image from "next/image";
+import heart from "@/static/icons/circle_heart.svg";
+import {desktopStore} from "@/store/DesktopStore";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
+import gift from "@/static/icons/gift-green.svg";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -32,7 +37,7 @@ export const getServerSideProps = async (context) => {
     const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return { props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo} }
+    return {props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo}}
 }
 const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo}) => {
     const router = useRouter()
@@ -100,7 +105,6 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
             return finAmount
         }
     }
-
 
 
     const [fillAll, setFillAll] = useState(false)
@@ -208,6 +212,13 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         }
     }, []);
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const [contactOpen, setContactOpen] = useState(false)
+    const toggleContact = () => {
+        setContactOpen(!contactOpen)
+    }
+    const closeContact = () => {
+        setContactOpen(false)
+    }
     // console.log(order.final_amount)
 
 
@@ -223,60 +234,69 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                     </div>
                     <div className={s.promos_block}>
                         <h4>Ваш заказ:</h4>
-                        <p>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
-                        <PromoInput placeholder={'Введите промокод'}
-                                    onChange={(e) => setPromo(e.target.value)}
-                                    value={promo}
-                                    onClick={(e) => sendPromo(e)}
-                        />
-                        {
-                            promoRes &&
-                            <p className={promoRes.status ? s.green_text : s.red_text}>
-                                {promoRes.message}
-                            </p>
-                        }
-                        {
-                            userStore.isLogged &&
-                            <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}
-                                        onChange={(e) => changeBonuses(e.target.value)}
-                                        value={bonuses}
-                                        onClick={e => spendBonuses(e)}
-                            />
-                        }
-                        {
-                            Number(willBonuses) > 0 && <p className={'mt-2 mb-0'}>Всего будет начислено бонусов: {willBonuses} ₽</p>
-                        }
-                        {
-                            Number(saleAmount) > 0 && <p>Суммарная скидка: {saleAmount} ₽</p>
-                        }
+                        <p className={'mt-2 mb-0'}>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
+                        {/*<PromoInput placeholder={'Введите промокод'}*/}
+                        {/*            onChange={(e) => setPromo(e.target.value)}*/}
+                        {/*            value={promo}*/}
+                        {/*            onClick={(e) => sendPromo(e)}*/}
+                        {/*/>*/}
+                        {/*{*/}
+                        {/*    promoRes &&*/}
+                        {/*    <p className={promoRes.status ? s.green_text : s.red_text}>*/}
+                        {/*        {promoRes.message}*/}
+                        {/*    </p>*/}
+                        {/*}*/}
+                        {/*{*/}
+                        {/*    userStore.isLogged &&*/}
+                        {/*    <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}*/}
+                        {/*                onChange={(e) => changeBonuses(e.target.value)}*/}
+                        {/*                value={bonuses}*/}
+                        {/*                onClick={e => spendBonuses(e)}*/}
+                        {/*    />*/}
+                        {/*}*/}
+
+
                         {
                             orderStore.deliveryPrice &&
                             (
                                 orderStore.deliveryPrice.block
-                                ?
-                                    orderStore.method === 1
                                     ?
-                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
+                                    orderStore.method === 1
+                                        ?
+                                        <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
+                                        :
+                                        <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_part)} ₽</p>
                                     :
-                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_part)} ₽</p>
-                                :
-                                    <p>Сумма доставки: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
+                                    <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
                             )
                         }
+                        {
+                            Number(saleAmount) > 0 && <p className={'mt-2 mb-0'}>Суммарная скидка: {saleAmount} ₽</p>
+                        }
+                        {
+                            <p className={'mt-2 mb-0'}>
+                                Будет начислено <Image src={gift} alt='' className={s.bonus_icon}/> <span
+                                className={s.bonuses}> {willBonuses}₽</span> бонусов
+                            </p>
+                            // Number(willBonuses) > 0 &&
+                            // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
+                        }
                         <hr/>
-                        <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
-                        <form method="POST" action="https://sellout.su/api/v1/order/payment" id="payment-form" ref={checkoutRef}>
-                            <input type="hidden" name="sum" value={String(order.final_amount)} />
+                        <p className={s.big_text}>Общая стоимость: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
+                        <form method="POST" action="https://sellout.su/api/v1/order/payment" id="payment-form"
+                              ref={checkoutRef}>
+                            <input type="hidden" name="sum" value={String(order.final_amount)}/>
                             {/*<input type="hidden" name="sum" value={"10"} />*/}
-                            <input type="hidden" name="clientid" value={order.user?.id?.toString()} />
-                            <input type="hidden" name="orderid" value={order.number?.toString()} />
-                            <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
-                            <input type="hidden" name="client_email" value={order.email} />
-                            <input type="hidden" name="client_phone" value={order.phone_int} />
-                            <input type="hidden" name="pstype" value='sbp_default' />
-                            <input type="hidden" name="json" value='true' />
-                            <input type="hidden" name="user_result_callback" value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`} />
-                            <input type="hidden" name="cart" value={ order.invoice_data }/>
+                            <input type="hidden" name="clientid" value={order.user?.id?.toString()}/>
+                            <input type="hidden" name="orderid" value={order.number?.toString()}/>
+                            <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`}/>
+                            <input type="hidden" name="client_email" value={order.email}/>
+                            <input type="hidden" name="client_phone" value={order.phone_int}/>
+                            <input type="hidden" name="pstype" value='sbp_default'/>
+                            <input type="hidden" name="json" value='true'/>
+                            <input type="hidden" name="user_result_callback"
+                                   value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`}/>
+                            <input type="hidden" name="cart" value={order.invoice_data}/>
                             {/*<input type="submit" value="Перейти к оплате" />*/}
                         </form>
 
@@ -311,13 +331,12 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         <button className={s.order_btn} onClick={checkout}>
                             {
                                 userData.user_status.base
-                                ?
+                                    ?
                                     'Перейти к оплате'
                                     :
                                     'Оформить заказ'
                             }
                         </button>
-
 
 
                         {fillAll &&
@@ -328,54 +347,98 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                                 на {userData.email}
                             </p>
                         }
+
                         <div className={s.questions_block}>
                             <TextModal title={'Вопросы по доставке'} img={boxImg}>
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                    <LoyaltyFAQ title={'Какие существуют варианты доставок с нашего склада в Москве до вас?'}>
-                                        При оформлении заказа вы указываете адрес и способ доставки. Мы доставляем, используя курьерскую службу Boxberry, а также на данный момент доставка по Москве бесплатная!
+                                    <LoyaltyFAQ
+                                        title={'Какие существуют варианты доставок с нашего склада в Москве до вас?'}>
+                                        При оформлении заказа вы указываете адрес и способ доставки. Мы доставляем,
+                                        используя курьерскую службу Boxberry, а также на данный момент доставка по
+                                        Москве бесплатная!
                                         <br/>
-                                        Вы можете выбрать доставку до Пункта Выдачи Заказов (ПВЗ) Boxberry, отметив на карте нужный ПВЗ, или выбрать доставку курьером до двери.
+                                        Вы можете выбрать доставку до Пункта Выдачи Заказов (ПВЗ) Boxberry, отметив на
+                                        карте нужный ПВЗ, или выбрать доставку курьером до двери.
                                         <br/>
                                         Самовывоза на данный момент нет, но скоро появится!
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Как выбрать тип доставки?'}>
-                                        Если в вашем заказе присутствует несколько позиций, прибывающих в разные даты, мы предлагаем на выбор два типа доставки:
+                                        Если в вашем заказе присутствует несколько позиций, прибывающих в разные даты,
+                                        мы предлагаем на выбор два типа доставки:
                                         <ol>
-                                            <li>Доставка всех позиций одновременно - мы дождёмся прибытия крайнего товара из вашего заказа и отправим весь заказ целиком. Благодаря этому стоимость доставки уменьшается, однако придется дожидаться всего заказа, а не
-                                                получать его по частям.</li>
-                                            <li>Доставка каждой позиции по отдельности - Мы будем отправлять каждую позицию вашего заказа сразу же по прибытии к нам на склад. Благодаря этому вы сможете получать части заказа сразу же, однако стоимость доставки
-                                                увеличится.</li>
+                                            <li>Доставка всех позиций одновременно - мы дождёмся прибытия крайнего
+                                                товара из вашего заказа и отправим весь заказ целиком. Благодаря этому
+                                                стоимость доставки уменьшается, однако придется дожидаться всего заказа,
+                                                а не
+                                                получать его по частям.
+                                            </li>
+                                            <li>Доставка каждой позиции по отдельности - Мы будем отправлять каждую
+                                                позицию вашего заказа сразу же по прибытии к нам на склад. Благодаря
+                                                этому вы сможете получать части заказа сразу же, однако стоимость
+                                                доставки
+                                                увеличится.
+                                            </li>
                                         </ol>
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Как рассчитывается стоимость доставки?'}>
-                                        Стоимость доставки рассчитываются автоматически на этапе оформления заказа. Она зависит от количества и веса товаров, способа и типа доставки, а также от адреса.
+                                        Стоимость доставки рассчитываются автоматически на этапе оформления заказа. Она
+                                        зависит от количества и веса товаров, способа и типа доставки, а также от
+                                        адреса.
 
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Включены ли таможенные пошлины и налоги в стоимость заказа?'}>
                                         Да, цена окончательная, никаких дополнительных платежей не потребуется!
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Куда мы доставляем?'}>
-                                        Мы доставляем по всей России службой курьерской доставки Boxberry. Очень скоро появится доставка в страны СНГ!
+                                        Мы доставляем по всей России службой курьерской доставки Boxberry. Очень скоро
+                                        появится доставка в страны СНГ!
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Какая скорость доставки со склада в Москве?'}>
-                                        В зависимости от вашего города доставка занимает от одного до нескольких дней после прибытия вашего заказа на наш склад в Москве. Подробнее вы сможете отслеживать на сайте или в приложении Boxberry.
+                                        В зависимости от вашего города доставка занимает от одного до нескольких дней
+                                        после прибытия вашего заказа на наш склад в Москве. Подробнее вы сможете
+                                        отслеживать на сайте или в приложении Boxberry.
 
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Как отслеживать доставку?'}>
-                                        Как только ваш заказ приедет на наш склад в Москве и будет отправлен курьерской службой Boxberry, вам
-                                        придет уведомление на почту с информацией о трек-номере отправления, а также трек-номер появится в
+                                        Как только ваш заказ приедет на наш склад в Москве и будет отправлен курьерской
+                                        службой Boxberry, вам
+                                        придет уведомление на почту с информацией о трек-номере отправления, а также
+                                        трек-номер появится в
                                         личном кабинете в информации о вашем заказе.
                                         <br/>
                                         Отследить заказ можно по
-                                        этой <a href="https://boxberry.ru/tracking-page" style={{color: 'inherit'}} target={'_blank'}>ссылке</a> или в мобильном приложении Boxberry. Отправление
-                                        автоматически появляется в приложении, если авторизоваться под теми же данными, под которыми был выполнен заказ на нашем сайте.
+                                        этой <a href="https://boxberry.ru/tracking-page" style={{color: 'inherit'}}
+                                                target={'_blank'}>ссылке</a> или в мобильном приложении Boxberry.
+                                        Отправление
+                                        автоматически появляется в приложении, если авторизоваться под теми же данными,
+                                        под которыми был выполнен заказ на нашем сайте.
 
                                     </LoyaltyFAQ>
                                 </div>
-                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
+                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                           className={'text-black'}
+                                                                                           target={'_blank'}>FAQ</Link>
+                                </h5>
                             </TextModal>
                         </div>
+                        {!desktopStore.isDesktop &&
+                            <div>
+                                <br/>
+
+                                <div className={'d-flex justify-content-center'}>
+                                    <Image src={heart} alt='' width={85}/>
+                                </div>
+                                <p className={'text-center mt-2'}>
+                                    Мы готовы сформировать для вас индивидуальные условия отправления,
+                                    поэтому вы всегда можете написать нам в <span
+                                    style={{color: 'black', textDecoration: 'underline', cursor: 'pointer'}}
+                                    onClick={toggleContact}>службу поддержку</span> свой запрос и мы обязательно вам
+                                    поможем!
+                                </p>
+                                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+
+                            </div>}
                     </div>
                 </div>
             </div>

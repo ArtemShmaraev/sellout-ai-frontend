@@ -16,12 +16,13 @@ import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
 const Stage1 = ({addresses, userData}) => {
     const router = useRouter()
-    const {orderStore, userStore} = useContext(Context)
+    const {orderStore, userStore, desktopStore} = useContext(Context)
     const [firstname, setFirstname] = useState(userData.first_name)
     const [lastname, setLastname] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
     const [comment, setComment] = useState('')
+
     useEffect(() => {
         console.log(userData)
         orderStore.setName(userData.first_name)
@@ -285,7 +286,8 @@ const Stage1 = ({addresses, userData}) => {
                             </div>
                             <p className={s.method_text}>
                                 Мы будем отправлять каждую позицию вашего заказа сразу же по прибытии к нам на
-                                склад. Благодаря этому вы сможете получать части заказа сразу же, однако стоимость доставки увеличится.
+                                склад. Благодаря этому вы сможете получать части заказа сразу же, однако стоимость
+                                доставки увеличится.
                             </p>
                         </div>
                     </div>
@@ -301,16 +303,22 @@ const Stage1 = ({addresses, userData}) => {
                     onChange={e => orderStore.setComment(e.target.value)}
                 />
             </div>
-            <hr/>
-            <div>
-                <div className={'d-flex justify-content-center'}>
-                    <Image src={heart} alt='' width={85}/>
-                </div>
-                <p className={'text-center mt-2'}>
-                    Мы готовы сформировать для вас индивидуальные условия отправления,
-                    поэтому вы всегда можете написать нам в <span style={{color: 'black', textDecoration: 'underline', cursor: 'pointer'}} onClick={toggleContact}>службу поддержку</span> свой запрос и мы обязательно вам поможем!
-                </p>
-            </div>
+
+            {desktopStore.isDesktop &&
+                <div>
+                <hr/>
+
+
+                    <div className={'d-flex justify-content-center'}>
+                        <Image src={heart} alt='' width={85}/>
+                    </div>
+                    <p className={'text-center mt-2'}>
+                        Мы готовы сформировать для вас индивидуальные условия отправления,
+                        поэтому вы всегда можете написать нам в <span
+                        style={{color: 'black', textDecoration: 'underline', cursor: 'pointer'}}
+                        onClick={toggleContact}>службу поддержку</span> свой запрос и мы обязательно вам поможем!
+                    </p>
+                </div>}
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
         </div>
     );
