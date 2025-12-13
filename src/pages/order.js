@@ -108,6 +108,8 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
 
 
     const [fillAll, setFillAll] = useState(false)
+    const [fillPatronymic, setFillPatronymic] = useState(false)
+    const [fillAddress, setFillAddress] = useState(false)
     const [order, setOrder] = useState({})
     const checkoutRef = useRef(null)
     const checkout = async () => {
@@ -122,33 +124,47 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
 
 
         const validate = () => {
+            setFillPatronymic(false)
+            setFillAll(false)
+            setFillAddress(false)
+            if (!orderObj.patronymic) {
+                setFillAll(true)
+                setFillPatronymic(true)
+                return null
+            }
             if (!orderObj.name || !orderObj.surname || !orderObj.patronymic || !orderObj.email || !orderObj.surname) {
                 setFillAll(true)
                 return null
             }
             if (!orderStore.shipType) {
                 setFillAll(true)
+                setFillAddress(true)
                 return null
             }
             if (orderStore.shipType === 3 && !orderObj.address_id) {
                 setFillAll(true)
+                setFillAddress(true)
                 return null
             }
             //До двери
             if (orderStore.shipType === 1 && !orderObj.address_id) {
                 setFillAll(true)
+                setFillAddress(true)
                 return null
             }
             //Boxberry
             if (orderStore.shipType === 2 && !orderObj.target) {
                 setFillAll(true)
+                setFillAddress(true)
                 return null
             }
             if (orderStore.deliveryPrice && orderStore.deliveryPrice.block && !orderStore.method) {
                 setFillAll(true)
                 return null
             }
+            setFillPatronymic(false)
             setFillAll(false)
+            setFillAddress(false)
             return true
         }
 
@@ -339,7 +355,13 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         </button>
 
 
-                        {fillAll &&
+                        {fillAll && fillPatronymic &&
+                            <p className={'red_text'}>Заполните отчество</p>
+                        }
+                        {fillAll && fillAddress &&
+                            <p className={'red_text'}>Выберите способ доставки</p>
+                        }
+                        {fillAll && !(fillPatronymic || fillAddress) &&
                             <p className={'red_text'}>Заполните все поля</p>
                         }
                         {verifyEmail &&
