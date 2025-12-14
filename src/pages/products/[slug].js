@@ -12,6 +12,7 @@ import HowToChoose from "@/components/pages/oneProduct/HowToChoose/HowToChoose";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/QuestionsDropdown";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
+
 import Image from 'next/image'
 import {
     fetchOneProduct,
@@ -34,6 +35,7 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import Compilation from "@/components/shared/Compilation/Compilation";
+import InvisibleCaptcha from "@/components/shared/CaptchaYandex/Captcha"
 import {Splide, SplideSlide, SplideTrack} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'
 import right from '@/static/icons/chevron-right.svg'
@@ -90,6 +92,8 @@ export const getServerSideProps = async (context) => {
     const prices = await fetchPrices(id, token)
     return {props: {product, prices}}
 }
+
+
 
 const OneProductPage = ({product, prices}) => {
     const router = useRouter()
@@ -421,6 +425,7 @@ const OneProductPage = ({product, prices}) => {
                 <meta name={'description'}
                       content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
             </Head>
+            <InvisibleCaptcha/>
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row}>
                     <div className={s.col1}>
