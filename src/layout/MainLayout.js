@@ -161,7 +161,7 @@ const MainLayout = ({children}) => {
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
             <YandexMetrica/>
             {(desktopStore.animation) && <AnimationSellout/>}
-            <div style={{display: 'none'}}>Front-end by Mikhail Valuev</div>
+
         </>
     );
 };
