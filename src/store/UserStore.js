@@ -13,6 +13,7 @@ class UserStore {
         this._accessToken = ''
         makeAutoObservable(this)
     }
+
     get isLogged() {
         return this._isLogged
     }

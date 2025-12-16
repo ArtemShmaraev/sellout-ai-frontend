@@ -87,7 +87,8 @@ import order from "@/pages/order";
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
-    const product = await fetchOneProduct(context.params.slug, token)
+    const captcha_token = cookies['captcha_token']
+    const product = await fetchOneProduct(context.params.slug, token, captcha_token)
     const {id} = product
     const prices = await fetchPrices(id, token)
     return {props: {product, prices}}
@@ -101,11 +102,11 @@ const OneProductPage = ({product, prices}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
 
-
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
 
     const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
+
     useEffect(() => {
         productStore.clearAll()
         if (prices.length === 1) {
@@ -416,6 +417,7 @@ const OneProductPage = ({product, prices}) => {
         }
     }, []); // Пустой массив зависимостей гарантирует выполнение эффекта только один раз при монтировании компонента
 
+
     return (
         <MainLayout>
             <Head>
@@ -425,7 +427,7 @@ const OneProductPage = ({product, prices}) => {
                 <meta name={'description'}
                       content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
             </Head>
-            <InvisibleCaptcha/>
+            <InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row}>
                     <div className={s.col1}>
