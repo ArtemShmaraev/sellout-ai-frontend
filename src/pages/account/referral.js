@@ -152,79 +152,91 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
     }
 
     const renderTable = () => {
-        const arr = []
-        const firstTrArr = []
-        let cnt = 0
+        const arr = [];
+        const firstTrArr = [];
+        let cnt = 0;
+
+        // Определяем количество столбцов и проверяем, все ли они равны нулю
+        const checkColumn = (column) => {
+            return column.reduce((acc, val) => acc + val, 0) !== 0;
+        };
+
         for (const key in refData) {
             if (key === 'promo_text' || key === 'promo_link') {
-                continue
+                continue;
             }
             if (refData[key]) {
-                cnt++
+                cnt++;
             }
         }
-        if (refData.order_amounts) {
+
+        if (refData.order_amounts && checkColumn(refData.order_amounts)) {
             firstTrArr.push(
                 <td width={100 / cnt}>
                     Сумма заказа
                 </td>
-            )
-            arr.push(refData.order_amounts)
+            );
+            arr.push(refData.order_amounts);
         }
-        if (refData.partner_bonus_amounts) {
+        // Проверяем другие столбцы на равенство нулю
+        // И добавляем только ненулевые столбцы
+        if (refData.partner_bonus_amounts && checkColumn(refData.partner_bonus_amounts)) {
             firstTrArr.push(
                 <td width={100 / cnt}>
                     Вы получите бонусов
                 </td>
-            )
-            arr.push(refData.partner_bonus_amounts)
+            );
+            arr.push(refData.partner_bonus_amounts);
         }
-        if (refData.client_sale_amounts) {
+        if (refData.client_sale_amounts && checkColumn(refData.client_sale_amounts)) {
             firstTrArr.push(
                 <td width={100 / cnt}>
                     Приглашенный пользователь получит скидку
                 </td>
-            )
-            arr.push(refData.client_sale_amounts)
+            );
+            arr.push(refData.client_sale_amounts);
         }
-        if (refData.client_bonus_amounts) {
+        if (refData.client_bonus_amounts && checkColumn(refData.client_bonus_amounts)) {
             firstTrArr.push(
                 <td width={100 / cnt}>
                     Приглашенный пользователь получит бонусов
                 </td>
-            )
-            arr.push(refData.client_bonus_amounts)
+            );
+            arr.push(refData.client_bonus_amounts);
         }
+
         const res = [
             <tr className={s.first_tr}>
                 {firstTrArr}
             </tr>
-        ]
+        ];
+
         for (let i = 0; i < arr[0].length; i++) {
-            const trArr = []
+            const trArr = [];
             for (let j = 0; j < arr.length; j++) {
                 if (j === 0) {
                     trArr.push(
                         <td>
-                            {`От ${arr[j][i]}₽`}
+                            {`${arr[j][i]}₽`}
                         </td>
-                    )
+                    );
                 } else {
                     trArr.push(
                         <td>
                             {`${arr[j][i]}₽`}
                         </td>
-                    )
+                    );
                 }
             }
             res.push(
                 <tr>
                     {trArr}
                 </tr>
-            )
+            );
         }
-        return res
-    }
+        return res;
+    };
+
 
     const [isDesktop, setIsDesktop] = useState(true)
     const checkIsDesktop = () => {

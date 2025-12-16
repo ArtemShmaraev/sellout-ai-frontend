@@ -353,6 +353,7 @@
     "search_filter_name": "Anta",
     "score": 0,
     "score_product_page": 40,
+    "is_show": true,
     "children": [
       {
         "id": 306,
@@ -394,8 +395,7 @@
         "score": 0,
         "score_product_page": 50
       }
-    ],
-    "is_show": true
+    ]
   },
   {
     "id": 311,
@@ -2468,6 +2468,17 @@
     "is_show": true
   },
   {
+    "id": 1137,
+    "name": "Aquascutum",
+    "is_all": false,
+    "view_name": "Aquascutum",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 732,
     "name": "Aquazzura",
     "is_all": false,
@@ -2501,6 +2512,17 @@
     "is_show": true
   },
   {
+    "id": 1135,
+    "name": "Arket",
+    "is_all": false,
+    "view_name": "Arket",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 537,
     "name": "Armani",
     "is_all": false,
@@ -2520,6 +2542,28 @@
     "search_filter_name": "ASH",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1134,
+    "name": "Atry",
+    "is_all": false,
+    "view_name": "Atry",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
+    "id": 1128,
+    "name": "Audemars Piguet",
+    "is_all": false,
+    "view_name": "Audemars Piguet",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -2622,6 +2666,17 @@
     "is_show": true
   },
   {
+    "id": 1141,
+    "name": "Barker",
+    "is_all": false,
+    "view_name": "Barker",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 717,
     "name": "Barrow",
     "is_all": false,
@@ -2674,6 +2729,17 @@
     "search_filter_name": "Belle",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1131,
+    "name": "Berluti",
+    "is_all": false,
+    "view_name": "Berluti",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -2773,6 +2839,39 @@
     "search_filter_name": "Bottega Veneta",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1140,
+    "name": "Boucheron",
+    "is_all": false,
+    "view_name": "Boucheron",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
+    "id": 1116,
+    "name": "Boy London",
+    "is_all": false,
+    "view_name": "Boy London",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
+    "id": 1110,
+    "name": "Brain Dead",
+    "is_all": false,
+    "view_name": "Brain Dead",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -3007,6 +3106,17 @@
     "is_show": true
   },
   {
+    "id": 1112,
+    "name": "CEEC LA",
+    "is_all": false,
+    "view_name": "CEEC LA",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 581,
     "name": "Celine",
     "is_all": false,
@@ -3059,6 +3169,17 @@
     "search_filter_name": "Charlotte Tilbury",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1119,
+    "name": "Chaumet",
+    "is_all": false,
+    "view_name": "Chaumet",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -3326,6 +3447,17 @@
     "is_show": true
   },
   {
+    "id": 1121,
+    "name": "Dark Circle",
+    "is_all": false,
+    "view_name": "Dark Circle",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 831,
     "name": "DC Shoes",
     "is_all": false,
@@ -3411,6 +3543,17 @@
     "search_filter_name": "Dior",
     "score": 0,
     "score_product_page": 60,
+    "is_show": true
+  },
+  {
+    "id": 1127,
+    "name": "Discover Mental Club",
+    "is_all": false,
+    "view_name": "Discover Mental Club",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -3521,6 +3664,17 @@
     "search_filter_name": "Empty Reference",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1133,
+    "name": "Ermanno Scervino",
+    "is_all": false,
+    "view_name": "Ermanno Scervino",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -3700,6 +3854,17 @@
     "is_show": true
   },
   {
+    "id": 1138,
+    "name": "Free world order",
+    "is_all": false,
+    "view_name": "Free world order",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 793,
     "name": "FRKM",
     "is_all": false,
@@ -3821,6 +3986,28 @@
     "is_show": true
   },
   {
+    "id": 1120,
+    "name": "GOLF",
+    "is_all": false,
+    "view_name": "GOLF",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
+    "id": 1117,
+    "name": "Golfcross",
+    "is_all": false,
+    "view_name": "Golfcross",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 773,
     "name": "GOOD",
     "is_all": false,
@@ -3906,6 +4093,17 @@
     "search_filter_name": "H&M",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1129,
+    "name": "Harry Winston",
+    "is_all": false,
+    "view_name": "Harry Winston",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -4250,6 +4448,17 @@
     "is_show": true
   },
   {
+    "id": 1114,
+    "name": "Khaite",
+    "is_all": false,
+    "view_name": "Khaite",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 669,
     "name": "Khrisjoy",
     "is_all": false,
@@ -4258,6 +4467,17 @@
     "search_filter_name": "Khrisjoy",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1113,
+    "name": "Killwinner",
+    "is_all": false,
+    "view_name": "Killwinner",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -4434,6 +4654,17 @@
     "search_filter_name": "Louis Vuitton",
     "score": 0,
     "score_product_page": 60,
+    "is_show": true
+  },
+  {
+    "id": 1111,
+    "name": "lululemon",
+    "is_all": false,
+    "view_name": "lululemon",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -4734,6 +4965,17 @@
     "is_show": true
   },
   {
+    "id": 1136,
+    "name": "Moon Boot",
+    "is_all": false,
+    "view_name": "Moon Boot",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 628,
     "name": "Moose Knuckles",
     "is_all": false,
@@ -4863,6 +5105,17 @@
     "search_filter_name": "Nanushka",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1125,
+    "name": "Native",
+    "is_all": false,
+    "view_name": "Native",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -5031,6 +5284,17 @@
     "is_show": true
   },
   {
+    "id": 1115,
+    "name": "Omega",
+    "is_all": false,
+    "view_name": "Omega",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 584,
     "name": "On",
     "is_all": false,
@@ -5108,6 +5372,17 @@
     "is_show": true
   },
   {
+    "id": 1118,
+    "name": "palladium",
+    "is_all": false,
+    "view_name": "palladium",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 565,
     "name": "Palm Angels",
     "is_all": false,
@@ -5149,6 +5424,17 @@
     "search_filter_name": "patagonia",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1126,
+    "name": "Patek Philippe",
+    "is_all": false,
+    "view_name": "Patek Philippe",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -5515,6 +5801,17 @@
     "is_show": true
   },
   {
+    "id": 1123,
+    "name": "Rolex",
+    "is_all": false,
+    "view_name": "Rolex",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 845,
     "name": "Russell Athletic",
     "is_all": false,
@@ -5812,7 +6109,7 @@
     "is_show": true
   },
   {
-    "id": 1099,
+    "id": 1100,
     "name": "Swatch",
     "is_all": false,
     "view_name": "Swatch",
@@ -5823,7 +6120,7 @@
     "is_show": true
   },
   {
-    "id": 1100,
+    "id": 1099,
     "name": "Swatch",
     "is_all": false,
     "view_name": "Swatch",
@@ -5886,6 +6183,17 @@
     "search_filter_name": "The Row",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1139,
+    "name": "The Salvages Fashion Club",
+    "is_all": false,
+    "view_name": "The Salvages Fashion Club",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -6021,6 +6329,17 @@
     "is_show": true
   },
   {
+    "id": 1132,
+    "name": "UFZ",
+    "is_all": false,
+    "view_name": "UFZ",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 608,
     "name": "UGG",
     "is_all": false,
@@ -6131,6 +6450,17 @@
     "is_show": true
   },
   {
+    "id": 1124,
+    "name": "Vacheron Constantin",
+    "is_all": false,
+    "view_name": "Vacheron Constantin",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
+    "is_show": true
+  },
+  {
     "id": 645,
     "name": "Valentino",
     "is_all": false,
@@ -6150,6 +6480,17 @@
     "search_filter_name": "Valextra",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1122,
+    "name": "Van Cleef & Arpels",
+    "is_all": false,
+    "view_name": "Van Cleef & Arpels",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
@@ -6271,6 +6612,17 @@
     "search_filter_name": "Waitingwave",
     "score": 0,
     "score_product_page": 1,
+    "is_show": true
+  },
+  {
+    "id": 1130,
+    "name": "Wandler",
+    "is_all": false,
+    "view_name": "Wandler",
+    "full_eng_name": "",
+    "search_filter_name": "",
+    "score": 0,
+    "score_product_page": 0,
     "is_show": true
   },
   {
