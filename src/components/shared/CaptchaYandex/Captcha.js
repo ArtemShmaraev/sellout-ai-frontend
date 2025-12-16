@@ -1,4 +1,4 @@
-import { InvisibleSmartCaptcha } from '@yandex/smart-captcha';
+import {InvisibleSmartCaptcha} from '@yandex/smart-captcha';
 import {useCallback, useContext, useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {$host} from "@/http";
@@ -20,21 +20,25 @@ const InvisibleCaptcha = ({isValidToken}) => {
     const handleButtonClick = () => setVisible(true);
     return (
         <>
-            <button onClick={handleButtonClick}>Validate</button>
-            <InvisibleSmartCaptcha
-                sitekey="ysc1_Mv7mBNR4HtAUi0sNynbQ87jBGypFFDYojn2qA3dC1fe2c235"
-                onSuccess={(token) => {
-                     // Сохраняем полученный токен в состоянии компонента
-                    setToken(token);
-                    fetchCaptchaToken(token)
+            <div style={{
+                height: '0px',
+                }}>
+                <button onClick={handleButtonClick}>Validate</button>
+                <InvisibleSmartCaptcha
+                    sitekey="ysc1_Mv7mBNR4HtAUi0sNynbQ87jBGypFFDYojn2qA3dC1fe2c235"
+                    onSuccess={(token) => {
+                        // Сохраняем полученный токен в состоянии компонента
+                        setToken(token);
+                        fetchCaptchaToken(token)
 
 
                     }}
-                onChallengeHidden={handleChallengeHidden}
-                visible={visible}
-                test={true}
-                hideShield={true}
-            />
+                    onChallengeHidden={handleChallengeHidden}
+                    visible={visible}
+                    test={true}
+                    hideShield={true}
+                />
+            </div>
         </>
     );
 };
