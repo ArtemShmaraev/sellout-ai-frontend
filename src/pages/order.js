@@ -36,10 +36,12 @@ export const getServerSideProps = async (context) => {
     const maxBonuses = cart.bonus + cart.promo_bonus
     const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
+    const skipPayment = cart.promo_code ? cart.promo_code.skip_payment : false
+    console.log(cart.promo_code)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return {props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo}}
+    return {props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo, skipPayment}}
 }
-const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo}) => {
+const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo, skipPayment}) => {
     const router = useRouter()
     const {orderStore, userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
@@ -50,6 +52,8 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
     const [promoRes, setPromoRes] = useState(null)
     const [verifyEmail, setVerifyEmail] = useState(false)
     const [willBonuses, setWillBonuses] = useState(maxBonuses)
+    const [isSkipPayment, setIsSkipPayment] = useState(skipPayment)
+
     const renderStage = () => {
         const stage = orderStore.stage
         if (stage === 1) {
@@ -207,7 +211,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         const invoiceStr = JSON.stringify(checkout.invoice_data)
         checkout.invoice_data = invoiceStr
         setOrder(checkout)
-        if (userData.user_status.base) {
+        if (userData.user_status.base && !isSkipPayment) {
             setTimeout(() => {
                 checkoutRef.current.submit()
             }, 100)
@@ -346,7 +350,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
 
                         <button className={s.order_btn} onClick={checkout}>
                             {
-                                userData.user_status.base
+                                (userData.user_status.base && !isSkipPayment)
                                     ?
                                     'Перейти к оплате'
                                     :

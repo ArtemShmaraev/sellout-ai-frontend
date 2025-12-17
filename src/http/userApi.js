@@ -5,6 +5,7 @@ export async function registration(body) {
     const {data} = await $host.post(`user/register`, body)
     Cookies.set('access_token', data.access, {expires: 2772})
     Cookies.set('refresh_token', data.refresh, {expires: 2772})
+
     return data
 }
 export async function login(body) {

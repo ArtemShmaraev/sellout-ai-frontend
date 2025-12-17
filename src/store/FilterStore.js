@@ -582,7 +582,7 @@ class FilterStore {
 
         if (currentScroll > position) {
             window.scrollTo({
-                top: position,
+                top: 100,
                 behavior: 'smooth',
                 duration: 1000,
             });

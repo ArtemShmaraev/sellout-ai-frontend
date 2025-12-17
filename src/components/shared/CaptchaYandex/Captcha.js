@@ -23,7 +23,6 @@ const InvisibleCaptcha = ({isValidToken}) => {
             <div style={{
                 height: '0px',
                 }}>
-                <button onClick={handleButtonClick}>Validate</button>
                 <InvisibleSmartCaptcha
                     sitekey="ysc1_Mv7mBNR4HtAUi0sNynbQ87jBGypFFDYojn2qA3dC1fe2c235"
                     onSuccess={(token) => {

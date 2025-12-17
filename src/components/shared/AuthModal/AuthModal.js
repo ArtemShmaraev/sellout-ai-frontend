@@ -30,6 +30,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState()
+    const [promoreg, setPromoreg] = useState()
     const [isMailingList, setIsMailingList] = useState(true)
 
     const [emailBusy, setEmailBusy] = useState(false)
@@ -72,7 +73,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             last_name: lastName,
             phone: phone,
             gender: userStore.gender,
-            is_mailing_list: isMailingList
+            is_mailing_list: isMailingList,
+            promoreg: promoreg
         }
         const referral = Cookies.get('referral_id')
         if (referral) {
@@ -103,10 +105,10 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setLastName(res.last_name)
             userStore.setAccessToken(res.access)
             userStore.setGender(res.gender)
-            const promo = Cookies.get('promo')
-            if (promo) {
+            const promoref = Cookies.get('promo')
+            if (promoref) {
                 const cartArr = Cookies.get('cart').trim().split(' ')
-                const data = await promoAuth(promo, userStore.id, res.access)
+                const data = await promoAuth(promoref, userStore.id, res.access)
             }
 
             await confirmEmail(res.access, res.user_id, window.location.href)
@@ -149,10 +151,10 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             userStore.setGender(res.gender)
             Cookies.set('selected_gender', res.gender === "male" ? "M": "F", {expires: 2772});
             setShow(false)
-            const promo = Cookies.get('promo')
-            if (promo) {
+            const promoref = Cookies.get('promo')
+            if (promoref) {
                 const cartArr = Cookies.get('cart').trim().split(' ')
-                const data = await promoAuth(promo, userStore.id, res.access)
+                const data = await promoAuth(promoref, userStore.id, res.access)
             }
         } catch (e) {
             setWrong(true)
@@ -192,8 +194,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             >
                 {children}
             </button>
-            <Modal show={show}
-                   centered={true}
+            <Modal show={show} style={{ overflowY: 'scroll'}}
+                   // centered={true}
                    onHide={handleClose}
                    fullscreen={!isDesktop}
                    >
@@ -251,20 +253,20 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label1}>Имя:</label>
                                     <input type="text" className={s.input}
                                            value={firstName}
-                                           placeholder={"Kanye"}
+                                           placeholder={"Kanye*"}
                                            onChange={(e) => setFirstName(e.target.value)}
                                     />
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Фамилия:</label>
                                     <input type="text" className={s.input}
-                                           placeholder={"West"}
+                                           placeholder={"West*"}
                                            value={lastName}
                                            onChange={(e) => setLastName(e.target.value)}
                                     />
                                 </div>
                                 <div className={s.input_block}>
-                                    <label className={s.label}>Номер телефона</label>
+                                    <label className={s.label}>Номер телефона:</label>
                                     <InputMask mask="+7 999 999-99-99" maskChar={null}
                                                value={phone}
                                                onChange={e => handleChangeNumber(e)}
@@ -278,7 +280,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Почта:</label>
                                     <input type="text" className={s.input}
                                            value={email}
-                                           placeholder={"KendallJenner@mail.ru"}
+                                           placeholder={"KendallJenner@mail.ru*"}
                                            onChange={(e) => setEmail(e.target.value)}/>
                                     {!validEmail &&
                                         <p className={s.validate}>Некорректный формат почты</p>
@@ -292,9 +294,17 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Пароль:</label>
                                     <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </div>
-                                <div className={s.gender_block}>
+                                <div className={s.input_block}>
                                     <label className={s.label}>Ваш пол:</label>
                                     <RadioGroup/>
+                                </div>
+                                <div className={s.input_block}>
+                                    <label className={s.label}>Промокод:</label>
+                                    <input type="text" className={s.input}
+                                           placeholder={"(Необязательно)"}
+                                           value={promoreg}
+                                           onChange={(e) => setPromoreg(e.target.value)}
+                                    />
                                 </div>
                                 <div className='d-flex mt-5' onClick={() => setIsMailingList(!isMailingList)}>
                                     <CustomCheckbox checked={isMailingList}

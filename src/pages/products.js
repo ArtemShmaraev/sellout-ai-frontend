@@ -1,5 +1,5 @@
 import MainLayout from "@/layout/MainLayout";
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import s from '../styles/products.module.css'
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
@@ -24,17 +24,21 @@ import Compilation from "@/components/shared/Compilation/Compilation";
 import cross from '@/static/icons/x-lg.svg'
 import Cookies from "js-cookie";
 import cn from "classnames";
+import loading_products_data from '@/static/jsons/loading_products_data.json'
+// import {cookies} from "next/headers";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const gender = cookies['selected_gender']; // Получаем 'gender' из куки или устанавливаем значение по умолчанию 'all'
     let products;
-    if (gender && !("gender" in context.query)) {
-        products = await fetchProductsPage({...context.query, gender}, token);
-    } else {
-        products = await fetchProductsPage(context.query, token)
-    }
+    // if (gender && !("gender" in context.query)) {
+    //     products = await fetchProductsPage({...context.query, gender}, token);
+    // } else {
+    //     products = await fetchProductsPage(context.query, token)
+    // }
+    //
+    products = []
 
 
     const categories = await fetchFilter('tree_cat')
@@ -56,9 +60,10 @@ export const getServerSideProps = async (context) => {
             }
         }
     }
-    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen}}
+    const url = context.query
+    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url}}
 }
-const Products = ({products, categories, lines, colors, collections, materials, sizes, lastSeen}) => {
+const Products = ({productsList, categories, lines, colors, collections, materials, sizes, lastSeen, url}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -66,7 +71,16 @@ const Products = ({products, categories, lines, colors, collections, materials, 
     const [isOpen, setIsOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore} = useContext(Context)
+    const [products, setProducts] = useState(loading_products_data)
+
     useEffect(() => {
+        setProducts(loading_products_data)
+    }, [router.asPath])
+
+
+
+    useEffect(() => {
+
         filterStore.fillCat(categories)
         if (!filterStore.lineQ) {
             filterStore.fillLines(lines)
@@ -83,7 +97,26 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         filterStore.setMinPrice(products.min_price)
         filterStore.setMaxPrice(products.max_price)
         filterStore.setRef(productListRef)
-    }, [products])
+    }, [router.asPath])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // const cookies = parse(context.req.headers.cookie || '')
+            const token = Cookies.get('access_token')
+            const gender = Cookies.get('selected_gender')
+            let data_products
+            if (gender && !("gender" in url)) {
+                data_products = await fetchProductsPage({...url, gender}, token);
+            } else {
+
+                data_products = await fetchProductsPage(url, token)
+            }
+            setProducts(data_products)
+        };
+
+        fetchData();
+    }, [router.asPath])
+
     const handleClick = () => {
         if (desktopStore.isDesktop) {
             setIsOpen(!isOpen)
@@ -128,6 +161,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         setIsSend(false)
     };
     const getTitle = () => {
+        // console.log(products)
         let title = desktopStore.isDesktop ? products.desktop.title : products.mobile.title
         if (title === 'sellout' || title === "") {
             title = 'Sellout'
@@ -136,8 +170,6 @@ const Products = ({products, categories, lines, colors, collections, materials, 
         return title
 
     }
-
-
     const [visible, setVisible] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -151,6 +183,7 @@ const Products = ({products, categories, lines, colors, collections, materials, 
 
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
+        // setProducts([])
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
 

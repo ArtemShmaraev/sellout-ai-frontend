@@ -1,0 +1,143 @@
+{
+  "add_filter": "",
+  "count": 100,
+  "min_price": 0,
+  "max_price": 50000000,
+  "results": [
+    {
+      "id": 115146,
+      "in_wishlist": false,
+      "price": {
+        "start_price": 18590,
+        "final_price": 18590
+      },
+      "model": "Загрузка...",
+      "colorway": "Загрузка...",
+      "slug": "nike-air-max-98-metallic-casual-115146",
+      "is_collab": false,
+      "collab": null,
+      "brands": [
+        {
+          "id": 57,
+          "name": "Загрузка...",
+          "query_name": "nike",
+          "score": 10
+        }
+      ],
+      "bucket_link": [
+        {
+          "url": "logo"
+        }
+      ],
+      "is_sale": false
+    },
+    {
+      "id": 115147,
+      "in_wishlist": false,
+      "price": {
+        "start_price": 18590,
+        "final_price": 18590
+      },
+      "model": "Загрузка...",
+      "colorway": "Загрузка...",
+      "slug": "nike-air-max-98-metallic-casual-115146",
+      "is_collab": false,
+      "collab": null,
+      "brands": [
+        {
+          "id": 57,
+          "name": "Загрузка...",
+          "query_name": "nike",
+          "score": 10
+        }
+      ],
+      "bucket_link": [
+        {
+          "url": "logo"
+        }
+      ],
+      "is_sale": false
+    },
+    {
+      "id": 115148,
+      "in_wishlist": false,
+      "price": {
+        "start_price": 18590,
+        "final_price": 18590
+      },
+      "model": "Загрузка...",
+      "colorway": "Загрузка...",
+      "slug": "nike-air-max-98-metallic-casual-115146",
+      "is_collab": false,
+      "collab": null,
+      "brands": [
+        {
+          "id": 57,
+          "name": "Загрузка...",
+          "query_name": "nike",
+          "score": 10
+        }
+      ],
+      "bucket_link": [
+        {
+          "url": "logo"
+        }
+      ],
+      "is_sale": false
+    },
+    {
+      "id": 115149,
+      "in_wishlist": false,
+      "price": {
+        "start_price": 19990,
+        "final_price": 19990
+      },
+      "model": "Загрузка...",
+      "colorway": "Загрузка...",
+      "slug": "nike-air-max-98-metallic-casual-115146",
+      "is_collab": false,
+      "collab": null,
+      "brands": [
+        {
+          "id": 57,
+          "name": "Загрузка...",
+          "query_name": "nike",
+          "score": 10
+        }
+      ],
+      "bucket_link": [
+        {
+          "url": "logo"
+        }
+      ],
+      "is_sale": false
+    }
+  ],
+  "mobile": {
+    "title": "Загрузка",
+    "content": "",
+    "title_with_gender": "",
+    "photo": "",
+    "subtitle": "",
+    "gender": [],
+    "category": [],
+    "collab": [],
+    "line": [],
+    "q": "",
+    "collection": []
+  },
+  "desktop": {
+    "title": "Загрузка",
+    "content": "",
+    "title_with_gender": "",
+    "photo": "",
+    "subtitle": "",
+    "gender": [],
+    "category": [],
+    "collab": [],
+    "line": [],
+    "q": "",
+    "collection": []
+  },
+  "time": 4.223260164260864
+}

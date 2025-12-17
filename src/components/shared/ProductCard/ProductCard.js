@@ -265,13 +265,14 @@ const ProductCard = ({cardList = false, product}) => {
                      onMouseLeave={handleMouseLeave}
 
                 >
+
                     <Image
                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                         loading={'eager'}
                         fill={true}
                         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
                         onLoadingComplete={() => setIsLoading(false)}
-                        src={photosArr[0].url} alt="shoe"
+                        src={photosArr[0].url !== "logo" ? photosArr[0].url : (isDesktop ? desktop : mobile)} alt="shoe"
                         sizes={'100%'}
                     />
                     {photos[1] &&
