@@ -280,7 +280,7 @@ const ProductCard = ({cardList = false, product}) => {
                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
                             loading={'eager'}
                             fill={true}
-                            className={isHovered && isDesktop? '' : 'opacity-0'}
+                            className={isHovered && isDesktop ? '' : 'opacity-0'}
                             onLoadingComplete={() => setIsLoading(false)}
                             src={photos[1]} alt="shoe"
                             sizes={'100%'}
@@ -301,13 +301,15 @@ const ProductCard = ({cardList = false, product}) => {
                         ?
                         <>
                             <div className={s.info}>
-                                <div className={`${s.tag}`}>{brandsDisplay()}</div>
-                                <div className={`${s.brand}`}>{model || 'No model'}</div>
-                                <div className={`${s.name}`}>{colorway}</div>
+
+                                <div
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay()}</div>
+
+                                <div
+                                    className={`${s.brand}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : ""}</div>
+                                <div
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? colorway : "."}</div>
                             </div>
-
-
-
                         </>
                         :
                         <div className={'text-black'}>
@@ -325,7 +327,8 @@ const ProductCard = ({cardList = false, product}) => {
                                 ?
                                 <div className={`${s.price}`}>
 
-                                    <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                    <span
+                                        className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
                                     {!isDesktop && <br/>}
                                     <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
                                     {/*<br/>*/}
@@ -336,15 +339,21 @@ const ProductCard = ({cardList = false, product}) => {
                                     Нет в наличии
                                 </div>
                             :
-                            <div className={`${s.price}`}>
-                                {
-                                    Number(price.final_price) > 0
-                                        ?
-                                        `от ${addSpacesToNumber(price.final_price)} ₽`
-                                        :
-                                        'Нет в наличии'
-                                }
-                            </div>
+                            Number(price.final_price) === 1
+                                ?
+                                <div className={`${s.placeholder}`}>
+
+                                </div>
+                                :
+                                <div className={`${s.price}`}>
+                                    {
+                                        Number(price.final_price) > 0
+                                            ?
+                                            `от ${addSpacesToNumber(price.final_price)} ₽`
+                                            :
+                                            'Нет в наличии'
+                                    }
+                                </div>
                     }
                 </div>
             </div>
@@ -353,7 +362,6 @@ const ProductCard = ({cardList = false, product}) => {
 };
 
 export default ProductCard;
-
 
 
 //     return (

@@ -107,6 +107,31 @@
     color: #727272;
 }
 
+
+.placeholder {
+    margin: 2px;
+    background: linear-gradient(to right, #c9c9c9, white);
+    background-color: #c9c9c9;
+    border-radius: 5px;
+    color: transparent; /* Делаем текст невидимым */
+    background-size: 200% auto; /* Увеличиваем размер градиента */
+    animation: gradientAnimation 2s infinite; /* Применяем анимацию */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
 .brand {
     font-weight: 500;
     color: #222222;

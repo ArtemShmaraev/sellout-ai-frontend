@@ -163,7 +163,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
     const getTitle = () => {
         // console.log(products)
         let title = desktopStore.isDesktop ? products.desktop.title : products.mobile.title
-        if (title === 'sellout' || title === "") {
+        if (title === 'sellout' || title === "" || title === "Загрузка") {
             title = 'Sellout'
         }
         // console.log(title);
