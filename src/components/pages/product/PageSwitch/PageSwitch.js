@@ -24,7 +24,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
     const nextPage = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        if (currentPage < totalProducts) {
+        if (currentPage < 100000) {
             const {pathname} = router
             const query = {...router.query}
             query.page = currentPage+1
@@ -42,7 +42,7 @@ const PageSwitch = ({currentPage, totalProducts}) => {
                 <div className={s.page}>{`${currentPage} из ${totalProducts}`}</div>
                 <a className={s.next}
                    onClick={(e) => nextPage(e)}
-                   style={currentPage < totalProducts ? {color: '#000'} : {color: '#E6E6E6'}}
+                   style={currentPage < 100000 ? {color: '#000'} : {color: '#E6E6E6'}}
                 >{'Следующая >'}</a>
             </div>
         </div>

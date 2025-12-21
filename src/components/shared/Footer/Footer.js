@@ -794,21 +794,13 @@ const Footer = ({textData}) => {
                 </Row>
             </div>
 
-            {textData.title ? (
-                <div>
-                    <hr/>
-                    <div className={'keywords-block'}>
 
-                        <h6>{textData.title}</h6>
-                        <p>{textData.description}</p></div>
-                </div>
-            ) : ""}
 
             <hr/>
             <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
                     <div>
-                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин, 2024</p>
+                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин обуви, одежды и аксессуаров, 2024</p>
                     </div>
                     <div className={s.footer_bottom}>
                         <a href="/docs/Агентский%20договор%20SELLOUT.pdf" target={"_blank"}
@@ -822,6 +814,16 @@ const Footer = ({textData}) => {
                             Политика конфиденциальности</a>
                     </div>
                 </div>
+                {textData ? (
+                    <div>
+                        {/*<hr/>*/}
+                        <br/>
+                        <div className={'keywords-block'}>
+
+                            <h6>{textData.title}</h6>
+                            <p>{textData.description}</p></div>
+                    </div>
+                ) : ""}
                 <div className={s.payment_block}>
                     <Image src={mastercard} alt=''/>
                     <Image src={visa} alt=''/>
@@ -829,6 +831,7 @@ const Footer = ({textData}) => {
                     {/*<Image src={payKeeper} alt='' height={14}/>*/}
                 </div>
             </div>
+
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
 

@@ -163,8 +163,8 @@ body.body-scroll-clip {
 
 
 .keywords-block {
-    margin-right: 3vw;
-    margin-left: 3vw;
+    /*margin-right: 3vw;*/
+    /*margin-left: 3vw;*/
 
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень под блоком */
     z-index: 999; /* Устанавливаем поверх других элементов */
