@@ -16,6 +16,10 @@ class DesktopStore {
     get isDesktop() {
         return this._isDesktop
     }
+
+    get isDesktop() {
+        return this._isDesktop
+    }
     setNavbarVisible(bool) {
         this._navbarVisible = bool
     }

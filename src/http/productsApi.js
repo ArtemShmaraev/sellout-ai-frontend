@@ -4,6 +4,37 @@ import tree_cat_filter_data from '@/static/jsons/tree_cat.json'
 import tree_line_filter_data from '@/static/jsons/tree_line.json'
 import colors_filter_data from '@/static/jsons/colors.json'
 import materials_filter_data from '@/static/jsons/materials.json'
+
+
+export async function fetchProductsPageFooterText(query) {
+    let allQuery = ''
+    Object.keys(query).forEach(key => {
+        if (typeof query[key] === "object") {
+            query[key].forEach(el => {
+                allQuery += `${key}=${el}&`
+            })
+        } else {
+            allQuery +=`${key}=${query[key]}&`
+        }
+    })
+    const {data} = await $host.get(`product/products_footer_text/?${allQuery}`)
+    return data
+}
+
+export async function fetchProductsPageHeaderText(query) {
+    let allQuery = ''
+    Object.keys(query).forEach(key => {
+        if (typeof query[key] === "object") {
+            query[key].forEach(el => {
+                allQuery += `${key}=${el}&`
+            })
+        } else {
+            allQuery +=`${key}=${query[key]}&`
+        }
+    })
+    const {data} = await $host.get(`product/products_header_text/?${allQuery}`)
+    return data
+}
 export async function fetchProductsPage(query, token = '') {
     let allQuery = ''
     Object.keys(query).forEach(key => {

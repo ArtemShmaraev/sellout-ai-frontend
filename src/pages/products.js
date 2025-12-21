@@ -11,7 +11,14 @@ import ProductList from "@/components/pages/product/ProductList/ProductList";
 import filter from '@/static/icons/filter.svg'
 import TitleAndDescriptionSEO from '@/components/shared/Products/seo_title_description.json'
 import Image from "next/image";
-import {fetchFilter, fetchPagesCnt, fetchProductsByArray, fetchProductsPage, fetchSizes} from "@/http/productsApi";
+import {
+    fetchFilter,
+    fetchPagesCnt,
+    fetchProductsByArray,
+    fetchProductsPage,
+    fetchProductsPageFooterText, fetchProductsPageHeaderText,
+    fetchSizes
+} from "@/http/productsApi";
 import {useRouter} from "next/router";
 import {Context} from "@/context/AppWrapper";
 import {observer} from "mobx-react-lite";
@@ -47,6 +54,8 @@ export const getServerSideProps = async (context) => {
     const collections = await fetchFilter('collabs')
     const materials = await fetchFilter('materials')
     const sizes = await fetchSizes(context.query, token)
+    const footer_text = await fetchProductsPageFooterText({...context.query, gender});
+    const header_text = await fetchProductsPageHeaderText({...context.query, gender});
     let lastSeen = []
     if (token) {
         const {user_id} = jwtDecode(token)
@@ -61,9 +70,9 @@ export const getServerSideProps = async (context) => {
         }
     }
     const url = context.query
-    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url}}
+    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}}
 }
-const Products = ({productsList, categories, lines, colors, collections, materials, sizes, lastSeen, url}) => {
+const Products = ({productsList, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -73,8 +82,26 @@ const Products = ({productsList, categories, lines, colors, collections, materia
     const {filterStore, desktopStore} = useContext(Context)
     const [products, setProducts] = useState(loading_products_data)
 
+
     useEffect(() => {
         setProducts(loading_products_data)
+    }, [router.asPath])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // const cookies = parse(context.req.headers.cookie || '')
+            const token = Cookies.get('access_token')
+            const gender = Cookies.get('selected_gender')
+            let data_products
+            if (gender && !("gender" in url)) {
+                data_products = await fetchProductsPage({...url, gender}, token);
+            } else {
+
+                data_products = await fetchProductsPage(url, token)
+            }
+            setProducts(data_products)
+        };
+        fetchData();
     }, [router.asPath])
 
 
@@ -99,23 +126,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
         filterStore.setRef(productListRef)
     }, [router.asPath])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            // const cookies = parse(context.req.headers.cookie || '')
-            const token = Cookies.get('access_token')
-            const gender = Cookies.get('selected_gender')
-            let data_products
-            if (gender && !("gender" in url)) {
-                data_products = await fetchProductsPage({...url, gender}, token);
-            } else {
 
-                data_products = await fetchProductsPage(url, token)
-            }
-            setProducts(data_products)
-        };
-
-        fetchData();
-    }, [router.asPath])
 
     const handleClick = () => {
         if (desktopStore.isDesktop) {
@@ -162,7 +173,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
     };
     const getTitle = () => {
         // console.log(products)
-        let title = desktopStore.isDesktop ? products.desktop.title : products.mobile.title
+        let title = desktopStore.isDesktop ? header_text.desktop.title : header_text.mobile.title
         if (title === 'sellout' || title === "" || title === "Загрузка") {
             title = 'Sellout'
         }
@@ -190,7 +201,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
 
     // title_and_description = Взять из json файла (как это сделать)
     return (
-        <MainLayout>
+        <MainLayout footerData={footer_text}>
             <Head>
                 <title>
 
@@ -198,7 +209,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
 
                     {getTitle() in TitleAndDescriptionSEO ? (
                         TitleAndDescriptionSEO[getTitle()]['title']
-                    ) : (products.desktop.title ? `Купите ${products.desktop.title} по лучшей цене в РФ на Sellout` :
+                    ) : (header_text.desktop.title ? `Купите ${header_text.desktop.title} по лучшей цене в РФ на Sellout` :
                             // Заголовок для случая, когда getTitle() равно "sellout"
                             "Sellout: онлайн-платформа брендовой одежды и обуви"
                     )}
@@ -214,8 +225,8 @@ const Products = ({productsList, categories, lines, colors, collections, materia
 
             </Head>
             <div className={`${s.cont} custom_cont`}>
-                <PictureBlock obj={products.desktop} className={s.desktop}/>
-                <PictureBlock obj={products.mobile} className={s.mobile}/>
+                <PictureBlock obj={header_text.desktop} className={s.desktop}/>
+                <PictureBlock obj={header_text.mobile} className={s.mobile}/>
                 {desktopStore.isDesktop &&
                     <div className={cn(s.filter_sort_row)}
                          style={desktopStore.navbarVisible ? {top: 150} : {top: 0}}

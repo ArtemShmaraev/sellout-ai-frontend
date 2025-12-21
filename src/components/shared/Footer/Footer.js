@@ -32,24 +32,33 @@ import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import inst_star from "@/static/icons/instagram_star.svg";
 import inst_star_white from "@/static/icons/instagram_star_white.svg";
 import {Context} from "@/context/AppWrapper";
+import {$host} from "@/http";
 
-const Footer = () => {
-    const {desktopStore} = useContext(Context)
-    const [contactOpen, setContactOpen] = useState(false)
+
+const Footer = ({textData}) => {
+
+    const {desktopStore} = useContext(Context);
+    const [contactOpen, setContactOpen] = useState(false);
+    const [howOpen, setHowOpen] = useState(false);
+
     const toggleContact = () => {
-        setContactOpen(!contactOpen)
-    }
-    const closeContact = () => {
-        setContactOpen(false)
-    }
+        setContactOpen(!contactOpen);
+    };
 
-    const [howOpen, setHowOpen] = useState(false)
+    const closeContact = () => {
+        setContactOpen(false);
+    };
+
     const toggleHow = () => {
-        setHowOpen(!howOpen)
-    }
+        setHowOpen(!howOpen);
+    };
+
     const closeHow = () => {
-        setHowOpen(false)
-    }
+        setHowOpen(false);
+
+    };
+    console.log(textData)
+
     return (
         <footer className={s.footer}>
             <div className={'custom_cont'}>
@@ -748,11 +757,12 @@ const Footer = () => {
                             Остались вопросы?
                         </div>
                         <div>
-                            <Link href="/faq" className={s.footer_link} target={'_blank'}>Ответы на большинство: <span style={{textDecoration: "underline", textUnderlineOffset: 4}}>FAQ</span></Link>
+                            <Link href="/faq" className={s.footer_link} target={'_blank'}>Ответы на большинство: <span
+                                style={{textDecoration: "underline", textUnderlineOffset: 4}}>FAQ</span></Link>
                         </div>
                         <div className={s.footer_link}>
                     <span
-                          onClick={toggleContact}
+                        onClick={toggleContact}
                     >Контакты службы поддержки</span>
                         </div>
 
@@ -762,13 +772,16 @@ const Footer = () => {
                 <Row className={'w-100'}>
                     <Col lg={4}>
                         <div className={s.social_media}>
-                            <h4 className={s.row2} style={desktopStore.isDesktop ? {} : {fontSize:24}}>Мы в социальных сетях:</h4>
+                            <h4 className={s.row2} style={desktopStore.isDesktop ? {} : {fontSize: 24}}>Мы в социальных
+                                сетях:</h4>
                             <div className={s.icons_block}>
                                 <a href={'https://t.me/selloutsu'}>
-                                    <Image src={tg} height={desktopStore.isDesktop ? 27 : 40} alt="" className={s.icon}/>
+                                    <Image src={tg} height={desktopStore.isDesktop ? 27 : 40} alt=""
+                                           className={s.icon}/>
                                 </a>
                                 <a href={'https://vk.com/sellout_official'}>
-                                    <Image src={vk} height={desktopStore.isDesktop ? 27 : 40} alt="" className={s.icon}/>
+                                    <Image src={vk} height={desktopStore.isDesktop ? 27 : 40} alt=""
+                                           className={s.icon}/>
                                 </a>
                             </div>
                         </div>
@@ -780,6 +793,17 @@ const Footer = () => {
                     </Col>
                 </Row>
             </div>
+
+            {textData.title ? (
+                <div>
+                    <hr/>
+                    <div className={'keywords-block'}>
+
+                        <h6>{textData.title}</h6>
+                        <p>{textData.description}</p></div>
+                </div>
+            ) : ""}
+
             <hr/>
             <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
@@ -807,6 +831,7 @@ const Footer = () => {
             </div>
             <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+
         </footer>
     );
 };

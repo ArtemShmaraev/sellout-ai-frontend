@@ -12,7 +12,7 @@ import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import {useRouter} from 'next/router';
 import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
 
-const MainLayout = ({children}) => {
+const MainLayout = ({ children, footerData }) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter();
 
@@ -57,11 +57,13 @@ const MainLayout = ({children}) => {
 
         window.addEventListener('resize', checkIsDesktop);
         checkIsDesktop();
+        console.log(footerData)
 
         // Убираем обработчик события при размонтировании компонента
         return () => {
             window.removeEventListener('resize', checkIsDesktop);
         };
+
     }, [])
 
     return (
@@ -155,7 +157,7 @@ const MainLayout = ({children}) => {
                         {children}
                     </div>
                 )}
-                <Footer/>
+                <Footer textData={footerData} />
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
@@ -169,4 +171,8 @@ const MainLayout = ({children}) => {
 export default observer(MainLayout);
 
 export const setSelectedGender = (gender) => {
+};
+
+MainLayout.defaultProps = {
+    footerData: {title: "", description: ""} // Устанавливаем пустой объект по умолчанию, если footerData не передано
 };

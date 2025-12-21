@@ -160,3 +160,24 @@ body.body-scroll-clip {
         margin-left: 15vw;
     }
 }
+
+
+.keywords-block {
+    margin-right: 3vw;
+    margin-left: 3vw;
+
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень под блоком */
+    z-index: 999; /* Устанавливаем поверх других элементов */
+    font-size: 14px; /* Размер текста */
+    color: #666; /* Серый цвет текста */
+    ;
+    /*text-align: center; !* Выравнивание текста по центру *!*/
+}
+
+.keywords-block h6 {
+    margin: 5px 0; /* Отступы сверху и снизу */
+    color: #b2b2b2; /* Серый цвет текста */
+}
+.keywords-block p {
+    margin: 5px 0; /* Отступы сверху и снизу */
+}
