@@ -42,20 +42,22 @@ const ImgSlider = ({photos}) => {
 
             <Swiper
                 loop={true}
-                // pagination={{
-                //     type: 'progressbar',
-                // }}
+                pagination={desktopStore.isDesktop ? false : { type: 'bullets' }}
+
                 // effect={"fade"}
 
                 // zoom={true}
                 initialSlide={0}
-                navigation={true}
-                modules={[Pagination, Navigation, Zoom]}
+                navigation={desktopStore.isDesktop}
+                modules={[Pagination, Zoom, Navigation]}
                 className={s.cont}
                 style={{
-                    "--swiper-pagination-color": "#000",
-                    "--swiper-navigation-color": "#000",
-                    "--swiper-navigation-size": "30px"
+                    '--swiper-pagination-color': 'rgba(0,0,0,0.8)',
+                    '--swiper-pagination-top': 'auto', // Убираем верхний отступ
+                    '--swiper-pagination-bottom': '20px', // Задаем отступ от нижнего края
+                    '--swiper-pagination-progressbar-size': '3px',
+                    '--swiper-pagination-progressbar-bg-color': 'rgba(0,0,0,0.1)',
+                    "--swiper-navigation-color": "rgba(0,0,0,0.5)",
                 }}
                 onClick={toggleFullScreen}
             >

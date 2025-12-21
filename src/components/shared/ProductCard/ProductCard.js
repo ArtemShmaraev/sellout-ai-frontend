@@ -14,6 +14,13 @@ import Link from "next/link";
 import desktop from '@/static/img/desktop_background.jpg'
 import mobile from '@/static/img/mobile_background.jpg'
 import {trackAddToFavorites, trackRemoveToFavorites} from "@/components/shared/YandexMetrica/YandexMetrica";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, Zoom } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/zoom';
+import 'swiper/css/effect-fade';
 
 
 const ProductCard = ({cardList = false, product}) => {
@@ -26,18 +33,19 @@ const ProductCard = ({cardList = false, product}) => {
     const photosArr = product.bucket_link
 
 
-    const {userStore} = useContext(Context)
+   
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(inWishlist)
+    const {userStore, desktopStore} = useContext(Context)
 
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [])
+    // const [desktopStore.isDesktop, setdesktopStore.isDesktop] = useState(true)
+    // useEffect(() => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setdesktopStore.isDesktop(false)
+    //     }
+    // }, [])
 
     const brandsDisplay = () => {
         if (collab) {
@@ -111,7 +119,7 @@ const ProductCard = ({cardList = false, product}) => {
         hideSizes();
     };
     const renderSizes = () => {
-        const n = isDesktop ? 25 : 10
+        const n = desktopStore.isDesktop ? 25 : 10
         const sizes = product.available_sizes.sizes
         return sizes.length <= n ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
     }
@@ -197,7 +205,7 @@ const ProductCard = ({cardList = false, product}) => {
             {/*            style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
             {/*            loading={'eager'}*/}
             {/*            fill={true}*/}
-            {/*            className={isHovered && photosArr[1] && isDesktop ? 'opacity-0' : ''}*/}
+            {/*            className={isHovered && photosArr[1] && desktopStore.isDesktop ? 'opacity-0' : ''}*/}
             {/*            onLoadingComplete={() => setIsLoading(false)}*/}
             {/*            src={photosArr[0].url}*/}
             {/*            alt="shoe"*/}
@@ -208,7 +216,7 @@ const ProductCard = ({cardList = false, product}) => {
             {/*                style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
             {/*                loading={'eager'}*/}
             {/*                fill={true}*/}
-            {/*                className={isHovered && isDesktop ? '' : 'opacity-0'}*/}
+            {/*                className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}*/}
             {/*                onLoadingComplete={() => setIsLoading(false)}*/}
             {/*                src={photosArr[currentIndex].url}*/}
             {/*                alt="shoe"*/}
@@ -216,7 +224,7 @@ const ProductCard = ({cardList = false, product}) => {
             {/*            />*/}
             {/*        )}*/}
             {/*        <Image*/}
-            {/*            src={isDesktop ? desktop : mobile}*/}
+            {/*            src={desktopStore.isDesktop ? desktop : mobile}*/}
             {/*            alt=""*/}
             {/*            className={'placeholder_img'}*/}
             {/*            fill={true}*/}
@@ -251,53 +259,117 @@ const ProductCard = ({cardList = false, product}) => {
             {/*                </div>*/}
             {/*            </>*/}
             {/*        )}*/}
+
             {photosArr && photosArr.length > 0 &&
-                <div className={s.image_container}
-                     onTouchStart={e => {
-                         e.stopPropagation()
-                         handleMouseEnter()
-                     }}
-                     onTouchEnd={e => {
-                         e.stopPropagation()
-                         handleMouseLeave()
-                     }}
-                     onMouseEnter={handleMouseEnter}
-                     onMouseLeave={handleMouseLeave}
+                (!desktopStore.isDesktop
+                        ?
+                        <div className={s.image_container}>
 
-                >
+                            <Swiper
+                                className={s.image_container}
+                                // style={{zIndex: -1}}
+                                // id={photosArr[0].id}
+                                // loop={true}
+                                pagination={{
+                                    type: 'bullets',
+                                }}
+                                // effect={"fade"}
 
-                    <Image
-                        style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                        loading={'eager'}
-                        fill={true}
-                        className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
-                        onLoadingComplete={() => setIsLoading(false)}
-                        src={photosArr[0].url !== "logo" ? photosArr[0].url : (isDesktop ? desktop : mobile)} alt="shoe"
-                        sizes={'100%'}
-                    />
-                    {photos[1] &&
-                        <Image
-                            style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                            loading={'eager'}
-                            fill={true}
-                            className={isHovered && isDesktop ? '' : 'opacity-0'}
-                            onLoadingComplete={() => setIsLoading(false)}
-                            src={photos[1]} alt="shoe"
-                            sizes={'100%'}
-                        />
-                    }
-                    <Image src={isDesktop ? desktop : mobile} alt=''
-                           className={'placeholder_img'} fill={true}
-                           style={isLoading ? {} : {opacity: 0}}
-                           sizes={'100%'}
-                    />
-                </div>
+                                // zoom={true}
+                                // initialSlide={0}
+                                // navigation={true}
+                                modules={[Pagination, Navigation]}
+                                pagination={true}
+                                // className={s.cont}
+                                style={{
+                                    "--swiper-pagination-color": "rgba(0,0,0,0.8)",
+                                    "--swiper-navigation-color": "#000",
+
+
+                                }}
+                            >
+                                {photos.map((el, index) =>
+                                    <SwiperSlide
+
+                                        key={index}
+
+                                        // className={s.photo}
+                                    >
+                                        <div>
+                                            <Image
+                                                id="photo"
+                                                style={{
+                                                    position: 'absolute',
+                                                    objectFit: 'contain',
+                                                    objectPosition: "center bottom"
+                                                }}
+                                                loading={'eager'}
+                                                fill={true}
+                                                className={''}
+                                                // onLoadingComplete={() => setIsLoading(false)}
+                                                src={el !== "logo" ? el : (desktopStore.isDesktop ? desktop : mobile)}
+                                                alt="shoe"
+                                                sizes={'100%'}
+                                            />
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                                }
+                            </Swiper>
+
+                        </div>
+                        :
+                        <div className={s.image_container}
+                             onTouchStart={e => {
+                                 e.stopPropagation()
+                                 handleMouseEnter()
+                             }}
+                             onTouchEnd={e => {
+                                 e.stopPropagation()
+                                 handleMouseLeave()
+                             }}
+                             onMouseEnter={handleMouseEnter}
+                             onMouseLeave={handleMouseLeave}
+
+                        >
+
+
+                            <Image
+                                style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
+                                loading={'eager'}
+                                fill={true}
+                                className={isHovered && photos[1] && desktopStore.isDesktop ? 'opacity-0' : ''}
+                                onLoadingComplete={() => setIsLoading(false)}
+                                src={photosArr[0].url !== "logo" ? photosArr[0].url : (desktopStore.isDesktop ? desktop : mobile)}
+                                alt="shoe"
+                                sizes={'100%'}/>
+                            {photos[1] &&
+                                <Image
+                                    style={{
+                                        position: 'absolute',
+                                        objectFit: 'contain',
+                                        objectPosition: "center bottom"
+                                    }}
+                                    loading={'eager'}
+                                    fill={true}
+                                    className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}
+                                    onLoadingComplete={() => setIsLoading(false)}
+                                    src={photos[1]} alt="shoe"
+                                    sizes={'100%'}
+                                />
+                            }
+                            <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''
+                                   className={'placeholder_img'} fill={true}
+                                   style={isLoading ? {} : {opacity: 0}}
+                                   sizes={'100%'}/>
+                        </div>
+                )
             }
             <div className={s.text_block}
                  ref={sizesRef}
             >
                 {
-                    !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
+                    !(isHovered && desktopStore.isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
                         ?
                         <>
                             <div className={s.info}>
@@ -329,7 +401,7 @@ const ProductCard = ({cardList = false, product}) => {
 
                                     <span
                                         className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
-                                    {!isDesktop && <br/>}
+                                    {!desktopStore.isDesktop && <br/>}
                                     <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
                                     {/*<br/>*/}
 
@@ -444,7 +516,7 @@ export default ProductCard;
 //                 //             }}
 //                 //             loading={'eager'}
 //                 //             fill={true}
-//                 //             className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+//                 //             className={isHovered && photos[1] && desktopStore.isDesktop ? 'opacity-0' : ''}
 //                 //             onLoadingComplete={() => setIsLoading(false)}
 //                 //             src={photosArr[0].url}
 //                 //             alt="shoe"
@@ -462,7 +534,7 @@ export default ProductCard;
 //                 //                 }}
 //                 //                 loading={'eager'}
 //                 //                 fill={true}
-//                 //                 className={isHovered && isDesktop ? '' : 'opacity-0'}
+//                 //                 className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}
 //                 //                 onLoadingComplete={() => setIsLoading(false)}
 //                 //                 src={photos[1]}
 //                 //                 alt="shoe"
@@ -487,7 +559,7 @@ export default ProductCard;
 //                         style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
 //                         loading={'eager'}
 //                         fill={true}
-//                         className={isHovered && photos[1] && isDesktop ? 'opacity-0' : ''}
+//                         className={isHovered && photos[1] && desktopStore.isDesktop ? 'opacity-0' : ''}
 //                         onLoadingComplete={() => setIsLoading(false)}
 //                         src={photosArr[0].url} alt="shoe"
 //                         sizes={'100%'}
@@ -497,13 +569,13 @@ export default ProductCard;
 //                             style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
 //                             loading={'eager'}
 //                             fill={true}
-//                             className={isHovered && isDesktop? '' : 'opacity-0'}
+//                             className={isHovered && desktopStore.isDesktop? '' : 'opacity-0'}
 //                             onLoadingComplete={() => setIsLoading(false)}
 //                             src={photos[1]} alt="shoe"
 //                             sizes={'100%'}
 //                         />
 //                     }
-//                     <Image src={isDesktop ? desktop : mobile} alt=''
+//                     <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''
 //                            className={'placeholder_img'} fill={true}
 //                            style={isLoading ? {} : {opacity: 0}}
 //                            sizes={'100%'}
@@ -515,7 +587,7 @@ export default ProductCard;
 //
 //             >
 //                 {
-//                     !(isHovered && isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
+//                     !(isHovered && desktopStore.isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
 //                         ?
 //                         <>
 //                             <div className={s.info}>
@@ -544,7 +616,7 @@ export default ProductCard;
 //                                 <div className={`${s.price}`}>
 //
 //                                     <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
-//                                     {!isDesktop && <br/>}
+//                                     {!desktopStore.isDesktop && <br/>}
 //                                     <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
 //                                     {/*<br/>*/}
 //
