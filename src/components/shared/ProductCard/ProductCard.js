@@ -266,7 +266,7 @@ const ProductCard = ({cardList = false, product}) => {
                         <div className={s.image_container}>
 
                             <Swiper
-                                className={s.image_container}
+                                className={s.swiper_container}
                                 // style={{zIndex: -1}}
                                 // id={photosArr[0].id}
                                 // loop={true}
