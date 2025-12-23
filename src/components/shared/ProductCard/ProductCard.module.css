@@ -253,14 +253,14 @@
 @media (max-width: 650px) {
     .card {
         width: 190px;
-        height: 340px;
+        height: 320px;
         padding: 0;
         margin: 10px 10px;
     }
 
     .card_list {
         width: 49%;
-        height: 340px;
+        height: 320px;
         padding: 0;
         margin: 10px 0;
     }
