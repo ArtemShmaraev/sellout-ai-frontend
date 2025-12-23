@@ -269,9 +269,9 @@ const ProductCard = ({cardList = false, product}) => {
                                 className={s.swiper_container}
                                 // style={{zIndex: -1}}
                                 // id={photosArr[0].id}
-                                // loop={true}
+                                loop={true}
                                 pagination={{
-                                    type: 'bullets',
+                                    type: 'bullets'
                                 }}
                                 // effect={"fade"}
 
@@ -282,28 +282,32 @@ const ProductCard = ({cardList = false, product}) => {
                                 pagination={true}
                                 // className={s.cont}
                                 style={{
+                                    // "--swiper-pagination-bullet-size": "8px",
+                                    // "--swiper-pagination-bullet-vertical-gap": "15px",
                                     "--swiper-pagination-color": "rgba(0,0,0,0.8)",
                                     "--swiper-navigation-color": "#000",
-
+                                    // "--swiper-pagination-right": "0",
 
                                 }}
+
+
                             >
                                 {photos.map((el, index) =>
                                     <SwiperSlide
-
                                         key={index}
 
                                         // className={s.photo}
                                     >
-                                        <div>
+
                                             <Image
                                                 id="photo"
                                                 style={{
                                                     position: 'absolute',
                                                     objectFit: 'contain',
-                                                    objectPosition: "center bottom"
+                                                    objectPosition: "center bottom",
+                                                    bottom: 0
                                                 }}
-                                                loading={'eager'}
+                                                loading={'lazy'}
                                                 fill={true}
                                                 className={''}
                                                 // onLoadingComplete={() => setIsLoading(false)}
@@ -311,7 +315,7 @@ const ProductCard = ({cardList = false, product}) => {
                                                 alt="shoe"
                                                 sizes={'100%'}
                                             />
-                                        </div>
+
                                     </SwiperSlide>
                                 )
                                 }
