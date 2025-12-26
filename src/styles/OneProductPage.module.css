@@ -90,6 +90,7 @@
     justify-content: center;
 }
 .cart_btn {
+    transition: background-color 0.5s ease;
     border: none;
     outline: none;
     border-radius: 7px;
@@ -98,7 +99,7 @@
     min-height: 48px;
     flex: 1; /* Растянуть на всё оставшееся пространство */
     margin-right: 8px; /* Добавить немного отступа между кнопками */
-    transition: 0.3s;
+    /*transition: /0.3s;*/
     font-size: 12pt;
 
     font-weight: 550;
@@ -109,6 +110,7 @@
 }
 
 .cart_btn2 {
+    transition: background-color 0.5s ease;
     border: none;
     outline: none;
     border-radius: 7px;
@@ -116,7 +118,7 @@
     color: white;
     min-height: 48px;
     width: 65%;
-    transition: 0.3s;
+    /*transition: 0.3s;*/
     font-size: 13pt;
     font-weight: 500;
 
@@ -124,6 +126,7 @@
 .cart_btn2:disabled {
     background: rgba(0, 0, 0, 0.25);
 }
+
 .fav_btn {
     border: 1px solid black;
     outline: none;
@@ -138,6 +141,7 @@
 
 }
 .fav_btn2 {
+
     border: 1px solid black;
     outline: none;
     border-radius: 7px;

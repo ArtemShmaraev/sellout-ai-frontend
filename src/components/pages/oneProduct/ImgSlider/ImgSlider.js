@@ -75,7 +75,7 @@ const ImgSlider = ({photos}) => {
                             <Image src={el.url}
                                    alt={``}
                                    fill={true}
-                                   loading={'eager'}
+                                   loading={index <= 1 ? "eager" : "lazy"}
                                    className={s.photo}
                             />
                         </div>
