@@ -53,11 +53,12 @@ const ImgSlider = ({photos}) => {
                 className={s.cont}
                 style={{
                     '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
+                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, #ffffff 50%)',
                     '--swiper-pagination-top': 'auto', // Убираем верхний отступ
                     '--swiper-pagination-bottom': '20px', // Задаем отступ от нижнего края
                     '--swiper-pagination-progressbar-size': '3px',
-                    '--swiper-pagination-bullet-size': '14px',
-                    '--swiper-pagination-bullet-horizontal-gap': '8px',
+                    '--swiper-pagination-bullet-size': '13px',
+                    '--swiper-pagination-bullet-horizontal-gap': '12px',
                     // '--swiper-pagination-bullet-border-radius': '25%',
                     '--swiper-pagination-progressbar-bg-color': 'rgba(0,0,0,0.1)',
                     "--swiper-navigation-color": "rgba(0,0,0,0.5)",

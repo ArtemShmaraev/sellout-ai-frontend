@@ -14,8 +14,8 @@ import Link from "next/link";
 import desktop from '@/static/img/desktop_background.jpg'
 import mobile from '@/static/img/mobile_background.jpg'
 import {trackAddToFavorites, trackRemoveToFavorites} from "@/components/shared/YandexMetrica/YandexMetrica";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Zoom } from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Pagination, Navigation, Zoom} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -33,7 +33,6 @@ const ProductCard = ({cardList = false, product}) => {
     const photosArr = product.bucket_link
 
 
-   
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(inWishlist)
@@ -271,7 +270,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 // id={photosArr[0].id}
                                 loop={true}
                                 pagination={{
-                                    type: 'bullets'
+                                    type: 'fraction'
                                 }}
                                 // effect={"fade"}
 
@@ -286,6 +285,13 @@ const ProductCard = ({cardList = false, product}) => {
                                     // "--swiper-pagination-bullet-vertical-gap": "15px",
                                     "--swiper-pagination-color": "rgba(0,0,0,0.8)",
                                     "--swiper-navigation-color": "#000",
+                                    '--swiper-pagination-bullet-size': '7px',
+                                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, #ffffff 50%)',
+                                    // '--swiper-pagination-left': '10px',
+                                    // '--swiper-pagination-right': '10px',
+                                    '--swiper-pagination-bottom': '-6px',
+                                    // '--swiper-pagination-top': '10px'
+
                                     // "--swiper-pagination-right": "0",
 
                                 }}
@@ -299,22 +305,22 @@ const ProductCard = ({cardList = false, product}) => {
                                         // className={s.photo}
                                     >
 
-                                            <Image
-                                                id="photo"
-                                                style={{
-                                                    position: 'absolute',
-                                                    objectFit: 'contain',
-                                                    objectPosition: "center bottom",
-                                                    bottom: 0
-                                                }}
-                                                loading={'lazy'}
-                                                fill={true}
-                                                className={''}
-                                                // onLoadingComplete={() => setIsLoading(false)}
-                                                src={el !== "logo" ? el : (desktopStore.isDesktop ? desktop : mobile)}
-                                                alt="shoe"
-                                                sizes={'100%'}
-                                            />
+                                        <Image
+                                            id="photo"
+                                            style={{
+                                                position: 'absolute',
+                                                objectFit: 'contain',
+                                                objectPosition: "center bottom",
+                                                bottom: 0
+                                            }}
+                                            loading={el !== "logo" ? "lazy" : "eager"}
+                                            fill={true}
+                                            className={''}
+                                            // onLoadingComplete={() => setIsLoading(false)}
+                                            src={el !== "logo" ? el : (desktopStore.isDesktop ? desktop : mobile)}
+                                            alt="shoe"
+                                            sizes={'100%'}
+                                        />
 
                                     </SwiperSlide>
                                 )
@@ -364,7 +370,17 @@ const ProductCard = ({cardList = false, product}) => {
                             }
                             <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''
                                    className={'placeholder_img'} fill={true}
-                                   style={isLoading ? {} : {opacity: 0}}
+                                   style={isLoading ? {
+                                       position: 'absolute',
+                                       objectFit: 'contain',
+                                       objectPosition: "center bottom",
+                                   } : {
+                                       position: 'absolute',
+                                       objectFit: 'contain',
+                                       objectPosition: "center bottom",
+                                       opacity: 0
+                                   }}
+
                                    sizes={'100%'}/>
                         </div>
                 )
