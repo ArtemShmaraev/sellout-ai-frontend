@@ -42,13 +42,13 @@ const ImgSlider = ({photos}) => {
 
             <Swiper
                 loop={true}
-                pagination={desktopStore.isDesktop ? false : { type: 'bullets' }}
+                pagination={(desktopStore.isDesktop || photos.length > 9)? false : { type: 'bullets' }}
 
                 // effect={"fade"}
 
                 // zoom={true}
                 initialSlide={0}
-                navigation={desktopStore.isDesktop}
+                navigation={desktopStore.isDesktop || photos.length > 9}
                 modules={[Pagination, Zoom, Navigation]}
                 className={s.cont}
                 style={{

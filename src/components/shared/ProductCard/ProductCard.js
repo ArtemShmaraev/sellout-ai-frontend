@@ -57,7 +57,7 @@ const ProductCard = ({cardList = false, product}) => {
     useEffect(() => {
         if (photosArr) {
             const arr = []
-            for (let i = 0; i < photosArr.length; i++) {
+            for (let i = 0; i < Math.min(photosArr.length, 11); i++) {
                 arr.push(photosArr[i].url)
             }
             setPhotos(arr)
