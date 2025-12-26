@@ -278,15 +278,15 @@ const ProductCard = ({cardList = false, product}) => {
                                 // initialSlide={0}
                                 // navigation={true}
                                 modules={[Pagination, Navigation]}
-                                pagination={true}
+                                pagination={!isLoading}
                                 // className={s.cont}
                                 style={{
                                     // "--swiper-pagination-bullet-size": "8px",
                                     // "--swiper-pagination-bullet-vertical-gap": "15px",
-                                    "--swiper-pagination-color": "rgba(0,0,0,0.8)",
+                                    "--swiper-pagination-color": "rgba(0,0,0)",
                                     "--swiper-navigation-color": "#000",
                                     '--swiper-pagination-bullet-size': '7px',
-                                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, #ffffff 50%)',
+                                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, rgba(255, 255, 255, 0) 50%)',
                                     // '--swiper-pagination-left': '10px',
                                     // '--swiper-pagination-right': '10px',
                                     '--swiper-pagination-bottom': '-6px',
@@ -304,28 +304,56 @@ const ProductCard = ({cardList = false, product}) => {
 
                                         // className={s.photo}
                                     >
+                                        {el !== "logo" &&
+                                            <Image
+                                                id="photo"
+                                                style={{
+                                                    position: 'absolute',
+                                                    objectFit: 'contain',
+                                                    objectPosition: "center bottom",
+                                                    bottom: 0,
+                                                    opacity: isLoading ? 0.4 : 1, // Начальная прозрачность в зависимости от состояния загрузки
+                                                    transition: el === "logo" ? "" :'opacity 0.6s ease', // Анимация изменения прозрачности
+                                                }}
+                                                loading={index === 0 ? "eager" : "lazy"}
+                                                fill={true}
+                                                className={''}
+                                                // onLoadingComplete={() => setIsLoading(false)}
+                                                src={el}
+                                                onLoadingComplete={() => setIsLoading(false)}
+                                                alt="shoe"
+                                                sizes={'100%'}
+                                            />
+                                        }
 
-                                        <Image
-                                            id="photo"
-                                            style={{
-                                                position: 'absolute',
-                                                objectFit: 'contain',
-                                                objectPosition: "center bottom",
-                                                bottom: 0
-                                            }}
-                                            loading={el !== "logo" ? "lazy" : "eager"}
-                                            fill={true}
-                                            className={''}
-                                            // onLoadingComplete={() => setIsLoading(false)}
-                                            src={el !== "logo" ? el : (desktopStore.isDesktop ? desktop : mobile)}
-                                            alt="shoe"
-                                            sizes={'100%'}
-                                        />
 
                                     </SwiperSlide>
                                 )
                                 }
                             </Swiper>
+                            <Image
+                                src={desktopStore.isDesktop ? desktop : mobile}
+                                alt=''
+                                className={'placeholder_img'}
+                                fill={true}
+                                style={{
+                                    position: 'absolute',
+                                    objectFit: 'contain',
+                                    objectPosition: "center bottom",
+                                    transition: 'opacity 0.2s ease', // Анимация изменения прозрачности
+                                    opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
+                                }}
+                                sizes={'100%'}
+                            />
+                            {/*{isLoading &&*/}
+                            {/*<Image src={mobile} alt=''*/}
+                            {/*       className={'placeholder_img'} fill={true}*/}
+                            {/*       style={{*/}
+                            {/*           position: 'absolute',*/}
+                            {/*           objectFit: 'contain',*/}
+                            {/*           objectPosition: "center bottom",*/}
+                            {/*       }}*/}
+                            {/*       sizes={'100%'}/>}*/}
 
                         </div>
                         :
@@ -353,6 +381,8 @@ const ProductCard = ({cardList = false, product}) => {
                                 src={photosArr[0].url !== "logo" ? photosArr[0].url : (desktopStore.isDesktop ? desktop : mobile)}
                                 alt="shoe"
                                 sizes={'100%'}/>
+
+
                             {photos[1] &&
                                 <Image
                                     style={{
@@ -368,20 +398,33 @@ const ProductCard = ({cardList = false, product}) => {
                                     sizes={'100%'}
                                 />
                             }
-                            <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''
-                                   className={'placeholder_img'} fill={true}
-                                   style={isLoading ? {
-                                       position: 'absolute',
-                                       objectFit: 'contain',
-                                       objectPosition: "center bottom",
-                                   } : {
-                                       position: 'absolute',
-                                       objectFit: 'contain',
-                                       objectPosition: "center bottom",
-                                       opacity: 0
-                                   }}
+                            {/*{isLoading &&*/}
+                            {/*    <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''*/}
+                            {/*           className={'placeholder_img'} fill={true}*/}
+                            {/*           style={{*/}
+                            {/*               position: 'absolute',*/}
+                            {/*               objectFit: 'contain',*/}
+                            {/*               objectPosition: "center bottom",*/}
+                            {/*           }}*/}
+                            {/*           sizes={'100%'}/>}*/}
 
-                                   sizes={'100%'}/>
+
+
+
+                            <Image
+                                src={desktopStore.isDesktop ? desktop : mobile}
+                                alt=''
+                                className={'placeholder_img'}
+                                fill={true}
+                                style={{
+                                    position: 'absolute',
+                                    objectFit: 'contain',
+                                    objectPosition: "center bottom",
+                                    transition: 'opacity 0.6s ease', // Анимация изменения прозрачности
+                                    opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
+                                }}
+                                sizes={'100%'}
+                            />
                         </div>
                 )
             }
@@ -393,10 +436,8 @@ const ProductCard = ({cardList = false, product}) => {
                         ?
                         <>
                             <div className={s.info}>
-
                                 <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay()}</div>
-
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : "."}</div>
                                 <div
                                     className={`${s.brand}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : ""}</div>
                                 <div

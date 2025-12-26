@@ -32,17 +32,26 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
                     showFullscreenButton={false}
                     showThumbnails={false}
                     // isRTL={true}
-                    startIndex={initialIndex.realIndex
+                    startIndex={initialIndex
                     }
                     useBrowserFullscreen={false}
                     renderItem={(item) => (
                         <div className="image-gallery-image">
-                            <img
+                            <Image
                                 src={item.original}
                                 alt={item.description}
-                                draggable={false}
-                                style={{ maxWidth: '100%', height: 'auto'}}
+                                loading={'eager'}
+                                style={{ width: '100vw', height: 'auto', objectFit: 'contain' }}
+                                width={'100'}
+                                height={'100'}
+
                             />
+                            {/*<img*/}
+                            {/*    src={item.original}*/}
+                            {/*    alt={item.description}*/}
+                            {/*    draggable={false}*/}
+                            {/*    style={{ maxWidth: '100%', height: 'auto'}}*/}
+                            {/*/>*/}
                         </div>
                     )}
                 />

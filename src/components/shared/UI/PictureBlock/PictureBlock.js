@@ -149,9 +149,10 @@ const PictureBlock = ({obj, className, type}) => {
                                 <div className={s.img_cont}>
                                     <Image src={obj.photo} alt='' fill={true} className={s.img}
                                            onLoadingComplete={() => setIsLoading(false)} sizes={'100%'}
-                                           loading={"eager"}/>
-
-
+                                           loading={"eager"}
+                                           style={{
+                                               transition: 'opacity 0.5s ease', // Анимация изменения прозрачности
+                                           }}/>
                                     <Image src={desktop} alt=''
                                            className={`placeholder_img ${s.desktop}`} fill={true} sizes={'100%'}
                                            style={isLoading ? {} : {opacity: 0}}

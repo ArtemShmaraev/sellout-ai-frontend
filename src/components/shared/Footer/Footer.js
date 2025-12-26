@@ -57,7 +57,7 @@ const Footer = ({textData}) => {
         setHowOpen(false);
 
     };
-    console.log(textData)
+
 
     return (
         <footer className={s.footer}>

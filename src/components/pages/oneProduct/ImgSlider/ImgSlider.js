@@ -33,7 +33,7 @@ const ImgSlider = ({photos}) => {
                 document.body.classList.remove('body-scroll-clip')
             }
             setIsFull(!isFull)
-            setSelectedPhotoIndex(index)
+            setSelectedPhotoIndex(index.realIndex)
         }
     }
 
@@ -53,7 +53,7 @@ const ImgSlider = ({photos}) => {
                 className={s.cont}
                 style={{
                     '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
-                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, #ffffff 50%)',
+                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 45%, rgba(255, 255, 255, 0) 50%)',
                     '--swiper-pagination-top': 'auto', // Убираем верхний отступ
                     '--swiper-pagination-bottom': '20px', // Задаем отступ от нижнего края
                     '--swiper-pagination-progressbar-size': '3px',
@@ -83,11 +83,14 @@ const ImgSlider = ({photos}) => {
                 )
                 }
             </Swiper>
+            <div style={{ opacity: isFull ? 1 : 0, pointerEvents: isFull ? 'auto' : 'none' }}>
+                <FullScreen toggle={toggleFullScreen} photos={photos} initialIndex={selectedPhotoIndex} />
+            </div>
 
-            {
-                isFull &&
-                <FullScreen toggle={toggleFullScreen} photos={photos} initialIndex={selectedPhotoIndex}/>
-            }
+            {/*{*/}
+            {/*    isFull &&*/}
+            {/*    <FullScreen toggle={toggleFullScreen} photos={photos} initialIndex={selectedPhotoIndex}/>*/}
+            {/*}*/}
         </>
     );
 };
