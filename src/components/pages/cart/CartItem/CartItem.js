@@ -43,8 +43,14 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
         return productDetails;
     };
 
+    const [isDeleted, setIsDeleted] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const deleteFromCart = async () => {
+        setIsDeleted(true)
+        setIsLoading(true)
+
         const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
         Cookies.set('cart', newCart.join(' '), {expires: 2772})
@@ -85,7 +91,8 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
 
 
     return (
-        <div key={unitId}>
+        <div key={unitId} className={isDeleted ? `${s.row} ${s.slideOut}` : ""} >
+
             <hr/>
             <div className={s.row}>
                 <div className={s.col1}>
