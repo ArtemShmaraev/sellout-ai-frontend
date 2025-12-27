@@ -37,21 +37,21 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
                     useBrowserFullscreen={false}
                     renderItem={(item) => (
                         <div className="image-gallery-image">
-                            <Image
-                                src={item.original}
-                                alt={item.description}
-                                loading={'eager'}
-                                style={{ width: '100vw', height: 'auto', objectFit: 'contain' }}
-                                width={'100'}
-                                height={'100'}
-
-                            />
-                            {/*<img*/}
+                            {/*<Image*/}
                             {/*    src={item.original}*/}
                             {/*    alt={item.description}*/}
-                            {/*    draggable={false}*/}
-                            {/*    style={{ maxWidth: '100%', height: 'auto'}}*/}
+                            {/*    loading={'eager'}*/}
+                            {/*    style={{ width: '100vw', height: 'auto', objectFit: 'contain' }}*/}
+                            {/*    width={'1000'}*/}
+                            {/*    height={'1000'}*/}
+
                             {/*/>*/}
+                            <img
+                                src={item.original}
+                                alt={item.description}
+                                draggable={false}
+                                style={{ maxWidth: '100%', height: 'auto'}}
+                            />
                         </div>
                     )}
                 />
