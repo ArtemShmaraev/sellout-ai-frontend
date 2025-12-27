@@ -101,7 +101,7 @@ export const getServerSideProps = async (context) => {
 const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, promoBonuses, defaultPromo, firstOrder}) => {
     const router = useRouter()
     const [lastSeen, setLastSeen] = useState([])
-    const {userStore, cartStore} = useContext(Context)
+    const {userStore, cartStore, desktopStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
     const [bonusesSale, setBonusesSale] = useState(Number(productUnits.bonus_sale) > 0 ? productUnits.bonus_sale : '')
     const [defAmount, setDefAmount] = useState(defaultPrice)
@@ -253,21 +253,21 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
         }
     }, [productUnits])
     const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    // const checkIsDesktop = () => {
+    //     const width = window.innerWidth
+    //     if (width <= 1200) {
+    //         setIsDesktop(false)
+    //     } else {
+    //         setIsDesktop(true)
+    //     }
+    // }
+    // useEffect(() => {
+    //     window.addEventListener("resize", checkIsDesktop);
+    //     // Call handler right away so state gets updated with initial window size
+    //     checkIsDesktop();
+    //     // Remove event listener on cleanup
+    //     return () => window.removeEventListener("resize", checkIsDesktop);
+    // })
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
     return (
@@ -396,7 +396,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                     Внимание! Ваша корзина обновилась
                                 </p>
                             }
-                            {isDesktop &&
+                            {desktopStore.isDesktop &&
                                 <div className={s.questions_block}>
                                     <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
                                         <Image src={change} alt='' width={60}/>
@@ -545,7 +545,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
 
 
                 }
-                {isDesktop && lastSeen.length > 0 && (
+                {desktopStore.isDesktop && lastSeen.length > 0 && (
                     <div>
                         <br/>
                         <br/>
@@ -555,7 +555,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                     </div>
                 )}
             </div>
-            {!isDesktop &&
+            {!desktopStore.isDesktop &&
                 <div className={s.questions_block}>
                     <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
                         <Image src={change} alt='' width={60}/>
@@ -701,7 +701,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
 
             }
 
-                {!isDesktop && lastSeen.length > 0 && (
+                {!desktopStore.isDesktop && lastSeen.length > 0 && (
                     <div className={s.cont + ' custom_cont'}>
                         {/*<hr/>*/}
                         <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import s from './CartItem.module.css'
 import Image from "next/image";
 import SizeDropdown from "@/components/pages/cart/SizeDropdown/SizeDropdown";
@@ -44,12 +44,11 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
     };
 
     const [isDeleted, setIsDeleted] = useState(false)
-    const [isLoading, setIsLoading] = useState(false);
+
 
 
     const deleteFromCart = async () => {
         setIsDeleted(true)
-        setIsLoading(true)
 
         const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
         const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
