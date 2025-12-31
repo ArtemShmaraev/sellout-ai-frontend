@@ -51,6 +51,7 @@ const ImgSlider = ({photos}) => {
                 navigation={desktopStore.isDesktop || photos.length > 9}
                 modules={[Pagination, Zoom, Navigation]}
                 className={s.cont}
+                // className={s.photo}
                 style={{
                     '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
                     '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 45%, rgba(255, 255, 255, 0) 50%)',
@@ -77,6 +78,12 @@ const ImgSlider = ({photos}) => {
                                    fill={true}
                                    loading={index <= 1 ? "eager" : "lazy"}
                                    className={s.photo}
+                                   style={{
+                                       // position: 'relative',
+                                       objectFit: 'contain',
+                                       // objectPosition: "center bottom",
+                                       // height: '100%',
+                                   }}
                             />
                         </div>
                     </SwiperSlide>

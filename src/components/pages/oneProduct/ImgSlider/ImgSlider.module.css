@@ -3,9 +3,17 @@
 }
 .photo_cont {
     width: 100%;
-    height: 440px;
+    height: 55vh;
     position: relative;
+
 }
+/*.photo_cont {*/
+/*    display: flex;*/
+/*    !*justify-content: center; !* Центрируем по горизонтали *!*!*/
+/*    align-items: center; !* Центрируем по вертикали *!*/
+/*    height: 50vh; !* Устанавливаем высоту для центрирования по вертикали *!*/
+/*    width: 100%;*/
+/*}*/
 .photo {
     text-align: center;
     object-fit: contain;

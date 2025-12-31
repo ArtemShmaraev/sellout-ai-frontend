@@ -478,7 +478,9 @@ const OneProductPage = ({product, prices}) => {
                                     {/*        </button>*/}
                                     {/*    </div>*/}
                                     {/*</Splide>*/}
-                                    <ImgSlider photos={product.bucket_link} key={router.asPath}/>
+                                    <div className={s.photo}>
+                                        <ImgSlider photos={product.bucket_link} key={router.asPath}/>
+                                    </div>
                                 </div>
                                 :
                                 <div className={s.slider}
