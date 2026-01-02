@@ -439,7 +439,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 <div
                                     className={`${s.brand}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : ""}</div>
                                 <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? colorway : "."}</div>
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.colorway}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? colorway : "."}</div>
                             </div>
                         </>
                         :
@@ -458,11 +458,23 @@ const ProductCard = ({cardList = false, product}) => {
                                 ?
                                 <div className={`${s.price}`}>
 
-                                    <span
-                                        className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
-                                    {!desktopStore.isDesktop && <br/>}
-                                    <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
-                                    {/*<br/>*/}
+                                    {desktopStore.isDesktop ? (
+                                        <>
+                                            <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                            <br/>
+                                            <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                        </>
+                                    )}
+
+
+
+
+
 
                                 </div>
                                 :

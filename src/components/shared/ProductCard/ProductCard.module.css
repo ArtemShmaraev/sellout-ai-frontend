@@ -108,6 +108,10 @@
     color: #727272;
 }
 
+.colorway {
+    color: #727272;
+}
+
 
 .placeholder {
     margin-top: 2px;
@@ -144,7 +148,8 @@
 }
 
 .price {
-    color: #545454;
+    /*color: #545454;*/
+    color: black;
     margin-top: auto;
     font-weight: 500;
     /*font-size: 14pt;*/
@@ -152,7 +157,7 @@
 
 .crossed {
     text-decoration: line-through;
-    /*color: rgba(0, 0, 0, 0.8);*/
+    color: rgba(0, 0, 0, 0.8);
     font-weight: 100;
     /*font-size: 14pt;*/
 
@@ -160,6 +165,7 @@
 
 .sale_price {
     color: #b61212;
+    /*color: rgba(182, 18, 18, 0.84);*/
     font-size: 110%;
     /*font-size: 16pt;*/
     /*font-weight: 600;*/
@@ -254,14 +260,14 @@
 @media (max-width: 650px) {
     .card {
         width: 190px;
-        height: 320px;
+        height: 315px;
         padding: 0;
         margin: 10px 10px;
     }
 
     .card_list {
         width: 49%;
-        height: 320px;
+        height: 315px;
         padding: 0;
         margin: 10px 0;
     }
@@ -283,8 +289,18 @@
     .tag, .brand, .name {
         font-size: 14px;
     }
+    .colorway{
+        font-size: 12px;
+    }
 
     .image_container {
         height: 90%;
+    }
+
+    .crossed{
+        font-size: 14px;
+    }
+    .sale_price{
+        font-size: 100%;
     }
 }
