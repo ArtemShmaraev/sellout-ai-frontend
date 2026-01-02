@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     z-index: 9999;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.90);
     width: 100vw;
     height: 140vh;
 }
@@ -17,8 +17,11 @@
 .cont {
     position: fixed;
     top: 45%;
-    transform: translateY(-45%);
+    transform: translateY(-37%);
     background-color: #FFFFFF;
+    height: 50vh;
+    /*width: 98%;*/
+
     /*left: 50%;*/
     /*transform: translate(-50%, -50%);*/
 }
