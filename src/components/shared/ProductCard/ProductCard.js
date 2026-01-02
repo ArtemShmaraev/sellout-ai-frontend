@@ -339,7 +339,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 style={{
                                     position: 'absolute',
                                     objectFit: 'contain',
-                                    objectPosition: "center bottom",
+                                    // objectPosition: "center bottom",
                                     transition: 'opacity 0.2s ease', // Анимация изменения прозрачности
                                     opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
                                 }}
