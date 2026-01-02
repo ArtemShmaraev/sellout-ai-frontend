@@ -325,8 +325,6 @@ const ProductCard = ({cardList = false, product}) => {
                                                 sizes={'100%'}
                                             />
                                         }
-
-
                                     </SwiperSlide>
                                 )
                                 }

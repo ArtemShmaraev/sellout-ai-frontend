@@ -18,12 +18,13 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
 
     return (
         <div className={s.fullscreen}>
-            <div className={'d-flex justify-content-end'}>
-                <button className={s.close_btn} onClick={toggle}>
-                    <Image src={close} alt={''} />
-                </button>
-            </div>
+
             <div className={s.cont}>
+                <div className={'d-flex justify-content-end'}>
+                    <button className={s.close_btn} onClick={toggle}>
+                        <Image src={close} alt={''} />
+                    </button>
+                </div>
                 <Gallery
                     items={galleryItems}
                     showNav={false}
@@ -50,12 +51,13 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
                                 src={item.original}
                                 alt={item.description}
                                 draggable={false}
-                                style={{ maxWidth: '100%', height: 'auto'}}
+                                style={{ maxWidth: '100%', height: 'auto', maxHeight: '50vh'}}
                             />
                         </div>
                     )}
                 />
             </div>
+
         </div>
     );
 };
