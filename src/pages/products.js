@@ -54,8 +54,15 @@ export const getServerSideProps = async (context) => {
     const collections = await fetchFilter('collabs')
     const materials = await fetchFilter('materials')
     const sizes = await fetchSizes(context.query, token)
+
+    let header_text;
+    if (gender && !("gender" in context.query)) {
+        header_text = await fetchProductsPageHeaderText({...context.query, gender});
+    } else {
+
+        header_text = await fetchProductsPageHeaderText(context.query)
+    }
     const footer_text = await fetchProductsPageFooterText({...context.query, gender});
-    const header_text = await fetchProductsPageHeaderText({...context.query, gender});
     let lastSeen = []
     if (token) {
         const {user_id} = jwtDecode(token)
