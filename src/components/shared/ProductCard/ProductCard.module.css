@@ -155,6 +155,7 @@
     /*font-size: 14pt;*/
 }
 
+
 .crossed {
     text-decoration: line-through;
     color: rgba(0, 0, 0, 0.8);
@@ -260,20 +261,21 @@
 @media (max-width: 650px) {
     .card {
         width: 190px;
-        height: 315px;
+        height: 290px;
         padding: 0;
         margin: 10px 10px;
     }
 
     .card_list {
         width: 49%;
-        height: 315px;
+        height: 290px;
         padding: 0;
         margin: 10px 0;
     }
 
     .text_block {
-        height: 85%;
+        height: 40%;
+        min-height: 103px;
     }
 
     .img {
@@ -288,9 +290,18 @@
 
     .tag, .brand, .name {
         font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+        white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+
     }
     .colorway{
         font-size: 12px;
+        /*max-width: 49%; !* Измените на нужное значение *!*/
+        /* Устанавливаем свойства для обрезки текста */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+        white-space: nowrap; /* Запрещаем перенос текста на новую строку */
     }
 
     .image_container {
@@ -299,8 +310,12 @@
 
     .crossed{
         font-size: 14px;
+        display: block;
     }
     .sale_price{
         font-size: 100%;
+        display: block;
+        margin-top: -5px;
     }
+
 }

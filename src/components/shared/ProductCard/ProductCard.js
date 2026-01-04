@@ -283,13 +283,13 @@ const ProductCard = ({cardList = false, product}) => {
                                 style={{
                                     // "--swiper-pagination-bullet-size": "8px",
                                     // "--swiper-pagination-bullet-vertical-gap": "15px",
-                                    "--swiper-pagination-color": "rgba(0,0,0)",
+                                    "--swiper-pagination-color": "rgb(38,38,38)",
                                     "--swiper-navigation-color": "#000",
                                     '--swiper-pagination-bullet-size': '7px',
                                     '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 50%, rgba(255, 255, 255, 0) 50%)',
                                     // '--swiper-pagination-left': '10px',
                                     // '--swiper-pagination-right': '10px',
-                                    '--swiper-pagination-bottom': '-6px',
+                                    '--swiper-pagination-bottom': '-4px',
                                     // '--swiper-pagination-top': '10px'
 
                                     // "--swiper-pagination-right": "0",
@@ -313,7 +313,7 @@ const ProductCard = ({cardList = false, product}) => {
                                                     // objectPosition: "center bottom",
                                                     bottom: 0,
                                                     opacity: isLoading ? 0.4 : 1, // Начальная прозрачность в зависимости от состояния загрузки
-                                                    transition: el === "logo" ? "" :'opacity 0.6s ease', // Анимация изменения прозрачности
+                                                    transition: el === "logo" ? "" : 'opacity 0.6s ease', // Анимация изменения прозрачности
                                                 }}
                                                 loading={index === 0 ? "eager" : "lazy"}
                                                 fill={true}
@@ -407,8 +407,6 @@ const ProductCard = ({cardList = false, product}) => {
                             {/*           sizes={'100%'}/>}*/}
 
 
-
-
                             <Image
                                 src={desktopStore.isDesktop ? desktop : mobile}
                                 alt=''
@@ -437,9 +435,9 @@ const ProductCard = ({cardList = false, product}) => {
                                 <div
                                     className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : "."}</div>
                                 <div
-                                    className={`${s.brand}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : ""}</div>
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.brand}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : "."}</div>
                                 <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.colorway}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? colorway : "."}</div>
+                                    className={s.colorway}>{brandsDisplay() !== "Загрузка" ? colorway : ""}</div>
                             </div>
                         </>
                         :
@@ -460,20 +458,17 @@ const ProductCard = ({cardList = false, product}) => {
 
                                     {desktopStore.isDesktop ? (
                                         <>
-                                            <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                            <span
+                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
                                             <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
                                         </>
                                     ) : (
                                         <>
                                             <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
-                                            <br/>
-                                            <span className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                            <span
+                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
                                         </>
                                     )}
-
-
-
-
 
 
                                 </div>
