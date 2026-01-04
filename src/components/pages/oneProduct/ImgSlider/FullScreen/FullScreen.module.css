@@ -17,9 +17,11 @@
 .cont {
     position: fixed;
     top: 45%;
+    align-items: center;
     transform: translateY(-37%);
     background-color: #FFFFFF;
     height: 50vh;
+    width: 100%;
     /*width: 98%;*/
 
     /*left: 50%;*/

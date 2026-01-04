@@ -48,10 +48,11 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
 
                             {/*/>*/}
                             <img
+                                loading={"lazy"}
                                 src={item.original}
                                 alt={item.description}
                                 draggable={false}
-                                style={{ maxWidth: '100%', height: 'auto', maxHeight: '50vh'}}
+                                style={{ maxWidth: '100%', height: 'auto', maxHeight: '40vh'}}
                             />
                         </div>
                     )}
