@@ -23,13 +23,13 @@
     object-fit: contain;
 }
 .brand {
-    font-size: 14px;
+    font-size: 16px;
     color: #727272;
     cursor: pointer;
 }
 .model {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
 }
 .color {
     font-size: 14px;

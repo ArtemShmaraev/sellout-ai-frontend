@@ -48,18 +48,25 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
 
 
     const deleteFromCart = async () => {
-        setIsDeleted(true)
+        setIsDeleted(true);
 
-        const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el))
-        const newCart = currCart.filter(el => el !== cartStore.ships[cardId])
-        Cookies.set('cart', newCart.join(' '), {expires: 2772})
+        // Сохраняем текущее положение скролла
+        // const scrollY = window.scrollY;
+
+        const currCart = Cookies.get('cart').trim().split(' ').filter(el => el !== ' ' && el !== '').map(el => Number(el));
+        const newCart = currCart.filter(el => el !== cartStore.ships[cardId]);
+        Cookies.set('cart', newCart.join(' '), { expires: 2772 });
         if (userStore.isLogged) {
-            const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'))
+            const data = await removeFromCart(userStore.id, cartStore.ships[cardId], Cookies.get('access_token'));
         }
-        cartStore.setCartCnt(newCart.length)
+        cartStore.setCartCnt(newCart.length);
         const productDetails = getProductDetail(product);
-        trackRemoveToCart(productDetails)
-        router.push('/cart', undefined, {scroll: false})
+        trackRemoveToCart(productDetails);
+
+        // Устанавливаем положение скролла обратно после удаления
+        // window.scrollTo(0, scrollY);
+
+        router.push('/cart', undefined, { scroll: false });
     }
     const [isInWishlist, setIsInWishlist] = useState(inWL)
 
@@ -95,21 +102,30 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             <hr/>
             <div className={s.row}>
                 <div className={s.col1}>
-                    <div className={s.img}>
-                        <Image src={imgSrc} fill={true} alt=''
-                               style={{objectFit: 'contain', cursor: 'pointer'}}
-                               onClick={() => router.push(`/products/${slug}`)}
-                        />
-                    </div>
+
+
+
+                        <div className={s.img}>
+                            <Image src={imgSrc} fill={true} alt=''
+                                   style={{objectFit: 'contain', cursor: 'pointer'}}
+                                   onClick={() => router.push(`/products/${slug}`)}
+                            />
+
+                        </div>
+
+
+
+
                 </div>
                 <div className={s.inner_row}>
                     <div className={s.col}>
                         <div>
-                            <div className={s.brand}>{brand}</div>
-                            <div className={s.text}>{model}</div>
-                            <div className={s.text}>{colorway}</div>
+                            <div className={s.tag}>{brand}</div>
+                            <div className={s.model}>{model}</div>
+                            <div className={s.colorway}>{colorway}</div>
                         </div>
                     </div>
+
                     <div className={s.col_dropdown}>
                         <div className={s.dropdowns}>
                             <div className={s.brand}>Размер</div>
