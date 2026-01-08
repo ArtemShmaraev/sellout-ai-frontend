@@ -14,14 +14,31 @@
     background: transparent;
     margin: 20px 20px;
 }
+
+.quater {
+    height: 25vh;
+}
+
+.closeBtnWrapper {
+    position: absolute; /* Устанавливаем абсолютное позиционирование */
+    top: 10px; /* Отступ от верхнего края */
+    right: 10px; /* Отступ от правого края */
+    z-index: 999; /* Устанавливаем порядок слоев */
+}
+
 .cont {
-    position: fixed;
-    top: 45%;
-    align-items: center;
-    transform: translateY(-37%);
+    position: relative;
+    /*object-fit: contain;*/
+    /*top: 45%;*/
+    /*!*align-items: center;*!*/
+    /*transform: translateY(-80%);*/
     background-color: #FFFFFF;
     height: 50vh;
     width: 100%;
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    overflow: hidden; /* Скрываем возможные прокрутки */
     /*width: 98%;*/
 
     /*left: 50%;*/

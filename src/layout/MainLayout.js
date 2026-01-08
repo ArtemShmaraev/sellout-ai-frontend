@@ -140,6 +140,7 @@ const MainLayout = ({ children, footerData }) => {
                     }}
                 />
             </Head>
+            {(desktopStore.animation) && <AnimationSellout/>}
             <div className={'body'}>
                 {/*<NavbarNoGender/>*/}
                 {/*<NavbarC/>*/}
@@ -162,7 +163,7 @@ const MainLayout = ({ children, footerData }) => {
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
             <YandexMetrica/>
-            {(desktopStore.animation) && <AnimationSellout/>}
+
 
         </>
     );

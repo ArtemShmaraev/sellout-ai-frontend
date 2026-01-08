@@ -17,10 +17,13 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
     }));
 
     return (
-        <div className={s.fullscreen}>
+        <div className={s.fullscreen} >
+            <div className={s.quater} onClick={toggle}>
+
+            </div>
 
             <div className={s.cont}>
-                <div className={'d-flex justify-content-end'}>
+                <div className={s.closeBtnWrapper}>
                     <button className={s.close_btn} onClick={toggle}>
                         <Image src={close} alt={''} />
                     </button>
@@ -52,11 +55,14 @@ const FullScreen = ({ toggle, photos, initialIndex}) => {
                                 src={item.original}
                                 alt={item.description}
                                 draggable={false}
-                                style={{ maxWidth: '100%', height: 'auto', maxHeight: '40vh'}}
+                                style={{ maxWidth: '100%', height: 'auto', maxHeight: '50vh'}}
                             />
                         </div>
                     )}
                 />
+            </div>
+            <div className={s.quater} onClick={toggle}>
+
             </div>
 
         </div>
