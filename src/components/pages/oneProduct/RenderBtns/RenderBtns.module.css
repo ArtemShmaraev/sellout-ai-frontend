@@ -6,6 +6,7 @@
     min-height: 40px;
     margin-bottom: 5px;
     position: relative;
+
 }
 .black {
     background: black;
@@ -26,11 +27,31 @@
     width: 48%;
 }
 
+@keyframes slideOutAnimation {
+    0% {
+        transform: translateY(-120%);
+        z-index: -1;
+
+    }
+    100% {
+        transform: translateY(0);
+        z-index: 0;
+
+    }
+}
+
+.slideOut {
+    animation: slideOutAnimation 0.3s ease forwards;
+    /*z-index: -1;*/
+}
 .row {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    position: relative; /* Добавляем позиционирование */
 }
+
+
 .crossed {
     text-decoration: line-through;
 }
@@ -80,5 +101,9 @@
     }
     .half_text {
         width: 100%;
+    }
+    .slideOut {
+        animation: slideOutAnimation 0.8s ease forwards;
+        /*z-index: -1;*/
     }
 }
