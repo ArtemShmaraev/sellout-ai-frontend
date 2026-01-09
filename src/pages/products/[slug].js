@@ -555,8 +555,10 @@ const OneProductPage = ({product, prices}) => {
                                     <div className={s.btn_group}>
                                         <RenderBtns btns={productStore.shipps} changeBonuses={changeBonusesString}/>
                                     </div>
+
                                 }
-                                {productStore.sizeChosen &&
+                                {
+                                    productStore.sizeChosen &&
                                     <div className={s.how}>
                                         <HowToChoose/>
                                     </div>}

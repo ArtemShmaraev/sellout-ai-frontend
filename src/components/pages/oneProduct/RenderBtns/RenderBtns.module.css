@@ -103,7 +103,7 @@
         width: 100%;
     }
     .slideOut {
-        animation: slideOutAnimation 0.8s ease forwards;
+        animation: slideOutAnimation 0.5s ease forwards;
         /*z-index: -1;*/
     }
 }

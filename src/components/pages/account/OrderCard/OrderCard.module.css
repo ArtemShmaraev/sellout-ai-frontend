@@ -1,8 +1,84 @@
 .dropdown {
     width: 100%;
     border: 1px solid black;
-    border-radius: 7px;
+    z-index: 1;
+    background-color: #FFFFFF;
 }
+.dropdown:hover{
+    background-color: #f7f7f7;
+}
+
+.white_rectangle {
+    position: absolute;
+    width: 100%;
+    height: 10px; /* Замените на нужную высоту */
+    background-color: white;
+    z-index: -1; /* Помещаем белый прямоугольник под другие элементы */
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-110%);
+        z-index: -1000;
+
+
+    }
+    100% {
+        transform: translateY(0);
+        z-index: 1;
+
+    }
+}
+
+@keyframes slideOutToTop {
+    0% {
+        transform: translateY(0);
+        z-index: -10;
+
+
+    }
+    40% {
+        transform: translateY(-110%);
+        z-index: -10;
+    }
+    100% {
+        transform: translateY(-100%);
+        z-index: -10;
+    }
+}
+
+.dropdown_detail {
+    position: relative; /* Должен быть относительным, чтобы дочерний элемент мог быть абсолютным */
+    overflow: hidden; /* Скрыть содержимое, которое выходит за пределы блока */
+    margin-top: -1px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 0px 0px 7px 7px;
+    z-index: 0;
+}
+
+.dropdown_wrapper {
+    /*position: relative;*/
+    width: 100%;
+    overflow: hidden; /* Ограничиваем область видимости содержимого */
+    position: relative
+}
+
+
+.dropdown_wrapper {
+    position: relative; /* Родительский элемент должен быть относительным */
+}
+
+
+.slideInFromTop {
+    animation: slideInFromTop 0.2s ease;
+}
+
+.slideOutToTop {
+    animation: slideOutToTop 0.5s ease;
+}
+
+
 .header {
     display: flex;
     align-items: center;
@@ -101,6 +177,11 @@
 .hr {
     visibility: hidden;
 }
+
+
+
+
+
 @media (max-width: 1200px) {
     .header_col {
         display: block;
@@ -158,5 +239,13 @@
     }
     .hr {
         visibility: visible;
+    }
+
+    .slideInFromTop {
+        animation: slideInFromTop 0.4s ease;
+    }
+
+    .slideOutToTop {
+        animation: slideOutToTop 1s ease;
     }
 }
