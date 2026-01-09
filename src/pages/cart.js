@@ -86,10 +86,10 @@ export const getServerSideProps = async (context) => {
     } else {
         const res = await fetchCartPrice(cartArr)
         defaultPrice = res.total_amount
-        finalPrice = defaultPrice
+        finalPrice = res.final_amount
         bonuses = res.bonus
         promoBonuses = 0
-        sale = 0
+        sale = res.sale
         defaultPromo = ''
         const promoStr = cookies['promo']
         if (promoStr) {
