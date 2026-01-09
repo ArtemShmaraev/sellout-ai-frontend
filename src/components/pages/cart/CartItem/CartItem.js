@@ -73,20 +73,22 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
 
 
     const addToWL = async () => {
+        setIsInWishlist(true)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToWishlist(userId, productId, token)
         const productDetails = getProductDetail(product);
         trackAddToFavorites(productDetails)
-        setIsInWishlist(true)
+
     }
     const deleteFromWL = async () => {
+        setIsInWishlist(false)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, productId, token)
         const productDetails = getProductDetail(product);
         trackRemoveToFavorites(productDetails)
-        setIsInWishlist(false)
+
     }
     // if (!product.available_flag || !available) {
     //     console.group(brand, model)

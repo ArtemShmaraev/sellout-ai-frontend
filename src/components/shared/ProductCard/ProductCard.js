@@ -83,20 +83,21 @@ const ProductCard = ({cardList = false, product}) => {
     };
 
     const addToWL = async () => {
+        setIsInWishlist(true)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToWishlist(userId, id, token)
-        setIsInWishlist(true)
+
         const {pathname, query} = router
         const productDetails = getProductDetail(product);
         trackAddToFavorites(productDetails)
         router.push({pathname, query}, undefined, {scroll: false})
     }
     const deleteFromWL = async () => {
+        setIsInWishlist(false)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, id, token)
-        setIsInWishlist(false)
         const {pathname, query} = router
         const productDetails = getProductDetail(product);
         trackRemoveToFavorites(productDetails)

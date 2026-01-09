@@ -268,21 +268,23 @@ const OneProductPage = ({product, prices}) => {
 
 
     const addToWL = async () => {
+        setIsInWishlist(true)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToWishlist(userId, product.id, token)
         const productDetails = getProductDetail(product);
         trackAddToFavorites(productDetails)
 
-        setIsInWishlist(true)
+
     }
     const deleteFromWL = async () => {
+        setIsInWishlist(false)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await removeFromWishlist(userId, product.id, token)
         const productDetails = getProductDetail(product);
         trackRemoveToFavorites(productDetails)
-        setIsInWishlist(false)
+
     }
     const cartAdd = async () => {
         let cart = Cookies.get('cart')

@@ -13,16 +13,18 @@ const Brand = ({name, inWL, brandId, query}) => {
     const {userStore} = useContext(Context)
     const [isInWishlist, setIsInWishlist] = useState(inWL)
     const addToFB = async () => {
+        setIsInWishlist(true)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await addToFavouriteBrands(userId, brandId, token)
-        setIsInWishlist(true)
+
     }
     const deleteFromFB = async () => {
+        setIsInWishlist(false)
         const token = Cookies.get('access_token')
         const userId = userStore.id
         const data = await deleteFavouriteBrands(userId, brandId, token)
-        setIsInWishlist(false)
+
     }
     return (
         <div className={s.brand} key={brandId}>
