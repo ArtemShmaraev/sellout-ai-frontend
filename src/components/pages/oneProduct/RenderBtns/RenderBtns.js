@@ -87,7 +87,7 @@ const RenderBtns = ({btns, changeBonuses}) => {
         }
     }, [productStore.shipps])
     return (
-        <div className={`w-100 ${s.slideOut}`}>
+        <div className={`w-100`}>
             {renderBtns(btns)}
         </div>
     )

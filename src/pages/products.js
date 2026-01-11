@@ -77,7 +77,8 @@ export const getServerSideProps = async (context) => {
         }
     }
     const url = context.query
-    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}}
+    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}
+    }
 }
 const Products = ({productsList, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}) => {
     const productListRef = useRef(null)

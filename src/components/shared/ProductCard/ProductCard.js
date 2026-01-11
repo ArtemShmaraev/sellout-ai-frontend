@@ -286,7 +286,7 @@ const ProductCard = ({cardList = false, product}) => {
                                     // "--swiper-pagination-bullet-vertical-gap": "15px",
                                     "--swiper-pagination-color": "rgb(38,38,38)",
                                     "--swiper-navigation-color": "#000",
-                                    '--swiper-pagination-bullet-size': '6px',
+                                    '--swiper-pagination-bullet-size': '6   px',
                                     '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
                                     // '--swiper-pagination-left': '10px',
                                     // '--swiper-pagination-right': '10px',

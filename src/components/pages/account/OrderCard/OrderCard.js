@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './OrderCard.module.css'
 import minus from '@/static/icons/dash-lg.svg'
 import plus from '@/static/icons/plus-lg.svg'
@@ -11,25 +11,47 @@ const OrderCard = ({order}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isBeOpen, setIsBeOpen] = useState(false)
     const {desktopStore} = useContext(Context)
-    const toggle = () => {
-        if (isOpen) {
-            setIsOpen(false);
-            setIsBeOpen(true);
-            setTimeout(() => {
-                setIsBeOpen(false);
-            }, desktopStore.isDesktop ? 300 : 500); // Задержка в одну секунду
-        } else {
-            setIsOpen(true);
-            setIsBeOpen(false);
-        }
-    };
+    // const toggle = () => {
+    //     if (isOpen) {
+    //         setIsOpen(false);
+    //         setIsBeOpen(true);
+    //         setTimeout(() => {
+    //             setIsBeOpen(false);
+    //         }, desktopStore.isDesktop ? 300 : 500); // Задержка в одну секунду
+    //     } else {
+    //         setIsOpen(true);
+    //         setIsBeOpen(false);
+    //     }
+    // };
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+    const toggle = () => {
+        if (isOpen){
+            setIsBeOpen(true)
+        }
+        setIsOpen(!isOpen)
+    }
+
+    const [contentHeight, setContentHeight] = useState('0');
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (contentRef.current) {
+            setContentHeight(isOpen ? contentRef.current.scrollHeight + "px" : "0");
+            setIsBeOpen(true)
+            setTimeout(() => {
+                setContentHeight(isOpen ? contentRef.current.scrollHeight + "px" : "0");
+                setIsBeOpen(false)
+            }, 400)
+
+        }
+    }, [isOpen]);
+
 
     return (
 
         <div className={s.dropdown_wrapper}>
-            <div className={s.white_rectangle}></div>
-            <div className={s.dropdown} style={{borderRadius: (isOpen)? "7px 7px 0px 0px" : "7px"}}
+
+            <div className={s.dropdown} style={{borderRadius: "7px"}}
             >
                 <div className={s.header}
                      style={isOpen ? {} : {}}
@@ -61,12 +83,10 @@ const OrderCard = ({order}) => {
                         />
                     </div>
                 </div>
-
-            </div>
-
-            {(isOpen || isBeOpen) &&
-                <div className={isOpen ? `${s.dropdown_detail} ${s.slideInFromTop}` : (isBeOpen ? `${s.dropdown_detail} ${s.slideOutToTop}` : s.dropdown_detail)}>
-
+                <div ref={contentRef}
+                     className={[s.text_block, isOpen ? s.open : ""].join(" ")}
+                     style={{ maxHeight: contentHeight}}>
+                    {(isOpen || isBeOpen)  && <div className={s.blackDivider}></div>}
                     <div className={s.details_block}>
                         <div className={s.order}>
                             {
@@ -117,7 +137,8 @@ const OrderCard = ({order}) => {
                         </div>
                     </div>
                 </div>
-            }
+            </div>
+
         </div>
 
     );

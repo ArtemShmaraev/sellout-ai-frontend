@@ -27,23 +27,7 @@
     width: 48%;
 }
 
-@keyframes slideOutAnimation {
-    0% {
-        transform: translateY(-100%);
-        z-index: -10;
 
-    }
-    100% {
-        transform: translateY(0);
-        z-index: 0;
-
-    }
-}
-
-.slideOut {
-    animation: slideOutAnimation 0.4s ease forwards;
-    /*z-index: -1;*/
-}
 .row {
     display: flex;
     justify-content: space-between;
@@ -101,9 +85,5 @@
     }
     .half_text {
         width: 100%;
-    }
-    .slideOut {
-        animation: slideOutAnimation 0.5s ease forwards;
-        /*z-index: -1;*/
     }
 }

@@ -1,51 +1,62 @@
-.dropdown {
-    width: 100%;
-    border: 1px solid black;
-    z-index: 1;
-    background-color: #FFFFFF;
+
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
 }
-.dropdown:hover{
-    background-color: #f7f7f7;
-}
+
 
 .white_rectangle {
     position: absolute;
     width: 100%;
-    height: 10px; /* Замените на нужную высоту */
+    height: 4px; /* Замените на нужную высоту */
     background-color: white;
     z-index: -1; /* Помещаем белый прямоугольник под другие элементы */
 }
 
-@keyframes slideInFromTop {
-    0% {
-        transform: translateY(-110%);
-        z-index: -1000;
+.text_block {
 
+    /*margin-top: -1px;*/
+    -webkit-transition: max-height 0.5s;
+    -moz-transition: max-height 0.5s;
+    -ms-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+    overflow: hidden;
+    max-height: 0;
 
-    }
-    100% {
-        transform: translateY(0);
-        z-index: 1;
+    /*border-top: 1px solid black;*/
 
-    }
+    z-index: -2;
+}
+.open {
+    max-height: none;
+
+    z-index: 1;
+
+    transition: max-height 0.5s ease;
+
+}
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
-@keyframes slideOutToTop {
-    0% {
-        transform: translateY(0);
-        z-index: -10;
 
 
-    }
-    40% {
-        transform: translateY(-110%);
-        z-index: -10;
-    }
-    100% {
-        transform: translateY(-100%);
-        z-index: -10;
-    }
+.dropdown {
+    width: 100%;
+    border: 1px solid black;
+    z-index: 10;
+    background-color: #FFFFFF;
 }
+
 
 .dropdown_detail {
     position: relative; /* Должен быть относительным, чтобы дочерний элемент мог быть абсолютным */
@@ -85,6 +96,8 @@
     padding: 10px;
     width: 100%;
     cursor: pointer;
+    z-index: 1;
+
 }
 .header_text {
     font-size: 20px;
@@ -176,6 +189,12 @@
 }
 .hr {
     visibility: hidden;
+}
+.blackDivider {
+    border-top: 1px solid black;
+}
+.whiteDivider {
+    border-top: 1px solid #ffffff;
 }
 
 
