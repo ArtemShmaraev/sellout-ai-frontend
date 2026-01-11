@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import s from './TreeLine.module.css'
 import Link from "next/link";
 import arrow from '@/static/icons/chevron-right-grey.svg'
@@ -10,6 +10,23 @@ import {Context} from "@/context/AppWrapper";
 const TreeLine = ({ list }) => {
     const {desktopStore} = useContext(Context)
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = (e) => {
+        setIsHovered(true)
+        const nameElement = e.currentTarget.querySelector(`.${s.name}`);
+        const overflow = nameElement.scrollWidth > nameElement.clientWidth;
+        if (overflow) {
+            nameElement.style.animation = `${s.slide} ${(nameElement.scrollWidth / 80)}s linear infinite`;
+        }
+    };
+
+    const handleMouseLeave = (e) => {
+        setIsHovered(false)
+        const nameElement = e.currentTarget.querySelector(`.${s.name}`);
+        nameElement.style.animation = 'none';
+    };
+
     const renderComponent = () => {
         const arr = [];
         const length = list.length;
@@ -18,7 +35,9 @@ const TreeLine = ({ list }) => {
             if (desktopStore.isDesktop) {
                 arr.push(
                     <div className={s.width33} key={ind}>
-                        <Link className={s.breadcrumbItem} href={`/products?${el.query}`}>
+                        <Link className={s.breadcrumbItem} href={`/products?${el.query}`}
+                              onMouseEnter={handleMouseEnter}
+                              onMouseLeave={handleMouseLeave}>
                             {el.name in most_pop && (
                                 <div className={s.imageContainer}>
                                     <img
@@ -30,7 +49,8 @@ const TreeLine = ({ list }) => {
                                 </div>
                             )}
                             <div className={s.textContainer} style={{marginLeft: el.name in most_pop ? "8px" : "12px"}}>
-                                <div className={s.name}>{el.name}</div>
+                                <div className={`${s.name} ${isHovered ? s.noEllipsis : ''}`}>{el.name}</div>
+
                                 {el.name in most_pop && (
                                     <div className={s.count}>{most_pop[el.name].count}</div>
                                 )}
