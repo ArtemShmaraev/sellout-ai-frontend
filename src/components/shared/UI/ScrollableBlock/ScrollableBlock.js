@@ -27,7 +27,7 @@ const ScrollableBlock = ({children, noArrows = false}) => {
     return (
         <div className={s.scrollableBlock}>
             {!noArrows &&
-                <button className={s.left} onClick={scrollLeft} style={{zIndex: 10}}>
+                <button className={s.left} onClick={scrollLeft} style={{zIndex: 2}}>
                     <Image src={arrow} alt='' style={{transform: 'rotate(180deg) translateY(2px)'}} className={s.img}/>
                 </button>
             }
@@ -39,7 +39,7 @@ const ScrollableBlock = ({children, noArrows = false}) => {
                 ))}
             </div>
             {!noArrows &&
-                <button className={s.right} onClick={scrollRight} style={{zIndex: 10}}>
+                <button className={s.right} onClick={scrollRight} style={{zIndex: 2}}>
                     <Image src={arrow} alt='' className={s.img}/>
                 </button>
             }

@@ -2,13 +2,13 @@
     border: none;
     outline: none;
     background: transparent;
-    font-size: 14px;
+    font-size: 13px;
     color: #727272;
     transition: 0.3s;
     width: fit-content;
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 4px 0;
 }
 .toggle_btn:hover {
     color: #444444;
@@ -19,7 +19,7 @@
 }
 .icon {
     margin: 0 10px;
-    min-width: 25px;
+    min-width: 23px;
     height: auto;
 }
 .label {

@@ -1,0 +1,133 @@
+.breadcrumbContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Распределить блоки равномерно по контейнеру */
+    margin-bottom: 20px;
+    min-height: 94px;
+    align-items: center;
+}
+.width33 {
+    /*padding-right: 8px;*/
+    padding-top: 10px;
+    width: 31%; /* Максимальная ширина блока (1/3 ширины контейнера) */
+    padding-bottom: 10px;
+    height: 100%;
+    min-height: 74px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+
+}
+.breadcrumbItem {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    min-height: 74px;
+    width: 100%;
+    border-radius: 12px;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    /*overflow: hidden;*/
+
+}
+
+.breadcrumbItem:hover{
+    /*background-color: #ececec;*/
+    border: 1px solid rgba(0, 0, 0, 0.9);
+}
+
+.textContainer {
+    /*flex: 1;*/
+    /*display: flex;*/
+    overflow: hidden;
+
+    flex-direction: column;
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+
+    margin-left: 8px; /* Отступ между текстом и изображением */
+}
+
+.imageContainer {
+    padding-left: 10px;
+
+
+    /*padding-right: 10px;*/
+    flex: 0 0 auto;
+    /*width: 70px; !* Ширина контейнера изображения *!*/
+    /*height: 70px; !* Высота контейнера изображения *!*/
+    /*overflow: hidden; !* Обрезаем изображение, которое выходит за пределы контейнера *!*/
+}
+
+.image {
+    width: 72px; /* Ширина изображения равна ширине контейнера */
+    height: 72px; /* Высота изображения равна высоте контейнера */
+    object-fit: contain; /* Изображение растягивается на весь размер контейнера, сохраняя пропорции и обрезая лишнее */
+
+}
+.name {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+}
+.count {
+    font-size: 13px;
+    color: #727272;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+}
+
+/* Первый элемент */
+/*.width33:first-child {*/
+/*    margin-right: auto; !* Сдвигаем его вправо, чтобы он прижался к левому краю *!*/
+/*}*/
+
+/*!* Последний элемент *!*/
+/*.width33:last-child {*/
+/*    margin-left: auto; !* Сдвигаем его влево, чтобы он прижался к правому краю *!*/
+/*}*/
+.link {
+    color: #727272;
+    white-space: nowrap;
+    font-size: 16px;
+}
+.arrow {
+    margin-right: 0.5% ;
+    margin-left: 0.5%;
+    width: 14px;
+    display: flex; /* Добавляем flexbox */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+}
+.hr {
+    width: 94%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: black; /* Замените your_color_here на ваш цвет */
+}
+
+
+@media (max-width: 768px) { /* Пример значения ширины для мобильных устройств */
+    .breadcrumbItem {
+        width: 100%; /* Ширина каждого элемента на мобильной версии */
+        margin-right: 0; /* Убрать отступы между элементами на мобильной версии */
+        /*margin-bottom: 10px; !* Добавить отступ снизу на мобильной версии *!*/
+        border: none;
+    }
+
+    .breadcrumbContainer {
+
+        margin-bottom: 10px;
+
+    }
+    .textContainer {
+        margin-left: 12px; /* Отступ между текстом и изображением */
+    }
+    .imageContainer {
+        padding-left: 14px;
+    }
+}

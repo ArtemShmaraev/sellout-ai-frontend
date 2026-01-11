@@ -83,6 +83,7 @@ import YandexMetrica, {
     trackPurchase, trackRemove, trackRemoveToFavorites,
 } from "@/components/shared/YandexMetrica/YandexMetrica";
 import order from "@/pages/order";
+import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -433,7 +434,7 @@ const OneProductPage = ({product, prices}) => {
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row}>
                     <div className={s.col1}>
-                        {desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}
+                        {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
                             <>
                                 <Link href={clickBrand()} className={s.brand}
@@ -604,12 +605,12 @@ const OneProductPage = ({product, prices}) => {
                             </>
                         }
 
-                        <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: '200px'}}
+                        <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}
                              ref={infoRef}>
                             {!desktopStore.isDesktop && <hr/>}
                             <div className={s.row}>
-                                <div className={s.col50}>
-                                    {!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}
+                                <div className={s.col60}>
+                                    {/*{!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                                     <div className={s.model}>{brandsDisplay()}</div>
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
@@ -617,7 +618,7 @@ const OneProductPage = ({product, prices}) => {
                                         {product.description}
                                     </p>
                                 </div>
-                                <div className={s.col50}>
+                                <div className={s.col40}>
                                     <div className={s.characteristics_title}>Характеристики товара:</div>
                                     {renderParams()}
                                 </div>
@@ -636,6 +637,7 @@ const OneProductPage = ({product, prices}) => {
                                 </button>
                             </div>
                         }
+                        <TreeLine list={product.list_lines}/>
                     </div>
                     <div className={s.col2}>
                         {desktopStore.isDesktop &&
@@ -745,6 +747,7 @@ const OneProductPage = ({product, prices}) => {
                         }
 
                         {!desktopStore.isDesktop && compilations.map(el =>
+
                             <Compilation arr={el.products} title={el.name}/>
                         )}
 
@@ -1362,6 +1365,7 @@ const OneProductPage = ({product, prices}) => {
                         }
                     </div>
                 </div>
+
                 {desktopStore.isDesktop && compilations.map(el =>
                     <Compilation arr={el.products} title={el.name}/>
                 )}

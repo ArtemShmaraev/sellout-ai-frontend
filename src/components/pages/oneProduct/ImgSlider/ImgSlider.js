@@ -42,7 +42,7 @@ const ImgSlider = ({photos}) => {
 
             <Swiper
                 loop={true}
-                pagination={(desktopStore.isDesktop || photos.length > 9)? false : { type: 'bullets' }}
+                pagination={(desktopStore.isDesktop || photos.length > 9)? {type: 'bullets'} : { type: 'bullets' }}
 
                 // effect={"fade"}
 
@@ -56,8 +56,8 @@ const ImgSlider = ({photos}) => {
                     '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
                     '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
                     '--swiper-pagination-top': 'auto', // Убираем верхний отступ
-                    '--swiper-pagination-bottom': '20px', // Задаем отступ от нижнего края
-                    '--swiper-pagination-progressbar-size': '3px',
+                    '--swiper-pagination-bottom': desktopStore.isDesktop ? '-7px' : "20px", // Задаем отступ от нижнего края
+                    '--swiper-pagination-progressbar-size': '2px',
                     '--swiper-pagination-bullet-size': '10px',
                     '--swiper-pagination-bullet-horizontal-gap': '12px',
                     // '--swiper-pagination-bullet-border-radius': '25%',
