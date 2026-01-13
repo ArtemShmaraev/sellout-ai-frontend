@@ -1,20 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Image from 'next/image';
 import s from './FirstMainBlock.module.css'
 import Link from 'next/link';
+import {Context} from "@/context/AppWrapper";
 // import img1 from '/src/static/img/image 896.jpg'
 // import img2 from '/src/static/img/image 889.jpg'
 // import img3 from '/src/static/img/image 897.jpg'
 
 
 const FirstMainBlock = ({obj}) => {
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [])
+    const {desktopStore} = useContext(Context)
+
 
     const leftImages = obj.leftImages
     const rightImages = obj.rightImages

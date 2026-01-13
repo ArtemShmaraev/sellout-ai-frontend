@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Image from "next/image";
 import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
@@ -6,14 +6,10 @@ import logo from '@/static/img/sellout_logo.svg'
 import Link from "next/link";
 import desktop from "@/static/img/desktop_background_old.jpg";
 import mobile from "@/static/img/big_bg.jpg";
+import {Context} from "@/context/AppWrapper";
 const MainImgBlock = ({obj, className}) => {
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [])
+    const {desktopStore} = useContext(Context)
+
     const getDirection = () => {
         if (obj.type === 'right_photo') {
             return s.row_reverse

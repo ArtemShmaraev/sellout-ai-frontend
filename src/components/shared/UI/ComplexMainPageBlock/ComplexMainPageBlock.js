@@ -48,13 +48,6 @@ const ComplexMainPageBlock = ({obj}) => {
 
     const checkIsDesktop = () => {
 
-        const width = window.innerWidth
-
-        if (width <= 1200) {
-            desktopStore.setIsDesktop(false)
-        } else {
-            desktopStore.setIsDesktop(true)
-        }
         setImageWidth(desktopStore.isDesktop ?
             (obj.imagesInRowAmount ? `calc((100% / ${obj.imagesInRowAmount}) - 0.5%)` : '100%') :
             '49%')
@@ -67,7 +60,7 @@ const ComplexMainPageBlock = ({obj}) => {
     }
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         window.addEventListener('resize', checkIsDesktop);
         checkIsDesktop();
