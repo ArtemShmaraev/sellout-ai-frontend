@@ -125,7 +125,7 @@
     align-items: center; /* Центрирование по вертикали */
 }
 .hr {
-    width: 94%;
+    width: 96%;
     height: 1px;
     margin: 0 auto;
     background-color: black; /* Замените your_color_here на ваш цвет */
@@ -138,6 +138,8 @@
         margin-right: 0; /* Убрать отступы между элементами на мобильной версии */
         /*margin-bottom: 10px; !* Добавить отступ снизу на мобильной версии *!*/
         border: none;
+        min-height: 64px;
+
     }
 
     .breadcrumbContainer {
@@ -149,6 +151,19 @@
         margin-left: 12px; /* Отступ между текстом и изображением */
     }
     .imageContainer {
-        padding-left: 14px;
+        padding-left: 12px;
+    }
+    .image {
+        width: 62px; /* Ширина изображения равна ширине контейнера */
+        height: 62px; /* Высота изображения равна высоте контейнера */
+        object-fit: contain; /* Изображение растягивается на весь размер контейнера, сохраняя пропорции и обрезая лишнее */
+
+    }
+
+    .width33 {
+        /*padding-right: 8px;*/
+        padding-top: 3px;
+        padding-bottom: 3px;
+        min-height: 64px;
     }
 }
