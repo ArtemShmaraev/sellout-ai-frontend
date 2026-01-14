@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from '@/styles/OneProductPage.module.css'
 import truck from '@/static/icons/truck.svg'
 import refund from '@/static/icons/arrow-return-left.svg'
-import ret from '@/static/icons/arrow-return-left.svg'
+import returnImg from '@/static/icons/arrow-return-left.svg'
 import like from '@/static/icons/heart.svg'
 import like_fill from '@/static/icons/heart-fill.svg'
 import SizeTable from "@/components/pages/oneProduct/SizeTable/SizeTable";
@@ -10,7 +10,6 @@ import SizeHelp from "@/components/pages/oneProduct/SizeHelp/SizeHelp";
 import SizeChoice from "@/components/pages/oneProduct/SizeChoice/SizeChoice";
 import HowToChoose from "@/components/pages/oneProduct/HowToChoose/HowToChoose";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
-import QuestionsDropdown from "@/components/pages/oneProduct/QuestionsDropdown/QuestionsDropdown";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
 import Image from 'next/image'
@@ -19,7 +18,8 @@ import {
     fetchPrices,
     fetchProductsByArray,
     fetchShippings,
-    fetchSimilarProducts, updateOneProduct
+    fetchSimilarProducts,
+    updateOneProduct
 } from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {Context} from "@/context/AppWrapper";
@@ -30,16 +30,12 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
-import {addLastSeen, fetchLastSeen, fetchLastSeen2} from "@/http/userApi";
+import {addLastSeen, fetchLastSeen2} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
-import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import Compilation from "@/components/shared/Compilation/Compilation";
 import InvisibleCaptcha from "@/components/shared/CaptchaYandex/Captcha"
-import {Splide, SplideSlide, SplideTrack} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'
-import right from '@/static/icons/chevron-right.svg'
-import left from '@/static/icons/chevron-left.svg'
 import Head from "next/head";
 import gift from '@/static/icons/gift-green.svg'
 import how from '@/static/icons/question-circle.svg'
@@ -60,8 +56,6 @@ import giftModal from "@/static/icons/gift.svg";
 import headphones from "@/static/icons/headphones-circle.svg";
 import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
-import Text from "@/components/pages/faq/Text/Text";
-import returnImg from "@/static/icons/arrow-return-left.svg";
 import cashStack from "@/static/icons/cash-stack.svg";
 import cashStack1 from "@/static/icons/cash-stack 1.svg";
 import twoArrows from "@/static/icons/two_arrows.svg";
@@ -75,14 +69,12 @@ import file from '@/static/icons/file-earmark-check 1.svg'
 import creditCard from '@/static/icons/credit-card 2.svg'
 import aboutUs from '@/static/icons/aboutus.svg'
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
-import inst_star from "@/static/icons/instagram_star.svg";
-import YandexMetrica, {
-    trackViewProduct,
-    trackAddToFavorites,
+import {
     trackAddToCart,
-    trackPurchase, trackRemove, trackRemoveToFavorites,
+    trackAddToFavorites,
+    trackRemoveToFavorites,
+    trackViewProduct,
 } from "@/components/shared/YandexMetrica/YandexMetrica";
-import order from "@/pages/order";
 import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
 
 export const getServerSideProps = async (context) => {
@@ -99,7 +91,7 @@ export const getServerSideProps = async (context) => {
 
 const OneProductPage = ({product, prices}) => {
     const router = useRouter()
-    const [moreOpen, setMoreOpen] = useState(true)
+    const [moreOpen, setMoreOpen] = useState(false)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
 
     const [compilations, setCompilations] = useState([])
@@ -254,13 +246,7 @@ const OneProductPage = ({product, prices}) => {
         return res
     }
 
-    // useEffect(() => {
-    //     window.addEventListener("resize", checkIsDesktop);
-    //     // Call handler right away so state gets updated with initial window size
-    //     checkIsDesktop();
-    //     // Remove event listener on cleanup
-    //     return () => window.removeEventListener("resize", checkIsDesktop);
-    // })
+
     const [isInWishlist, setIsInWishlist] = useState(product.in_wishlist)
     useEffect(() => {
         setIsInWishlist(product.in_wishlist)
@@ -336,12 +322,6 @@ const OneProductPage = ({product, prices}) => {
         Cookies.set('last_seen', newStr, {expires: 2772})
     }, [router.asPath])
 
-    const buttonRef = useRef(null)
-    // useEffect(() => {
-    //     if (product.bucket_link.length > 1) {
-    //         buttonRef.current.focus()
-    //     }
-    // }, [])
     const shouldRenderBonuses = () => {
         return Number(product.price.bonus) > 0;
     }
@@ -359,18 +339,51 @@ const OneProductPage = ({product, prices}) => {
 
         return bool
     }
-    const infoRef = useRef(null)
-    const [infoBtn, setInfoBtn] = useState(false)
+
+    const toggle_more_open = () => {
+        if (moreOpen){
+            setMoreOpen(true)
+        }
+        setMoreOpen(!moreOpen)
+    }
+
+    const [contentHeight, setContentHeight] = useState(desktopStore.isDesktop ? '145px': "195px");
+    const contentRef = useRef(null);
     useEffect(() => {
-        setInfoBtn(false)
-        setMoreOpen(true)
-        setTimeout(() => {
-            if (infoRef && infoRef.current.clientHeight > 200) {
-                setInfoBtn(true)
-            }
-            setMoreOpen(false)
-        }, 200)
+        if (contentRef.current) {
+            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px': "195px");
+            setTimeout(() => {
+                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px': "195px");
+            }, 400)
+
+        }
+    }, [moreOpen]);
+    const infoRef = useRef(null)
+    const [infoBtn, setInfoBtn] = useState(true)
+
+    useEffect(() => {
+        setMoreOpen(false)
+        console.log(contentRef.current.clientHeight)
+        console.log(desktopStore.isDesktop)
+        if (contentRef && contentRef.current.clientHeight > 144) {
+                        setInfoBtn(true)
+                    }
+        else {
+            setInfoBtn(false)
+        }
     }, [router.asPath])
+
+
+    // useEffect(() => {
+    //     setInfoBtn(false)
+    //     setMoreOpen(true)
+    //     setTimeout(() => {
+    //         if (contentRef && contentRef.current.clientHeight > 200) {
+    //             setInfoBtn(true)
+    //         }
+    //         setMoreOpen(false)
+    //     }, 200)
+    // }, [router.asPath])
     const [howOpen, setHowOpen] = useState(false)
     const toggleHow = () => {
         setHowOpen(!howOpen)
@@ -382,13 +395,12 @@ const OneProductPage = ({product, prices}) => {
 
 
     const getProductDetail = (product) => {
-        const productDetails = {
+        return {
             id: product.id.toString(),
             name: `${brandsDisplay()} ${product.model} ${product.colorway}`,
             price: product.min_price,
             brand: brandsDisplay()
         };
-        return productDetails;
     };
 
     useEffect(() => {
@@ -603,9 +615,12 @@ const OneProductPage = ({product, prices}) => {
                                 </div>
                             </>
                         }
+                        <div ref={contentRef}
+                             className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                             style={{ maxHeight: contentHeight}}>
 
-                        <div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}
-                             ref={infoRef}>
+                        {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
+                        {/*     ref={contentRef}>*/}
                             {!desktopStore.isDesktop && <hr/>}
                             <div className={s.row}>
                                 <div className={s.col60}>
@@ -628,7 +643,7 @@ const OneProductPage = ({product, prices}) => {
                             <div className='d-flex justify-content-center'>
                                 <button
                                     className={s.more_btn}
-                                    onClick={() => setMoreOpen(!moreOpen)}>
+                                    onClick={toggle_more_open}>
                                     <div className={s.more_text}>
                                         Подробнее
                                         <Arrow isOpen={moreOpen}/>
