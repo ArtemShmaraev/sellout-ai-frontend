@@ -148,10 +148,10 @@
 
     }
     .textContainer {
-        margin-left: 12px; /* Отступ между текстом и изображением */
+        padding-left: 4px; /* Отступ между текстом и изображением */
     }
     .imageContainer {
-        padding-left: 12px;
+        padding-left: 14px;
     }
     .image {
         width: 62px; /* Ширина изображения равна ширине контейнера */
