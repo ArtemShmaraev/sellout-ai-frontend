@@ -8,22 +8,9 @@ import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 const SalesLine = () => {
     const {userStore} = useContext(Context)
-    const [isDesktop, setIsDesktop] = useState(false)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    const {desktopStore} = useContext(Context)
+
+
     return (
         <div className={s.line}>
             <div className={'custom_cont d-flex justify-content-center'}>
@@ -43,7 +30,7 @@ const SalesLine = () => {
                         1000₽ в подарок за первый заказ
                     </SplideSlide>
                     {
-                        isDesktop
+                        desktopStore.isDesktop
                         ?
                             <SplideSlide className={s.splide}>
                                 Зовите друзей на Sellout и зарабатывайте до 7000₽ за
@@ -71,7 +58,7 @@ const SalesLine = () => {
                             </SplideSlide>
                     }
                     {
-                        isDesktop
+                        desktopStore.isDesktop
                             ?
                             <SplideSlide className={s.splide}>
                                 Воспользуйтесь бесплатной доставкой по Москве! В другие города бесплатная доставка от 35000₽

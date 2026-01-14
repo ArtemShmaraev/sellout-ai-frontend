@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './TextModal.module.css'
 import {Modal} from "react-bootstrap";
 import close from "@/static/icons/x-lg.svg";
 import Image from 'next/image'
+import {Context} from "@/context/AppWrapper";
 
 const TextModal = ({children, title, img, titleClassname}) => {
     const [show, setShow] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1000) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+    const {desktopStore} = useContext(Context)
     const handleClose = () => {
         setShow(false)
     };
@@ -43,7 +38,7 @@ const TextModal = ({children, title, img, titleClassname}) => {
                 centered={true}
                 show={show}
                 onHide={handleClose}
-                fullscreen={!isDesktop}
+                fullscreen={!desktopStore.isDesktop}
                 size={'lg'}
             >
                 <Modal.Body>

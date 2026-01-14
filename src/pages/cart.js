@@ -252,22 +252,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
             setIsUpdate(true)
         }
     }, [productUnits])
-    const [isDesktop, setIsDesktop] = useState(true)
-    // const checkIsDesktop = () => {
-    //     const width = window.innerWidth
-    //     if (width <= 1200) {
-    //         setIsDesktop(false)
-    //     } else {
-    //         setIsDesktop(true)
-    //     }
-    // }
-    // useEffect(() => {
-    //     window.addEventListener("resize", checkIsDesktop);
-    //     // Call handler right away so state gets updated with initial window size
-    //     checkIsDesktop();
-    //     // Remove event listener on cleanup
-    //     return () => window.removeEventListener("resize", checkIsDesktop);
-    // })
+
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
     return (

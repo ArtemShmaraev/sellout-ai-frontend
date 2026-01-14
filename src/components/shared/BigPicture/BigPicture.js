@@ -1,20 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from './BigPicture.module.css'
 import {Col, Row} from "react-bootstrap";
 import pic from '@/static/img/shoe.png'
 import Image from "next/image";
+import {Context} from "@/context/AppWrapper";
 
 const BigPicture = ({reversed = false, vertical = false}) => {
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+    const {desktopStore} = useContext(Context)
     return (
         <>
-            {isDesktop && !vertical && !reversed &&
+            {desktopStore.isDesktop && !vertical && !reversed &&
                 <Row className={s.container + ' justify-content-between align-items-center'}>
                 <Col lg={4}>
                     <p>
@@ -27,7 +22,7 @@ const BigPicture = ({reversed = false, vertical = false}) => {
                     <Image src={pic} alt='theme_pict'/>
                 </Col>
             </Row>}
-            {((!isDesktop || reversed) && !vertical) &&
+            {((!desktopStore.isDesktop || reversed) && !vertical) &&
                 <Row className={s.container + ' justify-content-between align-items-center'}>
                     <Col lg={8} className={s.pic_col}>
                         <Image src={pic} alt='theme_pict'/>

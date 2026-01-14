@@ -14,15 +14,10 @@ import Link from "next/link";
 
 const SizeHelp = ({model, imgSrc, manySizes, str}) => {
     const [show, setShow] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(true)
+    const {desktopStore} = useContext(Context)
     const {userStore} = useContext(Context)
     const router = useRouter()
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1000) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+
     const handleClose = () => {
         setShow(false)
     };
@@ -50,7 +45,7 @@ const SizeHelp = ({model, imgSrc, manySizes, str}) => {
                 centered={true}
                 show={show}
                 onHide={handleClose}
-                fullscreen={!isDesktop}
+                fullscreen={!desktopStore.isDesktop}
                 size={'lg'}
             >
                 <Modal.Body>

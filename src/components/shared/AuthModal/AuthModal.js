@@ -23,7 +23,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
 
     const [show, setShow] = useState(false);
     const [isReg, setIsReg] = useState(true)
-    const [isDesktop, setIsDesktop] = useState(true)
+    const {desktopStore} = useContext(Context)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -48,12 +48,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
         return emailRegex.test(email);
     };
 
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1000) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+
     const handleClose = () => {
         setShow(false)
     };
@@ -197,7 +192,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             <Modal show={show} style={{ overflowY: 'scroll'}}
                    // centered={true}
                    onHide={handleClose}
-                   fullscreen={!isDesktop}
+                   fullscreen={!desktopStore.isDesktop}
                    >
                 <Modal.Body className='pt-4'>
                     <div className={s.close_block}>

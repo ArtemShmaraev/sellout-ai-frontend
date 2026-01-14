@@ -37,22 +37,7 @@ const AccountLayout = ({children}) => {
         }
     }
 
-    const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    const {desktopStore} = useContext(Context)
     return (
         <div className={s.cont + ' custom_cont'}>
             <div className={s.header}>
@@ -61,7 +46,7 @@ const AccountLayout = ({children}) => {
             </div>
             <hr style={{marginTop: '5px'}} className={s.hr}/>
             <div className={s.main_block}>
-                {isDesktop
+                {desktopStore.isDesktop
                     ?
                     <div className={s.nav_block}>
                         <Link href="/account" className={s.nav_link}

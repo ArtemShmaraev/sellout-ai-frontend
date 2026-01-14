@@ -100,7 +100,6 @@ export const getServerSideProps = async (context) => {
 const OneProductPage = ({product, prices}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(true)
-    const [isDesktop, setIsDesktop] = useState(true)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
 
     const [compilations, setCompilations] = useState([])

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import s from "./HowToChoose.module.css"
 import {Modal} from "react-bootstrap";
 import close from "@/static/icons/x-lg.svg";
@@ -9,16 +9,12 @@ import map from "@/static/img/map.jpg";
 import globe from '@/static/icons/globe.svg'
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import Link from "next/link";
+import {Context} from "@/context/AppWrapper";
 
 const HowToChoose = () => {
     const [show, setShow] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1000) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+    const {desktopStore} = useContext(Context)
+
     const handleClose = () => {
         setShow(false)
     };
@@ -37,7 +33,7 @@ const HowToChoose = () => {
                 centered={true}
                 show={show}
                 onHide={handleClose}
-                fullscreen={!isDesktop}
+                fullscreen={!desktopStore.isDesktop}
                 size={'lg'}
             >
                 <Modal.Body>

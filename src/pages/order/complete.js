@@ -14,6 +14,7 @@ import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import heart from '@/static/icons/circle_heart.svg'
 import jwtDecode from "jwt-decode";
+import swipe from "bootstrap/js/src/util/swipe";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -69,13 +70,7 @@ const Complete = ({order, userData}) => {
 
     const {userStore, cartStore} = useContext(Context)
 
-    const [isDesktop, setIsDesktop] = useState(true)
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [])
+    const {desktopStore} = useContext(Context)
     const [contactOpen, setContactOpen] = useState(false)
     const toggleContact = () => {
         setContactOpen(!contactOpen)
@@ -90,7 +85,7 @@ const Complete = ({order, userData}) => {
         <MainLayout>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.thanks_block}>
-                    <Image  src={check} alt='' width={isDesktop ? 80 : 40}/>
+                    <Image  src={check} alt='' width={desktopStore.isDesktop ? 80 : 40}/>
                     <div>
                         {userStore.firstName}, спасибо за заказ!
                     </div>
@@ -134,7 +129,7 @@ const Complete = ({order, userData}) => {
                 {
                     !userData.user_status.base &&
                     <div className={s.info_block}>
-                        <Image src={info} alt='' width={isDesktop ? 80 : 40} className={s.icon}/>
+                        <Image src={info} alt='' width={desktopStore.isDesktop ? 80 : 40} className={s.icon}/>
                         <div>
                             Мы свяжемся с вами по указанному контакту: {userData.extra_contact} для подтверждения и оплаты заказа!
                             <br/>
@@ -145,7 +140,7 @@ const Complete = ({order, userData}) => {
                     </div>
                 }
                 <div className={s.info_block}>
-                    <Image src={heart} alt='' width={isDesktop ? 80 : 40} className={s.icon}/>
+                    <Image src={heart} alt='' width={desktopStore.isDesktop ? 80 : 40} className={s.icon}/>
                     <div>
                         Благодарим вас за выбор нашего сервиса и доверие к Sellout!
                     </div>

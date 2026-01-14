@@ -12,7 +12,7 @@ import {buyout} from "@/http/productsApi";
 const BuyoutModal = ({show, handleClose}) => {
     const [isSend, setIsSend] = useState(false)
     const {userStore} = useContext(Context)
-    const [isDesktop, setIsDesktop] = useState(true)
+    const {desktopStore} = useContext(Context)
     const [name, setName] = useState('');
     const [tg, setTg] = useState('');
     const [email, setEmail] = useState('');
@@ -31,12 +31,7 @@ const BuyoutModal = ({show, handleClose}) => {
             })
         }
     }, [userStore.isLogged])
-    useEffect(() => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        }
-    }, [isDesktop])
+
     const send = async () => {
         const formData = new FormData()
         formData.append('name', name)
@@ -53,7 +48,7 @@ const BuyoutModal = ({show, handleClose}) => {
         <Modal show={show}
                onHide={handleClose}
                centered={true}
-               fullscreen={!isDesktop && !isSend}
+               fullscreen={!desktopStore.isDesktop && !isSend}
         >
             {!isSend ?
                 <Modal.Body className='p-4'>
@@ -116,7 +111,7 @@ const BuyoutModal = ({show, handleClose}) => {
                         </Col>
                         <Col lg={12}>
                             <textarea
-                                rows={isDesktop ? 3 : 4}
+                                rows={desktopStore.isDesktop ? 3 : 4}
                                 placeholder={'Укажите дополнительные сведения о товаре: наимонования/артикул/' +
                                     'размер/цвет/другие характеристики товара'}
                                 className={s.textarea}

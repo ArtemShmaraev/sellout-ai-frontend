@@ -29,22 +29,6 @@ const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
     const {userStore, desktopStore} = useContext(Context)
     const [brands, setBrands] = useState(brandsArr)
-    const [isDesktop, setIsDesktop] = useState(true)
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        if (width <= 1200) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
     const alphabet = () => {
         const letters = ['0-9'];
 
@@ -95,7 +79,7 @@ const Brands = ({brandsArr}) => {
     const scroll = (id) => {
         const el = document.getElementById(id)
         const scrollPosition = el.offsetTop
-        const num = isDesktop ? 200 : 135
+        const num = desktopStore.isDesktop ? 200 : 135
         window.scrollTo({
             top: scrollPosition - num,
             behavior: 'smooth',
@@ -144,7 +128,7 @@ const Brands = ({brandsArr}) => {
                      style={desktopStore.navbarVisible ? {} : {top: 0}}
                 >
                     <div className={s.alphabet}>
-                        { isDesktop
+                        { desktopStore.isDesktop
                             ?
                             alphabet().map(el =>
                                 <button
