@@ -1365,7 +1365,7 @@ const OneProductPage = ({product, prices}) => {
                         }
                     </div>
                 </div>
-
+                {/*<TreeLine list={product.list_lines}/>*/}
                 {desktopStore.isDesktop && compilations.map(el =>
                     <Compilation arr={el.products} title={el.name}/>
                 )}

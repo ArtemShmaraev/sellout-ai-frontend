@@ -5,6 +5,7 @@ import arrow from '@/static/icons/chevron-right-grey.svg'
 import Image from "next/image";
 import most_pop from './most_pop.json'
 import {Context} from "@/context/AppWrapper";
+import {desktopStore} from "@/store/DesktopStore";
 
 
 const BreadItem = ({el}) => {
@@ -41,7 +42,8 @@ const BreadItem = ({el}) => {
                     </div>
                 )}
                 <div className={s.textContainer} style={{marginLeft: el.name in most_pop ? "8px" : "12px"}}>
-                    <div className={`${s.name} ${isHovered ? s.noEllipsis : ''}`}>{el.name}</div>
+                    <div className={`${s.name}`}
+                    style={{fontSize: (el.name.length > 30 && desktopStore.isDesktop) ? '12px' : "14px"}}>{el.name}</div>
 
                     {el.name in most_pop && (
                         <div className={s.count}>{most_pop[el.name].count}</div>
@@ -64,7 +66,10 @@ const TreeLine = ({ list }) => {
     const renderComponent = () => {
         const arr = [];
         const length = list.length;
-        const new_list = list.slice(length - 3, length)
+        if (length === 4){
+            delete list[1]
+        }
+        const new_list = list
         new_list.forEach((el, ind) => {
             if (desktopStore.isDesktop) {
                 arr.push(
