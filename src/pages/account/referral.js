@@ -267,7 +267,7 @@ const Referral = ({loyalty, fetchedPromo, refData}) => {
         <MainLayout>
             <Head>
                 <title>Программа лояльности</title>
-                <meta name="description" content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
+                <meta name="description" content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"/>
             </Head>
             <AccountLayout>
                 <div className={s.cont}>

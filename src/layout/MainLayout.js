@@ -11,8 +11,8 @@ import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSell
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import {useRouter} from 'next/router';
 import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
-
-const MainLayout = ({ children, footerData }) => {
+import logo_sq from "/src/static/img/logo_sq.png"
+const MainLayout = ({children, footerData}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter();
 
@@ -69,14 +69,20 @@ const MainLayout = ({ children, footerData }) => {
     return (
         <>
             <Head>
+
+                <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
+                <meta
+                    name="description"
+                    content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                />
+                <meta property="og:image" content={logo_sq}/>
+                <meta property="og:image:width" content="640px"/>
+                <meta property="og:image:height" content="640px"/>
                 <link rel={'icon'} type={'image/png'} sizes={"192x192"} href={'/favicon.png'}/>
                 {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>
                 <link rel={'manifest'} href={'/manifest.json'}/>
-                <meta
-                    name="description"
-                    content="1'000'000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
-                />
+
                 {/*<meta name={'description'}*/}
                 {/*      content={'Закажите одежду, обувь и аксессуары в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.'}/>*/}
                 <meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E"/>
@@ -85,7 +91,6 @@ const MainLayout = ({ children, footerData }) => {
                 <meta name="theme-color" content="#000000"/>
                 {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
-
 
 
                 <script
@@ -158,7 +163,7 @@ const MainLayout = ({ children, footerData }) => {
                         {children}
                     </div>
                 )}
-                <Footer textData={footerData} />
+                <Footer textData={footerData}/>
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
