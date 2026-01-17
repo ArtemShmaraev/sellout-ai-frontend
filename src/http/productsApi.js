@@ -157,17 +157,17 @@ export async function deletePhoto(productId, photoId) {
     const {data} = await $host.get(`product/add_photo_black_list/${productId}/${photoId}`)
     return data
 }
-export async function fetchOneProduct(slug, token = '') {
+export async function fetchOneProduct(slug, token = '', ip = "") {
+    const params = { ip }; // Создаем объект с параметрами
     if (!token) {
-        const {data} = await $host.get(`product/slug/${slug}`)
-        return data
+        const { data } = await $host.get(`product/slug/${slug}`, { params });
+        return data;
     } else {
-        const {data} = await $host.get(`product/slug/${slug}`, {
-            headers: {Authorization: `Bearer ${token}`}
-        })
-        return data
+        const { data } = await $host.get(`product/slug/${slug}`, { params, headers: { Authorization: `Bearer ${token}` }});
+        return data;
     }
 }
+
 export async function updateOneProduct(slug, token = '') {
     if (!token) {
         const {data} = await $host.get(`product/slug/${slug}?is_update=true`)

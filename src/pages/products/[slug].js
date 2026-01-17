@@ -78,21 +78,29 @@ import {
 import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
 
 export const getServerSideProps = async (context) => {
-    const cookies = parse(context.req.headers.cookie || '')
-    const token = cookies['access_token']
-    const captcha_token = cookies['captcha_token']
-    const product = await fetchOneProduct(context.params.slug, token, captcha_token)
-    const {id} = product
-    const prices = await fetchPrices(id, token)
-    return {props: {product, prices}}
-}
+    const cookies = parse(context.req.headers.cookie || '');
+    const token = cookies['access_token'];
+    const captcha_token = cookies['captcha_token'];
+
+    // Получение IP-адреса пользователя из заголовка X-Forwarded-For
+    const ip = context.req.headers['x-forwarded-for'] || context.req.connection.remoteAddress;
 
 
+    const product = await fetchOneProduct(context.params.slug, token, ip);
+    const { id } = product;
+    const prices = await fetchPrices(id, token);
 
-const OneProductPage = ({product, prices}) => {
+    // Передача IP-адреса в качестве пропса
+    return { props: { product, prices, ip} };
+};
+
+
+const OneProductPage = ({product, prices, ip}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
+    console.log(ip)
+    console.log(product.ip)
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
