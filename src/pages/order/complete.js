@@ -14,7 +14,7 @@ import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import heart from '@/static/icons/circle_heart.svg'
 import jwtDecode from "jwt-decode";
-import swipe from "bootstrap/js/src/util/swipe";
+
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
