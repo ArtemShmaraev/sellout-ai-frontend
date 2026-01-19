@@ -17,7 +17,6 @@ import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
-import logo_sq from "@/static/img/logo_sq.png";
 import logo_sq from "/src/static/img/logo_sq.png"
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
