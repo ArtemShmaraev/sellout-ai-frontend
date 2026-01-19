@@ -7,7 +7,6 @@ import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import Head from "next/head";
 import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
-import logo_sq from "/src/static/img/logo_sq.png"
 import Link from "next/link";
 import Image from "next/image";
 import {parse} from "cookie";
@@ -181,7 +180,7 @@ const Men = ({data}) => {
                     name="description"
                     content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                 />
-                <meta property="og:image" content={logo_sq}/>
+                <meta property="og:image" content="https://sellout.su/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_sq.02469b83.png&w=640&q=75"/>
                 <meta property="og:image:width" content="640px"/>
                 <meta property="og:image:height" content="640px"/>
             </Head>

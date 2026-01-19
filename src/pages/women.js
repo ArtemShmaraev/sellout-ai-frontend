@@ -17,7 +17,7 @@ import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
-import logo_sq from "/src/static/img/logo_sq.png"
+
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const page = cookies['index_page']
@@ -180,7 +180,7 @@ const Women = ({data}) => {
                     name="description"
                     content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                 />
-                <meta property="og:image" content={logo_sq}/>
+                <meta property="og:image" content="/static/img/logo_sq.png"/>
                 <meta property="og:image:width" content="640px"/>
                 <meta property="og:image:height" content="640px"/>
             </Head>

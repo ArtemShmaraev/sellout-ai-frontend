@@ -158,15 +158,31 @@ export async function deletePhoto(productId, photoId) {
     return data
 }
 export async function fetchOneProduct(slug, token = '', ip = "") {
-    const params = { ip }; // Создаем объект с параметрами
+    // Создаем объект с параметрами
+    const params = { ip };
+
     if (!token) {
-        const { data } = await $host.get(`product/slug/${slug}`, { params });
+        const { data } = await $host.get(`product/slug/${slug}`, {
+            params,
+            // Устанавливаем заголовок X-Forwarded-For
+            headers: {
+                'X-Forwarded-For': ip // Передаем IP-адрес в заголовке X-Forwarded-For
+            }
+        });
         return data;
     } else {
-        const { data } = await $host.get(`product/slug/${slug}`, { params, headers: { Authorization: `Bearer ${token}` }});
+        const { data } = await $host.get(`product/slug/${slug}`, {
+            params,
+            // Устанавливаем заголовок X-Forwarded-For и Authorization
+            headers: {
+                'X-Forwarded-For': ip, // Передаем IP-адрес в заголовке X-Forwarded-For
+                'Authorization': `Bearer ${token}`
+            }
+        });
         return data;
     }
 }
+
 
 export async function updateOneProduct(slug, token = '') {
     if (!token) {

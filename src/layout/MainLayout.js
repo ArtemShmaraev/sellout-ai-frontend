@@ -11,7 +11,8 @@ import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSell
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import {useRouter} from 'next/router';
 import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
-import logo_sq from "/src/static/img/logo_sq.png"
+ import logo_sq from "@/static/img/logo_sq.png"
+
 const MainLayout = ({children, footerData}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter();
