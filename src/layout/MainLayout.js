@@ -87,7 +87,9 @@ const MainLayout = ({children, footerData}) => {
                 {/*/>*/}
 
 
-                <link rel="canonical" href={canonicalUrl} />
+                <link rel="canonical" href={canonicalUrl}/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content={canonicalUrl}/>
                 <link rel={'icon'} type={'image/png'} sizes={"192x192"} href={'/favicon.png'}/>
                 {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>

@@ -50,7 +50,7 @@ const BreadItem = ({el, ind}) => {
                     )}
                 </div>
             </Link>
-            <meta itemProp="position" content={ind} />
+            <meta itemProp="position" content={ind + 1} />
         </div>
 
     )

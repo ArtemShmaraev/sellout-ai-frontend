@@ -76,6 +76,7 @@ import {
     trackViewProduct,
 } from "@/components/shared/YandexMetrica/YandexMetrica";
 import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
+import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -544,14 +545,17 @@ const OneProductPage = ({product, prices, ip}) => {
                                                 От {addSpacesToNumber(product.price.start_price)} ₽
                                             </div>
                                         }
-
-                                        <div
-                                            className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                        <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
+                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
-                                            От {addSpacesToNumber(product.price.final_price)} ₽
+                                            <span>От </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+
+
                                             {product.is_fast_shipping &&
                                                 <Image src={truck} alt="" className={s.icons}/>}
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                            <meta itemProp="priceCurrency" content="RUB"/>
+                                            <meta itemProp="availability" content="OnlineOnly"/>
                                         </div>
                                         {
                                             shouldRenderBonuses() &&
@@ -676,6 +680,7 @@ const OneProductPage = ({product, prices, ip}) => {
                             </div>
                         }
                         <TreeLine list={product.list_lines}/>
+                        <BreadcrumbC list={product.list_lines}/>
                     </div>
                     <div className={s.col2}>
                         {desktopStore.isDesktop &&
@@ -695,14 +700,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                                 От {addSpacesToNumber(product.price.start_price)} ₽
                                             </div>
                                         }
-
-                                        {/*<div itemProp="offers" itemScope itemType="https://schema.org/Offer">*/}
-                                        {/*    <span itemProp="price">{product.price}</span>*/}
-                                        {/*    <meta itemProp="priceCurrency" content={product.priceCurrency} />*/}
-                                        {/*    <link itemProp="availability" href={product.availability} />*/}
-                                        {/*</div>*/}
-
-                                        <div
+                                        <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
                                             <span>От </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
