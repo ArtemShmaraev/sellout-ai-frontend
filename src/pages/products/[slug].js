@@ -87,11 +87,20 @@ export const getServerSideProps = async (context) => {
 
 
     const product = await fetchOneProduct(context.params.slug, token, ip);
-    const { id } = product;
+    if (product === "Товар не найден") {
+
+        return {
+            notFound: true, // Это устанавливает статус код 404
+        };
+    }
+    const {id} = product;
     const prices = await fetchPrices(id, token);
+    // return {
+    //     notFound: true, // Это устанавливает статус код 404
+    // };
 
     // Передача IP-адреса в качестве пропса
-    return { props: { product, prices, ip} };
+    return {props: {product, prices, ip}};
 };
 
 
@@ -349,19 +358,19 @@ const OneProductPage = ({product, prices, ip}) => {
     }
 
     const toggle_more_open = () => {
-        if (moreOpen){
+        if (moreOpen) {
             setMoreOpen(true)
         }
         setMoreOpen(!moreOpen)
     }
 
-    const [contentHeight, setContentHeight] = useState(desktopStore.isDesktop ? '145px': "195px");
+    const [contentHeight, setContentHeight] = useState(desktopStore.isDesktop ? '145px' : "195px");
     const contentRef = useRef(null);
     useEffect(() => {
         if (contentRef.current) {
-            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px': "195px");
+            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "195px");
             setTimeout(() => {
-                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px': "195px");
+                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "195px");
             }, 400)
 
         }
@@ -374,9 +383,8 @@ const OneProductPage = ({product, prices, ip}) => {
         console.log(contentRef.current.clientHeight)
         console.log(desktopStore.isDesktop)
         if (contentRef && contentRef.current.clientHeight > 144) {
-                        setInfoBtn(true)
-                    }
-        else {
+            setInfoBtn(true)
+        } else {
             setInfoBtn(false)
         }
     }, [router.asPath])
@@ -453,16 +461,17 @@ const OneProductPage = ({product, prices, ip}) => {
             </Head>
             <InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>
             <div className={s.container + ' custom_cont'}>
-                <div className={s.row}>
+                <div className={s.row} itemScope itemType="https://schema.org/Product">
                     <div className={s.col1}>
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
-                            <>
-                                <Link href={clickBrand()} className={s.brand}
-                                >{brandsDisplay()}</Link>
-                                <div className={s.model}>{product.model}</div>
+                            <div itemProp="name">
+                                <div itemProp="brand">
+                                    <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}</Link>
+                                </div>
+                                <div className={s.model} itemProp="model">{product.model}</div>
                                 <div className={s.color}>{product.colorway}</div>
-                            </>
+                            </div>
                         }
                         {
                             product.bucket_link.length > 1
@@ -511,6 +520,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                 >
                                     <div className={s.photo}>
                                         <Image src={product.bucket_link[0].url}
+                                               itemProp="image"
                                                alt={`${brandsDisplay()} ${product.model} ${product.colorway}`}
                                                fill={true}
                                                loading={'eager'}
@@ -525,19 +535,17 @@ const OneProductPage = ({product, prices, ip}) => {
                                 {
                                     prices.length > 0 &&
                                     <>
+                                        {(product.price.start_price > product.price.final_price) &&
+                                            <div className={s.price_default}
+                                                 style={{textDecoration: 'line-through', fontSize: '16px'}}>
+                                                От {addSpacesToNumber(product.price.start_price)} ₽
+                                            </div>
+                                        }
+
                                         <div
-                                            className={s.price_default}
-                                            style={(product.price.start_price > product.price.final_price)
-                                                ? {textDecoration: 'line-through', fontSize: '16px'}
-                                                : {textDecoration: 'none', fontSize: '19px'}}
-                                        >От {addSpacesToNumber(product.price.start_price)} ₽
-                                        </div>
-                                        <div className='d-flex align-items-center'>
-                                            {(product.price.start_price > product.price.final_price) &&
-                                                <div className={s.price_sale}>
-                                                    От {addSpacesToNumber(product.price.final_price)} ₽
-                                                </div>
-                                            }
+                                            className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                        >
+                                            От {addSpacesToNumber(product.price.final_price)} ₽
                                             {product.is_fast_shipping &&
                                                 <Image src={truck} alt="" className={s.icons}/>}
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
@@ -627,15 +635,18 @@ const OneProductPage = ({product, prices, ip}) => {
                         }
                         <div ref={contentRef}
                              className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
-                             style={{ maxHeight: contentHeight}}>
+                             style={{maxHeight: contentHeight}}>
 
-                        {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
-                        {/*     ref={contentRef}>*/}
+                            {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
+                            {/*     ref={contentRef}>*/}
                             {!desktopStore.isDesktop && <hr/>}
                             <div className={s.row}>
                                 <div className={s.col60}>
                                     {/*{!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
-                                    <div className={s.model}>{brandsDisplay()}</div>
+                                    <span itemScope itemType="https://schema.org/Brand">
+                                        <div itemProp="name" className={s.model}>{brandsDisplay()}</div>
+                                    </span>
+
                                     <div className={s.more_color}>{product.colorway}</div>
                                     <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
                                     <p className={s.description}>
@@ -666,29 +677,39 @@ const OneProductPage = ({product, prices, ip}) => {
                     <div className={s.col2}>
                         {desktopStore.isDesktop &&
                             <>
-                                <Link href={clickBrand()} className={s.brand}
-                                >{brandsDisplay()}</Link>
-                                <div className={s.model}>{product.model}</div>
-                                <div className={s.color}>{product.colorway}</div>
+                                <div itemProp="name">
+                                    <Link href={clickBrand()} className={s.brand}
+                                    >{brandsDisplay()}</Link>
+                                    <div className={s.model}>{product.model}</div>
+                                    <div className={s.color}>{product.colorway}</div>
+                                </div>
                                 {
                                     prices.length > 0 &&
                                     <>
+                                        {(product.price.start_price > product.price.final_price) &&
+                                            <div className={s.price_default}
+                                                 style={{textDecoration: 'line-through', fontSize: '16px'}}>
+                                                От {addSpacesToNumber(product.price.start_price)} ₽
+                                            </div>
+                                        }
+
+                                        {/*<div itemProp="offers" itemScope itemType="https://schema.org/Offer">*/}
+                                        {/*    <span itemProp="price">{product.price}</span>*/}
+                                        {/*    <meta itemProp="priceCurrency" content={product.priceCurrency} />*/}
+                                        {/*    <link itemProp="availability" href={product.availability} />*/}
+                                        {/*</div>*/}
+
                                         <div
-                                            className={s.price_default}
-                                            style={(product.price.start_price > product.price.final_price)
-                                                ? {textDecoration: 'line-through', fontSize: '16px'}
-                                                : {textDecoration: 'none', fontSize: '19px'}}
-                                        >От {addSpacesToNumber(product.price.start_price)} ₽
-                                        </div>
-                                        <div className='d-flex align-items-center'>
-                                            {(product.price.start_price > product.price.final_price) &&
-                                                <div className={s.price_sale}>
-                                                    От {addSpacesToNumber(product.price.final_price)} ₽
-                                                </div>
-                                            }
+                                            className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                        >
+                                            <span>От </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+
+
                                             {product.is_fast_shipping &&
                                                 <Image src={truck} alt="" className={s.icons}/>}
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                            <meta itemProp="priceCurrency" content="RUB"/>
+                                            <meta itemProp="availability" content="OnlineOnly"/>
                                         </div>
                                         {
                                             shouldRenderBonuses() &&

@@ -8,7 +8,7 @@ import {Context} from "@/context/AppWrapper";
 import {desktopStore} from "@/store/DesktopStore";
 
 
-const BreadItem = ({el}) => {
+const BreadItem = ({el, ind}) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = (e) => {
@@ -27,8 +27,8 @@ const BreadItem = ({el}) => {
     };
 
     return (
-        <div className={s.width33}>
-            <Link className={s.breadcrumbItem} href={`/products?${el.query}`}
+        <div className={s.width33} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <Link itemProp="item" className={s.breadcrumbItem} href={`/products?${el.query}`}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}>
                 {el.name in most_pop && (
@@ -42,7 +42,7 @@ const BreadItem = ({el}) => {
                     </div>
                 )}
                 <div className={s.textContainer} style={{marginLeft: el.name in most_pop ? "8px" : "12px"}}>
-                    <div className={`${s.name}`}
+                    <div itemProp="name" className={`${s.name}`}
                     style={{fontSize: (el.name.length > 30 && desktopStore.isDesktop) ? '12px' : "14px"}}>{el.name}</div>
 
                     {el.name in most_pop && (
@@ -50,6 +50,7 @@ const BreadItem = ({el}) => {
                     )}
                 </div>
             </Link>
+            <meta itemProp="position" content={ind} />
         </div>
 
     )
@@ -58,10 +59,6 @@ const BreadItem = ({el}) => {
 
 const TreeLine = ({ list }) => {
     const {desktopStore} = useContext(Context)
-
-
-
-
 
     const renderComponent = () => {
         const arr = [];
@@ -73,7 +70,7 @@ const TreeLine = ({ list }) => {
         new_list.forEach((el, ind) => {
             if (desktopStore.isDesktop) {
                 arr.push(
-                   <BreadItem el={el}/>
+                   <BreadItem el={el} ind={ind}/>
                 );
                 if (ind !== new_list.length - 1) {
                     arr.push(<Image src={arrow} alt='' className={s.arrow} />);
@@ -81,7 +78,7 @@ const TreeLine = ({ list }) => {
             } else {
                 arr.push(
                     <>
-                        <BreadItem el={el}/>
+                        <BreadItem el={el} ind={ind}/>
                         <hr className={s.hr}/>
 
                         </>
@@ -96,7 +93,7 @@ const TreeLine = ({ list }) => {
 
 
     return (
-        <div className={s.breadcrumbContainer}>
+        <div itemScope itemType="https://schema.org/BreadcrumbList" className={s.breadcrumbContainer}>
             {renderComponent()}
         </div>
     );

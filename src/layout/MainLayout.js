@@ -67,6 +67,15 @@ const MainLayout = ({children, footerData}) => {
 
     }, [])
 
+    const [canonicalUrl, setCanonicalUrl] = useState('');
+
+    useEffect(() => {
+        if (process.browser) {
+            const url = window.location.href;
+            setCanonicalUrl(url);
+        }
+    }, [router]);
+
     return (
         <>
             <Head>
@@ -76,9 +85,9 @@ const MainLayout = ({children, footerData}) => {
                 {/*    name="description"*/}
                 {/*    content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"*/}
                 {/*/>*/}
-                {/*<meta property="og:image" content={logo_sq}/>*/}
-                {/*<meta property="og:image:width" content="640px"/>*/}
-                {/*<meta property="og:image:height" content="640px"/>*/}
+
+
+                <link rel="canonical" href={canonicalUrl} />
                 <link rel={'icon'} type={'image/png'} sizes={"192x192"} href={'/favicon.png'}/>
                 {/*<link rel={'icon'} type={'image/svg+xml'} sizes={"192x192"} href={'/favicon.svg'}/>*/}
                 <link rel="apple-touch-icon" href="/favicon.jpg"/>
