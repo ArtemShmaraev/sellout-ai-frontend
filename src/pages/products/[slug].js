@@ -455,6 +455,9 @@ const OneProductPage = ({product, prices, ip}) => {
                 <meta property="og:image" content={product.bucket_link[0].url}/>
                 <meta property="og:image:width" content="640px"/>
                 <meta property="og:image:height" content="410px"/>
+                <meta property="og:title" content={`Заказать ${brandsDisplay()} ${product.model} ${product.colorway} по выгодной цене на Sellout!`}/>
+                <meta property="og:description" content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
+
                 {/*<meta name={'description'} content={`Закажите ${brandsDisplay()} ${product.model} ${product.colorway} в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.`}/>*/}
                 <meta name={'description'}
                       content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>

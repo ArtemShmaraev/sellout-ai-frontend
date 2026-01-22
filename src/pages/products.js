@@ -222,6 +222,19 @@ const Products = ({productsList, categories, lines, colors, collections, materia
                             "Sellout: онлайн-платформа брендовой одежды и обуви"
                     )}
                 </title>
+                <meta property="og:title" content={getTitle() in TitleAndDescriptionSEO ? (
+                    TitleAndDescriptionSEO[getTitle()]['title']
+                ) : (header_text.desktop.title ? `Купите ${header_text.desktop.title} по лучшей цене в РФ на Sellout` :
+                        // Заголовок для случая, когда getTitle() равно "sellout"
+                        "Sellout: онлайн-платформа брендовой одежды и обуви"
+                )}/>
+                <meta property="og:description" content=
+                    {getTitle() in TitleAndDescriptionSEO ? (
+                        TitleAndDescriptionSEO[getTitle()]['description']
+                    ) : (
+                        // Заголовок для случая, когда getTitle() равно "sellout"
+                        "1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                    )}/>
                 <meta name={'description'} content=
                     {getTitle() in TitleAndDescriptionSEO ? (
                         TitleAndDescriptionSEO[getTitle()]['description']
