@@ -1,18 +1,18 @@
 // next.config.js
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/',
-        headers: [
-          {
-            key: 'X-Forwarded-For',
-            value: 'req.connection.remoteAddress',
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       headers: [
+  //         {
+  //           key: 'X-Forwarded-For',
+  //           value: 'req.connection.remoteAddress',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
