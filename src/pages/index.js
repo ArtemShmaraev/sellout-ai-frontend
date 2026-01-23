@@ -19,6 +19,8 @@ import man from "/src/static/img/man.png"
 import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
 import mainbigMob from "/src/static/img/Group 74.png"
+import men_mob from 'src/static/img/men.png'
+import women_mob from "src/static/img/women.png"
 import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
 
@@ -77,7 +79,9 @@ const Home = ({data}) => {
             </Head>
             <div>
 
-                <div>
+                <div className={s.cont_index}>
+
+                    {/*<br/>*/}
                     {desktopStore.isDesktop ?
                         <div>
                             <div>
@@ -116,25 +120,39 @@ const Home = ({data}) => {
                         </div>
                         :
                         <div>
-                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                <Link href="/women">
-
-                                    <Image src={kylieBig} alt="Description of your image"
-                                           style={{float: 'left', cursor: 'pointer'}}
-                                           layout="responsive" loading={'eager'}/>
-                                </Link>
-
-
-                            </div>
-                            <div style={{width: '100%', margin: '0 auto', padding: 0}}>
-                                <Link href="/men">
-
-                                    <Image src={manBig} alt="Description of your image"
-                                           style={{float: 'left', cursor: "pointer"}}
-                                           layout="responsive" loading={'eager'}/></Link>
+                            {/*<div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: "10px", paddingBottom: "80px" }}>*/}
+                                <div style={{ width: '100%', margin: '0 auto', padding: 0}}>
+                                    <Link href="/women">
+                                        <Image src={women_mob} alt="Description of your image" style={{float: 'left', cursor: 'pointer'}} layout="responsive" loading={'eager'} />
+                                    </Link>
+                                </div>
+                                <div style={{ width: '100%', margin: '0 auto', padding: 0 }}>
+                                    <Link href="/men">
+                                        <Image src={men_mob} alt="Description of your image" style={{float: 'left', cursor: 'pointer'}} layout="responsive" loading={'eager'} />
+                                    </Link>
+                                </div>
+                            {/*</div>*/}
 
 
-                            </div>
+                            {/*<div style={{width: '100%', margin: '0 auto', padding: 0}}>*/}
+                            {/*    <Link href="/women">*/}
+
+                            {/*        <Image src={kylieBig} alt="Description of your image"*/}
+                            {/*               style={{float: 'left', cursor: 'pointer'}}*/}
+                            {/*               layout="responsive" loading={'eager'}/>*/}
+                            {/*    </Link>*/}
+
+
+                            {/*</div>*/}
+                            {/*<div style={{width: '100%', margin: '0 auto', padding: 0}}>*/}
+                            {/*    <Link href="/men">*/}
+
+                            {/*        <Image src={manBig} alt="Description of your image"*/}
+                            {/*               style={{float: 'left', cursor: "pointer"}}*/}
+                            {/*               layout="responsive" loading={'eager'}/></Link>*/}
+
+
+                            {/*</div>*/}
                             <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
                                 <Link href="/about">
                                     <Image

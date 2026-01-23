@@ -3,6 +3,11 @@
     margin-bottom: 100px;
 }
 
+.cont_index {
+    margin-top: 160px;
+    /*margin-bottom: 100px;*/
+}
+
 .main {
     padding-top: 0;
 }
@@ -92,6 +97,10 @@
 @media (max-width: 1200px) {
     .cont {
         margin-top: 78px;
+    }
+
+    .cont_index{
+        margin-top: 105px;
     }
 
     .big_pict_block {

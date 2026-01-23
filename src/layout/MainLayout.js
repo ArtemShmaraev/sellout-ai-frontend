@@ -161,11 +161,12 @@ const MainLayout = ({children, footerData}) => {
             <div className={'body'}>
                 {/*<NavbarNoGender/>*/}
                 {/*<NavbarC/>*/}
-                {headerCustom ? (
-                    <NavbarC/>
-                ) : (
-                    <NavbarNoGender/>
-                )}
+                <NavbarC/>
+                {/*{headerCustom ? (*/}
+                {/*    <NavbarC/>*/}
+                {/*) : (*/}
+                {/*    <NavbarNoGender/>*/}
+                {/*)}*/}
                 {headerCustom ? (
                     <div className={'cont_up'}>
                         {children}
