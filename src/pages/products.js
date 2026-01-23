@@ -32,28 +32,25 @@ import cross from '@/static/icons/x-lg.svg'
 import Cookies from "js-cookie";
 import cn from "classnames";
 import loading_products_data from '@/static/jsons/loading_products_data.json'
-// import {cookies} from "next/headers";
+import categories from '@/static/jsons/tree_cat.json'
+import colors from '@/static/jsons/colors.json'
+import materials from '@/static/jsons/materials.json'
+import size_tables from '@/static/jsons/size_table.json'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     const gender = cookies['selected_gender']; // Получаем 'gender' из куки или устанавливаем значение по умолчанию 'all'
     let products;
-    // if (gender && !("gender" in context.query)) {
-    //     products = await fetchProductsPage({...context.query, gender}, token);
-    // } else {
-    //     products = await fetchProductsPage(context.query, token)
-    // }
-    //
     products = []
 
 
-    const categories = await fetchFilter('tree_cat')
+    // const categories = await fetchFilter('tree_cat')
     const lines = await fetchFilter('tree_line')
-    const colors = await fetchFilter('colors')
+    // const colors = await fetchFilter('colors')
     const collections = await fetchFilter('collabs')
-    const materials = await fetchFilter('materials')
-    const sizes = await fetchSizes(context.query, token)
+    // const materials = await fetchFilter('materials')
+    const size_tables_name = await fetchSizes(context.query, token)
 
     let header_text;
     if (gender && !("gender" in context.query)) {
@@ -77,10 +74,10 @@ export const getServerSideProps = async (context) => {
         }
     }
     const url = context.query
-    return {props: {products, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}
+    return {props: {lines, collections, size_tables_name, lastSeen, url, footer_text, header_text}
     }
 }
-const Products = ({productsList, categories, lines, colors, collections, materials, sizes, lastSeen, url, footer_text, header_text}) => {
+const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_text, header_text}) => {
     const productListRef = useRef(null)
     const router = useRouter()
     const page = Number(router.query.page) || 1
@@ -89,6 +86,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore} = useContext(Context)
     const [products, setProducts] = useState(loading_products_data)
+    console.log(size_tables_name)
 
 
     useEffect(() => {
@@ -125,7 +123,7 @@ const Products = ({productsList, categories, lines, colors, collections, materia
             filterStore.fillCollections(collections)
         }
         filterStore.fillMaterials(materials)
-        filterStore.fillSizes(sizes)
+        filterStore.fillSizes(size_tables_name)
         filterStore.deactivateFilters(filterStore.filters)
         filterStore.reactivateFilters(router.query)
 
@@ -207,43 +205,29 @@ const Products = ({productsList, categories, lines, colors, collections, materia
     }, [prevScrollPos]);
 
 
-    // title_and_description = Взять из json файла (как это сделать)
+    const title = getTitle() in TitleAndDescriptionSEO ? (
+            TitleAndDescriptionSEO[getTitle()]['title']
+        ) : (header_text.desktop.title ? `Купите ${header_text.desktop.title} по лучшей цене в РФ на Sellout` :
+                // Заголовок для случая, когда getTitle() равно "sellout"
+                "Sellout: онлайн-платформа брендовой одежды и обуви"
+        )
+    const description = getTitle() in TitleAndDescriptionSEO ? (
+            TitleAndDescriptionSEO[getTitle()]['description']
+        ) : (
+            // Заголовок для случая, когда getTitle() равно "sellout"
+            "1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+        )
     return (
         <MainLayout footerData={footer_text}>
             <Head>
                 <title>
-
-                    {/*{title_and_description[getTitle()]}*/}
-
-                    {getTitle() in TitleAndDescriptionSEO ? (
-                        TitleAndDescriptionSEO[getTitle()]['title']
-                    ) : (header_text.desktop.title ? `Купите ${header_text.desktop.title} по лучшей цене в РФ на Sellout` :
-                            // Заголовок для случая, когда getTitle() равно "sellout"
-                            "Sellout: онлайн-платформа брендовой одежды и обуви"
-                    )}
+                    {title}
                 </title>
-                <meta property="og:title" content={getTitle() in TitleAndDescriptionSEO ? (
-                    TitleAndDescriptionSEO[getTitle()]['title']
-                ) : (header_text.desktop.title ? `Купите ${header_text.desktop.title} по лучшей цене в РФ на Sellout` :
-                        // Заголовок для случая, когда getTitle() равно "sellout"
-                        "Sellout: онлайн-платформа брендовой одежды и обуви"
-                )}/>
-                <meta property="og:description" content=
-                    {getTitle() in TitleAndDescriptionSEO ? (
-                        TitleAndDescriptionSEO[getTitle()]['description']
-                    ) : (
-                        // Заголовок для случая, когда getTitle() равно "sellout"
-                        "1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
-                    )}/>
+                <meta property="og:title" content={title}/>
+                <meta property="og:description" content={description}
+                    />
                 <meta name={'description'} content=
-                    {getTitle() in TitleAndDescriptionSEO ? (
-                        TitleAndDescriptionSEO[getTitle()]['description']
-                    ) : (
-                        // Заголовок для случая, когда getTitle() равно "sellout"
-                        "1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
-                    )}/>
-
-
+                    {description}/>
             </Head>
             <div className={`${s.cont} custom_cont`}>
                 <PictureBlock obj={header_text.desktop} className={s.desktop}/>

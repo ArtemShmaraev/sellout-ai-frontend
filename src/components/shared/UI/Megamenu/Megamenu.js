@@ -32,6 +32,7 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                 linkQuery[query] = rowObj.query_name
                 rows.push(
                     <Link
+                        key={dataInd + i}
                         href={{
                             pathname: '/products',
                             query: linkQuery
@@ -43,7 +44,7 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                 )
             }
             cols.push(
-                <div style={{minWidth: `${100/colNum}%`}}>
+                <div style={{minWidth: `${100/colNum}%`}} key={i}>
                     {rows}
                 </div>
             )

@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import cn from "classnames";
 import Cookies from "js-cookie";
-
+import sizes from '@/static/jsons/size_table.json'
 class FilterStore {
     constructor() {
         this._ref = null
@@ -395,27 +395,37 @@ class FilterStore {
         }
         return arr
     }
-    fillSizes(sizes) {
+    fillSizes(size_tables_name) {
         this.filters.size = {}
         sizes.forEach(sizeCategory => {
-            this.filters.size[sizeCategory.filter_name] = {}
-            for (const key in sizeCategory.size_rows) {
-                const name = sizeCategory.size_rows[key].filter_name
-                const logo = sizeCategory.size_rows[key].filter_logo
-                const isMain = sizeCategory.size_rows[key].is_main
-                this.filters.size[sizeCategory.filter_name][name] = {}
-                sizeCategory.size_rows[key].sizes.forEach(size => {
-                    this.filters.size[sizeCategory.filter_name][name][size.size] = {
-                        text: size.size,
-                        query: size.query[0],
-                        viewName: size.view_name_in_line,
-                        state: false,
-                        logo,
-                        isMain
-                    }
-                })
+            console.log(sizeCategory.name)
+            console.log(size_tables_name)
+            if (size_tables_name.includes(sizeCategory.name)){
+                console.log(size_tables_name)
+                this.filters.size[sizeCategory.filter_name] = {}
+                for (const key in sizeCategory.size_rows) {
+                    const name = sizeCategory.size_rows[key].filter_name
+                    const logo = sizeCategory.size_rows[key].filter_logo
+                    const isMain = sizeCategory.size_rows[key].is_main
+                    this.filters.size[sizeCategory.filter_name][name] = {}
+                    sizeCategory.size_rows[key].sizes.forEach(size => {
+                        this.filters.size[sizeCategory.filter_name][name][size.size] = {
+                            text: size.size,
+                            query: size.query[0],
+                            viewName: size.view_name_in_line,
+                            state: false,
+                            logo,
+                            isMain
+                        }
+                    })
+
+
+
+                }
 
             }
+
+
         })
     }
     getSizes(category, row) {

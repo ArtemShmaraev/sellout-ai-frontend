@@ -471,9 +471,9 @@ const OneProductPage = ({product, prices, ip}) => {
                         {!desktopStore.isDesktop &&
                             <div itemProp="name">
                                 <div itemProp="brand">
-                                    <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}</Link>
+                                    <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}&nbsp;</Link>
                                 </div>
-                                <div className={s.model} itemProp="model">{product.model}</div>
+                                <div className={s.model} itemProp="model">{product.model}&nbsp;</div>
                                 <div className={s.color}>{product.colorway}</div>
                             </div>
                         }
@@ -680,16 +680,16 @@ const OneProductPage = ({product, prices, ip}) => {
                             </div>
                         }
                         <TreeLine list={product.list_lines}/>
-                        <BreadcrumbC list={product.list_lines}/>
+
                     </div>
                     <div className={s.col2}>
                         {desktopStore.isDesktop &&
                             <>
                                 <div itemProp="name">
                                     <Link href={clickBrand()} className={s.brand}
-                                    >{brandsDisplay()}</Link>
-                                    <div className={s.model}>{product.model}</div>
-                                    <div className={s.color}>{product.colorway}</div>
+                                    >{brandsDisplay()}&nbsp;</Link>
+                                    <div className={s.model}>{product.model}&nbsp;</div>
+                                    <div className={s.color}>{product.colorway}&nbsp;</div>
                                 </div>
                                 {
                                     prices.length > 0 &&

@@ -155,6 +155,7 @@ const ProductCard = ({cardList = false, product}) => {
 
         <Link className={cardList ? s.card_list : s.card}
               href={`/products/${slug}`}
+              key={slug}
 
         >
             <div className={s.icons_block}>
@@ -389,7 +390,7 @@ const ProductCard = ({cardList = false, product}) => {
                                         objectFit: 'contain',
                                         objectPosition: "center bottom"
                                     }}
-                                    loading={'eager'}
+                                    loading={'lazy'}
                                     fill={true}
                                     className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}
                                     onLoadingComplete={() => setIsLoading(false)}
@@ -421,6 +422,7 @@ const ProductCard = ({cardList = false, product}) => {
                                     opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
                                 }}
                                 sizes={'100%'}
+                                loading={"lazy"}
                             />
                         </div>
                 )
