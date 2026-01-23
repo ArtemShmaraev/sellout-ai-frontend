@@ -467,6 +467,7 @@ const OneProductPage = ({product, prices, ip}) => {
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row} itemScope itemType="https://schema.org/Product">
                     <div className={s.col1}>
+
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
                             <div itemProp="name">
@@ -539,16 +540,10 @@ const OneProductPage = ({product, prices, ip}) => {
                                 {
                                     prices.length > 0 &&
                                     <>
-                                        {(product.price.start_price > product.price.final_price) &&
-                                            <div className={s.price_default}
-                                                 style={{textDecoration: 'line-through', fontSize: '16px'}}>
-                                                От {addSpacesToNumber(product.price.start_price)} ₽
-                                            </div>
-                                        }
-                                        <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
-                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                        <span itemProp="offers" itemScope itemType="https://schema.org/Offer"
+                                              className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
-                                            <span>От </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+                                            <span>от </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
 
 
                                             {product.is_fast_shipping &&
@@ -556,7 +551,14 @@ const OneProductPage = ({product, prices, ip}) => {
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
                                             <meta itemProp="priceCurrency" content="RUB"/>
                                             <meta itemProp="availability" content="OnlineOnly"/>
-                                        </div>
+                                        </span>
+                                        {(product.price.start_price > product.price.final_price) &&
+                                            <span className={s.price_default}
+                                                 style={{textDecoration: 'line-through', fontSize: '17px'}}> {addSpacesToNumber(product.price.start_price)} ₽
+                                            </span>
+                                        }
+
+                                        <br/>
                                         {
                                             shouldRenderBonuses() &&
                                             <p className={s.bonuses_block}>
@@ -640,6 +642,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                 </div>
                             </>
                         }
+
                         <div ref={contentRef}
                              className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
                              style={{maxHeight: contentHeight}}>
@@ -650,6 +653,7 @@ const OneProductPage = ({product, prices, ip}) => {
                             <div className={s.row}>
                                 <div className={s.col60}>
                                     {/*{!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
+
                                     <span itemScope itemType="https://schema.org/Brand">
                                         <div itemProp="name" className={s.model}>{brandsDisplay()}</div>
                                     </span>
@@ -696,14 +700,14 @@ const OneProductPage = ({product, prices, ip}) => {
                                     <>
                                         {(product.price.start_price > product.price.final_price) &&
                                             <div className={s.price_default}
-                                                 style={{textDecoration: 'line-through', fontSize: '16px'}}>
-                                                От {addSpacesToNumber(product.price.start_price)} ₽
+                                                 style={{textDecoration: 'line-through', fontSize: '17px'}}>
+                                                 {addSpacesToNumber(product.price.start_price)} ₽
                                             </div>
                                         }
                                         <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
-                                            <span>От </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+                                            <span> от </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
 
 
                                             {product.is_fast_shipping &&

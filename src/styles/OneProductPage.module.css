@@ -23,7 +23,7 @@
 }
 .photo {
     width: 100%;
-    /*height: 390px;*/
+    height: 400px;
     text-align: center;
     object-fit: contain;
 }
@@ -42,10 +42,13 @@
 }
 .price_default {
     font-size: 19px;
+    font-weight: 500;
 }
 .price_sale {
     font-size: 19px;
-    color: rgba(189, 24, 24, 0.79);
+    /*color: green;*/
+    color: #b61212;
+    /*color: rgba(189, 24, 24, 0.79);*/
     margin-right: 7px;
     font-weight: 500;
 }
@@ -64,6 +67,7 @@
 .bonuses_block {
     display: inline;
     align-items: center;
+    font-weight: 500;
 }
 .bonuses {
     margin: 3px 0;
@@ -249,7 +253,7 @@
 }
 .slider {
     position: relative;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 @media (max-width: 1200px) {
     .container {
