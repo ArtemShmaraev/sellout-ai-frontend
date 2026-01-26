@@ -18,8 +18,23 @@ const ElasticSearchModal = () => {
     const [value, setValue] = useState('')
     const inputRef = useRef(null)
     const q = async () => {
+
         const query = {}
         query.q = value
+
+        const last_search = Cookies.get('last_search');
+        let searches = [];
+        if (last_search) {
+            searches = last_search.split("(|)"); // Получить все сохраненные поиски
+        }
+
+        searches.unshift(value); // Добавить новый поиск в начало списка
+        searches = [...new Set(searches)].slice(0, 7); // Удалить дубликаты и оставить только последние 7 поисков
+
+        const updated_search = searches.join("(|)"); // Объединить список в строку
+        Cookies.set('last_search', updated_search, { expires: 2772 }); // Установить новое значение куки
+
+
         const filters = await addFilterSearch(value)
         for (const key in filters) {
             if (filters[key]) {
@@ -54,7 +69,19 @@ const ElasticSearchModal = () => {
                     suggestSearch(value).then(res => setSuggs(res))
                 }
             } else {
-                setSuggs([])
+                let searches = [];
+                const last_search = Cookies.get('last_search');
+                if (last_search) {
+                    searches = last_search.split("(|)").slice(-7); // Получить последние 7 поисков
+                    searches = Array.from(new Set(searches)); // Удалить дубликаты
+                }
+                const uniqueSearches = [...new Set(searches)]; // Удаление дубликатов
+                const searchObjects = uniqueSearches.map(name => ({
+                    name: name,
+                    type: "История",
+                    url: `q=${name}`
+                }));
+                setSuggs(searchObjects)
             }
         }, 250)
         return () => clearTimeout(timeout)
