@@ -28,6 +28,8 @@
     flex-wrap: wrap;
 }
 
+
+
 .productsImagesContainer {
     display: flex;
     justify-content: space-between;
@@ -41,6 +43,11 @@
     text-decoration: none; /* Remove underline from links */
     color: black;
 }
+.imageLink:hover{
+    filter: brightness(80%);
+    transition: filter 0.3s;
+}
+
 
 .image {
     width: 100%;

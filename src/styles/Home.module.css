@@ -11,6 +11,11 @@
 .main {
     padding-top: 0;
 }
+.main:hover{
+    filter: brightness(70%);
+    transition: filter 0.3s;
+}
+
 
 .big_pict_block {
     display: flex;

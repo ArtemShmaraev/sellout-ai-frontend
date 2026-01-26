@@ -15,7 +15,7 @@ import {useRouter} from "next/router";
 
 import kylie from "/src/static/img/kylie.png"
 import kylieBig from "/src/static/img/kylieBig.png"
-import man from "/src/static/img/man.png"
+// import man from "/src/static/img/photo_2024-05-03_13-40-05.jpg"
 import manBig from "/src/static/img/manBig.png"
 import mainbig from "/src/static/img/mainbig.png"
 import mainbigMob from "/src/static/img/Group 74.png"
@@ -99,14 +99,14 @@ const Home = ({data}) => {
                                      style={{width: '50%', margin: '0 auto', padding: 0, float: 'right'}}>
                                     <Link href="/men">
 
-                                        <Image src={man} alt="Description of your image"
+                                        <Image src={manBig} alt="Description of your image"
                                                style={{float: 'left', cursor: 'pointer'}}
                                                layout="responsive" loading={'eager'}/></Link>
 
                                 </div>
                             </div>
                             <div>
-                                <div className={s.main} style={{width: '100%', margin: '0 auto', padding: 0}}>
+                                <div style={{width: '100%', margin: '0 auto', padding: 0}}>
                                     <Link href="/about">
                                         <Image
                                             src={mainbig}

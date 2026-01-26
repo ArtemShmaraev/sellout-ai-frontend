@@ -466,6 +466,9 @@ const OneProductPage = ({product, prices, ip}) => {
             <InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>
             <div className={s.container + ' custom_cont'}>
                 <div className={s.row} itemScope itemType="https://schema.org/Product">
+
+                    <meta itemProp="description" content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
+
                     <div className={s.col1}>
 
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}

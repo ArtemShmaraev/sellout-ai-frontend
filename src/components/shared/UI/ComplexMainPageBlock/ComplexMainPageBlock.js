@@ -98,7 +98,7 @@ const ComplexMainPageBlock = ({obj}) => {
             {obj.fullWidthImage && Object.keys(obj.fullWidthImage).length > 0 && (
                 <>
                     <div>
-                        <Link href={obj.fullWidthImage.url}>
+                        <Link href={obj.fullWidthImage.url} class={s.imageLink}>
                             <img
                                 src={desktopStore.isDesktop ? obj.fullWidthImage.desktop : obj.fullWidthImage.mobile}
                                 alt="Image"

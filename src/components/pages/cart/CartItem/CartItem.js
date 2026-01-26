@@ -19,6 +19,7 @@ import {
     trackRemoveToCart,
     trackRemoveToFavorites
 } from "@/components/shared/YandexMetrica/YandexMetrica";
+import green_gift from "@/static/icons/gift-green.svg";
 
 const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, cardId, imgSrc, slug, inWL, product,
                   available, bonus}) => {
@@ -158,7 +159,12 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
                             Number(bonus) > 0 &&
                             <>
                                 <div className={s.brand}>Начислено бонусов:</div>
-                                <div className={s.text}>{addSpacesToNumber(bonus)} ₽</div>
+                                <p className={'mt-2 mb-0'}>
+
+                                    <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
+                                    className={s.bonuses}> {bonus}₽</span>
+                                </p>
+                                {/*<div className={s.text}>{addSpacesToNumber(bonus)} ₽</div>*/}
                             </>
                         }
                         {userStore.isLogged

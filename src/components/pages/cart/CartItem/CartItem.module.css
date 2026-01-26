@@ -36,6 +36,12 @@
     margin-bottom: 5px;
 }
 
+.bonuses {
+    margin: 3px 0;
+    color: green;
+
+}
+
 .number_block {
     margin-top: 16px;
 }
@@ -100,10 +106,11 @@
     .col {
         width: 100%;
     }
-    .brand {
+    .brand, .bonuses {
         font-size: 12px;
 
     }
+
     .text {
         font-size: 12px;
     }

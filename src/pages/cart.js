@@ -211,6 +211,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
             setWillBonuses(bonuses)
             setWillPromoBonuses(res.promo_bonus)
             setTotalBonuses(bonuses + res.promo_bonus)
+            console.log(bonuses)
             // if (res.status) {
             //
             // }
@@ -347,7 +348,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                 <p className={'mt-2 mb-0'}>
 
                                     Всего будет начислено:  <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
-                                    className={s.bonuses}> {willBonuses}₽</span> бонусов
+                                    className={s.bonuses}> {totalBonuses}₽</span> бонусов
                                 </p>
                                 // Number(willBonuses) > 0 &&
                                 // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
