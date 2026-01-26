@@ -1,6 +1,7 @@
 .slideOut {
     transform: translateX(-120%);
     transition: transform 0.33s ease;
+    padding: 20px 0;
 }
 
 
