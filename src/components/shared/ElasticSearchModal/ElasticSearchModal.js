@@ -74,6 +74,8 @@ const ElasticSearchModal = () => {
                 if (last_search) {
                     searches = last_search.split("(|)").slice(-7); // Получить последние 7 поисков
                     searches = Array.from(new Set(searches)); // Удалить дубликаты
+
+
                 }
                 const uniqueSearches = [...new Set(searches)]; // Удаление дубликатов
                 const searchObjects = uniqueSearches.map(name => ({
@@ -81,7 +83,56 @@ const ElasticSearchModal = () => {
                     type: "История",
                     url: `q=${name}`
                 }));
-                setSuggs(searchObjects)
+
+                function shuffle(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+
+                const searchObjectsPop = shuffle([
+                    {
+                        "name": "adidas Samba",
+                        "type": "Популярное",
+                        "url": "line=adidas_samba"
+                    },
+                    {
+                        "name": "Vans Knu",
+                        "type": "Популярное",
+                        "url": "line=vans_knu"
+                    },
+                    {
+                        "name": "Nike Dunk",
+                        "type": "Популярное",
+                        "url": "line=nike_dunk"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
+                    }
+                ])
+                const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
+
+                const trimmedList = combinedList.slice(0, 9);
+                setSuggs(trimmedList)
             }
         }, 250)
         return () => clearTimeout(timeout)
