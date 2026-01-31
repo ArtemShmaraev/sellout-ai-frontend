@@ -58,9 +58,10 @@ export async function updateCartFromCookies(cookieStr, userId, token) {
     })
     return data
 }
-export async function fetchCartPrice(arr) {
+export async function fetchCartPrice(cartArr, promoStr) {
     const obj = {
-        product_unit_list: arr
+        product_unit_list: cartArr,
+        promo: promoStr
     }
     const {data} = await $host.post(`product_unit/total_amount_list`, JSON.stringify(obj))
     return data
@@ -75,9 +76,9 @@ export async function promoAuth(promoStr, userId, token) {
     )
     return data
 }
-export async function promoUnauth(promoStr, cartArt) {
+export async function promoUnauth(promoStr, cartArr) {
     const obj = {
-        product_unit_list: cartArt,
+        product_unit_list: cartArr,
         promo: promoStr
     }
     const {data} = await $host.post(`promo/anon_check`, JSON.stringify(obj))

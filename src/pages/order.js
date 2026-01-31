@@ -240,6 +240,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
         setContactOpen(false)
     }
     // console.log(order.final_amount)
+    console.log(order)
 
 
     return (
@@ -305,7 +306,7 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         <p className={s.big_text}>Общая стоимость: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
                         <form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form" ref={checkoutRef}>
                             <input type="hidden" name="sum" value={String(order.final_amount)} />
-                            <input type="hidden" name="clientid" value={order.user?.id?.toString()} />
+                            <input type="hidden" name="clientid" value={order.surname + " " + order.name} />
                             <input type="hidden" name="orderid" value={order.number?.toString()} />
                             <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
                             <input type="hidden" name="client_email" value={order.email} />

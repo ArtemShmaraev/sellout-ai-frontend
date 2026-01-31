@@ -84,17 +84,19 @@ export const getServerSideProps = async (context) => {
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
         defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     } else {
-        const res = await fetchCartPrice(cartArr)
+        defaultPromo = ''
+
+        const promoStr = cookies['promo']
+        if (promoStr) {
+            defaultPromo = promoStr
+        }
+        const res = await fetchCartPrice(cartArr, promoStr)
         defaultPrice = res.total_amount
         finalPrice = res.final_amount
         bonuses = res.bonus
         promoBonuses = 0
         sale = res.sale
-        defaultPromo = ''
-        const promoStr = cookies['promo']
-        if (promoStr) {
-            defaultPromo = promoStr
-        }
+
     }
     return { props: {productUnits, defaultPrice, finalPrice, sale, userData, bonuses, promoBonuses, defaultPromo, firstOrder} }
 }
