@@ -27,6 +27,20 @@
 }
 .big_text {
     font-size: 20px;
+    font-weight: 500;
+}
+.right_text {
+    /*font-size: 20px;*/
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.left_right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*font-weight: 00;*/
+    /*padding-top: 1p;*/
 }
 .order_btn {
     color: white;

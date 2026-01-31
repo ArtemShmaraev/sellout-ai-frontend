@@ -23,6 +23,7 @@ import heart from "@/static/icons/circle_heart.svg";
 import {desktopStore} from "@/store/DesktopStore";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import gift from "@/static/icons/gift-green.svg";
+import green_gift from "@/static/icons/gift-green.svg";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -39,9 +40,31 @@ export const getServerSideProps = async (context) => {
     const skipPayment = cart.promo_code ? cart.promo_code.skip_payment : false
     console.log(cart.promo_code)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
-    return {props: {addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo, skipPayment}}
+    return {
+        props: {
+            addresses,
+            defaultPrice,
+            finalPrice,
+            sale,
+            userData,
+            maxBonuses,
+            currBonuses,
+            defaultPromo,
+            skipPayment
+        }
+    }
 }
-const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses, currBonuses, defaultPromo, skipPayment}) => {
+const Order = ({
+                   addresses,
+                   defaultPrice,
+                   finalPrice,
+                   sale,
+                   userData,
+                   maxBonuses,
+                   currBonuses,
+                   defaultPromo,
+                   skipPayment
+               }) => {
     const router = useRouter()
     const {orderStore, userStore, cartStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
@@ -255,7 +278,10 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                     </div>
                     <div className={s.promos_block}>
                         <h4>Ваш заказ:</h4>
-                        <p className={'mt-2 mb-0'}>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
+                        <div className={s.left_right}>
+                            <p className={'mb-0'}>Cтоимость товаров:</p>
+                            <p className={s.right_text}>{addSpacesToNumber(defAmount)}₽</p>
+                        </div>
                         {/*<PromoInput placeholder={'Введите промокод'}*/}
                         {/*            onChange={(e) => setPromo(e.target.value)}*/}
                         {/*            value={promo}*/}
@@ -280,40 +306,99 @@ const Order = ({addresses, defaultPrice, finalPrice, sale, userData, maxBonuses,
                         {
                             orderStore.deliveryPrice &&
                             (
+
                                 orderStore.deliveryPrice.block
                                     ?
-                                    orderStore.method === 1
+
+
+                                    (orderStore.method === 1
                                         ?
-                                        <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
+                                        <div className={s.left_right}>
+                                            <p className={'mb-0'}>Доставка:</p>
+                                            <p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽</p>
+                                        </div>
                                         :
-                                        <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_part)} ₽</p>
+                                        <div className={s.left_right}>
+                                            <p className={'mb-0'}>Доставка:</p>
+                                            <p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_part)}₽</p>
+                                        </div>)
                                     :
-                                    <p className={'mt-2 mb-0'}>Доставка: {addSpacesToNumber(orderStore.deliveryPrice.sum_all)} ₽</p>
+                                    <div className={s.left_right}>
+                                        <p className={'mb-0'}>Доставка:</p>
+                                        <p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽</p>
+                                    </div>
+
                             )
                         }
+
                         {
-                            Number(saleAmount) > 0 && <p className={'mt-2 mb-0'}>Суммарная скидка: {saleAmount} ₽</p>
+
+                            Number(saleAmount) > 0 &&
+                            <div className={s.left_right}>
+                                <p className={'mb-0'}>Скидка: </p>
+                                <p className={s.right_text}>
+                                    <span
+                                        className={s.bonuses}> -{addSpacesToNumber(saleAmount)}₽</span></p>
+                                {/*<p className={'mb-0'}>-{addSpacesToNumber(saleAmount)}₽</p>*/}
+                            </div>
                         }
-                        {
-                            <p className={'mt-2 mb-0'}>
-                                Будет начислено <Image src={gift} alt='' className={s.bonus_icon}/> <span
-                                className={s.bonuses}> {willBonuses}₽</span> бонусов
-                            </p>
+
+                        {/*{Number(firstOrderBonus) > 0 &&*/}
+                        {/*    <div className={s.left_right}>*/}
+                        {/*        <p className={'mb-0'}>*/}
+
+                        {/*            Подарок за первый заказ:*/}
+                        {/*        </p>*/}
+                        {/*        <p className={s.right_text}>*/}
+                        {/*            <Image src={green_gift} alt='' className={s.bonus_icon}/>*/}
+                        {/*            <span*/}
+                        {/*                className={s.bonuses}> {addSpacesToNumber(firstOrderBonus)}₽</span>*/}
+                        {/*        </p>*/}
+                        {/*    </div>*/}
+                        {/*    // Number(willBonuses) > 0 &&*/}
+                        {/*    // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>*/}
+                        {/*}*/}
+                        {Number(1) > 0 &&
+
+                            <div className={s.left_right}>
+                                <p className={'mb-0'}>
+
+                                    Всего будет начислено бонусов:
+                                </p>
+                                <p className={s.right_text}>
+                                    <Image src={green_gift} alt='' className={s.bonus_icon}/>
+                                    <span
+                                        className={s.bonuses}> {addSpacesToNumber(willBonuses)}₽</span>
+                                </p>
+                            </div>
                             // Number(willBonuses) > 0 &&
                             // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
                         }
+
+                        {/*{*/}
+                        {/*    <p className={'mt-2 mb-0'}>*/}
+                        {/*        Будет начислено <Image src={gift} alt='' className={s.bonus_icon}/> <span*/}
+                        {/*        className={s.bonuses}> {willBonuses}₽</span> бонусов*/}
+                        {/*    </p>*/}
+                        {/*    // Number(willBonuses) > 0 &&*/}
+                        {/*    // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>*/}
+                        {/*}*/}
                         <hr/>
-                        <p className={s.big_text}>Общая стоимость: {addSpacesToNumber(calculateFinalPrice())} ₽</p>
-                        <form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form" ref={checkoutRef}>
-                            <input type="hidden" name="sum" value={String(order.final_amount)} />
-                            <input type="hidden" name="clientid" value={order.surname + " " + order.name} />
-                            <input type="hidden" name="orderid" value={order.number?.toString()} />
-                            <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`} />
-                            <input type="hidden" name="client_email" value={order.email} />
-                            <input type="hidden" name="client_phone" value={order.phone_int} />
-                            <input type="hidden" name="pstype" value='sbp_default' />
-                            <input type="hidden" name="user_result_callback" value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`} />
-                            <input type="hidden" name="cart" value={order.invoice_data} />
+                        <div className={s.left_right}>
+                            <p  className={s.big_text}>Итого: </p>
+                            <p className={s.big_text}>{addSpacesToNumber(calculateFinalPrice())} ₽</p></div>
+                        <form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form"
+                              ref={checkoutRef}>
+                            <input type="hidden" name="sum" value={String(order.final_amount)}/>
+                            <input type="hidden" name="clientid" value={order.surname + " " + order.name}/>
+                            <input type="hidden" name="orderid" value={order.number?.toString()}/>
+                            <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`}/>
+                            <input type="hidden" name="client_email" value={order.email}/>
+                            <input type="hidden" name="client_phone" value={order.phone_int}/>
+                            <input type="hidden" name="pstype" value='sbp_default'/>
+                            <input type="hidden" name="user_result_callback"
+                                   value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`}/>
+                            <input type="hidden" name="cart" value={order.invoice_data}/>
                             {/*<input type="submit" value="Перейти к оплате" />*/}
                         </form>
 

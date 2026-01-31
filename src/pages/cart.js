@@ -4,6 +4,7 @@ import MainLayout from "@/layout/MainLayout";
 import CartItem from "@/components/pages/cart/CartItem/CartItem";
 import {useRouter} from "next/router";
 import {parse} from "cookie";
+import parseHTML from 'html-react-parser'
 import {
     fetchCart,
     fetchCart2,
@@ -48,8 +49,8 @@ export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
     const token = cookies['access_token']
     let productUnits
-    let bonuses
-    let promoBonuses
+    let bonus
+    let promoBonus
     let cartArr = []
     if (cookies.cart) {
         cartArr = cookies['cart'].trim().split(' ')
@@ -66,6 +67,9 @@ export const getServerSideProps = async (context) => {
     let defaultPrice
     let finalPrice
     let sale
+    let bonusSale
+    let promoSale
+    let totalSale
     let userData = {}
     let defaultPromo
     let firstOrder = 0
@@ -75,17 +79,18 @@ export const getServerSideProps = async (context) => {
         // console.log(cart)
         defaultPrice = cart.total_amount
         finalPrice = cart.final_amount
-        sale = cart.total_sale
+        sale = cart.sale
+        promoSale = cart.promo_sale
+        bonusSale = cart.bonus_sale
+        totalSale = cart.total_sale
         productUnits = cart
-        bonuses = cart.bonus
-
-        promoBonuses = cart.promo_bonus
+        bonus = cart.bonus
+        promoBonus = cart.promo_bonus
         firstOrder = cart.first_order_bonus
         userData = await fetchUserInfo(context.req.headers.cookie, user_id)
         defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     } else {
         defaultPromo = ''
-
         const promoStr = cookies['promo']
         if (promoStr) {
             defaultPromo = promoStr
@@ -93,26 +98,64 @@ export const getServerSideProps = async (context) => {
         const res = await fetchCartPrice(cartArr, promoStr)
         defaultPrice = res.total_amount
         finalPrice = res.final_amount
-        bonuses = res.bonus
-        promoBonuses = 0
+        bonus = res.bonus
+        promoBonus = 0
         sale = res.sale
+        promoSale = 0
+        bonusSale = 0
+        totalSale = res.sale
+        firstOrder = 1000
 
     }
-    return { props: {productUnits, defaultPrice, finalPrice, sale, userData, bonuses, promoBonuses, defaultPromo, firstOrder} }
+    return {
+        props: {
+            productUnits,
+            defaultPrice,
+            finalPrice,
+            sale,
+            bonusSale,
+            promoSale,
+            totalSale,
+            userData,
+            bonus,
+            promoBonus,
+            defaultPromo,
+            firstOrder
+        }
+    }
 }
-const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, promoBonuses, defaultPromo, firstOrder}) => {
+const Cart = ({
+                  productUnits,
+                  defaultPrice,
+                  finalPrice,
+                  sale,
+                  bonusSale,
+                  promoSale,
+                  totalSale,
+                  userData,
+                  bonus,
+                  promoBonus,
+                  defaultPromo,
+                  firstOrder
+              }) => {
     const router = useRouter()
     const [lastSeen, setLastSeen] = useState([])
     const {userStore, cartStore, desktopStore} = useContext(Context)
     const [promo, setPromo] = useState(defaultPromo)
-    const [bonusesSale, setBonusesSale] = useState(Number(productUnits.bonus_sale) > 0 ? productUnits.bonus_sale : '')
+
     const [defAmount, setDefAmount] = useState(defaultPrice)
     const [finAmount, setFinAmount] = useState(finalPrice)
     const [saleAmount, setSaleAmount] = useState(sale)
+    const [promoSaleAmount, setPromoSaleAmount] = useState(promoSale)
+    const [bonusSaleAmount, setBonusSaleAmount] = useState(bonusSale)
+    const [totalSaleAmount, setTotalSaleAmount] = useState(totalSale)
+
     const [promoRes, setPromoRes] = useState(null)
-    const [willBonuses, setWillBonuses] = useState(bonuses)
-    const [willPromoBonuses, setWillPromoBonuses] = useState(promoBonuses)
-    const [totalBonuses, setTotalBonuses] = useState(promoBonuses + bonuses)
+    const [bonusAmount, setBonusAmount] = useState(bonus)
+    const [promoBonusAmount, setPromoBonusAmount] = useState(promoBonus)
+    const [firstOrderBonus, setFirstOrderBonus] = useState(firstOrder)
+
+    const [totalBonus, setTotalBonus] = useState(promoBonus + bonus + firstOrder)
 
     useEffect(() => {
         const token = Cookies.get('access_token')
@@ -166,22 +209,29 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
         setDefAmount(defaultPrice)
         setFinAmount(finalPrice)
         setSaleAmount(sale)
-        setWillBonuses(bonuses)
-        setWillPromoBonuses(promoBonuses)
-        setTotalBonuses(willBonuses+willPromoBonuses)
+        setPromoSaleAmount(promoSale)
+        setBonusSaleAmount(bonusSale > 0 ? bonusSale : "")
+
+        setTotalSaleAmount(totalSale)
+
+
+        setBonusAmount(bonus)
+        setPromoBonusAmount(promoBonus)
+        setFirstOrderBonus(firstOrder)
+        setTotalBonus(bonus + promoBonus + firstOrder)
         // setWillPromoBonuses()
         const promo = Cookies.get('promo')
         const token = Cookies.get('access_token')
-        if (promo && !token) {
-            const cartArr = Cookies.get('cart').trim().split(' ')
-            const res = promoUnauth(promo, cartArr).then(res => {
-                if (res.status) {
-                    setFinAmount(res.final_amount)
-                    setSaleAmount(res.total_sale)
-                }
-                setPromoRes(res)
-            })
-        }
+        // if (promo && !token) {
+        //     const cartArr = Cookies.get('cart').trim().split(' ')
+        //     const res = promoUnauth(promo, cartArr).then(res => {
+        //         if (res.status) {
+        //             setFinAmount(res.final_amount)
+        //             setSaleAmount(res.total_sale)
+        //         }
+        //         setPromoRes(res)
+        //     })
+        // }
         checkPromo()
 
         // sendPromo(e)
@@ -191,38 +241,46 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
     const checkPromo = async () => {
         const token = Cookies.get('access_token')
         let res
-        if (promo){
+        console.log(promo)
+        if (promo) {
             if (userStore.isLogged) {
                 res = await promoAuth(promo, userStore.id, token)
+                console.log(res)
+                // router.push('/cart', undefined, {scroll: false})
                 setFinAmount(res.final_amount)
-                setSaleAmount(res.total_sale)
-                router.push('/cart', undefined, {scroll: false})
+                setTotalSaleAmount(res.promo_sale + saleAmount + bonusSaleAmount)
+                setPromoSaleAmount(res.promo_sale)
+                setPromoBonusAmount(res.promo_bonus)
+                setFirstOrderBonus(1000)
+                if (res.promo_bonus > 0) {
+                    setFirstOrderBonus(0)
+                }
+                setPromoRes(res)
+                setBonusAmount(res.bonus)
+                setTotalBonus(promoBonusAmount + bonusAmount + firstOrderBonus)
 
             } else {
                 const cartArr = Cookies.get('cart').trim().split(' ')
                 res = await promoUnauth(promo, cartArr)
 
                 console.log(res)
-                Cookies.set('promo', promo, {expires: 2772})
-                const res2 = await fetchCartPrice(cartArr, promo)
-                bonuses = res2.bonus
+                setFinAmount(res.final_amount)
+                setTotalSaleAmount(res.promo_sale + saleAmount + bonusSaleAmount)
+                setPromoSaleAmount(res.promo_sale)
+                setPromoBonusAmount(res.promo_bonus)
+                setFirstOrderBonus(1000)
+                if (res.promo_bonus > 0) {
+                    setFirstOrderBonus(0)
+                }
 
+                setPromoRes(res)
+                setBonusAmount(res.bonus)
+                setTotalBonus(promoBonusAmount + bonusAmount + firstOrderBonus)
+                console.log(bonusAmount)
+                console.log(totalBonus)
+                // router.push('/cart', undefined, {scroll: false})
+                // router.push('/cart', undefined, {scroll: false})
             }
-
-            setFinAmount(res.final_amount)
-            setSaleAmount(res.total_sale)
-            // setWillBonuses(bonuses)
-            // setWillPromoBonuses(promoBonuses)
-            // setTotalBonuses(willBonuses+willPromoBonuses)
-            setWillBonuses(bonuses)
-            setWillPromoBonuses(res.promo_bonus)
-            setTotalBonuses(bonuses + res.promo_bonus)
-            console.log(bonuses)
-            // if (res.status) {
-            //
-            // }
-            setPromoRes(res)
-
         }
 
     }
@@ -234,7 +292,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
     const changeBonuses = (value) => {
         const maxBonuses = userData.bonuses.total_amount
         if (Number(value) <= Number(maxBonuses)) {
-            setBonusesSale(value)
+            setBonusSaleAmount(value)
         }
     }
     const spendBonuses = async (e) => {
@@ -271,7 +329,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                 <div className={s.title_block}>
                     <h3>Корзина</h3>
                     <Link href={'/products'}
-                       className={s.cart_link}
+                          className={s.cart_link}
                     >Продолжить покупки</Link>
                 </div>
                 <div>
@@ -320,7 +378,7 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                         </div>
                         <div className={s.promos_block}>
                             <h4>Ваш заказ:</h4>
-                            <p>Cтоимость: {addSpacesToNumber(defAmount)} ₽</p>
+
                             <PromoInput placeholder={'Введите промокод'}
                                         onChange={(e) => setPromo(e.target.value)}
                                         value={promo}
@@ -330,40 +388,72 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                 promoRes &&
                                 <p className={promoRes.status ? s.green_text : s.red_text}>
                                     {promoRes.message}
+
                                 </p>
                             }
                             {
                                 userStore.isLogged &&
-                                <PromoInput placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}
-                                            onChange={(e) => changeBonuses(e.target.value)}
-                                            value={bonusesSale}
-                                            onClick={e => spendBonuses(e)}
+                                <PromoInput
+                                    placeholder={`Списать бонусы (Доступно: ${userData.bonuses.total_amount} ₽)`}
+                                    onChange={(e) => changeBonuses(e.target.value)}
+                                    value={bonusSaleAmount}
+                                    onClick={e => spendBonuses(e)}
                                 />
                             }
 
-                            {Number(firstOrder) > 0 &&
-                                <p className={'mt-2 mb-0'}>
+                            <div className={s.left_right}>
+                                <p className={'mb-0'}>Cтоимость товаров:</p>
+                                <p className={s.right_text}>{addSpacesToNumber(defAmount)}₽</p>
+                            </div>
+                            {
 
-                                    Подарок за первый заказ:  <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
-                                    className={s.bonuses}> {willBonuses}₽</span> бонусов
-                                </p>
+                                Number(totalSaleAmount) > 0 &&
+                                <div className={s.left_right}>
+                                    <p className={'mb-0'}>Скидка: </p>
+                                    <p className={s.right_text}>
+                                    <span
+                                        className={s.bonuses}> -{addSpacesToNumber(totalSaleAmount)}₽</span></p>
+                                    {/*<p className={'mb-0'}>-{addSpacesToNumber(saleAmount)}₽</p>*/}
+                                </div>
+                            }
+
+                            {Number(firstOrderBonus) > 0 &&
+                                <div className={s.left_right}>
+                                    <p className={'mb-0'}>
+
+                                        Подарок за первый заказ:
+                                    </p>
+                                    <p className={s.right_text}>
+                                        <Image src={green_gift} alt='' className={s.bonus_icon}/>
+                                        <span
+                                            className={s.bonuses}> {addSpacesToNumber(firstOrderBonus)}₽</span>
+                                    </p>
+                                </div>
                                 // Number(willBonuses) > 0 &&
                                 // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
                             }
                             {Number(1) > 0 &&
-                                <p className={'mt-2 mb-0'}>
 
-                                    Всего будет начислено:  <Image src={green_gift} alt='' className={s.bonus_icon}/> <span
-                                    className={s.bonuses}> {totalBonuses}₽</span> бонусов
-                                </p>
+                                <div className={s.left_right}>
+                                    <p className={'mb-0'}>
+
+                                        Всего будет начислено бонусов:
+                                    </p>
+                                    <p className={s.right_text}>
+                                        <Image src={green_gift} alt='' className={s.bonus_icon}/>
+                                        <span
+                                            className={s.bonuses}> {addSpacesToNumber(totalBonus)}₽</span>
+                                    </p>
+                                </div>
                                 // Number(willBonuses) > 0 &&
                                 // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>
                             }
-                            {
-                                Number(saleAmount) > 0 && <p className={'my-0'}>Суммарная скидка: {saleAmount} ₽</p>
-                            }
+
                             <hr/>
-                            <p className={s.big_text}>Промежуточный итог: {addSpacesToNumber(finAmount)} ₽</p>
+                            <div className={s.left_right}>
+                            <p className={s.big_text}>Промежуточный итог: </p>
+                                <p className={s.big_text}>{addSpacesToNumber(finAmount)}₽</p>
+                            </div>
                             {
                                 userStore.isLogged
                                     ?
@@ -373,7 +463,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                     :
                                     <AuthModal order={true} style={{width: '100%'}}>
                                         <div className={s.order_btn}
-                                        >Перейти к оформлению заказа</div>
+                                        >Перейти к оформлению заказа
+                                        </div>
                                     </AuthModal>
                             }
                             {
@@ -390,32 +481,55 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                             }
                             {desktopStore.isDesktop &&
                                 <div className={s.questions_block}>
-                                    <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
+                                    <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'}
+                                               img={change}>
                                         <Image src={change} alt='' width={60}/>
-                                        <h4 className={'my-3'}>Почему изменилась цена или модель оказалась распроданной?</h4>
+                                        <h4 className={'my-3'}>Почему изменилась цена или модель оказалась
+                                            распроданной?</h4>
                                         <div className={s.img_cont}>
                                             <Image src={map} alt='' className={s.img} fill={true}/>
                                         </div>
                                         <p className={s.text}>
-                                            Многие представленные модели являются лимитированными и находятся в наличии в ограниченном количестве, поэтому может произойти такое, что кто-то другой купит эту позицию и данное ценовое предложение перестанет быть доступным. Мы собираем десятки миллионов предложений со всего мира, поэтому даже в короткие промежутки времени цена может меняться. В том числе на цену могут сказываться прочие внешние факторы, не зависящие от нас, такие как курс, стоимость доставки и многое другое.
+                                            Многие представленные модели являются лимитированными и находятся в наличии
+                                            в ограниченном количестве, поэтому может произойти такое, что кто-то другой
+                                            купит эту позицию и данное ценовое предложение перестанет быть доступным. Мы
+                                            собираем десятки миллионов предложений со всего мира, поэтому даже в
+                                            короткие промежутки времени цена может меняться. В том числе на цену могут
+                                            сказываться прочие внешние факторы, не зависящие от нас, такие как курс,
+                                            стоимость доставки и многое другое.
 
                                         </p>
                                         <div className={s.faq_block}>
                                             <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
                                             <LoyaltyFAQ title={'После чего цена меняться не будет?'}>
-                                                После того, как вы оформите заказ, цена для вас будет зафиксирована и никаким изменениям не подлежит. Добавление товара в корзину или избранное, к сожалению, не позволяет нам зафиксировать цену по объективным причинам. Мы стараемся в каждый момент времени предлагать вам наилучшую цену из возможных и делать ваш шопинг с нами еще более удобным и выгодным, поэтому не откладывайте ваши покупки на потом, чтобы не упустить приятные цены!
+                                                После того, как вы оформите заказ, цена для вас будет зафиксирована и
+                                                никаким изменениям не подлежит. Добавление товара в корзину или
+                                                избранное, к сожалению, не позволяет нам зафиксировать цену по
+                                                объективным причинам. Мы стараемся в каждый момент времени предлагать
+                                                вам наилучшую цену из возможных и делать ваш шопинг с нами еще более
+                                                удобным и выгодным, поэтому не откладывайте ваши покупки на потом, чтобы
+                                                не упустить приятные цены!
 
                                             </LoyaltyFAQ>
                                             <LoyaltyFAQ title={'Как часто могут меняться цены?'}>
-                                                Цена может не меняться как на протяжении долгого времени, так и постоянно оставаться волатильной. Она может как повыситься, так и понизиться. Вскоре мы добавим возможность следить за изменением цен, а также получать уведомления о появлении более выгодного предложения на интересующий вас лот!
+                                                Цена может не меняться как на протяжении долгого времени, так и
+                                                постоянно оставаться волатильной. Она может как повыситься, так и
+                                                понизиться. Вскоре мы добавим возможность следить за изменением цен, а
+                                                также получать уведомления о появлении более выгодного предложения на
+                                                интересующий вас лот!
 
                                             </LoyaltyFAQ>
                                             <LoyaltyFAQ title={'Почему модель оказалась распроданной?'}>
-                                                Так как многие размещенные на нашей платформе лоты являются коллекционными и редкими, может произойти такое, что какой-то конкретный размер или вся модель пропадет из наличия, поэтому не откладывайте свои покупки, чтобы успеть приобрести желанную модель!
+                                                Так как многие размещенные на нашей платформе лоты являются
+                                                коллекционными и редкими, может произойти такое, что какой-то конкретный
+                                                размер или вся модель пропадет из наличия, поэтому не откладывайте свои
+                                                покупки, чтобы успеть приобрести желанную модель!
 
                                             </LoyaltyFAQ>
                                         </div>
-                                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link}>FAQ</Link></h5>
+                                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                                   className={s.link}>FAQ</Link>
+                                        </h5>
                                     </TextModal>
                                     <TextModal title={'Бонусы'} img={gift}>
                                         <Image src={gift_gard} alt='' width={80}/>
@@ -453,32 +567,56 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                             <div className={'my-3'}>И оплачивайте ими 100% от стоимости заказа!</div>
                                         </div>
                                         <p className={s.text}>
-                                            Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT, поэтому за каждую совершенную покупку мы будем начислять вам бонусы в соответствии с вашим статусом. Конкретное число бонусов за каждый товар вы сможете увидеть на странице товара, а также в корзине. Также мы дарим 1000 бонусных рублей за первую покупку и на ваш день рождения и регулярно начисляем бонусы в честь различных праздников!
+                                            Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT,
+                                            поэтому за каждую совершенную покупку мы будем начислять вам бонусы в
+                                            соответствии с вашим статусом. Конкретное число бонусов за каждый товар вы
+                                            сможете увидеть на странице товара, а также в корзине. Также мы дарим 1000
+                                            бонусных рублей за первую покупку и на ваш день рождения и регулярно
+                                            начисляем бонусы в честь различных праздников!
 
                                         </p>
                                         <div className={s.faq_block}>
                                             <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
                                             <LoyaltyFAQ title={'Чему равны бонусы?'}>
-                                                Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до 100% заказа, тем самым сводя стоимость заказа к нулю!
+                                                Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до
+                                                100% заказа, тем самым сводя стоимость заказа к нулю!
 
                                             </LoyaltyFAQ>
                                             <LoyaltyFAQ title={'Как воспользоваться бонусами?'}>
-                                                Чтобы оплатить заказ целиком или частично бонусами, в корзине или на любом этапе оформления заказа введите количество бонусов, которое хотите списать, и скидка будет автоматически применена!
+                                                Чтобы оплатить заказ целиком или частично бонусами, в корзине или на
+                                                любом этапе оформления заказа введите количество бонусов, которое хотите
+                                                списать, и скидка будет автоматически применена!
                                             </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Как быстро после совершения покупки начисляются бонусы?'}>
-                                                Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по прошествии некоторого времени. Нам требуется обработать заказ, подтвердить корректность всех данных и после этого начислить бонусы. Если вы считаете, что бонусы слишком долго не начисляются и произошла какая-то ошибка, обязательно напишите нам и мы вам поможем!
+                                            <LoyaltyFAQ
+                                                title={'Как быстро после совершения покупки начисляются бонусы?'}>
+                                                Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по
+                                                прошествии некоторого времени. Нам требуется обработать заказ,
+                                                подтвердить корректность всех данных и после этого начислить бонусы.
+                                                Если вы считаете, что бонусы слишком долго не начисляются и произошла
+                                                какая-то ошибка, обязательно напишите нам и мы вам поможем!
 
                                             </LoyaltyFAQ>
-                                            <LoyaltyFAQ title={'Как получить бонусы по реферальной программе, приглашая друзей?'}>
-                                                Реферальная программа - это специальная возможность для вас поделиться удовлетворением от покупок с друзьями и получить взамен уникальные бонусы размером до 7000₽! Просто пригласите своих знакомых стать частью нашего сообщества, и вы оба сможете наслаждаться эксклюзивными преимуществами, такими как скидки и бонусы, созданными специально для участников нашей реферальной программы. Благодарим за доверие и ваш вклад в наше расширяющееся сообщество! Подробнее про реферальную программу
+                                            <LoyaltyFAQ
+                                                title={'Как получить бонусы по реферальной программе, приглашая друзей?'}>
+                                                Реферальная программа - это специальная возможность для вас поделиться
+                                                удовлетворением от покупок с друзьями и получить взамен уникальные
+                                                бонусы размером до 7000₽! Просто пригласите своих знакомых стать частью
+                                                нашего сообщества, и вы оба сможете наслаждаться эксклюзивными
+                                                преимуществами, такими как скидки и бонусы, созданными специально для
+                                                участников нашей реферальной программы. Благодарим за доверие и ваш
+                                                вклад в наше расширяющееся сообщество! Подробнее про реферальную
+                                                программу
                                                 смотрите <Link href={'/faq'} style={{color: 'inherit'}}>здесь</Link>
                                             </LoyaltyFAQ>
                                         </div>
 
                                         <div className={s.faq_block}>
-                                            <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
-                                                вы найдете здесь: <Link href={'/faq'} className={'text-black'}>FAQ</Link></h5>
-                                            <h5 className={`text-center ${s.questions_text}`}>Если у вас остались вопросы, вы всегда
+                                            <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство
+                                                вопросов
+                                                вы найдете здесь: <Link href={'/faq'}
+                                                                        className={'text-black'}>FAQ</Link></h5>
+                                            <h5 className={`text-center ${s.questions_text}`}>Если у вас остались
+                                                вопросы, вы всегда
                                                 можете обратиться в службу поддержки и мы будем
                                                 рады вам помочь!</h5>
                                         </div>
@@ -487,7 +625,8 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                         <div className={s.content}>
                                             <Image src={headphones} alt='' width={60}/>
                                             <div className={s.text_cont}>
-                                                <h5>Вы всегда можете написать в службу поддержки и мы будем рады вам помочь</h5>
+                                                <h5>Вы всегда можете написать в службу поддержки и мы будем рады вам
+                                                    помочь</h5>
                                                 <div>
                                                     <div>
                                                         Почта: <a href={'mailto:customerservice@sellout.su'}
@@ -506,16 +645,29 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                                 </div>
                                                 <div className={s.faq_block}>
                                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                                    <LoyaltyFAQ title={'Нужно ли авторизовываться в аккаунт для совершения заказа?'}>
-                                                        Да, для оформления заказа требуется либо войти в свой аккаунт, либо создать новый, а также подтвердить свою почту. Благодаря этому вы всегда сможете с легкостью отслеживать статусы заказов в личном кабинете, а также вы точно не перепутаете указанные данные и мы всегда сможем связаться с вами!
+                                                    <LoyaltyFAQ
+                                                        title={'Нужно ли авторизовываться в аккаунт для совершения заказа?'}>
+                                                        Да, для оформления заказа требуется либо войти в свой аккаунт,
+                                                        либо создать новый, а также подтвердить свою почту. Благодаря
+                                                        этому вы всегда сможете с легкостью отслеживать статусы заказов
+                                                        в личном кабинете, а также вы точно не перепутаете указанные
+                                                        данные и мы всегда сможем связаться с вами!
 
                                                     </LoyaltyFAQ>
                                                     <LoyaltyFAQ title={'Почему не работает промокод?'}>
-                                                        Пожалуйста, убедитесь, что вы выполнили все условия для применения промокода и время действия промокода еще не закончилось. Зачастую промокоды выдаются на первую покупку или на покупки от определенной суммы, проверьте, что вы вошли в правильный аккаунт. Если вы все же считаете, что произошла какая-то ошибка, напишите нам в службу поддержки, и мы обязательно поможем вам разобраться в ситуации!
+                                                        Пожалуйста, убедитесь, что вы выполнили все условия для
+                                                        применения промокода и время действия промокода еще не
+                                                        закончилось. Зачастую промокоды выдаются на первую покупку или
+                                                        на покупки от определенной суммы, проверьте, что вы вошли в
+                                                        правильный аккаунт. Если вы все же считаете, что произошла
+                                                        какая-то ошибка, напишите нам в службу поддержки, и мы
+                                                        обязательно поможем вам разобраться в ситуации!
 
                                                     </LoyaltyFAQ>
                                                 </div>
-                                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link}>FAQ</Link></h5>
+                                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                                           className={s.link}>FAQ</Link>
+                                                </h5>
                                                 <div>
                                                     <h5>Мы в социальных сетях:</h5>
                                                     <div className={s.icons_block}>
@@ -556,25 +708,41 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                             <Image src={map} alt='' className={s.img} fill={true}/>
                         </div>
                         <p className={s.text}>
-                            Многие представленные модели являются лимитированными и находятся в наличии в ограниченном количестве, поэтому может произойти такое, что кто-то другой купит эту позицию и данное ценовое предложение перестанет быть доступным. Мы собираем десятки миллионов предложений со всего мира, поэтому даже в короткие промежутки времени цена может меняться. В том числе на цену могут сказываться прочие внешние факторы, не зависящие от нас, такие как курс, стоимость доставки и многое другое.
+                            Многие представленные модели являются лимитированными и находятся в наличии в ограниченном
+                            количестве, поэтому может произойти такое, что кто-то другой купит эту позицию и данное
+                            ценовое предложение перестанет быть доступным. Мы собираем десятки миллионов предложений со
+                            всего мира, поэтому даже в короткие промежутки времени цена может меняться. В том числе на
+                            цену могут сказываться прочие внешние факторы, не зависящие от нас, такие как курс,
+                            стоимость доставки и многое другое.
 
                         </p>
                         <div className={s.faq_block}>
                             <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
                             <LoyaltyFAQ title={'После чего цена меняться не будет?'}>
-                                После того, как вы оформите заказ, цена для вас будет зафиксирована и никаким изменениям не подлежит. Добавление товара в корзину или избранное, к сожалению, не позволяет нам зафиксировать цену по объективным причинам. Мы стараемся в каждый момент времени предлагать вам наилучшую цену из возможных и делать ваш шопинг с нами еще более удобным и выгодным, поэтому не откладывайте ваши покупки на потом, чтобы не упустить приятные цены!
+                                После того, как вы оформите заказ, цена для вас будет зафиксирована и никаким изменениям
+                                не подлежит. Добавление товара в корзину или избранное, к сожалению, не позволяет нам
+                                зафиксировать цену по объективным причинам. Мы стараемся в каждый момент времени
+                                предлагать вам наилучшую цену из возможных и делать ваш шопинг с нами еще более удобным
+                                и выгодным, поэтому не откладывайте ваши покупки на потом, чтобы не упустить приятные
+                                цены!
 
                             </LoyaltyFAQ>
                             <LoyaltyFAQ title={'Как часто могут меняться цены?'}>
-                                Цена может не меняться как на протяжении долгого времени, так и постоянно оставаться волатильной. Она может как повыситься, так и понизиться. Вскоре мы добавим возможность следить за изменением цен, а также получать уведомления о появлении более выгодного предложения на интересующий вас лот!
+                                Цена может не меняться как на протяжении долгого времени, так и постоянно оставаться
+                                волатильной. Она может как повыситься, так и понизиться. Вскоре мы добавим возможность
+                                следить за изменением цен, а также получать уведомления о появлении более выгодного
+                                предложения на интересующий вас лот!
 
                             </LoyaltyFAQ>
                             <LoyaltyFAQ title={'Почему модель оказалась распроданной?'}>
-                                Так как многие размещенные на нашей платформе лоты являются коллекционными и редкими, может произойти такое, что какой-то конкретный размер или вся модель пропадет из наличия, поэтому не откладывайте свои покупки, чтобы успеть приобрести желанную модель!
+                                Так как многие размещенные на нашей платформе лоты являются коллекционными и редкими,
+                                может произойти такое, что какой-то конкретный размер или вся модель пропадет из
+                                наличия, поэтому не откладывайте свои покупки, чтобы успеть приобрести желанную модель!
 
                             </LoyaltyFAQ>
                         </div>
-                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
+                        <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link}
+                                                                                   target={'_blank'}>FAQ</Link></h5>
                     </TextModal>
                     <TextModal title={'Бонусы'} img={gift}>
                         <Image src={gift_gard} alt='' width={80}/>
@@ -612,31 +780,47 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                             <div className={'my-3'}>И оплачивайте ими 100% от стоимости заказа!</div>
                         </div>
                         <p className={s.text}>
-                            Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT, поэтому за каждую совершенную покупку мы будем начислять вам бонусы в соответствии с вашим статусом. Конкретное число бонусов за каждый товар вы сможете увидеть на странице товара, а также в корзине. Также мы дарим 1000 бонусных рублей за первую покупку и на ваш день рождения и регулярно начисляем бонусы в честь различных праздников!
+                            Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT, поэтому за каждую
+                            совершенную покупку мы будем начислять вам бонусы в соответствии с вашим статусом.
+                            Конкретное число бонусов за каждый товар вы сможете увидеть на странице товара, а также в
+                            корзине. Также мы дарим 1000 бонусных рублей за первую покупку и на ваш день рождения и
+                            регулярно начисляем бонусы в честь различных праздников!
 
                         </p>
                         <div className={s.faq_block}>
                             <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
                             <LoyaltyFAQ title={'Чему равны бонусы?'}>
-                                Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до 100% заказа, тем самым сводя стоимость заказа к нулю!
+                                Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до 100% заказа,
+                                тем самым сводя стоимость заказа к нулю!
 
                             </LoyaltyFAQ>
                             <LoyaltyFAQ title={'Как воспользоваться бонусами?'}>
-                                Чтобы оплатить заказ целиком или частично бонусами, в корзине или на любом этапе оформления заказа введите количество бонусов, которое хотите списать, и скидка будет автоматически применена!
+                                Чтобы оплатить заказ целиком или частично бонусами, в корзине или на любом этапе
+                                оформления заказа введите количество бонусов, которое хотите списать, и скидка будет
+                                автоматически применена!
                             </LoyaltyFAQ>
                             <LoyaltyFAQ title={'Как быстро после совершения покупки начисляются бонусы?'}>
-                                Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по прошествии некоторого времени. Нам требуется обработать заказ, подтвердить корректность всех данных и после этого начислить бонусы. Если вы считаете, что бонусы слишком долго не начисляются и произошла какая-то ошибка, обязательно напишите нам и мы вам поможем!
+                                Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по прошествии
+                                некоторого времени. Нам требуется обработать заказ, подтвердить корректность всех данных
+                                и после этого начислить бонусы. Если вы считаете, что бонусы слишком долго не
+                                начисляются и произошла какая-то ошибка, обязательно напишите нам и мы вам поможем!
 
                             </LoyaltyFAQ>
                             <LoyaltyFAQ title={'Как получить бонусы по реферальной программе, приглашая друзей?'}>
-                                Реферальная программа - это специальная возможность для вас поделиться удовлетворением от покупок с друзьями и получить взамен уникальные бонусы размером до 7000₽! Просто пригласите своих знакомых стать частью нашего сообщества, и вы оба сможете наслаждаться эксклюзивными преимуществами, такими как скидки и бонусы, созданными специально для участников нашей реферальной программы. Благодарим за доверие и ваш вклад в наше расширяющееся сообщество! Подробнее про реферальную программу
+                                Реферальная программа - это специальная возможность для вас поделиться удовлетворением
+                                от покупок с друзьями и получить взамен уникальные бонусы размером до 7000₽! Просто
+                                пригласите своих знакомых стать частью нашего сообщества, и вы оба сможете наслаждаться
+                                эксклюзивными преимуществами, такими как скидки и бонусы, созданными специально для
+                                участников нашей реферальной программы. Благодарим за доверие и ваш вклад в наше
+                                расширяющееся сообщество! Подробнее про реферальную программу
                                 смотрите <Link href={'/faq'} style={{color: 'inherit'}}>здесь</Link>
                             </LoyaltyFAQ>
                         </div>
 
                         <div className={s.faq_block}>
                             <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
-                                вы найдете здесь: <Link href={'/faq'} className={'text-black'} target={'_blank'}>FAQ</Link></h5>
+                                вы найдете здесь: <Link href={'/faq'} className={'text-black'}
+                                                        target={'_blank'}>FAQ</Link></h5>
                             <h5 className={`text-center ${s.questions_text}`}>Если у вас остались вопросы, вы всегда
                                 можете обратиться в службу поддержки и мы будем
                                 рады вам помочь!</h5>
@@ -666,15 +850,26 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
                                     <LoyaltyFAQ title={'Нужно ли авторизовываться в аккаунт для совершения заказа?'}>
-                                        Да, для оформления заказа требуется либо войти в свой аккаунт, либо создать новый, а также подтвердить свою почту. Благодаря этому вы всегда сможете с легкостью отслеживать статусы заказов в личном кабинете, а также вы точно не перепутаете указанные данные и мы всегда сможем связаться с вами!
+                                        Да, для оформления заказа требуется либо войти в свой аккаунт, либо создать
+                                        новый, а также подтвердить свою почту. Благодаря этому вы всегда сможете с
+                                        легкостью отслеживать статусы заказов в личном кабинете, а также вы точно не
+                                        перепутаете указанные данные и мы всегда сможем связаться с вами!
 
                                     </LoyaltyFAQ>
                                     <LoyaltyFAQ title={'Почему не работает промокод?'}>
-                                        Пожалуйста, убедитесь, что вы выполнили все условия для применения промокода и время действия промокода еще не закончилось. Зачастую промокоды выдаются на первую покупку или на покупки от определенной суммы, проверьте, что вы вошли в правильный аккаунт. Если вы все же считаете, что произошла какая-то ошибка, напишите нам в службу поддержки, и мы обязательно поможем вам разобраться в ситуации!
+                                        Пожалуйста, убедитесь, что вы выполнили все условия для применения промокода и
+                                        время действия промокода еще не закончилось. Зачастую промокоды выдаются на
+                                        первую покупку или на покупки от определенной суммы, проверьте, что вы вошли в
+                                        правильный аккаунт. Если вы все же считаете, что произошла какая-то ошибка,
+                                        напишите нам в службу поддержки, и мы обязательно поможем вам разобраться в
+                                        ситуации!
 
                                     </LoyaltyFAQ>
                                 </div>
-                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'} className={s.link} target={'_blank'}>FAQ</Link></h5>
+                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                           className={s.link}
+                                                                                           target={'_blank'}>FAQ</Link>
+                                </h5>
                                 <div>
                                     <h5>Мы в социальных сетях:</h5>
                                     <div className={s.icons_block}>
@@ -693,14 +888,13 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
 
             }
 
-                {!desktopStore.isDesktop && lastSeen.length > 0 && (
-                    <div className={s.cont + ' custom_cont'}>
-                        {/*<hr/>*/}
-                        <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+            {!desktopStore.isDesktop && lastSeen.length > 0 && (
+                <div className={s.cont + ' custom_cont'}>
+                    {/*<hr/>*/}
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
 
-                    </div>
-                )}
-
+                </div>
+            )}
 
 
         </MainLayout>
