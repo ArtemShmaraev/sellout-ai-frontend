@@ -121,12 +121,12 @@ const Home = ({data}) => {
                         :
                         <div>
                             {/*<div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: "10px", paddingBottom: "80px" }}>*/}
-                                <div style={{ width: '100%', margin: '0 auto', padding: 0}}>
+                                <div className={s.main} style={{ width: '100%', margin: '0 auto', padding: 0}}>
                                     <Link href="/women">
                                         <Image src={women_mob} alt="Description of your image" style={{float: 'left', cursor: 'pointer'}} layout="responsive" loading={'eager'} />
                                     </Link>
                                 </div>
-                                <div style={{ width: '100%', margin: '0 auto', padding: 0 }}>
+                                 <div className={s.main} style={{ width: '100%', margin: '0 auto', padding: 0 }}>
                                     <Link href="/men">
                                         <Image src={men_mob} alt="Description of your image" style={{float: 'left', cursor: 'pointer'}} layout="responsive" loading={'eager'} />
                                     </Link>

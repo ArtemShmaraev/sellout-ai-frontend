@@ -32,7 +32,10 @@ const CartItem = ({model, colorway, brand, price, productId, unitId, sizeId, car
             setPrices(res)
         })
         cartStore.ships[cardId] = unitId
+    // }, [])
     }, [Cookies.get('cart'), price])
+
+
 
     const getProductDetail = (product) => {
         const productDetails = {

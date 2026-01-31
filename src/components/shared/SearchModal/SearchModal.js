@@ -19,6 +19,19 @@ const SearchModal = () => {
     const q = async () => {
         const query = {}
         query.q = value
+
+        const last_search = Cookies.get('last_search');
+        let searches = [];
+        if (last_search) {
+            searches = last_search.split("(|)"); // Получить все сохраненные поиски
+        }
+
+        searches.unshift(value); // Добавить новый поиск в начало списка
+        searches = [...new Set(searches)].slice(0, 7); // Удалить дубликаты и оставить только последние 7 поисков
+
+        const updated_search = searches.join("(|)"); // Объединить список в строку
+        Cookies.set('last_search', updated_search, { expires: 2772 }); // Установить новое значение куки
+        
         const filters = await addFilterSearch(value)
         for (const key in filters) {
             if (filters[key]) {
@@ -50,7 +63,70 @@ const SearchModal = () => {
                 }
 
             } else {
-                setSuggs([])
+                let searches = [];
+                const last_search = Cookies.get('last_search');
+                if (last_search) {
+                    searches = last_search.split("(|)").slice(-7); // Получить последние 7 поисков
+                    searches = Array.from(new Set(searches)); // Удалить дубликаты
+
+
+                }
+                const uniqueSearches = [...new Set(searches)]; // Удаление дубликатов
+                const searchObjects = uniqueSearches.map(name => ({
+                    name: name,
+                    type: "История",
+                    url: `q=${name}`
+                }));
+
+                function shuffle(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+
+                const searchObjectsPop = shuffle([
+                    {
+                        "name": "adidas Samba",
+                        "type": "Популярное",
+                        "url": "line=adidas_samba"
+                    },
+                    {
+                        "name": "Vans Knu",
+                        "type": "Популярное",
+                        "url": "line=vans_knu"
+                    },
+                    {
+                        "name": "Nike Dunk",
+                        "type": "Популярное",
+                        "url": "line=nike_dunk"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
+                    }
+                ])
+                const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
+
+                const trimmedList = combinedList.slice(0, 9);
+                setSuggs(trimmedList)
             }
         }, 250)
         return () => clearTimeout(timeout)

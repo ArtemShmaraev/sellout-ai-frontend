@@ -25,7 +25,8 @@ const TextModal = ({children, title, img, titleClassname}) => {
                             onClick={handleShow}
                         >
                             <Image src={img} alt="" className={s.icon}/>
-                            <div className={s.label}>
+
+                            <div className={s.label} style={title === "Нашли тот же товар дешевле?" ? {fontWeight: 700, fontSize: "110%", color: 'black'} : {}}>
                                 {title}
                             </div>
                         </button>

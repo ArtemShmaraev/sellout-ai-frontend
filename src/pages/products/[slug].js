@@ -546,12 +546,13 @@ const OneProductPage = ({product, prices, ip}) => {
                                         <span itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                               className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
-                                            <span>от </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+                                            <span>от </span><span>{addSpacesToNumber(product.price.final_price)}</span><span>₽</span>
 
 
                                             {product.is_fast_shipping &&
                                                 <Image src={truck} alt="" className={s.icons}/>}
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                            <meta itemProp="price" content={product.price.final_price}/>
                                             <meta itemProp="priceCurrency" content="RUB"/>
                                             <meta itemProp="availability" content="OnlineOnly"/>
                                         </span>
@@ -643,6 +644,79 @@ const OneProductPage = ({product, prices, ip}) => {
                                             </div>
                                     }
                                 </div>
+                                {/*{productStore.sizeChosen &&*/}
+                                {/*<div style={{paddingTop: "12px"}}>*/}
+
+                                {/*<TextModal title={'Нашли тот же товар дешевле? '}>*/}
+                                {/*    <Image src={cashStack1} alt='' width={80}/>*/}
+                                {/*    <h4 className={'my-3'} >Нашли тот же товар дешевле?</h4>*/}
+                                {/*    <div className={s.arrows_section} style={{marginLeft: -5}}>*/}
+                                {/*        <Image src={ffIcon} alt='' width={100}/>*/}
+                                {/*        <div className={s.arrows_block}>*/}
+                                {/*            <div>*/}
+                                {/*                Информация о конкуренте*/}
+                                {/*            </div>*/}
+                                {/*            <div className={s.arrows_cont}>*/}
+                                {/*                <Image src={twoArrows} alt='' fill={true} className={s.arrow_img}/>*/}
+                                {/*            </div>*/}
+                                {/*            <div>*/}
+                                {/*                Лучшая цена*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*        <Image src={selloutIcon} alt='' width={70}/>*/}
+                                {/*    </div>*/}
+                                {/*    <p className={s.text}>*/}
+                                {/*        Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и*/}
+                                {/*        обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим клиентам*/}
+                                {/*        лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на*/}
+                                {/*        широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и аксессуаров.*/}
+                                {/*        Поэтому если вы нашли более низкую цену у наших конкурентов, смело пишите нам, и мы*/}
+                                {/*        обязательно сделаем для вас наилучшее предложение!*/}
+
+                                {/*    </p>*/}
+                                {/*    <div className={s.faq_block}>*/}
+                                {/*        <h5 className={'text-center'}>Часто задаваемые вопросы</h5>*/}
+                                {/*        <LoyaltyFAQ*/}
+                                {/*            title={'Цена в другом месте слишком низкая, и вы думаете, что там продают подделки, что делать?'}>*/}
+                                {/*            Да, если цена разительно ниже нашей, то это явный признак неоригинального*/}
+                                {/*            товара, однако все равно присылайте нам, где вы наткнулись на подозрительное*/}
+                                {/*            предложения, а мы в свою очередь расскажем вам и объективно докажем, является ли*/}
+                                {/*            данный магазин магазином подделок. Не стесняйтесь писать нам об этом, быть*/}
+                                {/*            может, наши опытные специалисты*/}
+                                {/*            уберегут вас от покупки подделки!*/}
+
+                                {/*        </LoyaltyFAQ>*/}
+                                {/*        <LoyaltyFAQ*/}
+                                {/*            title={'Куда присылать информацию о том, что вы нашли более выгодное предложение?'}>*/}
+                                {/*            Вы можете написать нам любым удобным для вас способом и прислать в любом формате*/}
+                                {/*            информацию о предложении конкурентов: ссылка, контакы в соц. сетях, скриншот*/}
+                                {/*            и.т.д.*/}
+                                {/*            <br/>*/}
+                                {/*            Наши контакты:*/}
+                                {/*            <div>*/}
+                                {/*                <div>*/}
+                                {/*                    Почта: <a href={'mailto:customerservice@sellout.su'}*/}
+                                {/*                              className={'text-black'}>customerservice@sellout.su</a>*/}
+                                {/*                </div>*/}
+                                {/*                <div>*/}
+                                {/*                    WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}*/}
+                                {/*                                 target={'_blank'}*/}
+                                {/*                                 className={'text-black'}>+7 993 896-92-27</a>*/}
+                                {/*                </div>*/}
+                                {/*                <div>*/}
+                                {/*                    Telegram: <a href={'https://t.me/sellout_official'}*/}
+                                {/*                                 target={'_blank'}*/}
+                                {/*                                 className={'text-black'}>@sellout_official</a>*/}
+                                {/*                </div>*/}
+                                {/*            </div>*/}
+                                {/*        </LoyaltyFAQ>*/}
+                                {/*    </div>*/}
+                                {/*    <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}*/}
+                                {/*                                                               className={s.link}*/}
+                                {/*                                                               target={'_blank'}>FAQ</Link>*/}
+                                {/*    </h5>*/}
+                                {/*</TextModal>*/}
+                                {/*</div>}*/}
                             </>
                         }
 
@@ -710,12 +784,13 @@ const OneProductPage = ({product, prices, ip}) => {
                                         <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
                                         >
-                                            <span> от </span><span itemProp="price">{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
+                                            <span> от </span><span>{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
 
 
                                             {product.is_fast_shipping &&
                                                 <Image src={truck} alt="" className={s.icons}/>}
                                             {product.is_return && <Image src={refund} alt="" className={s.icons}/>}
+                                            <meta itemProp="price" content={product.price.final_price}/>
                                             <meta itemProp="priceCurrency" content="RUB"/>
                                             <meta itemProp="availability" content="OnlineOnly"/>
                                         </div>
@@ -796,6 +871,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                             </div>
                                     }
                                 </div>
+
                             </>
                         }
 
@@ -806,6 +882,75 @@ const OneProductPage = ({product, prices, ip}) => {
 
 
                         <div className={s.link_block}>
+                            <TextModal title={'Нашли тот же товар дешевле?'} img={cashStack}>
+                                <Image src={cashStack1} alt='' width={80}/>
+                                <h4 className={'my-3'} >Нашли тот же товар дешевле?</h4>
+                                <div className={s.arrows_section} style={{marginLeft: -5}}>
+                                    <Image src={ffIcon} alt='' width={100}/>
+                                    <div className={s.arrows_block}>
+                                        <div>
+                                            Информация о конкуренте
+                                        </div>
+                                        <div className={s.arrows_cont}>
+                                            <Image src={twoArrows} alt='' fill={true} className={s.arrow_img}/>
+                                        </div>
+                                        <div>
+                                            Лучшая цена
+                                        </div>
+                                    </div>
+                                    <Image src={selloutIcon} alt='' width={70}/>
+                                </div>
+                                <p className={s.text}>
+                                    Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и
+                                    обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим клиентам
+                                    лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
+                                    широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и аксессуаров.
+                                    Поэтому если вы нашли более низкую цену у наших конкурентов, смело пишите нам, и мы
+                                    обязательно сделаем для вас наилучшее предложение!
+
+                                </p>
+                                <div className={s.faq_block}>
+                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ
+                                        title={'Цена в другом месте слишком низкая, и вы думаете, что там продают подделки, что делать?'}>
+                                        Да, если цена разительно ниже нашей, то это явный признак неоригинального
+                                        товара, однако все равно присылайте нам, где вы наткнулись на подозрительное
+                                        предложения, а мы в свою очередь расскажем вам и объективно докажем, является ли
+                                        данный магазин магазином подделок. Не стесняйтесь писать нам об этом, быть
+                                        может, наши опытные специалисты
+                                        уберегут вас от покупки подделки!
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ
+                                        title={'Куда присылать информацию о том, что вы нашли более выгодное предложение?'}>
+                                        Вы можете написать нам любым удобным для вас способом и прислать в любом формате
+                                        информацию о предложении конкурентов: ссылка, контакы в соц. сетях, скриншот
+                                        и.т.д.
+                                        <br/>
+                                        Наши контакты:
+                                        <div>
+                                            <div>
+                                                Почта: <a href={'mailto:customerservice@sellout.su'}
+                                                          className={'text-black'}>customerservice@sellout.su</a>
+                                            </div>
+                                            <div>
+                                                WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
+                                                             target={'_blank'}
+                                                             className={'text-black'}>+7 993 896-92-27</a>
+                                            </div>
+                                            <div>
+                                                Telegram: <a href={'https://t.me/sellout_official'}
+                                                             target={'_blank'}
+                                                             className={'text-black'}>@sellout_official</a>
+                                            </div>
+                                        </div>
+                                    </LoyaltyFAQ>
+                                </div>
+                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                           className={s.link}
+                                                                                           target={'_blank'}>FAQ</Link>
+                                </h5>
+                            </TextModal>
                             <TextModal title={'Нужно узнать больше о товаре или остались другие вопросы?'} img={how}>
                                 <div className={s.content}>
                                     <Image src={headphones} alt='' width={60}/>
@@ -986,207 +1131,6 @@ const OneProductPage = ({product, prices, ip}) => {
                                                                                            className={s.link}
                                                                                            target={'_blank'}>FAQ</Link>
                                 </h5>
-                            </TextModal>
-                            <TextModal title={'Нашли тот же товар дешевле?'} img={cashStack}>
-                                <Image src={cashStack1} alt='' width={80}/>
-                                <h4 className={'my-3'}>Нашли тот же товар дешевле?</h4>
-                                <div className={s.arrows_section} style={{marginLeft: -5}}>
-                                    <Image src={ffIcon} alt='' width={100}/>
-                                    <div className={s.arrows_block}>
-                                        <div>
-                                            Информация о конкуренте
-                                        </div>
-                                        <div className={s.arrows_cont}>
-                                            <Image src={twoArrows} alt='' fill={true} className={s.arrow_img}/>
-                                        </div>
-                                        <div>
-                                            Лучшая цена
-                                        </div>
-                                    </div>
-                                    <Image src={selloutIcon} alt='' width={70}/>
-                                </div>
-                                <p className={s.text}>
-                                    Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и
-                                    обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим клиентам
-                                    лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
-                                    широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и аксессуаров.
-                                    Поэтому если вы нашли более низкую цену у наших конкурентов, смело пишите нам, и мы
-                                    обязательно сделаем для вас наилучшее предложение!
-
-                                </p>
-                                <div className={s.faq_block}>
-                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                    <LoyaltyFAQ
-                                        title={'Цена в другом месте слишком низкая, и вы думаете, что там продают подделки, что делать?'}>
-                                        Да, если цена разительно ниже нашей, то это явный признак неоригинального
-                                        товара, однако все равно присылайте нам, где вы наткнулись на подозрительное
-                                        предложения, а мы в свою очередь расскажем вам и объективно докажем, является ли
-                                        данный магазин магазином подделок. Не стесняйтесь писать нам об этом, быть
-                                        может, наши опытные специалисты
-                                        уберегут вас от покупки подделки!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ
-                                        title={'Куда присылать информацию о том, что вы нашли более выгодное предложение?'}>
-                                        Вы можете написать нам любым удобным для вас способом и прислать в любом формате
-                                        информацию о предложении конкурентов: ссылка, контакы в соц. сетях, скриншот
-                                        и.т.д.
-                                        <br/>
-                                        Наши контакты:
-                                        <div>
-                                            <div>
-                                                Почта: <a href={'mailto:customerservice@sellout.su'}
-                                                          className={'text-black'}>customerservice@sellout.su</a>
-                                            </div>
-                                            <div>
-                                                WhatsApp: <a href={'https://wa.me/message/L2OINP6KNMNLA1'}
-                                                             target={'_blank'}
-                                                             className={'text-black'}>+7 993 896-92-27</a>
-                                            </div>
-                                            <div>
-                                                Telegram: <a href={'https://t.me/sellout_official'}
-                                                             target={'_blank'}
-                                                             className={'text-black'}>@sellout_official</a>
-                                            </div>
-                                        </div>
-                                    </LoyaltyFAQ>
-                                </div>
-                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
-                                                                                           className={s.link}
-                                                                                           target={'_blank'}>FAQ</Link>
-                                </h5>
-                            </TextModal>
-                            <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
-                                <Image src={change} alt='' width={60}/>
-                                <h4 className={'my-3'}>Почему изменилась цена или модель оказалась распроданной?</h4>
-                                <div className={s.img_cont}>
-                                    <Image src={map} alt='' className={s.img} fill={true}/>
-                                </div>
-                                <p className={s.text}>
-                                    Многие представленные модели являются лимитированными и находятся в наличии в
-                                    ограниченном количестве, поэтому может произойти такое, что кто-то другой купит эту
-                                    позицию и данное ценовое предложение перестанет быть доступным. Мы собираем десятки
-                                    миллионов предложений со всего мира, поэтому даже в короткие промежутки времени цена
-                                    может меняться. В том числе на цену могут сказываться прочие внешние факторы, не
-                                    зависящие от нас, такие как курс, стоимость доставки и многое другое.
-
-                                </p>
-                                <div className={s.faq_block}>
-                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                    <LoyaltyFAQ title={'После чего цена меняться не будет?'}>
-                                        После того, как вы оформите заказ, цена для вас будет зафиксирована и никаким
-                                        изменениям не подлежит. Добавление товара в корзину или избранное, к сожалению,
-                                        не позволяет нам зафиксировать цену по объективным причинам. Мы стараемся в
-                                        каждый момент времени предлагать вам наилучшую цену из возможных и делать ваш
-                                        шопинг с нами еще более удобным и выгодным, поэтому не откладывайте ваши покупки
-                                        на потом, чтобы не упустить приятные цены!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Как часто могут меняться цены?'}>
-                                        Цена может не меняться как на протяжении долгого времени, так и постоянно
-                                        оставаться волатильной. Она может как повыситься, так и понизиться. Вскоре мы
-                                        добавим возможность следить за изменением цен, а также получать уведомления о
-                                        появлении более выгодного предложения на интересующий вас лот!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Почему модель оказалась распроданной?'}>
-                                        Так как многие размещенные на нашей платформе лоты являются коллекционными и
-                                        редкими, может произойти такое, что какой-то конкретный размер или вся модель
-                                        пропадет из наличия, поэтому не откладывайте свои покупки, чтобы успеть
-                                        приобрести желанную модель!
-
-                                    </LoyaltyFAQ>
-                                </div>
-                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
-                                                                                           className={s.link}
-                                                                                           target={'_blank'}>FAQ</Link>
-                                </h5>
-                            </TextModal>
-                            <TextModal title={'Бонусы'} img={giftModal}>
-                                <Image src={gift_gard} alt='' width={80}/>
-                                <h4 className={'my-3'}>Получайте бонусы</h4>
-                                <div className={'d-flex justify-content-evenly'}>
-                                    <div className={s.point_block}>
-                                        <Image src={first} alt='' width={60}/>
-                                        <div>за первый заказ</div>
-                                        <div className={s.line}/>
-                                        1000 ₽
-                                    </div>
-                                    <div className={s.point_block}>
-                                        <Image src={good} alt='' width={60}/>
-                                        <div>за каждый товар</div>
-                                        <div className={s.line}/>
-                                        до 1500 ₽
-                                    </div>
-                                </div>
-                                <div className={'d-flex justify-content-evenly'}>
-                                    <div className={s.point_block}>
-                                        <Image src={friend} alt='' width={60}/>
-                                        <div>за приглашенного друга</div>
-                                        <div className={s.line}/>
-                                        до 3000 ₽
-                                    </div>
-                                    <div className={s.point_block}>
-                                        <Image src={birth} alt='' width={60}/>
-                                        <div>на день рождения</div>
-                                        <div className={s.line}/>
-                                        1000 ₽
-                                    </div>
-                                </div>
-                                <div className={'d-block'}>
-                                    <Image src={smile} alt='' width={60}/>
-                                    <div className={'my-3'}>И оплачивайте ими 100% от стоимости заказа!</div>
-                                </div>
-                                <p className={s.text}>
-                                    Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT, поэтому за
-                                    каждую совершенную покупку мы будем начислять вам бонусы в соответствии с вашим
-                                    статусом. Конкретное число бонусов за каждый товар вы сможете увидеть на странице
-                                    товара, а также в корзине. Также мы дарим 1000 бонусных рублей за первую покупку и
-                                    на ваш день рождения и регулярно начисляем бонусы в честь различных праздников!
-
-                                </p>
-                                <div className={s.faq_block}>
-                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
-                                    <LoyaltyFAQ title={'Чему равны бонусы?'}>
-                                        Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до 100%
-                                        заказа, тем самым сводя стоимость заказа к нулю!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Как воспользоваться бонусами?'}>
-                                        Чтобы оплатить заказ целиком или частично бонусами, в корзине или на любом этапе
-                                        оформления заказа введите количество бонусов, которое хотите списать, и скидка
-                                        будет автоматически применена!
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ title={'Как быстро после совершения покупки начисляются бонусы?'}>
-                                        Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по
-                                        прошествии некоторого времени. Нам требуется обработать заказ, подтвердить
-                                        корректность всех данных и после этого начислить бонусы. Если вы считаете, что
-                                        бонусы слишком долго не начисляются и произошла какая-то ошибка, обязательно
-                                        напишите нам и мы вам поможем!
-
-                                    </LoyaltyFAQ>
-                                    <LoyaltyFAQ
-                                        title={'Как получить бонусы по реферальной программе, приглашая друзей?'}>
-                                        Реферальная программа - это специальная возможность для вас поделиться
-                                        удовлетворением от покупок с друзьями и получить взамен уникальные бонусы
-                                        размером до 7000₽! Просто пригласите своих знакомых стать частью нашего
-                                        сообщества, и вы оба сможете наслаждаться эксклюзивными преимуществами, такими
-                                        как скидки и бонусы, созданными специально для участников нашей реферальной
-                                        программы. Благодарим за доверие и ваш вклад в наше расширяющееся сообщество!
-                                        Подробнее про реферальную программу
-                                        смотрите <Link href={'/faq'} style={{color: 'inherit'}}>здесь</Link>
-                                    </LoyaltyFAQ>
-                                </div>
-
-                                <div className={s.faq_block}>
-                                    <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
-                                        вы найдете здесь: <Link href={'/faq'} className={'text-black'}
-                                                                target={'_blank'}>FAQ</Link></h5>
-                                    <h5 className={`text-center ${s.questions_text}`}>Если у вас остались вопросы, вы
-                                        всегда
-                                        можете обратиться в службу поддержки и мы будем
-                                        рады вам помочь!</h5>
-                                </div>
                             </TextModal>
                             <TextModal title={'Доставка, оплата, возврат'} img={payment}>
                                 <Image src={truck} alt='' width={60}/>
@@ -1411,6 +1355,141 @@ const OneProductPage = ({product, prices, ip}) => {
                                 </h5>
 
                             </TextModal>
+                            <TextModal title={'Бонусы'} img={giftModal}>
+                                <Image src={gift_gard} alt='' width={80}/>
+                                <h4 className={'my-3'}>Получайте бонусы</h4>
+                                <div className={'d-flex justify-content-evenly'}>
+                                    <div className={s.point_block}>
+                                        <Image src={first} alt='' width={60}/>
+                                        <div>за первый заказ</div>
+                                        <div className={s.line}/>
+                                        1000 ₽
+                                    </div>
+                                    <div className={s.point_block}>
+                                        <Image src={good} alt='' width={60}/>
+                                        <div>за каждый товар</div>
+                                        <div className={s.line}/>
+                                        до 1500 ₽
+                                    </div>
+                                </div>
+                                <div className={'d-flex justify-content-evenly'}>
+                                    <div className={s.point_block}>
+                                        <Image src={friend} alt='' width={60}/>
+                                        <div>за приглашенного друга</div>
+                                        <div className={s.line}/>
+                                        до 3000 ₽
+                                    </div>
+                                    <div className={s.point_block}>
+                                        <Image src={birth} alt='' width={60}/>
+                                        <div>на день рождения</div>
+                                        <div className={s.line}/>
+                                        1000 ₽
+                                    </div>
+                                </div>
+                                <div className={'d-block'}>
+                                    <Image src={smile} alt='' width={60}/>
+                                    <div className={'my-3'}>И оплачивайте ими 100% от стоимости заказа!</div>
+                                </div>
+                                <p className={s.text}>
+                                    Мы стараемся всячески благодарить вас за покупки на платформе SELLOUT, поэтому за
+                                    каждую совершенную покупку мы будем начислять вам бонусы в соответствии с вашим
+                                    статусом. Конкретное число бонусов за каждый товар вы сможете увидеть на странице
+                                    товара, а также в корзине. Также мы дарим 1000 бонусных рублей за первую покупку и
+                                    на ваш день рождения и регулярно начисляем бонусы в честь различных праздников!
+
+                                </p>
+                                <div className={s.faq_block}>
+                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ title={'Чему равны бонусы?'}>
+                                        Каждый один бонус приравнивается к одному рублю! Вы можете оплачивать до 100%
+                                        заказа, тем самым сводя стоимость заказа к нулю!
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как воспользоваться бонусами?'}>
+                                        Чтобы оплатить заказ целиком или частично бонусами, в корзине или на любом этапе
+                                        оформления заказа введите количество бонусов, которое хотите списать, и скидка
+                                        будет автоматически применена!
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как быстро после совершения покупки начисляются бонусы?'}>
+                                        Обратите внимание, бонусы на ваш баланс будут начислены не сразу, а по
+                                        прошествии некоторого времени. Нам требуется обработать заказ, подтвердить
+                                        корректность всех данных и после этого начислить бонусы. Если вы считаете, что
+                                        бонусы слишком долго не начисляются и произошла какая-то ошибка, обязательно
+                                        напишите нам и мы вам поможем!
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ
+                                        title={'Как получить бонусы по реферальной программе, приглашая друзей?'}>
+                                        Реферальная программа - это специальная возможность для вас поделиться
+                                        удовлетворением от покупок с друзьями и получить взамен уникальные бонусы
+                                        размером до 7000₽! Просто пригласите своих знакомых стать частью нашего
+                                        сообщества, и вы оба сможете наслаждаться эксклюзивными преимуществами, такими
+                                        как скидки и бонусы, созданными специально для участников нашей реферальной
+                                        программы. Благодарим за доверие и ваш вклад в наше расширяющееся сообщество!
+                                        Подробнее про реферальную программу
+                                        смотрите <Link href={'/faq'} style={{color: 'inherit'}}>здесь</Link>
+                                    </LoyaltyFAQ>
+                                </div>
+
+                                <div className={s.faq_block}>
+                                    <h5 className={`text-center ${s.questions_text}`}>Ответы на большинство вопросов
+                                        вы найдете здесь: <Link href={'/faq'} className={'text-black'}
+                                                                target={'_blank'}>FAQ</Link></h5>
+                                    <h5 className={`text-center ${s.questions_text}`}>Если у вас остались вопросы, вы
+                                        всегда
+                                        можете обратиться в службу поддержки и мы будем
+                                        рады вам помочь!</h5>
+                                </div>
+                            </TextModal>
+
+                            <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
+                                <Image src={change} alt='' width={60}/>
+                                <h4 className={'my-3'}>Почему изменилась цена или модель оказалась распроданной?</h4>
+                                <div className={s.img_cont}>
+                                    <Image src={map} alt='' className={s.img} fill={true}/>
+                                </div>
+                                <p className={s.text}>
+                                    Многие представленные модели являются лимитированными и находятся в наличии в
+                                    ограниченном количестве, поэтому может произойти такое, что кто-то другой купит эту
+                                    позицию и данное ценовое предложение перестанет быть доступным. Мы собираем десятки
+                                    миллионов предложений со всего мира, поэтому даже в короткие промежутки времени цена
+                                    может меняться. В том числе на цену могут сказываться прочие внешние факторы, не
+                                    зависящие от нас, такие как курс, стоимость доставки и многое другое.
+
+                                </p>
+                                <div className={s.faq_block}>
+                                    <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
+                                    <LoyaltyFAQ title={'После чего цена меняться не будет?'}>
+                                        После того, как вы оформите заказ, цена для вас будет зафиксирована и никаким
+                                        изменениям не подлежит. Добавление товара в корзину или избранное, к сожалению,
+                                        не позволяет нам зафиксировать цену по объективным причинам. Мы стараемся в
+                                        каждый момент времени предлагать вам наилучшую цену из возможных и делать ваш
+                                        шопинг с нами еще более удобным и выгодным, поэтому не откладывайте ваши покупки
+                                        на потом, чтобы не упустить приятные цены!
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Как часто могут меняться цены?'}>
+                                        Цена может не меняться как на протяжении долгого времени, так и постоянно
+                                        оставаться волатильной. Она может как повыситься, так и понизиться. Вскоре мы
+                                        добавим возможность следить за изменением цен, а также получать уведомления о
+                                        появлении более выгодного предложения на интересующий вас лот!
+
+                                    </LoyaltyFAQ>
+                                    <LoyaltyFAQ title={'Почему модель оказалась распроданной?'}>
+                                        Так как многие размещенные на нашей платформе лоты являются коллекционными и
+                                        редкими, может произойти такое, что какой-то конкретный размер или вся модель
+                                        пропадет из наличия, поэтому не откладывайте свои покупки, чтобы успеть
+                                        приобрести желанную модель!
+
+                                    </LoyaltyFAQ>
+                                </div>
+                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
+                                                                                           className={s.link}
+                                                                                           target={'_blank'}>FAQ</Link>
+                                </h5>
+                            </TextModal>
+
+
                             {/*<QuestionsDropdown/>*/}
                         </div>
                         {!desktopStore.isDesktop && lastSeen.length > 0 &&
