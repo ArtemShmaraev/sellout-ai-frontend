@@ -201,8 +201,12 @@ const Cart = ({productUnits, defaultPrice, finalPrice, sale, userData, bonuses, 
             } else {
                 const cartArr = Cookies.get('cart').trim().split(' ')
                 res = await promoUnauth(promo, cartArr)
+
                 console.log(res)
                 Cookies.set('promo', promo, {expires: 2772})
+                const res2 = await fetchCartPrice(cartArr, promo)
+                bonuses = res2.bonus
+
             }
 
             setFinAmount(res.final_amount)
