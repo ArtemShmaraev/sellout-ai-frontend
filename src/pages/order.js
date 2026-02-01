@@ -34,7 +34,7 @@ export const getServerSideProps = async (context) => {
     const defaultPrice = cart.total_amount
     const finalPrice = cart.final_amount
     const sale = cart.total_sale
-    const maxBonuses = cart.bonus + cart.promo_bonus
+    const maxBonuses = cart.bonus + cart.promo_bonus + cart.first_order_bonus
     const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const skipPayment = cart.promo_code ? cart.promo_code.skip_payment : false
