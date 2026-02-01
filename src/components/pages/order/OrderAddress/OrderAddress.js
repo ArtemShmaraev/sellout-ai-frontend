@@ -37,14 +37,16 @@ const OrderAddress = ({isPickup = false, checked, name, address, id, isMain}) =>
     return (
         <div className={s.card}>
             <div className={s.col}>
-                <div onClick={selectAddress}>
+                <div className={s.address_name} onClick={selectAddress}>
                     <CustomRadio checked={orderStore.selectedAddressId === id}
                                  label={isPickup ? 'Самовывоз' : name}
                                  normalLabel={true}
                                  reversed={true}
                     />
+
                 </div>
-                <div>{isPickup ? 'Ул 3-я Лесные поляны, д27/22' : address}</div>
+                <div className={s.address_text}>{isPickup ? 'Ул 3-я Лесные поляны, д27/22' : address}</div>
+
             </div>
             <div className={s.icons_block}>
                 <AddressModal addressId={id} defName={name} defAddress={address} defMain={isMain}/>

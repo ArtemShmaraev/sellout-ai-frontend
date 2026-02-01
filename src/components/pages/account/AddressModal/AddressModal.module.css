@@ -6,8 +6,9 @@
     padding: 10px;
 }
 .white_btn {
-    color: black;
+    /*color: black;*/
     background: white;
+    border: 1px solid black;
     border-radius: 7px;
     padding: 10px;
 }

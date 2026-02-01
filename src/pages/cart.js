@@ -376,6 +376,12 @@ const Cart = ({
                         <div className={s.promos_block}>
                             <h4>Ваш заказ:</h4>
 
+
+                            <div className={s.left_right}>
+                                <p className={'mb-0'}>Cтоимость товаров:</p>
+                                <p className={s.right_text}>{addSpacesToNumber(defAmount)}₽</p>
+                            </div>
+
                             <PromoInput placeholder={'Введите промокод'}
                                         onChange={(e) => setPromo(e.target.value)}
                                         value={promo}
@@ -398,10 +404,6 @@ const Cart = ({
                                 />
                             }
 
-                            <div className={s.left_right}>
-                                <p className={'mb-0'}>Cтоимость товаров:</p>
-                                <p className={s.right_text}>{addSpacesToNumber(defAmount)}₽</p>
-                            </div>
                             {
 
                                 Number(totalSaleAmount) > 0 &&

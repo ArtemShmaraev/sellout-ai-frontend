@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 import {fetchDeliveryInfo} from "@/http/orderApi";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 
-const Stage1 = ({addresses, userData}) => {
+const Stage1 = ({addresses, userData, cart}) => {
     const router = useRouter()
     const {orderStore, userStore, desktopStore} = useContext(Context)
     const [firstname, setFirstname] = useState(userData.first_name)
@@ -22,6 +22,7 @@ const Stage1 = ({addresses, userData}) => {
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
     const [comment, setComment] = useState('')
+    const [boxberryAddress, setBoxberryAddress] = useState(null)
 
     useEffect(() => {
         console.log(userData)
@@ -38,7 +39,10 @@ const Stage1 = ({addresses, userData}) => {
     const chooseType = type => {
         orderStore.setShipType(type)
         orderStore.setSelectedAddressId(null)
+
         if (type === 1 || type === 3) {
+            setBoxberryAddress(null)
+            orderStore.setPvzAddress(false)
             addresses.forEach(el => {
                 if (el.is_main) {
                     orderStore.setSelectedAddressId(el.id)
@@ -61,11 +65,20 @@ const Stage1 = ({addresses, userData}) => {
             document.head.removeChild(script);
         };
     }, []);
-    const [boxberryAddress, setBoxberryAddress] = useState(null)
+
     const handleWidgetClick = () => {
-        // boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', 0, 0,
-        //     0, 0, 0, 0);
-        boxberry.open(boxberryCallback_function);
+        let weight = 0;
+        let price = 0;
+        for (const unit of cart.product_units) {
+            // Ваш код обработки каждого элемента массива
+            // Например, можно добавить вес каждого элемента к общему весу
+            weight += unit.weight_kg * 1000
+            price += unit.final_price
+            console.log(unit)
+        }
+
+        boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', price * 1.4, weight,0, 0, 0, 0)
+        // boxberry.open(boxberryCallback_function);
     };
     const boxberryCallback_function = (res) => {
         setBoxberryAddress(res)
@@ -93,6 +106,7 @@ const Stage1 = ({addresses, userData}) => {
         if (orderStore.shipType === 2) {
             obj.delivery_type = 1
             obj.target = boxberryRes.id
+            obj.bxb_price = boxberryRes.price
         }
         const token = Cookies.get('access_token')
         const data = await fetchDeliveryInfo(obj, token)

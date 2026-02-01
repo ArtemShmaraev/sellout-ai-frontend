@@ -24,6 +24,7 @@ import {desktopStore} from "@/store/DesktopStore";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import gift from "@/static/icons/gift-green.svg";
 import green_gift from "@/static/icons/gift-green.svg";
+import {Fade} from "react-bootstrap";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -42,6 +43,7 @@ export const getServerSideProps = async (context) => {
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     return {
         props: {
+            cart,
             addresses,
             defaultPrice,
             finalPrice,
@@ -55,6 +57,7 @@ export const getServerSideProps = async (context) => {
     }
 }
 const Order = ({
+                   cart,
                    addresses,
                    defaultPrice,
                    finalPrice,
@@ -80,7 +83,8 @@ const Order = ({
     const renderStage = () => {
         const stage = orderStore.stage
         if (stage === 1) {
-            return <Stage1 addresses={addresses} userData={userData}/>
+
+            return <Stage1 addresses={addresses} userData={userData} cart={cart}/>
         }
         if (stage === 2) {
             return <Stage2/>
@@ -180,7 +184,7 @@ const Order = ({
                 return null
             }
             //Boxberry
-            if (orderStore.shipType === 2 && !orderObj.target) {
+            if (orderStore.shipType === 2 && !orderObj.pvz_address) {
                 setFillAll(true)
                 setFillAddress(true)
                 return null
@@ -199,11 +203,13 @@ const Order = ({
         if (orderStore.shipType === 3) {
             orderObj.delivery_type = 0
             orderObj.address_id = orderStore.selectedAddressId
+            orderObj.pvz_address = false
         }
         //До двери
         if (orderStore.shipType === 1) {
             orderObj.delivery_type = 2
             orderObj.address_id = orderStore.selectedAddressId
+            orderObj.pvz_address = false
         }
         //Boxberry
         if (orderStore.shipType === 2) {
@@ -387,15 +393,32 @@ const Order = ({
                         <div className={s.left_right}>
                             <p  className={s.big_text}>Итого: </p>
                             <p className={s.big_text}>{addSpacesToNumber(calculateFinalPrice())} ₽</p></div>
-                        <form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form"
+                        {/*<form method="POST" action="https://sellout.server.paykeeper.ru/create/" id="payment-form"*/}
+                        {/*      ref={checkoutRef}>*/}
+                        {/*    <input type="hidden" name="sum" value={String(order.final_amount)}/>*/}
+                        {/*    <input type="hidden" name="clientid" value={order.surname + " " + order.name}/>*/}
+                        {/*    <input type="hidden" name="orderid" value={order.number?.toString()}/>*/}
+                        {/*    <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`}/>*/}
+                        {/*    <input type="hidden" name="client_email" value={order.email}/>*/}
+                        {/*    <input type="hidden" name="client_phone" value={order.phone_int}/>*/}
+                        {/*    <input type="hidden" name="pstype" value='sbp_default'/>*/}
+                        {/*    <input type="hidden" name="user_result_callback"*/}
+                        {/*           value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`}/>*/}
+                        {/*    <input type="hidden" name="cart" value={order.invoice_data}/>*/}
+                        {/*    /!*<input type="submit" value="Перейти к оплате" />*!/*/}
+                        {/*</form>*/}
+
+                        <form method="POST" action="https://sellout.su/api/v1/order/payment" id="payment-form"
                               ref={checkoutRef}>
                             <input type="hidden" name="sum" value={String(order.final_amount)}/>
+                            {/*<input type="hidden" name="sum" value={"10"} />*/}
                             <input type="hidden" name="clientid" value={order.surname + " " + order.name}/>
                             <input type="hidden" name="orderid" value={order.number?.toString()}/>
                             <input type="hidden" name="service_name" value={`Заказ №${order.number?.toString()}`}/>
                             <input type="hidden" name="client_email" value={order.email}/>
                             <input type="hidden" name="client_phone" value={order.phone_int}/>
                             <input type="hidden" name="pstype" value='sbp_default'/>
+                            <input type="hidden" name="json" value='true'/>
                             <input type="hidden" name="user_result_callback"
                                    value={`https://sellout.su/api/v1/order/fact_of_payment?id=${order.id}`}/>
                             <input type="hidden" name="cart" value={order.invoice_data}/>
