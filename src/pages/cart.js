@@ -211,10 +211,7 @@ const Cart = ({
         setSaleAmount(sale)
         setPromoSaleAmount(promoSale)
         setBonusSaleAmount(bonusSale > 0 ? bonusSale : "")
-
         setTotalSaleAmount(totalSale)
-
-
         setBonusAmount(bonus)
         setPromoBonusAmount(promoBonus)
         setFirstOrderBonus(firstOrder)
@@ -247,11 +244,11 @@ const Cart = ({
                 res = await promoAuth(promo, userStore.id, token)
                 console.log(res)
                 // router.push('/cart', undefined, {scroll: false})
-                setFinAmount(res.final_amount)
-                setTotalSaleAmount(res.promo_sale + saleAmount + bonusSaleAmount)
+                setFinAmount(Math.max(res.final_amount, 1))
+                setTotalSaleAmount(Math.min(res.promo_sale + saleAmount + bonusSaleAmount, defAmount))
                 setPromoSaleAmount(res.promo_sale)
                 setPromoBonusAmount(res.promo_bonus)
-                setFirstOrderBonus(1000)
+                // setFirstOrderBonus(0)
                 if (res.promo_bonus > 0) {
                     setFirstOrderBonus(0)
                 }
@@ -264,8 +261,8 @@ const Cart = ({
                 res = await promoUnauth(promo, cartArr)
 
                 console.log(res)
-                setFinAmount(res.final_amount)
-                setTotalSaleAmount(res.promo_sale + saleAmount + bonusSaleAmount)
+                setFinAmount(Math.max(res.final_amount, 1))
+                setTotalSaleAmount(Math.min(res.promo_sale + saleAmount + bonusSaleAmount, defAmount))
                 setPromoSaleAmount(res.promo_sale)
                 setPromoBonusAmount(res.promo_bonus)
                 setFirstOrderBonus(1000)
