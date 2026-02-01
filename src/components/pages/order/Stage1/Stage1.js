@@ -22,6 +22,8 @@ const Stage1 = ({addresses, userData, cart}) => {
     const [email, setEmail] = useState(userData.email)
     const [phone, setPhone] = useState(userData.phone_number)
     const [comment, setComment] = useState('')
+
+
     const [boxberryAddress, setBoxberryAddress] = useState(null)
 
     useEffect(() => {
@@ -110,6 +112,7 @@ const Stage1 = ({addresses, userData, cart}) => {
         }
         const token = Cookies.get('access_token')
         const data = await fetchDeliveryInfo(obj, token)
+
         orderStore.setDeliveryPrice(data)
     }
     const [contactOpen, setContactOpen] = useState(false)
@@ -173,6 +176,7 @@ const Stage1 = ({addresses, userData, cart}) => {
                                  checked={orderStore.shipType === 3}
                                  reversed={true}
                     />
+
                 </div>
                 <div>
                     {orderStore.shipType === 3 &&

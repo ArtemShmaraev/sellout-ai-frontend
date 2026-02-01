@@ -12,9 +12,7 @@
 }
 
 .address_text{
-    padding-top: 8px;
-    /*font-weight: 500;*/
-    font-size: 95%;
+
 
 }
 .col {
@@ -32,5 +30,11 @@
         align-items: start;
         /*min-height: 70px;*/
         margin-top: 7px;
+    }
+    .address_text{
+        padding-top: 8px;
+        /*font-weight: 500;*/
+        font-size: 95%;
+
     }
 }
