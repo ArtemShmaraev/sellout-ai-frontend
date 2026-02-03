@@ -2,9 +2,12 @@ import React, {useContext} from 'react';
 import styles from './StarRating.module.css';
 import {Context} from "@/context/AppWrapper";
 
-const StarRating = ({ rating, n }) => {
+const StarRating = ({rating, n}) => {
 
-    rating = Math.min(4.3 + Math.round(Math.min(rating / 700, 10)) / 10 + (0.1 * (n % 2)), 5)
+    rating = Math.min(
+        4.3 + Math.round(Math.min(rating / 700, 10)) / 10 + (0.1 * (n % 2)),
+        5
+    ).toFixed(1);
     const {desktopStore} = useContext(Context)
     const getStarClass = (index) => {
 
@@ -36,13 +39,14 @@ const StarRating = ({ rating, n }) => {
     return (
         <div className={styles.starRating}>
             {[...Array(5)].map((_, index) => (
-                <div key={index} style={{fontSize: desktopStore.isDesktop ? "22px" : "20px"}} className={`${styles.star} ${getStarClass(index)}`}>
+                <div key={index} style={{fontSize: desktopStore.isDesktop ? "22px" : "20px"}}
+                     className={`${styles.star} ${getStarClass(index)}`}>
                     ★
                 </div>
             ))}
             <span className={styles.tooltip_mobile}>{Math.round(Math.max((n / 1000 + rating)))}</span>
             {desktopStore.isDesktop &&
-            <span className={styles.tooltip}>{`Рейтинг: ${rating}`}</span>}
+                <span className={styles.tooltip}>{`Рейтинг: ${rating}`}</span>}
 
 
         </div>
