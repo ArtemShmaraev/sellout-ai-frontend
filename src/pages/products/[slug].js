@@ -77,6 +77,8 @@ import {
 } from "@/components/shared/YandexMetrica/YandexMetrica";
 import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
+import StarRating from "@/components/shared/StarRating/StarRating";
+import * as PropTypes from "prop-types";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -105,6 +107,8 @@ export const getServerSideProps = async (context) => {
 };
 
 
+
+StarRating.propTypes = {rating: PropTypes.number};
 const OneProductPage = ({product, prices, ip}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
@@ -473,12 +477,14 @@ const OneProductPage = ({product, prices, ip}) => {
 
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
+
                             <div itemProp="name">
                                 <div itemProp="brand">
                                     <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}&nbsp;</Link>
                                 </div>
                                 <div className={s.model} itemProp="model">{product.model}&nbsp;</div>
                                 <div className={s.color}>{product.colorway}</div>
+
                             </div>
                         }
                         {
@@ -726,9 +732,12 @@ const OneProductPage = ({product, prices, ip}) => {
 
                             {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
                             {/*     ref={contentRef}>*/}
-                            {!desktopStore.isDesktop && <hr/>}
+                            {!desktopStore.isDesktop &&
+                                <hr/>}
                             <div className={s.row}>
                                 <div className={s.col60}>
+                                    {!desktopStore.isDesktop  && <StarRating rating={product.score_product_page} n={product.id}/>}
+
                                     {/*{!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
 
                                     <span itemScope itemType="https://schema.org/Brand">
@@ -767,6 +776,7 @@ const OneProductPage = ({product, prices, ip}) => {
                         {desktopStore.isDesktop &&
                             <>
                                 <div itemProp="name">
+                                    <StarRating rating={product.score_product_page} n={product.id}/>
                                     <Link href={clickBrand()} className={s.brand}
                                     >{brandsDisplay()}&nbsp;</Link>
                                     <div className={s.model}>{product.model}&nbsp;</div>

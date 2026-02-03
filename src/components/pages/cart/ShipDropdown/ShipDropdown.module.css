@@ -82,7 +82,7 @@
     text-decoration: line-through;
 }
 .sale_price {
-    color: #b61212;
+    color: #940a0a;
 }
 @media (max-width: 1200px) {
     .display_none {

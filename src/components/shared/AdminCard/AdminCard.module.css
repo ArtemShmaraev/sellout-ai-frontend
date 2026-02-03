@@ -36,7 +36,7 @@
 }
 .sale {
     background: #E6E6E6;
-    color: #b61212;
+    color: #940a0a;
     font-size: 14px;
     user-select: none;
     padding: 3px;
@@ -102,7 +102,7 @@
 }
 .sale_price {
     margin-left: 10px;
-    color: #b61212;
+    color: #940a0a;
 }
 .image_container {
     position: relative;

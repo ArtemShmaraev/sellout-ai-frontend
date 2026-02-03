@@ -111,7 +111,7 @@
 }
 .sale_price {
     /*margin-left: 6px;*/
-    color: #b61212;
+    color: #940a0a;
 }
 @media (max-width: 1200px) {
     .dropdown, .dropdown_items_block {

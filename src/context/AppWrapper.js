@@ -122,10 +122,10 @@ export default function AppWrapper({ children }) {
         document.body.classList.add('body-scroll-clip')
         setTimeout(() => {
             desktopStore.setAnimation(false)
-        }, 2800)
+        }, 2700)
         setTimeout(() => {
             document.body.classList.remove('body-scroll-clip')
-        }, 2800)
+        }, 2600)
     }, []);
     useEffect(() => {
         const referral = router.query.referral_id

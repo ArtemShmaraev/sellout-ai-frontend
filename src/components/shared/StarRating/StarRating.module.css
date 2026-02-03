@@ -1,0 +1,131 @@
+.starRating {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.star {
+    color: lightgray;
+    position: relative;
+}
+
+.fullStar {
+    color: black;
+}
+
+.ninetyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 90%;
+}
+
+.eightyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 80%;
+}
+
+.seventyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 70%;
+}
+
+.sixtyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 60%;
+}
+
+.fiftyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 50%;
+}
+
+.fortyPercentStar::before {
+    content: '★';
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    width: 40%;
+}
+
+.thirtyPercentStar::before {
+    content: '★';
+    color: black;
+
+    position: absolute;
+    overflow: hidden;
+    width: 30%;
+}
+
+.twentyPercentStar::before {
+    content: '★';
+    color: black;
+
+    position: absolute;
+    overflow: hidden;
+    width: 20%;
+}
+
+.tenPercentStar::before {
+    content: '★';
+    color: black;
+
+    position: absolute;
+    overflow: hidden;
+    width: 10%;
+}
+
+.emptyStar {
+    color: lightgray;
+}
+
+.tooltip {
+    visibility: visible;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px;
+    position: absolute;
+    z-index: 1;
+    /*bottom: 100%; !* Position the tooltip above the star rating *!*/
+    left: 15%;
+    /*margin-left: -50px;*/
+    opacity: 0;
+    transition: opacity 0.3s;
+    width: 110px;
+    font-size: 90%;
+}
+
+.starRating:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip_mobile{
+    padding-left: 4px;
+    color: #6A6B6B;
+
+    font-size: 92%;
+    /*align-items: center;*/
+}
+
+@media (max-width: 1200px) {
+
+    .tooltip_mobile{
+        padding-top: 2px;
+    }
+}

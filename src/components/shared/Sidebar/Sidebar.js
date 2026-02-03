@@ -255,7 +255,7 @@ const Sidebar = ({photos}) => {
                                           query: {is_sale: 'is_sale'}
                                       }}
                                       onClick={handleClose}
-                                      style={{color: '#b61212'}}
+                                      style={{color: '#940a0a'}}
                                 >
                                     <div>Скидки</div>
                                     <Image src={arrow} alt=""/>

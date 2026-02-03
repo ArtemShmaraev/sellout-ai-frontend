@@ -47,7 +47,7 @@
 .price_sale {
     font-size: 19px;
     /*color: green;*/
-    color: #b61212;
+    color: #940a0a;
     /*color: rgba(189, 24, 24, 0.79);*/
     margin-right: 7px;
     font-weight: 500;
@@ -351,7 +351,7 @@
 }
 .red_text {
     margin: 0 0;
-    color: #b61212;
+    color: #940a0a;
     font-size: 14px;
 }
 .questions_block {
