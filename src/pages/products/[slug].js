@@ -777,6 +777,7 @@ const OneProductPage = ({product, prices, ip}) => {
                             <>
                                 <div itemProp="name">
                                     <StarRating rating={product.score_product_page} n={product.id}/>
+                                    <br/>
                                     <Link href={clickBrand()} className={s.brand}
                                     >{brandsDisplay()}&nbsp;</Link>
                                     <div className={s.model}>{product.model}&nbsp;</div>
