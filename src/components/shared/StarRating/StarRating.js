@@ -39,12 +39,12 @@ const StarRating = ({rating, n}) => {
     return (
         <div className={styles.starRating}>
             {[...Array(5)].map((_, index) => (
-                <div key={index} style={{fontSize: desktopStore.isDesktop ? "22px" : "20px"}}
+                <div key={index} style={{fontSize: desktopStore.isDesktop ? "22px" : "18px"}}
                      className={`${styles.star} ${getStarClass(index)}`}>
                     ★
                 </div>
             ))}
-            <span className={styles.tooltip_mobile}>{Math.round(Math.max((n / 1000 + rating)))}</span>
+            <span className={styles.tooltip_mobile}>{Math.round(Math.max((n / 1000)))}</span>
             {desktopStore.isDesktop &&
                 <span className={styles.tooltip}>{`Рейтинг: ${rating}`}</span>}
 

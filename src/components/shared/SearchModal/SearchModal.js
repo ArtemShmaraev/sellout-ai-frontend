@@ -9,6 +9,7 @@ import {addFilterSearch, suggestSearch} from "@/http/productsApi";
 import {Context} from "@/context/AppWrapper";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import most_pop from "@/components/pages/oneProduct/TreeLines/most_pop.json";
 
 const SearchModal = () => {
     const {filterStore, userStore} = useContext(Context)
@@ -147,6 +148,16 @@ const SearchModal = () => {
         }
         setIsOpen(!isOpen)
     }
+
+    const brandsDisplay = (product) => {
+        if (product.collab) {
+            return product.collab.name
+        } else {
+            return product.brands[0].name
+        }
+    }
+
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     return (
         <>
             <button className={s.toggle_btn}
@@ -171,21 +182,108 @@ const SearchModal = () => {
                     />
                     <div className={s.sug_block_mob}>
                         {
-                            suggs.map(el =>
-                                <Link className={s.sugg}
-                                   href={'/products?' + el.url}
-                                      onClick={clickOnSugg}
-                                >
-                                    <div className={s.result}>
-                                        {el.name}
-                                    </div>
-                                    <div className={s.type}>
-                                        {el.type}
-                                    </div>
-                                </Link>
-                            )
+                            suggs.map((el, index) => (
+                                el.type === "product" ? (
+                                    <Link
+                                        key={index} // Добавление ключа
+                                        className={s.sugg_product}
+                                        href={'/products/' + el.slug}
+                                        onClick={clickOnSugg}
+                                    >
+                                        <div className={s.sugg_product_div}>
+
+                                            <div style={{minWidth: "92px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                <img src={el.bucket_link[0].url} alt={el.model}/>
+                                            </div>
+                                            <div className="details">
+                                                <div style={{display: "flex", alignItems: 'center'}}>
+                                                                <span
+                                                                    className={s.brand}>{brandsDisplay(el)} {el.model}
+                                                                </span>
+                                                    {(el.price.start_price > el.price.final_price) && el.price.final_price > 0 && <span className={s.sale}>
+                                                                        -{Math.ceil(100 - (el.price.final_price / el.price.start_price) * 100)}%
+                                                                    </span>}
+                                                </div>
+                                                <div className={s.color}>
+                                                    {el.colorway}
+                                                </div>
+                                                {el.price.final_price < el.price.start_price
+                                                    ?
+                                                    (<div className={s.price_sale}>
+
+                                                        от {addSpacesToNumber(el.price.final_price)} ₽
+                                                    </div>)
+                                                    :
+                                                    (<div className={s.price_default}>
+                                                        от {addSpacesToNumber(el.price.final_price)} ₽
+                                                    </div>)
+                                                }
+
+                                            </div>
+
+                                        </div>
+                                        <div className={s.type}>
+                                            Товар
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    most_pop[el.name.toLowerCase()]  ? (
+                                        <Link
+                                            key={index} // Добавление ключа
+                                            className={s.sugg_product}
+                                            href={'/products?' + el.url}
+                                            onClick={clickOnSugg}
+                                        >
+                                            <div className={s.sugg_product_div}>
+
+                                                {most_pop[el.name.toLowerCase()] && most_pop[el.name.toLowerCase()].photo && (
+                                                    <div style={{minWidth: "92px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                        <img src={most_pop[el.name.toLowerCase()].photo} alt={el.name}/>
+                                                    </div>
+
+                                                )}
+                                                <div className="details">
+                                                    <div className={s.brand}>
+                                                        {el.name}
+                                                    </div>
+                                                    {most_pop[el.name.toLowerCase()] && most_pop[el.name.toLowerCase()].photo && (
+                                                        <div className={s.color}>
+                                                            {most_pop[el.name.toLowerCase()].count}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className={s.type}>
+                                                {el.type}
+                                            </div>
+                                        </Link>
+                                    ) : (
+                                        <Link
+                                            key={index} // Добавление ключа
+                                            className={s.sugg}
+                                            href={'/products?' + el.url}
+                                            onClick={clickOnSugg}
+                                        >
+                                            <div className={s.brand}>
+                                                {el.name}
+                                            </div>
+                                            <div className={s.type}>
+                                                {el.type}
+                                            </div>
+                                        </Link>
+                                    )
+                                )
+                            ))
                         }
+
+                        <div className={s.more} onClick={q}>
+                            Посмотреть больше товаров...
+                        </div>
+
+
+
                     </div>
+
                 </div>
             }
         </>
