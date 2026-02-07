@@ -22,7 +22,8 @@
 }
 .sug_block_mob {
     overflow-y: scroll;
-    max-height: 75vh;
+    overflow-x: hidden;
+    max-height: 38vh;
 }
 .sugg {
     display: flex;
