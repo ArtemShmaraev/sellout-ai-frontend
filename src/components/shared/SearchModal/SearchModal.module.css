@@ -70,6 +70,7 @@
     font-weight: 500;
     background-color: #000000;
     border-radius: 15px;
+    transition: 0.3s;
 }
 
 .sugg_product {
