@@ -24,6 +24,7 @@ const nextConfig = {
       'console.cloud.yandex.ru',
       'bucket.sellout.su',
       'sellout.su',
+      'img.icons8.com'
     ],
   },
   experimental: {
