@@ -32,9 +32,7 @@
     padding: 7px;
     transition: 0.3s;
 }
-.sugg:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
+
 .result {
     color: black;
 }
@@ -43,7 +41,7 @@
 }
 
 .brand {
-    font-size: 14px;
+    font-size: 13px;
     color: #393939;
     cursor: pointer;
     font-weight: 500;
@@ -55,8 +53,12 @@
 .color {
     /*margin-top: -1px;*/
     /*margin-bottom: -1px;*/
-    font-size: 12px;
+    font-size: 11px;
     color: gray;
+    /*max-width: 0%;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis; !* Добавляем многоточие для обрезанного текста *!*/
+    /*white-space: nowrap; !* Запрещаем перенос текста на новую строку *!*/
 }
 
 
@@ -78,7 +80,7 @@
     display: flex;
     align-items: center;
     padding: 0px;
-    padding-left: 10px;
+    padding-left: 0px;
     border: 1px solid white;
     /*margin-bottom: 4px;*/
     border-radius: 8px;
@@ -127,7 +129,7 @@
 }
 
 .sugg_product img {
-    max-width: 77px;
+    max-width: 80px;
     max-height: 68px;
     /*margin-right: 12px*/
 

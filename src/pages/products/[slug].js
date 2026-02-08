@@ -79,6 +79,7 @@ import TreeLine from "@/components/pages/oneProduct/TreeLines/TreeLine";
 import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import StarRating from "@/components/shared/StarRating/StarRating";
 import * as PropTypes from "prop-types";
+import ProductDetailsMob from "@/components/shared/ProductDetailsMob/ProductDetailsMob";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -369,13 +370,13 @@ const OneProductPage = ({product, prices, ip}) => {
         setMoreOpen(!moreOpen)
     }
 
-    const [contentHeight, setContentHeight] = useState(desktopStore.isDesktop ? '145px' : "195px");
+    const [contentHeight, setContentHeight] = useState(desktopStore.isDesktop ? '145px' : "250px");
     const contentRef = useRef(null);
     useEffect(() => {
         if (contentRef.current) {
-            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "195px");
+            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "250px");
             setTimeout(() => {
-                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "195px");
+                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : desktopStore.isDesktop ? '145px' : "250px");
             }, 400)
 
         }
@@ -725,37 +726,41 @@ const OneProductPage = ({product, prices, ip}) => {
                                 {/*</div>}*/}
                             </>
                         }
+                        {desktopStore.isDesktop
+                        ?
+                            <div ref={contentRef}
+                                 className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                 style={{maxHeight: contentHeight}}>
 
-                        <div ref={contentRef}
-                             className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
-                             style={{maxHeight: contentHeight}}>
-
-                            {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
-                            {/*     ref={contentRef}>*/}
-                            {!desktopStore.isDesktop &&
-                                <hr/>}
-                            <div className={s.row}>
-                                <div className={s.col60}>
-                                    {!desktopStore.isDesktop  && <StarRating rating={product.score_product_page} n={product.id}/>}
-
-                                    {/*{!desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
-
-                                    <span itemScope itemType="https://schema.org/Brand">
+                                {/*<div className={s.more} style={moreOpen ? {height: 'fit-content'} : {height: desktopStore.isDesktop ? '145px': "175px"}}*/}
+                                {/*     ref={contentRef}>*/}
+                                <div className={s.row}>
+                                    <div className={s.col60}>
+                                        <span itemScope itemType="https://schema.org/Brand">
                                         <div itemProp="name" className={s.model}>{brandsDisplay()}</div>
                                     </span>
 
-                                    <div className={s.more_color}>{product.colorway}</div>
-                                    <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
-                                    <p className={s.description}>
-                                        {product.description}
-                                    </p>
-                                </div>
-                                <div className={s.col40}>
-                                    <div className={s.characteristics_title}>Характеристики товара:</div>
-                                    {renderParams()}
+                                        <div className={s.more_color}>{product.colorway}</div>
+                                        <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
+                                        <p className={s.description}>
+                                            {product.description}
+                                        </p>
+                                    </div>
+                                    <div className={s.col40}>
+                                        <div className={s.characteristics_title}>Характеристики товара:</div>
+                                        {renderParams()}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        :
+                            <div ref={contentRef}
+                                 className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                 style={{maxHeight: contentHeight}}>
+                            <ProductDetailsMob key={product.id} product={product} ref={contentRef}
+                                               style={{maxHeight: contentHeight}}></ProductDetailsMob></div>
+
+                        }
+
                         {
                             infoBtn &&
                             <div className='d-flex justify-content-center'>
