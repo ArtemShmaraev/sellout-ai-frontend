@@ -1,0 +1,152 @@
+.menu {
+    /*font-size: 14px;*/
+    display: flex;
+    /*justify-content: space-around;*/
+    margin-bottom: 1rem;
+
+}
+
+.menu button {
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    width: 50%;
+
+}
+
+.menu button.active {
+    border-bottom: 2px solid #000;
+    width: 50%;
+}
+
+.more {
+    overflow: hidden;
+}
+
+.descriptionTab, .characteristicsTab {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sugg_product_div {
+    display: flex;
+    align-items: center;
+}
+
+.sugg_product_div .img_container {
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sugg_product_div .img_container img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+
+
+
+.brand {
+    font-size: 19px;
+    color: #393939;
+    cursor: pointer;
+    font-weight: 500;
+}
+.model {
+    font-weight: 700;
+    font-size: 20px;
+}
+.color {
+    font-size: 14px;
+    margin-bottom: 42px;
+}
+
+
+/*.row {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    gap: 40px;*/
+
+/*}*/
+
+.more {
+    /*padding-top: 4px;*/
+    /*margin-top: 40px;*/
+    margin-bottom: 20px;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 400;
+
+    -webkit-transition: max-height 0.5s;
+    -moz-transition: max-height 0.5s;
+    -ms-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+    z-index: -2;
+;
+}
+
+.more_open {
+    max-height: none;
+    z-index: 1;
+    transition: max-height 0.5s ease;
+}
+
+
+.tabActive {
+    display: block;
+}
+
+.tabInactive {
+    display: none;
+}
+.more_color {
+    font-size: 15px;
+}
+.description {
+    margin: 0px 0 20px 0;
+}
+.characteristics_title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.characteristics {
+    margin: 2px 0;
+
+    font-size: 15px;
+    color: #727272;
+}
+
+.sku_text {
+    margin: 5px;
+    margin-right: 2px;
+    font-size: 15px;
+    color: black;
+}
+.characteristics_text {
+    margin: 5px;
+    font-size: 15px;
+    color: black;
+}
+.more_btn {
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+    background: none;
+    border: none;
+}
+.more_text {
+    margin-right: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
