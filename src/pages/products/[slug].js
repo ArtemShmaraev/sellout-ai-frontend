@@ -11,7 +11,6 @@ import SizeChoice from "@/components/pages/oneProduct/SizeChoice/SizeChoice";
 import HowToChoose from "@/components/pages/oneProduct/HowToChoose/HowToChoose";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
-
 import Image from 'next/image'
 import {
     fetchOneProduct,
@@ -80,11 +79,13 @@ import BreadcrumbC from "@/components/shared/BreadcrumbC/BreadcrumbC";
 import StarRating from "@/components/shared/StarRating/StarRating";
 import * as PropTypes from "prop-types";
 import ProductDetailsMob from "@/components/shared/ProductDetailsMob/ProductDetailsMob";
+import Notification from "@/components/shared/Notification/Notification";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
     const token = cookies['access_token'];
     const captcha_token = cookies['captcha_token'];
+
 
     // Получение IP-адреса пользователя из заголовка X-Forwarded-For
     const ip = context.req.headers['x-forwarded-for'] || context.req.connection.remoteAddress;
@@ -114,6 +115,7 @@ const OneProductPage = ({product, prices, ip}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
+    const [notification, setNotification] = useState(null);
     console.log(ip)
     console.log(product.ip)
 
@@ -228,13 +230,24 @@ const OneProductPage = ({product, prices, ip}) => {
             query: query
         }
     }
+
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            setNotification('Артикул скопирован в буфер обмена');
+        }, () => {
+            setNotification('Не удалось скопировать артикул');
+        });
+    };
     const renderParams = () => {
         const res = []
         res.push(
-            <p className={s.characteristics}>Артикул:
-                <span className={s.characteristics_text}>{product.manufacturer_sku}</span>
+            <p className={s.characteristics}>
+                Артикул:
+                <span className={s.sku_text}>{product.manufacturer_sku}</span>
+                <img width="19" height="19" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
+
             </p>
-        )
+        );
         res.push(
             <p className={s.characteristics}>Дата релиза:
                 <span className={s.characteristics_text}>{product.approximate_date}</span>
@@ -470,6 +483,12 @@ const OneProductPage = ({product, prices, ip}) => {
             </Head>
             <InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>
             <div className={s.container + ' custom_cont'}>
+                {notification && (
+                    <Notification
+                        message={notification}
+                        onClose={() => setNotification(null)}
+                    />
+                )}
                 <div className={s.row} itemScope itemType="https://schema.org/Product">
 
                     <meta itemProp="description" content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>

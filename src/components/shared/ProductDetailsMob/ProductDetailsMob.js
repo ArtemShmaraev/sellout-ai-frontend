@@ -1,14 +1,15 @@
-import React, {useState, useRef, useLayoutEffect} from 'react';
+import React, {useState, useRef, useLayoutEffect, useEffect} from 'react';
 import { useSwipeable } from 'react-swipeable';
 import s from './ProductDetailsMob.module.css';
 import StarRating from "@/components/shared/StarRating/StarRating"; // Импортируйте ваши стили
 import parseHtml from 'html-react-parser';
-
+import Notification from "@/components/shared/Notification/Notification";
 const ProductDetails = ({ product }) => {
     const [activeTab, setActiveTab] = useState(product.description ? 'description' : "characteristics");
     const contentRef = useRef(null);
     const [contentHeight, setContentHeight] = useState('auto');
     const moreOpen = true; // Замените это на ваш реальный флаг состояния
+    const [notification, setNotification] = useState(null);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -20,7 +21,7 @@ const ProductDetails = ({ product }) => {
             <p className={s.characteristics}>
                 Артикул:
                 <span className={s.sku_text}>{product.manufacturer_sku}</span>
-                <img width="20" height="20" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
+                <img width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
 
             </p>
         );
@@ -75,14 +76,20 @@ const ProductDetails = ({ product }) => {
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            alert('Артикул скопирован в буфер обмена');
+            setNotification('Артикул скопирован в буфер обмена');
         }, () => {
-            alert('Не удалось скопировать артикул');
+            setNotification('Не удалось скопировать артикул');
         });
     };
 
     return (
         <div>
+            {notification && (
+                <Notification
+                    message={notification}
+                    onClose={() => setNotification(null)}
+                />
+            )}
             <div
                 ref={contentRef}
                 className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
