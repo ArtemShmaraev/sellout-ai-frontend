@@ -1,19 +1,43 @@
 import React, {useState, useRef, useLayoutEffect, useEffect} from 'react';
-import { useSwipeable } from 'react-swipeable';
+import {useSwipeable} from 'react-swipeable';
 import s from './ProductDetailsMob.module.css';
 import StarRating from "@/components/shared/StarRating/StarRating"; // Импортируйте ваши стили
 import parseHtml from 'html-react-parser';
 import Notification from "@/components/shared/Notification/Notification";
-const ProductDetails = ({ product }) => {
+import {Navigation, Pagination, Zoom} from "swiper/modules";
+import {Swiper, SwiperSlide} from "swiper/react";
+import Image from "next/image";
+import Arrow from "@/components/shared/UI/Arrow/Arrow";
+
+const ProductDetails = ({product}) => {
     const [activeTab, setActiveTab] = useState(product.description ? 'description' : "characteristics");
-    const contentRef = useRef(null);
     const [contentHeight, setContentHeight] = useState('auto');
-    const moreOpen = true; // Замените это на ваш реальный флаг состояния
+
     const [notification, setNotification] = useState(null);
+    const [moreOpen, setMoreOpen] = useState(false)
+    const swiperRef = useRef(null); // Реф для Swiper
+
+
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (contentRef.current) {
+            setContentHeight( "150px");
+            setTimeout(() => {
+                setContentHeight("150px");
+            }, 400)
+
+        }
+    }, [moreOpen]);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
+        if (tab === 'description') {
+            swiperRef.current?.swiper.slideTo(0); // Переключаем на первый слайд
+        } else if (tab === 'characteristics') {
+            swiperRef.current?.swiper.slideTo(1); // Переключаем на второй слайд
+        }
     };
+
 
     const renderParams = () => {
         const res = [];
@@ -21,7 +45,8 @@ const ProductDetails = ({ product }) => {
             <p className={s.characteristics}>
                 Артикул:
                 <span className={s.sku_text}>{product.manufacturer_sku}</span>
-                <img width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
+                <img width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png"
+                     alt="copy--v1" onClick={() => copyToClipboard(product.manufacturer_sku)}/>
 
             </p>
         );
@@ -66,6 +91,16 @@ const ProductDetails = ({ product }) => {
         trackMouse: true
     });
 
+
+
+
+    const toggle_more_open = () => {
+        if (moreOpen) {
+            setMoreOpen(true)
+        }
+        setMoreOpen(!moreOpen)
+    }
+
     const brandsDisplay = () => {
         if (product.collab) {
             return product.collab.name;
@@ -91,33 +126,30 @@ const ProductDetails = ({ product }) => {
                 />
             )}
             <div
-                ref={contentRef}
-                className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
-                style={{ maxHeight: contentHeight }}
+
                 {...handlers}
                 key={product.id}
             >
-                <hr />
+                <hr/>
 
                 <div>
                     <div>
-                        <StarRating rating={product.score_product_page} n={product.id} />
+                        <StarRating rating={product.score_product_page} n={product.id}/>
                         <span itemScope itemType="https://schema.org/Brand">
                             <div itemProp="name" className={s.model}>{brandsDisplay()}</div>
                         </span>
                         <div className={s.more_color}>{product.colorway}</div>
                         <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
 
-                        <div className={s.menu}
-                        key={product.id}
-                        id={product.id}>
-                            {product.description &&
+                        <div className={s.menu} key={product.id} id={product.id}>
+                            {product.description && (
                                 <button
-                                className={activeTab === 'description' ? s.active : ''}
-                                onClick={() => handleTabClick('description')}
-                            >
-                                Описание
-                            </button>}
+                                    className={activeTab === 'description' ? s.active : ''}
+                                    onClick={() => handleTabClick('description')}
+                                >
+                                    Описание
+                                </button>
+                            )}
                             <button
                                 className={activeTab === 'characteristics' ? s.active : ''}
                                 onClick={() => handleTabClick('characteristics')}
@@ -125,21 +157,77 @@ const ProductDetails = ({ product }) => {
                                 Характеристики
                             </button>
                         </div>
-                        {product.description &&
-                        <div className={activeTab === 'description' ? s.tabActive : s.tabInactive}>
-                            <div className={s.descriptionTab}>
-                                <p className={s.description}>
-                                    {product.description}
-                                </p>
-                            </div>
-                        </div>}
 
-                        <div className={activeTab === 'characteristics' ? s.tabActive : s.tabInactive}>
-                            <div className={s.characteristicsTab}>
-                                {/*<div className={s.characteristics_title}>Характеристики товара:</div>*/}
-                                {renderParams()}
-                            </div>
-                        </div>
+                        <Swiper
+                            ref={swiperRef} // Присваиваем реф Swiper
+                            initialSlide={0}
+                            modules={[Pagination, Zoom, Navigation]}
+                            className={s.cont}
+                            style={{
+                                '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
+                                '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
+                                '--swiper-pagination-top': 'auto', // Убираем верхний отступ
+                                '--swiper-pagination-progressbar-size': '2px',
+                                '--swiper-pagination-bullet-size': '10px',
+                                '--swiper-pagination-bullet-horizontal-gap': '12px',
+                                // '--swiper-pagination-bullet-border-radius': '25%',
+                                '--swiper-pagination-progressbar-bg-color': 'rgba(0,0,0,0.1)',
+                                "--swiper-navigation-color": "rgba(0,0,0,0.5)",
+                            }}
+                        >
+                            {product.description && (
+                                <SwiperSlide
+                                    >
+                                    <div
+                                        ref={contentRef}
+                                        className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                        >
+
+                                    <div className={activeTab === 'description' ? s.tabActive : s.tabInactive}>
+                                        <div className={s.descriptionTab}>
+                                            <p className={s.description}>
+                                                {product.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div className='d-flex justify-content-center'>
+                                        <button
+                                            className={s.more_btn}
+                                            onClick={toggle_more_open}>
+                                            <div className={s.more_text}>
+                                                Подробнее
+                                                <Arrow isOpen={moreOpen}/>
+                                            </div>
+                                        </button>
+                                    </div>
+
+                                </SwiperSlide>)}
+                            <SwiperSlide>
+
+                                <div
+                                    ref={contentRef}
+                                    className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                    >
+                                <div className={activeTab === 'characteristics' ? s.tabActive : s.tabInactive}>
+                                    <div className={s.characteristicsTab}>
+                                        {/*<div className={s.characteristics_title}>Характеристики товара:</div>*/}
+                                        {renderParams()}
+                                    </div>
+                                </div>
+                                </div>
+                                <div className='d-flex justify-content-center'>
+                                    <button
+                                        className={s.more_btn}
+                                        onClick={toggle_more_open}>
+                                        <div className={s.more_text}>
+                                            Подробнее
+                                            <Arrow isOpen={moreOpen}/>
+                                        </div>
+                                    </button>
+                                </div>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
             </div>

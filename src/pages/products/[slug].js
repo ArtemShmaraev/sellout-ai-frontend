@@ -773,15 +773,15 @@ const OneProductPage = ({product, prices, ip}) => {
                             </div>
                         :
                             <div ref={contentRef}
-                                 className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
-                                 style={{maxHeight: contentHeight}}>
+                                 className={s.more_open}
+                                 >
                             <ProductDetailsMob key={product.id} product={product} ref={contentRef}
                                                style={{maxHeight: contentHeight}}></ProductDetailsMob></div>
 
                         }
 
                         {
-                            infoBtn &&
+                            desktopStore.isDesktop && infoBtn &&
                             <div className='d-flex justify-content-center'>
                                 <button
                                     className={s.more_btn}
@@ -847,6 +847,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                             <SizeTable tables={product.size_table_platform}
                                                        photo={product.bucket_link[0].url}/>
                                         }
+
                                         <SizeHelp model={`${brandsDisplay()} ${product.model}`}
                                                   imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}
                                                   str={product.size_table_platform?.size_fit_recommendation ?? ''}
