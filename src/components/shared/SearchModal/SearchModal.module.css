@@ -16,8 +16,8 @@
     left: 0;
     background: white;
     width: 100vw;
-    height: 100vh;
-    overflow-y: hidden;
+    height: 120vh;
+    overflow-y: clip;
     padding: 20px;
 }
 .sug_block_mob {
@@ -31,7 +31,6 @@
     text-decoration: none;
     padding: 7px;
     transition: 0.3s;
-    z-index: 1;
 }
 
 .result {

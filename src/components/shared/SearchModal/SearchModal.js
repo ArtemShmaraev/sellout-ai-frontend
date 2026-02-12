@@ -192,7 +192,7 @@ const SearchModal = () => {
                                     >
                                         <div className={s.sugg_product_div}>
 
-                                            <div style={{minWidth: "100px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                            <div style={{minWidth: "98px", justifyContent: "center", display: "flex", alignItems: "center"}}>
                                                 <img src={el.bucket_link[0].url} alt={el.model}/>
                                             </div>
                                             <div className="details">
@@ -237,7 +237,7 @@ const SearchModal = () => {
                                             <div className={s.sugg_product_div}>
 
                                                 {most_pop[el.name.toLowerCase()] && most_pop[el.name.toLowerCase()].photo && (
-                                                    <div style={{minWidth: "100px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                    <div style={{minWidth: "98px", justifyContent: "center", display: "flex", alignItems: "center"}}>
                                                         <img src={most_pop[el.name.toLowerCase()].photo} alt={el.name}/>
                                                     </div>
 
