@@ -11,19 +11,23 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
 const ProductDetails = ({product}) => {
     const [activeTab, setActiveTab] = useState(product.description ? 'description' : "characteristics");
-    const [contentHeight, setContentHeight] = useState('auto');
+    // const [contentHeight, setContentHeight] = useState('auto');
 
     const [notification, setNotification] = useState(null);
     const [moreOpen, setMoreOpen] = useState(false)
     const swiperRef = useRef(null); // Реф для Swiper
 
+    const [contentHeight, setContentHeight] = useState('85px');
+
+
 
     const contentRef = useRef(null);
     useEffect(() => {
         if (contentRef.current) {
-            setContentHeight( "150px");
+            setContentHeight( "85x");
+            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
             setTimeout(() => {
-                setContentHeight("150px");
+                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
             }, 400)
 
         }
@@ -181,6 +185,7 @@ const ProductDetails = ({product}) => {
                                     <div
                                         ref={contentRef}
                                         className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                        style={{maxHeight: contentHeight}}
                                         >
 
                                     <div className={activeTab === 'description' ? s.tabActive : s.tabInactive}>
@@ -208,6 +213,7 @@ const ProductDetails = ({product}) => {
                                 <div
                                     ref={contentRef}
                                     className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                    style={{maxHeight: contentHeight}}
                                     >
                                 <div className={activeTab === 'characteristics' ? s.tabActive : s.tabInactive}>
                                     <div className={s.characteristicsTab}>

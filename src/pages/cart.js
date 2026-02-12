@@ -289,15 +289,18 @@ const Cart = ({
     const changeBonuses = (value) => {
         const maxBonuses = userData.bonuses.total_amount
         if (Number(value) <= Number(maxBonuses)) {
-            setBonusSaleAmount(value)
+            setBonusSaleAmount(Number(value))
         }
     }
     const spendBonuses = async (e) => {
         e.preventDefault()
         const token = Cookies.get('access_token')
-        const res = await useBonuses(bonusesSale, token)
+        const res = await useBonuses(bonusSaleAmount, token)
         setFinAmount(res.final_amount)
-        setSaleAmount(res.total_sale)
+        setBonusSaleAmount(bonusSaleAmount)
+
+        // setSaleAmount(res.total_sale)
+        setTotalSaleAmount(bonusSaleAmount + saleAmount + promoSaleAmount)
     }
     const [checkoutErr, setCheckoutErr] = useState('')
     const goToCheckout = () => {

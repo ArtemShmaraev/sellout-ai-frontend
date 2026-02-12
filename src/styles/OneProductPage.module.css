@@ -495,3 +495,28 @@
     height: 25px;
     width: 25px;
 }
+.iconContainer {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+}
+
+.shareIcon {
+    width: 26px; /* Adjust the size as needed */
+    height: 26px; /* Adjust the size as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+.clicked {
+    animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+}

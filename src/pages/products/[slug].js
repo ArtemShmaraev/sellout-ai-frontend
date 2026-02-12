@@ -47,6 +47,8 @@ import map from "@/static/img/map.jpg";
 import LoyaltyFAQ from "@/components/pages/account/LoyaltyFAQ/LoyaltyFAQ";
 import gift_gard from "@/static/icons/gift-gard.svg";
 import first from "@/static/icons/first.svg";
+import shareIcon from "@/static/icons/icons8-поделиться.svg"
+import shareGif from "@/static/icons/icons8-поделиться.gif"
 import good from "@/static/icons/good.svg";
 import friend from "@/static/icons/friend.svg";
 import birth from "@/static/icons/happybirthday.svg";
@@ -233,7 +235,7 @@ const OneProductPage = ({product, prices, ip}) => {
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            setNotification('Артикул скопирован в буфер обмена');
+            setNotification('Артикул скопирован');
         }, () => {
             setNotification('Не удалось скопировать артикул');
         });
@@ -243,8 +245,8 @@ const OneProductPage = ({product, prices, ip}) => {
         res.push(
             <p className={s.characteristics}>
                 Артикул:
-                <span className={s.sku_text}>{product.manufacturer_sku}</span>
-                <img width="19" height="19" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
+                <span className={s.characteristics_text}> {product.manufacturer_sku}</span>
+                <img style={{cursor: "pointer"}} width="19" height="19" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
 
             </p>
         );
@@ -466,6 +468,21 @@ const OneProductPage = ({product, prices, ip}) => {
         }
     }, []); // Пустой массив зависимостей гарантирует выполнение эффекта только один раз при монтировании компонента
 
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleShareClick = () => {
+        navigator.clipboard.writeText(`https://sellout.su/products/${product.slug}`).then(() => {
+            setNotification('Ссылка скопирована');
+        }, () => {
+            setNotification('Не удалось скопировать ссылку');
+        });
+
+        setIsClicked(true);
+        setTimeout(() => {
+            setIsClicked(false);
+        }, 300);  // Duration of the animation
+    };
+
 
     return (
         <MainLayout>
@@ -498,13 +515,22 @@ const OneProductPage = ({product, prices, ip}) => {
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
 
-                            <div itemProp="name">
-                                <div itemProp="brand">
-                                    <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}&nbsp;</Link>
+                            <div style={{ position: "relative" }}>
+                                <div itemProp="name">
+                                    <div itemProp="brand">
+                                        <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}&nbsp;</Link>
+                                    </div>
+                                    <div className={s.model} itemProp="model">{product.model}&nbsp;</div>
+                                    <div className={s.color}>{product.colorway}</div>
                                 </div>
-                                <div className={s.model} itemProp="model">{product.model}&nbsp;</div>
-                                <div className={s.color}>{product.colorway}</div>
-
+                                <div className={s.iconContainer}>
+                                    <Image
+                                        src={shareIcon}
+                                        alt="Share"
+                                        className={isClicked ? `${s.shareIcon} ${s.clicked}` : s.shareIcon}
+                                        onClick={handleShareClick}
+                                    />
+                                </div>
                             </div>
                         }
                         {
