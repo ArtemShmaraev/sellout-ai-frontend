@@ -12,14 +12,20 @@ import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import {useRouter} from 'next/router';
 import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
  import logo_sq from "@/static/img/logo_sq.png"
+import {parse} from "cookie";
+import PromoBanner from "@/components/shared/PromoBanner/PromoBanner";
+import BottomNav from "@/components/shared/BottomNav/BottomNav";
 
 const MainLayout = ({children, footerData}) => {
     const {desktopStore} = useContext(Context)
     const router = useRouter();
 
+
     const [cookieOpen, setCookieOpen] = useState(false)
+    const [promoOpen, setPromoOpen] = useState(false)
     const [selectedGender, setSelectedGender] = useState("")
-    const [headerCustom, setHeaderCustom] = useState(true)
+    const [isAuth, setIsAuth] = useState(false)
+    // const [headerCustom, setHeaderCustom] = useState(true)
 
     const closeCookie = () => {
         Cookies.set('cookie_message', true, {expires: 2772})
@@ -29,14 +35,31 @@ const MainLayout = ({children, footerData}) => {
         if (!Cookies.get('cookie_message')) {
             setCookieOpen(true)
         }
+        if ((!Cookies.get('promo_message')) && (!Cookies.get('access_token'))){
+            setPromoOpen(true)
+        }
     }, [])
+
+    const closePromo = () => {
+        Cookies.set('promo_message', true, {expires: 2772})
+        setPromoOpen(false)
+    }
+    // useEffect(() => {
+    //     if (!Cookies.get('promo_message')) {
+    //         setPromoOpen(true)
+    //     }
+    // }, [])
 
 
     useLayoutEffect(() => {
+        // checkIsDesktop();
         if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
-        setHeaderCustom(router.pathname !== '/' || selectedGender === "M" || selectedGender === "F")
+        if (Cookies.get('access_token')) {
+            setIsAuth(true)
+        }
+        // setHeaderCustom(router.pathname !== '/' || selectedGender === "M" || selectedGender === "F")
         // console.log("Вот", headerCustom)
 
     })
@@ -103,6 +126,8 @@ const MainLayout = ({children, footerData}) => {
                 <meta name="theme-color" content="#000000"/>
                 {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
+                <link rel="stylesheet" href="@/components/shared/Stories/snapgram.css"/>
+                <link rel="stylesheet" href="@/components/shared/Stories/zuck.css"/>
 
 
                 <script
@@ -159,28 +184,19 @@ const MainLayout = ({children, footerData}) => {
             </Head>
             {(desktopStore.animation) && <AnimationSellout/>}
             <div className={'body'}>
-                {/*<NavbarNoGender/>*/}
-                {/*<NavbarC/>*/}
                 <NavbarC/>
-                {/*{headerCustom ? (*/}
-                {/*    <NavbarC/>*/}
-                {/*) : (*/}
-                {/*    <NavbarNoGender/>*/}
-                {/*)}*/}
-                {headerCustom ? (
-                    <div className={'cont_up'}>
-                        {children}
-                    </div>
-                ) : (
-                    <div>
-                        {children}
-                    </div>
-                )}
+                <div className={'cont_up'}>
+                    {children}
+                </div>
                 <Footer textData={footerData}/>
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
+            {!cookieOpen && !desktopStore.isDesktop &&
+            <PromoBanner message="1000 бонусов к заказу за регистрацию" isOpen={promoOpen} close={closePromo}/>}
             <YandexMetrica/>
+            {/*<BottomNav />*/}
+
 
 
         </>

@@ -43,6 +43,7 @@ const ImgSlider = ({photos}) => {
             <Swiper
                 loop={true}
                 pagination={(desktopStore.isDesktop || photos.length > 9)? {type: 'bullets'} : { type: 'bullets' }}
+                // pagination={true}
 
                 // effect={"fade"}
 

@@ -143,6 +143,7 @@
     color: #8d8d8d;
 }
 @media (max-width: 1200px) {
+
     .header {
         padding: 0px 0 10px 0;
     }
@@ -153,13 +154,21 @@
     }
     .icons {
         width: 25px;
-        margin: 0 4px;
+        margin: 0 10px;
     }
     .row2 {
         display: none;
     }
 }
 @media (max-width: 600px) {
+
+    .icons_profile {
+        /*margin-left: 30px;*/
+        cursor: pointer;
+        position: relative;
+        width: 26px;
+        margin: 0 5px 0 7px;
+    }
     .block {
         width: auto;
     }

@@ -293,14 +293,14 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Ваш пол:</label>
                                     <RadioGroup/>
                                 </div>
-                                <div className={s.input_block}>
-                                    <label className={s.label}>Промокод:</label>
-                                    <input type="text" className={s.input}
-                                           placeholder={"(Необязательно)"}
-                                           value={promoreg}
-                                           onChange={(e) => setPromoreg(e.target.value)}
-                                    />
-                                </div>
+                                {/*<div className={s.input_block}>*/}
+                                {/*    <label className={s.label}>Промокод:</label>*/}
+                                {/*    <input type="text" className={s.input}*/}
+                                {/*           placeholder={"(Необязательно)"}*/}
+                                {/*           value={promoreg}*/}
+                                {/*           onChange={(e) => setPromoreg(e.target.value)}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
                                 <div className='d-flex mt-5' onClick={() => setIsMailingList(!isMailingList)}>
                                     <CustomCheckbox checked={isMailingList}
                                                     reversed={true}

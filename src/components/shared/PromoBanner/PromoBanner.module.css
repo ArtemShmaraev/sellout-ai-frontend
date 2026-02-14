@@ -1,0 +1,91 @@
+/* PromoBanner.module.css */
+.promo_banner {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.promo_banner.closing {
+    transform: translateY(100%);
+}
+
+.close_btn {
+    background: none;
+    border: none;
+    font-size: 15px;
+    padding-left: 5px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.text_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 10px; /* Space between text container and button */
+}
+
+.text {
+    font-size: 13px;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 0 10px;
+}
+
+.textp {
+    font-size: 13px;
+    cursor: pointer;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+
+.bonus_icon {
+    margin-top: -4px;
+}
+
+.register_btn {
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: 600;
+    border: none;
+    padding: 8px 13px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 1px;
+    margin-left: 10px; /* Space between button and text container */
+}
+
+@media (max-width: 1000px) {
+    .promo_banner {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 51px;
+        /*bottom: 0;*/
+        left: 0;
+        z-index: 1000;
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.3s ease-in-out;
+    }
+}

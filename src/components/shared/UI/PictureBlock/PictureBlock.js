@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './PictureBlock.module.css'
 import parse from "html-react-parser";
@@ -7,9 +7,37 @@ import desktop from "@/static/img/desktop_background_old.jpg";
 import mobile from "@/static/img/big_bg.jpg";
 import Link from "next/link";
 import {Context} from "@/context/AppWrapper";
+import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
 const PictureBlock = ({obj, className, type}) => {
     const {desktopStore} = useContext(Context)
+    const [moreOpen, setMoreOpen] = useState(false)
+    const swiperRef = useRef(null); // Реф для Swiper
+
+    const [contentHeight, setContentHeight] = useState('85px');
+
+
+
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (contentRef.current) {
+            setContentHeight( "85x");
+            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
+            setTimeout(() => {
+                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
+            }, 400)
+
+        }
+    }, [moreOpen]);
+
+    const toggle_more_open = () => {
+        if (moreOpen) {
+            setMoreOpen(true)
+        }
+        setMoreOpen(!moreOpen)
+    }
+
+
     const getDirection = () => {
         if (type === 'row_reverse') {
             return s.row_reverse
@@ -128,11 +156,33 @@ const PictureBlock = ({obj, className, type}) => {
                                         <div className={s.firstLinePhoto}>{firstLine}</div>
                                     )}
                                 </div>
-                                {obj.photo &&
-                                    <div className={s.text}>
-                                        {parse(obj.content)}
-                                    </div>
-                                }
+                                {obj.photo && (
+                                    desktopStore.isDesktop ? (
+                                        <div className={s.text}>
+                                            {parse(obj.content)}
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div
+                                                ref={contentRef}
+                                                className={[s.text, moreOpen ? s.text_open : ""].join(" ")}
+                                                style={{maxHeight: contentHeight}}
+                                            >
+                                                {parse(obj.content)}
+                                            </div>
+                                            <div className='d-flex justify-content-center'>
+                                                <button
+                                                    className={s.more_btn}
+                                                    onClick={toggle_more_open}>
+                                                    <div className={s.more_text}>
+                                                        <Arrow isOpen={moreOpen}/>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </>
+                                    )
+                                )}
+
                                 {secondLine && (
                                     <div className={s.secondLinePhoto}>{secondLine}</div>
                                 )}

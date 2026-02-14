@@ -111,7 +111,6 @@ export const getServerSideProps = async (context) => {
 };
 
 
-
 StarRating.propTypes = {rating: PropTypes.number};
 const OneProductPage = ({product, prices, ip}) => {
     const router = useRouter()
@@ -246,7 +245,9 @@ const OneProductPage = ({product, prices, ip}) => {
             <p className={s.characteristics}>
                 Артикул:
                 <span className={s.characteristics_text}> {product.manufacturer_sku}</span>
-                <img style={{cursor: "pointer"}} width="19" height="19" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"  onClick={() => copyToClipboard(product.manufacturer_sku)}/>
+                <img style={{cursor: "pointer"}} width="19" height="19"
+                     src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"
+                     onClick={() => copyToClipboard(product.manufacturer_sku)}/>
 
             </p>
         );
@@ -491,8 +492,10 @@ const OneProductPage = ({product, prices, ip}) => {
                 <meta property="og:image" content={product.bucket_link[0].url}/>
                 <meta property="og:image:width" content="640px"/>
                 <meta property="og:image:height" content="410px"/>
-                <meta property="og:title" content={`Заказать ${brandsDisplay()} ${product.model} ${product.colorway} по выгодной цене на Sellout!`}/>
-                <meta property="og:description" content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
+                <meta property="og:title"
+                      content={`Заказать ${brandsDisplay()} ${product.model} ${product.colorway} по выгодной цене на Sellout!`}/>
+                <meta property="og:description"
+                      content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
 
                 {/*<meta name={'description'} content={`Закажите ${brandsDisplay()} ${product.model} ${product.colorway} в интернет-магазине SELLOUT. Выгодные цены. Доставка по всей России. Бонусы к первому заказу.`}/>*/}
                 <meta name={'description'}
@@ -508,14 +511,15 @@ const OneProductPage = ({product, prices, ip}) => {
                 )}
                 <div className={s.row} itemScope itemType="https://schema.org/Product">
 
-                    <meta itemProp="description" content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
+                    <meta itemProp="description"
+                          content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
 
                     <div className={s.col1}>
 
                         {/*{desktopStore.isDesktop && <BreadcrumbC list={product.list_lines}/>}*/}
                         {!desktopStore.isDesktop &&
 
-                            <div style={{ position: "relative" }}>
+                            <div style={{position: "relative"}}>
                                 <div itemProp="name">
                                     <div itemProp="brand">
                                         <Link href={clickBrand()} className={s.brand}>{brandsDisplay()}&nbsp;</Link>
@@ -596,7 +600,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                     prices.length > 0 &&
                                     <>
                                         <span itemProp="offers" itemScope itemType="https://schema.org/Offer"
-                                              className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                              className={(product.price.start_price > product.price.final_price) ? s.price_sale : s.price_default}
                                         >
                                             <span>от </span><span>{addSpacesToNumber(product.price.final_price)}</span><span>₽</span>
 
@@ -610,7 +614,10 @@ const OneProductPage = ({product, prices, ip}) => {
                                         </span>
                                         {(product.price.start_price > product.price.final_price) &&
                                             <span className={s.price_default}
-                                                 style={{textDecoration: 'line-through', fontSize: '17px'}}> {addSpacesToNumber(product.price.start_price)} ₽
+                                                  style={{
+                                                      textDecoration: 'line-through',
+                                                      fontSize: '17px'
+                                                  }}> {addSpacesToNumber(product.price.start_price)} ₽
                                             </span>
                                         }
 
@@ -772,7 +779,7 @@ const OneProductPage = ({product, prices, ip}) => {
                             </>
                         }
                         {desktopStore.isDesktop
-                        ?
+                            ?
                             <div ref={contentRef}
                                  className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
                                  style={{maxHeight: contentHeight}}>
@@ -797,12 +804,12 @@ const OneProductPage = ({product, prices, ip}) => {
                                     </div>
                                 </div>
                             </div>
-                        :
+                            :
                             <div ref={contentRef}
                                  className={s.more_open}
-                                 >
-                            <ProductDetailsMob key={product.id} product={product} ref={contentRef}
-                                               style={{maxHeight: contentHeight}}></ProductDetailsMob></div>
+                            >
+                                <ProductDetailsMob key={product.id} product={product} ref={contentRef}
+                                                   style={{maxHeight: contentHeight}}></ProductDetailsMob></div>
 
                         }
 
@@ -825,13 +832,15 @@ const OneProductPage = ({product, prices, ip}) => {
                     <div className={s.col2}>
                         {desktopStore.isDesktop &&
                             <>
-                                <div itemProp="name">
+                                <div>
                                     <StarRating rating={product.score_product_page} n={product.id}/>
                                     <br/>
-                                    <Link href={clickBrand()} className={s.brand}
-                                    >{brandsDisplay()}&nbsp;</Link>
-                                    <div className={s.model}>{product.model}&nbsp;</div>
-                                    <div className={s.color}>{product.colorway}&nbsp;</div>
+                                    <div itemProp="name">
+                                        <Link href={clickBrand()} className={s.brand}
+                                        >{brandsDisplay()}&nbsp;</Link>
+                                        <div className={s.model}>{product.model}&nbsp;</div>
+                                        <div className={s.color}>{product.colorway}&nbsp;</div>
+                                    </div>
                                 </div>
                                 {
                                     prices.length > 0 &&
@@ -839,11 +848,11 @@ const OneProductPage = ({product, prices, ip}) => {
                                         {(product.price.start_price > product.price.final_price) &&
                                             <div className={s.price_default}
                                                  style={{textDecoration: 'line-through', fontSize: '17px'}}>
-                                                 {addSpacesToNumber(product.price.start_price)} ₽
+                                                {addSpacesToNumber(product.price.start_price)} ₽
                                             </div>
                                         }
                                         <div itemProp="offers" itemScope itemType="https://schema.org/Offer"
-                                            className={(product.price.start_price > product.price.final_price) ? s.price_sale :s.price_default}
+                                             className={(product.price.start_price > product.price.final_price) ? s.price_sale : s.price_default}
                                         >
                                             <span> от </span><span>{addSpacesToNumber(product.price.final_price)} </span><span>₽</span>
 
@@ -946,7 +955,7 @@ const OneProductPage = ({product, prices, ip}) => {
                         <div className={s.link_block}>
                             <TextModal title={'Нашли тот же товар дешевле?'} img={cashStack}>
                                 <Image src={cashStack1} alt='' width={80}/>
-                                <h4 className={'my-3'} >Нашли тот же товар дешевле?</h4>
+                                <h4 className={'my-3'}>Нашли тот же товар дешевле?</h4>
                                 <div className={s.arrows_section} style={{marginLeft: -5}}>
                                     <Image src={ffIcon} alt='' width={100}/>
                                     <div className={s.arrows_block}>

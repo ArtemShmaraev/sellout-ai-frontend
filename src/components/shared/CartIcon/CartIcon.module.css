@@ -21,8 +21,8 @@
 }
 @media (max-width: 1200px) {
     .icons {
-        width: 20px;
-        margin: 0 15px;
+        width: 24px;
+        margin: 0 7px 0 10px;
     }
     .circle {
         right: -10px;

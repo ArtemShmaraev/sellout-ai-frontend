@@ -115,7 +115,7 @@ const ProductDetails = ({product}) => {
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            setNotification('Артикул скопирован в буфер обмена');
+            setNotification('Артикул скопирован');
         }, () => {
             setNotification('Не удалось скопировать артикул');
         });

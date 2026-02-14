@@ -16,8 +16,9 @@ const ProductBlock = ({unit}) => {
     return (
         <div className={s.row}>
             <Link href={`/products/${unit.product.slug}`} className={s.col1}>
+                {unit.product.bucket_link[0] &&
                 <Image src={unit.product.bucket_link[0].url} alt=''
-                       className={s.img} fill={true} sizes={'width: 100%'}/>
+                       className={s.img} fill={true} sizes={'width: 100%'}/>}
             </Link>
             <div className={s.inner_row}>
                 <div className={s.col}>

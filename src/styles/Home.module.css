@@ -1,3 +1,159 @@
+.swiper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    margin-bottom: 10px;
+    max-height: 50vh;
+}
+
+.promo_slide {
+    width: 77%; /* Устанавливаем ширину слайда в 90% */
+    margin: 0 auto; /* Центрируем слайд по горизонтали */
+}
+
+.promo_slide img {
+    /*height: 22vh; !* Устанавливаем высоту изображения в 30% от высоты экрана *!*/
+    width: 100%;
+    border-radius: 3px; /* Добавляем скругление углов для изображения */
+    object-fit: cover;
+}
+
+.img_slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    padding-bottom: 3px;
+}
+
+.promo_content {
+    margin-top: 0px; /* Добавляем отступ сверху для контента */
+    /*width: 90%;*/
+}
+
+.h3_promo {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.p_promo {
+    font-size: 12px;
+}
+
+
+
+.blocks_container {
+    /*display: flex;*/
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 98%; /* Добавлено */
+    font-weight: 600;
+    margin: 0 auto;
+}
+.block img,
+.sub_block img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    aspect-ratio: 1; /* Устанавливаем соотношение сторон 1:1 */
+    object-fit: cover; /* Обрезаем изображение */
+    /*border: 3px solid #dedede;*/
+}
+.block {
+    flex: 1;
+    width: 100%; /* Изменено */
+    text-align: center;
+    padding: 10px;
+
+    border-radius: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 3px;
+}
+
+.block_double {
+    margin-bottom: 4px; /* Добавлено для создания пробела между блоками */
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ширина установлена на 100% */
+}
+
+.sub_block {
+    /*flex: 1;*/
+    width: 49.4%;
+    text-align: center;
+    /*padding: 10px;*/
+    /*border: 4px solid #dedede;*/
+    border-radius: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 0px; /* Оставлено без изменений */
+    aspect-ratio: 1; /* Устанавливаем соотношение сторон 1:1 */
+}
+
+
+.sub_block:hover {
+    background-color: lightblue;
+}
+
+
+.buttons_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    /*margin-top: 10px;*/
+    background-color: #dedede;
+    border-radius: 10px;
+
+
+
+}
+
+
+.button_gender {
+    flex: 1;
+    /*background-color: transparent;*/
+    background-color: #dedede;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 20px;
+    transition: background-color 0.3s ease;
+
+}
+
+
+.button_gender_active {
+    background-color: #ffffff;
+    border-radius: 10px;
+    flex: 1;
+    /*background-color: transparent;*/
+    border: 3px solid #dedede;
+    /*border: none;*/
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 20px;
+    /*background-color: ;*/
+    transition: background-color 0.3s ease;
+    text-decoration: underline;
+    /*background-color: #dedede;*/
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); !* добавляем тень *!*/
+}
+
+.main_cont {
+    margin-top: 130px;
+    margin-bottom: 100px;
+}
+
 .cont {
     margin-top: 130px;
     margin-bottom: 100px;
@@ -32,12 +188,45 @@
 .title_block {
     max-width: 50%;
 }
+.title_b {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem; /* my-5 */
+    margin-bottom: 3rem; /* my-5 */
+}
 
 .title {
     font-weight: 700;
     font-size: 26px;
+
+    margin: 0 auto;
     margin-bottom: 0;
 }
+
+.btn_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.btn {
+
+    background: black;
+    text-align: center;
+    color: white;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 15px 25px 15px 25px;
+    margin-top: -15px;
+    /*width: 100%;*/
+}
+
 
 .link {
     text-decoration: underline;
@@ -100,8 +289,33 @@
 }
 
 @media (max-width: 1200px) {
+    .collections{
+        /*margin-top: 30px;*/
+        margin-bottom: 0px;
+    }
+
+    .btn {
+        background: white;
+        text-align: center;
+        color: black;
+        /*border: none;*/
+        font-weight: 500;
+        outline: none;
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 15px 25px 15px 25px;
+        margin-top: -15px;
+        border: 1px solid black;
+        width: 95vw;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
     .cont {
         margin-top: 78px;
+    }
+    .title_block {
+        max-width: 100%;
     }
 
     .cont_index{
@@ -114,7 +328,7 @@
 
     .title {
         margin-left: 0;
-        font-size: 18px;
+        font-size: 25px;
         font-weight: 500;
     }
 
@@ -135,4 +349,13 @@
         font-weight: 500;
         padding: 0 10px;
     }
+    .title_b {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px; /* my-5 */
+        margin-bottom: 5px; /* my-5 */
+    }
+
+
 }

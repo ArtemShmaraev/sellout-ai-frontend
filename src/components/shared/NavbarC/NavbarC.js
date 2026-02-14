@@ -69,13 +69,12 @@ const NavbarC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
-        if (Cookies.get('selected_gender')){
+        if (Cookies.get('selected_gender')) {
             setSelectedGender(Cookies.get('selected_gender'))
         }
 
         return () => window.removeEventListener('scroll', checkScroll);
     }, [prevScrollPos]);
-
 
 
     const handleGenderSelection = async (gender) => {
@@ -103,16 +102,19 @@ const NavbarC = () => {
             <div className={'custom_cont'}>
                 <div className={s.row1}>
                     <div className={s.block}>
+
                         <div className={'desktop_d'}>
-                            <Link href="/women" className={selectedGender === 'F' ? s.selectedGender : s.genderButton} onClick={() => {
-                                handleGenderSelection('F');
+                            <Link href="/women" className={selectedGender === 'F' ? s.selectedGender : s.genderButton}
+                                  onClick={() => {
+                                      handleGenderSelection('F');
 
-                            }}>Женское</Link>
+                                  }}>Женское</Link>
 
-                            <Link href="/men" className={selectedGender === 'M' ? s.selectedGender : s.genderButton} onClick={() => {
-                                handleGenderSelection('M');
+                            <Link href="/men" className={selectedGender === 'M' ? s.selectedGender : s.genderButton}
+                                  onClick={() => {
+                                      handleGenderSelection('M');
 
-                            }}>Мужское</Link>
+                                  }}>Мужское</Link>
 
                             <Link href="/about" className={s.links}>О нас</Link>
                             {/*<Link href="https://t.me/selloutsu" className={s.links}>Блог</Link>*/}
@@ -132,25 +134,51 @@ const NavbarC = () => {
 
                         </Link>
                     </div>
+
                     <div className={s.block} style={{justifyContent: 'flex-end'}}>
-                        <Link href={'/wishlist'}>
-                            <Image width={25} src={like} alt="" className={s.icons} loading={"eager"}/>
-                        </Link>
-                        {desktopStore.isDesktop &&
-                        userStore.isLogged
-                            ?
-                            <Link href={'/account'} className={s.auth_block}>
-                                <Image width={25} src={person} alt="" className={s.icons} loading={"eager"}/>
-                                <div className={s.name}>{userStore.firstName}</div>
-                            </Link>
-                            :
-                            desktopStore.isDesktop &&
-                            <AuthModal>
-                                <Image width={25} src={person} alt="" className={s.icons} loading={"eager"}/>
-                                <div className={s.name}>Войдите</div>
-                            </AuthModal>
-                        }
-                        <CartIcon/>
+                        <div className={s.block} style={{ justifyContent: 'flex-end' }}>
+                            {desktopStore.isDesktop ? (
+                                <>
+                                    <Link href="/wishlist">
+                                        <Image width={25} src={like} alt="Wishlist" className={s.icons} loading="eager" />
+                                    </Link>
+                                    {userStore.isLogged ? (
+                                        <Link href="/account" className={s.auth_block}>
+                                            <Image width={25} src={person} alt="Account" className={s.icons} loading="eager" />
+                                            <div className={s.name}>{userStore.firstName}</div>
+                                        </Link>
+                                    ) : (
+                                        <AuthModal>
+                                            <Image width={25} src={person} alt="Login" className={s.icons} loading="eager" />
+                                            <div className={s.name}>Войдите</div>
+                                        </AuthModal>
+                                    )}
+                                    <CartIcon />
+                                </>
+                            ) : (
+                                <div className="mobile_d align-items-center">
+                                    <Link href="/wishlist">
+                                        <Image width={25} src={like} alt="Wishlist" className={s.icons} loading="eager" />
+                                    </Link>
+                                    {/*{userStore.isLogged ? (*/}
+                                    {/*    <Link href="/account" className={s.auth_block}>*/}
+                                    {/*        <Image width={26} src={person} alt="Account" className={s.icons_profile} loading="eager" />*/}
+
+                                    {/*    </Link>*/}
+                                    {/*) : (*/}
+                                    {/*    <AuthModal>*/}
+                                    {/*        <Image width={26} src={person} alt="Login" className={s.icons_profile} loading="eager" />*/}
+
+                                    {/*    </AuthModal>*/}
+                                    {/*)}*/}
+                                    <CartIcon />
+
+                                </div>
+                            )}
+                        </div>
+
+
+
                     </div>
                 </div>
                 <div className={s.row2}>

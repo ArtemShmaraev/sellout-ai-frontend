@@ -10,7 +10,7 @@ const CartIcon = () => {
     const {cartStore} = useContext(Context)
     return (
         <Link className={s.icons} href={'/cart'}>
-            <Image width={25} src={cart} alt=""/>
+            <Image width={24}  src={cart} alt=""/>
             {
                 cartStore.cartCnt > 0 &&
                 <div className={s.circle}>
