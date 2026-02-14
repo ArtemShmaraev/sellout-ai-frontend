@@ -505,11 +505,11 @@
 .shareIcon {
     width: 26px; /* Adjust the size as needed */
     height: 26px; /* Adjust the size as needed */
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .clicked {
-    animation: pulse 0.3s ease-in-out;
+    animation: pulse 0.5s ease-in-out;
 }
 
 @keyframes pulse {
