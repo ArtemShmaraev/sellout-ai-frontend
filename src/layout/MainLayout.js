@@ -14,7 +14,7 @@ import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // 
  import logo_sq from "@/static/img/logo_sq.png"
 import {parse} from "cookie";
 import PromoBanner from "@/components/shared/PromoBanner/PromoBanner";
-import BottomNav from "@/components/shared/BottomNav/BottomNav";
+// import BottomNav from "@/components/shared/BottomNav/BottomNav";
 
 const MainLayout = ({children, footerData}) => {
     const {desktopStore} = useContext(Context)
