@@ -49,6 +49,9 @@ const BreadItem = ({el, ind}) => {
                         <div className={s.count}>{most_pop[el.name].count}</div>
                     )}
                 </div>
+                {!desktopStore.isDesktop &&
+                    <Image src={arrow} alt='' className={s.arrow_mob} />
+                }
             </Link>
             <meta itemProp="position" content={ind + 1} />
         </div>

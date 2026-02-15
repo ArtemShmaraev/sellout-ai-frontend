@@ -124,6 +124,12 @@
     justify-content: center; /* Центрирование по горизонтали */
     align-items: center; /* Центрирование по вертикали */
 }
+.arrow_mob {
+    margin-right: 20px;
+    width: 15px;
+    position: absolute;
+    right: 0;
+}
 .hr {
     width: 96%;
     height: 1px;
@@ -132,7 +138,7 @@
 }
 
 
-@media (max-width: 768px) { /* Пример значения ширины для мобильных устройств */
+@media (max-width: 900px) { /* Пример значения ширины для мобильных устройств */
     .breadcrumbItem {
         width: 100%; /* Ширина каждого элемента на мобильной версии */
         margin-right: 0; /* Убрать отступы между элементами на мобильной версии */
@@ -148,6 +154,11 @@
         margin-top: 10px;
         /*padding-top: 20px;*/
 
+    }
+
+    .breadcrumbItem:hover{
+        /*background-color: #ececec;*/
+        border: 1px solid white;
     }
     .textContainer {
         padding-left: 4px; /* Отступ между текстом и изображением */
