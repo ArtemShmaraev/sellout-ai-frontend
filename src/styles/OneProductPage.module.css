@@ -444,7 +444,11 @@
 
     }
 }
-
+.similar_title {
+    font-size: 19px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
 .arrows_section {
     display: flex;
     align-items: center;

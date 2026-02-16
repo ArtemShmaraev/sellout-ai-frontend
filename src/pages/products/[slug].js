@@ -82,6 +82,7 @@ import StarRating from "@/components/shared/StarRating/StarRating";
 import * as PropTypes from "prop-types";
 import ProductDetailsMob from "@/components/shared/ProductDetailsMob/ProductDetailsMob";
 import Notification from "@/components/shared/Notification/Notification";
+import ProductList from "@/components/pages/product/ProductList/ProductList";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -947,8 +948,11 @@ const OneProductPage = ({product, prices, ip}) => {
                         }
 
                         {!desktopStore.isDesktop && compilations.map(el =>
-
-                            <Compilation arr={el.products} title={el.name}/>
+                            <>
+                                <h3 className={s.similar_title}>{el.name}</h3>
+                                {/*<Compilation arr={el.products} title={el.name}/>*/}
+                                <ProductList products={el.products} isAdmin={false}/>
+                            </>
                         )}
 
 

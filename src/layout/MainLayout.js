@@ -126,8 +126,7 @@ const MainLayout = ({children, footerData}) => {
                 <meta name="theme-color" content="#000000"/>
                 {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
-                <link rel="stylesheet" href="@/components/shared/Stories/snapgram.css"/>
-                <link rel="stylesheet" href="@/components/shared/Stories/zuck.css"/>
+
 
 
                 <script
