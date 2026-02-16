@@ -423,6 +423,10 @@
         "query_name": "chanel"
       },
       {
+        "name": "CHARLES&KEITH",
+        "query_name": "charlesandkeith"
+      },
+      {
         "name": "Chloe",
         "query_name": "chloe"
       },
@@ -517,10 +521,6 @@
       {
         "name": "Off-White",
         "query_name": "off-white"
-      },
-      {
-        "name": "PINKO",
-        "query_name": "pinko"
       },
       {
         "name": "Prada",
@@ -2266,6 +2266,10 @@
         "query_name": "chanel"
       },
       {
+        "name": "CHARLES&KEITH",
+        "query_name": "charlesandkeith"
+      },
+      {
         "name": "Chloe",
         "query_name": "chloe"
       },
@@ -2364,10 +2368,6 @@
       {
         "name": "Paco Rabanne",
         "query_name": "paco_rabanne"
-      },
-      {
-        "name": "PINKO",
-        "query_name": "pinko"
       },
       {
         "name": "Polo Ralph Lauren",
@@ -2448,6 +2448,10 @@
         "query_name": "chanel"
       },
       {
+        "name": "CHARLES&KEITH",
+        "query_name": "charlesandkeith"
+      },
+      {
         "name": "Chloe",
         "query_name": "chloe"
       },
@@ -2546,10 +2550,6 @@
       {
         "name": "Paco Rabanne",
         "query_name": "paco_rabanne"
-      },
-      {
-        "name": "PINKO",
-        "query_name": "pinko"
       },
       {
         "name": "Polo Ralph Lauren",
@@ -2630,6 +2630,10 @@
         "query_name": "chanel"
       },
       {
+        "name": "CHARLES&KEITH",
+        "query_name": "charlesandkeith"
+      },
+      {
         "name": "Chloe",
         "query_name": "chloe"
       },
@@ -2729,10 +2733,7 @@
         "name": "Paco Rabanne",
         "query_name": "paco_rabanne"
       },
-      {
-        "name": "PINKO",
-        "query_name": "pinko"
-      },
+
       {
         "name": "Polo Ralph Lauren",
         "query_name": "polo_ralph_lauren"

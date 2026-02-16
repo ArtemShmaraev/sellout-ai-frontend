@@ -43,6 +43,10 @@ const ProductBlock = ({unit}) => {
                         <div className={s.brand}>Цена</div>
                         <div className={s.text}>{addSpacesToNumber(unit.final_price)} ₽</div>
                     </div>
+                    <div className={s.number_block}>
+                        <div className={s.brand}>Доставка</div>
+                        <div className={s.text} id={'status'}>{unit.delivery_date_str}</div>
+                    </div>
                     {
                         unit.track_number &&
                         <div className={s.number_block}>

@@ -1,0 +1,49 @@
+/* BottomNav.module.css */
+.bottom_nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.icon_wrapper {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff; /* Highlight border color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.nav_icon {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+}
+
+.active .icon_wrapper {
+    border: 2px solid #000000; /* Highlight border color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.nav_item span {
+    margin-top: 4px;
+}

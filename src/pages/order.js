@@ -320,15 +320,15 @@ const Order = ({
                                     (orderStore.method === 1
                                         ?
                                         <div className={s.left_right}>
-                                            <p className={'mb-0'}><span className={'mb-0'}>Доставка со склада: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p><p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽</p>
+                                            <p className={'mb-0'}><span className={'mb-0'}>Доставка: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p><p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽</p>
                                         </div>
                                         :
                                         <div className={s.left_right}>
-                                            <p className={'mb-0'}><span className={'mb-0'}>Доставка со склада: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p><p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_part)}₽</p>
+                                            <p className={'mb-0'}><span className={'mb-0'}>Доставка: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p><p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_part)}₽</p>
                                         </div>)
                                     :
                                     <div className={s.left_right}>
-                                        <p className={'mb-0'}><span className={'mb-0'}>Доставка со склада: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p>
+                                        <p className={'mb-0'}><span className={'mb-0'}>Доставка: </span><span style={{fontWeight: "500"}}>{orderStore.deliveryPrice.ship_day}</span></p>
                                         <p className={s.right_text}>{addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽</p>
                                     </div>
 
