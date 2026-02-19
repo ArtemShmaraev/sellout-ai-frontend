@@ -68,5 +68,15 @@
     "id": 28,
     "name": "Другой",
     "eng_name": "other_material"
+  },
+  {
+    "id": 29,
+    "name": "Нубук",
+    "eng_name": "nubuck"
+  },
+  {
+    "id": 30,
+    "name": "Gore-Tex",
+    "eng_name": "gore-tex"
   }
 ]
