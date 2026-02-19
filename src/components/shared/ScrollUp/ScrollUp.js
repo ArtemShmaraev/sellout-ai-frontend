@@ -7,26 +7,64 @@ import cn from 'classnames'; // Импортируйте библиотеку 'c
 const ScrollUp = () => {
     const [visible, setVisible] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [isScrolling, setIsScrolling] = useState(false); // отслеживание процесса скроллинга
 
+    // Функция для проверки скроллинга
     const checkScroll = () => {
         const currentScrollPos = window.pageYOffset;
-        const visible = prevScrollPos > currentScrollPos;
+
+        // Определяем, видна ли кнопка: скролл вверх или позиция ниже определенного значения
+        const showButton = prevScrollPos > currentScrollPos && currentScrollPos > 100;
 
         setPrevScrollPos(currentScrollPos);
-        setVisible(visible);
+        setVisible(showButton);
+
+        // Если пользователь остановился, запускаем таймер для скрытия кнопки через 3 секунды
+        setIsScrolling(true);
+        setTimeout(() => {
+            setIsScrolling(false);
+        }, 700); // Через 300ms после скроллинга
     };
 
-    useEffect(() => {
-        window.addEventListener('scroll', checkScroll);
-        return () => window.removeEventListener('scroll', checkScroll);
-    }, [prevScrollPos]);
-
+    // Обработчик клика по кнопке для скролла наверх
     const click = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
-    }
+
+        // Скрываем кнопку сразу после начала скролла
+        setVisible(false);
+    };
+
+    // Отслеживаем скроллинг и скрытие кнопки при достижении верха
+    useEffect(() => {
+        const handleScroll = () => {
+            checkScroll();
+
+            // Скрываем кнопку, если пользователь находится вверху
+            if (window.pageYOffset === 0) {
+                setVisible(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [prevScrollPos]);
+
+    // Убираем кнопку через некоторое время после завершения скроллинга
+    useEffect(() => {
+        if (!isScrolling && visible) {
+            const timer = setTimeout(() => {
+                setVisible(false);
+            }, 500); // Убираем кнопку через 3 секунды после завершения скроллинга
+
+            return () => clearTimeout(timer);
+        }
+    }, [isScrolling, visible]);
 
     return (
         <div className={cn(s.scroll_btn, { [s.visible]: visible })} onClick={click}>

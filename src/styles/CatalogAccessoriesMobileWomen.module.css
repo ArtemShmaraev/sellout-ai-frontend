@@ -1,0 +1,271 @@
+/* Стили для общего контейнера хедера */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white; /* Пример фона */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Стили для первой части: Логотип и крестик */
+.headerTop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Логотип по центру */
+.logoContainer {
+    position: relative;
+}
+
+.logo {
+    width: 230px; /* Размер логотипа */
+    height: auto;
+}
+
+.closeButton {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+
+.headerBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 0; /* Отступ между частями */
+    margin-bottom: 10px;
+}
+
+/* Стрелка назад слева */
+.backArrowContainer {
+    position: absolute;
+    left: 10px; /* Отступ слева */
+}
+
+.backArrow {
+    width: 27px; /* Размер стрелки */
+    height: auto;
+}
+
+/* Текст по центру */
+.headerTitle {
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.catalogContainer {
+    margin-bottom: 50px;
+    margin-top: 140px;
+}
+
+/* Popular Brands Section */
+.brandsSection {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.brandsTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.brandsGrid {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: grid;
+    grid-template-columns: repeat(20, 97px);
+    grid-template-rows: repeat(3, auto);
+    gap: 17px;
+    overflow-x: auto; /* Включаем горизонтальную прокрутку */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.brandsGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.brandCircle {
+    text-align: center;
+}
+
+.circle {
+    width: 97px;
+    height: 97px;
+    border-radius: 50%;
+    border: 0.85px solid #C7C7C7;
+    margin-bottom: 7px;
+    transition: border 0.2s ease, box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    position: relative; /* Для центрирования изображения внутри кружка */
+    overflow: hidden; /* Чтобы изображение не выходило за границы кружка */
+}
+
+.circle:hover {
+    border-color: black; /* Обводка становится чёрной */
+    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.circleText {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.circleImage {
+    width: 97px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем изображение по вертикали и горизонтали */
+}
+
+
+.left {
+    position: absolute;
+    border: none;
+    right: 115px;
+    bottom: -40px;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.right {
+    position: absolute;
+    border: none;
+    right: 50px;
+    bottom: -40px;
+    z-index: 1;
+    background-color: transparent;
+}
+
+/* Categories Section */
+.categoriesSection {
+    margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.categoriesTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, min(170px, calc((100vw - 40px) / 3))); /* Каждая колонка будет 117px */
+    gap: 5px; /* Отступы между прямоугольниками */
+    margin-bottom: 5px;
+}
+
+.categoryItem {
+    width: min(170px, calc((100vw - 40px) / 3));
+    height: calc(min(170px, calc((100vw - 40px) / 3)) * (165/130));
+    position: relative;
+    background-color: #f4f4f4; /* Можно изменить на ваш цвет фона */
+    transition: box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    border-radius: 4px;
+}
+
+.categoryItem:hover {
+    box-shadow: inset 0 0 7px 0.5px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.categoryImage {
+    width: min(170px, calc((100vw - 40px) / 3));
+    height: auto; /* Картинка занимает всю ширину, сохраняя пропорции */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.categoryText {
+    position: absolute;
+    top: 80%; /* Отступ от верха до текста */
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+}
+
+
+.categoriesGrid4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, min(170px, calc((100vw - 45px) / 4))); /* Каждая колонка будет 117px */
+    gap: 5px; /* Отступы между прямоугольниками */
+    margin-bottom: 20px;
+}
+
+.categoryItem4 {
+    width: min(170px, calc((100vw - 45px) / 4));
+    height: calc(min(170px, calc((100vw - 45px) / 4)) * (120/100));
+    position: relative;
+    background-color: #f4f4f4; /* Можно изменить на ваш цвет фона */
+    transition: box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    border-radius: 4px;
+}
+
+.categoryItem4:hover {
+    box-shadow: inset 0 0 7px 0.5px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.categoryImage4 {
+    width: min(170px, calc((100vw - 45px) / 4));
+    height: auto; /* Картинка занимает всю ширину, сохраняя пропорции */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.categoryText4 {
+    position: absolute;
+    top: 82%; /* Отступ от верха до текста */
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #000;
+}
+
+.centerButton {
+    width: 400px;
+    height: 60px;
+    border: 1px solid black; /* Черная рамка */
+    background-color: transparent; /* Прозрачный фон */
+    border-radius: 9px; /* Радиус углов 9px */
+    display: flex;
+    justify-content: center; /* Горизонтальное выравнивание текста */
+    align-items: center; /* Вертикальное выравнивание текста */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: 500;
+    cursor: pointer; /* Указатель мыши при наведении */
+    margin: 0 auto; /* Центрирование кнопки */
+    text-transform: uppercase; /* Все буквы заглавные */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавные переходы */
+}
+
+.centerButton:hover {
+    background-color: black; /* Черный фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+

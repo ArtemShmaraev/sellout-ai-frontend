@@ -1,0 +1,344 @@
+/* Стили для общего контейнера хедера */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white; /* Пример фона */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+/* Стили для первой части: Логотип и крестик */
+.headerTop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Логотип по центру */
+.logoContainer {
+    position: relative;
+}
+
+.logo {
+    width: 230px; /* Размер логотипа */
+    height: auto;
+}
+
+.closeButton {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+
+.genderBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 70px; /* Отступ между частями */
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.genderButton {
+    width: 50%;
+    height: 55px;
+    font-size: 17px;
+    color: #999B99; /* Текст серого цвета для невыбранных */
+    background-color: #F8F8F8; /* Фон для невыбранных */
+    border: 1px solid #EEEEEE;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.genderButton:first-child {
+}
+
+.genderButton:last-child {
+}
+
+.selected {
+    background-color: white;
+    color: black; /* Текст черный для выбранных */
+    z-index: 2;
+}
+
+.selected:first-child {
+    border-right: none; /* Убираем правую рамку у первой кнопки, когда выбрана */
+    box-shadow: 2px 0px 10px 0px rgba(0, 0, 0, 0.25); /* Drop shadow */
+}
+
+.selected:last-child {
+    border-left: none; /* Убираем левую рамку у второй кнопки, когда выбрана */
+    box-shadow: -2px 0px 10px 0px rgba(0, 0, 0, 0.25); /* Drop shadow */
+}
+
+.searchBlock {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    position: sticky;
+    top: 65px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    z-index: 100;
+}
+
+.searchBar {
+    width: 95%; /* Ширина в неактивном состоянии */
+    height: 45px;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    margin-left: 2.5%;
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease; /* Анимация при изменении размера */
+    position: relative; /* Для абсолютного позиционирования элементов внутри */
+}
+
+.searchBar.active {
+    width: 77%; /* Ширина в активном состоянии */
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Растягиваем на всю ширину контейнера */
+    padding-left: 14px;
+}
+
+.searchIcon {
+    margin-right: 15px;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 16px;
+    color: black;
+}
+
+.searchInput::placeholder {
+    color: #646464;
+}
+
+.clearButton {
+    width: 26px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: #646464;
+    color: white;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.closeButton2 {
+    position: absolute;
+    right: 2.5%; /* Справа с отступом 5% */
+    font-size: 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.mainCats {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 20px;
+}
+
+.mainCatsRow {
+    display: flex;
+    gap: 2px;
+}
+
+.mainCat {
+    display: block;
+}
+
+.popularCats {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.popularCatsRow {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.popularCatsRow::-webkit-scrollbar {
+    display: none;
+}
+
+.popularCat {
+    height: 200px;
+    width: auto;
+}
+
+
+/* Текст по центру */
+.headerTitle {
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.catalogContainer {
+    margin-bottom: 50px;
+    margin-top: 140px;
+}
+
+/* Popular Brands Section */
+.brandsSection {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.brandsTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.brandsTitle2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.brandsGridCont {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    overflow-x: auto; /* Включаем горизонтальную прокрутку */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    align-items: center;
+}
+
+.brandsGrid {
+    display: grid;
+    grid-template-columns: repeat(24, 110px);
+    grid-template-rows: repeat(2, auto);
+    gap: 17px;
+}
+
+.brandsGridCont::-webkit-scrollbar {
+    display: none;
+}
+
+.brandCircle {
+    text-align: center;
+}
+
+.circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 0.85px solid #C7C7C7;
+    margin-bottom: 7px;
+    transition: border 0.2s ease, box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    position: relative; /* Для центрирования изображения внутри кружка */
+    overflow: hidden; /* Чтобы изображение не выходило за границы кружка */
+}
+
+.circle:hover {
+    border-color: black; /* Обводка становится чёрной */
+    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.circleText {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.circleImage {
+    width: 110px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем изображение по вертикали и горизонтали */
+}
+
+.moreLines {
+    width: 160px;
+    height: 270px;
+    background-color: #E2E2E2;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+.moreLinesText {
+    font-size: 14px;
+}
+
+
+.sets {
+    display: flex;
+    overflow-x: auto;
+    gap:10px;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.sets::-webkit-scrollbar {
+    display: none;
+}
+
+.setImg {
+    height: 240px;
+    width: auto;
+}
+
+.centerButton {
+    width: 390px;
+    height: 60px;
+    border: 1px solid black; /* Черная рамка */
+    background-color: transparent; /* Прозрачный фон */
+    border-radius: 9px; /* Радиус углов 9px */
+    display: flex;
+    justify-content: center; /* Горизонтальное выравнивание текста */
+    align-items: center; /* Вертикальное выравнивание текста */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: 500;
+    cursor: pointer; /* Указатель мыши при наведении */
+    /* Центрирование кнопки */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавные переходы */
+    margin: 0 auto 50px;
+}
+
+.centerButton:hover {
+    background-color: black; /* Черный фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+

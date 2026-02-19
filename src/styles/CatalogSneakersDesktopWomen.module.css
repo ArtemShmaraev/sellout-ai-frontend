@@ -1,0 +1,337 @@
+.catalogContainer {
+    margin: 150px 0 170px 0;
+}
+
+/* Header Styles */
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Центрируем главный контент */
+    align-items: center;
+    margin: 0 46px 50px 46px;
+}
+
+.closeButton {
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.viewAll {
+    position: absolute;
+    right: 0;
+    font-size: 16px;
+    color: #363636;
+    text-decoration: underline;
+    cursor: pointer;
+    text-underline-offset: 3px;
+    font-weight: 500;
+}
+
+
+/* Popular Brands Section */
+.brandsSection1 {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.brandsTitle1 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    margin-left: 46px;
+}
+
+.brandsGrid11 {
+    padding-left: 46px;
+    padding-right: 46px;
+    display: grid;
+    grid-template-columns: repeat(12, max(85px, min(5.55vw, 105px)));
+    grid-template-rows: repeat(2, auto);
+    gap: 17px;
+    overflow-y: hidden;
+    overflow-x: auto; /* Включаем горизонтальную прокрутку */
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.brandsGrid11::-webkit-scrollbar {
+    display: none;
+}
+
+
+.brandCircle1 {
+    text-align: center;
+}
+
+.circle1 {
+    width: max(85px, min(5.55vw, 105px));
+    height: max(85px, min(5.55vw, 105px));
+    border-radius: 50%;
+    border: 0.85px solid #C7C7C7;
+    margin-bottom: 7px;
+    transition: border 0.2s ease, box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    position: relative; /* Для центрирования изображения внутри кружка */
+    overflow: hidden; /* Чтобы изображение не выходило за границы кружка */
+}
+
+.circle1:hover {
+    border-color: black; /* Обводка становится чёрной */
+    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.circleText1 {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.circleImage1 {
+    width: max(85px, min(5.55vw, 105px));
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем изображение по вертикали и горизонтали */
+}
+
+/* Popular Brands Section */
+.brandsSection {
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.brandsPhoto {
+    margin-left: 46px;
+    display: block;
+}
+
+.brandsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 46px; /* Отступы по бокам */
+}
+
+.brandsTitle {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.viewAll2 {
+    font-size: 14px;
+    color: #3E3E3E;
+    cursor: pointer;
+    white-space: nowrap; /* Запрет на перенос текста */
+    text-decoration: underline;
+}
+
+.brandsGrid {
+    padding-left: 40px;
+    padding-right: 46px;
+    display: grid;
+    grid-template-rows: repeat(2, 130px);
+    gap: 17px;
+    overflow-x: auto; /* Включаем горизонтальную прокрутку */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.brandsGrid1 {
+    grid-template-columns: repeat(23, 100px);
+}
+.brandsGrid2 {
+    grid-template-columns: repeat(12, 100px);
+}
+.brandsGrid3 {
+    grid-template-columns: repeat(8, 100px);
+}
+.brandsGrid4 {
+    grid-template-columns: repeat(20, 100px);
+}
+.brandsGrid5 {
+    grid-template-columns: repeat(5, 100px);
+}
+.brandsGrid6 {
+    grid-template-columns: repeat(7, 100px);
+}
+.brandsGrid7 {
+    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: repeat(1, 130px);
+}
+.brandsGrid8 {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(1, 130px);
+}
+.brandsGrid9 {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(1, 130px);
+}
+.brandsGrid10 {
+    grid-template-columns: repeat(8, 100px);
+}
+.brandsGrid11_ {
+    grid-template-columns: repeat(3, 100px);
+}
+.brandsGrid12 {
+    grid-template-rows: repeat(2, 130px);
+    grid-template-columns: repeat(5, 100px);
+}
+
+.brandsGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.brandCircle {
+    text-align: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 0.85px solid #C7C7C7;
+    margin-bottom: 7px;
+    transition: border 0.2s ease, box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    position: relative; /* Для центрирования изображения внутри кружка */
+    overflow: hidden; /* Чтобы изображение не выходило за границы кружка */
+}
+
+.circle:hover {
+    border-color: black; /* Обводка становится чёрной */
+    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.circleText {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.circleImage {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрируем изображение по вертикали и горизонтали */
+}
+
+
+.left {
+    position: absolute;
+    border: none;
+    right: 115px;
+    bottom: -40px;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.right {
+    position: absolute;
+    border: none;
+    right: 50px;
+    bottom: -40px;
+    z-index: 1;
+    background-color: transparent;
+}
+
+/* Categories Section */
+.categoriesSection {
+    margin-bottom: 50px;
+    margin-left: 46px;
+    margin-right: 46px;
+}
+
+.categoriesTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.categoriesTitle2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 46px;
+}
+
+.categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px); /* Каждая колонка будет 117px */
+    gap: 15px; /* Отступы между прямоугольниками */
+}
+
+.categoryItem {
+    width: 200px;
+    height: 140px;
+    position: relative;
+    background-color: #f4f4f4; /* Можно изменить на ваш цвет фона */
+    transition: box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
+    border-radius: 4px;
+}
+
+.categoryItem:hover {
+    box-shadow: inset 0 0 7px 0.5px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    cursor: pointer;
+}
+
+.categoryImage {
+    width: 200px;
+    height: auto; /* Картинка занимает всю ширину, сохраняя пропорции */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.categoryText {
+    position: absolute;
+    top: 115px; /* Отступ от верха до текста */
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+}
+
+
+@media (min-width: 1800px) {
+    .header, .categoriesSection {
+        margin-right: calc(10vw);
+        margin-left: calc(10vw);
+    }
+
+    .brandsContainer, .categoriesTitle2, .brandsTitle1, .brandsPhoto {
+        margin-left: calc(10vw);
+    }
+
+    .brandsGrid11 {
+        padding-left: calc(10vw);
+        padding-right: calc(10vw);
+    }
+
+    .brandsGrid {
+        padding-right: calc(10vw);
+    }
+
+    .left {
+        right: calc(115px + 10vw);
+    }
+
+    .right {
+        right: calc(50px + 10vw);
+    }
+}
