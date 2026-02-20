@@ -1,12 +1,14 @@
 import MainLayout from "@/layout/MainLayout";
 import styles from '@/styles/MobileMenuWomen.module.css'
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import logo from "@/static/img/sellout_logo.svg";
 import cross from '@/static/icons/x-lg.svg'
 import search from "@/static/img/sellout_logo.svg";
 import more from "@/static/img/sellout_logo.svg";
+import Cookies from "js-cookie";
+import {router} from "next/client";
 
 const MobileMenuWomen = () => {
     const textsLines = [
@@ -45,6 +47,13 @@ const MobileMenuWomen = () => {
             inputRef.current.focus(); // Возвращаем фокус на инпут, чтобы клавиатура не закрывалась
         }
     };
+    useLayoutEffect(() => {
+        const savedGender = Cookies.get('selected_gender');
+        if (savedGender) {
+            setSelectedGender(savedGender)
+        }
+
+    }, []);
 
     return (
         <div>
@@ -63,14 +72,14 @@ const MobileMenuWomen = () => {
             {/* Вторая часть: Стрелка назад и текст */}
             <div className={styles.genderBlock}>
                 <button
-                    className={`${styles.genderButton} ${selectedGender === 'male' ? styles.selected : ''}`}
-                    onClick={() => handleGenderSelect('male')}
+                    className={`${styles.genderButton} ${selectedGender === 'M' ? styles.selected : ''}`}
+                    onClick={() => handleGenderSelect('M')}
                 >
                     Мужское
                 </button>
                 <button
-                    className={`${styles.genderButton} ${selectedGender === 'female' ? styles.selected : ''}`}
-                    onClick={() => handleGenderSelect('female')}
+                    className={`${styles.genderButton} ${selectedGender === 'F' ? styles.selected : ''}`}
+                    onClick={() => handleGenderSelect('F')}
                 >
                     Женское
                 </button>
