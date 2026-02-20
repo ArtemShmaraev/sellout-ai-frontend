@@ -1,0 +1,98 @@
+.aboutGuaranteeCont {
+    margin: 50px 3vw;
+    height: 70px;
+    background: linear-gradient(to bottom right, #EAEAEA, #0C5E00);
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+}
+
+.about, .guarantee {
+    display: flex;
+    align-items: center;
+}
+
+.guarantee {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(23vw - 50%), -50%);
+}
+
+.about {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(calc(23vw - 50%), -50%);
+}
+
+.aboutImg, .guaranteeImg {
+    margin-right: 10px;
+}
+
+.aboutText, .guaranteeText {
+    font-size: 15px;
+    color: black;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.aboutText {
+    max-width: calc(47vw - 177px);
+}
+
+.guaranteeText {
+    margin-right: 70px;
+    max-width: calc(47vw - 340px);
+    margin-bottom: 0;
+}
+
+.aboutButton, .guaranteeButton {
+    padding: 5px 15px;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 14px;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.aboutButton:hover, .guaranteeButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.separator {
+    width: 1px;
+    height: 35px;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+@media (min-width: 1800px) {
+    .aboutGuaranteeCont {
+        margin-right: calc(10vw);
+        margin-left: calc(10vw);
+    }
+
+    .guarantee {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(20vw - 50%), -50%);
+    }
+
+    .about {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(calc(20vw - 50%), -50%);
+    }
+}

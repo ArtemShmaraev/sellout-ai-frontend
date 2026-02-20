@@ -40,47 +40,60 @@ const SalesLine = () => {
                     {/*    Бесплатная доставка от 20000₽*/}
                     {/*</SplideSlide>*/}
                     <SplideSlide className={s.splide}>
-                        1000₽ в подарок за первый заказ
+                        <div className={s.text}>До 5000₽ в подарок</div>
+                        <button className={s.button}>Получить</button>
                     </SplideSlide>
-                    {
-                        isDesktop
-                            ?
-                            <SplideSlide className={s.splide}>
-                                Зовите друзей на Sellout и зарабатывайте до 7000₽ за
-                                каждого приведённого
-                                клиента. { userStore.isLogged ?
-                                <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
-                                :
-                                <AuthModal inline={true}
-                                           text={'Войдите или зарегистрируйтесь, чтобы стать участником реферальной программы и получать до 7000₽ за каждого приведённого клиента'}
-                                >
-                                    <span className={s.link}>Подробнее</span>
-                                </AuthModal>
-                            }
-                            </SplideSlide>
-                            :
-                            <SplideSlide className={s.splide} style={{fontSize: '12px', paddingTop: '2px'}}>
-                                Получайте до 7000₽ за приведённого
-                                клиента. { userStore.isLogged ?
-                                <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>
-                                :
-                                <AuthModal inline={true} salesLine={true}>
-                                    <span className={s.link}>Подробнее</span>
-                                </AuthModal>
-                            }
-                            </SplideSlide>
-                    }
-                    {
-                        isDesktop
-                            ?
-                            <SplideSlide className={s.splide}>
-                                Воспользуйтесь бесплатной доставкой по Москве! В другие города бесплатная доставка от 35000₽
-                            </SplideSlide>
-                            :
-                            <SplideSlide className={s.splide} style={{fontSize: '9px', paddingTop: '4px'}}>
-                                Бесплатная доставка по Москве! В другие города бесплатная доставка от 35000₽
-                            </SplideSlide>
-                    }
+                    <SplideSlide className={s.splide}>
+                        <div className={s.text}>Гарантируем лучшую цену</div>
+                        <button className={s.button}>Изучить</button>
+                    </SplideSlide>
+                    <SplideSlide className={s.splide}>
+                        <div className={s.text}>Приглашай друзей и получай до 7000₽</div>
+                        <button className={s.button}>Изучить</button>
+                    </SplideSlide>
+                    <SplideSlide className={s.splide}>
+                        <div className={s.text}>Все розыгрыши, скидки и новости</div>
+                        <button className={s.button}>Изучить</button>
+                    </SplideSlide>
+                    {/*{*/}
+                    {/*    isDesktop*/}
+                    {/*        ?*/}
+                    {/*        <SplideSlide className={s.splide}>*/}
+                    {/*            Зовите друзей на Sellout и зарабатывайте до 7000₽ за*/}
+                    {/*            каждого приведённого*/}
+                    {/*            клиента. { userStore.isLogged ?*/}
+                    {/*            <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>*/}
+                    {/*            :*/}
+                    {/*            <AuthModal inline={true}*/}
+                    {/*                       text={'Войдите или зарегистрируйтесь, чтобы стать участником реферальной программы и получать до 7000₽ за каждого приведённого клиента'}*/}
+                    {/*            >*/}
+                    {/*                <span className={s.link}>Подробнее</span>*/}
+                    {/*            </AuthModal>*/}
+                    {/*        }*/}
+                    {/*        </SplideSlide>*/}
+                    {/*        :*/}
+                    {/*        <SplideSlide className={s.splide} style={{fontSize: '12px', paddingTop: '2px'}}>*/}
+                    {/*            Получайте до 7000₽ за приведённого*/}
+                    {/*            клиента. { userStore.isLogged ?*/}
+                    {/*            <Link href={'/account/referral'} className={s.link} target={'_blank'}>Подробнее</Link>*/}
+                    {/*            :*/}
+                    {/*            <AuthModal inline={true} salesLine={true} text={'Войдите или зарегистрируйтесь, чтобы стать участником реферальной программы и получать до 7000₽ за каждого приведённого клиента'}>*/}
+                    {/*                <span className={s.link}>Подробнее</span>*/}
+                    {/*            </AuthModal>*/}
+                    {/*        }*/}
+                    {/*        </SplideSlide>*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    isDesktop*/}
+                    {/*        ?*/}
+                    {/*        <SplideSlide className={s.splide}>*/}
+                    {/*            Воспользуйтесь бесплатной доставкой по Москве! В другие города бесплатная доставка от 35000₽*/}
+                    {/*        </SplideSlide>*/}
+                    {/*        :*/}
+                    {/*        <SplideSlide className={s.splide} style={{fontSize: '9px', paddingTop: '4px'}}>*/}
+                    {/*            Бесплатная доставка по Москве! В другие города бесплатная доставка от 35000₽*/}
+                    {/*        </SplideSlide>*/}
+                    {/*}*/}
                 </Splide>
             </div>
         </div>

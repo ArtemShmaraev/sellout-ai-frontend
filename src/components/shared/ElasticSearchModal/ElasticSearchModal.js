@@ -164,7 +164,7 @@ const ElasticSearchModal = () => {
             return product.brands[0].name
         }
     }
-
+    let searchText = `2'000'000+\xa0\xa0товаров`
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     // console.log(suggs)
     return (
@@ -174,8 +174,8 @@ const ElasticSearchModal = () => {
                 className={s.toggle_btn}
             >
                 <div className={s.btn_text}>
-                    Поиск
                     <Image src={search} alt=''/>
+                    {searchText}
                 </div>
             </button>
             {isOpen &&

@@ -26,3 +26,18 @@
 .icon {
     cursor: pointer;
 }
+.socialsCont {
+    display: flex;
+    align-items: center;
+}
+.mainSocialsText {
+    margin-left: 10px;
+    color: black;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: left;
+}
+.linkTgSocials {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: black;
+}

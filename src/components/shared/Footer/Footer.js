@@ -4,6 +4,7 @@ import {Col, Row} from "react-bootstrap";
 import tg from '@/static/icons/tg.svg'
 import vk from '@/static/icons/vk.svg'
 import tgBlack from '@/static/icons/tg_black.svg'
+import igBlack from '@/static/icons/igImg.svg'
 import vkBlack from '@/static/icons/vk_black.svg'
 import MailingInput from "../UI/MailingInput/MailingInput";
 import FooterDropdown from "../UI/FooterDropdown/FooterDropdown";
@@ -17,6 +18,7 @@ import ContactModal from "@/components/shared/ContactModal/ContactModal";
 import TextModal from "@/components/shared/UI/TextModal/TextModal";
 import how from "@/static/icons/question-circle.svg";
 import warranty from "@/static/icons/warranty.svg";
+import igWhite from "@/static/icons/igImgWhite.svg";
 import payment from "@/static/icons/payment.svg";
 import ret from "@/static/icons/return.svg";
 import refund from "@/static/icons/arrow-return-left.svg";
@@ -33,6 +35,21 @@ import inst_star from "@/static/icons/instagram_star.svg";
 import inst_star_white from "@/static/icons/instagram_star_white.svg";
 import {Context} from "@/context/AppWrapper";
 import {$host} from "@/http";
+import imgUs3 from "@/static/img/Гарантии 1.png";
+import imgUs4 from "@/static/img/гарантии 2.png";
+import imgUs5 from "@/static/img/Гарантии 3.png";
+import imgUs6 from "@/static/img/Гарантии 4.png";
+import imgUs7 from "@/static/img/Гарантии 5.png";
+import imgUs8 from "@/static/img/Гарантии 6.png";
+import imgUs4Mob from "@/static/img/Гарантии 1 mob.png";
+import imgUs5Mob from "@/static/img/Гарантии 2 mob.png";
+import imgUs6Mob from "@/static/img/Гарантии 3 mob.png";
+import imgUs7Mob from "@/static/img/Гарантии 4 mob.png";
+import imgUs8Mob from "@/static/img/Гарантии 5 mob.png";
+import imgUs9Mob from "@/static/img/Гарантии 6 mob.png";
+import imgUs10Mob from "@/static/img/Гарантии 7 mob.png";
+import imgUs11Mob from "@/static/img/Гарантии 8 mob.png";
+import HowToChoose from "@/components/pages/oneProduct/HowToChoose/HowToChoose";
 
 
 const Footer = ({textData}) => {
@@ -40,6 +57,27 @@ const Footer = ({textData}) => {
     const {desktopStore} = useContext(Context);
     const [contactOpen, setContactOpen] = useState(false);
     const [howOpen, setHowOpen] = useState(false);
+
+    function changeBrowserColor(color) {
+        // Для Chrome, Firefox, Opera на Android
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', color);
+        }
+
+        // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
+        const statusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        if (statusBarMeta) {
+            // Изменение цвета status-bar на iOS
+            statusBarMeta.setAttribute('content', 'black-translucent'); // ограниченные возможности
+        }
+
+        // Для Microsoft Edge
+        const msNavbuttonMeta = document.querySelector('meta[name="msapplication-navbutton-color"]');
+        if (msNavbuttonMeta) {
+            msNavbuttonMeta.setAttribute('content', color);
+        }
+    }
 
     const toggleContact = () => {
         setContactOpen(!contactOpen);
@@ -51,11 +89,12 @@ const Footer = ({textData}) => {
 
     const toggleHow = () => {
         setHowOpen(!howOpen);
+        changeBrowserColor("#000000")
     };
 
     const closeHow = () => {
         setHowOpen(false);
-
+        changeBrowserColor("#ffffff")
     };
 
 
@@ -85,7 +124,7 @@ const Footer = ({textData}) => {
                             <div>
                                 <span className={s.footer_link} onClick={toggleHow}>Как мы работаем?</span>
                             </div>
-                            <TextModal title={'Гарантии оригинальности и качества'} img={warranty}
+                            <TextModal title={'Гарантии оригинальности и отзывы'} img={warranty}
                                        titleClassname={s.footer_link}>
                                 <>
                                     <Image src={shield} alt='' width={60}/>
@@ -100,28 +139,42 @@ const Footer = ({textData}) => {
                                         искусственного интеллекта, чтобы исключить человеческий фактор.
 
                                     </p>
-                                    <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть
+                                    <h5 className={'mb-5 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть
                                         отзывы, подробнее прочитать <Link href={'/about'} className={s.link}
                                                                           target={'_blank'}>про нашу компанию</Link>, а
-                                        также изучить отзывы на интернет ресурсах</h5>
+                                        также изучить отзывы на интернет ресурсах:</h5>
+
                                     <div className={s.icons_block}>
-                                        <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tgBlack} width={50} alt="" className={s.icon}/>
-                                        </a>
-                                        <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vkBlack} width={63} alt="" className={s.icon}/>
-                                        </a>
-                                    </div>
-                                    <div className={s.icons_block}>
+                                        <div className={s.socialsCont}>
+                                            <a style={{height: '45px'}}>
+                                                <Image src={igBlack} height={45} alt="" className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                        </div>
+
+                                        <div className={s.socialsCont}>
+                                            <a href={'https://t.me/selloutsu'} style={{height: '45px'}}>
+                                                <Image src={tgBlack} height={45} alt="" className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                        </div>
+
                                         <iframe
                                             src="https://www.yandex.ru/sprav/widget/rating-badge/108238948174?type=rating&theme=dark"
                                             width="150" height="50" frameBorder="0"></iframe>
-                                        <a id="zoon_widget_210x40_dark"
-                                           href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">
-                                            <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"
-                                                 alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"
-                                                 width="210" height="40"/>
-                                        </a>
+                                        {/*<a id="zoon_widget_210x40_dark"*/}
+                                        {/*   href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">*/}
+                                        {/*    <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"*/}
+                                        {/*         alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"*/}
+                                        {/*         width="210" height="40"/>*/}
+                                        {/*</a>*/}
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
                                     <h5 className={'my-3'}>Какие этапы проверки проходит каждый товар?</h5>
@@ -168,25 +221,53 @@ const Footer = ({textData}) => {
 
                                         </LoyaltyFAQ>
                                     </div>
-                                    <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
-                                                                                               className={s.link}
-                                                                                               target={'_blank'}>FAQ</Link>
+                                    <h5 style={{marginBottom: '50px'}}>Ответы на большинство вопросов вы найдете
+                                        здесь: <Link href={'/faq'}
+                                                     className={s.link}
+                                                     target={'_blank'}>FAQ</Link>
                                     </h5>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs3} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs4} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs5} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs6} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs7} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs8} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
                                 </>
                             </TextModal>
                             <TextModal title={'Доставка, оплата, возврат'} img={payment} titleClassname={s.footer_link}>
                                 <Image src={truck} alt='' width={60}/>
                                 <h4 className={'my-3'}>Доставка</h4>
                                 <p className={s.text}>
-                                    Мы собираем десятки миллионов предложений со всего мира: от различных бутиков,
+                                    Обратите внимание, на кнопке на странице товара указано количество дней, необходимое
+                                    для доставки от
+                                    продавца до нашего склада в Москве. Доставка со склада занимает от 1 дня в
+                                    зависимости от вашего местоположения.
+                                    <br/><br/>Мы собираем десятки миллионов предложений со всего мира: от различных
+                                    бутиков,
                                     магазинов и частных коллекционеров. В связи с этим мы можем предложить вам разные
                                     условия доставки: от самых быстрых до более длительных и при этом выгодных. Выбрав
                                     размер или конфигурацию товара, вам предстоит выбрать срок доставки и
                                     соответствующую цену. Обычно мы укладываемся сильно раньше, чем указанный крайний
                                     срок, однако мы берем время с запасом, чтобы учесть все непредвиденные
-                                    обстоятельства. На кнопке указано то количество дней, которое занимает доставка от
-                                    продавца до нашего
-                                    склада в Москве.
+                                    обстоятельства.
 
                                 </p>
                                 <div className={s.faq_block}>
@@ -456,25 +537,39 @@ const Footer = ({textData}) => {
                                 <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть
                                     отзывы, подробнее прочитать <Link href={'/about'} className={s.link}
                                                                       target={'_blank'}>про нашу компанию</Link>, а
-                                    также изучить отзывы на интернет ресурсах</h5>
+                                    также изучить отзывы на интернет ресурсах:</h5>
                                 <div className={s.icons_block}>
-                                    <a href={'https://t.me/selloutsu'}>
-                                        <Image src={tgBlack} width={50} alt="" className={s.icon}/>
-                                    </a>
-                                    <a href={'https://vk.com/sellout_official'}>
-                                        <Image src={vkBlack} width={63} alt="" className={s.icon}/>
-                                    </a>
+                                    <div className={s.socialsCont}>
+                                        <a style={{height: '45px'}}>
+                                            <Image src={igBlack} height={45} alt="" className={s.icon}/>
+                                        </a>
+                                        <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                    </div>
+
+                                    <div className={s.socialsCont}>
+                                        <a href={'https://t.me/selloutsu'} style={{height: '45px'}}>
+                                            <Image src={tgBlack} height={45} alt="" className={s.icon}/>
+                                        </a>
+                                        <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                    </div>
                                 </div>
                                 <div className={s.icons_block}>
                                     <iframe
                                         src="https://www.yandex.ru/sprav/widget/rating-badge/108238948174?type=rating&theme=dark"
                                         width="150" height="50" frameBorder="0"></iframe>
-                                    <a id="zoon_widget_210x40_dark"
-                                       href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">
-                                        <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"
-                                             alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"
-                                             width="210" height="40"/>
-                                    </a>
+                                    {/*<a id="zoon_widget_210x40_dark"*/}
+                                    {/*   href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">*/}
+                                    {/*    <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"*/}
+                                    {/*         alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"*/}
+                                    {/*         width="210" height="40"/>*/}
+                                    {/*</a>*/}
                                 </div>
                                 <Image src={patch} alt='' width={60} className={'mt-3'}/>
                                 <h5 className={'my-3'}>Какие этапы проверки проходит каждый товар?</h5>
@@ -521,25 +616,60 @@ const Footer = ({textData}) => {
 
                                     </LoyaltyFAQ>
                                 </div>
-                                <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
-                                                                                           className={s.link}
-                                                                                           target={'_blank'}>FAQ</Link>
+                                <h5 style={{marginBottom: '30px'}}>Ответы на большинство вопросов вы найдете
+                                    здесь: <Link href={'/faq'}
+                                                 className={s.link}
+                                                 target={'_blank'}>FAQ</Link>
                                 </h5>
+                                <div className={s.page2}>
+                                    <Image src={imgUs4Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs5Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs6Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs7Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs8Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs9Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs10Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
+                                <div className={s.page2}>
+                                    <Image src={imgUs11Mob} alt="Img" width={6000} height={2000}
+                                           className={s.page2Img}/>
+                                </div>
                             </>
                         </TextModal>
                         <TextModal title={'Доставка, оплата, возврат'} img={payment} titleClassname={s.footer_link}>
                             <Image src={truck} alt='' width={60}/>
                             <h4 className={'my-3'}>Доставка</h4>
                             <p className={s.text}>
-                                Мы собираем десятки миллионов предложений со всего мира: от различных бутиков,
+                                Обратите внимание, на кнопке на странице товара указано количество дней, необходимое для
+                                доставки от
+                                продавца до нашего склада в Москве. Доставка со склада занимает от 1 дня в зависимости
+                                вашего от местоположения.<br/><br/>Мы собираем десятки миллионов предложений со всего
+                                мира: от различных бутиков,
                                 магазинов и частных коллекционеров. В связи с этим мы можем предложить вам разные
                                 условия доставки: от самых быстрых до более длительных и при этом выгодных. Выбрав
                                 размер или конфигурацию товара, вам предстоит выбрать срок доставки и
                                 соответствующую цену. Обычно мы укладываемся сильно раньше, чем указанный крайний
                                 срок, однако мы берем время с запасом, чтобы учесть все непредвиденные
-                                обстоятельства. На кнопке указано то количество дней, которое занимает доставка от
-                                продавца до нашего
-                                склада в Москве.
+                                обстоятельства.
 
                             </p>
                             <div className={s.faq_block}>
@@ -771,18 +901,32 @@ const Footer = ({textData}) => {
                 }
                 <Row className={'w-100'}>
                     <Col lg={4}>
-                        <div className={s.social_media}>
+                        <div className={s.social_media2}>
                             <h4 className={s.row2} style={desktopStore.isDesktop ? {} : {fontSize: 24}}>Мы в социальных
                                 сетях:</h4>
-                            <div className={s.icons_block}>
-                                <a href={'https://t.me/selloutsu'}>
-                                    <Image src={tg} height={desktopStore.isDesktop ? 27 : 40} alt=""
-                                           className={s.icon}/>
-                                </a>
-                                <a href={'https://vk.com/sellout_official'}>
-                                    <Image src={vk} height={desktopStore.isDesktop ? 27 : 40} alt=""
-                                           className={s.icon}/>
-                                </a>
+                            <div className={s.icons_block3}>
+                                <div className={s.socialsCont}>
+                                    <a>
+                                        <Image src={igWhite} height={desktopStore.isDesktop ? 33 : 35} alt=""
+                                               className={s.icon}/>
+                                    </a>
+                                    <span className={s.mainSocialsText2}>
+                                      Запретграм: <br/> @sellout_platform
+                                </span>
+                                </div>
+                                <div className={s.socialsCont}>
+                                    <a href={'https://t.me/selloutsu'}>
+                                        <Image src={tg} height={desktopStore.isDesktop ? 33 : 35} alt=""
+                                               className={s.icon}/>
+                                    </a>
+                                    <span className={s.mainSocialsText2}>
+                                      Телеграм: <br/>
+                                      @<a href="https://t.me/selloutsu" className={s.linkTgSocials2}>
+                                        selloutsu
+                                      </a>
+                                </span>
+                                </div>
+
                             </div>
                         </div>
                     </Col>
@@ -795,12 +939,12 @@ const Footer = ({textData}) => {
             </div>
 
 
-
             <hr/>
             <div className={'custom_cont'}>
                 <div className={s.footer_bottom}>
                     <div>
-                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин обуви, одежды и аксессуаров, 2024</p>
+                        <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин обуви, одежды и аксессуаров,
+                            2024</p>
                     </div>
                     <div className={s.footer_bottom}>
                         <a href="/docs/Агентский%20договор%20SELLOUT.pdf" target={"_blank"}

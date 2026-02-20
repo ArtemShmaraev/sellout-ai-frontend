@@ -1,0 +1,49 @@
+.giftContMob {
+    margin: 10px;
+    height: 70px;
+    background: linear-gradient(to bottom right, #51031D, #B70742);
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.giftTextMob {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    padding-left: 5px;
+    max-width: calc(100vw - 20px - 115px);
+}
+
+.giftButtonMob {
+    padding: 5px 0;
+    margin-right: 5px;
+    width: 120px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.giftButtonMob:hover {
+    background-color: white;
+    color: black;
+}
+
+@media (max-width: 415px) {
+    .giftTextMob {
+        font-size: 20px;
+    }
+    .giftButtonMob {
+        font-size: 15px;
+        width: 110px;
+    }
+}

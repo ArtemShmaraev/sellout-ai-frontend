@@ -1,0 +1,138 @@
+.aboutGuaranteeCont {
+    margin: 50px 0;
+    height: 140px;
+    background-color: #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.aboutGuaranteeCont2 {
+    display: flex;
+    width: 100%;
+}
+
+.about, .guarantee, .price, .all {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 70px;
+    position: relative;
+}
+
+.aboutImg, .guaranteeImg {
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.aboutText, .guaranteeText, .priceText, .allText {
+    font-size: 15px;
+    color: black;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.aboutText {
+    max-width: calc(50vw - 190px);
+}
+
+.priceText {
+    max-width: calc(50vw - 240px);
+}
+
+.allText {
+    max-width: calc(50vw - 240px);
+}
+
+.guaranteeText {
+    max-width: calc(50vw - 290px);
+    margin-bottom: 0;
+}
+
+.aboutButton, .guaranteeButton {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 14px;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+    position: absolute;
+    right: 30px;
+}
+
+.aboutButton:hover, .guaranteeButton:hover {
+    background-color: black;
+    color: white;
+}
+
+.separator {
+    width: 1px;
+    height: 35px;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aboutGuaranteeContMob {
+    margin: 10px 0;
+    height: 240px;
+    background-color: #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+}
+
+
+.aboutMob, .guaranteeMob {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.aboutImgMob {
+    margin-right: 5px;
+}
+
+.guaranteeImgMob {
+    margin-right: 7px;
+}
+
+.aboutTextMob, .guaranteeTextMob {
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    max-width: calc(100vw - 20px - 100px - 35px - 5px - 10px);
+    margin-bottom: 0;
+}
+
+.aboutButtonMob, .guaranteeButtonMob {
+    padding: 5px 0;
+    text-align: center;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 12px;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+    position: absolute;
+    right: 10px;
+}
+
+@media (max-width: 415px) {
+    .aboutTextMob, .guaranteeTextMob {
+        font-size: 11px;
+    }
+}

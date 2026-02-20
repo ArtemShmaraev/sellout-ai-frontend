@@ -1,0 +1,110 @@
+.refCont {
+    margin: 50px 3vw;
+    height: 70px;
+    background: linear-gradient(to bottom right, #51031D, #B70742);
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+}
+
+.ref {
+    display: flex;
+    align-items: center;
+}
+
+.ref {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.refText {
+    font-size: 25px;
+    color: white;
+    margin-right: 40px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.refButton {
+    padding: 5px 35px;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 14px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.refButton:hover {
+    background-color: white;
+    color: black;
+}
+
+@media (min-width: 1800px) {
+    .refCont {
+        margin-right: calc(10vw);
+        margin-left: calc(10vw);
+    }
+}
+
+
+.refContMob {
+    margin: 10px;
+    height: 70px;
+    background: linear-gradient(to bottom right, #51031D, #65047D);
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.refTextMob {
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    padding-left: 5px;
+    max-width: calc(100vw - 20px - 115px);
+}
+
+.refButtonMob {
+    padding: 5px 0;
+    margin-right: 5px;
+    width: 100px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 12px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.refButtonMob:hover {
+    background-color: white;
+    color: black;
+}
+
+@media (max-width: 415px) {
+    .refTextMob {
+        font-size: 14px;
+    }
+}
+@media (max-width: 400px) {
+    .refTextMob {
+        font-size: 13px;
+    }
+}
+@media (max-width: 380px) {
+    .refTextMob {
+        font-size: 12px;
+    }
+}

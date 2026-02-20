@@ -541,7 +541,7 @@ const Cart = ({
                                                 <Image src={first} alt='' width={60}/>
                                                 <div>за первый заказ</div>
                                                 <div className={s.line}/>
-                                                1000 ₽
+                                                до 5000 ₽
                                             </div>
                                             <div className={s.point_block}>
                                                 <Image src={good} alt='' width={60}/>
@@ -555,7 +555,7 @@ const Cart = ({
                                                 <Image src={friend} alt='' width={60}/>
                                                 <div>за приглашенного друга</div>
                                                 <div className={s.line}/>
-                                                до 3000 ₽
+                                                до 7000 ₽
                                             </div>
                                             <div className={s.point_block}>
                                                 <Image src={birth} alt='' width={60}/>
