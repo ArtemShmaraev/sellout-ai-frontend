@@ -1,11 +1,11 @@
 import MainLayout from "@/layout/MainLayout";
-import styles from '@/styles/CatalogClothesDesktopWomen.module.css'
+import styles from '@/styles/CatalogShoesDesktopWomen.module.css'
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import arrow from "@/static/icons/arrowSlider.svg";
 
-const CatalogClothesDesktopWomen = () => {
+const Shoes_desktop_women = () => {
     const linksBrands = [
         'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
         'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
@@ -88,7 +88,7 @@ const CatalogClothesDesktopWomen = () => {
                 {/* Header */}
                 <div className={styles.header}>
                     <div className={styles.closeButton}>✕</div>
-                    <div className={styles.title}>ОДЕЖДА</div>
+                    <div className={styles.title}>ОБУВЬ</div>
                     <div className={styles.viewAll}>ПОСМОТРЕТЬ ВСЕ 100'000+ МОДЕЛЕЙ</div>
                 </div>
 
@@ -96,15 +96,15 @@ const CatalogClothesDesktopWomen = () => {
                 <div className={styles.brandsSection}>
                     <div className={styles.brandsTitle}>ПОПУЛЯРНЫЕ БРЕНДЫ</div>
                     <div className={styles.brandsGrid} ref={scrollableContainerRef}>
-                        {Array.from({length: 66}).map((_, idx) => (
+                        {Array.from({length: 42}).map((_, idx) => (
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Clothes/Brands/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Women/Products/Shoes/Brands/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
-                                        width={100}
-                                        height={100}
+                                        width={700}
+                                        height={700}
                                         layout="responsive"
                                         quality={100}
                                     />
@@ -129,115 +129,10 @@ const CatalogClothesDesktopWomen = () => {
                 <div className={styles.categoriesSection}>
                     <div className={styles.categoriesTitle}>КАТЕГОРИИ</div>
                     <div className={styles.categoriesGrid}>
-                        {['Футболки', 'Худи', 'Шорты', 'Топы', 'Свитеры', 'Юбки', 'Рубашки', 'Треники', 'Джинсы', 'Платья', 'Поло'].map((category, idx) => (
+                        {['Кроссовки', 'Лоферы', 'Шлёпки', 'Мюли', 'Босоножки', 'Зимние кроссов..', 'Пляжные санда..', 'Все туфли', 'Высокие', 'Средние', 'Низкие', 'Слипоны', 'Мокасины', 'Эспадрильи', 'Все ботинки', 'Толстая подошва', 'Ботфорты', 'Средние', 'Ботильоны', 'Мартинсы', 'Тимберленды', 'Челси'].map((category, idx) => (
                             <div key={idx} className={styles.categoryItem}>
                                 <Image
-                                    src={`/Images New Frontend/Desktop/Women/Products/Clothes/Categories/${idx + 1}.png?v=${Date.now()}`}
-                                    alt={category}
-                                    width={700}
-                                    height={700}
-                                    className={styles.categoryImage}
-                                />
-                                <div className={styles.categoryText}>
-                                    {category}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Categories 2*/}
-                <div className={styles.categoriesSection}>
-                    <div className={styles.categoriesTitle2}>СПОРТИВНАЯ ОДЕЖДА</div>
-                    <div className={styles.categoriesGrid}>
-                        {['Вся', 'Топы', 'Шорты', 'Легинсы', 'Майки', 'Футб. майки', 'Баскет. джерси'].map((category, idx) => (
-                            <div key={idx} className={styles.categoryItem}>
-                                <Image
-                                    src={`/Images New Frontend/Desktop/Women/Products/Clothes/Categories/${idx + 1 + 11}.png?v=${Date.now()}`}
-                                    alt={category}
-                                    width={700}
-                                    height={700}
-                                    className={styles.categoryImage}
-                                />
-                                <div className={styles.categoryText}>
-                                    {category}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Categories 3*/}
-                <div className={styles.categoriesSection}>
-                    <div className={styles.categoriesTitle2}>ВЕРХНЯЯ ОДЕЖДА</div>
-                    <div className={styles.categoriesGrid}>
-                        {['Вся', 'Куртки', 'Ветровки', 'Пуховики', 'Кожаные', 'Пальто', 'Джинсовые', 'Бейсбольные', 'Жилетки', 'Плащи', 'Шубы'].map((category, idx) => (
-                            <div key={idx} className={styles.categoryItem}>
-                                <Image
-                                    src={`/Images New Frontend/Desktop/Women/Products/Clothes/Categories/${idx + 1 + 18}.png?v=${Date.now()}`}
-                                    alt={category}
-                                    width={700}
-                                    height={700}
-                                    className={styles.categoryImage}
-                                />
-                                <div className={styles.categoryText}>
-                                    {category}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Categories 4*/}
-                <div className={styles.categoriesSection2}>
-                    <div className={styles.categoriesSectionPart}>
-                        <div className={styles.categoriesTitle2}>ХУДИ И ТОЛСТОВКИ</div>
-                        <div className={styles.categoriesGrid}>
-                            {['Все толстовки', 'С капюшоном', 'На молнии', 'Свитшоты'].map((category, idx) => (
-                                <div key={idx} className={styles.categoryItem}>
-                                    <Image
-                                        src={`/Images New Frontend/Desktop/Men/Products/Clothes/Categories/${idx + 1 + 27}.png?v=${Date.now()}`}
-                                        alt={category}
-                                        width={700}
-                                        height={700}
-                                        className={styles.categoryImage}
-                                    />
-                                    <div className={styles.categoryText}>
-                                        {category}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className={styles.categoriesSectionPart}>
-                        <div className={styles.categoriesTitle2}>СВИТЕРЫ И ТРИКОТАЖ</div>
-                        <div className={styles.categoriesGrid}>
-                            {['Все', 'Свитеры', 'Водолазки', 'Кардиганы'].map((category, idx) => (
-                                <div key={idx} className={styles.categoryItem}>
-                                    <Image
-                                        src={`/Images New Frontend/Desktop/Men/Products/Clothes/Categories/${idx + 1 + 31}.png?v=${Date.now()}`}
-                                        alt={category}
-                                        width={700}
-                                        height={700}
-                                        className={styles.categoryImage}
-                                    />
-                                    <div className={styles.categoryText}>
-                                        {category}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                </div>
-
-                {/* Categories 5*/}
-                <div className={styles.categoriesSection3}>
-                    <div className={styles.categoriesGrid}>
-                        {['Деним', 'Пиджаки', 'Костюмы', 'Зимние штаны', 'Лонгсливы', 'Боди', 'Брюки', 'Купальники', 'Купальники', 'Носки', 'Нижнее белье'].map((category, idx) => (
-                            <div key={idx} className={styles.categoryItem}>
-                                <Image
-                                    src={`/Images New Frontend/Desktop/Women/Products/Clothes/Categories/${idx + 1 + 37}.png?v=${Date.now()}`}
+                                    src={`/Images New Frontend/Desktop/Women/Products/Shoes/Categories/${idx + 1}.png?v=${Date.now()}`}
                                     alt={category}
                                     width={700}
                                     height={700}
@@ -255,4 +150,4 @@ const CatalogClothesDesktopWomen = () => {
     );
 };
 
-export default observer(CatalogClothesDesktopWomen);
+export default observer(Shoes_desktop_women);

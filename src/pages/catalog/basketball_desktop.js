@@ -5,7 +5,7 @@ import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import arrow from "@/static/icons/arrowSlider.svg";
 
-const CatalogBasketballDesktop = () => {
+const Basketball_desktop = () => {
     const linksBrands = [
         'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
         'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
@@ -280,4 +280,4 @@ const CatalogBasketballDesktop = () => {
     );
 };
 
-export default observer(CatalogBasketballDesktop);
+export default observer(Basketball_desktop);

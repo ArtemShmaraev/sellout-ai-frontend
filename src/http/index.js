@@ -27,7 +27,7 @@ $authHost.interceptors.request.use((config) => {
 //     const originalRequest = error.config;
 //     if (error.response.status === 401 && refreshToken) {
 //         const refreshObj = JSON.stringify({refresh: refreshToken})
-//         const response = await axios.post('http://51.250.74.115:8080/api/v1/user/token/refresh/', refreshObj)
+//         const response = await axios.post('http://158.160.105.163:8080/api/v1/user/token/refresh/', refreshObj)
 //         const newAccess = response.data.access
 //
 //     }

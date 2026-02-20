@@ -1,11 +1,11 @@
 import MainLayout from "@/layout/MainLayout";
-import styles from '@/styles/CatalogSneakersDesktopWomen.module.css'
+import styles from '@/styles/CatalogSneakersDesktopMen.module.css'
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import arrow from "@/static/icons/arrowSlider.svg";
 
-const CatalogSneakersDesktopWomen = () => {
+const Sneakers_desktop_men = () => {
     const linksBrands = [
         'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
         'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
@@ -24,12 +24,8 @@ const CatalogSneakersDesktopWomen = () => {
         'https://sellout.su/brand28'
     ];
 
-    const textsBrandsAdidas = [
-        'adidas Samba', 'adidas Gazelle', 'adidas SL', 'Human Race', 'Yeezy 350', 'adidas Falcon', 'Yeezy 380', 'adidas adimatic', 'adidas 4D', 'adidas Adilette', 'Foam Runner', 'adidas Rivalry', 'Yeezy 450', 'adidas EQT', 'adidas Superstar', 'adidas Deerupt', 'adidas Ozelia', 'Damian Lillard', 'Derrick Rose', 'adidas Nizza', 'adidas Campus', 'adidas Spezial', 'adidas Forum', 'adidas NMD', 'Yeezy Slide', 'Stan Smith', 'Continental', 'Nite Jogger', 'Yeezy 500', 'Trae Young', 'adidas Ultraboost', 'James Harden', 'Yeezy 700', 'adidas Ozweego', 'adidas ZX', 'adidas Hamburg', 'adidas Tubular', 'Pro Bounce', 'adidas D.O.N', 'Yeezy 750'
-    ];
-
     const textsBrandsNike = [
-        'Nike Dunk', 'Nike Air Force 1', 'Nike Blazer', 'Nike Cortez', 'Nike Air Max 95', 'Nike Zoom', 'Air Monarch', 'Nike Air Max 720', 'Nike Foamposite', 'Air Huarache', 'Nike Court Vision', 'Kyrie Irving', 'Kevin Durant', 'Nike Air Max 270', 'Nike Air Flight', 'Nike Air Trainer', 'Air Max Plus', 'Air Uptempo', 'Nike Hyperdunk', 'Nike Blazer Low', 'Nike Dunk Low', 'Nike Dunk Mid', 'Nike Dunk High', 'Nike Air Max 1', 'Nike Air Max 90', 'Zoom Voomero', 'Nike Zoom', 'Air Monarch', 'Nike Air Max 720', 'Nike Foamposite', 'Air Huarache', 'Nike Court Vision', 'Kyrie Irving', 'Kevin Durant', 'Nike Air Max 270', 'Nike Air Flight', 'Nike Air Trainer', 'Freak Giannis', 'Zoom G.T.', 'Ja Morant', 'Paul George', 'Court Borough', 'Nike Blazer Mid', 'Air Force 1 Low', 'Air Force 1 Mid', 'Air Force 1 High'
+        'Nike Dunk', 'Nike Air Force 1', 'Nike Blazer', 'Nike Cortez', 'Nike Air Max 95', 'Nike Air Max 97', 'Nike React', 'Nike V2K', 'Nike M2K', 'Air Monarch', 'Nike Foamposite', 'Air Uptempo', 'Nike Air Presto', 'Air Huarache', 'Nike Hyperdunk', 'Air Max Fusion', 'Nike Waffle', 'Nike Zoom', 'Nike Court Vision', 'Nike Blazer Low', 'Nike Dunk Low', 'Nike Dunk Mid', 'Nike Dunk High', 'Nike Air Max 1', 'Nike Air Max 90', 'Zoom Voomero', 'LeBron James', 'Kobe Bryant', 'Kyrie Irving', 'Kevin Durant', 'Nike Air Trainer', 'Nike Air Flight', 'Nike Air Max 98', 'Air Max Plus', 'Nike VaporMax', 'Nike Air Max 270', 'Nike Air Max 720', 'Freak Giannis', 'Zoom G.T.', 'Ja Morant', 'Paul George', 'Court Borough', 'Nike Blazer Mid', 'Air Force 1 Low', 'Air Force 1 Mid', 'Air Force 1 High'
     ];
 
     const textsBrandsJordan = [
@@ -40,24 +36,20 @@ const CatalogSneakersDesktopWomen = () => {
         'New Balance 237', 'NB 2002R', 'New Balance 550', 'New Balance 530', 'New Balance 580', 'New Balance 580', 'New Balance 991', 'New Balance 993', 'New Balance 327', 'NB 1906R', 'NB 9060', 'New Balance 650', 'New Balance 574', 'New Balance 990', 'New Balance 992', 'New Balance 997'
     ];
 
-    const textsBrandsConverse = [
-        'Chuck Taylor', 'One Star', 'Converse BB', 'Pro Leather', 'Run Star'
+    const textsBrandsAdidas = [
+        'Yeezy 350', 'Yeezy 500', 'Yeezy 700', 'adidas Gazelle', 'adidas Forum', 'adidas Spezial', 'Yeezy 380', 'adidas adimatic', 'adidas 4D', 'adidas Adilette', 'Foam Runner', 'adidas Rivalry', 'Yeezy 450', 'adidas EQT', 'adidas Superstar', 'adidas Deerupt', 'adidas Ozelia', 'Damian Lillard', 'Derrick Rose', 'adidas Nizza', 'adidas Samba', 'Human Race', 'adidas Campus', 'Yeezy Slide', 'adidas NMD', 'adidas SL', 'James Harden', 'Nite Jogger', 'Trae Young', 'Stan Smith', 'adidas Ultraboost', 'adidas Falcon', 'Continental', 'adidas Ozweego', 'adidas ZX', 'adidas Hamburg', 'adidas Tubular', 'Pro Bounce', 'adidas D.O.N', 'Yeezy 750'
     ];
 
     const textsBrandsVans = [
         'Vans Knu Skool', 'Vans Old Skool', 'Vans Half Cab', 'Vans ComfyCush', 'Vans Style 36', 'Vans SK8', 'Vans Era', 'Vans Slip-on', 'Vans Authentic', 'Vans Ward'
     ];
 
-    const textsBrandsPuma = [
-        'Puma MB', 'Ralph Sampson', 'Puma Mirage', 'Puma Suede', 'Puma Smash', 'Puma Ca Pro', 'Puma Slipstream', 'Puma RS', 'Puma Fusion', 'Future Rider', 'Puma Cali', 'Puma Roma', 'Puma Clyde', 'Puma Mayze', 'Puma Carina', 'Puma Ignite'
-    ];
-
     const textsBrandsAsics = [
         'Asics Gel-NYC', 'Asics Gel-Lyte', 'Magic Speed', 'Asics Gel-Kahana', 'Gel-Cumulus', 'Gel-Contend', 'Asics Gel-Kayano', 'Asics Gel-1130', 'Gel-Quantum', 'Asics Gel-Nimbus', 'Asics Gel-Flux', 'Asics Gel-1090', 'Asics Gel-Excite', 'Asics GT'
     ];
 
-    const textsBrandsReebok = [
-        'Reebok Club', 'Classic Leather', 'Instapump Fury', 'Reebok Workout', 'Zig Kinetica', 'Reebok Question'
+    const textsBrandsConverse = [
+        'Chuck Taylor', 'One Star', 'Converse BB', 'Pro Leather', 'Run Star'
     ];
 
     const textsBrandsAnta = [
@@ -66,6 +58,14 @@ const CatalogSneakersDesktopWomen = () => {
 
     const textsBrandsLiNing = [
         'Way Of Wade', 'Yushuai', 'Sonic', 'Speed'
+    ];
+
+    const textsBrandsPuma = [
+        'Puma MB', 'Ralph Sampson', 'Puma Mirage', 'Puma Suede', 'Puma Smash', 'Puma Ca Pro', 'Puma Slipstream', 'Puma RS', 'Puma Fusion', 'Future Rider', 'Puma Cali', 'Puma Roma', 'Puma Clyde', 'Puma Mayze', 'Puma Carina', 'Puma Ignite'
+    ];
+
+    const textsBrandsReebok = [
+        'Reebok Club', 'Classic Leather', 'Instapump Fury', 'Reebok Workout', 'Zig Kinetica', 'Reebok Question'
     ];
 
     const textsBrandsUA = [
@@ -144,10 +144,10 @@ const CatalogSneakersDesktopWomen = () => {
                 <div className={styles.categoriesSection}>
                     <div className={styles.categoriesTitle}>КАТЕГОРИИ</div>
                     <div className={styles.categoriesGrid}>
-                        {['Все кроссовки и кеды', 'Кроссовки', 'Кеды', 'Высокие кроссовки', 'Низкие кроссовки', 'Кроссовки для спорта'].map((category, idx) => (
+                        {['Все кроссовки и кеды', 'Высокие кроссовки', 'Низкие кроссовки', 'Баскетбольные кроссовки', 'Футбольные бутсы', 'Кроссовки для спорта'].map((category, idx) => (
                             <div key={idx} className={styles.categoryItem}>
                                 <Image
-                                    src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Categories/${idx + 1}.png?v=${Date.now()}`}
+                                    src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Categories/${idx + 1}.png?v=${Date.now()}`}
                                     alt={category}
                                     width={700}
                                     height={700}
@@ -170,7 +170,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle1}>
                                 <div className={styles.circle1}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Brands/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Brands/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage1}
                                         width={700}
@@ -197,61 +197,15 @@ const CatalogSneakersDesktopWomen = () => {
 
                 <div className={styles.categoriesTitle2}>ПОПУЛЯРНЫЕ ЛИНЕЙКИ</div>
 
-                {/* Popular Brands adidas*/}
-                <div className={styles.brandsSection}>
-                    <div>
-                        <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/1.png?v=${Date.now()}`}
-                            alt=''
-                            width={1000}
-                            height={1000}
-                            style={{width: '340px', height: 'auto'}}
-                            className={styles.brandsPhoto}
-                        />
-                    </div>
-                    <div className={`${styles.brandsGrid} ${styles.brandsGrid4}`}
-                         ref={(el) => scrollableContainerRefs.current[4] = el}>
-                        {Array.from({length: 40}).map((_, idx) => (
-                            <div key={idx} className={styles.brandCircle}>
-                                <div className={styles.circle}>
-                                    <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/adidas/${idx + 1}.png?v=${Date.now()}`}
-                                        alt="Brand Image"
-                                        className={styles.circleImage}
-                                        width={700}
-                                        height={700}
-                                        layout="responsive"
-                                        quality={100}
-                                    />
-                                </div>
-                                <div className={styles.circleText}>{textsBrandsAdidas[idx]}</div>
-                            </div>
-                        ))}
-                    </div>
-                    {!noArrows[4] &&
-                        <button className={styles.left} onClick={() => scrollLeft(4)} style={{zIndex: 2}}>
-                            <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
-                        </button>
-                    }
-                    {!noArrows[4] &&
-                        <button className={styles.right} onClick={() => scrollRight(4)} style={{zIndex: 2}}>
-                            <Image
-                                src={arrow}
-                                alt=''
-                            />
-                        </button>
-                    }
-                </div>
-
                 {/* Popular Brands Nike*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/2.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/1.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '340px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
@@ -261,7 +215,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Nike/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Nike/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -293,11 +247,11 @@ const CatalogSneakersDesktopWomen = () => {
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/3.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/2.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '340px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
@@ -307,7 +261,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Jordan/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Jordan/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -339,11 +293,11 @@ const CatalogSneakersDesktopWomen = () => {
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/4.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/3.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '430px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
@@ -353,7 +307,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/New Balance/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/New Balance/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -381,25 +335,25 @@ const CatalogSneakersDesktopWomen = () => {
                     }
                 </div>
 
-                {/* Popular Brands Converse*/}
+                {/* Popular Brands adidas*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/5.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/4.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '430px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
-                    <div className={`${styles.brandsGrid} ${styles.brandsGrid7}`}
-                         ref={(el) => scrollableContainerRefs.current[7] = el}>
-                        {Array.from({length: 5}).map((_, idx) => (
+                    <div className={`${styles.brandsGrid} ${styles.brandsGrid4}`}
+                         ref={(el) => scrollableContainerRefs.current[4] = el}>
+                        {Array.from({length: 40}).map((_, idx) => (
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Converse/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/adidas/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -408,17 +362,17 @@ const CatalogSneakersDesktopWomen = () => {
                                         quality={100}
                                     />
                                 </div>
-                                <div className={styles.circleText}>{textsBrandsConverse[idx]}</div>
+                                <div className={styles.circleText}>{textsBrandsAdidas[idx]}</div>
                             </div>
                         ))}
                     </div>
-                    {!noArrows[7] &&
-                        <button className={styles.left} onClick={() => scrollLeft(7)} style={{zIndex: 2}}>
+                    {!noArrows[4] &&
+                        <button className={styles.left} onClick={() => scrollLeft(4)} style={{zIndex: 2}}>
                             <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
                         </button>
                     }
-                    {!noArrows[7] &&
-                        <button className={styles.right} onClick={() => scrollRight(7)} style={{zIndex: 2}}>
+                    {!noArrows[4] &&
+                        <button className={styles.right} onClick={() => scrollRight(4)} style={{zIndex: 2}}>
                             <Image
                                 src={arrow}
                                 alt=''
@@ -431,11 +385,11 @@ const CatalogSneakersDesktopWomen = () => {
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/6.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/5.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '430px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
@@ -445,7 +399,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Vans/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Vans/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -473,61 +427,15 @@ const CatalogSneakersDesktopWomen = () => {
                     }
                 </div>
 
-                {/* Popular Brands Puma*/}
-                <div className={styles.brandsSection}>
-                    <div>
-                        <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/7.png?v=${Date.now()}`}
-                            alt=''
-                            width={1000}
-                            height={1000}
-                            style={{width: '430px', height: 'auto'}}
-                            className={styles.brandsPhoto}
-                        />
-                    </div>
-                    <div className={`${styles.brandsGrid} ${styles.brandsGrid10}`}
-                         ref={(el) => scrollableContainerRefs.current[10] = el}>
-                        {Array.from({length: 16}).map((_, idx) => (
-                            <div key={idx} className={styles.brandCircle}>
-                                <div className={styles.circle}>
-                                    <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Puma/${idx + 1}.png?v=${Date.now()}`}
-                                        alt="Brand Image"
-                                        className={styles.circleImage}
-                                        width={700}
-                                        height={700}
-                                        layout="responsive"
-                                        quality={100}
-                                    />
-                                </div>
-                                <div className={styles.circleText}>{textsBrandsPuma[idx]}</div>
-                            </div>
-                        ))}
-                    </div>
-                    {!noArrows[10] &&
-                        <button className={styles.left} onClick={() => scrollLeft(10)} style={{zIndex: 2}}>
-                            <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
-                        </button>
-                    }
-                    {!noArrows[10] &&
-                        <button className={styles.right} onClick={() => scrollRight(10)} style={{zIndex: 2}}>
-                            <Image
-                                src={arrow}
-                                alt=''
-                            />
-                        </button>
-                    }
-                </div>
-
                 {/* Popular Brands Asics*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/8.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/6.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
-                            style={{width: '430px', height: 'auto'}}
+                            style={{width: '326px', height: 'auto'}}
                             className={styles.brandsPhoto}
                         />
                     </div>
@@ -537,7 +445,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Asics/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Asics/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -565,11 +473,11 @@ const CatalogSneakersDesktopWomen = () => {
                     }
                 </div>
 
-                {/* Popular Brands Reebok*/}
+                {/* Popular Brands Converse*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/9.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/7.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
@@ -577,13 +485,13 @@ const CatalogSneakersDesktopWomen = () => {
                             className={styles.brandsPhoto}
                         />
                     </div>
-                    <div className={`${styles.brandsGrid} ${styles.brandsGrid11_}`}
-                         ref={(el) => scrollableContainerRefs.current[11] = el}>
-                        {Array.from({length: 6}).map((_, idx) => (
+                    <div className={`${styles.brandsGrid} ${styles.brandsGrid7}`}
+                         ref={(el) => scrollableContainerRefs.current[7] = el}>
+                        {Array.from({length: 5}).map((_, idx) => (
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Reebok/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Converse/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -592,17 +500,17 @@ const CatalogSneakersDesktopWomen = () => {
                                         quality={100}
                                     />
                                 </div>
-                                <div className={styles.circleText}>{textsBrandsReebok[idx]}</div>
+                                <div className={styles.circleText}>{textsBrandsConverse[idx]}</div>
                             </div>
                         ))}
                     </div>
-                    {!noArrows[11] &&
-                        <button className={styles.left} onClick={() => scrollLeft(11)} style={{zIndex: 2}}>
+                    {!noArrows[7] &&
+                        <button className={styles.left} onClick={() => scrollLeft(7)} style={{zIndex: 2}}>
                             <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
                         </button>
                     }
-                    {!noArrows[11] &&
-                        <button className={styles.right} onClick={() => scrollRight(11)} style={{zIndex: 2}}>
+                    {!noArrows[7] &&
+                        <button className={styles.right} onClick={() => scrollRight(7)} style={{zIndex: 2}}>
                             <Image
                                 src={arrow}
                                 alt=''
@@ -611,12 +519,11 @@ const CatalogSneakersDesktopWomen = () => {
                     }
                 </div>
 
-
                 {/* Popular Brands Anta*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/10.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/8.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
@@ -630,7 +537,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Anta/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Anta/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -662,7 +569,7 @@ const CatalogSneakersDesktopWomen = () => {
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/11.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/9.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
@@ -676,7 +583,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Li-Ning/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Li-Ning/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -704,11 +611,103 @@ const CatalogSneakersDesktopWomen = () => {
                     }
                 </div>
 
+                {/* Popular Brands Puma*/}
+                <div className={styles.brandsSection}>
+                    <div>
+                        <Image
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/10.png?v=${Date.now()}`}
+                            alt=''
+                            width={1000}
+                            height={1000}
+                            style={{width: '430px', height: 'auto'}}
+                            className={styles.brandsPhoto}
+                        />
+                    </div>
+                    <div className={`${styles.brandsGrid} ${styles.brandsGrid10}`}
+                         ref={(el) => scrollableContainerRefs.current[10] = el}>
+                        {Array.from({length: 16}).map((_, idx) => (
+                            <div key={idx} className={styles.brandCircle}>
+                                <div className={styles.circle}>
+                                    <Image
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Puma/${idx + 1}.png?v=${Date.now()}`}
+                                        alt="Brand Image"
+                                        className={styles.circleImage}
+                                        width={700}
+                                        height={700}
+                                        layout="responsive"
+                                        quality={100}
+                                    />
+                                </div>
+                                <div className={styles.circleText}>{textsBrandsPuma[idx]}</div>
+                            </div>
+                        ))}
+                    </div>
+                    {!noArrows[10] &&
+                        <button className={styles.left} onClick={() => scrollLeft(10)} style={{zIndex: 2}}>
+                            <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
+                        </button>
+                    }
+                    {!noArrows[10] &&
+                        <button className={styles.right} onClick={() => scrollRight(10)} style={{zIndex: 2}}>
+                            <Image
+                                src={arrow}
+                                alt=''
+                            />
+                        </button>
+                    }
+                </div>
+
+                {/* Popular Brands Reebok*/}
+                <div className={styles.brandsSection}>
+                    <div>
+                        <Image
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/11.png?v=${Date.now()}`}
+                            alt=''
+                            width={1000}
+                            height={1000}
+                            style={{width: '430px', height: 'auto'}}
+                            className={styles.brandsPhoto}
+                        />
+                    </div>
+                    <div className={`${styles.brandsGrid} ${styles.brandsGrid11_}`}
+                         ref={(el) => scrollableContainerRefs.current[11] = el}>
+                        {Array.from({length: 6}).map((_, idx) => (
+                            <div key={idx} className={styles.brandCircle}>
+                                <div className={styles.circle}>
+                                    <Image
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Reebok/${idx + 1}.png?v=${Date.now()}`}
+                                        alt="Brand Image"
+                                        className={styles.circleImage}
+                                        width={700}
+                                        height={700}
+                                        layout="responsive"
+                                        quality={100}
+                                    />
+                                </div>
+                                <div className={styles.circleText}>{textsBrandsReebok[idx]}</div>
+                            </div>
+                        ))}
+                    </div>
+                    {!noArrows[11] &&
+                        <button className={styles.left} onClick={() => scrollLeft(11)} style={{zIndex: 2}}>
+                            <Image src={arrow} alt='' style={{transform: 'rotate(180deg)'}}/>
+                        </button>
+                    }
+                    {!noArrows[11] &&
+                        <button className={styles.right} onClick={() => scrollRight(11)} style={{zIndex: 2}}>
+                            <Image
+                                src={arrow}
+                                alt=''
+                            />
+                        </button>
+                    }
+                </div>
+
                 {/* Popular Brands Under Armour*/}
                 <div className={styles.brandsSection}>
                     <div>
                         <Image
-                            src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Photos/12.png?v=${Date.now()}`}
+                            src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Photos/12.png?v=${Date.now()}`}
                             alt=''
                             width={1000}
                             height={1000}
@@ -722,7 +721,7 @@ const CatalogSneakersDesktopWomen = () => {
                             <div key={idx} className={styles.brandCircle}>
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Women/Products/Sneakers/Under Armour/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`/Images New Frontend/Desktop/Men/Products/Sneakers/Under Armour/${idx + 1}.png?v=${Date.now()}`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -754,4 +753,4 @@ const CatalogSneakersDesktopWomen = () => {
     );
 };
 
-export default observer(CatalogSneakersDesktopWomen);
+export default observer(Sneakers_desktop_men);

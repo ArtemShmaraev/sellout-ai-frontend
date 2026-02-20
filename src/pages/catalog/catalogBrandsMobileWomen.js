@@ -6,7 +6,7 @@ import Image from "next/image";
 import logo from "@/static/img/sellout_logo.svg";
 import backLogo from "@/static/icons/chevron-left.svg";
 import cross from '@/static/icons/x-lg.svg'
-import more from "@/static/icons/moreIcon.svg";
+import more from "@/static/img/sellout_logo.svg";
 
 
 const CatalogBrandsMobileWomen = () => {

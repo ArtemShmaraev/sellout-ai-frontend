@@ -5,8 +5,8 @@ import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import logo from "@/static/img/sellout_logo.svg";
 import cross from '@/static/icons/x-lg.svg'
-import search from "@/static/icons/searchMob.svg";
-import more from "@/static/icons/moreIcon.svg";
+import search from "@/static/img/sellout_logo.svg";
+import more from "@/static/img/sellout_logo.svg";
 
 const MobileMenuWomen = () => {
     const textsLines = [
