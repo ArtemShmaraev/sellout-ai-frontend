@@ -407,10 +407,10 @@
       },
       {
         "id": 268,
-        "name": "Зимние кроссовки и ботинки",
-        "eng_name": "winter_sneakers_and_shoes",
+        "name": "Зимние кроссовки",
+        "eng_name": "winter_sneakers",
         "is_all": false,
-        "full_name": "Обувь | Зимние кроссовки и ботинки",
+        "full_name": "Обувь | Зимние кроссовки",
         "score": 5,
         "score_product_page": 0,
         "parent_category": 228

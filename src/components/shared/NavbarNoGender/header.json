@@ -1355,8 +1355,8 @@
         "query_name": "slippers"
       },
       {
-        "name": "Зимние кроссовки и ботинки",
-        "query_name": "winter_sneakers_and_shoes"
+        "name": "Зимние кроссовки",
+        "query_name": "winter_sneakers"
       }
     ],
     "male": [
@@ -1381,8 +1381,8 @@
         "query_name": "boots"
       },
       {
-        "name": "Зимние кроссовки и ботинки",
-        "query_name": "winter_sneakers_and_shoes"
+        "name": "Зимние кроссовки",
+        "query_name": "winter_sneakers"
       },
       {
         "name": "Мартинсы",
@@ -1479,8 +1479,8 @@
         "query_name": "slippers"
       },
       {
-        "name": "Зимние кроссовки и ботинки",
-        "query_name": "winter_sneakers_and_shoes"
+        "name": "Зимние кроссовки",
+        "query_name": "winter_sneakers"
       }
     ]
   },

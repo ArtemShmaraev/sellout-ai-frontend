@@ -9,7 +9,7 @@ import search from "@/static/img/sellout_logo.svg";
 import more from "@/static/img/sellout_logo.svg";
 import Cookies from "js-cookie";
 import {router} from "next/client";
-import MainMobeleLayout from "@/layout/MainMobeleLayout";
+
 
 const MobileMenuWomen = () => {
     const textsLines = [
