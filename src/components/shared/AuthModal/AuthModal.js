@@ -267,7 +267,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                                onChange={e => handleChangeNumber(e)}
                                     >
                                         {(inputProps) => <input {...inputProps} type="tel"
-                                                                className={s.input}
+                                                                className={s.input} autoComplete="tel"
                                         />}
                                     </InputMask>
                                 </div>
@@ -275,6 +275,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Почта:</label>
                                     <input type="text" className={s.input}
                                            value={email}
+                                           name="email" autoComplete="email"
                                            placeholder={"KendallJenner@mail.ru*"}
                                            onChange={(e) => setEmail(e.target.value)}/>
                                     {!validEmail &&
@@ -329,7 +330,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <label className={s.label}>Почта:</label>
                                     <input type="text" className={s.input}
                                            value={email}
-                                           onChange={(e) => setEmail(e.target.value)}
+                                           onChange={(e) => setEmail(e.target.value)} name="email" autoComplete="email"
                                     />
                                     {!validEmail &&
                                         <p className={s.validate}>Некорректный формат почты</p>

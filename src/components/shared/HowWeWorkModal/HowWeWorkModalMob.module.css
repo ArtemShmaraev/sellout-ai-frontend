@@ -1,0 +1,222 @@
+.close {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 100;
+}
+
+.modalContent {
+    background-color: black;
+    overflow-x: hidden;
+    scrollbar-width: none; /* Для Firefox — скрытие скроллбара */
+    -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
+}
+.modalContent::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera — скрытие скроллбара */
+    background: transparent; /* Chrome/Safari/Webkit-based browsers */
+}
+
+.page1Wrapper {
+    position: relative;
+    scrollbar-width: none; /* Для Firefox — скрытие скроллбара */
+    -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page1Wrapper::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera — скрытие скроллбара */
+    background: transparent; /* Chrome/Safari/Webkit-based browsers */
+}
+
+.page2LogoImgContainer {
+    position: absolute;
+    width: 77%;
+    transform: translate(-50%, -50%);
+    top: 50vh;
+    left: 50%;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.animationImagePage2Logo {
+    animation: zoomOutAndMove 2s ease-in-out forwards; /* Анимация увеличения и затем перемещения */
+    display: block;
+}
+
+@keyframes zoomOutAndMove {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(calc(50px - 50vh + (250 * 77vw / 2240)));
+    }
+}
+
+.image1grid {
+    width: 96vw;
+    margin-top: calc(50px + 50px + (250 * 77vw / 1120));
+    animation: slideIn 0.5s ease-out forwards;
+    opacity: 0;
+    animation-delay: 2s;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%); /* Начинаем с позиции за пределами экрана слева */
+        opacity: 0; /* Прозрачность для плавного появления */
+    }
+    to {
+        transform: translateX(0); /* Окончательная позиция блока на экране */
+        opacity: 1; /* Блок полностью виден */
+    }
+}
+
+.scrollImagesPage2 {
+    display: flex;
+    overflow: hidden; /* Скрываем часть, выходящую за пределы */
+    width: 100%;
+    animation: slideIn 0.5s ease-out forwards;
+    animation-delay: 2.5s;
+    opacity: 0;
+}
+
+.logosSlide {
+    height: 20vh;
+    display: inline-block;
+    white-space: nowrap;
+    animation: 30s slide infinite linear;
+}
+
+.manyLogos {
+    height: 20vh;
+    width: auto;
+}
+
+
+.page3Images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5vh;
+    margin-bottom: 70px;
+    gap: 1vh;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.5s ease-out forwards;
+    animation-delay: 3s;
+}
+
+.image234grid {
+    width: 96vw;
+}
+
+.imagesPage2 {
+    display: block;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.animation1Blob1 {
+    animation: chaoticFloat 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: 0; /* Устанавливаем на задний план */
+    left: -40%;
+    top: -5%;
+    width: 200%;
+}
+
+.animation1Blob2 {
+    animation: chaoticFloat2 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: 0; /* Устанавливаем на задний план */
+    right: -70%;
+    width: 200%;
+}
+
+@keyframes chaoticFloat {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(80px, 250px);
+    }
+    28% {
+        transform: translate(-80px, 180px);
+    }
+    42% {
+        transform: translate(-150px, 100px);
+    }
+    56% {
+        transform: translate(-100px, -50px);
+    }
+    70% {
+        transform: translate(-60px, 20px);
+    }
+    84% {
+        transform: translate(50px, 150px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+@keyframes chaoticFloat2 {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(60px, 180px);
+    }
+    28% {
+        transform: translate(40px, 40px);
+    }
+    42% {
+        transform: translate(-80px, 80px);
+    }
+    56% {
+        transform: translate(-70px, 20px);
+    }
+    70% {
+        transform: translate(-60px, 80px);
+    }
+    84% {
+        transform: translate(0, 160px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+.page2Wrapper {
+    position: relative;
+}
+
+.page2 {
+    display: flex;
+    justify-content: center;
+}
+
+.page2Img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}

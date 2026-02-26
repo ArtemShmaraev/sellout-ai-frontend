@@ -45,6 +45,16 @@ import creditCard from "@/static/icons/credit-card 2.svg";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import inst_star from "@/static/icons/instagram_star.svg";
 import Cookies from "js-cookie";
+import igBlack from "@/static/icons/igImg.svg";
+import igWhite from "@/static/icons/igImgWhite.svg";
+import imgUs4Mob from "@/static/img/Гарантии 1 mob.png";
+import imgUs5Mob from "@/static/img/Гарантии 2 mob.png";
+import imgUs6Mob from "@/static/img/Гарантии 3 mob.png";
+import imgUs7Mob from "@/static/img/Гарантии 4 mob.png";
+import imgUs8Mob from "@/static/img/Гарантии 5 mob.png";
+import imgUs9Mob from "@/static/img/Гарантии 6 mob.png";
+import imgUs10Mob from "@/static/img/Гарантии 7 mob.png";
+import imgUs11Mob from "@/static/img/Гарантии 8 mob.png";
 
 const Sidebar = ({photos}) => {
     const header = headerJson
@@ -137,12 +147,37 @@ const Sidebar = ({photos}) => {
             document.body.classList.remove('body-scroll-clip')
         }
     }, [])
+
+    function changeBrowserColor(color) {
+        // Для Chrome, Firefox, Opera на Android
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', color);
+        }
+
+        // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
+        const statusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        if (statusBarMeta) {
+            // Изменение цвета status-bar на iOS
+            statusBarMeta.setAttribute('content', 'black-translucent'); // ограниченные возможности
+        }
+
+        // Для Microsoft Edge
+        const msNavbuttonMeta = document.querySelector('meta[name="msapplication-navbutton-color"]');
+        if (msNavbuttonMeta) {
+            msNavbuttonMeta.setAttribute('content', color);
+        }
+    }
+
     const [howOpen, setHowOpen] = useState(false)
+
     const toggleHow = () => {
         setHowOpen(!howOpen)
+        changeBrowserColor("#000000")
     }
     const closeHow = () => {
         setHowOpen(false)
+        changeBrowserColor("#ffffff")
     }
     return (
         <>
@@ -206,15 +241,15 @@ const Sidebar = ({photos}) => {
                                     <div className={s.genderButtons}>
                                         <div className={s.genderHalf}>
                                             <Link href={'/men'}
-                                                className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
-                                                onClick={() => handleGenderSelection('M')}>Мужское
+                                                  className={selectedGender === 'M' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                  onClick={() => handleGenderSelection('M')}>Мужское
                                             </Link>
                                         </div>
                                         <div className={s.genderSeparator}></div>
                                         <div className={s.genderHalf}>
                                             <Link href={'/women'}
-                                                className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
-                                                onClick={() => handleGenderSelection('F')}>Женское
+                                                  className={selectedGender === 'F' ? `${s.genderButton} ${s.selectedGender}` : s.genderButton}
+                                                  onClick={() => handleGenderSelection('F')}>Женское
                                             </Link>
                                         </div>
                                     </div>
@@ -394,14 +429,27 @@ const Sidebar = ({photos}) => {
                         </div>
                         <div className={s.col}>
                             <div className={s.social_media}>
-                                <h4 className={'text-white'}>Мы в социальных сетях:</h4>
-                                <div className={s.icons_block}>
-                                    <a href={'https://t.me/selloutsu'}>
-                                        <Image src={tg} width={30} alt="" className={s.icon}/>
-                                    </a>
-                                    <a href={'https://vk.com/sellout_official'}>
-                                        <Image src={vk} width={38} alt="" className={s.icon}/>
-                                    </a>
+                                <h4 className={'text-white'} style={{textAlign: 'left', marginBottom:'0'}}>Мы в социальных сетях:</h4>
+                                <div className={s.icons_block2}>
+                                    <div className={s.socialsBlock}>
+                                        <a href={'https://t.me/selloutsu'}>
+                                            <Image src={tg} width={45} alt="" className={s.icon}/>
+                                        </a>
+                                        <span className={s.mainSocialsText2}>
+                                              Телеграм: <br/>
+                                              @<a href="https://t.me/selloutsu" className={s.linkTgSocials2}>
+                                                selloutsu
+                                              </a>
+                                        </span>
+                                    </div>
+                                    <div className={s.socialsBlock}>
+                                        <a>
+                                            <Image src={igWhite} width={45} alt="" className={s.icon}/>
+                                        </a>
+                                        <span className={s.mainSocialsText2}>
+                                              Запретграм: <br/> @sellout_platform
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -428,25 +476,39 @@ const Sidebar = ({photos}) => {
                                     <h5 className={'mb-3 mt-5'}>Вы можете найти нас во всех соц. сетях и посмотреть
                                         отзывы, подробнее прочитать <Link href={'/about'} className={s.link}
                                                                           target={'_blank'}>про нашу компанию</Link>, а
-                                        также изучить отзывы на интернет ресурсах</h5>
+                                        также изучить отзывы на интернет ресурсах:</h5>
                                     <div className={s.icons_block}>
-                                        <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tgBlack} width={50} alt="" className={s.icon}/>
-                                        </a>
-                                        <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vkBlack} width={63} alt="" className={s.icon}/>
-                                        </a>
+                                        <div className={s.socialsCont}>
+                                            <a style={{height: '45px'}}>
+                                                <Image src={igBlack} height={45} alt="" className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                        </div>
+
+                                        <div className={s.socialsCont}>
+                                            <a href={'https://t.me/selloutsu'} style={{height: '45px'}}>
+                                                <Image src={tgBlack} height={45} alt="" className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className={s.icons_block}>
                                         <iframe
                                             src="https://www.yandex.ru/sprav/widget/rating-badge/108238948174?type=rating&theme=dark"
                                             width="150" height="50" frameBorder="0"></iframe>
-                                        <a id="zoon_widget_210x40_dark"
-                                           href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">
-                                            <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"
-                                                 alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"
-                                                 width="210" height="40"/>
-                                        </a>
+                                        {/*<a id="zoon_widget_210x40_dark"*/}
+                                        {/*   href="https://zoon.ru/service/657ee85a79a80027cf0274d7/">*/}
+                                        {/*    <img src="https://zoon.ru/wg/210x40/657ee85a79a80027cf0274d7/dark/"*/}
+                                        {/*         alt="Интернет-магазин Sellout" title="Интернет-магазин Sellout"*/}
+                                        {/*         width="210" height="40"/>*/}
+                                        {/*</a>*/}
                                     </div>
                                     <Image src={patch} alt='' width={60} className={'mt-3'}/>
                                     <h5 className={'my-3'}>Какие этапы проверки проходит каждый товар?</h5>
@@ -493,25 +555,60 @@ const Sidebar = ({photos}) => {
 
                                         </LoyaltyFAQ>
                                     </div>
-                                    <h5>Ответы на большинство вопросов вы найдете здесь: <Link href={'/faq'}
-                                                                                               className={s.link}
-                                                                                               target={'_blank'}>FAQ</Link>
+                                    <h5 style={{marginBottom: '30px'}}>Ответы на большинство вопросов вы найдете
+                                        здесь: <Link href={'/faq'}
+                                                     className={s.link}
+                                                     target={'_blank'}>FAQ</Link>
                                     </h5>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs4Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs5Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs6Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs7Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs8Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs9Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs10Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
+                                    <div className={s.page2}>
+                                        <Image src={imgUs11Mob} alt="Img" width={6000} height={2000}
+                                               className={s.page2Img}/>
+                                    </div>
                                 </>
                             </TextModal>
                             <TextModal title={'Доставка, оплата, возврат'} img={payment} titleClassname={s.footer_link}>
                                 <Image src={truck} alt='' width={60}/>
                                 <h4 className={'my-3'}>Доставка</h4>
                                 <p className={s.text}>
-                                    Мы собираем десятки миллионов предложений со всего мира: от различных бутиков,
+                                    Обратите внимание, на кнопке на странице товара указано количество дней, необходимое
+                                    для доставки от
+                                    продавца до нашего склада в Москве. Доставка со склада занимает от 1 дня в
+                                    зависимости вашего от местоположения.<br/><br/>Мы собираем десятки миллионов
+                                    предложений со всего мира: от различных бутиков,
                                     магазинов и частных коллекционеров. В связи с этим мы можем предложить вам разные
                                     условия доставки: от самых быстрых до более длительных и при этом выгодных. Выбрав
                                     размер или конфигурацию товара, вам предстоит выбрать срок доставки и
                                     соответствующую цену. Обычно мы укладываемся сильно раньше, чем указанный крайний
                                     срок, однако мы берем время с запасом, чтобы учесть все непредвиденные
-                                    обстоятельства. На кнопке указано то количество дней, которое занимает доставка от
-                                    продавца до нашего
-                                    склада в Москве.
+                                    обстоятельства.
 
                                 </p>
                                 <div className={s.faq_block}>

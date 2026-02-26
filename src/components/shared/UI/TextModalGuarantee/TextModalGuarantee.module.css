@@ -1,0 +1,120 @@
+.link {
+    color: #000;
+}
+
+.link:hover {
+    color: #000;
+}
+
+
+.icons_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 50px;
+}
+
+.icons_block3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 50px;
+}
+
+.socialsCont {
+    display: flex;
+    align-items: center;
+}
+
+.mainSocialsText {
+    margin-left: 10px;
+    color: black;
+    font-size: 20px;
+    font-family: inherit;
+    text-align: left;
+}
+
+.mainSocialsText2 {
+    margin-left: 10px;
+    color: white;
+    font-size: 15px;
+    font-family: inherit;
+    text-align: left;
+}
+
+.linkTgSocials {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: black;
+}
+
+.linkTgSocials2 {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: white;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.faq_block {
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.text {
+    font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+    .faq_block {
+        padding: 0;
+    }
+
+    .social_media {
+        width: 100%;
+        text-align: center;
+        padding-left: 20px;
+    }
+
+    .social_media2 {
+        width: 100%;
+    }
+
+    .mainSocialsText {
+        font-size: 16px;
+    }
+
+    .mainSocialsText2 {
+        font-size: 16px;
+    }
+
+    .icons_block {
+        gap: 25px;
+    }
+
+    .icons_block3 {
+        gap: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: unset;
+        margin-left: 10px;
+    }
+
+    .socialsCont {
+        gap: 10px;
+    }
+}
+
+.page2 {
+    display: flex;
+    justify-content: center;
+}
+
+.page2Img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}

@@ -8,6 +8,8 @@ import Link from "next/link";
 import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
 import inst_star from "@/static/icons/instagram_star.svg";
+import igBlack from "@/static/icons/igImg.svg";
+import tgBlack from "@/static/icons/tg_black.svg";
 
 const ContactModal = ({isOpen, handleClose}) => {
     return (
@@ -44,12 +46,26 @@ const ContactModal = ({isOpen, handleClose}) => {
                         <div>
                             <h5>Мы в социальных сетях:</h5>
                             <div className={s.icons_block}>
-                                <a href={'https://t.me/selloutsu'} target={'_blank'}>
-                                    <Image src={tg} width={50} alt="" className={s.icon}/>
-                                </a>
-                                <a href={'https://vk.com/sellout_official'} target={'_blank'}>
-                                    <Image src={vk} width={63} alt="" className={s.icon}/>
-                                </a>
+                                <div className={s.socialsCont}>
+                                    <a style={{height: '45px'}}>
+                                        <Image src={igBlack} height={40} alt="" className={s.icon}/>
+                                    </a>
+                                    <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                </div>
+
+                                <div className={s.socialsCont}>
+                                    <a href={'https://t.me/selloutsu'} style={{height: '37px'}}>
+                                        <Image src={tgBlack} height={37} alt="" className={s.icon}/>
+                                    </a>
+                                    <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                </div>
                             </div>
                         </div>
                     </div>

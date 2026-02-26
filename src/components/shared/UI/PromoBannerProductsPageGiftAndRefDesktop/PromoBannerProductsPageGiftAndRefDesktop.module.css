@@ -1,0 +1,103 @@
+.giftRefCont {
+    margin: 50px 3vw;
+    height: 70px;
+    background: linear-gradient(to bottom right, #51031D, #B70742);
+    border-radius: 2px;
+    display: flex;
+    position: relative;
+}
+
+.gift, .ref {
+    display: flex;
+    align-items: center;
+}
+
+.ref {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(23vw - 50%), -50%);
+}
+
+.gift {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(calc(23vw - 50%), -50%);
+}
+
+.giftText, .refText {
+    font-size: 23px;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.giftText {
+    max-width: calc(47vw - 177px);
+}
+
+.refText {
+    margin-right: 30px;
+    max-width: calc(47vw - 220px);
+    margin-bottom: 0;
+}
+
+.giftButton, .refButton {
+    padding: 5px 45px;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 14px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.refButton {
+    padding: 5px 35px;
+}
+
+.giftButton:hover, .refButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.separator {
+    width: 1px;
+    height: 35px;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1370px) {
+    .giftText, .refText {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .giftRefCont {
+        margin-right: calc(10vw);
+        margin-left: calc(10vw);
+    }
+
+    .ref {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(20vw - 50%), -50%);
+    }
+
+    .gift {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(calc(20vw - 50%), -50%);
+    }
+}

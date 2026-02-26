@@ -30,7 +30,7 @@ const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) =>
                     }}
                     value={value}
                     onChange={onChange}
-                    placeholder='Поиск'
+                    placeholder="Поиск среди 2'000'000+ товаров"
                     className={s.search}
                     style={
                     (w100 && clearFunc)

@@ -423,12 +423,35 @@ const OneProductPage = ({product, prices, ip}) => {
     //         setMoreOpen(false)
     //     }, 200)
     // }, [router.asPath])
+    function changeBrowserColor(color) {
+        // Для Chrome, Firefox, Opera на Android
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', color);
+        }
+
+        // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
+        const statusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        if (statusBarMeta) {
+            // Изменение цвета status-bar на iOS
+            statusBarMeta.setAttribute('content', 'black-translucent'); // ограниченные возможности
+        }
+
+        // Для Microsoft Edge
+        const msNavbuttonMeta = document.querySelector('meta[name="msapplication-navbutton-color"]');
+        if (msNavbuttonMeta) {
+            msNavbuttonMeta.setAttribute('content', color);
+        }
+    }
+
     const [howOpen, setHowOpen] = useState(false)
     const toggleHow = () => {
         setHowOpen(!howOpen)
+        changeBrowserColor("#000000")
     }
     const closeHow = () => {
         setHowOpen(false)
+        changeBrowserColor("#ffffff")
     }
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
@@ -980,7 +1003,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                     обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим клиентам
                                     лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
                                     широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и аксессуаров.
-                                    Поэтому если вы нашли более низкую цену у наших конкурентов, смело пишите нам, и мы
+                                    Поэтому если вы нашли более низкую цену у наших конкурентов, причем речь не только о крупнейших российских сетях и премиальных бутиках, но и о любых сервисах, магазинах из любых стран, смело пишите нам, и мы
                                     обязательно сделаем для вас наилучшее предложение!
 
                                 </p>
@@ -1211,15 +1234,14 @@ const OneProductPage = ({product, prices, ip}) => {
                                 <Image src={truck} alt='' width={60}/>
                                 <h4 className={'my-3'}>Доставка</h4>
                                 <p className={s.text}>
-                                    Мы собираем десятки миллионов предложений со всего мира: от различных бутиков,
+                                    Обратите внимание, на кнопке на странице товара указано количество дней, необходимое для доставки от
+                                    продавца до нашего склада в Москве. Доставка со склада занимает от 1 дня в зависимости вашего от местоположения.<br/><br/>Мы собираем десятки миллионов предложений со всего мира: от различных бутиков,
                                     магазинов и частных коллекционеров. В связи с этим мы можем предложить вам разные
                                     условия доставки: от самых быстрых до более длительных и при этом выгодных. Выбрав
                                     размер или конфигурацию товара, вам предстоит выбрать срок доставки и
                                     соответствующую цену. Обычно мы укладываемся сильно раньше, чем указанный крайний
                                     срок, однако мы берем время с запасом, чтобы учесть все непредвиденные
-                                    обстоятельства. На кнопке указано то количество дней, которое занимает доставка от
-                                    продавца до нашего
-                                    склада в Москве.
+                                    обстоятельства.
 
                                 </p>
                                 <div className={s.faq_block}>

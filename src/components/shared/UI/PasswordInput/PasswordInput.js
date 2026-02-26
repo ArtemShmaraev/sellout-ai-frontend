@@ -18,6 +18,7 @@ const PasswordInput = ({value, onChange}) => {
                    value={value}
                    onChange={onChange}
                    ref={ref}
+                   name="new-password" autoComplete="new-password"
             />
             <Image src={passShown ? eye : eyeCrossed}
                    alt={'Показать/скрыть пароль'}

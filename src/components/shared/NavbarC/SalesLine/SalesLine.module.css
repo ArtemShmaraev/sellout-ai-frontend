@@ -1,22 +1,47 @@
 .line {
     width: 100%;
-    background: #940a0a;
+    background: #51031D;
     margin-bottom: 20px;
     padding: 9px 0;
 }
+
 .splide {
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    gap: 10px;
+}
+
+.text {
     color: white;
     text-align: center;
-    /*letter-spacing: 2px;*/
     font-size: 15px;
 }
+
 .link {
     color: #8d8d8d;
     text-decoration: underline;
 }
 
 @media (max-width: 1200px) {
-    .splide {
-        font-size: 14px;
-    }
+}
+
+.button {
+    height: 24px;
+    width: 122px;
+    font-size: 14px; /* Уменьшенный размер шрифта на 1-2 пикселя */
+    color: white; /* Цвет текста кнопки */
+    border: 1px solid white; /* Белая рамка */
+    background: transparent; /* Прозрачный фон */
+    cursor: pointer; /* Указатель при наведении */
+    display: flex; /* Используем flex для центрирования текста */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    border-radius: 3px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
 }

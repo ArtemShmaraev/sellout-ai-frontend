@@ -215,23 +215,72 @@
     color: #9a9999;
 }
 
-.icons_block {
-    display: flex;
-    margin-top: 20px;
-    gap: 50px;
-    align-items: center;
-    justify-content: center;
-}
-
 .icon {
     cursor: pointer;
 }
 
 .link {
-    margin: 15px 0;
+    color: #000;
+}
+.icons_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 25px;
+}
+
+.icons_block2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0 20px;
+    gap: 25px;
+}
+
+
+.socialsBlock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.socialsCont {
+    display: flex;
+    align-items: center;
+}
+.mainSocialsText {
+    margin-left: 10px;
     color: black;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: left;
+}
+.mainSocialsText2 {
+    margin-left: 10px;
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: left;
+}
+.linkTgSocials2 {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: white;
+}
+.linkTgSocials {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: black;
+}
+
+.page2 {
+    display: flex;
+    justify-content: center;
+}
+
+.page2Img {
+    width: 100vw;
+    height: auto;
     display: block;
-    text-decoration: none;
 }
 
 .footer_link {
@@ -251,7 +300,6 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .faq_block {

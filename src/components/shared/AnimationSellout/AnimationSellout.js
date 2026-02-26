@@ -4,10 +4,36 @@ import img from '@/static/img/logo_white.png'
 import Image from "next/image";
 
 const AnimationSellout = () => {
+    function changeBrowserColor(color) {
+        // Для Chrome, Firefox, Opera на Android
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', color);
+        }
+
+        // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
+        const statusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        if (statusBarMeta) {
+            // Изменение цвета status-bar на iOS
+            statusBarMeta.setAttribute('content', 'black-translucent'); // ограниченные возможности
+        }
+
+        // Для Microsoft Edge
+        const msNavbuttonMeta = document.querySelector('meta[name="msapplication-navbutton-color"]');
+        if (msNavbuttonMeta) {
+            msNavbuttonMeta.setAttribute('content', color);
+        }
+    }
 
     useLayoutEffect(() => {
         console.log("Сxxxxейчас будет анимация")
-
+        console.log(document.querySelector('meta[name="theme-color"]'))
+        setTimeout(() => {
+            changeBrowserColor("#000000")
+        }, 100)
+        setTimeout(() => {
+            // changeBrowserColor("#015000")/
+        }, 3000)
     }, [])
     return (
         <div className={s.block}>
