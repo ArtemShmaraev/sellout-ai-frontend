@@ -35,6 +35,9 @@ const BottomNav = () => {
                 router.push('/mobileMenuWomen')
             }
         }
+        else {
+            router.push('/mobileMenuMen')
+        }
         router.push(path);
     };
 

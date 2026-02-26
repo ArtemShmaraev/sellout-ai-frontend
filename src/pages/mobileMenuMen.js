@@ -8,6 +8,7 @@ import cross from '@/static/icons/x-lg.svg'
 import search from "@/static/img/sellout_logo.svg";
 import more from "@/static/img/sellout_logo.svg";
 import Cookies from "js-cookie";
+import {router} from "next/client";
 
 const MobileMenuMen = () => {
     const textsLines = [
@@ -18,6 +19,10 @@ const MobileMenuMen = () => {
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
+        Cookies.set('selected_gender', "F", {expires: 2772});
+        // setSelectedGender(gender)
+        router.push('/mobileMenuWomen')
+
     };
 
     const [isActive, setIsActive] = useState(false);

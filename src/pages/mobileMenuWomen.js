@@ -19,6 +19,9 @@ const MobileMenuWomen = () => {
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
+        Cookies.set('selected_gender', "M", {expires: 2772});
+        // setSelectedGender(gender)
+        router.push('/mobileMenuMen')
     };
 
     const [isActive, setIsActive] = useState(false);
