@@ -1,4 +1,4 @@
-import MainLayout from "@/layout/MainLayout";
+import MainMobileLayout from "@/layout/MainMobileLayout";
 import styles from '@/styles/MobileMenuWomen.module.css'
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
@@ -9,6 +9,7 @@ import search from "@/static/img/sellout_logo.svg";
 import more from "@/static/img/sellout_logo.svg";
 import Cookies from "js-cookie";
 import {router} from "next/client";
+import MainMobeleLayout from "@/layout/MainMobeleLayout";
 
 const MobileMenuWomen = () => {
     const textsLines = [
@@ -59,6 +60,7 @@ const MobileMenuWomen = () => {
     }, []);
 
     return (
+<MainMobileLayout>
         <div>
             <div className={styles.header}>
                 {/* Первая часть: Логотип и крестик */}
@@ -453,6 +455,7 @@ const MobileMenuWomen = () => {
 
             <div className={styles.centerButton}>Посмотреть все 2’000’000+ товаров</div>
         </div>
+</MainMobileLayout>
 
     );
 };
