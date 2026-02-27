@@ -1,0 +1,128 @@
+
+.multiSectionCirclesTitle {
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+
+.categoriesGrid {
+    display: flex;
+    gap: 10px; /* Отступы между прямоугольниками */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.categoriesGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.centerContent {
+    justify-content: center;
+}
+
+.categoryItem {
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.2s ease; /* Плавный переход для обводки, тени и трансформации */
+    border-radius: 4px;
+}
+
+.categoryItem:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+.selectedItem {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+.selectedItem:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+    cursor: initial;
+}
+
+.customButton {
+    justify-content: center;
+    display: flex;
+    margin-top: -40px;
+}
+
+.linkMore {
+    padding: 15px 40px;
+    border: 1.5px solid black;
+    color: black;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 400px;
+    max-width: 97vw;
+    text-align: center;
+}
+
+.linkMore:hover {
+    background-color: black;
+    color: white;
+}
+
+@media (max-width: 1200px) {
+    .categoryItem:hover {
+        box-shadow: none;
+        cursor: pointer;
+    }
+    .selectedItem {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+        cursor: initial;
+    }
+    .selectedItem:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+        cursor: initial;
+    }
+    .customButton {
+        margin-top: -20px;
+    }
+}
+
+
+.paddings {
+    padding-right: 3vw;
+    padding-left: 3vw;
+}
+
+@media (max-width: 1200px) {
+    .paddings {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .paddings {
+        padding-right: 10vw;
+        padding-left: 10vw;
+    }
+}
+
+@media (min-width: 2500px) {
+    .paddings {
+        padding-right: 15vw;
+        padding-left: 15vw;
+    }
+}
+
+@media (max-width: 650px) {
+    .paddings {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+}
+

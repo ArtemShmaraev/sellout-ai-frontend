@@ -130,12 +130,6 @@ const AddressModal = ({newAddress = false, whiteBnt = false,
                         </div>
                         <h4 className={s.title}>{newAddress ? 'Добавить новый адрес' : 'Редактировать адрес'}</h4>
                         <hr/>
-                        <input type="text"
-                               className={s.input}
-                               placeholder={'Название адреса (например, домашний)'}
-                               value={name}
-                               onChange={e => setName(e.target.value)}
-                        />
                         <div ref={sugRef}>
                             <input type="text"
                                    ref={inputRef}
@@ -161,6 +155,12 @@ const AddressModal = ({newAddress = false, whiteBnt = false,
                                 </div>
                             }
                         </div>
+                        <input type="text"
+                               className={s.input}
+                               placeholder={'Название адреса (например, домашний)'}
+                               value={name}
+                               onChange={e => setName(e.target.value)}
+                        />
                         {newAddress
                             ?
                             <>

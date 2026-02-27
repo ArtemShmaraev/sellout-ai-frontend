@@ -119,7 +119,7 @@ const ProductCard = ({cardList = false, product}) => {
         hideSizes();
     };
     const renderSizes = () => {
-        const n = desktopStore.isDesktop ? 25 : 10
+        const n = desktopStore.isDesktop ? 20 : 10
         const sizes = product.available_sizes.sizes
         return sizes.length <= n ? sizes.join(', ') : `${sizes[0]} - ${sizes[sizes.length - 1]}`
     }
@@ -140,6 +140,23 @@ const ProductCard = ({cardList = false, product}) => {
             document.removeEventListener('mousemove', handleClickOutside);
         };
     }, []);
+
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    useEffect(() => {
+        // Функция для обновления ширины
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        // Устанавливаем текущую ширину при загрузке компонента
+        handleResize();
+
+        // Добавляем слушатель изменения размера окна
+        window.addEventListener('resize', handleResize);
+
+        // Удаляем слушатель при размонтировании компонента
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     const [currentIndex, setCurrentIndex] = useState(1);
     const handlePrevClick = () => {
@@ -435,19 +452,19 @@ const ProductCard = ({cardList = false, product}) => {
                         <>
                             <div className={s.info}>
                                 <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : "."}</div>
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : ""}</div>
                                 <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.brand}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? model || 'No model' : "."}</div>
+                                    className={brandsDisplay() !== "Загрузка" ? `${s.brand}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? model || '' : ""}</div>
                                 <div
                                     className={s.colorway}>{brandsDisplay() !== "Загрузка" ? colorway : ""}</div>
                             </div>
                         </>
                         :
-                        <div className={'text-black'}>
-                            <span className={'fw-bold'}>
-                                Доступныe размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
+                        <div>
+                            <span className={s.tag}>
+                                Доступные размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
                             <br/>
-                            {renderSizes()}
+                            <span style={{fontSize: '14px', lineHeight: '1.5', color: 'black', display: 'inline-block'}}>{renderSizes()}</span>
                         </div>
                 }
                 <div className={`${s.price_block}`}>
@@ -459,7 +476,17 @@ const ProductCard = ({cardList = false, product}) => {
                                 <div className={`${s.price}`}>
 
                                     {desktopStore.isDesktop ? (
+                                        <div className={`${price.final_price > 9999999 ? s.flexColumn : s.flexRow}`}>
+                                            <span
+                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                        </div>
+                                    ) : windowWidth > 650 ? (
                                         <>
+                                            {/*<span style={{display: 'flex'}}><span*/}
+                                            {/*    className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>&nbsp;&nbsp;</span>*/}
+                                            {/*<span*/}
+                                            {/*    className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>*/}
                                             <span
                                                 className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
                                             <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
@@ -468,11 +495,9 @@ const ProductCard = ({cardList = false, product}) => {
                                         <>
                                             <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
                                             <span
-                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>
                                         </>
                                     )}
-
-
                                 </div>
                                 :
                                 <div className={`${s.price}`}>

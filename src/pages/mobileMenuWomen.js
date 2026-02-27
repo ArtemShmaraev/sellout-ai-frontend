@@ -1,15 +1,12 @@
-import MainMobileLayout from "@/layout/MainMobileLayout";
+import MainLayout from "@/layout/MainLayout";
 import styles from '@/styles/MobileMenuWomen.module.css'
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import logo from "@/static/img/sellout_logo.svg";
 import cross from '@/static/icons/x-lg.svg'
 import search from "@/static/img/sellout_logo.svg";
 import more from "@/static/img/sellout_logo.svg";
-import Cookies from "js-cookie";
-import {router} from "next/client";
-
 
 const MobileMenuWomen = () => {
     const textsLines = [
@@ -20,9 +17,6 @@ const MobileMenuWomen = () => {
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
-        Cookies.set('selected_gender', "M", {expires: 2772});
-        // setSelectedGender(gender)
-        router.push('/mobileMenuMen')
     };
 
     const [isActive, setIsActive] = useState(false);
@@ -51,16 +45,8 @@ const MobileMenuWomen = () => {
             inputRef.current.focus(); // Возвращаем фокус на инпут, чтобы клавиатура не закрывалась
         }
     };
-    useLayoutEffect(() => {
-        const savedGender = Cookies.get('selected_gender');
-        if (savedGender) {
-            setSelectedGender(savedGender)
-        }
-
-    }, []);
 
     return (
-<MainMobileLayout>
         <div>
             <div className={styles.header}>
                 {/* Первая часть: Логотип и крестик */}
@@ -77,14 +63,14 @@ const MobileMenuWomen = () => {
             {/* Вторая часть: Стрелка назад и текст */}
             <div className={styles.genderBlock}>
                 <button
-                    className={`${styles.genderButton} ${selectedGender === 'M' ? styles.selected : ''}`}
-                    onClick={() => handleGenderSelect('M')}
+                    className={`${styles.genderButton} ${selectedGender === 'male' ? styles.selected : ''}`}
+                    onClick={() => handleGenderSelect('male')}
                 >
                     Мужское
                 </button>
                 <button
-                    className={`${styles.genderButton} ${selectedGender === 'F' ? styles.selected : ''}`}
-                    onClick={() => handleGenderSelect('F')}
+                    className={`${styles.genderButton} ${selectedGender === 'female' ? styles.selected : ''}`}
+                    onClick={() => handleGenderSelect('female')}
                 >
                     Женское
                 </button>
@@ -455,7 +441,6 @@ const MobileMenuWomen = () => {
 
             <div className={styles.centerButton}>Посмотреть все 2’000’000+ товаров</div>
         </div>
-</MainMobileLayout>
 
     );
 };

@@ -168,51 +168,58 @@ const ComplexMainPageBlock = ({obj}) => {
             )}
 
             {obj.imagesInRow && obj.imagesInRow.length > 0 && (
-                <div className={s.imageContainer} style={noMargin ? desktopStore.isDesktop ? {marginTop: 10} : {marginTop: 0} : {}}>
-                    {obj.imagesInRow.map((imageData, index) => (
-                        <Link key={index} href={imageData.url} className={s.imageLink} style={{width: imageWidth}}>
-                            <img
+                <div className={`${s.margins}`}>
+                    <div className={`${s.imageContainer}`}
+                         style={noMargin ? desktopStore.isDesktop ? {marginTop: 10} : {marginTop: 0} : {}}>
+                        {obj.imagesInRow.map((imageData, index) => (
+                            <Link key={index} href={imageData.url} className={s.imageLink} style={{width: imageWidth}}>
+                                <img
                                     src={desktopStore.isDesktop ? imageData.imageDesktop : imageData.imageMobile}
-                                alt={imageData.text}
-                                className={s.image}
-                                loading={"lazy"}
-                            />
-                            <div className={s.textContainer}>
-                                {imageData.title &&
-                                    <p className={s.title} style={{textDecoration: "underline"}}>{imageData.title}</p>}
-                                {imageData.subTitle && <p className={s.subTitle}
-                                                          style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.subTitle}</p>}
-                                {imageData.text && <p className={s.text}
-                                                      style={imageData.title || imageData.subTitle ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
-                            </div>
-                        </Link>
-                    ))}
+                                    alt={imageData.text}
+                                    className={s.image}
+                                    loading={"lazy"}
+                                />
+                                <div className={s.textContainer}>
+                                    {imageData.title &&
+                                        <p className={s.title}
+                                           style={{textDecoration: "underline"}}>{imageData.title}</p>}
+                                    {imageData.subTitle && <p className={s.subTitle}
+                                                              style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.subTitle}</p>}
+                                    {imageData.text && <p className={s.text}
+                                                          style={imageData.title || imageData.subTitle ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             )}
 
             {obj.videosInRow && obj.videosInRow.length > 0 && (
-                <div className={s.imageContainer}>
-                    {obj.videosInRow.map((imageData, index) => (
-                        <Link key={index} href={imageData.url} className={s.imageLink} style={{width: videoWidth}}>
-                            <div className={s.videoContainer}>
-                                {imageData.video.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image}
-                                        alt={`Image ${index + 1}`}
-                                        className={index === currentImageIndex ? s.active : ''}
-                                    />
-                                ))}
-                            </div>
-                            <div className={s.textContainer}>
-                                {imageData.title &&
-                                    <p className={s.title} style={{textDecoration: "underline"}}>{imageData.title}</p>}
-                                {imageData.subTitle && <p className={s.subTitle}>{imageData.subTitle}</p>}
-                                {imageData.text && <p className={s.text}
-                                                      style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
-                            </div>
-                        </Link>
-                    ))}
+                <div className={`${s.margins}`}>
+                    <div className={s.imageContainer}>
+                        {obj.videosInRow.map((imageData, index) => (
+                            <Link key={index} href={imageData.url} className={s.imageLink} style={{width: videoWidth}}>
+                                <div className={s.videoContainer}>
+                                    {imageData.video.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={image}
+                                            alt={`Image ${index + 1}`}
+                                            className={index === currentImageIndex ? s.active : ''}
+                                        />
+                                    ))}
+                                </div>
+                                <div className={s.textContainer}>
+                                    {imageData.title &&
+                                        <p className={s.title}
+                                           style={{textDecoration: "underline"}}>{imageData.title}</p>}
+                                    {imageData.subTitle && <p className={s.subTitle}>{imageData.subTitle}</p>}
+                                    {imageData.text && <p className={s.text}
+                                                          style={imageData.title ? {} : {textDecoration: "underline"}}>{imageData.text}</p>}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             )}
 
@@ -238,24 +245,26 @@ const ComplexMainPageBlock = ({obj}) => {
             {/*)}*/}
 
             {obj.productsBlocks && Object.keys(obj.productsBlocks).length > 0 && (
-                <div className={s.productsImagesContainer}>
-                    {obj.productsBlocks.blocks.map((imageData, index) => (
-                        <Link key={index} href={imageData.url} className={s.imageLink}
-                              style={{width: productBlocksWidth}}>
-                            <img
-                                src={imageData.image}
-                                alt={imageData.text}
-                                className={s.image}
-                            />
-                            <div className={s.textContainer}>
-                                {imageData.title &&
-                                    <p className={`${s.subTitle} ${s.subTitleProds}`}
-                                       style={{textAlign: "center"}}>{imageData.title}</p>}
-                                {imageData.text &&
-                                    <p className={s.text} style={{textAlign: "center"}}>{imageData.text}</p>}
-                            </div>
-                        </Link>
-                    ))}
+                <div className={`${s.margins}`}>
+                    <div className={s.productsImagesContainer}>
+                        {obj.productsBlocks.blocks.map((imageData, index) => (
+                            <Link key={index} href={imageData.url} className={s.imageLink}
+                                  style={{width: productBlocksWidth}}>
+                                <img
+                                    src={imageData.image}
+                                    alt={imageData.text}
+                                    className={s.image}
+                                />
+                                <div className={s.textContainer}>
+                                    {imageData.title &&
+                                        <p className={`${s.subTitle} ${s.subTitleProds}`}
+                                           style={{textAlign: "center"}}>{imageData.title}</p>}
+                                    {imageData.text &&
+                                        <p className={s.text} style={{textAlign: "center"}}>{imageData.text}</p>}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             )}
 

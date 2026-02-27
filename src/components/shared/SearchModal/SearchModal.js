@@ -28,11 +28,11 @@ const SearchModal = () => {
         }
 
         searches.unshift(value); // Добавить новый поиск в начало списка
-        searches = [...new Set(searches)].slice(0, 7); // Удалить дубликаты и оставить только последние 7 поисков
+        searches = [...new Set(searches)].slice(0, 5); // Удалить дубликаты и оставить только последние 7 поисков
 
         const updated_search = searches.join("(|)"); // Объединить список в строку
-        Cookies.set('last_search', updated_search, { expires: 2772 }); // Установить новое значение куки
-        
+        Cookies.set('last_search', updated_search, {expires: 2772}); // Установить новое значение куки
+
         const filters = await addFilterSearch(value)
         for (const key in filters) {
             if (filters[key]) {
@@ -67,7 +67,7 @@ const SearchModal = () => {
                 let searches = [];
                 const last_search = Cookies.get('last_search');
                 if (last_search) {
-                    searches = last_search.split("(|)").slice(-7); // Получить последние 7 поисков
+                    searches = last_search.split("(|)").slice(-5); // Получить последние 7 поисков
                     searches = Array.from(new Set(searches)); // Удалить дубликаты
 
 
@@ -122,12 +122,32 @@ const SearchModal = () => {
                         "name": "Кроссовки Nike",
                         "type": "Популярное",
                         "url": "category=sneakers&line=nike"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
                     }
                 ])
                 const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
 
-                const trimmedList = combinedList.slice(0, 9);
-                setSuggs(trimmedList)
+                // const trimmedList = combinedList.slice(0, 9);
+                setSuggs(combinedList)
             }
         }, 250)
         return () => clearTimeout(timeout)
@@ -192,7 +212,12 @@ const SearchModal = () => {
                                     >
                                         <div className={s.sugg_product_div}>
 
-                                            <div style={{minWidth: "98px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                            <div style={{
+                                                minWidth: "98px",
+                                                justifyContent: "center",
+                                                display: "flex",
+                                                alignItems: "center"
+                                            }}>
                                                 <img src={el.bucket_link[0].url} alt={el.model}/>
                                             </div>
                                             <div className="details">
@@ -200,7 +225,8 @@ const SearchModal = () => {
                                                                 <span
                                                                     className={s.brand}>{brandsDisplay(el)} {el.model}
                                                                 </span>
-                                                    {(el.price.start_price > el.price.final_price) && el.price.final_price > 0 && <span className={s.sale}>
+                                                    {(el.price.start_price > el.price.final_price) && el.price.final_price > 0 &&
+                                                        <span className={s.sale}>
                                                                         -{Math.ceil(100 - (el.price.final_price / el.price.start_price) * 100)}%
                                                                     </span>}
                                                 </div>
@@ -227,7 +253,7 @@ const SearchModal = () => {
                                         </div>
                                     </Link>
                                 ) : (
-                                    most_pop[el.name.toLowerCase()]  ? (
+                                    most_pop[el.name.toLowerCase()] ? (
                                         <Link
                                             key={index} // Добавление ключа
                                             className={s.sugg_product}
@@ -237,7 +263,12 @@ const SearchModal = () => {
                                             <div className={s.sugg_product_div}>
 
                                                 {most_pop[el.name.toLowerCase()] && most_pop[el.name.toLowerCase()].photo && (
-                                                    <div style={{minWidth: "98px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                    <div style={{
+                                                        minWidth: "98px",
+                                                        justifyContent: "center",
+                                                        display: "flex",
+                                                        alignItems: "center"
+                                                    }}>
                                                         <img src={most_pop[el.name.toLowerCase()].photo} alt={el.name}/>
                                                     </div>
 
@@ -276,10 +307,12 @@ const SearchModal = () => {
                             ))
                         }
 
-                        <div className={s.more} onClick={q}>
-                            Посмотреть больше товаров...
-                        </div>
 
+                        {value &&
+                            <div className={s.more} onClick={q}>
+                                Посмотреть все {value}
+                            </div>
+                        }
 
 
                     </div>

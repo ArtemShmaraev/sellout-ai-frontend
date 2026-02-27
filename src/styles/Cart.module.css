@@ -139,6 +139,21 @@
     margin: 20px 0;
     gap: 30px;
 }
+.socialsCont {
+    display: flex;
+    align-items: center;
+}
+.mainSocialsText {
+    margin-left: 10px;
+    color: black;
+    font-size: 20px;
+    font-family: inherit;
+    text-align: left;
+}
+.linkTgSocials {
+    text-decoration: underline; /* Подчёркивание текста */
+    color: black;
+}
 .icon {
     cursor: pointer;
 }
@@ -152,7 +167,7 @@
 }
 @media (max-width: 1200px) {
     .cont {
-        margin-top: 80px;
+        margin-top: 20px;
     }
     .login_block {
         display: inline;
@@ -172,5 +187,14 @@
     .point_block {
         width: 45%;
         font-size: 13px;
+    }
+    .icons_block {
+        gap: 25px;
+    }
+    .socialsCont {
+        gap: 10px;
+    }
+    .mainSocialsText {
+        font-size: 16px;
     }
 }

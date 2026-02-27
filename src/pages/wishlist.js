@@ -12,6 +12,7 @@ import {observer} from "mobx-react-lite";
 import Recommendations from "@/components/shared/Recommendations/Recommendations";
 import Head from "next/head";
 import Link from "next/link";
+import {desktopStore} from "@/store/DesktopStore";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -51,7 +52,7 @@ const Wishlist = ({wishlist}) => {
             <Head>
                 <title>Избранное</title>
             </Head>
-            <div className={'custom_cont'} style={{marginTop: '130px', marginBottom: '50px'}}>
+            <div className={'custom_cont'} style={{marginTop: desktopStore.isDesktop ? '130px' : '20px', marginBottom: '50px'}}>
                 <h3>Избранное</h3>
                 {
                     wishlist.length > 0 &&

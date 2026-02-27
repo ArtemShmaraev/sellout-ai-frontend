@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import s from './ScrollUp.module.css'
 import arrow from '@/static/icons/chevron-up.svg'
 import Image from "next/image";
-import cn from 'classnames'; // Импортируйте библиотеку 'classnames'
+import cn from 'classnames';
+import {desktopStore} from "@/store/DesktopStore"; // Импортируйте библиотеку 'classnames'
 
 const ScrollUp = () => {
     const [visible, setVisible] = useState(false);
@@ -14,7 +15,7 @@ const ScrollUp = () => {
         const currentScrollPos = window.pageYOffset;
 
         // Определяем, видна ли кнопка: скролл вверх или позиция ниже определенного значения
-        const showButton = prevScrollPos > currentScrollPos && currentScrollPos > 100;
+        const showButton = prevScrollPos > currentScrollPos && desktopStore.navbarVisible && currentScrollPos > 100;
 
         setPrevScrollPos(currentScrollPos);
         setVisible(showButton);

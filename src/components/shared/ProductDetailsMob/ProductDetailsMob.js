@@ -10,24 +10,23 @@ import Image from "next/image";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
 const ProductDetails = ({product}) => {
-    const [activeTab, setActiveTab] = useState(product.description ? 'description' : "characteristics");
+    // const [activeTab, setActiveTab] = useState(product.description ? 'description' : "characteristics");
+    const [activeTab, setActiveTab] = useState("characteristics");
     // const [contentHeight, setContentHeight] = useState('auto');
 
     const [notification, setNotification] = useState(null);
     const [moreOpen, setMoreOpen] = useState(false)
     const swiperRef = useRef(null); // Реф для Swiper
 
-    const [contentHeight, setContentHeight] = useState('85px');
-
-
+    const [contentHeight, setContentHeight] = useState('120px');
 
     const contentRef = useRef(null);
     useEffect(() => {
         if (contentRef.current) {
-            setContentHeight( "85x");
-            setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
+            setContentHeight( "120px");
+            setContentHeight(moreOpen ? (contentRef.current.scrollHeight + 10) + "px" : '120px');
             setTimeout(() => {
-                setContentHeight(moreOpen ? contentRef.current.scrollHeight + "px" : '85px');
+                setContentHeight(moreOpen ? (contentRef.current.scrollHeight + 10) + "px" : '120px');
             }, 400)
 
         }
@@ -36,9 +35,9 @@ const ProductDetails = ({product}) => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
         if (tab === 'description') {
-            swiperRef.current?.swiper.slideTo(0); // Переключаем на первый слайд
+            swiperRef.current?.swiper.slideTo(1); // Переключаем на первый слайд
         } else if (tab === 'characteristics') {
-            swiperRef.current?.swiper.slideTo(1); // Переключаем на второй слайд
+            swiperRef.current?.swiper.slideTo(0); // Переключаем на второй слайд
         }
     };
 
@@ -89,8 +88,8 @@ const ProductDetails = ({product}) => {
     };
 
     const handlers = useSwipeable({
-        onSwipedLeft: () => setActiveTab('characteristics'),
-        onSwipedRight: () => setActiveTab('description'),
+        onSwipedLeft: () => setActiveTab('description'),
+        onSwipedRight: () => setActiveTab('characteristics'),
         preventDefaultTouchmoveEvent: true,
         trackMouse: true
     });
@@ -121,6 +120,19 @@ const ProductDetails = ({product}) => {
         });
     };
 
+    const infoRef = useRef(null)
+    const [infoBtn, setInfoBtn] = useState(true)
+    const [fadeOutInvisible, setFadeOutInvisible] = useState(false)
+
+    useEffect(() => {
+        if (contentRef && contentRef.current.clientHeight >= 120) {
+            setInfoBtn(true)
+        } else {
+            setInfoBtn(false)
+            setFadeOutInvisible(true);
+        }
+    }, [moreOpen])
+
     return (
         <div>
             {notification && (
@@ -134,32 +146,32 @@ const ProductDetails = ({product}) => {
                 {...handlers}
                 key={product.id}
             >
-                <hr/>
+                {/*<hr/>*/}
 
                 <div>
                     <div>
-                        <StarRating rating={product.score_product_page} n={product.id}/>
-                        <span itemScope itemType="https://schema.org/Brand">
-                            <div itemProp="name" className={s.model}>{brandsDisplay()}</div>
-                        </span>
-                        <div className={s.more_color}>{product.colorway}</div>
-                        <div className={s.more_color}>{parseHtml(product.extra_name)}</div>
+                        {/*<StarRating rating={product.score_product_page} n={product.id}/>*/}
+                        {/*<span itemScope itemType="https://schema.org/Brand">*/}
+                        {/*    <div itemProp="name" className={s.model}>{brandsDisplay()}</div>*/}
+                        {/*</span>*/}
+                        {/*<div className={s.more_color}>{product.colorway}</div>*/}
+                        {/*<div className={s.more_color}>{parseHtml(product.extra_name)}</div>*/}
 
                         <div className={s.menu} key={product.id} id={product.id}>
-                            {product.description && (
-                                <button
-                                    className={activeTab === 'description' ? s.active : ''}
-                                    onClick={() => handleTabClick('description')}
-                                >
-                                    Описание
-                                </button>
-                            )}
                             <button
-                                className={activeTab === 'characteristics' ? s.active : ''}
+                                className={`${activeTab === 'characteristics' ? s.active : s.inActive} ${!product.description ? s.fullWidth : ''}`}
                                 onClick={() => handleTabClick('characteristics')}
                             >
                                 Характеристики
                             </button>
+                            {product.description && (
+                            <button
+                                className={activeTab === 'description' ? s.active : s.inActive}
+                                onClick={() => handleTabClick('description')}
+                            >
+                                Описание
+                            </button>
+                        )}
                         </div>
 
                         <Swiper
@@ -179,35 +191,6 @@ const ProductDetails = ({product}) => {
                                 "--swiper-navigation-color": "rgba(0,0,0,0.5)",
                             }}
                         >
-                            {product.description && (
-                                <SwiperSlide
-                                    >
-                                    <div
-                                        ref={contentRef}
-                                        className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
-                                        style={{maxHeight: contentHeight}}
-                                        >
-
-                                    <div className={activeTab === 'description' ? s.tabActive : s.tabInactive}>
-                                        <div className={s.descriptionTab}>
-                                            <p className={s.description}>
-                                                {product.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className='d-flex justify-content-center'>
-                                        <button
-                                            className={s.more_btn}
-                                            onClick={toggle_more_open}>
-                                            <div className={s.more_text}>
-                                                Подробнее
-                                                <Arrow isOpen={moreOpen}/>
-                                            </div>
-                                        </button>
-                                    </div>
-
-                                </SwiperSlide>)}
                             <SwiperSlide>
 
                                 <div
@@ -215,14 +198,17 @@ const ProductDetails = ({product}) => {
                                     className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
                                     style={{maxHeight: contentHeight}}
                                     >
-                                <div className={activeTab === 'characteristics' ? s.tabActive : s.tabInactive}>
+                                <div className={activeTab === 'characteristics' ? s.tabActive : ''}>
                                     <div className={s.characteristicsTab}>
                                         {/*<div className={s.characteristics_title}>Характеристики товара:</div>*/}
                                         {renderParams()}
                                     </div>
+                                    {/* Градиент для плавного исчезновения внизу */}
+                                    <div className={`${moreOpen || fadeOutInvisible ? s.invisible : s.fadeOut}`}></div>
                                 </div>
                                 </div>
-                                <div className='d-flex justify-content-center'>
+                                {infoBtn &&
+                                    <div className='d-flex justify-content-center'>
                                     <button
                                         className={s.more_btn}
                                         onClick={toggle_more_open}>
@@ -232,7 +218,42 @@ const ProductDetails = ({product}) => {
                                         </div>
                                     </button>
                                 </div>
+                                }
+
                             </SwiperSlide>
+
+                            {product.description && (
+                            <SwiperSlide
+                            >
+                                <div
+                                    ref={contentRef}
+                                    className={[s.more, moreOpen ? s.more_open : ""].join(" ")}
+                                    style={{maxHeight: contentHeight}}
+                                >
+
+                                    <div className={activeTab === 'description' ? s.tabActive : s.tabInactive}>
+                                        <div className={s.descriptionTab}>
+                                            <p className={s.description}>
+                                                {product.description}
+                                            </p>
+                                        </div>
+                                        {/* Градиент для плавного исчезновения внизу */}
+                                        <div className={`${moreOpen || fadeOutInvisible ? s.invisible : s.fadeOut}`}></div>
+                                    </div>
+                                </div>
+                                {infoBtn &&
+                                <div className='d-flex justify-content-center'>
+                                    <button
+                                        className={s.more_btn}
+                                        onClick={toggle_more_open}>
+                                        <div className={s.more_text}>
+                                            Подробнее
+                                            <Arrow isOpen={moreOpen}/>
+                                        </div>
+                                    </button>
+                                </div>}
+
+                            </SwiperSlide>)}
                         </Swiper>
                     </div>
                 </div>

@@ -259,7 +259,6 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
                 }
                 {!desktopStore.isDesktop &&
                     <div className={['d-flex justify-content-evenly align-items-center', s.mobile_sort_row].join(' ')}
-                         style={desktopStore.navbarVisible ? {top: 90} : {top: 0}}
                     >
                         <button className={s.filter_toggle}
                                 onClick={handleClick}
@@ -278,9 +277,9 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
             </div>
-            <div className={'custom_cont'}>
+            <div>
                 {lastSeen.length > 0 &&
-                    <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
                 }
             </div>
             <div className={s.text_container}>
@@ -296,7 +295,7 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
 
             {modalOpen &&
                 <div className={s.modal}
-                     style={desktopStore.navbarVisible ? {top: 92} : {top: 0}}
+                     style={desktopStore.navbarVisible ? {top: 0} : {top: 0}}
                 >
                     <Container>
                         <div className='d-flex justify-content-between'>

@@ -176,6 +176,7 @@ const SizeTable = ({tables, photo}) => {
                         <div className={s.text_block}>
                             <div className={s.header}>{table.title}</div>
                             <div className={s.description}>{table.description}</div>
+                            <div className={s.warning}>Советуем всегда перед покупкой писать в службу поддержки, и наши специалисты помогут определиться с размером!</div>
                         </div>
                     </div>
                     <div className={s.btns_block}>

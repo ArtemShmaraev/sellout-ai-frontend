@@ -16,6 +16,7 @@
 }
 @media (max-width: 1000px) {
     .cont {
-        margin-top: 90px;
+        margin-top: 70px;
+        margin-bottom: 60px;
     }
 }

@@ -16,7 +16,7 @@
 .search::placeholder {
     font-style: italic;
     font-size: 14px;
-    color: black;
+    color: #5b5b5b;
 }
 .input .icon {
     position: absolute;

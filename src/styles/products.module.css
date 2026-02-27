@@ -54,7 +54,7 @@
 .mobile_sort_row {
     position: sticky;
     background: white;
-    top: 150px;
+    top: 0;
     z-index: 6;
     transition: 0.3s;
 }
@@ -64,13 +64,13 @@
 }
 .modal {
     position: fixed;
-    z-index: 7;
+    z-index: 20;
     top: 84px;
     left: 0;
     background: white;
     width: 100vw;
     height: 100dvh;
-    padding: 15px 15px 150px 15px;
+    padding: 15px 5px 150px 5px;
     overflow-y: scroll;
 }
 .modal_container {
@@ -120,11 +120,10 @@
     border: none;
     padding: 10px;
     border-radius: 7px;
-    margin-top: 70%;
     position: fixed;
     bottom: 20px;
     opacity: 0.85;
-    z-index: 4;
+    z-index: 20;
 }
 .desktop {
     display: flex;
@@ -160,7 +159,7 @@
 }
 @media (max-width: 1200px) {
     .cont {
-        margin-top: 90px;
+        margin-top: 0;
     }
     .border, .filter_toggle {
         border: none;
@@ -187,7 +186,8 @@
 
 @media (max-width: 600px) {
     .cont {
-        margin: 30px 0 0 0;
-        padding: 15px;
+        margin: 0 0 0 0;
+        padding-left: 7px;
+        padding-right: 7px;
     }
 }

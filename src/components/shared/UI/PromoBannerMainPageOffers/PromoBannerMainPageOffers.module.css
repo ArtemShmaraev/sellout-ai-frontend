@@ -1,5 +1,5 @@
 .aboutGuaranteeCont {
-    margin: 50px 0;
+    margin-bottom: 100px;
     height: 140px;
     background: linear-gradient(to bottom right, #51031D, #B70742);
     display: flex;
@@ -81,7 +81,7 @@
 }
 
 .aboutGuaranteeContMob {
-    margin: 10px 0;
+    margin-bottom: 50px;
     height: 230px;
     background: linear-gradient(to bottom right, #51031D, #B70742);
     display: flex;

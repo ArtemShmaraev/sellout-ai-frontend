@@ -24,8 +24,7 @@
 
 @media (max-width: 600px) {
     .scroll_btn {
-
-        bottom: 70px;
+        bottom: 120px;
         right: 20px;
         width: 40px;
         height: 35px;

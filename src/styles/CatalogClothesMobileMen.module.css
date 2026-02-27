@@ -67,7 +67,7 @@
 
 .catalogContainer {
     margin-bottom: 50px;
-    margin-top: 140px;
+    margin-top: 20px;
 }
 
 /* Popular Brands Section */
@@ -182,13 +182,13 @@
 
 .categoriesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, min(170px, calc((100vw - 40px) / 3))); /* Каждая колонка будет 117px */
+    grid-template-columns: repeat(auto-fill, min(170px, calc((100% - 10px) / 3))); /* Каждая колонка будет 117px */
     gap: 5px; /* Отступы между прямоугольниками */
     margin-bottom: 5px;
 }
 
 .categoryItem {
-    width: min(170px, calc((100vw - 40px) / 3));
+    width: 100%;
     height: calc(min(170px, calc((100vw - 40px) / 3)) * (165/130));
     position: relative;
     background-color: #f4f4f4; /* Можно изменить на ваш цвет фона */
@@ -202,7 +202,7 @@
 }
 
 .categoryImage {
-    width: min(170px, calc((100vw - 40px) / 3));
+    width: 100%;
     height: auto; /* Картинка занимает всю ширину, сохраняя пропорции */
     position: absolute;
     top: 0;
@@ -222,14 +222,14 @@
 
 .categoriesGrid4 {
     display: grid;
-    grid-template-columns: repeat(auto-fill, min(170px, calc((100vw - 45px) / 4))); /* Каждая колонка будет 117px */
+    grid-template-columns: repeat(auto-fill, min(150px, calc((100% - 15px) / 4))); /* Каждая колонка будет 117px */
     gap: 5px; /* Отступы между прямоугольниками */
     margin-bottom: 20px;
 }
 
 .categoryItem4 {
-    width: min(170px, calc((100vw - 45px) / 4));
-    height: calc(min(170px, calc((100vw - 45px) / 4)) * (120/100));
+    width: 100%;
+    height: calc(min(150px, calc((100vw - 45px) / 4)) * (120/100));
     position: relative;
     background-color: #f4f4f4; /* Можно изменить на ваш цвет фона */
     transition: box-shadow 0.2s ease; /* Плавный переход для обводки и тени */
@@ -242,7 +242,7 @@
 }
 
 .categoryImage4 {
-    width: min(170px, calc((100vw - 45px) / 4));
+    width: 100%;
     height: auto; /* Картинка занимает всю ширину, сохраняя пропорции */
     position: absolute;
     top: 0;
@@ -259,8 +259,15 @@
     color: #000;
 }
 
+@media (max-width: 400px) {
+    .categoryText4 {
+        font-size: 10px;
+    }
+}
+
 .centerButton {
     width: 400px;
+    max-width: 96%;
     height: 60px;
     border: 1px solid black; /* Черная рамка */
     background-color: transparent; /* Прозрачный фон */
@@ -278,6 +285,20 @@
 
 .centerButton:hover {
     background-color: black; /* Черный фон при наведении */
+}
+
+.centerButton a {
+    color: black; /* Белый текст при наведении */
+    width: 100%;
+    height: 100%;
+    transition: color 0.3s ease; /* Плавные переходы */
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.centerButton a:hover {
     color: white; /* Белый текст при наведении */
 }
 

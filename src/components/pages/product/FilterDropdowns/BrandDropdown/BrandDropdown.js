@@ -58,6 +58,7 @@ const BrandDropdown = () => {
                                 <SearchInput w100={true}
                                              value={query}
                                              onChange={e => setQuery(e.target.value)}
+                                             placeholder="Поиск среди 1'000+ брендов"
                                 />
                             </div>
                         </div>

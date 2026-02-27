@@ -76,6 +76,9 @@ input {
     padding-top: 38px;
     flex: 1;
 }
+.cont_up_mob {
+    flex: 1;
+}
 .custom_cont {
     margin-right: 3vw;
     margin-left: 3vw;
@@ -140,12 +143,6 @@ body.body-scroll-clip {
     }
     body.body-scroll-clip {
         overflow-y: hidden;
-    }
-}
-@media (min-width: 1800px) {
-    .custom_cont {
-        margin-right: 10vw;
-        margin-left: 10vw;
     }
 }
 @media (min-width: 1800px) {

@@ -13,7 +13,6 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
     const header = headerJson
 
 
-
     const renderMegamenu = (numInCol, colNum, basicObj, query, title, constantQuery = {}) => {
         const cols = []
 
@@ -33,10 +32,14 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                 rows.push(
                     <Link
                         key={dataInd + i}
-                        href={{
-                            pathname: '/products',
-                            query: linkQuery
-                        }}
+                        href={(gender === "any") ? '/' :
+                            linkQuery[query].startsWith('/')
+                                ? linkQuery[query]
+                                : {
+                                    pathname: '/products',
+                                    query: linkQuery,
+                                }
+                        }
                         onClick={() => setIsShown(false)}
                         className={s.megamenu_links}
                     >
@@ -44,13 +47,13 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                 )
             }
             cols.push(
-                <div style={{minWidth: `${100/colNum}%`}} key={i}>
+                <div style={{minWidth: `${100 / colNum}%`}} key={i}>
                     {rows}
                 </div>
             )
         }
         const result = (
-            <div style={{minWidth: `${20* colNum}%`}} key={title}>
+            <div style={{minWidth: `${20 * colNum}%`}} key={title}>
                 <h4 className={s.h_text}>{title}</h4>
                 <div className={s.cols_block}>
                     {cols}
@@ -58,7 +61,6 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
             </div>
         )
         return result
-
 
 
     }
@@ -82,6 +84,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
             clearTimeout(timeoutId); // Очистить таймер при размонтировании компонента
         };
     }, [timeoutId]);
+
+    const selectedGender = Cookies.get('selected_gender')
+
     return (
         <div
             onMouseEnter={handleMouseEnter}
@@ -130,12 +135,8 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                                                     />
                                                 </div>
                                                 <div className={s.link_block}>
-                                                    <Link className={s.img_link}
-                                                          href={{
-                                                              pathname: '/brands',
-                                                          }}
-                                                    >
-                                                        Все бренды
+                                                    <Link href={{pathname: '/brands'}}>
+                                                        <button className={s.img_button}>Все бренды</button>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -175,13 +176,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                                                     />
                                                 </div>
                                                 <div className={s.link_block}>
-                                                    <Link className={s.img_link}
-                                                          href={{
-                                                              pathname: '/products',
-                                                              query: {category: 'shoes_category'}
-                                                          }}
-                                                    >
-                                                        Вся обувь
+                                                    <Link
+                                                        href={selected_gender === "M" ? "/catalog/shoes_desktop_men" : selected_gender === "F" ? "/catalog/shoes_desktop_women" : '/'}>
+                                                        <button className={s.img_button}>Полный каталог обуви</button>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -215,13 +212,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                                                     />
                                                 </div>
                                                 <div className={s.link_block}>
-                                                    <Link className={s.img_link}
-                                                          href={{
-                                                              pathname: '/products',
-                                                              query: {category: 'clothes'}
-                                                          }}
-                                                    >
-                                                        Вся одежда
+                                                    <Link
+                                                        href={selected_gender === "M" ? "/catalog/clothes_desktop_men" : selected_gender === "F" ? "/catalog/clothes_desktop_women" : '/'}>
+                                                        <button className={s.img_button}>Полный каталог одежды</button>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -255,13 +248,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                                                     />
                                                 </div>
                                                 <div className={s.link_block}>
-                                                    <Link className={s.img_link}
-                                                          href={{
-                                                              pathname: '/products',
-                                                              query: {category: 'accessories'}
-                                                          }}
-                                                    >
-                                                        Все аксессуары
+                                                    <Link
+                                                        href={selected_gender === "M" ? "/catalog/accessories_desktop_men" : selected_gender === "F" ? "/catalog/accessories_desktop_women" : '/'}>
+                                                        <button className={s.img_button}>Каталог аксессуаров</button>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -295,13 +284,9 @@ const Megamenu = ({className, label, link, type, photos, visible, selected_gende
                                                     />
                                                 </div>
                                                 <div className={s.link_block}>
-                                                    <Link className={s.img_link}
-                                                          href={{
-                                                              pathname: '/products',
-                                                              query: {category: 'bags'}
-                                                          }}
-                                                    >
-                                                        Все аксессуары
+                                                    <Link
+                                                        href={selected_gender === "M" ? "/catalog/bags_desktop_men" : selected_gender === "F" ? "/catalog/bags_desktop_women" : '/'}>
+                                                        <button className={s.img_button}>Полный каталог сумок</button>
                                                     </Link>
                                                 </div>
                                             </div>

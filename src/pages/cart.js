@@ -43,6 +43,8 @@ import map from '@/static/img/map.jpg'
 import inst_star from "@/static/icons/instagram_star.svg";
 import Compilation from "@/components/shared/Compilation/Compilation";
 import {fetchProductsByArray, fetchSimilarProducts} from "@/http/productsApi";
+import igBlack from "@/static/icons/igImg.svg";
+import tgBlack from "@/static/icons/tg_black.svg";
 
 
 export const getServerSideProps = async (context) => {
@@ -453,7 +455,7 @@ const Cart = ({
 
                             <hr/>
                             <div className={s.left_right}>
-                            <p className={s.big_text}>Промежуточный итог: </p>
+                                <p className={s.big_text}>Промежуточный итог: </p>
                                 <p className={s.big_text}>{addSpacesToNumber(finAmount)}₽</p>
                             </div>
                             {
@@ -673,12 +675,28 @@ const Cart = ({
                                                 <div>
                                                     <h5>Мы в социальных сетях:</h5>
                                                     <div className={s.icons_block}>
-                                                        <a href={'https://t.me/selloutsu'}>
-                                                            <Image src={tg} width={50} alt="" className={s.icon}/>
-                                                        </a>
-                                                        <a href={'https://vk.com/sellout_official'}>
-                                                            <Image src={vk} width={63} alt="" className={s.icon}/>
-                                                        </a>
+                                                        <div className={s.socialsCont}>
+                                                            <a style={{height: '45px'}}>
+                                                                <Image src={igBlack} height={40} alt=""
+                                                                       className={s.icon}/>
+                                                            </a>
+                                                            <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                                        </div>
+
+                                                        <div className={s.socialsCont}>
+                                                            <a href={'https://t.me/selloutsu'} style={{height: '37px'}}>
+                                                                <Image src={tgBlack} height={37} alt=""
+                                                                       className={s.icon}/>
+                                                            </a>
+                                                            <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -688,19 +706,13 @@ const Cart = ({
                             }
                         </div>
                     </div>
-
-
                 }
-                {desktopStore.isDesktop && lastSeen.length > 0 && (
-                    <div>
-                        <br/>
-                        <br/>
-                        {/*<hr/>*/}
-                        <Compilation arr={lastSeen} title={'Ранее просмотренные'}/>
-
-                    </div>
-                )}
             </div>
+            {desktopStore.isDesktop && lastSeen.length > 0 && (
+                <div>
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
+                </div>
+            )}
             {!desktopStore.isDesktop &&
                 <div className={s.questions_block}>
                     <TextModal title={'Почему изменилась цена или модель оказалась распроданной?'} img={change}>
@@ -875,12 +887,28 @@ const Cart = ({
                                 <div>
                                     <h5>Мы в социальных сетях:</h5>
                                     <div className={s.icons_block}>
-                                        <a href={'https://t.me/selloutsu'}>
-                                            <Image src={tg} width={50} alt="" className={s.icon}/>
-                                        </a>
-                                        <a href={'https://vk.com/sellout_official'}>
-                                            <Image src={vk} width={63} alt="" className={s.icon}/>
-                                        </a>
+                                        <div className={s.socialsCont}>
+                                            <a style={{height: '45px'}}>
+                                                <Image src={igBlack} height={40} alt=""
+                                                       className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Запретграм: <br/> @sellout_platform
+                                            </span>
+                                        </div>
+
+                                        <div className={s.socialsCont}>
+                                            <a href={'https://t.me/selloutsu'} style={{height: '37px'}}>
+                                                <Image src={tgBlack} height={37} alt=""
+                                                       className={s.icon}/>
+                                            </a>
+                                            <span className={s.mainSocialsText}>
+                                                  Телеграм: <br/>
+                                                  @<a href="https://t.me/selloutsu" className={s.linkTgSocials}>
+                                                    selloutsu
+                                                  </a>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,25 +1,35 @@
 // BottomNav.js
 import React from 'react';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import s from './BottomNav.module.css';
 import CartIcon from "@/components/shared/CartIcon/CartIcon";
 import Image from "next/image";
 
 import sellout_icon from "@/static/icons/favicon.jpg";
-import cart from "@/static/icons/BottomNav/Корзина.svg";
-import profile from "@/static/icons/BottomNav/Профиль.svg";
-import fav from "@/static/icons/BottomNav/Избранное.svg";
-import logo from "@/static/icons/BottomNav/Логотип.svg";
-import search_icon from "@/static/icons/BottomNav/Поиск.svg";
+
+import cartNotSelected from "@/static/icons/CertMobileNavBarNotSelected.svg";
+import accountNotSelected from "@/static/icons/AccountMobileNavBarNotSelected.svg";
+import favouriteNotSelected from "@/static/icons/FavouriteMobileNavBarNotSelected.svg";
+import homeNotSelected from "@/static/icons/HomeMobileNavBarNotSelected.svg";
+import searchNotSelected from "@/static/icons/SearchMobileNavBarNotSelected.svg";
+
+import cartSelected from "@/static/icons/CertMobileNavBarSelected.svg";
+import accountSelected from "@/static/icons/AccountMobileNavBarSelected.svg";
+import favouriteSelected from "@/static/icons/FavouriteMobileNavBarSelected.svg";
+import homeSelected from "@/static/icons/HomeMobileNavBarSelected.svg";
+import searchSelected from "@/static/icons/SearchMobileNavBarSelected.svg";
+
 import Cookies from "js-cookie";
 
 const BottomNav = () => {
     const router = useRouter();
-    const { pathname } = router;
+    const {pathname} = router;
 
-    const isHome = pathname === '/' || pathname.startsWith('/men') || pathname.startsWith('/women');
     const isCatalog = pathname.startsWith('/products');
     const isCart = pathname.startsWith('/cart');
+    const isHome = pathname === '/' || pathname.startsWith('/men') || pathname.startsWith('/women');
+    const isWishlist = pathname.startsWith('/wishlist');
+    const isAccount = pathname.startsWith('/account');
 
     const handleNavigation = (path) => {
         router.push(path);
@@ -34,8 +44,7 @@ const BottomNav = () => {
             } else {
                 router.push('/mobileMenuWomen')
             }
-        }
-        else {
+        } else {
             router.push('/mobileMenuMen')
         }
         router.push(path);

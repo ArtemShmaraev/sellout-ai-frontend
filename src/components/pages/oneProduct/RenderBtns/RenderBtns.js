@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 
 const RenderBtns = ({btns, changeBonuses}) => {
     const [activeButtonId, setActiveButtonId] = useState();
-    const {productStore} = useContext(Context)
+    const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
     const arr = []
     let curNum = 1
 
@@ -25,6 +25,7 @@ const RenderBtns = ({btns, changeBonuses}) => {
     const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
 
+
     const renderBtns = (buttons) => {
         const rows = [];
         let currentRow = [];
@@ -38,9 +39,17 @@ const RenderBtns = ({btns, changeBonuses}) => {
                         (button.start_price > button.final_price)
                         ?
                             <div className={s.half_text}>
-                                <span className={s.crossed}>{addSpacesToNumber(button.start_price)} ₽</span>
-                                <br/>
-                                <span className={s.sale_price}>{addSpacesToNumber(button.final_price)} ₽</span>
+                                {desktopStore.isDesktop &&
+                                    <>
+                                        <span className={s.crossed}>{addSpacesToNumber(button.start_price)} ₽</span>
+                                        <br/>
+                                        <span className={s.sale_price}>{addSpacesToNumber(button.final_price)} ₽</span>
+                                    </>}
+                                {!desktopStore.isDesktop &&
+                                    <>
+                                        <span className={s.crossed} style={{marginRight: '10px'}}>{addSpacesToNumber(button.start_price)} ₽</span>
+                                        <span className={s.sale_price}>{addSpacesToNumber(button.final_price)} ₽</span>
+                                    </>}
                             </div>
                             :
                             <div className={s.half_text}>{addSpacesToNumber(button.final_price)} ₽</div>

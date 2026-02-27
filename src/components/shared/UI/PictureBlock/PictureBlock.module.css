@@ -146,7 +146,6 @@
         padding-bottom: 0;
     }
     .main_block {
-        margin-top: 25px;
         flex-direction: column-reverse;
     }
     .text_block, .img_block {

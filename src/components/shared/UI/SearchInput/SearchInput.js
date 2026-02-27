@@ -1,16 +1,24 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './SearchInput.module.css'
 import icon from '@/static/icons/search.svg'
 import cross from '@/static/icons/x-lg-copy.svg'
 import Image from "next/image";
+import Cookies from "js-cookie";
 
-const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) => {
+const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus, placeholder="Поиск среди 2'000'000+ товаров"}) => {
     const ref = useRef(null)
+    const [selectedGender, setSelectedGender] = useState("any")
     useEffect(() => {
         if (autoFocus) {
             ref.current.focus()
         }
+        if (Cookies.get('selected_gender')) {
+            setSelectedGender(Cookies.get('selected_gender'))
+        }
     }, []);
+    if (placeholder === "Поиск среди 2'000'000+ товаров") {
+        placeholder = selectedGender === "M" ? "Мужское: поиск среди 2'000'000+ товаров" : selectedGender === "F" ? "Женское: поиск среди 2'000'000+ товаров" : placeholder
+    }
     return (
         <div className={s.input} style={w100 && {width: '100%'}}>
             <form onSubmit={(e) => {
@@ -30,7 +38,7 @@ const SearchInput = ({w100, value, onChange, onSubmit, clearFunc, autoFocus}) =>
                     }}
                     value={value}
                     onChange={onChange}
-                    placeholder="Поиск среди 2'000'000+ товаров"
+                    placeholder={placeholder}
                     className={s.search}
                     style={
                     (w100 && clearFunc)

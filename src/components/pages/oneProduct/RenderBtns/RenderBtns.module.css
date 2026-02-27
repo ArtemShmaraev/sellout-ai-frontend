@@ -86,6 +86,9 @@
     }
     .content {
         flex-wrap: wrap;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        gap: 5px;
     }
     .half_text {
         width: 100%;

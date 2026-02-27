@@ -1,0 +1,68 @@
+.close {
+    position: fixed;
+    right: 10px;
+    top: 20px;
+    z-index: 100;
+}
+
+.modalContent {
+    overflow-x: hidden;
+    scrollbar-width: none; /* Для Firefox — скрытие скроллбара */
+    -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
+}
+.modalContent::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera — скрытие скроллбара */
+    background: transparent; /* Chrome/Safari/Webkit-based browsers */
+}
+
+/* Логотип по центру сверху */
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 230px;
+    height: auto;
+}
+
+/* Основной контейнер контента */
+.contentContainer {
+    display: flex;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    align-items: center;
+}
+
+/* Фото товара */
+.productImageContainer {
+    width: 50%;
+    margin-right: 20px;
+}
+
+.productImage {
+    width: 100%;
+    height: auto;
+}
+
+/* Информация о товаре */
+.productInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.brand, .model, .colorway {
+    color: #333;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.model, .colorway {
+    font-size: 16px;
+}

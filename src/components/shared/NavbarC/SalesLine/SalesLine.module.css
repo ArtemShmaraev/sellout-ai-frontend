@@ -45,3 +45,57 @@
     background-color: white;
     color: black;
 }
+
+.promoBar {
+    background-color: #51031D; /* Цвет прямоугольника бара */
+    overflow: hidden; /* Скрываем излишки, если текст выходит за пределы */
+    width: 100%;
+    padding: 10px 0; /* Внутренние отступы */
+    position: relative; /* Позиционирование для анимации */
+}
+
+.scrollContainer {
+    display: flex;
+    white-space: nowrap; /* Убираем перенос строк */
+}
+
+.promoText {
+    color: white; /* Цвет текста */
+    font-size: 14px; /* Размер шрифта */
+    font-family: inherit;
+    display: flex; /* Чтобы текст не переносился */
+    align-items: center;
+    animation: scroll 30s linear infinite; /* Добавление анимации прокрутки */
+}
+
+/* Анимация прокрутки */
+@keyframes scroll {
+    from {
+        transform: translateX(0); /* Начинаем справа */
+    }
+    to {
+        transform: translateX(-100%); /* Заканчиваем слева */
+    }
+}
+
+.buttonMob {
+    height: 24px;
+    width: 100px;
+    font-size: 14px; /* Уменьшенный размер шрифта на 1-2 пикселя */
+    color: white; /* Цвет текста кнопки */
+    border: 1px solid white; /* Белая рамка */
+    background: transparent; /* Прозрачный фон */
+    cursor: pointer; /* Указатель при наведении */
+    display: flex; /* Используем flex для центрирования текста */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    border-radius: 3px;
+    transition: background-color 0.5s, color 0.5s;
+    font-family: inherit;
+    margin-left: 20px;
+}
+
+.buttonMob:hover {
+    background-color: white;
+    color: black;
+}

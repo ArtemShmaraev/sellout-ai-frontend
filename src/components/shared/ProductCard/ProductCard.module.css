@@ -1,7 +1,6 @@
 .card {
-    width: 256px;
-    height: 350px;
-    padding: 15px;
+    width: 240px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -35,8 +34,8 @@
     justify-content: flex-start;
     cursor: pointer;
     text-decoration: none;
-    transition: box-shadow 0.5s, transform 0.5s;
-    border-radius: 15px;
+    /*transition: box-shadow 0.5s, transform 0.5s;*/
+    /*border-radius: 15px;*/
 }
 
 /*.card_list:hover {*/
@@ -49,7 +48,6 @@
 .icons_block {
     display: flex;
     justify-content: space-between;
-    margin: 5px 0;
 }
 
 .sale {
@@ -106,7 +104,7 @@
     flex-direction: column;
     justify-content: flex-start;
     margin-top: 5px;
-    min-height: 123px;
+    min-height: 115px;
     z-index: -1;
 }
 
@@ -117,17 +115,20 @@
 }
 
 .info {
-    max-height: 93px;
-    height: 93px;
+    max-height: 87px;
+    height: 87px;
     overflow-y: clip;
 }
 
 .tag {
-    color: #727272;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .colorway {
     color: #727272;
+    font-size: 13px;
 }
 
 
@@ -158,6 +159,7 @@
 
 .brand {
     font-weight: 500;
+    font-size: 14px;
     color: #222222;
 }
 
@@ -170,6 +172,7 @@
     color: black;
     margin-top: auto;
     font-weight: 500;
+    font-size: 16px;
     /*font-size: 14pt;*/
 }
 
@@ -181,6 +184,19 @@
     /*font-size: 14pt;*/
 
 }
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 
 .sale_price {
     color: #940a0a;
@@ -308,15 +324,18 @@
     }
 }
 
-
+@media (max-width: 850px) {
+    .card {
+        width: 200px;
+        height: 300px;
+    }
+}
 
 
 @media (max-width: 650px) {
     .card {
         width: 172px;
-        height: 290px;
-        padding: 0;
-        margin: 10px 10px;
+        height: 270px;
     }
 
     .empty_card {
@@ -327,10 +346,10 @@
     }
 
     .card_list {
-        width: 49%;
-        height: 290px;
+        width: 48%;
+        height: 340px;
         padding: 0;
-        margin: 10px 0;
+        margin: 20px 0;
     }
 
     .text_block {
@@ -349,14 +368,17 @@
     }
 
     .tag, .brand, .name {
-        font-size: 14px;
+        font-size: 13px;
         overflow: hidden;
         text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
         white-space: nowrap; /* Запрещаем перенос текста на новую строку */
 
     }
-    .colorway{
+    .brand {
         font-size: 12px;
+    }
+    .colorway{
+        font-size: 11px;
         /*max-width: 49%; !* Измените на нужное значение *!*/
         /* Устанавливаем свойства для обрезки текста */
         overflow: hidden;

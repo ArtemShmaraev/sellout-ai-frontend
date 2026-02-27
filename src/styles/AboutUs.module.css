@@ -26,7 +26,7 @@
 }
 @media (max-width: 1200px) {
     .cont {
-        margin-top: 78px;
+        margin-top: 0;
     }
     .link {
         font-size: 18px;

@@ -79,7 +79,7 @@ const Stage1 = ({addresses, userData, cart}) => {
             console.log(unit)
         }
 
-        boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46','Москва','', price * 1.4, weight,0, 0, 0, 0)
+        boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46', 'Москва', '', price * 1.4, weight, 0, 0, 0, 0)
         // boxberry.open(boxberryCallback_function);
     };
     const boxberryCallback_function = (res) => {
@@ -122,6 +122,8 @@ const Stage1 = ({addresses, userData, cart}) => {
     const closeContact = () => {
         setContactOpen(false)
     }
+
+    const addSpacesToNumber = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
     return (
         <div>
@@ -167,37 +169,39 @@ const Stage1 = ({addresses, userData, cart}) => {
                            placeholder={'Почта*'}
                            value={orderStore.email}
                            onChange={e => orderStore.setEmail(e.target.value)}
+                           style={{width: desktopStore.isDesktop ? '' : '100%'}}
                     />
                 </div>
                 <h5>Выберите доставку</h5>
-                <div onClick={() => chooseType(3)} className={s.radio}>
-                    <CustomRadio label={'Доставка в пределах МКАД (бесплатно)'}
-                                 normalLabel={true}
-                                 checked={orderStore.shipType === 3}
-                                 reversed={true}
-                    />
+                {/*<div onClick={() => chooseType(3)} className={s.radio}>*/}
+                {/*    <CustomRadio label={'Доставка в пределах МКАД (бесплатно)'}*/}
+                {/*                 normalLabel={true}*/}
+                {/*                 checked={orderStore.shipType === 3}*/}
+                {/*                 reversed={true}*/}
+                {/*    />*/}
 
-                </div>
-                <div>
-                    {orderStore.shipType === 3 &&
-                        <div className={s.address_block}>
-                            {addresses.map(el =>
-                                <OrderAddress
-                                    name={el.name}
-                                    address={el.address}
-                                    id={el.id}
-                                    isMain={el.is_main}
-                                />
-                            )}
-                            <AddressModal newAddress={true} whiteBnt={true}/>
-                        </div>
-                    }
-                </div>
+                {/*</div>*/}
+                {/*<div>*/}
+                {/*    {orderStore.shipType === 3 &&*/}
+                {/*        <div className={s.address_block}>*/}
+                {/*            {addresses.map(el =>*/}
+                {/*                <OrderAddress*/}
+                {/*                    name={el.name}*/}
+                {/*                    address={el.address}*/}
+                {/*                    id={el.id}*/}
+                {/*                    isMain={el.is_main}*/}
+                {/*                />*/}
+                {/*            )}*/}
+                {/*            <AddressModal newAddress={true} whiteBnt={true}/>*/}
+                {/*        </div>*/}
+                {/*    }*/}
+                {/*</div>*/}
                 <div onClick={() => chooseType(1)} className={s.radio}>
-                    <CustomRadio label={'Доставка до двери'}
-                                 normalLabel={true}
-                                 checked={orderStore.shipType === 1}
-                                 reversed={true}
+                    <CustomRadio
+                        label={!orderStore.deliveryPrice || orderStore.shipType !== 1 ? `Доставка до двери: от 500₽` : orderStore.method === 1 || !orderStore.deliveryPrice.block ? `Доставка до двери: ${addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽` : `Доставка до двери: от ${addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽`}
+                        normalLabel={true}
+                        checked={orderStore.shipType === 1}
+                        reversed={true}
                     />
                 </div>
                 <div>
@@ -223,7 +227,7 @@ const Stage1 = ({addresses, userData, cart}) => {
                              }
                          }}
                     >
-                        <CustomRadio label={'Доставка до пункта самовывоза Boxberry'}
+                        <CustomRadio label={!orderStore.deliveryPrice || orderStore.shipType !== 2 || !boxberryAddress ? `Доставка до ПВЗ Boxberry: от 300₽` : orderStore.method === 1 || !orderStore.deliveryPrice.block ? `Доставка до ПВЗ Boxberry: ${addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽` : `Доставка до ПВЗ Boxberry: от ${addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽`}
                                      normalLabel={true}
                                      checked={orderStore.shipType === 2}
                                      reversed={true}
@@ -276,7 +280,7 @@ const Stage1 = ({addresses, userData, cart}) => {
                             прибывающих в разные даты, мы хотим предложить вам выбрать предпочитаемый тип доставки:</p>
                         <div>
                             <div className={s.radio}>
-                                <CustomRadio label={'Доставка всех позиций одновременно'}
+                                <CustomRadio label={`Все позиции одновременно: ${addSpacesToNumber(orderStore.deliveryPrice.sum_all)}₽`}
                                              onClick={() => {
                                                  orderStore.setMethod(1)
                                              }}
@@ -293,7 +297,7 @@ const Stage1 = ({addresses, userData, cart}) => {
                         </div>
                         <div>
                             <div className={s.radio}>
-                                <CustomRadio label={'Доставка каждой позиции по отдельности'}
+                                <CustomRadio label={`Каждая позиция по отдельности: ${addSpacesToNumber(orderStore.deliveryPrice.sum_part)}₽`}
                                              onClick={() => {
                                                  orderStore.setMethod(2)
                                              }}
@@ -324,7 +328,7 @@ const Stage1 = ({addresses, userData, cart}) => {
 
             {desktopStore.isDesktop &&
                 <div>
-                <hr/>
+                    <hr/>
 
 
                     <div className={'d-flex justify-content-center'}>

@@ -1362,7 +1362,7 @@
     "male": [
       {
         "name": "Кроссовки",
-        "query_name": "sneakers"
+        "query_name": "/catalog/sneakers_desktop_men"
       },
       {
         "name": "Кеды",
@@ -1374,7 +1374,7 @@
       },
       {
         "name": "Баскетбольные кроссовки",
-        "query_name": "basketball_sneakers"
+        "query_name": "/catalog/basketball_desktop"
       },
       {
         "name": "Ботинки",
@@ -1424,7 +1424,7 @@
     "female": [
       {
         "name": "Кроссовки",
-        "query_name": "sneakers"
+        "query_name": "/catalog/sneakers_desktop_women"
       },
       {
         "name": "Кеды",

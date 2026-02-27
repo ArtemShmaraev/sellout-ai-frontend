@@ -106,6 +106,7 @@ const CollectionsDropdown = () => {
                                 <SearchInput w100={true}
                                              value={query}
                                              onChange={e => setQuery(e.target.value)}
+                                             placeholder="Поиск среди коллабораций"
                                 />
                             </div>
                         </div>

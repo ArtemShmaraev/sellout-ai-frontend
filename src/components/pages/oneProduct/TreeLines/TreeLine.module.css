@@ -5,6 +5,7 @@
     margin-bottom: 20px;
     min-height: 94px;
     align-items: center;
+    margin-top: 70px;
 }
 .width33 {
     /*padding-right: 8px;*/
@@ -63,6 +64,7 @@
     /*white-space: nowrap; !* Запрещаем перенос текста на новую строку *!*/
 
     margin-left: 8px; /* Отступ между текстом и изображением */
+    overflow: hidden;
 }
 
 .imageContainer {
@@ -83,6 +85,9 @@
 .name {
     font-size: 14px;
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
 
     /*overflow: hidden;*/
     /*text-overflow: ellipsis; !* Добавляем многоточие для обрезанного текста *!*/
@@ -131,7 +136,7 @@
     right: 0;
 }
 .hr {
-    width: 96%;
+    width: 100%;
     height: 1px;
     margin: 0 auto;
     background-color: black; /* Замените your_color_here на ваш цвет */
@@ -161,14 +166,14 @@
         border: 1px solid white;
     }
     .textContainer {
-        padding-left: 4px; /* Отступ между текстом и изображением */
+        padding-left: 8px; /* Отступ между текстом и изображением */
     }
     .imageContainer {
-        padding-left: 14px;
+        padding-left: 7px;
     }
     .image {
-        width: 62px; /* Ширина изображения равна ширине контейнера */
-        height: 62px; /* Высота изображения равна высоте контейнера */
+        width: 100px; /* Ширина изображения равна ширине контейнера */
+        height: auto; /* Высота изображения равна высоте контейнера */
         object-fit: contain; /* Изображение растягивается на весь размер контейнера, сохраняя пропорции и обрезая лишнее */
 
     }

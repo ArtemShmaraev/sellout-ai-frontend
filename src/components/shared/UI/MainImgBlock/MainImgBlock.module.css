@@ -1,7 +1,7 @@
 .main_block {
     justify-content: space-between;
     min-height: 40vh;
-    margin: 120px 0;
+    margin-bottom: 40px;
 }
 
 
@@ -24,6 +24,38 @@
 .text {
     margin-top: 25px;
     color: black;
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
+    overflow: hidden;
+    max-height: 87px;
+
+    -webkit-transition: max-height 0.5s;
+    -moz-transition: max-height 0.5s;
+    -ms-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+    z-index: -2;
+    white-space: normal;
+}
+.text_open {
+    max-height: none;
+    z-index: 1;
+    transition: max-height 0.5s ease;
+}
+.more_btn {
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+    background: none;
+    border: none;
+    margin-left: auto;
+}
+.more_text {
+    margin-right: 15px;
+    /*font-weight: 700;*/
+    /*margin-bottom: 20px;*/
+    display: flex;
+    gap: 10px;
 }
 .img_block {
     width: 57%;
@@ -78,7 +110,7 @@
 }
 @media (max-width: 1200px) {
     .main_block {
-        margin: 45px 0;
+        margin-bottom: 30px;
         flex-direction: column-reverse;
     }
     .text_block, .img_block {
@@ -107,5 +139,38 @@
     }
     .mobile {
         opacity: 1;
+    }
+}
+
+
+.margins {
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+@media (max-width: 1200px) {
+    .margins {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+    .title {
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 1800px) {
+    .margins {
+        margin-right: 10vw;
+        margin-left: 10vw;
+    }
+}
+@media (min-width: 2500px) {
+    .margins {
+        margin-right: 15vw;
+        margin-left: 15vw;
+    }
+}
+@media (max-width: 650px) {
+    .margins {
+        margin-right: 8px;
+        margin-left: 8px;
     }
 }

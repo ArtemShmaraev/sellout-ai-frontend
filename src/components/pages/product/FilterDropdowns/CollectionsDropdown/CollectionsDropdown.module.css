@@ -20,6 +20,7 @@
 .scroll {
     max-height: 400px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .dropdown_items_block {
     background: white;

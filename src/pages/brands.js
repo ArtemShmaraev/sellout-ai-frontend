@@ -23,7 +23,7 @@ export const getServerSideProps = async (context) => {
     } else {
         brandsArr = await fetchBrands()
     }
-    return { props: {brandsArr} }
+    return {props: {brandsArr}}
 }
 const Brands = ({brandsArr}) => {
     const [a, setA] = useState([])
@@ -125,17 +125,16 @@ const Brands = ({brandsArr}) => {
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.alphabet_block}
-                     style={desktopStore.navbarVisible ? {} : {top: 0}}
                 >
                     <div className={s.alphabet}>
-                        { desktopStore.isDesktop
+                        {desktopStore.isDesktop
                             ?
                             alphabet().map(el =>
                                 <button
                                     onClick={(e) => {
-                                    e.preventDefault()
-                                    scroll(el)
-                                }}
+                                        e.preventDefault()
+                                        scroll(el)
+                                    }}
                                     className={s.letter}
                                     disabled={!a.includes(el)}
                                     key={el}
@@ -152,7 +151,7 @@ const Brands = ({brandsArr}) => {
                                             }}
                                                     className={s.letter}
                                                     disabled={!a.includes(el)}
-                                                    style={ind > 0 && ind < alphabet().length-1
+                                                    style={ind > 0 && ind < alphabet().length - 1
                                                         ? {margin: '0 12px'}
                                                         :
                                                         ind === 0 ? {marginRight: '12px'} : {marginLeft: '12px'}}
@@ -172,15 +171,17 @@ const Brands = ({brandsArr}) => {
                             <SearchInput w100={true}
                                          value={query}
                                          onChange={e => setQuery(e.target.value)}
+                                         placeholder="Поиск среди 1000 брендов"
                             />
                             {
                                 userStore.isLogged
                                     ?
-                                    <div className={s.text}>
-                                        Нажми на <Image src={like} alt='' className={s.like}/>
-                                        чтобы добавить бренд в <Link href="/account/favorite-brands"
-                                                                     className={s.link}>избранное</Link>
-                                    </div>
+                                    <></>
+                                    // <div className={s.text}>
+                                    //     Нажми на <Image src={like} alt='' className={s.like}/>
+                                    //     и добавьте бренд в <Link href="/account/favorite-brands"
+                                    //                                  className={s.link}>избранное</Link>
+                                    // </div>
                                     :
                                     <div className={s.text}>
                                         Войдите или зарегистрируйтесь, чтобы добавлять бренды в избранное

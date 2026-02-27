@@ -4,28 +4,65 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import arrow from "@/static/icons/arrowSlider.svg";
+import Link from "next/link";
+import {useRouter} from "next/router";
+import Cookies from "js-cookie";
 
 const Bags_desktop_men = () => {
-    const linksBrands = [
-        'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
-        'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
-        'https://sellout.su/brand7', 'https://sellout.su/brand8', 'https://sellout.su/brand9',
-        'https://sellout.su/brand10', 'https://sellout.su/brand11', 'https://sellout.su/brand12',
-        'https://sellout.su/brand13', 'https://sellout.su/brand14', 'https://sellout.su/brand15',
-        'https://sellout.su/brand16', 'https://sellout.su/brand17', 'https://sellout.su/brand18',
-        'https://sellout.su/brand19', 'https://sellout.su/brand20', 'https://sellout.su/brand21',
-        'https://sellout.su/brand22', 'https://sellout.su/brand23', 'https://sellout.su/brand24',
-        'https://sellout.su/brand25', 'https://sellout.su/brand26', 'https://sellout.su/brand27',
-        'https://sellout.su/brand28', 'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
-        'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
-        'https://sellout.su/brand7', 'https://sellout.su/brand8', 'https://sellout.su/brand9',
-        'https://sellout.su/brand10', 'https://sellout.su/brand11', 'https://sellout.su/brand12',
-        'https://sellout.su/brand13', 'https://sellout.su/brand14', 'https://sellout.su/brand15',
-        'https://sellout.su/brand16', 'https://sellout.su/brand17', 'https://sellout.su/brand18',
-        'https://sellout.su/brand19', 'https://sellout.su/brand20', 'https://sellout.su/brand21',
-        'https://sellout.su/brand22', 'https://sellout.su/brand23', 'https://sellout.su/brand24',
-        'https://sellout.su/brand25', 'https://sellout.su/brand26'
-    ];
+    const linksBrands = ['/products?line=balenciaga&category=bags',
+        '/products?line=carhartt&category=bags',
+        '/products?line=michael_kors&category=bags',
+        '/products?line=coach&category=bags',
+        '/products?line=gucci&category=bags',
+        '/products?line=nike&category=bags',
+        '/products?line=jordan&category=bags',
+        '/products?line=vans&category=bags',
+        '/products?line=a_bathing_ape®&category=bags',
+        '/products?line=burberry&category=bags',
+        '/products?line=vetements&category=bags',
+        '/products?line=loewe&category=bags',
+        '/products?line=heron_preston&category=bags',
+        '/products?line=armani&category=bags',
+        '/products?line=marc_jacobs&category=bags',
+        '/products?line=fjallraven&category=bags',
+        '/products?line=champion&category=bags',
+        '/products?line=palace&category=bags',
+        '/products?line=prada&category=bags',
+        '/products?line=stüssy&category=bags',
+        '/products?line=bally&category=bags',
+        '/products?line=louis_vuitton&category=bags',
+        '/products?line=dior&category=bags',
+        '/products?line=adidas&category=bags',
+        '/products?line=new_balance&category=bags',
+        '/products?line=off-white&category=bags',
+        '/products?line=dickies&category=bags',
+        '/products?line=alexander_mcqueen&category=bags',
+        '/products?line=calvin_klein&category=bags',
+        '/products?line=cav_empt&category=bags',
+        '/products?line=palm_angels&category=bags',
+        '/products?line=hugo_boss&category=bags',
+        '/products?line=versace&category=bags',
+        '/products?line=diesel&category=bags',
+        '/products?line=balmain&category=bags',
+        '/products?line=stone_island&category=bags',
+        '/products?line=goyard&category=bags',
+        '/products?line=supreme&category=bags',
+        '/products?line=guess&category=bags',
+        '/products?line=hermes&category=bags',
+        '/products?line=bottega_veneta&category=bags',
+        '/products?line=puma&category=bags',
+        '/products?line=converse&category=bags',
+        '/products?line=under_armour&category=bags',
+        '/products?line=longchamp&category=bags',
+        '/products?line=maison_margiela&category=bags',
+        '/products?line=the_north_face&category=bags',
+        '/products?line=drew_house&category=bags',
+        '/products?line=comme_des_garçons&category=bags',
+        '/products?line=mlb&category=bags',
+        '/products?line=fendi&category=bags',
+        '/products?line=a.p.c.&category=bags',
+        '/products?line=ferragamo&category=bags',
+        '/products?line=moncler&category=bags'];
 
     const textsBrands = [
         '1000 лотов', '2000 лотов', '3000 лотов', '4000 лотов', '5000 лотов',
@@ -40,6 +77,20 @@ const Bags_desktop_men = () => {
         '16000 лотов', '17000 лотов', '18000 лотов', '19000 лотов', '20000 лотов',
         '21000 лотов', '22000 лотов', '23000 лотов', '24000 лотов', '25000 лотов',
         '26000 лотов'
+    ];
+
+    const linksCategories = [
+        "/products?category=bags",
+        "/products?category=waist_bags",
+        "/products?category=backpacks",
+        "/products?category=sport_bags",
+        "/products?category=wallets",
+        "/products?category=clutches",
+        "/products?category=cardholders",
+        "/products?category=makeup_bags",
+        "/products?category=formal_case",
+        "/products?category=suitcases",
+        "/products?category=passport_covers"
     ];
 
     const scrollableContainerRef = useRef(null);
@@ -87,15 +138,34 @@ const Bags_desktop_men = () => {
         // Очистка обработчика при размонтировании компонента
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const router = useRouter();
 
+    const selectedGender = Cookies.get('selected_gender')
+
+    const handleClose = () => {
+        const previousUrl = document.referrer;
+
+        if (previousUrl && new URL(previousUrl).hostname === window.location.hostname) {
+            router.back(); // Если реферер — это ваш сайт, вернуться назад
+        } else {
+            router.push(selectedGender === "M" ? '/men' : selectedGender === "F" ? '/women' : '/');
+        }
+    };
     return (
         <MainLayout>
             <div className={styles.catalogContainer}>
                 {/* Header */}
                 <div className={styles.header}>
-                    <div className={styles.closeButton}>✕</div>
+                    <div className={styles.closeButton} onClick={handleClose}>✕</div>
                     <div className={styles.title}>СУМКИ</div>
-                    <div className={styles.viewAll}>ПОСМОТРЕТЬ ВСЕ 100'000+ МОДЕЛЕЙ</div>
+                    <div className={styles.viewAll}>
+                        <Link
+                            href={'/products?category=bags'}
+                            style={{textDecoration: 'none', color: '#363636'}}
+                        >
+                            ПОСМОТРЕТЬ ВСЕ 100'000+ МОДЕЛЕЙ
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Popular Brands */}
@@ -104,9 +174,13 @@ const Bags_desktop_men = () => {
                     <div className={styles.brandsGrid} ref={scrollableContainerRef}>
                         {Array.from({length: 54}).map((_, idx) => (
                             <div key={idx} className={styles.brandCircle}>
+                                <Link
+                                    href={linksBrands[idx]}
+                                    style={{flex: 1}}
+                                >
                                 <div className={styles.circle}>
                                     <Image
-                                        src={`/Images New Frontend/Desktop/Men/Products/Bags/Brands/${idx + 1}.png?v=${Date.now()}`}
+                                        src={`https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/Products/Bags/Brands/${idx + 1}.png`}
                                         alt="Brand Image"
                                         className={styles.circleImage}
                                         width={700}
@@ -115,6 +189,7 @@ const Bags_desktop_men = () => {
                                         quality={100}
                                     />
                                 </div>
+                                </Link>
                                 <div className={styles.circleText}>{textsBrands[idx]}</div>
                             </div>
                         ))}
@@ -136,9 +211,13 @@ const Bags_desktop_men = () => {
                     <div className={styles.categoriesTitle}>КАТЕГОРИИ</div>
                     <div className={styles.categoriesGrid}>
                         {['Все сумки', 'Сумки на пояс', 'Рюкзаки', 'Спортивные', 'Кошельки', 'Клатчи', 'Кардхолдеры', 'Косметички', 'Портфели', 'Чемоданы', 'Обложки'].map((category, idx) => (
+                            <Link
+                                href={linksCategories[idx]}
+                                style={{flex: 1}}
+                            >
                             <div key={idx} className={styles.categoryItem}>
                                 <Image
-                                    src={`/Images New Frontend/Desktop/Men/Products/Bags/Categories/${idx + 1}.png?v=${Date.now()}`}
+                                    src={`https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/Products/Bags/Categories/${idx + 1}.png`}
                                     alt={category}
                                     width={700}
                                     height={700}
@@ -148,6 +227,7 @@ const Bags_desktop_men = () => {
                                     {category}
                                 </div>
                             </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

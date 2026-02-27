@@ -5,8 +5,8 @@
 .blockTitle {
     text-align: center;
     font-weight: 500;
-    font-size: 32px;
-    margin-top: 100px;
+    font-size: 28px;
+    margin-bottom: 30px;
 }
 
 .img_block {
@@ -24,8 +24,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 40px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 
@@ -155,7 +155,7 @@
 
     .blockTitle {
         font-size: 28px;
-        margin-top: 50px;
+        margin-bottom: 10px;
     }
 
     .selections_title {
@@ -192,5 +192,39 @@
 
     .subTitleProds {
         margin-top: 10px;
+    }
+}
+
+
+.margins {
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+@media (max-width: 1200px) {
+    .margins {
+
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+    .title {
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 1800px) {
+    .margins {
+        margin-right: 10vw;
+        margin-left: 10vw;
+    }
+}
+@media (min-width: 2500px) {
+    .margins {
+        margin-right: 15vw;
+        margin-left: 15vw;
+    }
+}
+@media (max-width: 650px) {
+    .margins {
+        margin-right: 8px;
+        margin-left: 8px;
     }
 }

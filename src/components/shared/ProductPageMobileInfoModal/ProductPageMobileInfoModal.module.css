@@ -1,0 +1,271 @@
+.close {
+    position: fixed;
+    right: calc(20px + 2vw);
+    top: 30px;
+    z-index: 100;
+}
+.p0 {
+    padding: 0;
+}
+
+.modalContent {
+    border: none;
+    padding: 0;
+    background-color: black;
+}
+
+.modalCustom {
+    width: 96vw; /* Задаем ширину в процентах от экрана */
+    max-width: 96vw; /* Максимальная ширина модалки */
+    /* Центрирование модалки */
+    margin: 20px auto;
+    padding-left: 0 !important;
+    overflow-x: hidden;
+}
+
+.customBackdrop {
+    background: rgba(0, 0, 0, 0.5); /* Прозрачный чёрный */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+}
+
+.page1Wrapper {
+    position: relative;
+    height: 100vh;
+}
+
+
+.page2LogoImgContainer {
+    position: absolute;
+    width: 35%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.animationImagePage2Logo {
+    animation: zoomOutAndMove 2s ease-in-out forwards; /* Анимация увеличения и затем перемещения */
+    display: block;
+}
+
+@keyframes zoomOutAndMove {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(calc(40px - 50vh + (250 * 35vw / 2240)));
+    }
+}
+
+
+.imageGridVisible {
+    /*animation: fadeIn 1s forwards;*/
+    /*display: none;*/
+    position: relative;
+    top: calc(80px + (250 * 35vw / 1120));
+}
+
+.imageGrid {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 3%; /* Отступы справа и слева */
+    position: relative;
+}
+
+.imageBlock {
+    display: block;
+    transform: translateY(600px);
+    opacity: 0;
+}
+
+.imageBlock1 {
+    animation: slideUp 0.5s ease-out forwards; /* Применяем анимацию */
+    animation-delay: 2s; /* Задержка для первого блока */
+}
+
+.imageBlock2 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 2.2s; /* Задержка для второго блока */
+}
+
+.imageBlock3 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 2.4s; /* Задержка для третьего блока */
+}
+
+.imageBlock4 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 2.6s; /* Задержка для четвертого блока */
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(600px); /* Начальная позиция для первого блока */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Конечная позиция */
+    }
+}
+
+.imageColumn {
+    display: flex;
+    flex-direction: column;
+    gap: calc((30.68vw * 834 / 1431) - (18.048vw * 642 / 855) - (18.048vw * 162 / 855));
+}
+
+.imagesPage2 {
+    display: block;
+}
+
+.logos {
+    display: flex;
+    overflow: hidden; /* Скрываем часть, выходящую за пределы */
+    height: calc((39.7056vw * 1684 / 2456) - (30.68vw * 834 / 1431) - 5px);
+    width: 60%;
+    position: absolute;
+    left: 40%;
+    bottom: 0;
+    transform: translateY(600px);
+    animation: slideUp 1s ease-out forwards;
+    opacity: 0;
+    animation-delay: 2.6s; /* Задержка для четвертого блока */
+}
+
+
+.logosSlide {
+    height: calc((39.7056vw * 1684 / 2456) - (30.68vw * 834 / 1431) - 5px);
+    display: inline-block;
+    white-space: nowrap;
+    animation: 30s slide infinite linear;
+}
+
+.manyLogos {
+    height: calc((39.7056vw * 1684 / 2456) - (30.68vw * 834 / 1431) - 5px);
+    width: auto;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+.animation1Blob1 {
+    animation: chaoticFloat 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: 0; /* Устанавливаем на задний план */
+    bottom: -7%;
+    left: -7%;
+    width: 70%;
+}
+
+.animation1Blob2 {
+    animation: chaoticFloat2 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: 0; /* Устанавливаем на задний план */
+    bottom: -7%;
+    right: -30%;
+    width: 70%;
+}
+
+@keyframes chaoticFloat {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(100px, 300px);
+    }
+    20% {
+        transform: translate(-100px, 200px);
+    }
+    30% {
+        transform: translate(-200px, 100px);
+    }
+    40% {
+        transform: translate(-100px, -100px);
+    }
+    50% {
+        transform: translate(-100px, 0);
+    }
+    60% {
+        transform: translate(0, 0);
+    }
+    70% {
+        transform: translate(100px, 200px);
+    }
+    80% {
+        transform: translate(200px, 200px);
+    }
+    90% {
+        transform: translate(-100px, 200px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+@keyframes chaoticFloat2 {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(100px, 200px);
+    }
+    20% {
+        transform: translate(50px, 0);
+    }
+    30% {
+        transform: translate(-100px, 100px);
+    }
+    40% {
+        transform: translate(-100px, 0);
+    }
+    50% {
+        transform: translate(-100px, 100px);
+    }
+    60% {
+        transform: translate(0, 0);
+    }
+    70% {
+        transform: translate(0, 200px);
+    }
+    80% {
+        transform: translate(-100px, 200px);
+    }
+    90% {
+        transform: translate(-100px, 200px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+.page2Wrapper {
+    position: relative;
+}
+
+.page2 {
+    display: flex;
+    justify-content: center;
+}
+
+.page2Img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}

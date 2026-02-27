@@ -30,7 +30,7 @@ const ElasticSearchModal = () => {
         }
 
         searches.unshift(value); // Добавить новый поиск в начало списка
-        searches = [...new Set(searches)].slice(0, 7); // Удалить дубликаты и оставить только последние 7 поисков
+        searches = [...new Set(searches)].slice(0, 5); // Удалить дубликаты и оставить только последние 7 поисков
 
         const updated_search = searches.join("(|)"); // Объединить список в строку
         Cookies.set('last_search', updated_search, {expires: 2772}); // Установить новое значение куки
@@ -73,7 +73,7 @@ const ElasticSearchModal = () => {
                 let searches = [];
                 const last_search = Cookies.get('last_search');
                 if (last_search) {
-                    searches = last_search.split("(|)").slice(-7); // Получить последние 7 поисков
+                    searches = last_search.split("(|)").slice(-5); // Получить последние 7 поисков
                     searches = Array.from(new Set(searches)); // Удалить дубликаты
 
 
@@ -128,12 +128,32 @@ const ElasticSearchModal = () => {
                         "name": "Кроссовки Nike",
                         "type": "Популярное",
                         "url": "category=sneakers&line=nike"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
                     }
                 ])
                 const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
 
-                const trimmedList = combinedList.slice(0, 9);
-                setSuggs(trimmedList)
+                // const trimmedList = combinedList.slice(0, 9);
+                setSuggs(combinedList)
             }
         }, 250)
         return () => clearTimeout(timeout)
@@ -181,7 +201,7 @@ const ElasticSearchModal = () => {
             {isOpen &&
                 <div className={s.modal} onClick={() => setIsOpen(false)}>
                     <div className={s.search_block} onClick={(e) => e.stopPropagation()}>
-                        <Container>
+                        <div className={s.searchContentBlock}>
                             <div className={s.close_block}>
                                 <Image src={close}
                                        alt=''
@@ -189,8 +209,8 @@ const ElasticSearchModal = () => {
                                        className={s.icon}
                                 />
                             </div>
-                            <div className='d-flex justify-content-center'>
-                                <div className={s.main_block}>
+                            <div className={`d-flex justify-content-center ${s.main_block}`}>
+                                <div className={s.contentBlock}>
                                     <SearchInput w100={true}
                                                  value={value}
                                                  onChange={e => {
@@ -213,7 +233,7 @@ const ElasticSearchModal = () => {
                                                     >
                                                         <div className={s.sugg_product_div}>
 
-                                                            <div style={{minWidth: "97px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                            <div style={{minWidth: "97px", justifyContent: "center", display: "flex", alignItems: "center", marginRight: '20px'}}>
                                                                  <img src={el.bucket_link[0].url} alt={el.model}/>
                                                             </div>
                                                             <div className="details">
@@ -258,7 +278,7 @@ const ElasticSearchModal = () => {
                                                             <div className={s.sugg_product_div}>
 
                                                                 {most_pop[el.name.toLowerCase()] && most_pop[el.name.toLowerCase()].photo && (
-                                                                    <div style={{minWidth: "97px", justifyContent: "center", display: "flex", alignItems: "center"}}>
+                                                                    <div style={{minWidth: "97px", justifyContent: "center", display: "flex", alignItems: "center", marginRight: '20px'}}>
                                                                         <img src={most_pop[el.name.toLowerCase()].photo} alt={el.name}/>
                                                                     </div>
 
@@ -297,18 +317,15 @@ const ElasticSearchModal = () => {
                                             ))
                                         }
 
-                                        <div className={s.more} onClick={q}>
-                                                Посмотреть больше товаров...
-                                        </div>
-
-
-
+                                        {value &&
+                                            <div className={s.more} onClick={q}>
+                                                Посмотреть все {value}
+                                            </div>
+                                        }
                                     </div>
-
-
                                 </div>
                             </div>
-                        </Container>
+                        </div>
                     </div>
                 </div>
             }

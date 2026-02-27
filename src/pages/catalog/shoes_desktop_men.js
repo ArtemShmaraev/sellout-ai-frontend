@@ -4,20 +4,39 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {observer} from "mobx-react-lite";
 import Image from "next/image";
 import arrow from "@/static/icons/arrowSlider.svg";
+import Link from "next/link";
+import {useRouter} from "next/router";
+import Cookies from "js-cookie";
 
 const Shoes_desktop_men = () => {
-    const linksBrands = [
-        'https://sellout.su/brand1', 'https://sellout.su/brand2', 'https://sellout.su/brand3',
-        'https://sellout.su/brand4', 'https://sellout.su/brand5', 'https://sellout.su/brand6',
-        'https://sellout.su/brand7', 'https://sellout.su/brand8', 'https://sellout.su/brand9',
-        'https://sellout.su/brand10', 'https://sellout.su/brand11', 'https://sellout.su/brand12',
-        'https://sellout.su/brand13', 'https://sellout.su/brand14', 'https://sellout.su/brand15',
-        'https://sellout.su/brand16', 'https://sellout.su/brand17', 'https://sellout.su/brand18',
-        'https://sellout.su/brand19', 'https://sellout.su/brand20', 'https://sellout.su/brand21',
-        'https://sellout.su/brand22', 'https://sellout.su/brand23', 'https://sellout.su/brand24',
-        'https://sellout.su/brand25', 'https://sellout.su/brand26', 'https://sellout.su/brand27',
-        'https://sellout.su/brand28'
-    ];
+    const linksBrands = ['/products?line=nike&category=shoes_category',
+        '/products?line=jordan&category=shoes_category',
+        '/products?line=vans&category=shoes_category',
+        '/products?line=li-ning&category=shoes_category',
+        '/products?line=off-white&category=shoes_category',
+        '/products?line=maison_margiela&category=shoes_category',
+        '/products?line=asics&category=shoes_category',
+        '/products?line=converse&category=shoes_category',
+        '/products?line=balenciaga&category=shoes_category',
+        '/products?line=lanvin&category=shoes_category',
+        '/products?line=bottega_veneta&category=shoes_category',
+        '/products?line=valentino&category=shoes_category',
+        '/products?line=timberland&category=shoes_category',
+        '/products?line=dr.martens&category=shoes_category',
+        '/products?line=adidas&category=shoes_category',
+        '/products?line=new_balance&category=shoes_category',
+        '/products?line=puma&category=shoes_category',
+        '/products?line=under_armour&category=shoes_category',
+        '/products?line=alexander_mcqueen&category=shoes_category',
+        '/products?line=vetements&category=shoes_category',
+        '/products?line=reebok&category=shoes_category',
+        '/products?line=anta&category=shoes_category',
+        '/products?line=dior&category=shoes_category',
+        '/products?line=louis_vuitton&category=shoes_category',
+        '/products?line=a_bathing_ape®&category=shoes_category',
+        '/products?line=gucci&category=shoes_category',
+        '/products?line=prada&category=shoes_category',
+        '/products?line=loro_piana&category=shoes_category'];
 
     const textsBrands = [
         '1000 лотов', '2000 лотов', '3000 лотов', '4000 лотов', '5000 лотов',
@@ -26,6 +45,20 @@ const Shoes_desktop_men = () => {
         '16000 лотов', '17000 лотов', '18000 лотов', '19000 лотов', '20000 лотов',
         '21000 лотов', '22000 лотов', '23000 лотов', '24000 лотов', '25000 лотов',
         '26000 лотов', '27000 лотов', '28000 лотов'
+    ];
+
+    const linksCategories = [
+        "/catalog/sneakers_desktop_men",
+        "/products?category=loafers",
+        "/products?category=slippers",
+        "/products?category=slip_ons",
+        "/products?category=winter_sneakers",
+        "/products?category=boots",
+        "/products?category=martins",
+        "/products?category=timberlands",
+        "/products?category=sandals",
+        "/products?category=beach_sandals",
+        "/products?category=mules_and_clogs"
     ];
 
     const scrollableContainerRef = useRef(null);
@@ -73,15 +106,34 @@ const Shoes_desktop_men = () => {
         // Очистка обработчика при размонтировании компонента
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const router = useRouter();
 
+    const selectedGender = Cookies.get('selected_gender')
+
+    const handleClose = () => {
+        const previousUrl = document.referrer;
+
+        if (previousUrl && new URL(previousUrl).hostname === window.location.hostname) {
+            router.back(); // Если реферер — это ваш сайт, вернуться назад
+        } else {
+            router.push(selectedGender === "M" ? '/men' : selectedGender === "F" ? '/women' : '/');
+        }
+    };
     return (
         <MainLayout>
             <div className={styles.catalogContainer}>
                 {/* Header */}
                 <div className={styles.header}>
-                    <div className={styles.closeButton}>✕</div>
+                    <div className={styles.closeButton} onClick={handleClose}>✕</div>
                     <div className={styles.title}>ОБУВЬ</div>
-                    <div className={styles.viewAll}>ПОСМОТРЕТЬ ВСЕ 100'000+ МОДЕЛЕЙ</div>
+                    <div className={styles.viewAll}>
+                        <Link
+                            href={'/products?category=shoes_category'}
+                            style={{textDecoration: 'none', color: '#363636'}}
+                        >
+                            ПОСМОТРЕТЬ ВСЕ 400'000+ МОДЕЛЕЙ
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Popular Brands */}
@@ -90,17 +142,22 @@ const Shoes_desktop_men = () => {
                     <div className={styles.brandsGrid} ref={scrollableContainerRef}>
                         {Array.from({length: 28}).map((_, idx) => (
                             <div key={idx} className={styles.brandCircle}>
-                                <div className={styles.circle}>
-                                    <Image
-                                        src={`/Images New Frontend/Desktop/Men/Products/Shoes/Brands/${idx + 1}.png?v=${Date.now()}`}
-                                        alt="Brand Image"
-                                        className={styles.circleImage}
-                                        width={700}
-                                        height={700}
-                                        layout="responsive"
-                                        quality={100}
-                                    />
-                                </div>
+                                <Link
+                                    href={linksBrands[idx]}
+                                    style={{flex: 1}}
+                                >
+                                    <div className={styles.circle}>
+                                        <Image
+                                            src={`https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/Products/Shoes/Brands/${idx + 1}.png`}
+                                            alt="Brand Image"
+                                            className={styles.circleImage}
+                                            width={700}
+                                            height={700}
+                                            layout="responsive"
+                                            quality={100}
+                                        />
+                                    </div>
+                                </Link>
                                 <div className={styles.circleText}>{textsBrands[idx]}</div>
                             </div>
                         ))}
@@ -122,18 +179,23 @@ const Shoes_desktop_men = () => {
                     <div className={styles.categoriesTitle}>КАТЕГОРИИ</div>
                     <div className={styles.categoriesGrid}>
                         {['Кроссовки', 'Лоферы', 'Шлёпки', 'Слипоны', 'Зимние кроссов..', 'Все ботинки', 'Мартинсы', 'Тимберленды', 'Сандалии', 'Пляжные санда..', 'Мюли'].map((category, idx) => (
-                            <div key={idx} className={styles.categoryItem}>
-                                <Image
-                                    src={`/Images New Frontend/Desktop/Men/Products/Shoes/Categories/${idx + 1}.png?v=${Date.now()}`}
-                                    alt={category}
-                                    width={700}
-                                    height={700}
-                                    className={styles.categoryImage}
-                                />
-                                <div className={styles.categoryText}>
-                                    {category}
+                            <Link
+                                href={linksCategories[idx]}
+                                style={{flex: 1}}
+                            >
+                                <div key={idx} className={styles.categoryItem}>
+                                    <Image
+                                        src={`https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/Products/Shoes/Categories/${idx + 1}.png`}
+                                        alt={category}
+                                        width={700}
+                                        height={700}
+                                        className={styles.categoryImage}
+                                    />
+                                    <div className={styles.categoryText}>
+                                        {category}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

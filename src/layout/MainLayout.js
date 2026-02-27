@@ -11,7 +11,9 @@ import AnimationSellout from "@/components/shared/AnimationSellout/AnimationSell
 import NavbarNoGender from "@/components/shared/NavbarNoGender/NavbarNoGender";
 import {useRouter} from 'next/router';
 import YandexMetrica from "@/components/shared/YandexMetrica/YandexMetrica"; // Assuming you're using Next.js
- import logo_sq from "@/static/img/logo_sq.png"
+import logo_sq from "@/static/img/logo_sq.png"
+import tempMenu from "@/static/img/Все меню.png"
+import Image from 'next/image'
 import {parse} from "cookie";
 import PromoBanner from "@/components/shared/PromoBanner/PromoBanner";
 // import BottomNav from "@/components/shared/BottomNav/BottomNav";
@@ -183,21 +185,17 @@ const MainLayout = ({children, footerData}) => {
             </Head>
             {(desktopStore.animation) && <AnimationSellout/>}
             <div className={'body'}>
-                <NavbarC/>
-                <div className={'cont_up'}>
+                {(selectedGender === "M" || selectedGender === "F" || router.pathname !== '/') &&
+                    <NavbarC/>
+                }
+                <div className={`${desktopStore.isDesktop ? 'cont_up' : 'cont_up_mob'}`}>
                     {children}
                 </div>
                 <Footer textData={footerData}/>
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
-            {!cookieOpen && !desktopStore.isDesktop &&
-            <PromoBanner message="1000 бонусов к заказу за регистрацию" isOpen={promoOpen} close={closePromo}/>}
             <YandexMetrica/>
-            {/*<BottomNav />*/}
-
-
-
         </>
     );
 };

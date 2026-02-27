@@ -36,8 +36,9 @@
     background: white;
 }
 .scroll {
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 @media (max-width: 1200px) {
     .dropdown_toggle:hover {

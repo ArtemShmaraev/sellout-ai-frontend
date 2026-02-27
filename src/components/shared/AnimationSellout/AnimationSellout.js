@@ -26,8 +26,6 @@ const AnimationSellout = () => {
     }
 
     useLayoutEffect(() => {
-        console.log("Сxxxxейчас будет анимация")
-        console.log(document.querySelector('meta[name="theme-color"]'))
         setTimeout(() => {
             changeBrowserColor("#000000")
         }, 100)

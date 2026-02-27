@@ -44,7 +44,7 @@ const CatalogSneakersMobileWomen = () => {
     ];
 
     const textsBrandsNewBalance = [
-        'New Balance 237', 'NB 2002R', 'New Balance 550', 'New Balance 530', 'New Balance 580', 'New Balance 580', 'New Balance 991', 'New Balance 993', 'New Balance 327', 'NB 1906R', 'NB 9060', 'New Balance 650', 'New Balance 574', 'New Balance 990', 'New Balance 992', 'New Balance 997'
+        'New Balance 237', 'NB 2002R', 'New Balance 550', 'New Balance 530', 'New Balance 580', 'New Balance 57/40', 'New Balance 991', 'New Balance 993', 'New Balance 327', 'NB 1906R', 'NB 9060', 'New Balance 650', 'New Balance 574', 'New Balance 990', 'New Balance 992', 'New Balance 997'
     ];
 
     const textsBrandsConverse = [

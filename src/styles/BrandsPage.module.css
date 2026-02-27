@@ -99,7 +99,7 @@
 }
 @media (max-width: 1200px) {
     .cont {
-        margin: 90px 0 0 0;
+        margin: 50px 0 0 0;
         padding: 15px;
     }
     .alphabet {
@@ -108,7 +108,7 @@
     .alphabet_block {
         position: fixed;
         left: 0;
-        top: 85px;
+        top: 0;
         z-index: 7;
     }
     .letter {
