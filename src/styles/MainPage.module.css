@@ -1,0 +1,700 @@
+/*:root {*/
+/*    --background: #ffffff;*/
+/*    --foreground: #171717;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    :root {*/
+/*        --background: #000000;*/
+/*        --foreground: #ededed;*/
+/*    }*/
+/*}*/
+
+/*html,*/
+/*body {*/
+/*    max-width: 100vw;*/
+/*    !*overflow-y: hidden;*!*/
+/*    scrollbar-width: none; !* Для Firefox — скрытие скроллбара *!*/
+/*    -ms-overflow-style: none; !* Для Internet Explorer и Edge — скрытие скроллбара *!*/
+/*}*/
+
+/*.body::-webkit-scrollbar {*/
+/*    display: none; !* Для Chrome, Safari, Opera — скрытие скроллбара *!*/
+/*}*/
+
+/*.bodyNoScroll {*/
+/*    overflow-y: hidden; !* Отключаем прокрутку *!*/
+/*}*/
+
+/*body {*/
+/*    color: #171717;*/
+/*    background: #000000;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*    -moz-osx-font-smoothing: grayscale;*/
+/*}*/
+
+/** {*/
+/*    box-sizing: border-box;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*a {*/
+/*    color: inherit;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    html {*/
+/*        color-scheme: dark;*/
+/*    }*/
+/*}*/
+
+/*input:-webkit-autofill {*/
+/*    -webkit-text-fill-color: black !important;*/
+/*    border-color: black !important; !* Цвет рамки *!*/
+/*    transition: background-color 1000s ease-in-out 0s; !* Для того, чтобы изменить цвет автозаполнения *!*/
+/*}*/
+
+
+
+
+
+
+
+/* Обертка для страницы */
+.pageWrapper {
+    height: 100%;
+    scrollbar-width: none; /* Для Firefox — скрытие скроллбара */
+    -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
+}
+
+.pageWrapper::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera — скрытие скроллбара */
+    background: transparent; /* Chrome/Safari/Webkit-based browsers */
+}
+
+/* Первая страница */
+.page1Wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Первый блок с фотографией */
+.heroSection {
+    position: relative;
+    width: 100%;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.buttonsWrapper {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: min(70px, 10vw);
+}
+
+.button {
+    width: min(219px, 45vw); /* Ширина кнопки */
+    height: 58px; /* Высота кнопки */
+    border: 1px solid black; /* Рамка внутри кнопки */
+    background-color: transparent; /* Прозрачный фон по умолчанию */
+    color: black; /* Цвет текста */
+    font-size: 22px; /* Размер шрифта */
+    font-family: inherit;
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход */
+}
+
+.button:hover {
+    background-color: black; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
+}
+
+.transitionSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+.gradientBlock {
+    height: 50px;
+    background: linear-gradient(180deg, #F1F0EC 0%, #000000 100%);
+}
+
+.blackBlock {
+    background-color: #000000;
+    flex-grow: 1;
+}
+
+.animatedButtonContainer {
+    position: absolute; /* Позиционируем контейнер абсолютно */
+    display: flex;
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    top: 50%; /* Центрируем по вертикали */
+    left: 50%; /* Центрируем по горизонтали */
+    overflow: hidden;
+    transform: translate(-50%, -50%); /* Сдвигаем влево и вверх на 50% */
+    white-space: nowrap;
+}
+
+.animatedButton {
+    display: inline-block;
+    position: relative;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-family: inherit;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-bottom: none; /* Убираем нижнюю границу */
+    cursor: pointer;
+    transition: 0.7s ease;
+    overflow: hidden;
+}
+
+
+
+.animatedButton::before,
+.animatedButton::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Нижняя граница кнопки */
+    width: 100px; /* Ширина "палок" */
+    height: 1px; /* Толщина "палок" */
+    background-color: white;
+    transition: transform 0.7s ease;
+}
+
+.animatedButton::before {
+    left: 0; /* Слева от выреза */
+    transform: translateX(0); /* Начальная позиция */
+}
+
+.animatedButton::after {
+    right: 0; /* Справа от выреза */
+    transform: translateX(0); /* Начальная позиция */
+}
+
+.animatedButton:hover::before {
+    transform: translateX(0) scaleX(3); /* Увеличиваем длину линии */
+}
+
+.animatedButton:hover::after {
+    transform: translateX(0) scaleX(3); /* Увеличиваем длину линии */
+}
+
+.line {
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background-color: white;
+    margin: 0 20px;
+    vertical-align: middle;
+    line-height: 1; /* Равен высоте шрифта для точного выравнивания */
+}
+
+@media (min-aspect-ratio: 1920/800) {
+    .animatedButton {
+        color: black;
+        border: 1px solid black;
+        border-bottom: none;
+    }
+    .line {
+        background-color: black;
+    }
+    .animatedButton::before,
+    .animatedButton::after {
+        background-color: black;
+    }
+    .animatedButtonContainer {
+        top: 10%
+    }
+}
+
+/* Стиль стрелки */
+.arrowCont {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center; /* Центрирование стрелки */
+    height: 50px;
+    width: 20px;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 18px;
+    width: 16px;
+    height: auto;
+    transition: transform 0.7s ease; /* Плавный переход */
+}
+
+/* Вторая страница */
+.page2Wrapper {
+    position: relative;
+    height: 100vh; /* Задаем высоту для страницы */
+    width: 100%;
+    overflow: hidden;
+}
+
+.page2LogoImgContainer {
+    position: absolute;
+    width: 37%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.animationImagePage2Logo {
+    animation: zoomOutAndMove 2s ease-in-out forwards; /* Анимация увеличения и затем перемещения */
+    display: block;
+}
+
+@keyframes zoomOutAndMove {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(calc(50px - 50vh + (250 * 37vw / 2240)));
+    }
+}
+
+.imageGridVisible {
+    /*animation: fadeIn 1s forwards;*/
+    /*display: none;*/
+    position: relative;
+    top: calc(100px + (250 * 37vw / 1120));
+}
+
+.imageGrid {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3%; /* Отступы справа и слева */
+    position: relative;
+}
+
+.imageBlock {
+    display: block;
+    transform: translateY(600px);
+}
+
+.imageBlock1 {
+    animation: slideUp 0.5s ease-out forwards; /* Применяем анимацию */
+    animation-delay: 0s; /* Задержка для первого блока */
+}
+
+.imageBlock2 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 0.2s; /* Задержка для второго блока */
+}
+
+.imageBlock3 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 0.4s; /* Задержка для третьего блока */
+}
+
+.imageBlock4 {
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: 0.6s; /* Задержка для четвертого блока */
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(600px); /* Начальная позиция для первого блока */
+    }
+    to {
+        transform: translateY(0); /* Конечная позиция */
+    }
+}
+
+.imageColumn {
+    display: flex;
+    flex-direction: column;
+    gap: calc((31.96vw * 834 / 1431) - (18.8vw * 642 / 855) - (18.8vw * 162 / 855));
+}
+
+.imagesPage2 {
+    display: block;
+}
+
+.logos {
+    display: flex;
+    overflow: hidden; /* Скрываем часть, выходящую за пределы */
+    height: calc((41.36vw * 1684 / 2456) - (31.96vw * 834 / 1431) - 5px);
+    position: absolute;
+    left: 40%;
+    bottom: 0;
+    transform: translateY(600px);
+    animation: slideUp 1s ease-out forwards;
+    animation-delay: 0.6s; /* Задержка для четвертого блока */
+}
+
+
+.logosSlide {
+    height: calc((41.36vw * 1684 / 2456) - (31.96vw * 834 / 1431) - 5px);
+    display: inline-block;
+    white-space: nowrap;
+    animation: 30s slide infinite linear;
+}
+
+.manyLogos {
+    height: calc((41.36vw * 1684 / 2456) - (31.96vw * 834 / 1431) - 5px);
+    width: auto;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.animation1Blob1 {
+    animation: chaoticFloat 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: -1; /* Устанавливаем на задний план */
+    bottom: -37%;
+    left: -7%;
+    width: 70%;
+}
+
+.animation1Blob2 {
+    animation: chaoticFloat2 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    z-index: -1; /* Устанавливаем на задний план */
+    bottom: -27%;
+    right: -30%;
+    width: 70%;
+}
+
+@keyframes chaoticFloat {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(100px, 300px);
+    }
+    20% {
+        transform: translate(-100px, 200px);
+    }
+    30% {
+        transform: translate(-200px, 100px);
+    }
+    40% {
+        transform: translate(-100px, -100px);
+    }
+    50% {
+        transform: translate(-100px, 0);
+    }
+    60% {
+        transform: translate(0, 0);
+    }
+    70% {
+        transform: translate(100px, 200px);
+    }
+    80% {
+        transform: translate(200px, 200px);
+    }
+    90% {
+        transform: translate(-100px, 200px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+@keyframes chaoticFloat2 {
+    0% {
+        transform: translate(0, 100px);
+    }
+    14% {
+        transform: translate(100px, 200px);
+    }
+    20% {
+        transform: translate(50px, 0);
+    }
+    30% {
+        transform: translate(-100px, 100px);
+    }
+    40% {
+        transform: translate(-100px, 0);
+    }
+    50% {
+        transform: translate(-100px, 100px);
+    }
+    60% {
+        transform: translate(0, 0);
+    }
+    70% {
+        transform: translate(0, 200px);
+    }
+    80% {
+        transform: translate(-100px, 200px);
+    }
+    90% {
+        transform: translate(-100px, 200px);
+    }
+    100% {
+        transform: translate(0, 100px);
+    }
+}
+
+.buttons2pageContainer {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Отступ между кнопками */
+    overflow: hidden;
+    align-items: center;
+    animation: moveFromSide 0.5s ease-out forwards;
+    transform: translateX(300px);
+    animation-delay: 3.5s;
+}
+
+@keyframes moveFromSide {
+    from {
+        transform: translateX(300px); /* Начальная позиция для первого блока */
+    }
+    to {
+        transform: translateX(0); /* Конечная позиция */
+    }
+}
+
+.buttonPage2 {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    width: 170px; /* Общая ширина кнопок */
+    height: 40px; /* Общая высота кнопок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.buttonPage2:hover {
+    background-color: white;
+    color: black;
+}
+
+.animatedButtonPage2Cont {
+    position: relative;
+}
+
+.animatedButtonPage2 {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px 2px 0 0;
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    width: 170px; /* Общая ширина кнопок */
+    height: 40px; /* Общая высота кнопок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    border-bottom: none; /* Убираем нижнюю границу */
+    transition: 0.7s ease;
+    overflow: hidden;
+}
+
+.animatedButtonPage2::before,
+.animatedButtonPage2::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Нижняя граница кнопки */
+    width: 35px; /* Ширина "палок" */
+    height: 1px; /* Толщина "палок" */
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: transform 0.7s ease;
+}
+
+.animatedButtonPage2::before {
+    left: 0.2px; /* Слева от выреза */
+    transform: translateX(0); /* Начальная позиция */
+}
+
+.animatedButtonPage2::after {
+    right: 0.4px; /* Справа от выреза */
+    transform: translate(0, 0); /* Начальная позиция */
+}
+
+.animatedButtonPage2:hover::before {
+    transform: translate(50%, 0.8px) scaleX(2); /* Увеличиваем длину линии */
+}
+
+.animatedButtonPage2:hover::after {
+    transform: translate(-52%, 0.8px) scaleX(2); /* Увеличиваем длину линии */
+}
+
+.arrowPage2Cont {
+    display: flex;
+    justify-content: center; /* Центрирование стрелки */
+    height: 50px;
+    width: 170px;
+    overflow: hidden;
+    position: relative;
+}
+
+.arrowPage2 {
+    height: 100px;
+    width: auto;
+    position: absolute; /* Позволяет стрелке позиционироваться независимо от контейнера */
+    bottom: 20px;
+    transition: transform 0.7s ease; /* Плавный переход */
+}
+
+.arrowMove {
+    transform: translateY(10px); /* Движение вниз на 10px */
+}
+
+/* Третья страница */
+.pages37Wrapper {
+    position: relative;
+    display: block;
+}
+
+.page37Wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    background-color: #000000;
+}
+
+.page371 {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+.page37 {
+    display: flex;
+    justify-content: center;
+}
+
+.page37Img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}
+
+.fixedHeader {
+    width: 100%;
+    height: 120px;
+    z-index: 1000;
+    border-bottom: 1px solid gray;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.fixedHeaderAbsolute {
+    position: absolute;
+    top: 0;
+}
+
+.fixedHeaderFixed {
+    position: fixed;
+    top: 0;
+}
+
+.headerText {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 20px; /* Отступ под текстом */
+}
+
+.buttonsHeaderGenders {
+    display: flex;
+    gap: 20px; /* Пробел между кнопками */
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonHeaderGender {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    width: 150px; /* Общая ширина кнопок */
+    height: 40px; /* Общая высота кнопок */
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.buttonHeaderGender:hover {
+    background-color: white;
+    color: black;
+}
+
+
+.buttonHeaderFixed {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    width: 140px; /* Общая ширина кнопок */
+    height: 40px; /* Общая высота кнопок */
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.buttonHeaderFixed:hover {
+    background-color: white;
+    color: black;
+}
+
+.arrowContHeader {
+    position: absolute;
+    right: 15px;
+    width: 10px;
+    display: flex;
+    justify-content: center;
+}
