@@ -1,0 +1,545 @@
+/*:root {*/
+/*    --background: #ffffff;*/
+/*    --foreground: #171717;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    :root {*/
+/*        --background: #000000;*/
+/*        --foreground: #ededed;*/
+/*    }*/
+/*}*/
+
+/*html,*/
+/*body {*/
+/*    max-width: 100vw;*/
+/*    !*overflow-y: hidden;*!*/
+/*    scrollbar-width: none; !* Для Firefox — скрытие скроллбара *!*/
+/*    -ms-overflow-style: none; !* Для Internet Explorer и Edge — скрытие скроллбара *!*/
+/*}*/
+
+/*.body::-webkit-scrollbar {*/
+/*    display: none; !* Для Chrome, Safari, Opera — скрытие скроллбара *!*/
+/*}*/
+
+/*.bodyNoScroll {*/
+/*    overflow-y: hidden; !* Отключаем прокрутку *!*/
+/*}*/
+
+/*body {*/
+/*    color: var(--foreground);*/
+/*    background: var(--background);*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*    -moz-osx-font-smoothing: grayscale;*/
+/*}*/
+
+/** {*/
+/*    box-sizing: border-box;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*a {*/
+/*    color: inherit;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    html {*/
+/*        color-scheme: dark;*/
+/*    }*/
+/*}*/
+
+/*input:-webkit-autofill {*/
+/*    -webkit-text-fill-color: black !important;*/
+/*    border-color: black !important; !* Цвет рамки *!*/
+/*    transition: background-color 1000s ease-in-out 0s; !* Для того, чтобы изменить цвет автозаполнения *!*/
+/*}*/
+
+
+
+
+
+/* Обертка для страницы */
+.pageWrapper {
+    height: 100%;
+    scrollbar-width: none; /* Для Firefox — скрытие скроллбара */
+    -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
+}
+
+.pageWrapper::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera — скрытие скроллбара */
+    background: transparent; /* Chrome/Safari/Webkit-based browsers */
+}
+
+/* Первая страница */
+.page1Wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Первый блок с фотографией */
+.heroSection {
+    position: relative;
+    width: 100%;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.buttonsWrapper {
+    position: absolute;
+    width: 100%;
+    height: 5vh;
+    top: 55%;
+    transform: translateY(-50%);
+    display: flex;
+}
+
+.button {
+    width: 40%; /* Ширина кнопки */
+    height: 5vh; /* Высота кнопки */
+    margin: 0 5% 0 5%;
+    border-radius: 0;
+    border: none;
+    background-color: white; /* Прозрачный фон по умолчанию */
+    color: black; /* Цвет текста */
+    font-size: 4.5vw; /* Размер шрифта */
+    font-family: inherit;
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход */
+}
+
+.button:hover {
+    background-color: black; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
+}
+
+.transitionSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+.gradientBlock {
+    height: 100px;
+    background: linear-gradient(180deg, #F1F0EC 0%, #000000 100%);
+}
+
+.blackBlock {
+    background-color: #000000;
+    flex-grow: 1;
+}
+
+.animatedButtonContainer {
+    position: absolute; /* Позиционируем контейнер абсолютно */
+    display: flex;
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    top: 50%; /* Центрируем по вертикали */
+    left: 50%; /* Центрируем по горизонтали */
+    overflow: hidden;
+    transform: translate(-50%, -50%); /* Сдвигаем влево и вверх на 50% */
+    white-space: nowrap;
+}
+
+.animatedButton {
+    display: flex;
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    position: relative;
+    padding: 15px 50px;
+    gap: 10px;
+    font-size: min(4.5vw, 37px);
+    font-family: inherit;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-bottom: none; /* Убираем нижнюю границу */
+    cursor: pointer;
+    transition: 0.7s ease;
+    overflow: hidden;
+    align-items: center;
+}
+
+.line {
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background-color: white;
+    margin: 0 20px;
+    vertical-align: middle;
+    line-height: 1; /* Равен высоте шрифта для точного выравнивания */
+}
+
+.animatedButton::before,
+.animatedButton::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Нижняя граница кнопки */
+    width: 70px; /* Ширина "палок" */
+    height: 1px; /* Толщина "палок" */
+    background-color: white;
+    transition: transform 0.7s ease;
+}
+
+.animatedButton::before {
+    left: 0; /* Слева от выреза */
+    transform: translateX(0); /* Начальная позиция */
+}
+
+.animatedButton::after {
+    right: 0; /* Справа от выреза */
+    transform: translateX(0); /* Начальная позиция */
+}
+
+.animatedButton:hover::before {
+    transform: translateX(0) scaleX(3); /* Увеличиваем длину линии */
+}
+
+.animatedButton:hover::after {
+    transform: translateX(0) scaleX(3); /* Увеличиваем длину линии */
+}
+
+.arrowCont {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center; /* Центрирование стрелки */
+    height: 50px;
+    width: 20px;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 18px;
+    width: 16px;
+    height: auto;
+    transition: transform 0.7s ease; /* Плавный переход */
+}
+
+.arrowMove {
+    transform: translateY(10px); /* Движение вниз на 10px */
+}
+
+.pages27Wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+
+/* Вторая страница */
+.page2Wrapper {
+    position: relative;
+    width: 100%;
+    height: calc(30px + 30px + (250 * 87vw / 1120) + 20vh + min(100vh - max(64px, 8vh) - 50px - 20vh - 30px - 30px - (250 * 87vw / 1120), (95vw * 648) / 820));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page2LogoImgContainer {
+    position: absolute;
+    width: 87%;
+    transform: translate(-50%, -50%);
+    top: 50vh;
+    left: 50%;
+}
+
+.animationImagePage2Logo {
+    animation: zoomOutAndMove 2s ease-in-out forwards; /* Анимация увеличения и затем перемещения */
+    display: block;
+}
+
+@keyframes zoomOutAndMove {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(calc(30px - 50vh + (250 * 87vw / 2240)));
+    }
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.image1grid {
+    width: calc(min(95%, (100vh - max(64px, 8vh) - 50px - 20vh - 30px - 30px - (250 * 87vw / 1120)) * (820 / 648)));
+    margin-top: calc(30px + 30px + (250 * 87vw / 1120));
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.imagesPage2 {
+    display: block;
+}
+
+.scrollImagesPage2 {
+    display: flex;
+    overflow: hidden; /* Скрываем часть, выходящую за пределы */
+    width: 100%;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+
+.logosSlide {
+    height: 20vh;
+    display: inline-block;
+    white-space: nowrap;
+    animation: 30s slide infinite linear;
+}
+
+.manyLogos {
+    height: 20vh;
+    width: auto;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%); /* Начинаем с позиции за пределами экрана слева */
+        opacity: 0; /* Прозрачность для плавного появления */
+    }
+    to {
+        transform: translateX(0); /* Окончательная позиция блока на экране */
+        opacity: 1; /* Блок полностью виден */
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.animation1Blob1 {
+    animation: chaoticFloat 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    width: 150%;
+    left: -50%;
+}
+
+.animation1Blob2 {
+    animation: chaoticFloat2 10s linear infinite; /* Плавное движение */
+    position: absolute; /* Фиксируем позицию */
+    width: 170%;
+    left: 7%;
+}
+
+@keyframes chaoticFloat {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-10vw, 12vh); /* Двигаем влево и немного вниз */
+    }
+    50% {
+        transform: translate(15vw, 12vh); /* Двигаем вправо и немного вверх */
+    }
+    75% {
+        transform: translate(-5vw, -5vh); /* Двигаем дальше влево и немного вниз */
+    }
+    100% {
+        transform: translate(0, 0); /* Возвращаем в исходное положение */
+    }
+}
+
+@keyframes chaoticFloat2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(10vw, -7vh); /* Двигаем вправо и немного вверх */
+    }
+    50% {
+        transform: translate(-15vw, -7vh); /* Двигаем влево и немного вверх */
+    }
+    75% {
+        transform: translate(20vw, -5vh); /* Двигаем дальше влево и немного вниз */
+    }
+    100% {
+        transform: translate(0, 0); /* Возвращаем в исходное положение */
+    }
+}
+
+.fixedFooter {
+    width: 100%;
+    height: max(64px, 8vh);
+    z-index: 1000;
+    background: linear-gradient(155deg, #090003 0%, #51031D 72%, #510345 100%);
+    opacity: 0.95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 20px 0 0;
+}
+
+@keyframes slideIn2 {
+    from {
+        transform: translateY(100%); /* Начинаем с позиции за пределами экрана слева */
+        opacity: 0; /* Прозрачность для плавного появления */
+    }
+    to {
+        transform: translateY(0); /* Окончательная позиция блока на экране */
+        opacity: 1; /* Блок полностью виден */
+    }
+}
+
+
+.fixedFooterAbsolute {
+    position: absolute;
+    bottom: 0;
+}
+
+.fixedFooterFixed {
+    position: fixed;
+    bottom: 0;
+    animation: slideIn2 0.5s ease-out forwards;
+}
+
+.buttonFooter {
+    color: white;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: calc(0.25 * 0.25 * max(64px, 8vh));
+    font-family: inherit;
+    font-size: calc(0.25 * max(64px, 8vh));
+    display: flex;
+    gap: 10px;
+    position: absolute;
+}
+
+
+.page3Wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.page3Images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    gap: 1vh;
+    transform: translateX(100%);
+    animation: slideIn 0.5s ease-out forwards;
+    animation-delay: 2.5s;
+}
+
+.image234grid {
+    width: calc(min(95%, ((96vh - 30px - max(64px, 8vh)) / (990 / 1230 + 546 / 1230 + 234 / 1230))));
+    z-index: 3;
+}
+
+.pages47Wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.fixedHeader {
+    width: 100%;
+    height: 100px;
+    z-index: 1000;
+    border-bottom: 0.5px solid #6b6b6b;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0
+}
+
+.fixedHeaderAbsolute {
+    position: absolute;
+    top: 0;
+}
+
+.fixedHeaderFixed {
+    position: fixed;
+    top: 0;
+}
+
+
+.headerText {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 10px; /* Отступ под текстом */
+    margin-top: 20px;
+}
+
+.buttonsHeaderGenders {
+    display: flex;
+    gap: 20px; /* Пробел между кнопками */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.buttonHeaderGender {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    width: 150px; /* Общая ширина кнопок */
+    height: 40px; /* Общая высота кнопок */
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.buttonHeaderGender:hover {
+    background-color: white;
+    color: black;
+}
+
+.page47Wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    background-color: #000000;
+}
+
+.page471 {
+    display: flex;
+    justify-content: center;
+}
+
+.page47 {
+    display: flex;
+    justify-content: center;
+}
+
+.page47Img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}
