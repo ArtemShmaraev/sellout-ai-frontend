@@ -362,7 +362,7 @@ const Order = ({
                         {/*    // Number(willBonuses) > 0 &&*/}
                         {/*    // <p className={'mt-2 mb-0'}>Будет начислено бонусов: {willBonuses} ₽</p>*/}
                         {/*}*/}
-                        {Number(1) > 0 &&
+                        {!isNaN(Number(willBonuses)) && Number(willBonuses) > 0 &&
 
                             <div className={s.left_right}>
                                 <p className={'mb-0'}>

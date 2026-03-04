@@ -7,15 +7,51 @@ import Link from "next/link";
 import more from "@/static/icons/moreIcon.svg";
 import arrowNew from "@/static/icons/arrowSlider.svg";
 import {desktopStore} from "@/store/DesktopStore";
+import Cookies from "js-cookie";
+import {useRouter} from "next/router";
+import {fetchProductsForMainPage} from "@/http/mainPageApi";
+import {fetchSimilarProducts} from "@/http/productsApi";
 
-const PopularBrandsMainPage = ({el, selectedCircle = 0}) => {
+const PopularBrandsMainPage = ({el}) => {
+    const blockId = el.blockId;
+
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
-    const [selectedCircleIndex, setSelectedCircleIndex] = useState(selectedCircle);
+    const [selectedCircleIndex, setSelectedCircleIndex] = useState(0);
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    const [resetSelectedCircle, setResetSelectedCircle] = useState(false);
+
+    useLayoutEffect(() => {
+        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
+        setSelectedCircleIndex(initialSelectedCircleIndex);
+        setTimeout(() => {
+            setResetSelectedCircle(true);
+        }, 100)
+    }, []);
+
+    const router = useRouter()
+
+    useEffect(() => {
+        const token = Cookies.get('access_token')
+        let sP = el.products[selectedCircleIndex] || [];
+        if (!sP || sP.length === 0) {
+            fetchProductsForMainPage(el.brandsLinks[selectedCircleIndex], token).then(res => {
+                setSelectedProducts(res)
+            })
+        } else {
+            setSelectedProducts(sP);
+        }
+
+    }, [selectedCircleIndex])
 
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
         const scrollableBlockArr = [];
-        const selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
+        // let selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
+        // if (!selectedProducts || selectedProducts.length === 0) {
+        //     selectedProducts = await fetchProductsForMainPage(el.brandsLinks[selectedCircleIndex]);
+        //     el.products[selectedCircleIndex] = selectedProducts;
+        // }
+
         selectedProducts.forEach(product => {
             scrollableBlockArr.push(
                 <ProductCard
@@ -79,18 +115,56 @@ const PopularBrandsMainPage = ({el, selectedCircle = 0}) => {
 
     useEffect(() => {
         // Прокручиваем блок товаров в начало при смене выбранного кружка
-        if (scrollableBlockRef.current) {
+        if (scrollableBlockRef.current && resetSelectedCircle) {
             scrollableBlockRef.current.resetScroll();
         }
-
     }, [selectedCircleIndex]);
 
-    const handleOpenSideBar = (sectionName, openedSectionsList, scrollPosition) => {
-        desktopStore.setCurrentSection(sectionName); // Устанавливаем текущую секцию
-        desktopStore.setOpenedSections(openedSectionsList); // Задаем список открытых секций
-        desktopStore.setScrollPosition(scrollPosition); // Устанавливаем позиции скролла
-        desktopStore.setMobileSideBar(true); // Открываем сайдбар
-    }
+    useEffect(() => {
+        const saveSelectedSectionAndScrollPositions = () => {
+            setSelectedCircleIndex((prevIndex) => {
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, prevIndex, {expires: 0.25});
+                return prevIndex;
+            });
+
+            if (scrollableContainerRef.current) {
+                const scrollLeft = scrollableContainerRef.current.scrollLeft;
+                Cookies.set(`multiSectionedBlock-${blockId}-SectionsContainerPosition`, scrollLeft, {expires: 0.25});
+            }
+
+            if (scrollableBlockRef.current) {
+                const scrollLeft = scrollableBlockRef.current.getScroll();
+                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+            }
+
+        };
+
+        const restoreScrollPosition = () => {
+            const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
+            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+
+            if (SectionsContainerPosition && scrollableContainerRef.current) {
+                scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
+            }
+            if (ProductsBlockPosition && scrollableBlockRef.current) {
+                scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
+            }
+        };
+
+        // Восстанавливаем позицию при загрузке страницы
+        // restoreScrollPosition();
+
+        restoreScrollPosition();
+
+        // Сохраняем позицию перед уходом со страницы
+        router.events.on("routeChangeStart", saveSelectedSectionAndScrollPositions);
+
+        // Убираем обработчик при размонтировании компонента
+        return () => {
+            router.events.off("routeChangeStart", saveSelectedSectionAndScrollPositions);
+        };
+    }, [router]);
+
 
     return (
         <div className={s.brandsSection}>

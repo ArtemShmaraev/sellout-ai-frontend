@@ -28,21 +28,35 @@
 
 .categoryItem {
     position: relative;
-    transition: box-shadow 0.2s ease, transform 0.2s ease; /* Плавный переход для обводки, тени и трансформации */
-    border-radius: 4px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, filter 0.3s; /* Плавный переход для обводки, тени и трансформации */
+    border-radius: 2px;
+    background-color: transparent;
+    filter: brightness(70%);
 }
 
 .categoryItem:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
     cursor: pointer;
+    transition: filter 0.3s;
+    filter: brightness(100%);
 }
 
 .selectedItem {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
-    cursor: pointer;
+    filter: brightness(100%);
+    position: relative;
+    border-radius: 2px;
+    background-color: transparent;
 }
 
-.selectedItem:hover {
+.selectedImage {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
+    /*border: 3px solid #003C00;*/
+    box-sizing: content-box;
+    overflow: hidden;
+    border: 3px solid #981e47;
+}
+
+.selectedImage:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), /* Внешняя тень при наведении */ inset 0 0 7px 0.5px rgba(255, 255, 255, 0.25);
     cursor: initial;
 }
@@ -64,8 +78,9 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    min-width: 400px;
-    max-width: 97vw;
+    min-width: 30%;
+    width: 390px;
+    max-width: 96%;
     text-align: center;
 }
 
@@ -89,6 +104,10 @@
     }
     .customButton {
         margin-top: -20px;
+    }
+
+    .selectedImage {
+        border: 2px solid #981e47;
     }
 }
 

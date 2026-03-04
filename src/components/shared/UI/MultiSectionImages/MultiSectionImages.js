@@ -5,12 +5,73 @@ import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBl
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import Link from "next/link";
 import {desktopStore} from "@/store/DesktopStore";
+import Cookies from "js-cookie";
+import {useRouter} from "next/router";
 
 const MultiSectionImages = ({el, heightImage = "250px"}) => {
     const [centerContent, setCenterContent] = useState(false);
 
+    const blockId = el.blockId;
+
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
     const [selectedCircleIndex, setSelectedCircleIndex] = useState(0);
+    const [resetSelectedCircle, setResetSelectedCircle] = useState(false);
+
+    useLayoutEffect(() => {
+        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
+        setSelectedCircleIndex(initialSelectedCircleIndex);
+        setTimeout(() => {
+            setResetSelectedCircle(true);
+        }, 100)
+    }, []);
+
+    const router = useRouter()
+
+    useEffect(() => {
+        const saveSelectedSectionAndScrollPositions = () => {
+            setSelectedCircleIndex((prevIndex) => {
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, prevIndex, {expires: 0.25});
+                return prevIndex;
+            });
+
+            if (scrollableContainerRef.current) {
+                const scrollLeft = scrollableContainerRef.current.scrollLeft;
+                Cookies.set(`multiSectionedBlock-${blockId}-SectionsContainerPosition`, scrollLeft, {expires: 0.25});
+            }
+
+            if (scrollableBlockRef.current) {
+                const scrollLeft = scrollableBlockRef.current.getScroll();
+                console.log(scrollLeft);
+                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+            }
+
+        };
+
+        const restoreScrollPosition = () => {
+            const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
+            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+
+            if (SectionsContainerPosition && scrollableContainerRef.current) {
+                scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
+            }
+            if (ProductsBlockPosition && scrollableBlockRef.current) {
+                scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
+            }
+        };
+
+        // Восстанавливаем позицию при загрузке страницы
+        // restoreScrollPosition();
+
+        restoreScrollPosition();
+
+        // Сохраняем позицию перед уходом со страницы
+        router.events.on("routeChangeStart", saveSelectedSectionAndScrollPositions);
+
+        // Убираем обработчик при размонтировании компонента
+        return () => {
+            router.events.off("routeChangeStart", saveSelectedSectionAndScrollPositions);
+        };
+    }, [router]);
 
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
@@ -34,7 +95,7 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
 
     useEffect(() => {
         // Прокручиваем блок товаров в начало при смене выбранного кружка
-        if (scrollableBlockRef.current) {
+        if (scrollableBlockRef.current && resetSelectedCircle) {
             scrollableBlockRef.current.resetScroll();
         }
 
@@ -95,14 +156,15 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
             <div className={s.multiSectionCirclesTitle}>{el.title} {el.titleName[selectedCircleIndex]}</div>
             <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
                 {(desktopStore.isDesktop ? el.desktopImages : el.mobileImages).map((_, idx) => (
-                    <div key={idx} className={`${s.categoryItem} ${selectedCircleIndex === idx ? s.selectedItem : ''}`}
+                    <div key={idx} className={`${selectedCircleIndex === idx ? s.selectedItem : s.categoryItem}`}
                          onClick={() => setSelectedCircleIndex(idx)} style={{height: `${height}`, width: 'auto'}}>
                         <Image
                             src={el.desktopImages[idx]}
                             alt={idx}
                             width={desktopStore.isDesktop ? 240 : 200}
                             height={300}
-                            style={{height: `${height}`, width: 'auto'}}
+                            style={{height: `${height}`, width: 'auto', borderRadius: '2px'}}
+                            className={`${selectedCircleIndex === idx ? s.selectedImage : ''}`}
                         />
                     </div>
                 ))}

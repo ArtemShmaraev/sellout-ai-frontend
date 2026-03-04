@@ -13,7 +13,7 @@
 
     transition: opacity 0.3s;
     opacity: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 .scroll_btn.visible {
     opacity: 1;

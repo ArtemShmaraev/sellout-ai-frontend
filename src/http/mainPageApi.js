@@ -41,3 +41,16 @@ export async function fetchNavbarPhoto() {
     const {data} = await $host.get(`product/header_photo`)
     return data
 }
+
+export async function fetchProductsForMainPage(query, token = '') {
+    if (!token) {
+        const {data} = await $host.get(`product${query}`)
+        console.log(data.results)
+        return data.results
+    } else {
+        const {data} = await $host.get(`product${query}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return data.results
+    }
+}

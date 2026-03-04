@@ -264,7 +264,9 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    min-width: 400px;
+    min-width: 30%;
+    width: 390px;
+    max-width: 96%;
     text-align: center;
 }
 

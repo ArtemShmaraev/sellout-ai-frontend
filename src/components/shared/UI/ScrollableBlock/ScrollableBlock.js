@@ -15,11 +15,9 @@ const ScrollableBlock = forwardRef(({
                                         moreButton = false,
                                         moreButtonText = "Посмотреть все",
                                         moreButtonUrl = "",
-                                        // blockId, // проп для уникального идентификатора
                                     }, ref) => {
     const scrollableContainerRef = useRef(null);
     const scroll = 1100
-
     const scrollLeft = () => {
         if (scrollableContainerRef.current) {
             scrollableContainerRef.current.scrollTo({
@@ -48,9 +46,24 @@ const ScrollableBlock = forwardRef(({
         }
     };
 
+    const setScroll = (scrollLeftPosition) => {
+        if (scrollableContainerRef.current) {
+            scrollableContainerRef.current.scrollTo({
+                left: scrollLeftPosition,
+                behavior: 'smooth',
+            });
+        }
+    };
+
     useImperativeHandle(ref, () => ({
-        resetScroll
+        resetScroll,
+        setScroll,
+        getScroll
     }));
+
+    const getScroll = () => {
+        return scrollableContainerRef.current?.scrollLeft || 0;
+    };
 
     const paddingClass = paddings === 'regular' ? s.paddingRegular : '';
     const snapPaddingClass = paddings === 'regular' ? s.snapPaddingRegular : '';

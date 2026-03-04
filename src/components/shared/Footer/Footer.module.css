@@ -188,6 +188,7 @@
 
     .icons_block {
         gap: 25px;
+        flex-direction: column;
     }
 
     .icons_block3 {
@@ -200,6 +201,7 @@
 
     .socialsCont {
         gap: 10px;
+        width: 200px;
     }
 }
 

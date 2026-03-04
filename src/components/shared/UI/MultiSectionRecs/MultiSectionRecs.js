@@ -6,6 +6,8 @@ import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import Link from "next/link";
 import styles from "@/styles/CatalogAccessoriesDesktopMen.module.css";
 import {desktopStore} from "@/store/DesktopStore";
+import Cookies from "js-cookie";
+import {useRouter} from "next/router";
 
 const MultiSectionRecs = ({el}) => {
     const [centerContent, setCenterContent] = useState(false);
@@ -26,8 +28,67 @@ const MultiSectionRecs = ({el}) => {
         };
     }, [el.cols]);
 
+    const blockId = el.blockId;
+
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
     const [selectedCircleIndex, setSelectedCircleIndex] = useState(0);
+    const [resetSelectedCircle, setResetSelectedCircle] = useState(false);
+
+    useLayoutEffect(() => {
+        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
+        setSelectedCircleIndex(initialSelectedCircleIndex);
+        setTimeout(() => {
+            setResetSelectedCircle(true);
+        }, 100)
+    }, []);
+
+    const router = useRouter()
+
+    useEffect(() => {
+        const saveSelectedSectionAndScrollPositions = () => {
+            setSelectedCircleIndex((prevIndex) => {
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, prevIndex, {expires: 0.25});
+                return prevIndex;
+            });
+
+            if (scrollableContainerRef.current) {
+                const scrollLeft = scrollableContainerRef.current.scrollLeft;
+                Cookies.set(`multiSectionedBlock-${blockId}-SectionsContainerPosition`, scrollLeft, {expires: 0.25});
+            }
+
+            if (scrollableBlockRef.current) {
+                const scrollLeft = scrollableBlockRef.current.getScroll();
+                console.log(scrollLeft);
+                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+            }
+
+        };
+
+        const restoreScrollPosition = () => {
+            const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
+            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+
+            if (SectionsContainerPosition && scrollableContainerRef.current) {
+                scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
+            }
+            if (ProductsBlockPosition && scrollableBlockRef.current) {
+                scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
+            }
+        };
+
+        // Восстанавливаем позицию при загрузке страницы
+        // restoreScrollPosition();
+
+        restoreScrollPosition();
+
+        // Сохраняем позицию перед уходом со страницы
+        router.events.on("routeChangeStart", saveSelectedSectionAndScrollPositions);
+
+        // Убираем обработчик при размонтировании компонента
+        return () => {
+            router.events.off("routeChangeStart", saveSelectedSectionAndScrollPositions);
+        };
+    }, [router]);
 
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
@@ -48,10 +109,11 @@ const MultiSectionRecs = ({el}) => {
     const selectionRows = el.selectionRowsMobile && !desktopStore.isDesktop ? el.selectionRowsMobile : 1;
 
     const scrollableBlockRef = useRef(null);
+    const scrollableContainerRef = useRef(null);
 
     useEffect(() => {
         // Прокручиваем блок товаров в начало при смене выбранного кружка
-        if (scrollableBlockRef.current) {
+        if (scrollableBlockRef.current && resetSelectedCircle) {
             scrollableBlockRef.current.resetScroll();
         }
 
@@ -60,7 +122,7 @@ const MultiSectionRecs = ({el}) => {
     return (
         <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}}>
             <div className={s.multiSectionCirclesTitle}>{el.title}</div>
-            <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`}>
+            <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
                 {el.recsNames.map((category, idx) => (
                     <div key={idx} className={`${s.categoryItem} ${selectedCircleIndex === idx ? s.selectedItem : ''}`}
                          onClick={() => setSelectedCircleIndex(idx)}>

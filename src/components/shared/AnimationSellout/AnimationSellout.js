@@ -8,7 +8,9 @@ const AnimationSellout = () => {
         // Для Chrome, Firefox, Opera на Android
         const themeColorMeta = document.querySelector('meta[name="theme-color"]');
         if (themeColorMeta) {
-            themeColorMeta.setAttribute('content', color);
+            setTimeout(() => {
+                themeColorMeta.setAttribute('content', color);
+            }, 100)
         }
 
         // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
@@ -25,13 +27,12 @@ const AnimationSellout = () => {
         }
     }
 
-    useLayoutEffect(() => {
-        setTimeout(() => {
-            changeBrowserColor("#000000")
-        }, 100)
-        setTimeout(() => {
-            // changeBrowserColor("#015000")/
-        }, 3000)
+    // setTimeout(() => {
+    //     changeBrowserColor("#000000")
+    // }, 1)
+
+    useEffect(() => {
+        changeBrowserColor("#000000")
     }, [])
     return (
         <div className={s.block}>

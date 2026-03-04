@@ -792,9 +792,11 @@
     }
     .icons_block {
         gap: 25px;
+        flex-direction: column;
     }
     .socialsCont {
         gap: 10px;
+        width: 200px;
     }
     .mainSocialsText {
         font-size: 16px;
@@ -814,22 +816,22 @@
 .arrows_section {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 0 20px;
-    margin: 20px;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 .arrows_block {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    width: 300px;
 }
 
 .arrows_cont {
     position: relative;
     width: 100%;
     height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .arrow_img {

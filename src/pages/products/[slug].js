@@ -59,9 +59,9 @@ import tg from "@/static/icons/tg_black.svg";
 import vk from "@/static/icons/vk_black.svg";
 import cashStack from "@/static/icons/cash-stack.svg";
 import cashStack1 from "@/static/icons/cash-stack 1.svg";
-import twoArrows from "@/static/icons/two_arrows.svg";
+import twoArrows from "@/static/icons/two_arrowsNew.svg";
 import ffIcon from '@/static/icons/ff.png'
-import selloutIcon from '@/static/icons/favicon.svg'
+import selloutIcon from '@/static/icons/selloutIcon.png'
 import ImgSlider from "@/components/pages/oneProduct/ImgSlider/ImgSlider";
 import shield from "@/static/icons/shield-check 1.svg";
 import patch from "@/static/icons/patch-check 1.svg";
@@ -862,15 +862,39 @@ const OneProductPage = ({product, prices, ip}) => {
                                         <Image src={selloutIcon} alt='' width={70}/>
                                     </div>
                                     <p className={s.text}>
+                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для вас более выгодное!
+                                    </p>
+                                    <div className='d-flex flex-row align-items-center justify-content-between' style={{marginBottom: '30px'}}>
+                                        {/* Telegram */}
+                                        <a
+                                            href='https://t.me/sellout_official'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={`${s.button} mb-3`}
+                                            style={{ backgroundColor: '#24A1DE', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            Телеграм
+                                        </a>
+
+                                        {/* WhatsApp */}
+                                        <a
+                                            href='https://wa.me/message/L2OINP6KNMNLA1'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={`${s.button} mb-3`}
+                                            style={{ backgroundColor: '#128c7e', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            WhatsApp
+                                        </a>
+                                    </div>
+                                    <p className={s.text}>
                                         Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и
                                         обуви, поэтому тщательно мониторим конкурентов и стремимся предлагать нашим
                                         клиентам
                                         лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
                                         широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и
                                         аксессуаров.
-                                        Поэтому если вы нашли более низкую цену у наших конкурентов, причем речь не
+                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span style={{fontWeight: '600'}}>причем речь не
                                         только о крупнейших российских сетях и премиальных бутиках, но и о любых
-                                        сервисах, магазинах из любых стран, смело пишите нам, и мы
+                                        сервисах, магазинах из любых стран</span>, смело пишите нам, и мы
                                         обязательно сделаем для вас наилучшее предложение!
 
                                     </p>
@@ -1283,7 +1307,31 @@ const OneProductPage = ({product, prices, ip}) => {
                                                 Лучшая цена
                                             </div>
                                         </div>
-                                        <Image src={selloutIcon} alt='' width={70}/>
+                                        <Image src={selloutIcon} alt='' width={80}/>
+                                    </div>
+                                    <p className={s.text}>
+                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для вас более выгодное!
+                                    </p>
+                                    <div className='d-flex flex-row align-items-center justify-content-between' style={{marginBottom: '30px'}}>
+                                        {/* Telegram */}
+                                        <a
+                                            href='https://t.me/sellout_official'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={`${s.button} mb-3`}
+                                            style={{ backgroundColor: '#24A1DE', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            Телеграм
+                                        </a>
+
+                                        {/* WhatsApp */}
+                                        <a
+                                            href='https://wa.me/message/L2OINP6KNMNLA1'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className={`${s.button} mb-3`}
+                                            style={{ backgroundColor: '#128c7e', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            WhatsApp
+                                        </a>
                                     </div>
                                     <p className={s.text}>
                                         Мы стараемся держать лидирующую позицию на российском рынке брендовой одежды и
@@ -1292,9 +1340,9 @@ const OneProductPage = ({product, prices, ip}) => {
                                         лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
                                         широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и
                                         аксессуаров.
-                                        Поэтому если вы нашли более низкую цену у наших конкурентов, причем речь не
+                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span style={{fontWeight: '600'}}>причем речь не
                                         только о крупнейших российских сетях и премиальных бутиках, но и о любых
-                                        сервисах, магазинах из любых стран, смело пишите нам, и мы
+                                        сервисах, магазинах из любых стран</span>, смело пишите нам, и мы
                                         обязательно сделаем для вас наилучшее предложение!
 
                                     </p>

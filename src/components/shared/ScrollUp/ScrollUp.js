@@ -3,7 +3,8 @@ import s from './ScrollUp.module.css'
 import arrow from '@/static/icons/chevron-up.svg'
 import Image from "next/image";
 import cn from 'classnames';
-import {desktopStore} from "@/store/DesktopStore"; // Импортируйте библиотеку 'classnames'
+import {desktopStore} from "@/store/DesktopStore";
+import {useRouter} from "next/router"; // Импортируйте библиотеку 'classnames'
 
 const ScrollUp = () => {
     const [visible, setVisible] = useState(false);
@@ -67,8 +68,10 @@ const ScrollUp = () => {
         }
     }, [isScrolling, visible]);
 
+    const router = useRouter();
+
     return (
-        <div className={cn(s.scroll_btn, { [s.visible]: visible })} onClick={click}>
+        <div className={cn(s.scroll_btn, { [s.visible]: visible })} onClick={click} style={{bottom: `${router.pathname === '/' ? '40px' : ''}`}}>
             <Image width={25} src={arrow} alt='' className={s.icon}/>
         </div>
     );

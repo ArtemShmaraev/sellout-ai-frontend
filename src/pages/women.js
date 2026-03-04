@@ -28,6 +28,7 @@ import MultiSectionCirclesGrid from "@/components/shared/UI/MultiSectionCirclesG
 import PopularBrandsMainPage from "@/components/shared/UI/PopularBrandsMainPage/PopularBrandsMainPage";
 import MultiSectionRecs from "@/components/shared/UI/MultiSectionRecs/MultiSectionRecs";
 import MultiSectionImages from "@/components/shared/UI/MultiSectionImages/MultiSectionImages";
+import Selection from "@/components/shared/UI/Selection/Selection";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -445,60 +446,8 @@ const Women = ({data}) => {
                     <MainImgBlock obj={el.mobile} className={s.mobile}/>
                 )
             } else if (el.type === 'selection') {
-                const scrollableBlockArr = []
-                el.products.forEach(product => {
-                    scrollableBlockArr.push(
-                        <ProductCard
-                            product={product}
-                            key={product.id}
-                            smallCard={true}
-                        />
-                    )
-                })
-                const selectionRows = el.selectionRowsMobile && !desktopStore.isDesktop ? el.selectionRowsMobile : 1;
                 arr.push(
-                    <div className={`${s.collections} ${!el.moreButton ? s.limitedMargin : ''}`}>
-                        {el.titleBlock && (
-                            <div className={'d-flex justify-content-between align-items-center ' + s.margins}
-                                 style={{marginBottom: '30px'}}>
-                                <div className={s.title_block}>
-                                    <h3 className={s.title}>{el.title}</h3>
-                                </div>
-                                <div>
-                                    <Link href={'/products?' + el.url} className={s.link}
-                                    >{el.productsAmount ? <span>Все {el.productsAmount} моделей</span> :
-                                        <span>Посмотреть все</span>}</Link>
-                                </div>
-                            </div>
-                        )}
-                        {el.titleCentered && (
-                            <div className={`${s.title} + ${s.titleCentered}`}>
-                                {el.title}
-                            </div>
-                        )}
-                        <ScrollableBlock paddings={'regular'} rows={selectionRows} moreButton={el.moreButton}
-                                         moreButtonUrl={`${el.url}`}>
-                            {scrollableBlockArr}
-                        </ScrollableBlock>
-                        {el.moreButton && (
-                            <div className={s.customButton}>
-                                <Link href={`${el.url}`}
-                                      className={`${s.linkMore} + ${s.paddings}`}>
-                                    {
-                                        el.moreButtonName?.startsWith("ЦЕЛИКОМ")
-                                            ? el.moreButtonName.replace(/^ЦЕЛИКОМ\s*/, '').trim() :
-                                            el.productsAmount && el.moreButtonName
-                                                ? `Все ${el.productsAmount} ${!el.moreButtonNameNoModel ? 'моделей' : ''} ${el.moreButtonName}`
-                                                : el.productsAmount
-                                                    ? `Все ${el.productsAmount} моделей`
-                                                    : el.moreButtonName
-                                                        ? `Посмотреть все ${el.moreButtonName}`
-                                                        : 'Посмотреть все'
-                                    }</Link>
-                            </div>
-
-                        )}
-                    </div>
+                    <Selection el={el}></Selection>
                 )
             }
         })
@@ -535,11 +484,11 @@ const Women = ({data}) => {
                         <>
                             {/* Your existing code for rendering the main content */}
                             {renderPage()}
-                            <div className={'d-flex justify-content-center my-5'}>
-                                <button onClick={getMore} className={s.more_btn}>
-                                    Посмотреть ещё
-                                </button>
-                            </div>
+                            {/*<div className={'d-flex justify-content-center my-5'}>*/}
+                            {/*    <button onClick={getMore} className={s.more_btn}>*/}
+                            {/*        Посмотреть ещё*/}
+                            {/*    </button>*/}
+                            {/*</div>*/}
 
                             <BuyoutModal show={show} handleClose={handleClose} isSend={isSend}/>
                         </>

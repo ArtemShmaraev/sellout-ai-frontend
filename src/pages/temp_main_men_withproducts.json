@@ -1,0 +1,2345 @@
+{
+  "price": {
+    "item": {
+      "floorPrice": 307500,
+      "upperPrice": 0,
+      "intentPrice": 0,
+      "originalPrice": 281900,
+      "nonGlobalOriginalPrice": 0,
+      "activityPrice": 0,
+      "saleInventoryNo": "SN103785536319PS13",
+      "price": 307500,
+      "type": 1,
+      "maxPrice": 519200,
+      "tradeType": 3,
+      "skuId": 736917841
+    }
+  },
+  "image": {
+    "imageLayoutType": 0,
+    "isOnlyShowHitCspu": true,
+    "spuImage": {
+      "supportPanorama": 0,
+      "supportColorBlock": 0,
+      "arSkuIdRelation": [
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401149
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401150
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401151
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401152
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401153
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401154
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401155
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401156
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401157
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401158
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401159
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401160
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401161
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401162
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401163
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401164
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401165
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401166
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401168
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401169
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401170
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401171
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 658401172
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 733445293
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 736917841
+        },
+        {
+          "propertyValueId": 369157293,
+          "supportFlag": false,
+          "spuId": 9517888,
+          "skuId": 738110002
+        }
+      ],
+      "moreMaterialFlag": 0,
+      "threeDimension": {
+        "spu3dShowType": 0,
+        "propertyValueId": 0,
+        "moreMaterialFlag": 0,
+        "spu3dModelFormat": 0
+      },
+      "images": [
+        {
+          "propertyValueId": 369157293,
+          "url": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+          "imgType": 0,
+          "desc": ""
+        },
+        {
+          "propertyValueId": 369157293,
+          "url": "https://cdn.poizon.com/pro-img/origin-img/20240823/237c529ad7284ba7a530fcaa21d109dc.jpg",
+          "imgType": 0,
+          "desc": ""
+        },
+        {
+          "propertyValueId": 369157293,
+          "url": "https://cdn.poizon.com/pro-img/origin-img/20240823/03ff543e58a246e3b5af46b2caa379e8.jpg",
+          "imgType": 0,
+          "desc": ""
+        },
+        {
+          "propertyValueId": 369157293,
+          "url": "https://cdn.poizon.com/pro-img/origin-img/20240823/6a45891ed7494861af096f7a1003dbd8.jpg",
+          "imgType": 0,
+          "desc": ""
+        },
+        {
+          "propertyValueId": 369157293,
+          "url": "https://cdn.poizon.com/pro-img/origin-img/20240823/f25e5120a2ca44eabd1e3980bf37af73.jpg",
+          "imgType": 0,
+          "desc": ""
+        }
+      ]
+    }
+  },
+  "frontLabelSummaryDTO": {
+    "afterTitle": {
+      "sortRule": [
+        {
+          "labelType": "LABEL_DE_WU_EXCLUSIVE",
+          "sorted": 10,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_EXCLUSIVE_LAUNCH",
+          "sorted": 20,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_FIRST_SELL",
+          "sorted": 30,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_FIRST_BUY",
+          "sorted": 31,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_BRAND_ONLY_4_BRAND_OFFICIAL",
+          "sorted": 40,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_BRAND_ONLY_4_BRAND_ONLY",
+          "sorted": 41,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_GLOBAL_BUY",
+          "sorted": 50,
+          "sourceType": "SPU"
+        }
+      ]
+    },
+    "belowTitle": {
+      "sortRule": [
+        {
+          "labelType": "LABEL_PAGE_LANDING_RANK",
+          "sorted": 10,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_LANDING_THEME",
+          "sorted": 11,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_LANDING_SERIES",
+          "sorted": 20,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_LANDING_IP",
+          "sorted": 30,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_FLOAT_PROP",
+          "sorted": 55,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_LANDING_RELATED",
+          "sorted": 70,
+          "sourceType": "SPU"
+        },
+        {
+          "labelType": "LABEL_PAGE_MORE_SIMILAR_STYLE",
+          "sorted": 80,
+          "sourceType": "SPU"
+        }
+      ]
+    }
+  },
+  "basicParam": {
+    "basicList": [
+      {
+        "propertyValueId": 369157284,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "主色",
+        "value": "紫色"
+      },
+      {
+        "propertyValueId": 369157292,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "功能性",
+        "value": "耐磨"
+      },
+      {
+        "propertyValueId": 369157291,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "闭合方式",
+        "value": "系带"
+      },
+      {
+        "propertyValueId": 369157285,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "辅色",
+        "value": "黑色"
+      },
+      {
+        "propertyValueId": 369157288,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "鞋跟类型",
+        "value": "平跟"
+      },
+      {
+        "propertyValueId": 369157286,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "配色",
+        "value": "紫黑"
+      },
+      {
+        "propertyValueId": 369157289,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "鞋帮高度",
+        "value": "低帮"
+      },
+      {
+        "propertyValueId": 0,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "主货号",
+        "value": "DZ7293-500"
+      },
+      {
+        "propertyValueId": 0,
+        "valueType": 0,
+        "definitionId": 0,
+        "key": "发售价格",
+        "value": "¥1437"
+      }
+    ],
+    "windowsList": [],
+    "windowTitle": "商品参数",
+    "windowSubTitle": "纠错"
+  },
+  "favoriteData": {
+    "hasFavorite": false,
+    "hasMyOwn": false,
+    "favoriteCount": {
+      "count": 476,
+      "content": "476人想要",
+      "tinyContent": "476"
+    },
+    "myOwnCount": {
+      "count": 17,
+      "content": "17",
+      "tinyContent": "17"
+    }
+  },
+  "brandRootInfo": {
+    "title": "品牌",
+    "multiRelationText": "",
+    "brandLayer": 1,
+    "brandItemShowSize": 1,
+    "brandItemList": [
+      {
+        "mainBrand": 0,
+        "brandType": 0,
+        "artistId": 0,
+        "brandLogo": "https://cdn.poizon.com/pro-img/cut-img/20240809/7aa64ce8f1db4d7ab57e0f685fc87499.jpg",
+        "brandName": "Nike",
+        "coverUrl": "https://cdn.poizon.com/node-common/JUU1JTkzJTgxJUU3JTg5JThDJUU0JUI4JUJCJUU5JUExJUI1JUU5JUE2JTk2JUU1JTlCJUJFMDYwMTE2ODU1OTE0ODY2MTk=.jpg",
+        "brandTextList": [
+          {
+            "type": 6,
+            "showText": "27万+款好物"
+          },
+          {
+            "type": 4,
+            "showText": "833万+人订阅"
+          },
+          {
+            "type": 2,
+            "showText": "尖端运动科技"
+          }
+        ],
+        "brandId": 144
+      }
+    ]
+  },
+  "sizeDto": {
+    "sizeFlag": 3,
+    "sizeInfoRecommendText": "查看尺码表",
+    "comparedRecommendRow": 1,
+    "foldShowRowNum": 0,
+    "downFoldShowRowNum": 4,
+    "sizeInfo": {
+      "sizeTemplate": {
+        "title": "尺码对照表",
+        "tips": "该数据仅供参考，请结合自身情况进行选择。",
+        "name": "",
+        "list": [
+          {
+            "sizeKey": "欧码EU",
+            "sizeValue": "35.5,36,36.5,37.5,38,38.5,39,40,40.5,41,42,42.5,43,44,44.5,45,45.5,46,47,47.5,48,48.5,49,49.5,50,50.5"
+          },
+          {
+            "sizeKey": "CHN中国码",
+            "sizeValue": "225,230,235,235,240,240,245,250,255,260,265,270,275,280,285,290,295,300,305,310,315,320,325,330,335,340"
+          },
+          {
+            "sizeKey": "US美码",
+            "sizeValue": "M3.5/W5,M4/W5.5,M4.5/W6,M5/W6.5,M5.5/W7,M6/W7.5,M6.5/W8,M7/W8.5,M7.5/W9,M8/W9.5,M8.5/W10,M9/W10.5,M9.5/W11,M10/W11.5,M10.5/W12,M11/W12.5,M11.5/W13,M12/W13.5,M12.5/W14,M13/W14.5,M13.5/W15,M14/W15.5,M14.5/W16,M15/W16.5,M15.5/W17,M16/W17.5"
+          },
+          {
+            "sizeKey": "UK英码",
+            "sizeValue": "3,3.5,4,4.5,5,5.5,6,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15"
+          },
+          {
+            "sizeKey": "JP日本码",
+            "sizeValue": "22.5,23,23.5,23.5,24,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30,30.5,31,31.5,32,32.5,33,33.5,34"
+          },
+          {
+            "sizeKey": "KR韩国码",
+            "sizeValue": "225,230,235,235,240,240,245,250,255,260,265,270,275,280,285,290,295,300,305,310,315,320,325,330,335,340"
+          },
+          {
+            "sizeKey": "适合脚长",
+            "sizeValue": "22.5,23,23.5,23.5,24,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30,30.5,31,31.5,32,32.5,33,33.5,34"
+          }
+        ],
+        "brandLogoUrl": "https://cdn.poizon.com/pro-img/cut-img/20240809/7aa64ce8f1db4d7ab57e0f685fc87499.jpg",
+        "hasSizeTable": true,
+        "hasFold": true,
+        "hasSelected": false,
+        "hitRowNum": 1,
+        "hitColNum": 0,
+        "defaultRowNum": 1,
+        "offsetCodeType": 0,
+        "type": 1,
+        "isShow": 1
+      }
+    }
+  },
+  "detail": {
+    "isSelf": 0,
+    "isShow": 1,
+    "fitId": 1,
+    "defaultSkuId": 0,
+    "goodsType": 0,
+    "status": 1,
+    "bizType": 0,
+    "levelPvSize": 2,
+    "level1CategoryId": 29,
+    "level2CategoryId": 35,
+    "brandId": 144,
+    "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+    "soldCountText": "",
+    "subTitle": "",
+    "originalTitle": "",
+    "structureTitle": "NOCTA x Nike Hot Step 2 耐磨 低帮 生活休闲鞋 男女同款 紫黑",
+    "authPrice": 1437,
+    "spuId": 9517888,
+    "categoryId": 1001189,
+    "title": "NOCTA x Nike Hot Step 2 耐磨 低帮 生活休闲鞋 男女同款 紫黑",
+    "desc": "",
+    "sourceName": "default",
+    "articleNumber": "DZ7293-500",
+    "sellDate": "2024.08.22",
+    "categoryName": "生活休闲鞋"
+  },
+  "skus": [
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401149,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157294,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157294,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "38",
+            "sort": 4
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804623899PS27",
+            "price": 428600,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401150,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157295,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157295,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "38.5",
+            "sort": 5
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804047875PS30",
+            "price": 349000,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401151,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157296,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157296,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "39",
+            "sort": 6
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103762416271PS08",
+            "price": 368600,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401152,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157297,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157297,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "40",
+            "sort": 7
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804547861PS18",
+            "price": 375100,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401153,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157298,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157298,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "40.5",
+            "sort": 8
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804647870PS04",
+            "price": 452600,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401154,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157299,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157299,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "41",
+            "sort": 9
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804141928PS07",
+            "price": 385000,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401155,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157300,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157300,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "42",
+            "sort": 10
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103805371585PS17",
+            "price": 436200,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401156,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157301,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157301,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "42.5",
+            "sort": 11
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103785600684PS11",
+            "price": 406800,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401157,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157302,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157302,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "43",
+            "sort": 12
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103805301914PS29",
+            "price": 487500,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401158,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157303,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157303,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "44",
+            "sort": 13
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804552014PS12",
+            "price": 443900,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401159,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157304,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157304,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "44.5",
+            "sort": 14
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103805515108PS26",
+            "price": 455900,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401160,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157305,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157305,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "45",
+            "sort": 15
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103744747802PS29",
+            "price": 331500,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401161,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157306,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157306,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "45.5",
+            "sort": 16
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103805185489PS11",
+            "price": 354400,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401162,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157307,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157307,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "46",
+            "sort": 17
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804135088PS17",
+            "price": 375100,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401163,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157308,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157308,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "47",
+            "sort": 18
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804835663PS07",
+            "price": 353300,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401164,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157309,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157309,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "47.5",
+            "sort": 19
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103785290712PS04",
+            "price": 315100,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401165,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157310,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157310,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "48",
+            "sort": 20
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103768119261PS18",
+            "price": 518100,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 21,
+              "max": 23
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401166,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157311,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157311,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "48.5",
+            "sort": 21
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103805644862PS08",
+            "price": 388200,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401168,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157313,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157313,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "49.5",
+            "sort": 23
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804678071PS15",
+            "price": 409000,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401169,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157314,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157314,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "50",
+            "sort": 24
+          }
+        }
+      ],
+      "price": {
+        "quantity": 0,
+        "prices": []
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401170,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157315,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157315,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "50.5",
+            "sort": 25
+          }
+        }
+      ],
+      "price": {
+        "quantity": 0,
+        "prices": []
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401171,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157316,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157316,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "51",
+            "sort": 26
+          }
+        }
+      ],
+      "price": {
+        "quantity": 0,
+        "prices": []
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 658401172,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 369157317,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 369157317,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "51.5",
+            "sort": 27
+          }
+        }
+      ],
+      "price": {
+        "quantity": 0,
+        "prices": []
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 733445293,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 508903592,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 508903592,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "36",
+            "sort": 1
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103784918111PS24",
+            "price": 339100,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 736917841,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 514251082,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 514251082,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "36.5",
+            "sort": 2
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804379315PS13",
+            "price": 306400,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "authPrice": 143700,
+      "status": 1,
+      "logoUrl": "https://cdn.poizon.com/pro-img/origin-img/20240823/f43f42dfd86a4ee7b5678659695200ce.jpg",
+      "skuId": 738110002,
+      "spuId": 9517888,
+      "properties": [
+        {
+          "level": 1,
+          "propertyValueId": 369157293,
+          "saleProperty": {
+            "propertyId": 1012497,
+            "propertyValueId": 369157293,
+            "customValue": "紫黑",
+            "level": 1,
+            "showValue": 0,
+            "definitionId": 1,
+            "fontProperty": false,
+            "name": "颜色",
+            "value": "紫黑",
+            "sort": 0
+          }
+        },
+        {
+          "level": 2,
+          "propertyValueId": 516178813,
+          "saleProperty": {
+            "propertyId": 1012485,
+            "propertyValueId": 516178813,
+            "customValue": "",
+            "level": 2,
+            "showValue": 1,
+            "definitionId": 6,
+            "fontProperty": false,
+            "name": "尺码",
+            "value": "37.5",
+            "sort": 3
+          }
+        }
+      ],
+      "price": {
+        "quantity": 10,
+        "prices": [
+          {
+            "tradeType": 3,
+            "tradeDesc": "买手代采",
+            "saleInventoryNo": "SN103804803441PS02",
+            "price": 383900,
+            "channelAdditionInfoDTO": {
+              "explain": "已含税",
+              "symbol": "≈"
+            },
+            "timeDelivery": {
+              "min": 27,
+              "max": 29
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "saleProperties": {
+    "list": [
+      {
+        "propertyId": 1012497,
+        "propertyValueId": 369157293,
+        "customValue": "紫黑",
+        "level": 1,
+        "showValue": 0,
+        "definitionId": 1,
+        "fontProperty": false,
+        "name": "颜色",
+        "value": "紫黑",
+        "sort": 0
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 508903592,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "36",
+        "sort": 1
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 514251082,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "36.5",
+        "sort": 2
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 516178813,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "37.5",
+        "sort": 3
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157294,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "38",
+        "sort": 4
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157295,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "38.5",
+        "sort": 5
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157296,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "39",
+        "sort": 6
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157297,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "40",
+        "sort": 7
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157298,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "40.5",
+        "sort": 8
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157299,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "41",
+        "sort": 9
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157300,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "42",
+        "sort": 10
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157301,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "42.5",
+        "sort": 11
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157302,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "43",
+        "sort": 12
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157303,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "44",
+        "sort": 13
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157304,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "44.5",
+        "sort": 14
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157305,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "45",
+        "sort": 15
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157306,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "45.5",
+        "sort": 16
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157307,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "46",
+        "sort": 17
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157308,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "47",
+        "sort": 18
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157309,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "47.5",
+        "sort": 19
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157310,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "48",
+        "sort": 20
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157311,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "48.5",
+        "sort": 21
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157312,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "49",
+        "sort": 22
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157313,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "49.5",
+        "sort": 23
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157314,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "50",
+        "sort": 24
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157315,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "50.5",
+        "sort": 25
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157316,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "51",
+        "sort": 26
+      },
+      {
+        "propertyId": 1012485,
+        "propertyValueId": 369157317,
+        "customValue": "",
+        "level": 2,
+        "showValue": 1,
+        "definitionId": 6,
+        "fontProperty": false,
+        "name": "尺码",
+        "value": "51.5",
+        "sort": 27
+      }
+    ]
+  },
+  "shareInfo": {
+    "threeDLinkUrl": "https://cdn-m.dewu.com/router/product/ProductDetail?spuId=9517888&sourceName=shareDetail&shareSource=productDetail",
+    "shareLinkUrl": "https://cdn-m.dewu.com/router/product/ProductDetail?spuId=9517888&sourceName=shareDetail"
+  }
+}

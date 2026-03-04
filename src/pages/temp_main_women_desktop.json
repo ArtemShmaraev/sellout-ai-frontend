@@ -113,6 +113,7 @@
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ БРЕНДЫ",
+    "blockId": "1F",
     "type": "popularBrands",
     "selectionRowsMobile": 2,
     "brandsAmount": 64,
@@ -1477,6 +1478,7 @@
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
+    "blockId": "3F",
     "type": "multiSectionCircles",
     "title": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
     "selectionRowsMobile": 2,
@@ -2699,6 +2701,7 @@
   },
   {
     "blockName": "СУМКИ",
+    "blockId": "4F",
     "type": "multiSectionCircles",
     "title": "СУМКИ",
     "selectionRowsMobile": 2,
@@ -2738,7 +2741,7 @@
       "Косметички",
       "Кошельки",
       "Рюкзаки",
-      "Спортивные сумки",
+      "Спортивные",
       "Michael Kors",
       "Charles & Keith",
       "JW Anderson",
@@ -3833,6 +3836,7 @@
   },
   {
     "blockName": "SALE PRODUCTS",
+    "blockId": "5F",
     "type": "selection",
     "selectionRowsMobile": 2,
     "url": "/products?is_sale=is_sale",
@@ -4354,6 +4358,7 @@
   },
   {
     "blockName": "TRENDY LOTS PRODUCTS",
+    "blockId": "6F",
     "type": "selection",
     "selectionRowsMobile": 2,
     "url": "/products?collection=trendswomen&gender=F",
@@ -4868,6 +4873,7 @@
   },
   {
     "blockName": "ОДЕЖДА",
+    "blockId": "7F",
     "type": "multiSectionRecs",
     "title": "ОДЕЖДА",
     "selectionRowsMobile": 2,
@@ -5943,6 +5949,7 @@
   },
   {
     "blockName": "ПОДБОРКИ",
+    "blockId": "8F",
     "type": "multiSectionImages",
     "title": "",
     "selectionRowsMobile": 2,
@@ -7033,6 +7040,7 @@
   },
   {
     "blockName": "Аксессуары",
+    "blockId": "9F",
     "type": "multiSectionRecs",
     "title": "Аксессуары",
     "selectionRowsMobile": 2,
@@ -8108,6 +8116,7 @@
   },
   {
     "blockName": "Верхняя одежда",
+    "blockId": "10F",
     "type": "multiSectionImages",
     "title": "ВЕРХНЯЯ ОДЕЖДА",
     "selectionRowsMobile": 2,
@@ -9282,6 +9291,7 @@
   },
   {
     "blockName": "ОБУВЬ",
+    "blockId": "11F",
     "type": "multiSectionRecs",
     "title": "ОБУВЬ",
     "selectionRowsMobile": 2,
@@ -10357,6 +10367,7 @@
   },
   {
     "blockName": "ЗИМНЯЯ ОБУВЬ",
+    "blockId": "12F",
     "type": "multiSectionImages",
     "title": "Зимняя обувь",
     "selectionRowsMobile": 2,
@@ -11503,6 +11514,7 @@
   },
   {
     "blockName": "ПРЕМИУМ КРОССОВКИ",
+    "blockId": "13F",
     "type": "multiSectionCircles",
     "title": "Премиальные кроссовки",
     "selectionRowsMobile": 2,
@@ -12709,6 +12721,7 @@
   },
   {
     "blockName": "Сумки",
+    "blockId": "14F",
     "type": "multiSectionImages",
     "title": "Сумки",
     "selectionRowsMobile": 2,
@@ -13883,6 +13896,7 @@
   },
   {
     "blockName": "MORE SNEAKERS",
+    "blockId": "15F",
     "type": "multiSectionImages",
     "title": "Кроссовки",
     "selectionRowsMobile": 2,
@@ -15064,6 +15078,7 @@
   },
   {
     "blockName": "STREETWEAR",
+    "blockId": "16F",
     "type": "multiSectionImages",
     "title": "STREETWEAR: ",
     "selectionRowsMobile": 2,
