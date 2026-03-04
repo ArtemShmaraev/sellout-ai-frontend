@@ -45,7 +45,6 @@ export async function fetchNavbarPhoto() {
 export async function fetchProductsForMainPage(query, token = '') {
     if (!token) {
         const {data} = await $host.get(`product${query}`)
-        console.log(data.results)
         return data.results
     } else {
         const {data} = await $host.get(`product${query}`, {

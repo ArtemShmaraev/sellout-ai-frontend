@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 import {fetchSimilarProducts} from "@/http/productsApi";
 
-const PopularBrandsMainPage = ({el}) => {
+const PopularBrandsMainPage = ({el, updateContent}) => {
     const blockId = el.blockId;
 
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
@@ -34,10 +34,15 @@ const PopularBrandsMainPage = ({el}) => {
         const token = Cookies.get('access_token')
         let sP = el.products[selectedCircleIndex] || [];
         if (!sP || sP.length === 0) {
+            console.log(selectedCircleIndex + "INDEX NOT GOOD")
             fetchProductsForMainPage(el.brandsLinks[selectedCircleIndex], token).then(res => {
                 setSelectedProducts(res)
+                el.products[selectedCircleIndex] = res;
+                updateContent(el);
+                console.log(selectedCircleIndex + "INDEX maybe UPDATED")
             })
         } else {
+            console.log(selectedCircleIndex + "INDEX GOOD")
             setSelectedProducts(sP);
         }
 
@@ -46,11 +51,6 @@ const PopularBrandsMainPage = ({el}) => {
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
         const scrollableBlockArr = [];
-        // let selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
-        // if (!selectedProducts || selectedProducts.length === 0) {
-        //     selectedProducts = await fetchProductsForMainPage(el.brandsLinks[selectedCircleIndex]);
-        //     el.products[selectedCircleIndex] = selectedProducts;
-        // }
 
         selectedProducts.forEach(product => {
             scrollableBlockArr.push(

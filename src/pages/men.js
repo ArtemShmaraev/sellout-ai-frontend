@@ -47,7 +47,56 @@ export const getServerSideProps = async (context) => {
 const Men = ({data}) => {
     // const {desktopStore} = useContext(Context)
     const router = useRouter()
-    const [content, setContent] = useState(data)
+    const [content, setContent] = useState(data); // Инициализация с props
+    const [uploadedContent, setUploadedContent] = useState(false);
+
+    useEffect(() => {
+        console.log("ВЫЗОВ ЗАГРУЗОЧНОГО ЭФФЕКТА")
+        console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
+        if (typeof window !== "undefined") {
+            const cachedData = localStorage.getItem("contentMainPageMen");
+            const lastUpdated = localStorage.getItem("contentMainPageMenLastUpdated");
+
+            if (cachedData && lastUpdated) {
+                const now = new Date().getTime();
+                const timeDifference = (now - parseInt(lastUpdated, 10)) / 1000 / 60; // Разница в минутах
+
+                if (timeDifference <= 30) {
+                    setContent(JSON.parse(cachedData)); // Устанавливаем данные из localStorage
+                    setUploadedContent(true);
+                    console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
+                    console.log("Установили уже созданный контент")
+                    return;
+                }
+            }
+            localStorage.setItem("contentMainPageMen", JSON.stringify(content));
+            localStorage.setItem("contentMainPageMenLastUpdated", new Date().getTime().toString());
+            console.log("Не установили уже созданный контент")
+            setUploadedContent(true);
+        } else {
+            console.log("А КАК ТАК")
+        }
+    }, []);
+
+    // Обновляем данные в localStorage при изменении content
+    useEffect(() => {
+        if (uploadedContent) {
+            console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
+            localStorage.setItem("contentMainPageMen", JSON.stringify(content));
+            console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
+            console.log("UPDATED STORAGE")
+        }
+    }, [content]);
+
+    // Функция для обновления content в дочерних компонентах
+    const updateContent = (updatedEl) => {
+        console.log("TRYING TO UPDATE" + updatedEl.id + "INDEX");
+        setContent((prevContent) =>
+            prevContent.map((el) =>
+                el.id === updatedEl.id ? updatedEl : el // Заменяем изменённый элемент
+            )
+        );
+    };
 
     const {desktopStore} = useContext(Context)
     const [viewVideo, setViewVideo] = useState(false)
@@ -126,13 +175,16 @@ const Men = ({data}) => {
 
     useEffect(() => {
         const saveScrollPosition = () => {
-            // Сохраняем позицию прокрутки в cookie на 7 дней
             Cookies.set("homeScrollPositionMen", window.scrollY.toString(), {expires: 0.25});
         };
 
         const restoreScrollPosition = () => {
             const savedPosition = Cookies.get("homeScrollPositionMen");
-            if (savedPosition) {
+            if (!uploadedContent) {
+                setTimeout(() => {
+                    restoreScrollPosition();
+                }, 100)
+            } else if (savedPosition) {
                 window.scrollTo(0, parseInt(savedPosition, 10));
             }
         };
@@ -362,7 +414,7 @@ const Men = ({data}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} updateContent={updateContent}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
@@ -485,7 +537,11 @@ const Men = ({data}) => {
                     <div className={s.cont}>
                         <>
                             {/* Your existing code for rendering the main content */}
-                            {renderPage()}
+                            {uploadedContent &&
+                                <>
+                                    {renderPage()}
+                                </>
+                            }
                             {/*<div className={'d-flex justify-content-center my-5'}>*/}
                             {/*    <button onClick={getMore} className={s.more_btn}>*/}
                             {/*        Посмотреть ещё*/}
