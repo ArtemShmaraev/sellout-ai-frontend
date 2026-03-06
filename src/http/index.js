@@ -2,10 +2,10 @@ import axios from 'axios'
 import {parse} from "cookie";
 
 const $host = axios.create({
-    baseURL: 'https://sellout.su/api/v1/'
+    baseURL: 'http://127.0.0.1:8000/api/v1/'
 })
 const $authHost = axios.create({
-    baseURL: 'https://sellout.su/api/v1/'
+    baseURL: 'http://127.0.0.1:8000/api/v1/'
 })
 const $dadata = axios.create({
     baseURL: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address'
@@ -27,7 +27,7 @@ $authHost.interceptors.request.use((config) => {
 //     const originalRequest = error.config;
 //     if (error.response.status === 401 && refreshToken) {
 //         const refreshObj = JSON.stringify({refresh: refreshToken})
-//         const response = await axios.post('http://158.160.105.163:8080/api/v1/user/token/refresh/', refreshObj)
+//         const response = await axios.post('http://51.250.74.115:8080/api/v1/user/token/refresh/', refreshObj)
 //         const newAccess = response.data.access
 //
 //     }
