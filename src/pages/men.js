@@ -1,27 +1,20 @@
 import MainLayout from "@/layout/MainLayout";
-import ProductCard from "@/components/shared/ProductCard/ProductCard";
-import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import Head from "next/head";
-import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMainPage2} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
 import Image from "next/image";
-import {parse} from "cookie";
+import cookie, {parse} from "cookie";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
-import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
-import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
-import {desktopStore} from "@/store/DesktopStore";
 import tempManJson from "./temp_main_men_desktop.json"
 import arrowNew from "@/static/icons/arrowSlider.svg";
-import styles from "@/styles/CatalogBrandsMobileMen.module.css";
-import more from "@/static/icons/moreIcon.svg";
 import PromoBannerMainPageAbout from "@/components/shared/UI/PromoBannerMainPageAbout/PromoBannerMainPageAbout";
 import PromoBannerMainPageOffers from "@/components/shared/UI/PromoBannerMainPageOffers/PromoBannerMainPageOffers";
 import MultiSectionCirclesGrid from "@/components/shared/UI/MultiSectionCirclesGrid/MultiSectionCirclesGrid";
@@ -35,15 +28,98 @@ export const getServerSideProps = async (context) => {
     const page = cookies['index_page']
     const token = cookies['access_token']
 
-    const selected_gender = "M"; // Добавляем получение выбранного гендера из кук
+    const selected_gender = "M";
 
-    let data;
+    let emptyData;
+    let restoredData = false;
 
-    data = tempManJson
+    emptyData = tempManJson
 
-    return {props: {data}};
+    // Шаг 0: Создание списков allComplexBlockIds и allBlockIds
+    const allComplexBlockIds = {};
+    const allBlockIds = [];
+
+    emptyData.forEach(item => {
+        if (item.blockId) {
+            allBlockIds.push(item.blockId);
+        }
+
+        if (['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages'].includes(item.type)) {
+            const key = 'brandsLinks' in item ? 'brandsLinks' :
+                'circleLinks' in item ? 'circleLinks' :
+                    'recsLinks' in item ? 'recsLinks' : null;
+            if (key) {
+                allComplexBlockIds[item.blockId] = item[key].length;
+            }
+        }
+    });
+
+    // Итоговая расстановка (может остаться пустой, если не в первый раз заходим на страницу и не происходит сброса положений (не прошло более 15 минут с последнего захода)
+    let arrangement = {};
+
+    // Базовая расстановка: 0:0, 1:1 итд
+    let arrangementBase = {};
+    Object.keys(allComplexBlockIds).forEach(blockId => {
+        arrangementBase[blockId] = {};
+        for (let i = 0; i < allComplexBlockIds[blockId]; i++) {
+            arrangementBase[blockId][i] = i;
+        }
+    });
+
+    // Шаг 1: Если первая загрузка страницы (куки все еще пустые и нет расстановки), создаем базовую расстановку.
+    if (!('mainPageMen-lastTimeUpdated' in cookies) || !cookies['mainPageMen-lastTimeUpdated']) {
+        arrangement = arrangementBase
+
+        restoredData = true;
+    } else if ('mainPageMen-lastTimeUpdated' in cookies && Date.now() - parseInt(cookies['mainPageMen-lastTimeUpdated'], 10) > 1 * 60 * 1000) {
+        // Если уже не первый раз заходим, но прошло более 15 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
+        restoredData = true;
+
+        // 1. Рандомизация расстановки
+        Object.keys(arrangementBase).forEach(blockId => {
+            const block = arrangementBase[blockId];
+            const keys = Object.keys(block);
+            const values = keys.map(key => block[key]);
+
+            // Алгоритм Фишера-Йетса для перемешивания значений
+            for (let i = values.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [values[i], values[j]] = [values[j], values[i]]; // Перемешиваем значения
+            }
+
+            // Создаем новый объект с перемешанными значениями для каждого блока
+            const newBlock = {};
+            keys.forEach((key, index) => {
+                newBlock[key] = values[index]; // Создаем новый объект с перемешанными значениями
+            });
+
+            arrangement[blockId] = newBlock; // Сохраняем рандомизированные значения для текущего blockId
+        });
+
+        // 2. Обновление словаря cookies, заменяя значения для соответствующих блоков
+        Object.keys(arrangement).forEach(blockId => {
+            const block = arrangement[blockId];
+
+            cookies[`multiSectionedBlock-${blockId}-SelectedSection`] = block[0];
+        });
+    }
+
+    // Функция для преобразования объекта в строку cookie
+    const cookiesToString = (cookies) => {
+        return Object.keys(cookies)
+            .map(key => `${key}=${cookies[key]}`) // создаем строку вида "ключ=значение"
+            .join('; '); // соединяем все пары ключ=значение через ";"
+    };
+
+    // Преобразуем объект в строку cookie
+    const cookieString = cookiesToString(cookies);
+
+    // let data = await fetchMainPage2(cookieString, selected_gender)
+    let data = tempManJson;
+
+    return {props: {data, arrangement, restoredData}};
 }
-const Men = ({data}) => {
+const Men = ({data, arrangement, restoredData}) => {
     // const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
@@ -74,6 +150,7 @@ const Men = ({data}) => {
         };
     }, [])
 
+    const [arrangementFinal, setArrangementFinal] = useState({})
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
         const savedGender = "M";
@@ -84,6 +161,82 @@ const Men = ({data}) => {
             const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
             Cookies.set('index_page', 1, {expires: tenMinutes});
         }
+
+        Cookies.set('mainPageMen-lastTimeUpdated', Date.now(), {expires: 2772})
+        if (restoredData) {
+            // Если обновили данные (первый заход или более 15 минут прошло), то сбрасываем на ноль все позиции, сохраняем новую расстановку
+            Cookies.set("homeScrollPositionMen", 0, {expires: 0.25});
+            localStorage.setItem('mainPageMen-Arrangement', JSON.stringify(arrangement));
+
+            data.forEach(item => {
+                if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
+                    const blockId = item.blockId;
+
+                    // Формируем имена куков
+                    const cookiesToCheck = item.type === "selection" ? [
+                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                    ] : [
+                        `multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`,
+                        `multiSectionedBlock-${blockId}-SectionsContainerPosition`,
+                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                    ];
+
+                    // Проверяем наличие каждого кука и устанавливаем значение 0
+                    cookiesToCheck.forEach(cookieName => {
+                        Cookies.set(cookieName, 0, {expires: 0.25});
+                    });
+
+                    if (item.type !== "selection") {
+                        Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][0], {expires: 0.25});
+                    }
+                }
+            })
+        }
+
+        // Теперь необходимо восстановить корректную расстановку внутри data согласно нашей расстановке (новая или прежняя - в любом случае будет уже лежать в локал хранилище)
+        setArrangementFinal(JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
+
+        const rearrangeData = (data, arrangement) => {
+            return data.map(item => {
+                // Проверяем, есть ли blockId и если он есть, то ищем в расстановке для этого blockId
+                if (item.blockId && arrangement[item.blockId]) {
+                    const blockArrangement = arrangement[item.blockId];
+
+                    // Перемешиваем все ключи с массивами в соответствии с расстановкой
+                    const keysToRearrange = [
+                        'desktopImages',
+                        'mobileImages',
+                        'productsAmount',
+                        'brandsLinks',
+                        'brandsNamesDesktop',
+                        'brandsNamesMobile',
+                        'products',
+                        'moreButtonName',
+                        'circleNames',
+                        'circleLinks',
+                        'recsNames',
+                        'recsLinks',
+                        'moreButtons',
+                        'titleName',
+                        'moreButtonNameNoModel'
+                    ];
+
+                    // Перебираем все ключи и выполняем перестановку значений
+                    keysToRearrange.forEach(key => {
+                        if (Array.isArray(item[key])) {
+                            // Проверяем, что длина массива в item[key] совпадает с длиной в arrangement для данного blockId
+                            if (item[key].length === Object.keys(blockArrangement).length) {
+                                // Новый порядок элементов на основе расстановки
+                                item[key] = item[key].map((_, index) => item[key][blockArrangement[index]]);
+                            }
+                        }
+                    });
+                }
+                return item;
+            });
+        };
+
+        data = rearrangeData(data, JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
     }, []);
 
 
@@ -363,7 +516,7 @@ const Men = ({data}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el} gender={"M"}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} gender={"M"} arrangement={arrangementFinal}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
@@ -375,15 +528,16 @@ const Men = ({data}) => {
                 )
             } else if (el.type === "multiSectionCircles") {
                 arr.push(
-                    <MultiSectionCirclesGrid el={el} gender={"M"}></MultiSectionCirclesGrid>
+                    <MultiSectionCirclesGrid el={el} gender={"M"}
+                                             arrangement={arrangementFinal}></MultiSectionCirclesGrid>
                 )
             } else if (el.type === "multiSectionRecs") {
                 arr.push(
-                    <MultiSectionRecs el={el} gender={"M"}></MultiSectionRecs>
+                    <MultiSectionRecs el={el} gender={"M"} arrangement={arrangementFinal}></MultiSectionRecs>
                 )
             } else if (el.type === "multiSectionImages") {
                 arr.push(
-                    <MultiSectionImages el={el} gender={"M"}></MultiSectionImages>
+                    <MultiSectionImages el={el} gender={"M"} arrangement={arrangementFinal}></MultiSectionImages>
                 )
             } else if (el.type === "fullWidthImage") {
                 arr.push(
