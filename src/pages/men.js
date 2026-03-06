@@ -173,6 +173,24 @@ const Men = ({data}) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const restoreScrollPosition = () => {
+        const savedPosition = Cookies.get("homeScrollPositionMen");
+        if (!uploadedContent) {
+            console.log("ПОХУЙ")
+            // setTimeout(() => {
+            //     console.log("ПЛЮС ПОЕБАТЬ")
+            //     restoreScrollPosition();
+            // }, 100)
+        } else if (savedPosition) {
+            console.log("УРА")
+            window.scrollTo(0, parseInt(savedPosition, 10));
+        }
+    };
+
+    useEffect(() => {
+        restoreScrollPosition()
+    }, [uploadedContent]);
+
     useEffect(() => {
         const saveScrollPosition = () => {
             Cookies.set("homeScrollPositionMen", window.scrollY.toString(), {expires: 0.25});
@@ -181,16 +199,19 @@ const Men = ({data}) => {
         const restoreScrollPosition = () => {
             const savedPosition = Cookies.get("homeScrollPositionMen");
             if (!uploadedContent) {
+                console.log("ПОХУЙ")
                 setTimeout(() => {
+                    console.log("ПЛЮС ПОЕБАТЬ")
                     restoreScrollPosition();
                 }, 100)
             } else if (savedPosition) {
+                console.log("УРА")
                 window.scrollTo(0, parseInt(savedPosition, 10));
             }
         };
 
         // Восстанавливаем позицию при загрузке страницы
-        restoreScrollPosition();
+        // restoreScrollPosition();
 
         // Сохраняем позицию перед уходом со страницы
         router.events.on("routeChangeStart", saveScrollPosition);
