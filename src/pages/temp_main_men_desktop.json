@@ -13,7 +13,8 @@
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/2.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/3.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/4.png"
-    ]
+    ],
+    "id": 1
   },
   {
     "blockName": "ДОП КАТЕГОРИИ",
@@ -91,7 +92,8 @@
       "/products?category=jewelries",
       "/products?category=sunglasses&category=optical_glasses",
       "/products?category=other_sport_shoes&category=football_boots&category=basketball_sneakers&category=sport_clothes&category=sport_goods&category=sport_bags"
-    ]
+    ],
+    "id": 2
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ БРЕНДЫ",
@@ -206,7 +208,7 @@
       "/products?line=adidas",
       "/products?line=jordan",
       "/products?line=supreme",
-      "/products?line=st\u00fcssy",
+      "/products?line=stüssy",
       "/products?line=converse",
       "/products?line=puma",
       "/products?line=heron_preston",
@@ -221,7 +223,7 @@
       "/products?line=reebok",
       "/products?line=palace",
       "/products?line=drew_house",
-      "/products?line=comme_des_gar\u00e7ons",
+      "/products?line=comme_des_garçons",
       "/products?line=a-cold-wall*",
       "/products?line=ambush",
       "/products?line=loro_piana",
@@ -875,505 +877,141 @@
       ],
       [
         {
-          "id": 454044,
+          "id": 0,
           "in_wishlist": false,
-          "price": {
-            "start_price": 31990,
-            "final_price": 17590
-          },
-          "model": "Air Force 1 Low 2",
-          "colorway": "Certified lover boy Drake",
-          "slug": "nike-air-force-1-low-drake-nocta-certified-lover-boy-454044",
-          "is_collab": true,
-          "collab": {
-            "id": 178,
-            "name": "Nike x Drake NOCTA",
-            "query_name": "nike_x_drake_nocta",
-            "is_main_collab": true,
-            "is_all": false,
-            "score": 10,
-            "score_product_page": 10,
-            "order": 178
-          },
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
+          "is_collab": false,
+          "isLoadingCard": true,
+          "collab": { },
           "brands": [
-            {
-              "id": 57,
-              "name": "Nike",
-              "query_name": "nike",
-              "score": 10
-            }
           ],
           "bucket_link": [
             {
-              "id": 7138319,
               "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-            },
-            {
-              "id": 7138320,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/dadeea3dfe4242ce9181012c5cbd1328.jpg"
-            },
-            {
-              "id": 7138321,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/c840220562f6419da4995724f5b1da58.jpg"
-            },
-            {
-              "id": 7138322,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/81e2e9e8115642edb7e892195f7a6d9a.jpg"
-            },
-            {
-              "id": 7138323,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/c95a61d795164c55ad3916f921584e9c.jpg"
-            },
-            {
-              "id": 7138324,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/6e31a55b00eb4af4a7df65928fcd8cdc.jpg"
             }
           ],
-          "is_sale": true,
+          "is_sale": false,
           "available_sizes": {
-            "sizes": [
-              "35.5",
-              "36",
-              "36.5",
-              "37.5",
-              "38",
-              "38.5",
-              "39",
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "45.5",
-              "46",
-              "47.5"
-            ],
-            "filter_logo": "EU"
+            "sizes": [],
+            "filter_logo": ""
           }
         },
         {
-          "id": 805553,
+          "id": 0,
           "in_wishlist": false,
-          "price": {
-            "start_price": 18890,
-            "final_price": 18890
-          },
-          "model": "Air Jordan 4",
-          "colorway": "\"Olive Canvas\"",
-          "slug": "jordan-air-jordan-4-olive-805553",
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
           "is_collab": false,
-          "collab": null,
+          "isLoadingCard": true,
+          "collab": { },
           "brands": [
-            {
-              "id": 54,
-              "name": "Jordan",
-              "query_name": "jordan",
-              "score": 10
-            }
           ],
           "bucket_link": [
             {
-              "id": 5883908,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/dc46223a750b45b6915fca5b88cb2147.jpg"
-            },
-            {
-              "id": 5883909,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/af42b35f8a214028b4229978033a8c8d.jpg"
-            },
-            {
-              "id": 5883910,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/eb4de404a53f4c2d8784b82dc67641f9.jpg"
-            },
-            {
-              "id": 5883911,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/4c587605b7d943bda2b4a43e83dea9ca.jpg"
-            },
-            {
-              "id": 5883912,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/8003311333b74466b94430bb34602a86.jpg"
-            },
-            {
-              "id": 5883913,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231106/e709760cba824e688129ca151e5404f5.jpg"
+              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
             }
           ],
           "is_sale": false,
           "available_sizes": {
-            "sizes": [
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "45.5",
-              "46",
-              "47",
-              "47.5",
-              "48.5",
-              "49.5"
-            ],
-            "filter_logo": "EU"
+            "sizes": [],
+            "filter_logo": ""
           }
         },
         {
-          "id": 811772,
+          "id": 0,
           "in_wishlist": false,
-          "price": {
-            "start_price": 31390,
-            "final_price": 31390
-          },
-          "model": "Samba",
-          "colorway": "Nylon Tonal Wales Bonner Cream White",
-          "slug": "adidas-samba-wales-bonner-x-pony-tonal-795955",
-          "is_collab": true,
-          "collab": null,
-          "brands": [
-            {
-              "id": 50,
-              "name": "adidas",
-              "query_name": "adidas",
-              "score": 10
-            }
-          ],
-          "bucket_link": [
-            {
-              "id": 7142116,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/53f52150842849f08498ff2cb43ef182.jpg"
-            },
-            {
-              "id": 7142117,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/94a88714c29249018d2dc9bc59668686.jpg"
-            },
-            {
-              "id": 7142118,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/2f83ce2bd68d4bff97f768ae69582807.jpg"
-            },
-            {
-              "id": 7142119,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/ef1e2ca638f24e80b2449d10ce61b603.jpg"
-            },
-            {
-              "id": 7142120,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/b9da6c36185749468a3d79ce72964272.jpg"
-            }
-          ],
-          "is_sale": false,
-          "available_sizes": {
-            "sizes": [
-              "35.5",
-              "36",
-              "36.5",
-              "37",
-              "38",
-              "38.5",
-              "39",
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "46",
-              "46.5",
-              "47"
-            ],
-            "filter_logo": "EU"
-          }
-        },
-        {
-          "id": 807525,
-          "in_wishlist": false,
-          "price": {
-            "start_price": 13990,
-            "final_price": 13990
-          },
-          "model": "KD Kevin Durant",
-          "colorway": "3 3 \"Vibrant Yellow\" Kevin Durant",
-          "slug": "nike-kd-kevin-durant-3-3-vibrant-yellow-kevin-durant-807525",
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
           "is_collab": false,
-          "collab": null,
+          "isLoadingCard": true,
+          "collab": { },
           "brands": [
-            {
-              "id": 57,
-              "name": "Nike",
-              "query_name": "nike",
-              "score": 10
-            }
           ],
           "bucket_link": [
             {
-              "id": 6057087,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/3319f7d5b5c04d5693b5b4a2067cd88b.jpg"
-            },
-            {
-              "id": 6057088,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/5fbde2e947cb47109924dc188def0f6e.jpg"
-            },
-            {
-              "id": 6057089,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/3ed99464a79448a7abd2a4b64f3d0d52.jpg"
-            },
-            {
-              "id": 6057090,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/da5b9e855a66478691f116295c49b4a2.jpg"
-            },
-            {
-              "id": 6057091,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/6bd742cce6cd4a219259811d14d73fd8.jpg"
-            },
-            {
-              "id": 6057092,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231208/4acc15d47d1f47d4a604da4fad6311c5.jpg"
+              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
             }
           ],
           "is_sale": false,
           "available_sizes": {
-            "sizes": [
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "45.5",
-              "46",
-              "47.5",
-              "49.5"
-            ],
-            "filter_logo": "EU"
+            "sizes": [],
+            "filter_logo": ""
           }
         },
         {
-          "id": 798681,
+          "id": 0,
           "in_wishlist": false,
-          "price": {
-            "start_price": 17990,
-            "final_price": 17990
-          },
-          "model": "Air Force 1 Mid",
-          "colorway": "\"White and Varsity Maize\"",
-          "slug": "nike-off-white-air-force-1-mid-white-and-varsity-maize-798681",
-          "is_collab": true,
-          "collab": {
-            "id": 108,
-            "name": "Nike x Off-White",
-            "query_name": "nike_x_off-white",
-            "is_main_collab": true,
-            "is_all": false,
-            "score": 10,
-            "score_product_page": 10,
-            "order": 108
-          },
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
+          "is_collab": false,
+          "isLoadingCard": true,
+          "collab": { },
           "brands": [
-            {
-              "id": 57,
-              "name": "Nike",
-              "query_name": "nike",
-              "score": 10
-            },
-            {
-              "id": 66,
-              "name": "Off-White",
-              "query_name": "off-white",
-              "score": 10
-            }
           ],
           "bucket_link": [
             {
-              "id": 6471985,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/9f7abdece7db46ff97349d0e3c8a3425.jpg"
-            },
-            {
-              "id": 6471986,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/349679457f5e422fb25e76efb65e8ece.jpg"
-            },
-            {
-              "id": 6471987,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/6191caa093c248439d2cbfd55c61283a.jpg"
-            },
-            {
-              "id": 6471988,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/5037e42464154d698ca5134780432e7b.jpg"
-            },
-            {
-              "id": 6471989,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/53a02846dde944e19b602a0c9d2eb9fc.jpg"
-            },
-            {
-              "id": 6471990,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231101/f82ba7b90efa443ea9fd826a49932a5b.jpg"
+              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
             }
           ],
           "is_sale": false,
           "available_sizes": {
-            "sizes": [
-              "Один размер"
-            ],
-            "filter_logo": "EU"
+            "sizes": [],
+            "filter_logo": ""
           }
         },
         {
-          "id": 782461,
+          "id": 0,
           "in_wishlist": false,
-          "price": {
-            "start_price": 17790,
-            "final_price": 17790
-          },
-          "model": "Air Force 1 Low",
-          "colorway": "\"Baroque Brown\"",
-          "slug": "nike-supreme-air-force-1-low-baroque-brown-782461",
-          "is_collab": true,
-          "collab": {
-            "id": 110,
-            "name": "Nike x Supreme",
-            "query_name": "nike_x_supreme",
-            "is_main_collab": true,
-            "is_all": false,
-            "score": 10,
-            "score_product_page": 10,
-            "order": 110
-          },
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
+          "is_collab": false,
+          "isLoadingCard": true,
+          "collab": { },
           "brands": [
-            {
-              "id": 57,
-              "name": "Nike",
-              "query_name": "nike",
-              "score": 10
-            },
-            {
-              "id": 64,
-              "name": "Supreme",
-              "query_name": "supreme",
-              "score": 10
-            }
           ],
           "bucket_link": [
             {
-              "id": 5624621,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231114/7c766399dfbe460ebdd6d343369b2604.jpg"
-            },
-            {
-              "id": 5624622,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231225/161eda644c004eb0a61434afa90d77bf.jpg"
-            },
-            {
-              "id": 5624623,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231225/e8f96e5b9e5d43df9896d407452b7d5e.jpg"
-            },
-            {
-              "id": 5624624,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231225/6727f03af79c45c4a65f237a95d6f087.jpg"
-            },
-            {
-              "id": 5624625,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20231225/f71edb28e65a4b26a39d9723583e987c.jpg"
-            }
-          ],
-          "is_sale": true,
-          "available_sizes": {
-            "sizes": [
-              "38.5",
-              "39",
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "45.5",
-              "46",
-              "47.5"
-            ],
-            "filter_logo": "EU"
-          }
-        },
-        {
-          "id": 434791,
-          "in_wishlist": false,
-          "price": {
-            "start_price": 50290,
-            "final_price": 50290
-          },
-          "model": "Dunk Low",
-          "colorway": "SB Born X Raised One Block At A Time",
-          "slug": "nike-sb-dunk-low-born-x-raised-434791",
-          "is_collab": true,
-          "collab": null,
-          "brands": [
-            {
-              "id": 57,
-              "name": "Nike",
-              "query_name": "nike",
-              "score": 10
-            }
-          ],
-          "bucket_link": [
-            {
-              "id": 6973749,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/c4845bf2afed4e0d955a99ea315f615b.jpg"
-            },
-            {
-              "id": 6973750,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/44ffe63e5d2c424780bedb9b730dfd92.jpg"
-            },
-            {
-              "id": 6973751,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/61ce36c9a5ed4140a2f862673bca4a02.jpg"
-            },
-            {
-              "id": 6973752,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/07e3c8c5670847179567b8fc16e3149f.jpg"
-            },
-            {
-              "id": 6973753,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/117bdccc8a6e460fa2ede6806ec15912.jpg"
-            },
-            {
-              "id": 6973754,
-              "url": "https://cdn.poizon.com/pro-img/origin-img/20230607/1efe34535cbb4ba5b54d616c9265b470.jpg"
+              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
             }
           ],
           "is_sale": false,
           "available_sizes": {
-            "sizes": [
-              "36",
-              "36.5",
-              "37.5",
-              "38",
-              "38.5",
-              "39",
-              "40",
-              "40.5",
-              "41",
-              "42",
-              "42.5",
-              "43",
-              "44",
-              "44.5",
-              "45",
-              "45.5",
-              "46",
-              "47.5",
-              "48.5"
-            ],
-            "filter_logo": "EU"
+            "sizes": [],
+            "filter_logo": ""
+          }
+        },
+        {
+          "id": 0,
+          "in_wishlist": false,
+          "price": {},
+          "model": "",
+          "colorway": "",
+          "slug": "",
+          "is_collab": false,
+          "isLoadingCard": true,
+          "collab": { },
+          "brands": [
+          ],
+          "bucket_link": [
+            {
+              "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+            }
+          ],
+          "is_sale": false,
+          "available_sizes": {
+            "sizes": [],
+            "filter_logo": ""
           }
         }
       ]
@@ -1444,19 +1082,23 @@
       "Casio",
       "RayBan",
       "Swatch"
-    ]
+    ],
+    "id": 3
   },
   {
     "blockName": "aboutPromoModal",
-    "type": "aboutPromoModal"
+    "type": "aboutPromoModal",
+    "id": 4
   },
   {
     "blockName": "НОВИНКИ",
-    "type": "multiSectionImages_"
+    "type": "multiSectionImages_",
+    "id": 5
   },
   {
     "blockName": "giftsPromoModal",
-    "type": "giftsPromoModal"
+    "type": "giftsPromoModal",
+    "id": 6
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
@@ -2759,7 +2401,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 7
   },
   {
     "blockName": "ОДЕЖДА",
@@ -3835,7 +3478,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 8
   },
   {
     "blockName": "SALE IMAGE",
@@ -3843,7 +3487,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/sale.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/sale.png",
-    "imageLink": "/products?is_sale=is_sale"
+    "imageLink": "/products?is_sale=is_sale",
+    "id": 9
   },
   {
     "blockName": "SALE PRODUCTS",
@@ -4357,7 +4002,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 10
   },
   {
     "blockName": "ЗИМНЯЯ ОБУВЬ",
@@ -5518,7 +5164,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 11
   },
   {
     "blockName": "BEST SELLERS IMAGE",
@@ -5526,7 +5173,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/bestSellers.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/bestSellers.png",
-    "imageLink": ""
+    "imageLink": "",
+    "id": 12
   },
   {
     "blockName": "BEST SELLERS PRODUCTS",
@@ -6040,7 +5688,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 13
   },
   {
     "blockName": "ВЕРХНЯЯ ОДЕЖДА",
@@ -7229,7 +6878,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 14
   },
   {
     "blockName": "СУМКИ",
@@ -8305,7 +7955,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 15
   },
   {
     "blockName": "БАСКЕТБОЛЬНЫЕ ТОВАРЫ",
@@ -9408,7 +9059,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 16
   },
   {
     "blockName": "ПРЕМИУМ КРОССОВКИ",
@@ -10615,7 +10267,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 17
   },
   {
     "blockName": "КОЛЛЛАБОРАЦИИ IMAGE",
@@ -10635,7 +10288,8 @@
       "content": "Сотни знаковых коллабораций: \n<a href='/products?line=yeezy'>adidas Yeezy</a>, \n<a href='/products?collab=nike_x_off-white'>Nike x Off-White</a>, \n<a href='/products?collab=nike_x_travis_scott'>Nike x Travis Scott</a>, \n<a href='/products?collab=nike_x_supreme'>Nike x Supreme</a>, \n<a href='/products?collab=nike_x_union'>Nike x Union</a>, \n<a href='/products?collab=nike_x_clot'>Nike x Clot</a>, \n<a href='/products?collab=nike_x_sacai'>Nike x Sacai</a>, \n<a href='/products?collab=nike_x_st%C3%BCssy'>Nike x Stüssy</a>, \n<a href='/products?collab=nike_x_ambush'>Nike x Ambush</a>, \n<a href='/products?collab=nike_x_a_ma_maniére'>Nike x A Ma Maniére</a> и многие другие",
       "url": "collab=all",
       "button": "Все коллаборационные лоты"
-    }
+    },
+    "id": 18
   },
   {
     "blockName": "КОЛЛЛАБОРАЦИИ PRODUCTS",
@@ -11149,7 +10803,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 19
   },
   {
     "blockName": "Аксессуары",
@@ -12225,7 +11880,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 20
   },
   {
     "blockName": "UNDER RETAIL IMAGE",
@@ -12233,7 +11889,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/underRetail.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/underRetail.png",
-    "imageLink": ""
+    "imageLink": "",
+    "id": 21
   },
   {
     "blockName": "UNDER RETAIL PRODUCTS",
@@ -12747,7 +12404,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 22
   },
   {
     "blockName": "NIKE LINES",
@@ -13962,7 +13620,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 23
   },
   {
     "blockName": "MORE PROFIT IMAGE",
@@ -13970,7 +13629,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/moreProfit.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/moreProfit.png",
-    "imageLink": "/products?collection=bargainsmen"
+    "imageLink": "/products?collection=bargainsmen",
+    "id": 24
   },
   {
     "blockName": "MORE PROFIT PRODUCTS",
@@ -14485,7 +14145,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 25
   },
   {
     "blockName": "JORDAN LINES",
@@ -15612,7 +15273,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 26
   },
   {
     "blockName": "STREETWEAR",
@@ -16794,7 +16456,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 27
   },
   {
     "blockName": "NEW BALANCE LINES",
@@ -17889,7 +17552,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 28
   },
   {
     "blockName": "TOP SHELF IMAGE",
@@ -17897,7 +17561,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/topShelf.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/topShelf.png",
-    "imageLink": "/products?collection=topshelfmen"
+    "imageLink": "/products?collection=topshelfmen",
+    "id": 29
   },
   {
     "blockName": "TOP SHELF PRODUCTS",
@@ -18412,7 +18077,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 30
   },
   {
     "blockName": "ADIDAS LINES",
@@ -19603,7 +19269,8 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 31
   },
   {
     "blockName": "GIFTS FOR HER IMAGE",
@@ -19611,7 +19278,8 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/giftsForHer.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/giftsForHer.png",
-    "imageLink": "/products?collection=8march&gender=F"
+    "imageLink": "/products?collection=8march&gender=F",
+    "id": 32
   },
   {
     "blockName": "GIFTS FOR HER PRODUCTS",
@@ -20126,7 +19794,8 @@
           "filter_logo": "EU"
         }
       }
-    ]
+    ],
+    "id": 33
   },
   {
     "blockName": "MORE SNEAKERS",
@@ -21308,6 +20977,7 @@
           }
         }
       ]
-    ]
+    ],
+    "id": 34
   }
 ]

@@ -24,7 +24,7 @@ import 'swiper/css/effect-fade';
 
 
 const ProductCard = ({cardList = false, product}) => {
-    const {id, model, slug, brands, collab, colorway, price} = product
+    const {id, model, slug, brands, collab, colorway, price, isLoadingCard} = product
     const isFastShip = product.is_fast_shipping
     const isReturn = product.is_return
     const isSale = product.is_sale
@@ -169,360 +169,437 @@ const ProductCard = ({cardList = false, product}) => {
 
 
     return (
+        <>
+            {!isLoadingCard ? (
+                <Link className={cardList ? s.card_list : s.card}
+                      href={`/products/${slug}`}
+                      key={slug}
 
-        <Link className={cardList ? s.card_list : s.card}
-              href={`/products/${slug}`}
-              key={slug}
-
-        >
-            <div className={s.icons_block}>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    {(price.start_price > price.final_price) && price.final_price > 0 && <div className={s.sale}>
-                        -{Math.ceil(100 - (price.final_price / price.start_price) * 100)}%
-                    </div>}
-                    {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
-                    {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
-                </div>
-                {userStore.isLogged
-                    ?
-                    <div className={s.like_block}
-                         onClick={(e) => {
-                             e.preventDefault()
-                             e.stopPropagation()
-                             isInWishlist ? deleteFromWL() : addToWL()
-                         }}>
-                        <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
-                    </div>
-                    :
-                    <div onClick={e => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                    }} className={s.like_block}>
-                        <AuthModal fromWishlist={true}>
-                            <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}
-                            />
-                        </AuthModal>
-                    </div>
-                }
-            </div>
-            {/*{photosArr && photosArr.length > 0 &&*/}
-            {/*    <div className={s.image_container}*/}
-            {/*         onTouchStart={e => {*/}
-            {/*             e.stopPropagation()*/}
-            {/*             handleMouseEnter()*/}
-            {/*         }}*/}
-            {/*         onTouchEnd={e => {*/}
-            {/*             e.stopPropagation()*/}
-            {/*             handleMouseLeave()*/}
-            {/*         }}*/}
-            {/*         onMouseEnter={handleMouseEnter}*/}
-            {/*         onMouseLeave={handleMouseLeave}*/}
-
-            {/*    >*/}
-            {/*        <Image*/}
-            {/*            style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
-            {/*            loading={'eager'}*/}
-            {/*            fill={true}*/}
-            {/*            className={isHovered && photosArr[1] && desktopStore.isDesktop ? 'opacity-0' : ''}*/}
-            {/*            onLoadingComplete={() => setIsLoading(false)}*/}
-            {/*            src={photosArr[0].url}*/}
-            {/*            alt="shoe"*/}
-            {/*            sizes={'100%'}*/}
-            {/*        />*/}
-            {/*        {photosArr[1] && (*/}
-            {/*            <Image*/}
-            {/*                style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
-            {/*                loading={'eager'}*/}
-            {/*                fill={true}*/}
-            {/*                className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}*/}
-            {/*                onLoadingComplete={() => setIsLoading(false)}*/}
-            {/*                src={photosArr[currentIndex].url}*/}
-            {/*                alt="shoe"*/}
-            {/*                sizes={'100%'}*/}
-            {/*            />*/}
-            {/*        )}*/}
-            {/*        <Image*/}
-            {/*            src={desktopStore.isDesktop ? desktop : mobile}*/}
-            {/*            alt=""*/}
-            {/*            className={'placeholder_img'}*/}
-            {/*            fill={true}*/}
-            {/*            style={isLoading ? {} : { opacity: 0 }}*/}
-            {/*            sizes={'100%'}*/}
-            {/*        />*/}
-            {/*        {isHovered && photosArr.length > 1 && (*/}
-            {/*            <>*/}
-            {/*                <div*/}
-            {/*                    style={{*/}
-            {/*                        position: 'absolute',*/}
-            {/*                        top: '50%',*/}
-            {/*                        left: '10px',*/}
-            {/*                        transform: 'translateY(-50%)',*/}
-            {/*                        cursor: 'pointer',*/}
-            {/*                    }}*/}
-            {/*                    onClick={handlePrevClick}*/}
-            {/*                >*/}
-            {/*                    &lt; /!* Left arrow *!/*/}
-            {/*                </div>*/}
-            {/*                <div*/}
-            {/*                    style={{*/}
-            {/*                        position: 'absolute',*/}
-            {/*                        top: '50%',*/}
-            {/*                        right: '10px',*/}
-            {/*                        transform: 'translateY(-50%)',*/}
-            {/*                        cursor: 'pointer',*/}
-            {/*                    }}*/}
-            {/*                    onClick={handleNextClick}*/}
-            {/*                >*/}
-            {/*                    &gt; /!* Right arrow *!/*/}
-            {/*                </div>*/}
-            {/*            </>*/}
-            {/*        )}*/}
-
-            {photosArr && photosArr.length > 0 &&
-                (!desktopStore.isDesktop
-                        ?
-                        <div className={s.image_container}>
-
-                            <Swiper
-                                className={s.swiper_container}
-                                // style={{zIndex: -1}}
-                                // id={photosArr[0].id}
-                                loop={true}
-                                pagination={{
-                                    type: 'bullets'
-                                }}
-                                // effect={"fade"}
-
-                                // zoom={true}
-                                // initialSlide={0}
-                                // navigation={true}
-                                modules={[Pagination, Navigation]}
-                                pagination={!isLoading}
-                                // className={s.cont}
-                                style={{
-                                    // "--swiper-pagination-bullet-size": "8px",
-                                    // "--swiper-pagination-bullet-vertical-gap": "15px",
-                                    "--swiper-pagination-color": "rgb(38,38,38)",
-                                    "--swiper-navigation-color": "#000",
-                                    '--swiper-pagination-bullet-size': '6px',
-                                    '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
-                                    // '--swiper-pagination-left': '10px',
-                                    // '--swiper-pagination-right': '10px',
-                                    '--swiper-pagination-bottom': '-4px',
-                                    // '--swiper-pagination-top': '10px'
-
-                                    // "--swiper-pagination-right": "0",
-
-                                }}
-
-
-                            >
-                                {photos.map((el, index) =>
-                                    <SwiperSlide
-                                        key={index}
-
-                                        // className={s.photo}
-                                    >
-                                        {el !== "logo" &&
-                                            <Image
-                                                id="photo"
-                                                style={{
-                                                    position: 'absolute',
-                                                    objectFit: 'contain',
-                                                    // objectPosition: "center bottom",
-                                                    bottom: 0,
-                                                    opacity: isLoading ? 0.4 : 1, // Начальная прозрачность в зависимости от состояния загрузки
-                                                    transition: el === "logo" ? "" : 'opacity 0.4s ease', // Анимация изменения прозрачности
-                                                }}
-                                                loading={index === 0 ? "eager" : "lazy"}
-                                                fill={true}
-                                                className={''}
-                                                // onLoadingComplete={() => setIsLoading(false)}
-                                                src={el}
-                                                onLoadingComplete={() => setIsLoading(false)}
-                                                alt="shoe"
-                                                sizes={'100%'}
-                                            />
-                                        }
-                                    </SwiperSlide>
-                                )
-                                }
-                            </Swiper>
-                            <Image
-                                src={desktopStore.isDesktop ? desktop : mobile}
-                                alt=''
-                                className={'placeholder_img'}
-                                fill={true}
-                                style={{
-                                    position: 'absolute',
-                                    objectFit: 'contain',
-                                    // objectPosition: "center bottom",
-                                    transition: 'opacity 0.2s ease', // Анимация изменения прозрачности
-                                    opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
-                                }}
-                                sizes={'100%'}
-                            />
-                            {/*{isLoading &&*/}
-                            {/*<Image src={mobile} alt=''*/}
-                            {/*       className={'placeholder_img'} fill={true}*/}
-                            {/*       style={{*/}
-                            {/*           position: 'absolute',*/}
-                            {/*           objectFit: 'contain',*/}
-                            {/*           objectPosition: "center bottom",*/}
-                            {/*       }}*/}
-                            {/*       sizes={'100%'}/>}*/}
-
+                >
+                    <div className={s.icons_block}>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            {(price.start_price > price.final_price) && price.final_price > 0 &&
+                                <div className={s.sale}>
+                                    -{Math.ceil(100 - (price.final_price / price.start_price) * 100)}%
+                                </div>}
+                            {isFastShip && <Image src={truck} alt="shippment" className={s.truck}/>}
+                            {isReturn && <Image src={re} alt="shippment" className={s.truck}/>}
                         </div>
-                        :
-                        <div className={s.image_container}
-                             onTouchStart={e => {
-                                 e.stopPropagation()
-                                 handleMouseEnter()
-                             }}
-                             onTouchEnd={e => {
-                                 e.stopPropagation()
-                                 handleMouseLeave()
-                             }}
-                             onMouseEnter={handleMouseEnter}
-                             onMouseLeave={handleMouseLeave}
-
-                        >
-
-
-                            <Image
-                                style={{position: 'absolute', objectFit: 'contain', objectPosition: "center bottom"}}
-                                loading={'eager'}
-                                fill={true}
-                                className={isHovered && photos[1] && desktopStore.isDesktop ? 'opacity-0' : ''}
-                                onLoadingComplete={() => setIsLoading(false)}
-                                src={photosArr[0].url !== "logo" ? photosArr[0].url : (desktopStore.isDesktop ? desktop : mobile)}
-                                alt="shoe"
-                                sizes={'100%'}/>
-
-
-                            {photos[1] &&
-                                <Image
-                                    style={{
-                                        position: 'absolute',
-                                        objectFit: 'contain',
-                                        objectPosition: "center bottom"
-                                    }}
-
-                                    fill={true}
-                                    className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}
-                                    onLoadingComplete={() => setIsLoading(false)}
-                                    src={photos[1]} alt="shoe"
-                                    sizes={'100%'}
-                                />
-                            }
-                            {/*{isLoading &&*/}
-                            {/*    <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''*/}
-                            {/*           className={'placeholder_img'} fill={true}*/}
-                            {/*           style={{*/}
-                            {/*               position: 'absolute',*/}
-                            {/*               objectFit: 'contain',*/}
-                            {/*               objectPosition: "center bottom",*/}
-                            {/*           }}*/}
-                            {/*           sizes={'100%'}/>}*/}
-
-
-                            <Image
-                                src={desktopStore.isDesktop ? desktop : mobile}
-                                alt=''
-                                className={'placeholder_img'}
-                                fill={true}
-                                style={{
-                                    position: 'absolute',
-                                    objectFit: 'contain',
-                                    objectPosition: "center bottom",
-                                    transition: 'opacity 0.5s ease', // Анимация изменения прозрачности
-                                    opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
-                                }}
-                                sizes={'100%'}
-                            />
-                        </div>
-                )
-            }
-            <div className={s.text_block}
-                 ref={sizesRef}
-            >
-                {
-                    !(isHovered && desktopStore.isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
-                        ?
-                        <>
-                            <div className={s.info}>
-                                <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : ""}</div>
-                                <div
-                                    className={brandsDisplay() !== "Загрузка" ? `${s.brand}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? model || '' : ""}</div>
-                                <div
-                                    className={s.colorway}>{brandsDisplay() !== "Загрузка" ? colorway : ""}</div>
+                        {userStore.isLogged
+                            ?
+                            <div className={s.like_block}
+                                 onClick={(e) => {
+                                     e.preventDefault()
+                                     e.stopPropagation()
+                                     isInWishlist ? deleteFromWL() : addToWL()
+                                 }}>
+                                <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like} width={20}/>
                             </div>
-                        </>
-                        :
-                        <div>
+                            :
+                            <div onClick={e => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                            }} className={s.like_block}>
+                                <AuthModal fromWishlist={true}>
+                                    <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
+                                           width={20}
+                                    />
+                                </AuthModal>
+                            </div>
+                        }
+                    </div>
+                    {/*{photosArr && photosArr.length > 0 &&*/}
+                    {/*    <div className={s.image_container}*/}
+                    {/*         onTouchStart={e => {*/}
+                    {/*             e.stopPropagation()*/}
+                    {/*             handleMouseEnter()*/}
+                    {/*         }}*/}
+                    {/*         onTouchEnd={e => {*/}
+                    {/*             e.stopPropagation()*/}
+                    {/*             handleMouseLeave()*/}
+                    {/*         }}*/}
+                    {/*         onMouseEnter={handleMouseEnter}*/}
+                    {/*         onMouseLeave={handleMouseLeave}*/}
+
+                    {/*    >*/}
+                    {/*        <Image*/}
+                    {/*            style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
+                    {/*            loading={'eager'}*/}
+                    {/*            fill={true}*/}
+                    {/*            className={isHovered && photosArr[1] && desktopStore.isDesktop ? 'opacity-0' : ''}*/}
+                    {/*            onLoadingComplete={() => setIsLoading(false)}*/}
+                    {/*            src={photosArr[0].url}*/}
+                    {/*            alt="shoe"*/}
+                    {/*            sizes={'100%'}*/}
+                    {/*        />*/}
+                    {/*        {photosArr[1] && (*/}
+                    {/*            <Image*/}
+                    {/*                style={{ position: 'absolute', objectFit: 'contain', objectPosition: 'center bottom' }}*/}
+                    {/*                loading={'eager'}*/}
+                    {/*                fill={true}*/}
+                    {/*                className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}*/}
+                    {/*                onLoadingComplete={() => setIsLoading(false)}*/}
+                    {/*                src={photosArr[currentIndex].url}*/}
+                    {/*                alt="shoe"*/}
+                    {/*                sizes={'100%'}*/}
+                    {/*            />*/}
+                    {/*        )}*/}
+                    {/*        <Image*/}
+                    {/*            src={desktopStore.isDesktop ? desktop : mobile}*/}
+                    {/*            alt=""*/}
+                    {/*            className={'placeholder_img'}*/}
+                    {/*            fill={true}*/}
+                    {/*            style={isLoading ? {} : { opacity: 0 }}*/}
+                    {/*            sizes={'100%'}*/}
+                    {/*        />*/}
+                    {/*        {isHovered && photosArr.length > 1 && (*/}
+                    {/*            <>*/}
+                    {/*                <div*/}
+                    {/*                    style={{*/}
+                    {/*                        position: 'absolute',*/}
+                    {/*                        top: '50%',*/}
+                    {/*                        left: '10px',*/}
+                    {/*                        transform: 'translateY(-50%)',*/}
+                    {/*                        cursor: 'pointer',*/}
+                    {/*                    }}*/}
+                    {/*                    onClick={handlePrevClick}*/}
+                    {/*                >*/}
+                    {/*                    &lt; /!* Left arrow *!/*/}
+                    {/*                </div>*/}
+                    {/*                <div*/}
+                    {/*                    style={{*/}
+                    {/*                        position: 'absolute',*/}
+                    {/*                        top: '50%',*/}
+                    {/*                        right: '10px',*/}
+                    {/*                        transform: 'translateY(-50%)',*/}
+                    {/*                        cursor: 'pointer',*/}
+                    {/*                    }}*/}
+                    {/*                    onClick={handleNextClick}*/}
+                    {/*                >*/}
+                    {/*                    &gt; /!* Right arrow *!/*/}
+                    {/*                </div>*/}
+                    {/*            </>*/}
+                    {/*        )}*/}
+
+                    {photosArr && photosArr.length > 0 &&
+                        (!desktopStore.isDesktop
+                                ?
+                                <div className={s.image_container}>
+
+                                    <Swiper
+                                        className={s.swiper_container}
+                                        // style={{zIndex: -1}}
+                                        // id={photosArr[0].id}
+                                        loop={true}
+                                        pagination={{
+                                            type: 'bullets'
+                                        }}
+                                        // effect={"fade"}
+
+                                        // zoom={true}
+                                        // initialSlide={0}
+                                        // navigation={true}
+                                        modules={[Pagination, Navigation]}
+                                        pagination={!isLoading}
+                                        // className={s.cont}
+                                        style={{
+                                            // "--swiper-pagination-bullet-size": "8px",
+                                            // "--swiper-pagination-bullet-vertical-gap": "15px",
+                                            "--swiper-pagination-color": "rgb(38,38,38)",
+                                            "--swiper-navigation-color": "#000",
+                                            '--swiper-pagination-bullet-size': '6px',
+                                            '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
+                                            // '--swiper-pagination-left': '10px',
+                                            // '--swiper-pagination-right': '10px',
+                                            '--swiper-pagination-bottom': '-4px',
+                                            // '--swiper-pagination-top': '10px'
+
+                                            // "--swiper-pagination-right": "0",
+
+                                        }}
+
+
+                                    >
+                                        {photos.map((el, index) =>
+                                            <SwiperSlide
+                                                key={index}
+
+                                                // className={s.photo}
+                                            >
+                                                {el !== "logo" &&
+                                                    <Image
+                                                        id="photo"
+                                                        style={{
+                                                            position: 'absolute',
+                                                            objectFit: 'contain',
+                                                            // objectPosition: "center bottom",
+                                                            bottom: 0,
+                                                            opacity: isLoading ? 0.4 : 1, // Начальная прозрачность в зависимости от состояния загрузки
+                                                            transition: el === "logo" ? "" : 'opacity 0.4s ease', // Анимация изменения прозрачности
+                                                        }}
+                                                        loading={index === 0 ? "eager" : "lazy"}
+                                                        fill={true}
+                                                        className={''}
+                                                        // onLoadingComplete={() => setIsLoading(false)}
+                                                        src={el}
+                                                        onLoadingComplete={() => setIsLoading(false)}
+                                                        alt="shoe"
+                                                        sizes={'100%'}
+                                                    />
+                                                }
+                                            </SwiperSlide>
+                                        )
+                                        }
+                                    </Swiper>
+                                    <Image
+                                        src={desktopStore.isDesktop ? desktop : mobile}
+                                        alt=''
+                                        className={'placeholder_img'}
+                                        fill={true}
+                                        style={{
+                                            position: 'absolute',
+                                            objectFit: 'contain',
+                                            // objectPosition: "center bottom",
+                                            transition: 'opacity 0.2s ease', // Анимация изменения прозрачности
+                                            opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
+                                        }}
+                                        sizes={'100%'}
+                                    />
+                                    {/*{isLoading &&*/}
+                                    {/*<Image src={mobile} alt=''*/}
+                                    {/*       className={'placeholder_img'} fill={true}*/}
+                                    {/*       style={{*/}
+                                    {/*           position: 'absolute',*/}
+                                    {/*           objectFit: 'contain',*/}
+                                    {/*           objectPosition: "center bottom",*/}
+                                    {/*       }}*/}
+                                    {/*       sizes={'100%'}/>}*/}
+
+                                </div>
+                                :
+                                <div className={s.image_container}
+                                     onTouchStart={e => {
+                                         e.stopPropagation()
+                                         handleMouseEnter()
+                                     }}
+                                     onTouchEnd={e => {
+                                         e.stopPropagation()
+                                         handleMouseLeave()
+                                     }}
+                                     onMouseEnter={handleMouseEnter}
+                                     onMouseLeave={handleMouseLeave}
+
+                                >
+
+
+                                    <Image
+                                        style={{
+                                            position: 'absolute',
+                                            objectFit: 'contain',
+                                            objectPosition: "center bottom"
+                                        }}
+                                        loading={'eager'}
+                                        fill={true}
+                                        className={isHovered && photos[1] && desktopStore.isDesktop ? 'opacity-0' : ''}
+                                        onLoadingComplete={() => setIsLoading(false)}
+                                        src={photosArr[0].url !== "logo" ? photosArr[0].url : (desktopStore.isDesktop ? desktop : mobile)}
+                                        alt="shoe"
+                                        sizes={'100%'}/>
+
+
+                                    {photos[1] &&
+                                        <Image
+                                            style={{
+                                                position: 'absolute',
+                                                objectFit: 'contain',
+                                                objectPosition: "center bottom"
+                                            }}
+
+                                            fill={true}
+                                            className={isHovered && desktopStore.isDesktop ? '' : 'opacity-0'}
+                                            onLoadingComplete={() => setIsLoading(false)}
+                                            src={photos[1]} alt="shoe"
+                                            sizes={'100%'}
+                                        />
+                                    }
+                                    {/*{isLoading &&*/}
+                                    {/*    <Image src={desktopStore.isDesktop ? desktop : mobile} alt=''*/}
+                                    {/*           className={'placeholder_img'} fill={true}*/}
+                                    {/*           style={{*/}
+                                    {/*               position: 'absolute',*/}
+                                    {/*               objectFit: 'contain',*/}
+                                    {/*               objectPosition: "center bottom",*/}
+                                    {/*           }}*/}
+                                    {/*           sizes={'100%'}/>}*/}
+
+
+                                    <Image
+                                        src={desktopStore.isDesktop ? desktop : mobile}
+                                        alt=''
+                                        className={'placeholder_img'}
+                                        fill={true}
+                                        style={{
+                                            position: 'absolute',
+                                            objectFit: 'contain',
+                                            objectPosition: "center bottom",
+                                            transition: 'opacity 0.5s ease', // Анимация изменения прозрачности
+                                            opacity: isLoading ? 1 : 0, // Начальная прозрачность в зависимости от состояния загрузки
+                                        }}
+                                        sizes={'100%'}
+                                    />
+                                </div>
+                        )
+                    }
+                    <div className={s.text_block}
+                         ref={sizesRef}
+                    >
+                        {
+                            !(isHovered && desktopStore.isDesktop && (product.available_sizes && product.available_sizes.sizes?.length))
+                                ?
+                                <>
+                                    <div className={s.info}>
+                                        <div
+                                            className={brandsDisplay() !== "Загрузка" ? `${s.tag}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? brandsDisplay() : ""}</div>
+                                        <div
+                                            className={brandsDisplay() !== "Загрузка" ? `${s.brand}` : `${s.placeholder}`}>{brandsDisplay() !== "Загрузка" ? model || '' : ""}</div>
+                                        <div
+                                            className={s.colorway}>{brandsDisplay() !== "Загрузка" ? colorway : ""}</div>
+                                    </div>
+                                </>
+                                :
+                                <div>
                             <span className={s.tag}>
                                 Доступные размеры{product.available_sizes.filter_logo ? ` (${product.available_sizes.filter_logo})` : ''}:</span>
-                            <br/>
-                            <span style={{fontSize: '14px', lineHeight: '1.5', color: 'black', display: 'inline-block'}}>{renderSizes()}</span>
-                        </div>
-                }
-                <div className={`${s.price_block}`}>
-                    {
-                        ((price.start_price > price.final_price) && price.final_price > 0)
-                            ?
-                            Number(price.final_price) > 0
-                                ?
-                                <div className={`${s.price}`}>
+                                    <br/>
+                                    <span style={{
+                                        fontSize: '14px',
+                                        lineHeight: '1.5',
+                                        color: 'black',
+                                        display: 'inline-block'
+                                    }}>{renderSizes()}</span>
+                                </div>
+                        }
+                        <div className={`${s.price_block}`}>
+                            {
+                                ((price.start_price > price.final_price) && price.final_price > 0)
+                                    ?
+                                    Number(price.final_price) > 0
+                                        ?
+                                        <div className={`${s.price}`}>
 
-                                    {desktopStore.isDesktop ? (
-                                        <div className={`${price.final_price > 9999999 ? s.flexColumn : s.flexRow}`}>
+                                            {desktopStore.isDesktop ? (
+                                                <div
+                                                    className={`${price.final_price > 9999999 ? s.flexColumn : s.flexRow}`}>
                                             <span
                                                 className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
-                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                                    <span
+                                                        className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                                </div>
+                                            ) : windowWidth > 650 ? (
+                                                <>
+                                                    {/*<span style={{display: 'flex'}}><span*/}
+                                                    {/*    className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>&nbsp;&nbsp;</span>*/}
+                                                    {/*<span*/}
+                                                    {/*    className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>*/}
+                                                    <span
+                                                        className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
+                                                    <span
+                                                        className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span
+                                                        className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
+                                                    <span
+                                                        className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>
+                                                </>
+                                            )}
                                         </div>
-                                    ) : windowWidth > 650 ? (
-                                        <>
-                                            {/*<span style={{display: 'flex'}}><span*/}
-                                            {/*    className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>&nbsp;&nbsp;</span>*/}
-                                            {/*<span*/}
-                                            {/*    className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>*/}
-                                            <span
-                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽ &nbsp;</span>
-                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className={s.crossed}>{addSpacesToNumber(price.start_price)} ₽</span>
-                                            <span
-                                                className={s.sale_price}>от {addSpacesToNumber(price.final_price)} ₽</span>
-                                        </>
-                                    )}
-                                </div>
-                                :
-                                <div className={`${s.price}`}>
-                                    Нет в наличии
-                                </div>
-                            :
-                            Number(price.final_price) === 1
-                                ?
-                                <div className={`${s.placeholder}`}>
+                                        :
+                                        <div className={`${s.price}`}>
+                                            Нет в наличии
+                                        </div>
+                                    :
+                                    Number(price.final_price) === 1
+                                        ?
+                                        <div className={`${s.placeholder}`}>
 
+                                        </div>
+                                        :
+                                        <div className={`${s.price}`}>
+                                            {
+                                                Number(price.final_price) > 0
+                                                    ?
+                                                    `от ${addSpacesToNumber(price.final_price)} ₽`
+                                                    :
+                                                    'Нет в наличии'
+                                            }
+                                        </div>
+                            }
+                        </div>
+                    </div>
+                </Link>
+            ) : (
+                <div className={cardList ? s.card_list : s.card}
+                     key={slug}
+                >
+                    {photosArr && photosArr.length > 0 &&
+                        (!desktopStore.isDesktop
+                                ?
+                                <div className={s.image_container}>
+                                    <Image
+                                        src={desktopStore.isDesktop ? desktop : mobile}
+                                        alt=''
+                                        className={'placeholder_img'}
+                                        fill={true}
+                                        style={{
+                                            position: 'absolute',
+                                            objectFit: 'contain',
+                                            // objectPosition: "center bottom",
+                                            transition: 'opacity 0.2s ease', // Анимация изменения прозрачности
+                                            opacity: 1, // Начальная прозрачность в зависимости от состояния загрузки
+                                        }}
+                                        sizes={'100%'}
+                                    />
                                 </div>
                                 :
-                                <div className={`${s.price}`}>
-                                    {
-                                        Number(price.final_price) > 0
-                                            ?
-                                            `от ${addSpacesToNumber(price.final_price)} ₽`
-                                            :
-                                            'Нет в наличии'
-                                    }
+                                <div className={s.image_container}
+                                     onTouchStart={e => {
+                                         e.stopPropagation()
+                                         handleMouseEnter()
+                                     }}
+                                     onTouchEnd={e => {
+                                         e.stopPropagation()
+                                         handleMouseLeave()
+                                     }}
+                                     onMouseEnter={handleMouseEnter}
+                                     onMouseLeave={handleMouseLeave}
+
+                                >
+                                    <Image
+                                        src={desktopStore.isDesktop ? desktop : mobile}
+                                        alt=''
+                                        className={'placeholder_img'}
+                                        fill={true}
+                                        style={{
+                                            position: 'absolute',
+                                            objectFit: 'contain',
+                                            objectPosition: "center bottom",
+                                            transition: 'opacity 0.5s ease', // Анимация изменения прозрачности
+                                            opacity: 1, // Начальная прозрачность в зависимости от состояния загрузки
+                                        }}
+                                        sizes={'100%'}
+                                    />
                                 </div>
+                        )
                     }
+                    <div className={s.text_block}
+                    >
+                        <div className={s.skeleton}></div>
+                    </div>
                 </div>
-            </div>
-        </Link>
+            )}
+        </>
     );
 };
 

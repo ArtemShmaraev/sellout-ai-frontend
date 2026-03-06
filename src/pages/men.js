@@ -19,7 +19,6 @@ import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
 import {desktopStore} from "@/store/DesktopStore";
 import tempManJson from "./temp_main_men_desktop.json"
-import tempManJson2 from "./temp_main_men_desktop_2.json"
 import arrowNew from "@/static/icons/arrowSlider.svg";
 import styles from "@/styles/CatalogBrandsMobileMen.module.css";
 import more from "@/static/icons/moreIcon.svg";
@@ -47,56 +46,7 @@ export const getServerSideProps = async (context) => {
 const Men = ({data}) => {
     // const {desktopStore} = useContext(Context)
     const router = useRouter()
-    const [content, setContent] = useState(data); // Инициализация с props
-    const [uploadedContent, setUploadedContent] = useState(false);
-
-    useEffect(() => {
-        console.log("ВЫЗОВ ЗАГРУЗОЧНОГО ЭФФЕКТА")
-        console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
-        if (typeof window !== "undefined") {
-            const cachedData = localStorage.getItem("contentMainPageMen");
-            const lastUpdated = localStorage.getItem("contentMainPageMenLastUpdated");
-
-            if (cachedData && lastUpdated) {
-                const now = new Date().getTime();
-                const timeDifference = (now - parseInt(lastUpdated, 10)) / 1000 / 60; // Разница в минутах
-
-                if (timeDifference <= 30) {
-                    setContent(JSON.parse(cachedData)); // Устанавливаем данные из localStorage
-                    setUploadedContent(true);
-                    console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
-                    console.log("Установили уже созданный контент")
-                    return;
-                }
-            }
-            localStorage.setItem("contentMainPageMen", JSON.stringify(content));
-            localStorage.setItem("contentMainPageMenLastUpdated", new Date().getTime().toString());
-            console.log("Не установили уже созданный контент")
-            setUploadedContent(true);
-        } else {
-            console.log("А КАК ТАК")
-        }
-    }, []);
-
-    // Обновляем данные в localStorage при изменении content
-    useEffect(() => {
-        if (uploadedContent) {
-            console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
-            localStorage.setItem("contentMainPageMen", JSON.stringify(content));
-            console.log(JSON.parse(localStorage.getItem("contentMainPageMen"))?.[2]);
-            console.log("UPDATED STORAGE")
-        }
-    }, [content]);
-
-    // Функция для обновления content в дочерних компонентах
-    const updateContent = (updatedEl) => {
-        console.log("TRYING TO UPDATE" + updatedEl.id + "INDEX");
-        setContent((prevContent) =>
-            prevContent.map((el) =>
-                el.id === updatedEl.id ? updatedEl : el // Заменяем изменённый элемент
-            )
-        );
-    };
+    const [content, setContent] = useState(data)
 
     const {desktopStore} = useContext(Context)
     const [viewVideo, setViewVideo] = useState(false)
@@ -173,52 +123,30 @@ const Men = ({data}) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const restoreScrollPosition = () => {
-        const savedPosition = Cookies.get("homeScrollPositionMen");
-        if (!uploadedContent) {
-            console.log("ПОХУЙ")
-            // setTimeout(() => {
-            //     console.log("ПЛЮС ПОЕБАТЬ")
-            //     restoreScrollPosition();
-            // }, 100)
-        } else if (savedPosition) {
-            console.log("УРА")
-            window.scrollTo(0, parseInt(savedPosition, 10));
-        }
-    };
-
-    useEffect(() => {
-        restoreScrollPosition()
-    }, [uploadedContent]);
-
     useEffect(() => {
         const saveScrollPosition = () => {
+            // Сохраняем позицию прокрутки в cookie на 7 дней
             Cookies.set("homeScrollPositionMen", window.scrollY.toString(), {expires: 0.25});
         };
 
         const restoreScrollPosition = () => {
             const savedPosition = Cookies.get("homeScrollPositionMen");
-            if (!uploadedContent) {
-                console.log("ПОХУЙ")
-                setTimeout(() => {
-                    console.log("ПЛЮС ПОЕБАТЬ")
-                    restoreScrollPosition();
-                }, 100)
-            } else if (savedPosition) {
-                console.log("УРА")
+            if (savedPosition) {
                 window.scrollTo(0, parseInt(savedPosition, 10));
             }
         };
 
         // Восстанавливаем позицию при загрузке страницы
-        // restoreScrollPosition();
+        restoreScrollPosition();
 
         // Сохраняем позицию перед уходом со страницы
         router.events.on("routeChangeStart", saveScrollPosition);
+        window.addEventListener('beforeunload', saveScrollPosition)
 
         // Убираем обработчик при размонтировании компонента
         return () => {
             router.events.off("routeChangeStart", saveScrollPosition);
+            window.removeEventListener('beforeunload', saveScrollPosition)
         };
     }, [router]);
 
@@ -435,7 +363,7 @@ const Men = ({data}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el} updateContent={updateContent}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} gender={"M"}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
@@ -447,15 +375,15 @@ const Men = ({data}) => {
                 )
             } else if (el.type === "multiSectionCircles") {
                 arr.push(
-                    <MultiSectionCirclesGrid el={el}></MultiSectionCirclesGrid>
+                    <MultiSectionCirclesGrid el={el} gender={"M"}></MultiSectionCirclesGrid>
                 )
             } else if (el.type === "multiSectionRecs") {
                 arr.push(
-                    <MultiSectionRecs el={el}></MultiSectionRecs>
+                    <MultiSectionRecs el={el} gender={"M"}></MultiSectionRecs>
                 )
             } else if (el.type === "multiSectionImages") {
                 arr.push(
-                    <MultiSectionImages el={el}></MultiSectionImages>
+                    <MultiSectionImages el={el} gender={"M"}></MultiSectionImages>
                 )
             } else if (el.type === "fullWidthImage") {
                 arr.push(
@@ -558,11 +486,7 @@ const Men = ({data}) => {
                     <div className={s.cont}>
                         <>
                             {/* Your existing code for rendering the main content */}
-                            {uploadedContent &&
-                                <>
-                                    {renderPage()}
-                                </>
-                            }
+                            {renderPage()}
                             {/*<div className={'d-flex justify-content-center my-5'}>*/}
                             {/*    <button onClick={getMore} className={s.more_btn}>*/}
                             {/*        Посмотреть ещё*/}

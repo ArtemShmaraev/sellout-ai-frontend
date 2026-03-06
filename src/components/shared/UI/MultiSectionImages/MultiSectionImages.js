@@ -7,25 +7,164 @@ import Link from "next/link";
 import {desktopStore} from "@/store/DesktopStore";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
+import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const MultiSectionImages = ({el, heightImage = "250px"}) => {
+const MultiSectionImages = ({el, heightImage = "250px", gender}) => {
     const [centerContent, setCenterContent] = useState(false);
 
     const blockId = el.blockId;
 
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
     const [selectedCircleIndex, setSelectedCircleIndex] = useState(0);
+    const [selectedProducts, setSelectedProducts] = useState([]);
     const [resetSelectedCircle, setResetSelectedCircle] = useState(false);
+    const isReset = useRef(false)
 
     useLayoutEffect(() => {
         const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
+        setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
             setResetSelectedCircle(true);
         }, 100)
     }, []);
 
     const router = useRouter()
+
+    const loadingProductsData = [
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        }
+    ]
 
     useEffect(() => {
         const saveSelectedSectionAndScrollPositions = () => {
@@ -51,11 +190,12 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
             const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
             const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
 
-            if (SectionsContainerPosition && scrollableContainerRef.current) {
+            if (SectionsContainerPosition && scrollableContainerRef.current && selectedProducts.length && !isReset.current) {
                 scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
             }
-            if (ProductsBlockPosition && scrollableBlockRef.current) {
+            if (ProductsBlockPosition && scrollableBlockRef.current && selectedProducts.length && !isReset.current) {
                 scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
+                isReset.current = true
             }
         };
 
@@ -66,17 +206,19 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
 
         // Сохраняем позицию перед уходом со страницы
         router.events.on("routeChangeStart", saveSelectedSectionAndScrollPositions);
+        window.addEventListener('beforeunload', saveSelectedSectionAndScrollPositions)
 
         // Убираем обработчик при размонтировании компонента
         return () => {
             router.events.off("routeChangeStart", saveSelectedSectionAndScrollPositions);
+            window.removeEventListener('beforeunload', saveSelectedSectionAndScrollPositions)
         };
-    }, [router]);
+    }, [router, selectedProducts]);
 
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
         const scrollableBlockArr = [];
-        const selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
+        // const selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
         selectedProducts.forEach(product => {
             scrollableBlockArr.push(
                 <ProductCard
@@ -149,7 +291,18 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
         }
     };
 
-    const height = desktopStore.isDesktop ? '300px' : '250px'
+    const height = desktopStore.isDesktop ? '300px' : '250px';
+
+    const chooseCircle = async (idx) => {
+        setSelectedCircleIndex(idx)
+        if (el.products[idx] && el.products[idx].length > 0) {
+            setSelectedProducts(el.products[idx])
+        } else {
+            setSelectedProducts(loadingProductsData)
+            const data = await fetchProductsForMainPage(el.recsLinks[idx], gender)
+            setSelectedProducts(data)
+        }
+    }
 
     return (
         <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}}>
@@ -157,7 +310,7 @@ const MultiSectionImages = ({el, heightImage = "250px"}) => {
             <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
                 {(desktopStore.isDesktop ? el.desktopImages : el.mobileImages).map((_, idx) => (
                     <div key={idx} className={`${selectedCircleIndex === idx ? s.selectedItem : s.categoryItem}`}
-                         onClick={() => setSelectedCircleIndex(idx)} style={{height: `${height}`, width: 'auto'}}>
+                         onClick={() => chooseCircle(idx)} style={{height: `${height}`, width: 'auto'}}>
                         <Image
                             src={el.desktopImages[idx]}
                             alt={idx}

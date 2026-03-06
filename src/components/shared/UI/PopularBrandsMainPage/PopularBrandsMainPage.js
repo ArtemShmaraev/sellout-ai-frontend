@@ -10,19 +10,20 @@ import {desktopStore} from "@/store/DesktopStore";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
-import {fetchSimilarProducts} from "@/http/productsApi";
 
-const PopularBrandsMainPage = ({el, updateContent}) => {
+const PopularBrandsMainPage = ({el, gender}) => {
     const blockId = el.blockId;
 
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
     const [selectedCircleIndex, setSelectedCircleIndex] = useState(0);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [resetSelectedCircle, setResetSelectedCircle] = useState(false);
+    const isReset = useRef(false)
 
     useLayoutEffect(() => {
         const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
+        setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
             setResetSelectedCircle(true);
         }, 100)
@@ -30,28 +31,145 @@ const PopularBrandsMainPage = ({el, updateContent}) => {
 
     const router = useRouter()
 
-    useEffect(() => {
-        const token = Cookies.get('access_token')
-        let sP = el.products[selectedCircleIndex] || [];
-        if (!sP || sP.length === 0) {
-            console.log(selectedCircleIndex + "INDEX NOT GOOD")
-            fetchProductsForMainPage(el.brandsLinks[selectedCircleIndex], token).then(res => {
-                setSelectedProducts(res)
-                el.products[selectedCircleIndex] = res;
-                updateContent(el);
-                console.log(selectedCircleIndex + "INDEX maybe UPDATED")
-            })
-        } else {
-            console.log(selectedCircleIndex + "INDEX GOOD")
-            setSelectedProducts(sP);
+    const loadingProductsData = [
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
+        },
+        {
+            "id": 0,
+            "in_wishlist": false,
+            "price": {},
+            "model": "",
+            "colorway": "",
+            "slug": "",
+            "is_collab": false,
+            "isLoadingCard": true,
+            "collab": {},
+            "brands": [],
+            "bucket_link": [
+                {
+                    "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                }
+            ],
+            "is_sale": false,
+            "available_sizes": {
+                "sizes": [],
+                "filter_logo": ""
+            }
         }
-
-    }, [selectedCircleIndex])
+    ]
 
     // Генерация массива товаров для текущего выбранного кружка
     const getScrollableBlockArr = () => {
         const scrollableBlockArr = [];
-
+        // const selectedProducts = el.products[selectedCircleIndex] || []; // Получаем список продуктов для выбранной линейки
         selectedProducts.forEach(product => {
             scrollableBlockArr.push(
                 <ProductCard
@@ -143,11 +261,12 @@ const PopularBrandsMainPage = ({el, updateContent}) => {
             const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
             const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
 
-            if (SectionsContainerPosition && scrollableContainerRef.current) {
+            if (SectionsContainerPosition && scrollableContainerRef.current && selectedProducts.length && !isReset.current) {
                 scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
             }
-            if (ProductsBlockPosition && scrollableBlockRef.current) {
+            if (ProductsBlockPosition && scrollableBlockRef.current && selectedProducts.length && !isReset.current) {
                 scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
+                isReset.current = true
             }
         };
 
@@ -158,12 +277,25 @@ const PopularBrandsMainPage = ({el, updateContent}) => {
 
         // Сохраняем позицию перед уходом со страницы
         router.events.on("routeChangeStart", saveSelectedSectionAndScrollPositions);
+        window.addEventListener('beforeunload', saveSelectedSectionAndScrollPositions)
 
         // Убираем обработчик при размонтировании компонента
         return () => {
             router.events.off("routeChangeStart", saveSelectedSectionAndScrollPositions);
+            window.removeEventListener('beforeunload', saveSelectedSectionAndScrollPositions)
         };
-    }, [router]);
+    }, [router, selectedProducts]);
+
+    const chooseCircle = async (idx) => {
+        setSelectedCircleIndex(idx)
+        if (el.products[idx] && el.products[idx].length > 0) {
+            setSelectedProducts(el.products[idx])
+        } else {
+            setSelectedProducts(loadingProductsData)
+            const data = await fetchProductsForMainPage(el.brandsLinks[idx], gender)
+            setSelectedProducts(data)
+        }
+    }
 
 
     return (
@@ -176,7 +308,7 @@ const PopularBrandsMainPage = ({el, updateContent}) => {
                         {Array.from({length: el.brandsAmount}).map((_, idx) => (
                             <div key={idx} className={s.brandCircle}>
                                 <div className={`${s.circle1} ${selectedCircleIndex === idx ? s.selectedCircle : ''}`}
-                                     onClick={() => setSelectedCircleIndex(idx)}>
+                                     onClick={() => chooseCircle(idx)}>
                                     <Image
                                         src={el.desktopImages[idx]}
                                         alt="Brand Image"

@@ -141,10 +141,12 @@ const Women = ({data}) => {
 
         // Сохраняем позицию перед уходом со страницы
         router.events.on("routeChangeStart", saveScrollPosition);
+        window.addEventListener('beforeunload', saveScrollPosition)
 
         // Убираем обработчик при размонтировании компонента
         return () => {
             router.events.off("routeChangeStart", saveScrollPosition);
+            window.removeEventListener('beforeunload', saveScrollPosition)
         };
     }, [router]);
 
@@ -360,7 +362,7 @@ const Women = ({data}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} gender={"F"}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
@@ -372,15 +374,15 @@ const Women = ({data}) => {
                 )
             } else if (el.type === "multiSectionCircles") {
                 arr.push(
-                    <MultiSectionCirclesGrid el={el}></MultiSectionCirclesGrid>
+                    <MultiSectionCirclesGrid el={el} gender={"F"}></MultiSectionCirclesGrid>
                 )
             } else if (el.type === "multiSectionRecs") {
                 arr.push(
-                    <MultiSectionRecs el={el}></MultiSectionRecs>
+                    <MultiSectionRecs el={el} gender={"F"}></MultiSectionRecs>
                 )
             } else if (el.type === "multiSectionImages") {
                 arr.push(
-                    <MultiSectionImages el={el}></MultiSectionImages>
+                    <MultiSectionImages el={el} gender={"F"}></MultiSectionImages>
                 )
             } else if (el.type === "fullWidthImage") {
                 arr.push(

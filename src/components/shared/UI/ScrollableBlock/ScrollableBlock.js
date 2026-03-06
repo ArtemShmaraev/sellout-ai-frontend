@@ -72,9 +72,13 @@ const ScrollableBlock = forwardRef(({
 
     useEffect(() => {
         const handleResize = () => {
+            console.log(moreButtonUrl)
+            console.log("OUT")
             if (scrollableContainerRef.current) {
                 const scrollableWidth = scrollableContainerRef.current.scrollWidth;
                 const visibleWidth = scrollableContainerRef.current.clientWidth;
+                console.log(scrollableWidth)
+                console.log(visibleWidth)
 
                 // Если содержимое шире контейнера, показываем стрелки
                 if (scrollableWidth > visibleWidth) {
@@ -91,7 +95,7 @@ const ScrollableBlock = forwardRef(({
 
         // Очистка обработчика при размонтировании компонента
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [children]);
 
     // Оставляем товары, кратные числу рядов
     const adjustedArr = children.slice(0, Math.floor(children.length / rows) * rows);

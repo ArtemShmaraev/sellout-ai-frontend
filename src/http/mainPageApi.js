@@ -42,12 +42,12 @@ export async function fetchNavbarPhoto() {
     return data
 }
 
-export async function fetchProductsForMainPage(query, token = '') {
+export async function fetchProductsForMainPage(query, gender, token = '') {
     if (!token) {
-        const {data} = await $host.get(`product${query}`)
+        const {data} = await $host.get(`product${query}${gender ? `&gender=${gender}` : ""}`)
         return data.results
     } else {
-        const {data} = await $host.get(`product${query}`, {
+        const {data} = await $host.get(`product${query}${gender ? `&gender=${gender}` : ""}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
         return data.results
