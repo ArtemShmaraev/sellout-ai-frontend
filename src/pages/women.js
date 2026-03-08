@@ -5,7 +5,7 @@ import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import Head from "next/head";
-import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMainPage2, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
 import Image from "next/image";
@@ -39,7 +39,8 @@ export const getServerSideProps = async (context) => {
 
     let data;
 
-    data = tempWomenJson
+
+    data = await fetchMainPage2(context.req.headers.cookie, selected_gender)
 
     return {props: {data}};
 }
