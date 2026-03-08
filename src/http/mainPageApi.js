@@ -1,6 +1,31 @@
 import {$host} from "@/http/index";
 
 
+export async function fetchMainPage2(cookies, gender, token = "") {
+    // Создаем объект конфигурации для запроса
+    const config = {
+        headers: {
+            Cookie: cookies,  // Всегда передаем куки
+        },
+        withCredentials: true,  // Убедитесь, что браузер передает куки (если нужно)
+    };
+
+    // Добавляем токен в заголовок Authorization только если он передан
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    try {
+        const { data } = await $host.get(`product/main_page2?gender=${gender}`, config);
+        return data;
+    } catch (error) {
+        console.error("Error fetching main page:", error.response?.data || error.message);
+        throw error;
+    }
+}
+
+
+
 export async function fetchMainPage(token, nextPage, newPage, page, selected_gender) {
     let pageParam = 'page=1'
     let nextParam
