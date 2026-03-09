@@ -55,6 +55,8 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
         setValue(str)
     }
 
+    const selectedGender = Cookies.get('selected_gender')
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (value) {
@@ -86,11 +88,403 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
                     return array;
                 }
 
-                const searchObjectsPop = shuffle([
+                const searchObjectsPopM = shuffle([
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Stüssy",
+                        "type": "Популярное",
+                        "url": "line=stüssy"
+                    },
+                    {
+                        "name": "Fear of God",
+                        "type": "Популярное",
+                        "url": "line=fear_of_god"
+                    },
+                    {
+                        "name": "Cactus Jack by Travis Scott",
+                        "type": "Популярное",
+                        "url": "line=cactus_jack_by_travis_scott"
+                    },
+                    {
+                        "name": "Off-White",
+                        "type": "Популярное",
+                        "url": "line=off-white"
+                    },
+                    {
+                        "name": "Maison Margiela",
+                        "type": "Популярное",
+                        "url": "line=masion_margiela"
+                    },
+                    {
+                        "name": "The North Face",
+                        "type": "Популярное",
+                        "url": "line=the_north_face"
+                    },
+                    {
+                        "name": "Polo Ralph Lauren",
+                        "type": "Популярное",
+                        "url": "line=polo_ralph_lauren"
+                    },
+                    {
+                        "name": "Cav Empt",
+                        "type": "Популярное",
+                        "url": "line=cav_empt"
+                    },
+                    {
+                        "name": "Stone Island",
+                        "type": "Популярное",
+                        "url": "line=stone_island"
+                    },
+                    {
+                        "name": "Air Jordan 1",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1"
+                    },
+                    {
+                        "name": "Air Jordan 3",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_3"
+                    },
+                    {
+                        "name": "Air Jordan 4",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_4"
+                    },
+                    {
+                        "name": "Nike Dunk",
+                        "type": "Популярное",
+                        "url": "line=nike_dunk"
+                    },
+                    {
+                        "name": "Nike Air Force 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_force_1"
+                    },
+                    {
+                        "name": "Nike Air Max 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_1"
+                    },
+                    {
+                        "name": "Nike Air Max 90",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_90"
+                    },
+                    {
+                        "name": "Nike Blazer",
+                        "type": "Популярное",
+                        "url": "line=nike_blazer"
+                    },
+                    {
+                        "name": "Nike Zoom",
+                        "type": "Популярное",
+                        "url": "line=nike_zoom"
+                    },
+                    {
+                        "name": "Nike Cortez",
+                        "type": "Популярное",
+                        "url": "line=nike_cortez"
+                    },
+                    {
+                        "name": "adidas Yeezy 350",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_350"
+                    },
+                    {
+                        "name": "adidas Yeezy 500",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_500"
+                    },
+                    {
+                        "name": "adidas Yeezy 700",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_700"
+                    },
+                    {
+                        "name": "Кроссовки Vans",
+                        "type": "Популярное",
+                        "url": "line=vans&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки Asics",
+                        "type": "Популярное",
+                        "url": "line=asics&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки New Balance",
+                        "type": "Популярное",
+                        "url": "line=new_balance&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки On",
+                        "type": "Популярное",
+                        "url": "line=on&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки Li-Ning",
+                        "type": "Популярное",
+                        "url": "line=li-ning&category=sneakers"
+                    },
+                    {
+                        "name": "Футболки",
+                        "type": "Популярное",
+                        "url": "category=tshirts"
+                    },
+                    {
+                        "name": "Худи и толстовки",
+                        "type": "Популярное",
+                        "url": "category=hoodie_sweatshirts"
+                    },
+                    {
+                        "name": "Треники",
+                        "type": "Популярное",
+                        "url": "category=sweatpants"
+                    },
+                    {
+                        "name": "Шорты",
+                        "type": "Популярное",
+                        "url": "category=shorts"
+                    },
+                    {
+                        "name": "Свитеры",
+                        "type": "Популярное",
+                        "url": "category=knitwear"
+                    },
+                    {
+                        "name": "Ботинки",
+                        "type": "Популярное",
+                        "url": "category=boots"
+                    },
+                    {
+                        "name": "Зимние кроссовки",
+                        "type": "Популярное",
+                        "url": "category=winter_sneakers"
+                    },
+                    {
+                        "name": "Верхняя одежда",
+                        "type": "Популярное",
+                        "url": "category=outerwear"
+                    },
+                    {
+                        "name": "Сумки",
+                        "type": "Популярное",
+                        "url": "category=bags"
+                    },
+                    {
+                        "name": "Баскетбольные кроссовки",
+                        "type": "Популярное",
+                        "url": "category=basketball_sneakers"
+                    },
+                    {
+                        "name": "Шапки",
+                        "type": "Популярное",
+                        "url": "category=hats"
+                    },
+                    {
+                        "name": "Шарфы",
+                        "type": "Популярное",
+                        "url": "category=scarfs"
+                    },
+                    {
+                        "name": "Кепки",
+                        "type": "Популярное",
+                        "url": "category=caps"
+                    },
+                    {
+                        "name": "Часы",
+                        "type": "Популярное",
+                        "url": "category=watches"
+                    },
+                    {
+                        "name": "Браслеты",
+                        "type": "Популярное",
+                        "url": "category=bracelets"
+                    },
+                    {
+                        "name": "Цепочки",
+                        "type": "Популярное",
+                        "url": "category=necklaces"
+                    },
+                    {
+                        "name": "Nike x Off-White",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_off-white"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Nike x Union",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_union"
+                    },
+                    {
+                        "name": "Nike x Supreme",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_supreme"
+                    },
+                    {
+                        "name": "Nike x Sacai",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_sacai"
+                    },
+                    {
+                        "name": "Nike x Clot",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_clot"
+                    },
+                    {
+                        "name": "Nike x Stüssy",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_stüssy"
+                    },
+                    {
+                        "name": "Nike x A Ma Maniére",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_a_ma_maniére"
+                    }
+                ])
+                const searchObjectsPopF = shuffle([
+                    {
+                        "name": "MIU MIU",
+                        "type": "Популярное",
+                        "url": "line=miu_miu"
+                    },
+                    {
+                        "name": "Jacquemus",
+                        "type": "Популярное",
+                        "url": "line=jacquemus"
+                    },
+                    {
+                        "name": "Skims",
+                        "type": "Популярное",
+                        "url": "line=skims"
+                    },
+                    {
+                        "name": "Saint Laurent",
+                        "type": "Популярное",
+                        "url": "line=saint_laurent"
+                    },
+                    {
+                        "name": "Loewe",
+                        "type": "Популярное",
+                        "url": "line=loewe"
+                    },
+                    {
+                        "name": "Marc Jacobs",
+                        "type": "Популярное",
+                        "url": "line=marc_jacobs"
+                    },
+                    {
+                        "name": "Diesel",
+                        "type": "Популярное",
+                        "url": "line=diesel"
+                    },
+                    {
+                        "name": "Prada",
+                        "type": "Популярное",
+                        "url": "line=prada"
+                    },
+                    {
+                        "name": "Bottega Veneta",
+                        "type": "Популярное",
+                        "url": "line=bottega_veneta"
+                    },
+                    {
+                        "name": "Acne Studios",
+                        "type": "Популярное",
+                        "url": "line=acne_studios"
+                    },
+                    {
+                        "name": "Dior",
+                        "type": "Популярное",
+                        "url": "line=dior"
+                    },
+                    {
+                        "name": "Jil Sander",
+                        "type": "Популярное",
+                        "url": "line=jil_sander"
+                    },
+                    {
+                        "name": "Balenciaga",
+                        "type": "Популярное",
+                        "url": "line=balenciaga"
+                    },
+                    {
+                        "name": "Stüssy",
+                        "type": "Популярное",
+                        "url": "line=stüssy"
+                    },
+                    {
+                        "name": "Fear of God",
+                        "type": "Популярное",
+                        "url": "line=fear_of_god"
+                    },
+                    {
+                        "name": "Maison Margiela",
+                        "type": "Популярное",
+                        "url": "line=masion_margiela"
+                    },
+                    {
+                        "name": "Polo Ralph Lauren",
+                        "type": "Популярное",
+                        "url": "line=polo_ralph_lauren"
+                    },
                     {
                         "name": "adidas Samba",
                         "type": "Популярное",
                         "url": "line=adidas_samba"
+                    },
+                    {
+                        "name": "adidas Gazelle",
+                        "type": "Популярное",
+                        "url": "line=adidas_gazelle"
+                    },
+                    {
+                        "name": "adidas Campus",
+                        "type": "Популярное",
+                        "url": "line=adidas_campus"
+                    },
+                    {
+                        "name": "adidas Spezial",
+                        "type": "Популярное",
+                        "url": "line=adidas_spezial"
+                    },
+                    {
+                        "name": "adidas Forum",
+                        "type": "Популярное",
+                        "url": "line=adidas_campus"
+                    },
+                    {
+                        "name": "adidas SL",
+                        "type": "Популярное",
+                        "url": "line=adidas_sl"
+                    },
+                    {
+                        "name": "Air Jordan 1 Low",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_low"
+                    },
+                    {
+                        "name": "Air Jordan 1 Mid",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_mid"
+                    },
+                    {
+                        "name": "Air Jordan 4",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_4"
+                    },
+                    {
+                        "name": "Air Jordan 1 High",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_high"
                     },
                     {
                         "name": "Vans Knu",
@@ -103,9 +497,54 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
                         "url": "line=nike_dunk"
                     },
                     {
+                        "name": "Nike Air Force 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_force_1"
+                    },
+                    {
+                        "name": "Nike Air Max 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_1"
+                    },
+                    {
+                        "name": "Nike Air Max 90",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_90"
+                    },
+                    {
+                        "name": "Nike Blazer",
+                        "type": "Популярное",
+                        "url": "line=nike_blazer"
+                    },
+                    {
+                        "name": "Nike Zoom",
+                        "type": "Популярное",
+                        "url": "line=nike_zoom"
+                    },
+                    {
+                        "name": "Nike Cortez",
+                        "type": "Популярное",
+                        "url": "line=nike_cortez"
+                    },
+                    {
+                        "name": "adidas Yeezy 350",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_350"
+                    },
+                    {
                         "name": "New Balance 9060",
                         "type": "Популярное",
                         "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "New Balance 1906R",
+                        "type": "Популярное",
+                        "url": "line=new_balance_1906R"
+                    },
+                    {
+                        "name": "New Balance 2002R",
+                        "type": "Популярное",
+                        "url": "line=new_balance_2002r"
                     },
                     {
                         "name": "Nike x Travis Scott",
@@ -113,37 +552,559 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
                         "url": "collab=nike_x_travis_scott"
                     },
                     {
-                        "name": "Jordan",
+                        "name": "Кроссовки Asics",
                         "type": "Популярное",
-                        "url": "line=jordan"
+                        "url": "line=asics&category=sneakers"
                     },
                     {
-                        "name": "Кроссовки Nike",
+                        "name": "Кроссовки Onitsuka Tiger",
                         "type": "Популярное",
-                        "url": "category=sneakers&line=nike"
+                        "url": "line=onitsuka_tiger&category=sneakers"
                     },
                     {
-                        "name": "New Balance 9060",
+                        "name": "Кроссовки On",
                         "type": "Популярное",
-                        "url": "line=new_balance_9060"
+                        "url": "line=on&category=sneakers"
                     },
                     {
-                        "name": "Nike x Travis Scott",
+                        "name": "Сумки",
                         "type": "Популярное",
-                        "url": "collab=nike_x_travis_scott"
+                        "url": "category=bags"
                     },
                     {
-                        "name": "Jordan",
+                        "name": "Сумки тоут",
                         "type": "Популярное",
-                        "url": "line=jordan"
+                        "url": "category=tote_bags"
                     },
                     {
-                        "name": "Кроссовки Nike",
+                        "name": "Футболки",
                         "type": "Популярное",
-                        "url": "category=sneakers&line=nike"
+                        "url": "category=tshirts"
+                    },
+                    {
+                        "name": "Худи и толстовки",
+                        "type": "Популярное",
+                        "url": "category=hoodie_sweatshirts"
+                    },
+                    {
+                        "name": "Треники",
+                        "type": "Популярное",
+                        "url": "category=sweatpants"
+                    },
+                    {
+                        "name": "Шорты",
+                        "type": "Популярное",
+                        "url": "category=shorts"
+                    },
+                    {
+                        "name": "Топы",
+                        "type": "Популярное",
+                        "url": "category=tops"
+                    },
+                    {
+                        "name": "Юбки",
+                        "type": "Популярное",
+                        "url": "category=skirts"
+                    },
+                    {
+                        "name": "Свитеры",
+                        "type": "Популярное",
+                        "url": "category=knitwear"
+                    },
+                    {
+                        "name": "Ботинки",
+                        "type": "Популярное",
+                        "url": "category=boots"
+                    },
+                    {
+                        "name": "Зимние кроссовки",
+                        "type": "Популярное",
+                        "url": "category=winter_sneakers"
+                    },
+                    {
+                        "name": "Верхняя одежда",
+                        "type": "Популярное",
+                        "url": "category=outerwear"
+                    },
+                    {
+                        "name": "Шапки",
+                        "type": "Популярное",
+                        "url": "category=hats"
+                    },
+                    {
+                        "name": "Шарфы",
+                        "type": "Популярное",
+                        "url": "category=scarfs"
+                    },
+                    {
+                        "name": "Кепки",
+                        "type": "Популярное",
+                        "url": "category=caps"
+                    },
+                    {
+                        "name": "Часы",
+                        "type": "Популярное",
+                        "url": "category=watches"
+                    },
+                    {
+                        "name": "Браслеты",
+                        "type": "Популярное",
+                        "url": "category=bracelets"
+                    },
+                    {
+                        "name": "Цепочки",
+                        "type": "Популярное",
+                        "url": "category=necklaces"
+                    },
+                    {
+                        "name": "Кольца",
+                        "type": "Популярное",
+                        "url": "category=rings"
+                    },
+                    {
+                        "name": "Лоферы",
+                        "type": "Популярное",
+                        "url": "category=loafers"
+                    },
+                    {
+                        "name": "Туфли",
+                        "type": "Популярное",
+                        "url": "category=shoes"
+                    },
+                    {
+                        "name": "Шлёпки и тапки",
+                        "type": "Популярное",
+                        "url": "category=slippers"
                     }
                 ])
-                const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
+                const searchObjectsPopU = shuffle([
+                    {
+                        "name": "Air Jordan 3",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_3"
+                    },
+                    {
+                        "name": "Cav Empt",
+                        "type": "Популярное",
+                        "url": "line=cav_empt"
+                    },
+                    {
+                        "name": "Stone Island",
+                        "type": "Популярное",
+                        "url": "line=stone_island"
+                    },
+                    {
+                        "name": "Cactus Jack by Travis Scott",
+                        "type": "Популярное",
+                        "url": "line=cactus_jack_by_travis_scott"
+                    },
+                    {
+                        "name": "Off-White",
+                        "type": "Популярное",
+                        "url": "line=off-white"
+                    },
+                    {
+                        "name": "Stüssy",
+                        "type": "Популярное",
+                        "url": "line=stüssy"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "adidas Yeezy 500",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_500"
+                    },
+                    {
+                        "name": "adidas Yeezy 700",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_700"
+                    },
+                    {
+                        "name": "Кроссовки Vans",
+                        "type": "Популярное",
+                        "url": "line=vans&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки New Balance",
+                        "type": "Популярное",
+                        "url": "line=new_balance&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки Li-Ning",
+                        "type": "Популярное",
+                        "url": "line=li-ning&category=sneakers"
+                    },
+                    {
+                        "name": "Баскетбольные кроссовки",
+                        "type": "Популярное",
+                        "url": "category=basketball_sneakers"
+                    },
+                    {
+                        "name": "MIU MIU",
+                        "type": "Популярное",
+                        "url": "line=miu_miu"
+                    },
+                    {
+                        "name": "Nike x Off-White",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_off-white"
+                    },
+                    {
+                        "name": "Nike x Union",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_union"
+                    },
+                    {
+                        "name": "Nike x Supreme",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_supreme"
+                    },
+                    {
+                        "name": "Nike x Sacai",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_sacai"
+                    },
+                    {
+                        "name": "Nike x Clot",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_clot"
+                    },
+                    {
+                        "name": "Nike x Stüssy",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_stüssy"
+                    },
+                    {
+                        "name": "Nike x A Ma Maniére",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_a_ma_maniére"
+                    },
+                    {
+                        "name": "Jacquemus",
+                        "type": "Популярное",
+                        "url": "line=jacquemus"
+                    },
+                    {
+                        "name": "Skims",
+                        "type": "Популярное",
+                        "url": "line=skims"
+                    },
+                    {
+                        "name": "Saint Laurent",
+                        "type": "Популярное",
+                        "url": "line=saint_laurent"
+                    },
+                    {
+                        "name": "Loewe",
+                        "type": "Популярное",
+                        "url": "line=loewe"
+                    },
+                    {
+                        "name": "Marc Jacobs",
+                        "type": "Популярное",
+                        "url": "line=marc_jacobs"
+                    },
+                    {
+                        "name": "Diesel",
+                        "type": "Популярное",
+                        "url": "line=diesel"
+                    },
+                    {
+                        "name": "Prada",
+                        "type": "Популярное",
+                        "url": "line=prada"
+                    },
+                    {
+                        "name": "Bottega Veneta",
+                        "type": "Популярное",
+                        "url": "line=bottega_veneta"
+                    },
+                    {
+                        "name": "Acne Studios",
+                        "type": "Популярное",
+                        "url": "line=acne_studios"
+                    },
+                    {
+                        "name": "Dior",
+                        "type": "Популярное",
+                        "url": "line=dior"
+                    },
+                    {
+                        "name": "Jil Sander",
+                        "type": "Популярное",
+                        "url": "line=jil_sander"
+                    },
+                    {
+                        "name": "Balenciaga",
+                        "type": "Популярное",
+                        "url": "line=balenciaga"
+                    },
+                    {
+                        "name": "Stüssy",
+                        "type": "Популярное",
+                        "url": "line=stüssy"
+                    },
+                    {
+                        "name": "Fear of God",
+                        "type": "Популярное",
+                        "url": "line=fear_of_god"
+                    },
+                    {
+                        "name": "Maison Margiela",
+                        "type": "Популярное",
+                        "url": "line=masion_margiela"
+                    },
+                    {
+                        "name": "Polo Ralph Lauren",
+                        "type": "Популярное",
+                        "url": "line=polo_ralph_lauren"
+                    },
+                    {
+                        "name": "adidas Samba",
+                        "type": "Популярное",
+                        "url": "line=adidas_samba"
+                    },
+                    {
+                        "name": "adidas Gazelle",
+                        "type": "Популярное",
+                        "url": "line=adidas_gazelle"
+                    },
+                    {
+                        "name": "adidas Campus",
+                        "type": "Популярное",
+                        "url": "line=adidas_campus"
+                    },
+                    {
+                        "name": "adidas Spezial",
+                        "type": "Популярное",
+                        "url": "line=adidas_spezial"
+                    },
+                    {
+                        "name": "adidas Forum",
+                        "type": "Популярное",
+                        "url": "line=adidas_campus"
+                    },
+                    {
+                        "name": "adidas SL",
+                        "type": "Популярное",
+                        "url": "line=adidas_sl"
+                    },
+                    {
+                        "name": "Air Jordan 1 Low",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_low"
+                    },
+                    {
+                        "name": "Air Jordan 1 Mid",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_mid"
+                    },
+                    {
+                        "name": "Air Jordan 4",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_4"
+                    },
+                    {
+                        "name": "Air Jordan 1 High",
+                        "type": "Популярное",
+                        "url": "line=air_jordan_1_high"
+                    },
+                    {
+                        "name": "Vans Knu",
+                        "type": "Популярное",
+                        "url": "line=vans_knu"
+                    },
+                    {
+                        "name": "Nike Dunk",
+                        "type": "Популярное",
+                        "url": "line=nike_dunk"
+                    },
+                    {
+                        "name": "Nike Air Force 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_force_1"
+                    },
+                    {
+                        "name": "Nike Air Max 1",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_1"
+                    },
+                    {
+                        "name": "Nike Air Max 90",
+                        "type": "Популярное",
+                        "url": "line=nike_air_max_90"
+                    },
+                    {
+                        "name": "Nike Blazer",
+                        "type": "Популярное",
+                        "url": "line=nike_blazer"
+                    },
+                    {
+                        "name": "Nike Zoom",
+                        "type": "Популярное",
+                        "url": "line=nike_zoom"
+                    },
+                    {
+                        "name": "Nike Cortez",
+                        "type": "Популярное",
+                        "url": "line=nike_cortez"
+                    },
+                    {
+                        "name": "adidas Yeezy 350",
+                        "type": "Популярное",
+                        "url": "line=adidas_yeezy_350"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "New Balance 1906R",
+                        "type": "Популярное",
+                        "url": "line=new_balance_1906R"
+                    },
+                    {
+                        "name": "New Balance 2002R",
+                        "type": "Популярное",
+                        "url": "line=new_balance_2002r"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Кроссовки Asics",
+                        "type": "Популярное",
+                        "url": "line=asics&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки Onitsuka Tiger",
+                        "type": "Популярное",
+                        "url": "line=onitsuka_tiger&category=sneakers"
+                    },
+                    {
+                        "name": "Кроссовки On",
+                        "type": "Популярное",
+                        "url": "line=on&category=sneakers"
+                    },
+                    {
+                        "name": "Сумки",
+                        "type": "Популярное",
+                        "url": "category=bags"
+                    },
+                    {
+                        "name": "Сумки тоут",
+                        "type": "Популярное",
+                        "url": "category=tote_bags"
+                    },
+                    {
+                        "name": "Футболки",
+                        "type": "Популярное",
+                        "url": "category=tshirts"
+                    },
+                    {
+                        "name": "Худи и толстовки",
+                        "type": "Популярное",
+                        "url": "category=hoodie_sweatshirts"
+                    },
+                    {
+                        "name": "Треники",
+                        "type": "Популярное",
+                        "url": "category=sweatpants"
+                    },
+                    {
+                        "name": "Шорты",
+                        "type": "Популярное",
+                        "url": "category=shorts"
+                    },
+                    {
+                        "name": "Топы",
+                        "type": "Популярное",
+                        "url": "category=tops"
+                    },
+                    {
+                        "name": "Юбки",
+                        "type": "Популярное",
+                        "url": "category=skirts"
+                    },
+                    {
+                        "name": "Свитеры",
+                        "type": "Популярное",
+                        "url": "category=knitwear"
+                    },
+                    {
+                        "name": "Ботинки",
+                        "type": "Популярное",
+                        "url": "category=boots"
+                    },
+                    {
+                        "name": "Зимние кроссовки",
+                        "type": "Популярное",
+                        "url": "category=winter_sneakers"
+                    },
+                    {
+                        "name": "Верхняя одежда",
+                        "type": "Популярное",
+                        "url": "category=outerwear"
+                    },
+                    {
+                        "name": "Шапки",
+                        "type": "Популярное",
+                        "url": "category=hats"
+                    },
+                    {
+                        "name": "Шарфы",
+                        "type": "Популярное",
+                        "url": "category=scarfs"
+                    },
+                    {
+                        "name": "Кепки",
+                        "type": "Популярное",
+                        "url": "category=caps"
+                    },
+                    {
+                        "name": "Часы",
+                        "type": "Популярное",
+                        "url": "category=watches"
+                    },
+                    {
+                        "name": "Браслеты",
+                        "type": "Популярное",
+                        "url": "category=bracelets"
+                    },
+                    {
+                        "name": "Цепочки",
+                        "type": "Популярное",
+                        "url": "category=necklaces"
+                    },
+                    {
+                        "name": "Кольца",
+                        "type": "Популярное",
+                        "url": "category=rings"
+                    },
+                    {
+                        "name": "Лоферы",
+                        "type": "Популярное",
+                        "url": "category=loafers"
+                    },
+                    {
+                        "name": "Туфли",
+                        "type": "Популярное",
+                        "url": "category=shoes"
+                    },
+                    {
+                        "name": "Шлёпки и тапки",
+                        "type": "Популярное",
+                        "url": "category=slippers"
+                    }
+                ])
+                const combinedList = searchObjects.concat(selectedGender === "M" ? searchObjectsPopM : selectedGender === "F" ? searchObjectsPopF : searchObjectsPopU); // Объединение двух списков
 
                 // const trimmedList = combinedList.slice(0, 9);
                 setSuggs(combinedList)

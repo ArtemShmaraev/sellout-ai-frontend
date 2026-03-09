@@ -17,6 +17,9 @@ const SearchModal = () => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
+
+    const selectedGender = Cookies.get('selected_gender')
+
     const q = async () => {
         const query = {}
         query.q = value
@@ -87,9 +90,101 @@ const SearchModal = () => {
                     return array;
                 }
 
-                const searchObjectsPop = shuffle([
+                const searchObjectsPopM = shuffle([
                     {
-                        "name": "adidas Samba",
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Stüssy",
+                        "type": "Популярное",
+                        "url": "line=stüssy"
+                    },
+                    {
+                        "name": "Fear of God",
+                        "type": "Популярное",
+                        "url": "line=fear_of_god"
+                    },
+                    {
+                        "name": "Cactus Jack by Travis Scott",
+                        "type": "Популярное",
+                        "url": "line=cactus_jack_by_travis_scott"
+                    },
+                    {
+                        "name": "Off-White",
+                        "type": "Популярное",
+                        "url": "line=off-white"
+                    },
+                    {
+                        "name": "Maison Margiela",
+                        "type": "Популярное",
+                        "url": "line=masion_margiela"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    },
+                    {
+                        "name": "Supreme",
+                        "type": "Популярное",
+                        "url": "line=supreme"
+                    }
+                ])
+                const searchObjectsPopF = shuffle([
+                    {
+                        "name": "adidas Sambaф",
                         "type": "Популярное",
                         "url": "line=adidas_samba"
                     },
@@ -144,7 +239,64 @@ const SearchModal = () => {
                         "url": "category=sneakers&line=nike"
                     }
                 ])
-                const combinedList = searchObjects.concat(searchObjectsPop); // Объединение двух списков
+                const searchObjectsPopU = shuffle([
+                    {
+                        "name": "adidas Sambaф",
+                        "type": "Популярное",
+                        "url": "line=adidas_samba"
+                    },
+                    {
+                        "name": "Vans Knu",
+                        "type": "Популярное",
+                        "url": "line=vans_knu"
+                    },
+                    {
+                        "name": "Nike Dunk",
+                        "type": "Популярное",
+                        "url": "line=nike_dunk"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
+                    },
+                    {
+                        "name": "New Balance 9060",
+                        "type": "Популярное",
+                        "url": "line=new_balance_9060"
+                    },
+                    {
+                        "name": "Nike x Travis Scott",
+                        "type": "Популярное",
+                        "url": "collab=nike_x_travis_scott"
+                    },
+                    {
+                        "name": "Jordan",
+                        "type": "Популярное",
+                        "url": "line=jordan"
+                    },
+                    {
+                        "name": "Кроссовки Nike",
+                        "type": "Популярное",
+                        "url": "category=sneakers&line=nike"
+                    }
+                ])
+                const combinedList = searchObjects.concat(selectedGender === "M" ? searchObjectsPopM : selectedGender === "F" ? searchObjectsPopF : searchObjectsPopU); // Объединение двух списков
 
                 // const trimmedList = combinedList.slice(0, 9);
                 setSuggs(combinedList)

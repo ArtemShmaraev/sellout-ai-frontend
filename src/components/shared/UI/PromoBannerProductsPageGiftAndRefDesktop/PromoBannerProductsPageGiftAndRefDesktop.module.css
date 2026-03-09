@@ -1,5 +1,6 @@
 .giftRefCont {
-    margin: 50px 3vw;
+    margin: 50px 0;
+    width: 100%;
     height: 70px;
     background: linear-gradient(to bottom right, #51031D, #B70742);
     border-radius: 2px;
@@ -83,8 +84,6 @@
 
 @media (min-width: 1800px) {
     .giftRefCont {
-        margin-right: calc(10vw);
-        margin-left: calc(10vw);
     }
 
     .ref {

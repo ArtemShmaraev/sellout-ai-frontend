@@ -1,0 +1,492 @@
+/*Почти ненужные стили*/
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: relative;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.openModalButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+}
+
+.openModalButton:hover {
+    background-color: lightgray;
+}
+
+/*Конец почти ненужных стилей*/
+
+.modalOpen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    background-color: white;
+    overflow-y: auto; /* Скролл появится, только если контент больше 100vh */
+    animation: slideUp 0.5s ease forwards; /* Анимация появления */
+    z-index: 999; /* Модалка поверх всего */
+    display: flex;
+    flex-direction: column;
+}
+
+.modalContent {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Анимация выезда сверху */
+@keyframes slideUp {
+    0% {
+        transform: translateY(100vh); /* Начинает за пределами экрана снизу */
+    }
+    100% {
+        transform: translateY(0); /* Появляется на экране */
+    }
+}
+
+.img {
+    width: 100%;
+}
+
+.title {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.02 * 100vh);
+    margin: 15px calc(0.01351351351 * 100vh);
+}
+
+.text1 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.016 * 100vh);
+    margin-bottom: calc(0.02027027027 * 100vh);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.text2 {
+    font-size: calc(0.025 * 100vh);
+    text-align: center;
+    color: #940A0A; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    top: calc(100vw * 542 / 860 + 0.12 * 100vh);
+    position: absolute;
+}
+
+@keyframes fadeIn2 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.text2Visible {
+    animation: fadeIn2 2s ease forwards;
+    animation-delay: 1s;
+    font-size: calc(0.025 * 100vh);
+    text-align: center;
+    color: #940A0A; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    position: absolute;
+    top: calc(100vw * 542 / 860 + 0.12 * 100vh);
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 31vw);
+    gap: 2vw;
+    justify-content: center; /* Выравнивание по центру */
+    margin: 0 auto; /* Центрирование сетки */
+}
+
+.square {
+    background-color: #ededed; /* Цвет фона */
+    width: 31vw;
+    height: 10.77vh;
+    border-radius: calc(0.045 * 0.7 * 31vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(0.13333333333 * 0.7 * 31vw);
+    color: black;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.square.active {
+    background-color: #FD9292;
+}
+
+/* Контейнер для текста внутри квадрата */
+.text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+
+/* Первый текст (7'000₽) */
+.text-block .price {
+    font-size: calc(0.25 * 10.77vh);
+    color: #940A0A; /* Цвет текста */
+    margin-bottom: calc(0.00461538461 * 10.77vh);
+}
+
+/* Второй текст (бонусов к первому заказу) */
+.text-block .bonus {
+    font-size: calc(0.13333333333 * 10.77vh);
+    color: #000; /* Черный текст */
+}
+
+.text-block .bonusExtra {
+    margin-top: calc(0.01 * min(92vh, 80vw * (650 / 1205)));
+}
+
+.text-block .giftLogo {
+    width: calc(min(0.77 * 31vw, 0.67 * 10.77vh * 130 / 60)); /* Ширина изображения */
+    height: calc(min(0.77 * 31vw * 60 / 130, 0.67 * 10.77vh)); /* Автоматическая высота, чтобы сохранить пропорции */
+}
+
+.text-block .giftLogo2 {
+    width: calc(min(0.87 * 31vw, 0.67 * 10.77vh * 150 / 45));
+    height: calc(min(0.87 * 31vw * 45 / 150, 0.67 * 10.77vh)); /* Автоматическая высота, чтобы сохранить пропорции */
+}
+
+.fadeOutSquare {
+    animation: fadeOut2 2s ease forwards;
+}
+
+@keyframes fadeOut2 {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.winningSquare {
+    z-index: 10;
+    animation: moveToFinalPosition 2s ease forwards;
+}
+
+@keyframes moveToFinalPosition {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(var(--x), var(--y)) scale(1.27); /* Используем CSS-переменные */
+    }
+}
+
+
+.text3 {
+    text-align: center;
+    color: #000000; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    position: absolute;
+    font-size: calc(0.02 * 100vh);
+    top: calc(100vw * 542 / 860 + 0.12 * 100vh + 22vh);
+}
+
+.text3Visible {
+    animation: fadeIn2 2s ease forwards;
+    animation-delay: 1s;
+    font-size: calc(0.02 * 100vh);
+    text-align: center;
+    color: #000000; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    position: absolute;
+    top: calc(100vw * 542 / 860 + 0.12 * 100vh + 22vh);
+}
+
+@media (max-aspect-ratio: 421/925) {
+    /* Стили для экранов с соотношением сторон меньше 0.454 */
+    .text2Visible {
+        top: calc(100vw * 542 / 860 + 0.12 * 100vh + 2vh);
+    }
+
+    .text3Visible {
+        top: calc(100vw * 542 / 860 + 0.12 * 100vh + 24vh);
+    }
+}
+
+
+.buttonContainer {
+    width: 95vw;
+    height: 6vh;
+    margin-bottom: calc(0.002 * 100vh);
+    margin-top: calc(0.015 * 100vh);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+
+.subscribeButton {
+    width: 95vw;
+    height: 6vh;
+    font-size: calc(0.2 * 0.7 * 31vw);
+    font-family: inherit;
+    border: 1px solid black;
+    border-radius: 1vh;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    position: relative; /* Для позиционирования сердечка */
+    transition: background-color 0.5s, color 0.5s;
+    text-align: center;
+}
+
+.subscribeButton:hover {
+    background-color: black;
+    color: white;
+}
+
+.disabledButton {
+    background-color: gray; /* Серый фон, когда кнопка неактивна */
+    color: white; /* Белый текст */
+    border: 1px solid gray; /* Серый цвет рамки */
+    cursor: default;
+}
+
+.disabledButton:hover {
+    background-color: gray; /* Серый фон, когда кнопка неактивна */
+    color: white; /* Белый текст */
+}
+
+.hideText {
+    font-size: calc(0.13333333333 * 0.7 * 31vw);
+    font-family: inherit;
+    color: #940A0A;
+    text-align: center;
+    position: relative;
+    transition: color 0.3s;
+}
+
+
+.twoButtons {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.buttonLeft,
+.buttonRight {
+    font-family: inherit;
+    border-radius: 1vh;
+    font-size: calc(0.2 * 0.7 * 31vw);
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.buttonRight {
+    width: 0;
+    opacity: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.buttonLeft {
+    background: linear-gradient(to right, #208BD5, #4C3E6B);
+    color: white;
+    border: none;
+}
+
+.buttonLeft:hover {
+    background: linear-gradient(to right, #208BD5, #4C3E6B);
+    color: white;
+    border: none;
+}
+
+.buttonRight:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Анимация изменения ширины левой кнопки */
+@keyframes expandLeft {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 57%;
+    }
+}
+
+/* Анимация появления и увеличения правой кнопки */
+@keyframes expandRight {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 42%;
+        opacity: 1;
+    }
+}
+
+/* Когда анимация завершена, обе кнопки должны быть видны */
+.twoButtons.animate .buttonLeft {
+    animation: expandLeft 1.5s ease forwards;
+}
+
+.twoButtons.animate .buttonRight {
+    animation: expandRight 1.5s ease forwards;
+}
+
+.cross {
+    width: calc(0.0265116279 * 100vh);
+    height: calc(0.0265116279 * 100vh);
+    top: calc(0.02325581395 * 100vh);
+    right: calc(0.02325581395 * 100vh);
+    position: absolute;
+    animation: fadeIn2 2s ease forwards;
+    cursor: pointer;
+}
+
+.back {
+    width: calc(0.0265116279 * 100vh);
+    height: calc(0.0265116279 * 100vh);
+    top: calc(0.02325581395 * 100vh);
+    left: calc(0.02325581395 * 100vh);
+    position: absolute;
+    animation: fadeIn2 2s ease forwards;
+    cursor: pointer;
+}
+
+.invisible {
+    display: none;
+}
+
+.text11 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.02 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.02027027027 * 100vh);
+}
+
+
+.contentCont {
+    display: flex;
+    flex-direction: column; /* Расположение рядов сверху вниз */
+    gap: 2vh;
+    margin-bottom: calc(0.15 * 100vh);
+}
+
+.contentRow {
+    display: flex; /* Расположение блоков в ряд */
+    justify-content: space-between; /* Равномерное распределение блоков по ширине */
+}
+
+.contentItem {
+    display: flex; /* Отображение элементов в строку */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    width: 95vw;
+    height: auto;
+}
+
+.contentImage {
+    width: 5vw;
+    height: 5vw;
+    margin-right: 2vw;
+}
+
+.contentText {
+    flex-grow: 1; /* Позволяет тексту занимать оставшееся пространство */
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: black; /* Цвет текста */
+    font-size: calc(0.016 * 100vh);
+    font-family: inherit;
+}
+
+.text111 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.027 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.01727027027 * 100vh);
+}
+
+.text22 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.022 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.02027027027 * 100vh);
+}
+
+.text33 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-weight: 600;
+    font-size: calc(0.028 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.02027027027 * 100vh);
+}
+
+.text44 {
+    color: #940A0A;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.021 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.02027027027 * 100vh);
+}
+
+.text55 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.021 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.01327027027 * 100vh);
+}
+
+.text66 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.021 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 5px calc(0.01327027027 * 100vh);
+}

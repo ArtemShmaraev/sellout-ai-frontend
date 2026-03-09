@@ -46,7 +46,6 @@ export async function fetchProductsPage(query, token = '') {
             allQuery +=`${key}=${query[key]}&`
         }
     })
-    console.log(allQuery)
     if (!token) {
         const {data} = await $host.get(`product/products/?${allQuery}`)
         return data
@@ -183,6 +182,31 @@ export async function fetchOneProduct(slug, token = '', ip = "") {
     }
 }
 
+export async function fetchOneProductFull(slug, token = '', ip = "") {
+    // Создаем объект с параметрами
+    const params = { ip };
+
+    if (!token) {
+        const { data } = await $host.get(`product/slug_full/${slug}`, {
+            params,
+            // Устанавливаем заголовок X-Forwarded-For
+            headers: {
+                'X-Forwarded-For': ip // Передаем IP-адрес в заголовке X-Forwarded-For
+            }
+        });
+        return data;
+    } else {
+        const { data } = await $host.get(`product/slug_full/${slug}`, {
+            params,
+            // Устанавливаем заголовок X-Forwarded-For и Authorization
+            headers: {
+                'X-Forwarded-For': ip, // Передаем IP-адрес в заголовке X-Forwarded-For
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return data;
+    }
+}
 
 export async function updateOneProduct(slug, token = '') {
     if (!token) {

@@ -1,0 +1,163 @@
+/*Почти ненужные стили*/
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: relative;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.openModalButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+}
+
+.openModalButton:hover {
+    background-color: lightgray;
+}
+
+/*Конец почти ненужных стилей*/
+
+.modalOpen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    background-color: white;
+    overflow-y: auto; /* Скролл появится, только если контент больше 100vh */
+    animation: slideUp 0.5s ease forwards; /* Анимация появления */
+    z-index: 999; /* Модалка поверх всего */
+    display: flex;
+    flex-direction: column;
+}
+
+.modalContent {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Анимация выезда сверху */
+@keyframes slideUp {
+    0% {
+        transform: translateY(100vh); /* Начинает за пределами экрана снизу */
+    }
+    100% {
+        transform: translateY(0); /* Появляется на экране */
+    }
+}
+
+.img {
+    width: 100%;
+}
+
+.title {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.02297297297 * 100vh);
+    margin: calc(0.01351351351 * 100vh) 10px;
+}
+
+.text1 {
+    color: black;
+    font-family: inherit;
+    text-align: center;
+    font-size: calc(0.018 * 100vh);
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.contentCont {
+    display: flex;
+    flex-direction: column; /* Расположение рядов сверху вниз */
+    gap: 30px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentItem {
+    display: flex; /* Отображение элементов в строку */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    height: 40px;
+    width: 96%;
+}
+
+.contentItem2 {
+    display: flex; /* Отображение элементов в строку */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    height: 40px;
+}
+
+.contentImage {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.contentText {
+    text-align: left; /* Выравнивание текста по левому краю */
+    width: 100%;
+    color: black; /* Цвет текста */
+    font-size: calc(0.018 * 100vh);
+    font-family: inherit;
+}
+
+.contentRow {
+    display: flex; /* Расположение блоков в ряд */
+    justify-content: space-between; /* Равномерное распределение блоков по ширине */
+    width: 96%;
+    gap: 3%
+}
+
+.button {
+    width: 80%;
+    height: 50px;
+    font-size: 18px;
+    font-family: inherit;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    position: relative; /* Для позиционирования сердечка */
+    transition: background-color 0.5s, color 0.5s;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    background-color: black;
+    color: white;
+}
+
+.hideText {
+    font-family: inherit;
+    color: #828282;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 120px;
+}

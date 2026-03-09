@@ -58,6 +58,7 @@ export async function fetchMainPage(token, nextPage, newPage, page, selected_gen
         return data
     }
 }
+
 export async function fetchMore(page) {
     const {data} = await $host.get(`product/main_page?page=${page}`)
     return data

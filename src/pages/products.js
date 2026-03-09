@@ -83,12 +83,10 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
     const page = Number(router.query.page) || 1
     const [totalProducts, setTotalProducts] = useState(' ')
     const [isOpen, setIsOpen] = useState(false)
+    const [showPromos, setShowPromos] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const {filterStore, desktopStore} = useContext(Context)
     const [products, setProducts] = useState(loading_products_data)
-    console.log(size_tables_name)
-
-
     useEffect(() => {
         setProducts(loading_products_data)
     }, [router.asPath])
@@ -106,6 +104,12 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
                 data_products = await fetchProductsPage(url, token)
             }
             setProducts(data_products)
+            console.log(data_products.results.length === 60 && (!("page" in url) || url["page"] === "1"))
+            if (data_products.results.length === 60 && (!("page" in url) || url["page"] === "1")) {
+                setShowPromos(true)
+            } else {
+                setShowPromos(false)
+            }
         };
         fetchData();
     }, [router.asPath])
@@ -273,7 +277,7 @@ const Products = ({lines, collections, size_tables_name, lastSeen, url, footer_t
                     {desktopStore.filtersOpen &&
                         <FilterDropdowns/>
                     }
-                    <ProductList products={products.results} isAdmin={false}/>
+                    <ProductList products={products.results} isAdmin={false} showPromos={showPromos}/>
                 </div>
                 <PageSwitch currentPage={page} totalProducts={totalProducts}/>
             </div>

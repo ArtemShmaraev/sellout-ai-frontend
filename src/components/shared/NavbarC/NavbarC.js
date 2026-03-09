@@ -35,6 +35,8 @@ import accountSelected from "@/static/icons/AccountMobileNavBarSelected.svg";
 import favouriteSelected from "@/static/icons/FavouriteMobileNavBarSelected.svg";
 import homeSelected from "@/static/icons/HomeMobileNavBarSelected.svg";
 import searchSelected from "@/static/icons/SearchMobileNavBarSelected.svg";
+import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
 
 // import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 
@@ -153,6 +155,28 @@ const NavbarC = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+    const [socialsOpen, setSocialsOpen] = useState(false);
+    const toggleSocials = () => {
+        setSocialsOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleSocialsClose = () => {
+        setSocialsOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
+    const [refModalOpen, setRefModalOpen] = useState(false);
+
+    const toggleRef = () => {
+        setRefModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleRefModalOpen = () => {
+        setRefModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
 
     return (
         <>
@@ -163,7 +187,7 @@ const NavbarC = () => {
             } id={'navbar'}>
                 {desktopStore.isDesktop &&
                     <>
-                        <SalesLine/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
                         <div className={'custom_cont'}>
                             <div className={s.row1}>
                                 <div className={s.block}>
@@ -330,7 +354,7 @@ const NavbarC = () => {
 
                 {!desktopStore.isDesktop &&
                     <>
-                        <SalesLine/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
                         <div className={s.bottom_nav}>
                             <div
                                 className={s.nav_item}
@@ -445,6 +469,8 @@ const NavbarC = () => {
                     initialScrollPositions={desktopStore.scrollPositions}
                 />
             }
+            <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
+            <ModalRef show={refModalOpen} onClose={handleRefModalOpen}/>
         </>
 
 

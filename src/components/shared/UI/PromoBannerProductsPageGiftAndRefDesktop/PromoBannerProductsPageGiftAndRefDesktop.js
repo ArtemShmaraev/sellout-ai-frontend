@@ -6,6 +6,8 @@ import aboutImg from "@/static/icons/promoBannerAboutImg.svg";
 import guaranteeImg from "@/static/icons/promoBannerGuaranteeImg.svg";
 import TextModalGuarantee from "@/components/shared/UI/TextModalGuarantee/TextModalGuarantee";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
+
 
 const PromoBannerProductsPageGiftAndRefDesktop = () => {
     const [howOpen, setHowOpen] = useState(false);
@@ -41,6 +43,18 @@ const PromoBannerProductsPageGiftAndRefDesktop = () => {
         changeBrowserColor("#ffffff")
     };
 
+    const [refModalOpen, setRefModalOpen] = useState(false);
+
+    const toggleRef = () => {
+        setRefModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleRefModalOpen = () => {
+        setRefModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             {desktopStore.isDesktop ?
@@ -56,10 +70,10 @@ const PromoBannerProductsPageGiftAndRefDesktop = () => {
                     <div className={styles.separator}>
                     </div>
                     <div className={styles.ref}>
-                        <div className={styles.refText} onClick={toggleHow}>
+                        <div className={styles.refText} onClick={toggleRef}>
                             До 7000₽ за приглашенного друга
                         </div>
-                        <div className={styles.refButton} onClick={toggleHow}>
+                        <div className={styles.refButton} onClick={toggleRef}>
                             Подробнее
                         </div>
                     </div>
@@ -68,6 +82,7 @@ const PromoBannerProductsPageGiftAndRefDesktop = () => {
                 <></>
             }
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+            <ModalRef show={refModalOpen} onClose={handleRefModalOpen}/>
         </>
     );
 };

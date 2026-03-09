@@ -1,0 +1,570 @@
+/*Почти ненужные стили*/
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    position: relative;
+    flex-direction: column;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.openModalButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+}
+
+.openModalButton:hover {
+    background-color: lightgray;
+}
+
+/*Конец почти ненужных стилей*/
+
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Прозрачный чёрный */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease forwards;
+    z-index: 10;
+}
+
+.fadeOut {
+    animation: fadeOut 0.5s ease-in forwards; /* Анимация закрытия */
+}
+
+.modalContent {
+    background-color: white;
+    border-radius: 0.5vh;
+    width: calc((1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    height: calc(min(92vh, 80vw * (650 / 1205)));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideDown 1s ease forwards;
+    display: flex;
+    position: relative;
+}
+
+.slideUp {
+    animation: slideUp 0.5s ease-in forwards; /* Анимация закрытия */
+}
+
+/* Анимация для заднего фона */
+@keyframes fadeIn {
+    0% {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.77);
+        backdrop-filter: blur(5px);
+    }
+}
+
+/* Анимация для модального окна */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Анимация для заднего фона при закрытии */
+@keyframes fadeOut {
+    0% {
+        background: rgba(0, 0, 0, 0.77);
+        backdrop-filter: blur(5px);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* Анимация для модального окна при закрытии */
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.leftSide {
+    width: auto; /* Авто ширина для изображения */
+    height: 100%;
+}
+
+.image {
+    height: 100%; /* Автоматическая высота для сохранения пропорций */
+    width: 100%;
+}
+
+.rightSide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cross {
+    width: calc(0.03076923076 * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.03076923076 * min(92vh, 80vw * (650 / 1205)));
+    top: calc(0.02307692307 * min(92vh, 80vw * (650 / 1205)));
+    right: calc(0.01244813278 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    position: absolute;
+    animation: fadeIn2 2s ease forwards;
+    cursor: pointer;
+}
+
+.back {
+    width: calc(0.03076923076 * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.03076923076 * min(92vh, 80vw * (650 / 1205)));
+    top: calc(0.02307692307 * min(92vh, 80vw * (650 / 1205)));
+    left: calc(0.01244813278 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)) + min(92vh, 80vw * (650 / 1205)) * (482 / 650));
+    position: absolute;
+    animation: fadeIn2 2s ease forwards;
+    cursor: pointer;
+}
+
+.invisible {
+    display: none;
+}
+
+.logo {
+    width: calc(0.05692307692 * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.05692307692 * min(92vh, 80vw * (650 / 1205)));
+    margin-top: calc(0.02307692307 * min(92vh, 80vw * (650 / 1205)));
+}
+
+.title {
+    font-size: calc(0.035 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    margin-top: calc(0.02 * min(92vh, 80vw * (650 / 1205)));
+    color: black;
+    margin-bottom: calc(0.02 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text1 {
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: black;
+    margin-bottom: calc(0.02 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text2 {
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: #940A0A; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    transform: translateY(calc(0.05 * min(92vh, 80vw * (650 / 1205))));
+
+}
+
+@keyframes fadeIn2 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.text2Visible {
+    animation: fadeIn2 2s ease forwards;
+    animation-delay: 1s;
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: #940A0A; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    transform: translateY(calc(0.05 * min(92vh, 80vw * (650 / 1205))));
+}
+
+.text3 {
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: #000000; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    position: absolute;
+    top: calc((0.02307692307 + 0.05692307692 + 0.035 + 0.12 + 1.3 * 0.15384615384 + 0.2) * min(92vh, 80vw * (650 / 1205)))
+}
+
+.text3Visible {
+    animation: fadeIn2 2s ease forwards;
+    animation-delay: 1s;
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: #000000; /* Цвет текста */
+    font-family: inherit;
+    opacity: 0;
+    position: absolute;
+    top: calc((0.02307692307 + 0.05692307692 + 0.035 + 0.12 + 1.3 * 0.15384615384 + 0.2) * min(92vh, 80vw * (650 / 1205)))
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, calc(0.16182572614 * (1205 / 650) * min(92vh, 80vw * (650 / 1205))));
+    gap: calc(0.01538461538 * min(92vh, 80vw * (650 / 1205)));
+    justify-content: center; /* Выравнивание по центру */
+    margin: 0 auto; /* Центрирование сетки */
+}
+
+.square {
+    background-color: #ededed; /* Цвет фона */
+    width: calc(0.16182572614 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.15384615384 * min(92vh, 80vw * (650 / 1205)));
+    border-radius: 5px; /* Скругленные углы */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: black;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.square.active {
+    background-color: #FD9292;
+}
+
+/* Контейнер для текста внутри квадрата */
+.text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(0.14107883817 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+}
+
+/* Первый текст (7'000₽) */
+.text-block .price {
+    font-size: calc(0.03692307692 * min(92vh, 80vw * (650 / 1205)));
+    color: #940A0A; /* Цвет текста */
+    margin-bottom: calc(0.00461538461 * min(92vh, 80vw * (650 / 1205)));
+}
+
+/* Второй текст (бонусов к первому заказу) */
+.text-block .bonus {
+    font-size: calc(0.02153846153 * min(92vh, 80vw * (650 / 1205)));
+    color: #000; /* Черный текст */
+}
+
+.text-block .bonusExtra {
+    margin-top: calc(0.01 * min(92vh, 80vw * (650 / 1205)));
+}
+
+.text-block .giftLogo {
+    width: 130px; /* Ширина изображения */
+    height: 60px; /* Автоматическая высота, чтобы сохранить пропорции */
+}
+
+.text-block .giftLogo2 {
+    width: 150px; /* Ширина изображения */
+    height: 45px; /* Автоматическая высота, чтобы сохранить пропорции */
+}
+
+.fadeOutSquare {
+    animation: fadeOut2 2s ease forwards;
+}
+
+@keyframes fadeOut2 {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.winningSquare {
+    z-index: 10;
+    animation: moveToFinalPosition 2s ease forwards;
+}
+
+@keyframes moveToFinalPosition {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(var(--x), var(--y)) scale(1.27); /* Используем CSS-переменные */
+    }
+}
+
+.subscribeButton {
+    width: calc(0.51701244813 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.08 * min(92vh, 80vw * (650 / 1205)));
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+    border: 1px solid black;
+    border-radius: calc(0.00923076923 * min(92vh, 80vw * (650 / 1205)));
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    position: relative; /* Для позиционирования сердечка */
+    transition: background-color 0.5s, color 0.5s;
+    text-align: center;
+
+}
+
+.subscribeButton:hover {
+    background-color: black;
+    color: white;
+}
+
+.disabledButton {
+    background-color: gray; /* Серый фон, когда кнопка неактивна */
+    color: white; /* Белый текст */
+    border: 1px solid gray; /* Серый цвет рамки */
+    cursor: default;
+}
+
+.disabledButton:hover {
+    background-color: gray; /* Серый фон, когда кнопка неактивна */
+    color: white; /* Белый текст */
+}
+
+.buttonContainer {
+    width: calc(0.51701244813 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.08 * min(92vh, 80vw * (650 / 1205)));
+    margin-bottom: calc(0.01 * min(92vh, 80vw * (650 / 1205)));
+    margin-top: calc(0.045 * min(92vh, 80vw * (650 / 1205)));
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+
+.twoButtons {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.buttonLeft,
+.buttonRight {
+    font-family: inherit;
+    border-radius: calc(0.00923076923 * min(92vh, 80vw * (650 / 1205)));
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s, color 0.5s, backgrodund 0.5s;
+}
+
+.buttonRight {
+    width: 0;
+    opacity: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.buttonLeft {
+    background: linear-gradient(to right, #208BD5, #4C3E6B);
+    color: white;
+    border: none;
+}
+
+.buttonLeft:hover {
+    background: linear-gradient(to right, #4C3E6B, #4C3E6B);
+    color: white;
+    border: none;
+}
+
+.buttonRight:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Анимация изменения ширины левой кнопки */
+@keyframes expandLeft {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 67%;
+    }
+}
+
+/* Анимация появления и увеличения правой кнопки */
+@keyframes expandRight {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 30%;
+        opacity: 1;
+    }
+}
+
+/* Когда анимация завершена, обе кнопки должны быть видны */
+.twoButtons.animate .buttonLeft {
+    animation: expandLeft 1.5s ease forwards;
+}
+
+.twoButtons.animate .buttonRight {
+    animation: expandRight 1.5s ease forwards;
+}
+
+
+.hideText {
+    font-size: calc(0.022 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+    color: #940A0A;
+    text-align: center;
+    position: relative;
+    transition: color 0.3s;
+}
+
+
+.contentCont {
+    display: flex;
+    flex-direction: column; /* Расположение рядов сверху вниз */
+    gap: calc(0.0663 * min(92vh, 80vw * (650 / 1205)));
+    margin-bottom: calc(0.3 * min(92vh, 80vw * (650 / 1205)));
+}
+
+.contentRow {
+    display: flex; /* Расположение блоков в ряд */
+    justify-content: space-between; /* Равномерное распределение блоков по ширине */
+}
+
+.contentItem {
+    display: flex; /* Отображение элементов в строку */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    width: calc(0.28 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.06153846153 * min(92vh, 80vw * (650 / 1205)));
+}
+
+.contentImage {
+    width: calc(0.04923076923 * min(92vh, 80vw * (650 / 1205)));
+    height: calc(0.04923076923 * min(92vh, 80vw * (650 / 1205)));
+    margin-right: calc(0.00898472596 * (1205 / 650) * min(92vh, 80vw * (650 / 1205)));
+}
+
+.contentText {
+    flex-grow: 1; /* Позволяет тексту занимать оставшееся пространство */
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: black; /* Цвет текста */
+    font-size: calc(0.025 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text11 {
+    font-size: calc(0.03 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: black;
+    margin: calc(0.02 * min(92vh, 80vw * (650 / 1205))) calc(0.02 * min(92vh, 80vw * (650 / 1205))) calc(0.05 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text22 {
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: black;
+    margin-bottom: calc(0.1 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text33 {
+    font-size: calc(0.04 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    font-weight: 600;
+    color: black;
+    margin-bottom: calc(0.04 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text44 {
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    font-weight: 500;
+    color: #940A0A;
+    margin-bottom: calc(0.1 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text55 {
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: black;
+    margin-bottom: calc(0.04 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+.text66 {
+    font-size: calc(0.027 * min(92vh, 80vw * (650 / 1205)));
+    text-align: center;
+    color: black;
+    margin-bottom: calc(0.04 * min(92vh, 80vw * (650 / 1205)));
+    font-family: inherit;
+}
+
+
+.toast {
+    position: fixed; /* Чтобы закрепить прямоугольник поверх страницы */
+    bottom: 20px; /* Позиция по вертикали снизу */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    background-color: rgba(128, 128, 128, 0.5); /* Серый цвет с прозрачностью */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругленные углы */
+    color: white;
+    font-size: 16px;
+    white-space: nowrap;
+    font-family: inherit;
+    animation: fadeInOut 3s ease-in-out; /* Анимация появления и исчезновения */
+    z-index: 1000;
+    text-align: center;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px); /* Начальная позиция */
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0); /* Видимое состояние */
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px); /* Конечная позиция */
+    }
+}

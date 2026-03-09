@@ -29,12 +29,12 @@
     left: 0;
     background: rgba(0, 0, 0, 0.5);
     width: 100vw;
-    height: 100vh;
+    height: 101vh;
 }
 
 .search_block {
     background: white;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 30px);
     padding-top: 20px;
 }
 
@@ -45,7 +45,6 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 3vw;
-    margin-bottom: 30px;
 }
 
 .main_block {
@@ -83,8 +82,7 @@
 
 .sug_block {
     overflow-y: scroll;
-    height: calc(100vh - 200px - 20px - 50px - 50px);
-    padding-bottom: 30px;
+    height: calc(100vh - 30px - 45px - 45px);
     overflow-x: hidden;
     padding-top: 5px;
 }
@@ -100,9 +98,7 @@
     transition: 0.3s;
     background-color: #000000;
     border-radius: 15px;
-    margin-right: 17%;
-    margin-left: 17%;
-    margin-top: 20px;
+    margin: 20px 17%;
     color: white;
 }
 

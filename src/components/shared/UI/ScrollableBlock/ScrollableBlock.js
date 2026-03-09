@@ -72,14 +72,9 @@ const ScrollableBlock = forwardRef(({
 
     useEffect(() => {
         const handleResize = () => {
-            console.log(moreButtonUrl)
-            console.log("OUT")
             if (scrollableContainerRef.current) {
                 const scrollableWidth = scrollableContainerRef.current.scrollWidth;
                 const visibleWidth = scrollableContainerRef.current.clientWidth;
-                console.log(scrollableWidth)
-                console.log(visibleWidth)
-
                 // Если содержимое шире контейнера, показываем стрелки
                 if (scrollableWidth > visibleWidth) {
                     setNoArrows(false); // Показать стрелки

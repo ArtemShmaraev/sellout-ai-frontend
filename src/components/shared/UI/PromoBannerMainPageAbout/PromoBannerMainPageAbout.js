@@ -8,9 +8,14 @@ import priceImg from "@/static/icons/priceImg.svg";
 import allImg from "@/static/icons/allImg.svg";
 import TextModalGuarantee from "@/components/shared/UI/TextModalGuarantee/TextModalGuarantee";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import OfferBetterPriceModal from "@/components/shared/OfferBetterPriceModal/OfferBetterPriceModal";
+import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
+import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 
 const PromoBannerMainPageAbout = () => {
     const [howOpen, setHowOpen] = useState(false);
+    const [offerOpen, setOfferOpen] = useState(false);
+    const [deliverAnythingOpen, setDeliverAnythingOpen] = useState(false);
 
     function changeBrowserColor(color) {
         // Для Chrome, Firefox, Opera на Android
@@ -41,6 +46,22 @@ const PromoBannerMainPageAbout = () => {
     const closeHow = () => {
         setHowOpen(false);
         changeBrowserColor("#ffffff")
+    };
+
+    const toggleOffer = () => {
+        setOfferOpen(!offerOpen);
+    };
+
+    const closeOffer = () => {
+        setOfferOpen(false);
+    };
+
+    const toggleDeliver = () => {
+        setDeliverAnythingOpen(!deliverAnythingOpen);
+    };
+
+    const closeDeliver = () => {
+        setDeliverAnythingOpen(false);
     };
 
     return (
@@ -90,10 +111,10 @@ const PromoBannerMainPageAbout = () => {
                                     height={34}
                                 />
                             </div>
-                            <div className={styles.priceText} onClick={toggleHow}>
+                            <div className={styles.priceText} onClick={toggleOffer}>
                                 Предложим цену выгоднее, если найдете где-то дешевле
                             </div>
-                            <div className={styles.aboutButton} onClick={toggleHow}>
+                            <div className={styles.aboutButton} onClick={toggleOffer}>
                                 Подробнее
                             </div>
                         </div>
@@ -106,10 +127,10 @@ const PromoBannerMainPageAbout = () => {
                                     height={34}
                                 />
                             </div>
-                            <div className={styles.allText} onClick={toggleHow}>
+                            <div className={styles.allText} onClick={toggleDeliver}>
                                 Привезем любой ваш желанный товар по лучшей цене
                             </div>
-                            <div className={styles.aboutButton} onClick={toggleHow}>
+                            <div className={styles.aboutButton} onClick={toggleDeliver}>
                                 Подробнее
                             </div>
                         </div>
@@ -159,10 +180,10 @@ const PromoBannerMainPageAbout = () => {
                                 height={34}
                             />
                         </div>
-                        <div className={styles.aboutTextMob} onClick={toggleHow}>
+                        <div className={styles.aboutTextMob} onClick={toggleOffer}>
                             Предложим цену выгоднее, если найдете где-то дешевле
                         </div>
-                        <div className={styles.aboutButtonMob} onClick={toggleHow}>
+                        <div className={styles.aboutButtonMob} onClick={toggleOffer}>
                             Подробнее
                         </div>
                     </div>
@@ -175,16 +196,18 @@ const PromoBannerMainPageAbout = () => {
                                 height={34}
                             />
                         </div>
-                        <div className={styles.aboutTextMob} onClick={toggleHow}>
+                        <div className={styles.aboutTextMob} onClick={toggleDeliver}>
                             Привезем любой желанный товар
                         </div>
-                        <div className={styles.aboutButtonMob} onClick={toggleHow}>
+                        <div className={styles.aboutButtonMob} onClick={toggleDeliver}>
                             Подробнее
                         </div>
                     </div>
                 </div>
             }
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+            <OfferBetterPriceModal show={offerOpen} onHide={closeOffer}/>
+            <BuyoutModal show={deliverAnythingOpen} handleClose={closeDeliver}/>
         </>
     );
 };

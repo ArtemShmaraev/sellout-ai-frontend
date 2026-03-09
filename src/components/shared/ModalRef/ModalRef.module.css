@@ -1,0 +1,266 @@
+/*Почти ненужные стили*/
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    position: relative;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.openModalButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+}
+
+.openModalButton:hover {
+    background-color: lightgray;
+}
+
+/*Конец почти ненужных стилей*/
+
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Прозрачный чёрный */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease forwards;
+    z-index: 10;
+}
+
+.fadeOut {
+    animation: fadeOut 0.5s ease-in forwards; /* Анимация закрытия */
+}
+
+.modalContent {
+    background-color: white;
+    border-radius: 0.5vh;
+    width: calc((1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+    height: calc(min(89vh, 82vw * (626 / 1265)));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideDown 1s ease forwards;
+    display: flex;
+    position: relative;
+}
+
+.slideUp {
+    animation: slideUp 0.5s ease-in forwards; /* Анимация закрытия */
+}
+
+/* Анимация для заднего фона */
+@keyframes fadeIn {
+    0% {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.77);
+        backdrop-filter: blur(5px);
+    }
+}
+
+/* Анимация для модального окна */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Анимация для заднего фона при закрытии */
+@keyframes fadeOut {
+    0% {
+        background: rgba(0, 0, 0, 0.77);
+        backdrop-filter: blur(5px);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* Анимация для модального окна при закрытии */
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.leftSide {
+    width: auto; /* Авто ширина для изображения */
+    height: 100%;
+}
+
+.image {
+    height: 100%; /* Автоматическая высота для сохранения пропорций */
+    width: 100%;
+}
+
+.rightSide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: calc(0.1 * min(89vh, 82vw * (626 / 1265)));
+    height: calc(0.1 * min(89vh, 82vw * (626 / 1265)));
+    margin-top: calc(0.03194888178 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.title {
+    font-size: calc(0.03833865814 * min(89vh, 82vw * (626 / 1265)));
+    text-align: center;
+    margin-top: calc(0.02396166134 * min(89vh, 82vw * (626 / 1265)));
+    color: black;
+    margin-bottom: calc(0.01597444089 * min(89vh, 82vw * (626 / 1265)));
+    font-family: inherit;
+}
+
+.text1 {
+    font-size: calc(0.02875399361 * min(89vh, 82vw * (626 / 1265)));
+    text-align: center;
+    color: black;
+    font-family: inherit;
+    margin-bottom: calc(0.05271565495 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.text2 {
+    font-size: calc(0.02875399361 * min(89vh, 82vw * (626 / 1265)));
+    font-weight: 500;
+    text-align: center;
+    color: black;
+    font-family: inherit;
+    margin-bottom: calc(0.04792332268 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.contentCont {
+    display: flex;
+    flex-direction: column; /* Расположение рядов сверху вниз */
+    gap: calc(0.05431309904 * min(89vh, 82vw * (626 / 1265)));
+    margin-bottom: calc(0.04792332268 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.contentRow {
+    display: flex; /* Расположение блоков в ряд */
+    justify-content: space-between; /* Равномерное распределение блоков по ширине */
+}
+
+.contentItem {
+    display: flex; /* Отображение элементов в строку */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    width: calc(0.56837944664 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+    height: calc(0.06389776357 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.contentImage {
+    width: calc(0.05111821086 * min(89vh, 82vw * (626 / 1265)));
+    height: calc(0.05111821086 * min(89vh, 82vw * (626 / 1265)));
+    margin-right: calc(0.00790513833 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+}
+
+.contentText {
+    flex-grow: 1; /* Позволяет тексту занимать оставшееся пространство */
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: black; /* Цвет текста */
+    font-size: calc(0.02555910543 * min(89vh, 82vw * (626 / 1265)));
+    font-family: inherit;
+}
+
+.text3 {
+    font-size: calc(0.02875399361 * min(89vh, 82vw * (626 / 1265)));
+    font-weight: 500;
+    text-align: center;
+    color: black;
+    font-family: inherit;
+    margin-bottom: calc(0.06389776357 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.subscribeButton {
+    width: calc(0.49249011857 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+    height: calc(0.08306709265 * min(89vh, 82vw * (626 / 1265)));
+    font-size: calc(0.02555910543 * min(89vh, 82vw * (626 / 1265)));
+    font-family: inherit;
+    border: 1px solid black;
+    border-radius: calc(0.00958466453 * min(89vh, 82vw * (626 / 1265)));
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    position: relative; /* Для позиционирования сердечка */
+    transition: background-color 0.5s, color 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: calc(0.02 * min(89vh, 82vw * (626 / 1265)));
+}
+
+.subscribeButton:hover {
+    background-color: black;
+    color: white;
+}
+
+.hideText {
+    font-size: calc(0.02236421725 * min(89vh, 82vw * (626 / 1265)));
+    font-family: inherit;
+    color: #828282;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    width: calc(0.49249011857 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+}
+
+.hideText:hover {
+    color: black;
+}
+
+.hideTextText {
+    text-decoration: underline;
+    margin-left: calc(0.18023715415 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+}
+
+.sadEmoji {
+    margin-left: calc(0.01477 * 0.3 * (1265 / 626) * min(89vh, 82vw * (626 / 1265)));
+}
+
+.title2 {
+    font-size: calc(0.03 * min(89vh, 82vw * (626 / 1265)));
+    text-align: center;
+    margin-top: calc(0.02396166134 * min(89vh, 82vw * (626 / 1265)));
+    color: black;
+    margin-bottom: calc(0.01597444089 * min(89vh, 82vw * (626 / 1265)));
+    font-family: inherit;
+}
+
+
+
+

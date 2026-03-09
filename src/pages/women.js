@@ -5,7 +5,7 @@ import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import Head from "next/head";
-import {fetchMainPage, fetchMainPage2, fetchMore} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
 import Image from "next/image";
@@ -38,13 +38,13 @@ export const getServerSideProps = async (context) => {
     const selected_gender = "F"; // Добавляем получение выбранного гендера из кук
 
     let data;
+    const restoredData = false;
 
+    data = tempWomenJson
 
-    data = await fetchMainPage2(context.req.headers.cookie, selected_gender)
-
-    return {props: {data}};
+    return {props: {data, restoredData}};
 }
-const Women = ({data}) => {
+const Women = ({data, restoredData}) => {
     // const {desktopStore} = useContext(Context)
     const router = useRouter()
     const [content, setContent] = useState(data)
@@ -84,6 +84,29 @@ const Women = ({data}) => {
         if (!Cookies.get('index_page')) {
             const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
             Cookies.set('index_page', 1, {expires: tenMinutes});
+        }
+
+        if (restoredData) {
+            Cookies.set('mainPageMen-lastTimeUpdated', Date.now(), {expires: 2772})
+            Cookies.set("homeScrollPositionMen", 0, {expires: 0.25});
+
+            data.forEach(item => {
+                if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
+                    const blockId = item.blockId;
+
+                    // Формируем имена куков
+                    const cookiesToCheck = [
+                        `multiSectionedBlock-${blockId}-SelectedSection`,
+                        `multiSectionedBlock-${blockId}-SectionsContainerPosition`,
+                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                    ];
+
+                    // Проверяем наличие каждого кука и устанавливаем значение 0
+                    cookiesToCheck.forEach(cookieName => {
+                        Cookies.set(cookieName, 0, {expires: 0.25});
+                    });
+                }
+            })
         }
     }, []);
 

@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styles from './PromoBannerProductsPageSocial.module.css'
 import {desktopStore} from "@/store/DesktopStore";
-import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 
 const PromoBannerProductsPageSocial = () => {
-    const [howOpen, setHowOpen] = useState(false);
-
     function changeBrowserColor(color) {
         // Для Chrome, Firefox, Opera на Android
         const themeColorMeta = document.querySelector('meta[name="theme-color"]');
@@ -27,14 +25,16 @@ const PromoBannerProductsPageSocial = () => {
         }
     }
 
-    const toggleHow = () => {
-        setHowOpen(!howOpen);
-        changeBrowserColor("#000000")
+    const [socialsOpen, setSocialsOpen] = useState(false);
+
+    const toggleSocials = () => {
+        setSocialsOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
     };
 
-    const closeHow = () => {
-        setHowOpen(false);
-        changeBrowserColor("#ffffff")
+    const handleSocialsClose = () => {
+        setSocialsOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
     };
 
     return (
@@ -42,25 +42,25 @@ const PromoBannerProductsPageSocial = () => {
             {desktopStore.isDesktop ?
                 <div className={styles.socialCont}>
                     <div className={styles.social}>
-                        <div className={styles.socialText} onClick={toggleHow}>
+                        <div className={styles.socialText} onClick={toggleSocials}>
                             Все розыгрыши, скидки, полезный контент, новости и многое другое в одном месте
                         </div>
-                        <div className={styles.socialButton} onClick={toggleHow}>
+                        <div className={styles.socialButton} onClick={toggleSocials}>
                             Подробнее
                         </div>
                     </div>
                 </div>
                 :
                 <div className={styles.socialContMob}>
-                    <div className={styles.socialTextMob} onClick={toggleHow}>
+                    <div className={styles.socialTextMob} onClick={toggleSocials}>
                         Розыгрыши, скидки, полезный контент, новости и многое другое
                     </div>
-                    <div className={styles.socialButtonMob} onClick={toggleHow}>
+                    <div className={styles.socialButtonMob} onClick={toggleSocials}>
                         Посмотреть
                     </div>
                 </div>
             }
-            <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+            <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
         </>
     );
 };

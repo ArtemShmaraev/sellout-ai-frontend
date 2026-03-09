@@ -17,6 +17,8 @@ import heart from '@/static/icons/heart.svg'
 const AccountLayout = ({children}) => {
     const {userStore, cartStore} = useContext(Context)
     const router = useRouter()
+    const selectedGender = Cookies.get('selected_gender')
+
     const logout = (e) => {
         e.preventDefault()
         Cookies.remove('access_token')
@@ -27,7 +29,7 @@ const AccountLayout = ({children}) => {
         userStore.setIsLogged(false)
         userStore.setGender('')
         cartStore.setCartCnt(0)
-        router.push('/')
+        router.push(selectedGender === 'M' ? '/men' : selectedGender === 'F' ? '/women' : '/')
     }
     const makeBold = (currPage) => {
         const {pathname} = router

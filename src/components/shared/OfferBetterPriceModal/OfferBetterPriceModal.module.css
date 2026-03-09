@@ -1,0 +1,63 @@
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+.text_block {
+    text-align: center;
+    margin: 30px 50px;
+}
+@media (max-width: 1000px) {
+    .text_block {
+        margin: 0 0;
+    }
+}
+
+
+.arrows_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.arrows_block {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.arrows_cont {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.arrow_img {
+    object-fit: contain;
+}
+
+.text {
+    font-weight: 500;
+}
+
+.faq_block {
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+@media (max-width: 1200px) {
+    .faq_block {
+        padding: 0;
+    }
+}
+
+.link {
+    color: black;
+}
+
+.link:hover {
+    color: #9a9999;
+}

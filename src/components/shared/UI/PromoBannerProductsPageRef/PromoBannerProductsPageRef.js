@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styles from './PromoBannerProductsPageRef.module.css'
 import {desktopStore} from "@/store/DesktopStore";
-import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
 
 const PromoBannerProductsPageRef = () => {
-    const [howOpen, setHowOpen] = useState(false);
-
     function changeBrowserColor(color) {
         // Для Chrome, Firefox, Opera на Android
         const themeColorMeta = document.querySelector('meta[name="theme-color"]');
@@ -27,14 +25,16 @@ const PromoBannerProductsPageRef = () => {
         }
     }
 
-    const toggleHow = () => {
-        setHowOpen(!howOpen);
-        changeBrowserColor("#000000")
+    const [refModalOpen, setRefModalOpen] = useState(false);
+
+    const toggleRef = () => {
+        setRefModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
     };
 
-    const closeHow = () => {
-        setHowOpen(false);
-        changeBrowserColor("#ffffff")
+    const handleRefModalClose = () => {
+        setRefModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
     };
 
     return (
@@ -42,25 +42,25 @@ const PromoBannerProductsPageRef = () => {
             {desktopStore.isDesktop ?
                 <div className={styles.refCont}>
                     <div className={styles.ref}>
-                        <div className={styles.refText} onClick={toggleHow}>
+                        <div className={styles.refText} onClick={toggleRef}>
                             До 7000₽ за приглашенного друга
                         </div>
-                        <div className={styles.refButton} onClick={toggleHow}>
+                        <div className={styles.refButton} onClick={toggleRef}>
                             Получить
                         </div>
                     </div>
                 </div>
                 :
                 <div className={styles.refContMob}>
-                    <div className={styles.refTextMob} onClick={toggleHow}>
+                    <div className={styles.refTextMob} onClick={toggleRef}>
                         До 7000₽ за приглашенного друга
                     </div>
-                    <div className={styles.refButtonMob} onClick={toggleHow}>
+                    <div className={styles.refButtonMob} onClick={toggleRef}>
                         Получить
                     </div>
                 </div>
             }
-            <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+            <ModalRef show={refModalOpen} onClose={handleRefModalClose}/>
         </>
     );
 };

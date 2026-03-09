@@ -17,7 +17,7 @@ import PasswordInput from "@/components/shared/UI/PasswordInput/PasswordInput";
 import PassEmailModal from "@/components/shared/PassEmailModal/PassEmailModal";
 
 const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, order = false, text = '',
-                   salesLine = false}) => {
+                   salesLine = false,  urlToGo = '', extraTasks = () => {}}) => {
     const router = useRouter()
     const {userStore, cartStore} = useContext(Context)
 
@@ -108,6 +108,12 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
 
             await confirmEmail(res.access, res.user_id, window.location.href)
             setShow(false)
+            if (extraTasks) {
+                extraTasks()
+            }
+            if (urlToGo) {
+                router.push(urlToGo)
+            }
         } catch (e) {
             setEmailBusy(true)
         }
@@ -150,6 +156,12 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             if (promoref) {
                 const cartArr = Cookies.get('cart').trim().split(' ')
                 const data = await promoAuth(promoref, userStore.id, res.access)
+            }
+            if (extraTasks) {
+                extraTasks()
+            }
+            if (urlToGo) {
+                router.push(urlToGo)
             }
         } catch (e) {
             setWrong(true)

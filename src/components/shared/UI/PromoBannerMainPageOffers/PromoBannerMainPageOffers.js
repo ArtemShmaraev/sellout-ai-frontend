@@ -8,6 +8,8 @@ import priceImg from "@/static/icons/priceImg.svg";
 import allImg from "@/static/icons/allImg.svg";
 import TextModalGuarantee from "@/components/shared/UI/TextModalGuarantee/TextModalGuarantee";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
+import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
 
 const PromoBannerMainPageOffers = () => {
     const [howOpen, setHowOpen] = useState(false);
@@ -43,6 +45,30 @@ const PromoBannerMainPageOffers = () => {
         changeBrowserColor("#ffffff")
     };
 
+    const [socialsOpen, setSocialsOpen] = useState(false);
+
+    const toggleSocials = () => {
+        setSocialsOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleSocialsClose = () => {
+        setSocialsOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
+    const [refModalOpen, setRefModalOpen] = useState(false);
+
+    const toggleRef = () => {
+        setRefModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleRefModalClose = () => {
+        setRefModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             {desktopStore.isDesktop ?
@@ -57,10 +83,10 @@ const PromoBannerMainPageOffers = () => {
                             </div>
                         </div>
                         <div className={styles.guarantee}>
-                            <div className={styles.aboutText} onClick={toggleHow}>
+                            <div className={styles.aboutText} onClick={toggleRef}>
                                 До 7000₽ за приглашенного друга
                             </div>
-                            <div className={styles.aboutButton} onClick={toggleHow}>
+                            <div className={styles.aboutButton} onClick={toggleRef}>
                                 Подробнее
                             </div>
                         </div>
@@ -68,10 +94,10 @@ const PromoBannerMainPageOffers = () => {
 
                     <div className={styles.aboutGuaranteeCont2}>
                         <div className={styles.price}>
-                            <div className={styles.priceText} onClick={toggleHow}>
+                            <div className={styles.priceText} onClick={toggleSocials}>
                                 Все розыгрыши, скидки, полезный контент, новости и многое другое в одном месте
                             </div>
-                            <div className={styles.aboutButton} onClick={toggleHow}>
+                            <div className={styles.aboutButton} onClick={toggleSocials}>
                                 Посмотреть
                             </div>
                         </div>
@@ -92,10 +118,10 @@ const PromoBannerMainPageOffers = () => {
                             </div>
                         </div>
                         <div className={styles.guaranteeMob}>
-                            <div className={styles.guaranteeTextMob} onClick={toggleHow}>
+                            <div className={styles.guaranteeTextMob} onClick={toggleRef}>
                                 До 7000₽ за приглашенного друга
                             </div>
-                            <div className={styles.guaranteeButtonMob} onClick={toggleHow}>
+                            <div className={styles.guaranteeButtonMob} onClick={toggleRef}>
                                 Подробнее
                             </div>
                         </div>
@@ -103,10 +129,10 @@ const PromoBannerMainPageOffers = () => {
 
                     <div className={styles.aboutGuaranteeCont2Mob}>
                         <div className={styles.priceMob}>
-                            <div className={styles.priceTextMob} onClick={toggleHow}>
+                            <div className={styles.priceTextMob} onClick={toggleSocials}>
                                 Розыгрыши, скидки, новости и многое другое
                             </div>
-                            <div className={styles.priceButtonMob} onClick={toggleHow}>
+                            <div className={styles.priceButtonMob} onClick={toggleSocials}>
                                 Посмотреть
                             </div>
                         </div>
@@ -114,6 +140,8 @@ const PromoBannerMainPageOffers = () => {
                 </div>
             }
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+            <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
+            <ModalRef show={refModalOpen} onClose={handleRefModalClose}/>
         </>
     );
 };

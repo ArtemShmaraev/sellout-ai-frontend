@@ -398,10 +398,7 @@ class FilterStore {
     fillSizes(size_tables_name) {
         this.filters.size = {}
         sizes.forEach(sizeCategory => {
-            console.log(sizeCategory.name)
-            console.log(size_tables_name)
             if (size_tables_name.includes(sizeCategory.name)){
-                console.log(size_tables_name)
                 this.filters.size[sizeCategory.filter_name] = {}
                 for (const key in sizeCategory.size_rows) {
                     const name = sizeCategory.size_rows[key].filter_name

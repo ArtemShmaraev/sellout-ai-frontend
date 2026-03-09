@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const PopularBrandsMainPage = ({el, gender}) => {
+const PopularBrandsMainPage = ({el, gender, arrangement}) => {
     const blockId = el.blockId;
 
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
@@ -21,7 +21,7 @@ const PopularBrandsMainPage = ({el, gender}) => {
     const isReset = useRef(false)
 
     useLayoutEffect(() => {
-        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
+        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
         setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
@@ -241,7 +241,8 @@ const PopularBrandsMainPage = ({el, gender}) => {
     useEffect(() => {
         const saveSelectedSectionAndScrollPositions = () => {
             setSelectedCircleIndex((prevIndex) => {
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, prevIndex, {expires: 0.25});
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][prevIndex], {expires: 0.25});
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`, prevIndex, {expires: 0.25});
                 return prevIndex;
             });
 

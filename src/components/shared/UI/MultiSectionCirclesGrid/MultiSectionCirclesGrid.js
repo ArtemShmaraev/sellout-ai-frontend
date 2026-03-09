@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const MultiSectionCirclesGrid = ({el, gender}) => {
+const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
     const [centerContent, setCenterContent] = useState(false);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const MultiSectionCirclesGrid = ({el, gender}) => {
     const isReset = useRef(false)
 
     useLayoutEffect(() => {
-        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSection`) || 0);
+        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
         setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
@@ -186,7 +186,8 @@ const MultiSectionCirclesGrid = ({el, gender}) => {
     useEffect(() => {
         const saveSelectedSectionAndScrollPositions = () => {
             setSelectedCircleIndex((prevIndex) => {
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, prevIndex, {expires: 0.25});
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][prevIndex], {expires: 0.25});
+                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`, prevIndex, {expires: 0.25});
                 return prevIndex;
             });
 
@@ -197,7 +198,6 @@ const MultiSectionCirclesGrid = ({el, gender}) => {
 
             if (scrollableBlockRef.current) {
                 const scrollLeft = scrollableBlockRef.current.getScroll();
-                console.log(scrollLeft);
                 Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
             }
 

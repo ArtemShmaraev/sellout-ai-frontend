@@ -5,8 +5,10 @@ import '@splidejs/react-splide/css'
 import Link from "next/link";
 import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
+import OfferBetterPriceModal from "@/components/shared/OfferBetterPriceModal/OfferBetterPriceModal";
+import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 
-const SalesLine = () => {
+const SalesLine = ({toggleSocials, toggleRef}) => {
     const {userStore, desktopStore} = useContext(Context)
     const [isDesktop, setIsDesktop] = useState(false)
     const checkIsDesktop = () => {
@@ -24,6 +26,17 @@ const SalesLine = () => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", checkIsDesktop);
     })
+
+    const [offerOpen, setOfferOpen] = useState(false);
+
+    const toggleOffer = () => {
+        setOfferOpen(!offerOpen);
+    };
+
+    const closeOffer = () => {
+        setOfferOpen(false);
+    };
+
     return (
         <>
             {
@@ -49,15 +62,15 @@ const SalesLine = () => {
                                     </SplideSlide>
                                     <SplideSlide className={s.splide}>
                                         <div className={s.text}>Гарантируем лучшую цену</div>
-                                        <button className={s.button}>Изучить</button>
+                                        <button className={s.button} onClick={toggleOffer}>Изучить</button>
                                     </SplideSlide>
                                     <SplideSlide className={s.splide}>
                                         <div className={s.text}>Приглашай друзей и получай до 7000₽</div>
-                                        <button className={s.button}>Изучить</button>
+                                        <button className={s.button} onClick={toggleRef}>Изучить</button>
                                     </SplideSlide>
                                     <SplideSlide className={s.splide}>
                                         <div className={s.text}>Все розыгрыши, скидки и новости</div>
-                                        <button className={s.button}>Изучить</button>
+                                        <button className={s.button} onClick={toggleSocials}>Изучить</button>
                                     </SplideSlide>
                                     {/*{*/}
                                     {/*    isDesktop*/}
@@ -110,13 +123,13 @@ const SalesLine = () => {
                                 <button className={s.buttonMob}>Получить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Гарантируем
                                 лучшую цену
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleOffer}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приглашай
                                 друзей и получай до 7000₽
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleRef}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все розыгрыши,
                                 скидки и новости
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleSocials}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div className={s.promoText}>
@@ -124,19 +137,20 @@ const SalesLine = () => {
                                 <button className={s.buttonMob}>Получить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Гарантируем
                                 лучшую цену
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleOffer}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приглашай
                                 друзей и получай до 7000₽
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleRef}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все розыгрыши,
                                 скидки и новости
-                                <button className={s.buttonMob}>Изучить</button>
+                                <button className={s.buttonMob} onClick={toggleSocials}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
                     </div>
                 )
             }
+            <OfferBetterPriceModal show={offerOpen} onHide={closeOffer}/>
         </>
     );
 };

@@ -14,11 +14,13 @@ import Arrow from "@/components/shared/UI/Arrow/Arrow";
 import Image from 'next/image'
 import {
     fetchOneProduct,
+    fetchOneProductFull,
     fetchPrices,
     fetchProductsByArray,
     fetchShippings,
     fetchSimilarProducts,
-    updateOneProduct
+    updateOneProduct,
+    fetchProductsPage
 } from "@/http/productsApi";
 import MainLayout from "@/layout/MainLayout";
 import {Context} from "@/context/AppWrapper";
@@ -29,7 +31,7 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
-import {addLastSeen, fetchLastSeen2} from "@/http/userApi";
+import {addLastSeen, fetchLastSeen2, fetchLoyaltyInfo, fetchUserInfo} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import Compilation from "@/components/shared/Compilation/Compilation";
@@ -111,6 +113,12 @@ import imgUs10Mob from "@/static/img/Гарантии 7 mob.png";
 import imgUs11Mob from "@/static/img/Гарантии 8 mob.png";
 import arrow from "@/static/icons/chevron-right-grey.svg";
 import ProductPageMobileInfoModal from "@/components/shared/ProductPageMobileInfoModal/ProductPageMobileInfoModal";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
+import similarBrands from '@/static/jsons/similarBrands.json'
+import similarLines from '@/static/jsons/similarLines.json'
+import similarCategories from '@/static/jsons/similarCategories.json'
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -123,6 +131,7 @@ export const getServerSideProps = async (context) => {
 
 
     const product = await fetchOneProduct(context.params.slug, token, ip);
+    const productFull = await fetchOneProductFull(context.params.slug, token, ip);
     if (product === "Товар не найден") {
 
         return {
@@ -131,26 +140,167 @@ export const getServerSideProps = async (context) => {
     }
     const {id} = product;
     const prices = await fetchPrices(id, token);
+
+    let userData = {}
+    if (token) {
+        const {user_id} = jwtDecode(token)
+        userData = await fetchUserInfo(context.req.headers.cookie, user_id)
+    }
     // return {
     //     notFound: true, // Это устанавливает статус код 404
     // };
 
     // Передача IP-адреса в качестве пропса
-    return {props: {product, prices, ip}};
+    return {props: {product, productFull, prices, ip, userData}};
 };
 
 
 StarRating.propTypes = {rating: PropTypes.number};
-const OneProductPage = ({product, prices, ip}) => {
+const OneProductPage = ({product, productFull, prices, ip, userData}) => {
     const router = useRouter()
     const [moreOpen, setMoreOpen] = useState(false)
     const [bonuses, setBonuses] = useState(`До ${product.price.bonus}`)
     const [notification, setNotification] = useState(null);
-    console.log(ip)
-    console.log(product.ip)
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
+    const loadingProductsData = {
+        "results": [
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            },
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            },
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            },
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            },
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            },
+            {
+                "id": 0,
+                "in_wishlist": false,
+                "price": {},
+                "model": "",
+                "colorway": "",
+                "slug": "",
+                "is_collab": false,
+                "isLoadingCard": true,
+                "collab": {},
+                "brands": [],
+                "bucket_link": [
+                    {
+                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                    }
+                ],
+                "is_sale": false,
+                "available_sizes": {
+                    "sizes": [],
+                    "filter_logo": ""
+                }
+            }
+        ]
+    }
+    const [recProducts, setRecProducts] = useState(loadingProductsData);
 
     const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
 
@@ -161,6 +311,108 @@ const OneProductPage = ({product, prices, ip}) => {
             productStore.setSizeChosen(prices[0])
         }
     }, [router.asPath])
+
+    const generateQueryForRecommendations = (productFull) => {
+        const query = {};
+
+        const getProbabilityOutcome = (probabilities) => {
+            const random = Math.random() * 100;
+            let cumulative = 0;
+            for (const [outcome, probability] of probabilities) {
+                cumulative += probability;
+                if (random <= cumulative) return outcome;
+            }
+        };
+
+        const getRandomElements = (arr, count) => {
+            const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        };
+
+        const currentLine = productFull.main_line?.full_eng_name?.replace(/_$/, '');
+
+        if (currentLine && similarLines[currentLine]) {
+            // 3 варианта с вероятностями
+            const outcome = getProbabilityOutcome([
+                ['variant1', 85],
+                ['variant2', 10],
+                ['variant3', 5]
+            ]);
+
+            if (outcome === 'variant1') {
+                const lines = [...similarLines[currentLine], currentLine];
+                query.line = Array.from(new Set(getRandomElements(lines, 5 + Math.floor(Math.random() * 3))));
+                query.category = ['sneakers'];
+            } else if (outcome === 'variant2') {
+                const categoryName = productFull.categories?.[productFull.categories.length - 1]?.eng_name;
+                if (categoryName && similarCategories[categoryName]) {
+                    const extendedCategories = similarCategories[categoryName].concat(Array(5).fill(categoryName));
+                    query.category = Array.from(new Set(getRandomElements(extendedCategories, 3 + Math.floor(Math.random() * 8))));
+                } else {
+                    query.category = [categoryName];
+                }
+
+                const brandName = productFull.brands?.[0]?.query_name;
+                if (brandName && similarBrands[brandName]) {
+                    const brandOutcome = getProbabilityOutcome([['brandSet', 80], ['randomBrands', 20]]);
+                    if (brandOutcome === 'brandSet') {
+                        const lines = [...similarBrands[brandName], brandName];
+                        query.line = Array.from(new Set(getRandomElements(lines, 4 + Math.floor(Math.random() * 4))));
+                    } else {
+                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                    }
+                } else {
+                    // Если brandName отсутствует или его нет в similarBrands
+                    const brandFallbackOutcome = getProbabilityOutcome([['currentBrand', 50], ['randomBrands', 50]]);
+                    if (brandFallbackOutcome === 'currentBrand' && brandName) {
+                        query.line = [brandName];
+                    } else {
+                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                    }
+                }
+            } else if (outcome === 'variant3') {
+                query.page = Math.floor(Math.random() * 77) + 1;
+            }
+        } else {
+            // Нет линейки, другие кейсы
+            const outcome = getProbabilityOutcome([['brandCategory', 85], ['randomPage', 15]]);
+            if (outcome === 'brandCategory') {
+                const categoryName = productFull.categories?.[productFull.categories.length - 1]?.eng_name;
+                if (categoryName && similarCategories[categoryName]) {
+                    const extendedCategories = similarCategories[categoryName].concat(Array(5).fill(categoryName));
+                    query.category = Array.from(new Set(getRandomElements(extendedCategories, 3 + Math.floor(Math.random() * 8))));
+                } else {
+                    query.category = [categoryName];
+                }
+
+                const brandName = productFull.brands?.[0]?.query_name;
+                if (brandName && similarBrands[brandName]) {
+                    const brandOutcome = getProbabilityOutcome([['brandSet', 80], ['randomBrands', 20]]);
+                    if (brandOutcome === 'brandSet') {
+                        const lines = [...similarBrands[brandName], brandName];
+                        query.line = Array.from(new Set(getRandomElements(lines, 4 + Math.floor(Math.random() * 4))));
+                    } else {
+                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                    }
+                } else {
+                    // Если brandName отсутствует или его нет в similarBrands
+                    const brandFallbackOutcome = getProbabilityOutcome([['currentBrand', 50], ['randomBrands', 50]]);
+                    if (brandFallbackOutcome === 'currentBrand' && brandName) {
+                        query.line = [brandName];
+                    } else {
+                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                    }
+                }
+            } else if (outcome === 'randomPage') {
+                query.page = Math.floor(Math.random() * 77) + 1;
+            }
+        }
+
+        console.log(query)
+
+        return query;
+    };
+
     useEffect(() => {
         const token = Cookies.get('access_token')
         fetchSimilarProducts(product.id, token).then(res => {
@@ -175,11 +427,22 @@ const OneProductPage = ({product, prices, ip}) => {
             let arr
             if (Cookies.get('last_seen')) {
                 arr = Cookies.get('last_seen').trim().split(' ')
-                console.log(arr)
                 if (arr[0] !== '') {
                     fetchProductsByArray(arr, token).then(res => setLastSeen(res))
                 }
             }
+        }
+
+        const url = generateQueryForRecommendations(productFull); // Формируем query
+        const gender = Cookies.get('selected_gender');
+        if (gender && !("gender" in url)) {
+            fetchProductsPage({...url, gender}, token).then(res => {
+                setRecProducts(res)
+            })
+        } else {
+            fetchProductsPage(url, token).then(res => {
+                setRecProducts(res)
+            })
         }
     }, [router.asPath])
 
@@ -397,7 +660,6 @@ const OneProductPage = ({product, prices, ip}) => {
         let bool = false
         if (Array.isArray(product.size_table_platform)) {
             bool = product.size_table_platform.length > 0
-            console.log(product.size_table_platform)
         } else {
             Object.values(product.size_table_platform.tables).forEach(table => {
                 if (Object.keys(table).length > 0) {
@@ -618,6 +880,27 @@ const OneProductPage = ({product, prices, ip}) => {
         return params;
     };
 
+    const [contactOpen, setContactOpen] = useState(false);
+    const toggleContact = () => {
+        setContactOpen(!contactOpen);
+    };
+
+    const closeContact = () => {
+        setContactOpen(false);
+    };
+
+    const [giftsModalOpen, setGiftsModalOpen] = useState(false);
+
+    const toggleGifts = () => {
+        setGiftsModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleGiftsModalClose = () => {
+        setGiftsModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <MainLayout>
             <Head>
@@ -765,6 +1048,33 @@ const OneProductPage = ({product, prices, ip}) => {
                                                 в подарок!
                                             </p>
                                         }
+                                        {
+                                            userData && userData.user_status && !userData.user_status.base &&
+                                            <div className={s.privText}>
+                                                <Image src={ffIcon} alt=''
+                                                       width={100}
+                                                       height={80}
+                                                       className={s.priv_icon}
+                                                />
+                                                <div>
+                                                    <span className={s.privTextPart}>{userStore.firstName}, привилегии и максимальная скидка уже учтены!<br/>Однако сейчас цена на сайте может отличаться от лучшего предложения, поэтому напишите&nbsp;
+                                                        {userData.personalManager && userData.personalManager === "Марк Фельдман" ? (
+                                                            <a href={'https://t.me/markermann'} target={'_blank'}
+                                                               style={{
+                                                                   textDecoration: 'underline',
+                                                                   cursor: 'pointer',
+                                                                   color: '#83052F'
+                                                               }}>Марку</a>
+                                                        ) : (
+                                                            <span onClick={toggleContact} style={{
+                                                                textDecoration: 'underline',
+                                                                cursor: 'pointer'
+                                                            }}>нам</span>
+                                                        )}, и, может, мы подберем еще более приятную цену!)</span>
+                                                </div>
+
+                                            </div>
+                                        }
                                     </>
                                 }
                                 {
@@ -862,16 +1172,26 @@ const OneProductPage = ({product, prices, ip}) => {
                                         <Image src={selloutIcon} alt='' width={70}/>
                                     </div>
                                     <p className={s.text}>
-                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для вас более выгодное!
+                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для
+                                        вас более выгодное!
                                     </p>
-                                    <div className='d-flex flex-row align-items-center justify-content-between' style={{marginBottom: '30px'}}>
+                                    <div className='d-flex flex-row align-items-center justify-content-between'
+                                         style={{marginBottom: '30px'}}>
                                         {/* Telegram */}
                                         <a
                                             href='https://t.me/sellout_official'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className={`${s.button} mb-3`}
-                                            style={{ backgroundColor: '#24A1DE', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            style={{
+                                                backgroundColor: '#24A1DE',
+                                                color: '#fff',
+                                                width: '48%',
+                                                textAlign: 'center',
+                                                padding: '10px 0',
+                                                borderRadius: '5px',
+                                                textDecoration: 'none'
+                                            }}>
                                             Телеграм
                                         </a>
 
@@ -881,7 +1201,15 @@ const OneProductPage = ({product, prices, ip}) => {
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className={`${s.button} mb-3`}
-                                            style={{ backgroundColor: '#128c7e', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            style={{
+                                                backgroundColor: '#128c7e',
+                                                color: '#fff',
+                                                width: '48%',
+                                                textAlign: 'center',
+                                                padding: '10px 0',
+                                                borderRadius: '5px',
+                                                textDecoration: 'none'
+                                            }}>
                                             WhatsApp
                                         </a>
                                     </div>
@@ -892,7 +1220,8 @@ const OneProductPage = ({product, prices, ip}) => {
                                         лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
                                         широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и
                                         аксессуаров.
-                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span style={{fontWeight: '600'}}>причем речь не
+                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span
+                                        style={{fontWeight: '600'}}>причем речь не
                                         только о крупнейших российских сетях и премиальных бутиках, но и о любых
                                         сервисах, магазинах из любых стран</span>, смело пишите нам, и мы
                                         обязательно сделаем для вас наилучшее предложение!
@@ -945,7 +1274,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                 <hr style={{marginTop: '10px'}}/>
                                 <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
                                     <span className={s.promoText}>До 5000₽ в подарок</span>
-                                    <button className={s.promoButton}>Получить</button>
+                                    <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
                                 </div>
                                 <button
                                     className={s.how_btn}
@@ -1218,6 +1547,33 @@ const OneProductPage = ({product, prices, ip}) => {
                                                 в подарок!
                                             </p>
                                         }
+                                        {
+                                            userData && userData.user_status && !userData.user_status.base &&
+                                            <div className={s.privText}>
+                                                <Image src={ffIcon} alt=''
+                                                       width={100}
+                                                       height={80}
+                                                       className={s.priv_icon}
+                                                />
+                                                <div>
+                                                    <span className={s.privTextPart}>{userStore.firstName}, привилегии и максимальная скидка уже учтены!<br/>Однако сейчас цена на сайте может отличаться от лучшего предложения, поэтому напишите&nbsp;
+                                                        {userData.personalManager && userData.personalManager === "Марк Фельдман" ? (
+                                                            <a href={'https://t.me/markermann'} target={'_blank'}
+                                                               style={{
+                                                                   textDecoration: 'underline',
+                                                                   cursor: 'pointer',
+                                                                   color: '#83052F'
+                                                               }}>Марку</a>
+                                                        ) : (
+                                                            <span onClick={toggleContact} style={{
+                                                                textDecoration: 'underline',
+                                                                cursor: 'pointer'
+                                                            }}>нам</span>
+                                                        )}, и, может, мы подберем еще более приятную цену!)</span>
+                                                </div>
+
+                                            </div>
+                                        }
                                     </>
                                 }
                                 {
@@ -1310,16 +1666,26 @@ const OneProductPage = ({product, prices, ip}) => {
                                         <Image src={selloutIcon} alt='' width={80}/>
                                     </div>
                                     <p className={s.text}>
-                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для вас более выгодное!
+                                        Пришлите информацию о предложении конкурента, а мы гарантированно подберем для
+                                        вас более выгодное!
                                     </p>
-                                    <div className='d-flex flex-row align-items-center justify-content-between' style={{marginBottom: '30px'}}>
+                                    <div className='d-flex flex-row align-items-center justify-content-between'
+                                         style={{marginBottom: '30px'}}>
                                         {/* Telegram */}
                                         <a
                                             href='https://t.me/sellout_official'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className={`${s.button} mb-3`}
-                                            style={{ backgroundColor: '#24A1DE', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            style={{
+                                                backgroundColor: '#24A1DE',
+                                                color: '#fff',
+                                                width: '48%',
+                                                textAlign: 'center',
+                                                padding: '10px 0',
+                                                borderRadius: '5px',
+                                                textDecoration: 'none'
+                                            }}>
                                             Телеграм
                                         </a>
 
@@ -1329,7 +1695,15 @@ const OneProductPage = ({product, prices, ip}) => {
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className={`${s.button} mb-3`}
-                                            style={{ backgroundColor: '#128c7e', color: '#fff', width: '48%', textAlign: 'center', padding: '10px 0', borderRadius: '5px', textDecoration: 'none' }}>
+                                            style={{
+                                                backgroundColor: '#128c7e',
+                                                color: '#fff',
+                                                width: '48%',
+                                                textAlign: 'center',
+                                                padding: '10px 0',
+                                                borderRadius: '5px',
+                                                textDecoration: 'none'
+                                            }}>
                                             WhatsApp
                                         </a>
                                     </div>
@@ -1340,7 +1714,8 @@ const OneProductPage = ({product, prices, ip}) => {
                                         лучшие цены! Одна из наших ключевых ценностей - это самые выгодные цены на
                                         широчайший ассортимент брендовой, стильной, премиальной одежды, обуви и
                                         аксессуаров.
-                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span style={{fontWeight: '600'}}>причем речь не
+                                        Поэтому если вы нашли более низкую цену у наших конкурентов, <span
+                                        style={{fontWeight: '600'}}>причем речь не
                                         только о крупнейших российских сетях и премиальных бутиках, но и о любых
                                         сервисах, магазинах из любых стран</span>, смело пишите нам, и мы
                                         обязательно сделаем для вас наилучшее предложение!
@@ -1393,7 +1768,7 @@ const OneProductPage = ({product, prices, ip}) => {
                                 <hr className={'my-2'}/>
                                 <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
                                     <span className={s.promoText}>До 5000₽ в подарок</span>
-                                    <button className={s.promoButton}>Получить</button>
+                                    <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
                                 </div>
                                 <button
                                     className={s.how_btn}
@@ -2912,24 +3287,26 @@ const OneProductPage = ({product, prices, ip}) => {
                         <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
                     </>
                 }
-                {!desktopStore.isDesktop && compilations.map(el =>
+                {!desktopStore.isDesktop && recProducts.results && recProducts.results.length > 0 &&
                     <div className={'custom_cont'}>
-                        <h3 className={s.similar_title}>{el.name} (Рекомендации!)</h3>
-                        <ProductList products={el.products} isAdmin={false}/>
+                        <h3 className={s.similar_title}>Рекомендации</h3>
+                        <ProductList products={recProducts.results} isAdmin={false}/>
                     </div>
-                )}
+                }
                 {desktopStore.isDesktop && compilations.map(el =>
                     <Compilation arr={el.products} title={el.name} paddings={'regular'}/>
                 )}
                 {desktopStore.isDesktop && lastSeen.length > 0 &&
                     <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
                 }
-                {desktopStore.isDesktop && compilations.map(el =>
-                    <Compilation arr={el.products} title={'Рекомендации'} paddings={'regular'}/>
-                )}
+                {desktopStore.isDesktop && recProducts.results && recProducts.results.length > 0 &&
+                    <Compilation arr={recProducts.results} title={'Рекомендации'} paddings={'regular'}/>
+                }
             </div>
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
             <ProductPageMobileInfoModal show={infoOpen} onHide={closeInfoModal} product={product}/>
+            <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
+            <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
         </MainLayout>
     );
 };

@@ -1,5 +1,6 @@
 .giftContMob {
-    margin: 10px;
+    margin: 10px 0;
+    width: 100%;
     height: 70px;
     background: linear-gradient(to bottom right, #51031D, #B70742);
     border-radius: 2px;
