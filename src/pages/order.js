@@ -78,7 +78,7 @@ const Order = ({
     const [promoRes, setPromoRes] = useState(null)
     const [verifyEmail, setVerifyEmail] = useState(false)
     const [willBonuses, setWillBonuses] = useState(maxBonuses)
-    const [isSkipPayment, setIsSkipPayment] = useState(skipPayment)
+    const [isSkipPayment, setIsSkipPayment] = useState(true)
 
     const renderStage = () => {
         const stage = orderStore.stage
