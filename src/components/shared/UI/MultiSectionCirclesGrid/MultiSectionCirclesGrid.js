@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './MultiSectionCirclesGrid.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
+const MultiSectionCirclesGrid = forwardRef(({el, gender, arrangement, dataIndex="none"}, ref) => {
     const [centerContent, setCenterContent] = useState(false);
 
     useEffect(() => {
@@ -47,7 +47,9 @@ const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
     }, []);
 
     useEffect(() => {
-        setSelectedProducts(el.products[selectedCircleIndex] || [])
+        if (el.products[selectedCircleIndex].length > 0) {
+            setSelectedProducts(el.products[selectedCircleIndex])
+        }
     }, [el.products, arrangement]);
 
     const router = useRouter()
@@ -321,7 +323,7 @@ const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
     }
 
     return (
-        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}}>
+        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}} data-index={dataIndex} ref={ref}>
             <div className={s.multiSectionCirclesTitle}>{el.title}</div>
             <div style={{position: 'relative'}}>
                 <div
@@ -391,6 +393,6 @@ const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
             )}
         </div>
     );
-};
+});
 
 export default MultiSectionCirclesGrid;

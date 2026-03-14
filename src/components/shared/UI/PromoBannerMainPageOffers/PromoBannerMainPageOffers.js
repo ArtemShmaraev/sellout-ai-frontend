@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useState} from 'react';
 import styles from './PromoBannerMainPageOffers.module.css'
 import Image from 'next/image'
 import {desktopStore} from "@/store/DesktopStore";
@@ -13,7 +13,7 @@ import ModalRef from "@/components/shared/ModalRef/ModalRef";
 import Cookies from "js-cookie";
 import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
-const PromoBannerMainPageOffers = () => {
+const PromoBannerMainPageOffers = forwardRef(({dataIndex="none"}, ref) => {
     const [howOpen, setHowOpen] = useState(false);
 
     function changeBrowserColor(color) {
@@ -90,7 +90,7 @@ const PromoBannerMainPageOffers = () => {
     };
 
     return (
-        <>
+        <div data-index={dataIndex} ref={ref}>
             {desktopStore.isDesktop ?
                 <div className={styles.aboutGuaranteeCont}>
                     {receivedWelcomeGift ? (
@@ -193,8 +193,8 @@ const PromoBannerMainPageOffers = () => {
             <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
             <ModalRef show={refModalOpen} onClose={handleRefModalClose}/>
             <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
-        </>
+        </div>
     );
-};
+});
 
 export default PromoBannerMainPageOffers;

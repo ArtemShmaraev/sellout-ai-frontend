@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './MultiSectionImages.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) => {
+const MultiSectionImages = forwardRef(({el, gender, arrangement, heightImage = "250px", dataIndex="none"}, ref) => {
     const [centerContent, setCenterContent] = useState(false);
 
     const blockId = el.blockId;
@@ -30,7 +30,9 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
     }, []);
 
     useEffect(() => {
-        setSelectedProducts(el.products[selectedCircleIndex] || [])
+        if (el.products[selectedCircleIndex].length > 0) {
+            setSelectedProducts(el.products[selectedCircleIndex])
+        }
     }, [el.products, arrangement]);
 
     const router = useRouter()
@@ -309,7 +311,7 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
     }
 
     return (
-        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}}>
+        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}} data-index={dataIndex} ref={ref}>
             <div className={s.multiSectionCirclesTitle}>{el.title} {el.titleName[selectedCircleIndex]}</div>
             <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
                 {(desktopStore.isDesktop ? el.desktopImages : el.mobileImages).map((_, idx) => (
@@ -352,6 +354,6 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
             )}
         </div>
     );
-};
+});
 
 export default MultiSectionImages;

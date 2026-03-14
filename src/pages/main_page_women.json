@@ -215,7 +215,7 @@
       "/products?line=celine",
       "/products?line=chloe",
       "/products?line=lanvin",
-      "/products?line=a.p.c",
+      "/products?line=a.p.c.",
       "/products?line=jimmy_choo",
       "/products?line=cartier",
       "/products?line=calvin_klein",
@@ -456,12 +456,8 @@
     ]
   },
   {
-    "blockName": "aboutPromoModal",
+    "blockName": "О НАС МОДАЛКИ",
     "type": "aboutPromoModal"
-  },
-  {
-    "blockName": "НОВИНКИ",
-    "type": "multiSectionImages_"
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
@@ -586,7 +582,7 @@
       "/products?line=new_balance_990",
       "/products?line=new_balance_1906r",
       "/products?line=adidas_sl",
-      "/products?line=converse_run_star",
+      "/products?line=converse_chuck_taylor_run_star",
       "/products?line=adidas_falcon",
       "/products?line=adidas_stan_smith",
       "/products?line=air_jordan_4",
@@ -678,7 +674,7 @@
     "products": []
   },
   {
-  "blockName": "giftsPromoModal",
+  "blockName": "БОНУСЫ МОДАЛКИ",
   "type": "giftsPromoModal"
 },
   {
@@ -751,22 +747,22 @@
       "/products?category=wallets",
       "/products?category=backpacks",
       "/products?category=sport_bags",
-      "/products?line=michael_kors",
-      "/products?line=charlesandkeith",
-      "/products?line=jw_anderson",
-      "/products?line=staud",
-      "/products?line=jacquemus",
-      "/products?line=diesel",
-      "/products?line=marc_jacobs",
-      "/products?line=miu_miu",
-      "/products?line=by_far",
-      "/products?line=a.p.c.",
-      "/products?line=coach",
-      "/products?line=loewe",
-      "/products?line=coperni",
-      "/products?line=prada",
-      "/products?line=bottega_veneta",
-      "/products?line=manu_atelier"
+      "/products?category=bags&line=michael_kors",
+      "/products?category=bags&line=charlesandkeith",
+      "/products?category=bags&line=jw_anderson",
+      "/products?category=bags&line=staud",
+      "/products?category=bags&line=jacquemus",
+      "/products?category=bags&line=diesel",
+      "/products?category=bags&line=marc_jacobs",
+      "/products?category=bags&line=miu_miu",
+      "/products?category=bags&line=by_far",
+      "/products?category=bags&line=a.p.c.",
+      "/products?category=bags&line=coach",
+      "/products?category=bags&line=loewe",
+      "/products?category=bags&line=coperni",
+      "/products?category=bags&line=prada",
+      "/products?category=bags&line=bottega_veneta",
+      "/products?category=bags&line=manu_atelier"
     ],
     "productsAmount": [
       "1000"
@@ -816,7 +812,8 @@
     "moreButton": true,
     "productsAmount": 1320,
     "moreButtonName": "со скидками",
-    "products": []
+    "products": [],
+    "connectedBlock": "SALE IMAGE"
   },
   {
     "blockName": "TRENDY LOTS IMAGE",
@@ -836,7 +833,8 @@
     "productsAmount": 1320,
     "moreButtonName": "трендовых лотов",
     "moreButtonNameNoModel": true,
-    "products": []
+    "products": [],
+    "connectedBlock": "TRENDY LOTS IMAGE"
   },
   {
     "blockName": "ОДЕЖДА",
@@ -988,7 +986,7 @@
     "products": []
   },
   {
-    "blockName": "Аксессуары",
+    "blockName": "АКСЕССУАРЫ",
     "blockId": "9F",
     "type": "multiSectionRecs",
     "title": "Аксессуары",
@@ -1055,7 +1053,7 @@
     "products": []
   },
   {
-    "blockName": "Верхняя одежда",
+    "blockName": "ВЕРХНЯЯ ОДЕЖДА",
     "blockId": "10F",
     "type": "multiSectionImages",
     "title": "ВЕРХНЯЯ ОДЕЖДА",
@@ -1624,7 +1622,7 @@
     "products": []
   },
   {
-    "blockName": "Сумки",
+    "blockName": "СУМКИ БРЕНДЫ",
     "blockId": "14F",
     "type": "multiSectionImages",
     "title": "Сумки",

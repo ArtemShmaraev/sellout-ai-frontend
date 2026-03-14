@@ -26,6 +26,13 @@
 .headerMob.visibleMob {
     transform: translateY(0);
 }
+
+@supports (height: 100dvh) {
+    .headerMob {
+        /*height: calc(50px + env(safe-area-inset-bottom)); !* Учет динамических изменений *!*/
+    }
+}
+
 .cont {
 
 }

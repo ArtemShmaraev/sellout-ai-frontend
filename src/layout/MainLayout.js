@@ -62,14 +62,12 @@ const MainLayout = ({children, footerData}) => {
             setIsAuth(true)
         }
         // setHeaderCustom(router.pathname !== '/' || selectedGender === "M" || selectedGender === "F")
-        // console.log("Вот", headerCustom)
 
     })
 
     const checkIsDesktop = () => {
 
         const width = window.innerWidth
-        // console.log(width)
 
         if (width <= 1200) {
             desktopStore.setIsDesktop(false)
@@ -83,7 +81,6 @@ const MainLayout = ({children, footerData}) => {
 
         window.addEventListener('resize', checkIsDesktop);
         checkIsDesktop();
-        console.log(footerData)
 
         // Убираем обработчик события при размонтировании компонента
         return () => {
@@ -119,7 +116,7 @@ const MainLayout = ({children, footerData}) => {
                 {/*<title>Sellout: онлайн-платформа брендовой одежды и обуви</title>*/}
                 {/*<meta*/}
                 {/*    name="description"*/}
-                {/*    content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"*/}
+                {/*    content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"*/}
                 {/*/>*/}
 
 
@@ -137,7 +134,7 @@ const MainLayout = ({children, footerData}) => {
                 {/*<meta name="google-site-verification" content="-9Lz8B9UM4KuSBbpP5pxTwJW9Ha0ee2nQmpMUTXh75E" />*/}
                 <meta name="yandex-verification" content="82500b5b5e72aa3a"/>
                 <meta name="theme-color" content={themeColor}/>
-                {/*<meta name="viewport" content="width=device-width, initial-scale=1.0"/>*/}
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
                 <meta name="mailru-verification" content="2d636d2d3b28c14a"/>
 
 
@@ -198,6 +195,7 @@ const MainLayout = ({children, footerData}) => {
             <div className={'body'}>
                 {(selectedGender === "M" || selectedGender === "F" || router.pathname !== '/') &&
                     <NavbarC/>
+                    // <></>
                 }
                 <div className={`${router.pathname === '/' ? '' : desktopStore.isDesktop ? 'cont_up' : 'cont_up_mob'}`}>
                     {children}

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './PopularBrandsMainPage.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const PopularBrandsMainPage = ({el, gender, arrangement}) => {
+const PopularBrandsMainPage = forwardRef(({el, gender, arrangement, dataIndex = "none"}, ref) => {
     const blockId = el.blockId;
 
     // Состояние для хранения индекса выбранного кружка, изначально 0 (первый кружок)
@@ -30,7 +30,9 @@ const PopularBrandsMainPage = ({el, gender, arrangement}) => {
     }, []);
 
     useEffect(() => {
-        setSelectedProducts(el.products[selectedCircleIndex] || [])
+        if (el.products[selectedCircleIndex].length > 0) {
+            setSelectedProducts(el.products[selectedCircleIndex])
+        }
     }, [el.products, arrangement]);
 
     const router = useRouter()
@@ -304,7 +306,7 @@ const PopularBrandsMainPage = ({el, gender, arrangement}) => {
 
 
     return (
-        <div className={s.brandsSection}>
+        <div className={s.brandsSection} data-index={dataIndex} ref={ref}>
             <div
                 className={s.brandsTitle}>{desktopStore.isDesktop ? `Популярные лоты` : ``} {desktopStore.isDesktop ? el.brandsNamesDesktop[selectedCircleIndex] : el.brandsNamesMobile[selectedCircleIndex]}</div>
             <div style={{position: 'relative', marginBottom: desktopStore.isDesktop ? '70px' : '20px'}}>
@@ -382,6 +384,6 @@ const PopularBrandsMainPage = ({el, gender, arrangement}) => {
             )}
         </div>
     );
-};
+});
 
 export default PopularBrandsMainPage;

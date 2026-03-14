@@ -101,7 +101,6 @@ const Brands = ({brandsArr}) => {
         }
         let res
         res = await searchBrands(value, token)
-        console.log(res)
         return res
     }
     useEffect(() => {

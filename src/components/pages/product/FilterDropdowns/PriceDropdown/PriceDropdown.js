@@ -16,7 +16,6 @@ const PriceDropdown = () => {
     function isNumber(str) {
         // Преобразуем строку в число с помощью parseFloat
         // и проверяем, является ли результат числом и не NaN
-        console.log(!isNaN(parseFloat(str)))
         return !isNaN(parseFloat(str));
     }
     const handleFrom = (e) => {

@@ -36,7 +36,7 @@ const AnimationSellout = () => {
     }, [])
     return (
         <div className={s.block}>
-            <Image src={img} alt='' className={s.img}/>
+            <Image src={img} alt='' className={s.img} loading={"eager"}/>
         </div>
     );
 };

@@ -1139,7 +1139,6 @@ const ElasticSearchModal = () => {
     useEffect(() => {
         function close(e) {
             if (e.key === 'Escape') {
-                console.log(e.key)
                 closeModal()
             }
         }

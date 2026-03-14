@@ -73,6 +73,28 @@
         padding: 0;
     }
 
+    .row2 {
+        margin-top: 70px;
+    }
+
+    .dark_links {
+        margin: 0;
+    }
+
+    .footer_link {
+        margin-top: 7px;
+        color: #cccccc;
+        font-size: 19px;
+    }
+
+    .footer_link:hover {
+        color: #c4c0c0;
+    }
+
+    .footer_link:active {
+        color: #9a9999;
+    }
+
     .social_media {
         width: 100%;
         text-align: center;
@@ -81,6 +103,10 @@
 
     .social_media2 {
         width: 100%;
+    }
+
+    .payment_block {
+        margin-top: 50px;
     }
 
     .mainSocialsText {
@@ -93,6 +119,7 @@
 
     .icons_block {
         gap: 25px;
+        flex-direction: column;
     }
 
     .icons_block3 {
@@ -105,6 +132,7 @@
 
     .socialsCont {
         gap: 10px;
+        width: 200px;
     }
 }
 

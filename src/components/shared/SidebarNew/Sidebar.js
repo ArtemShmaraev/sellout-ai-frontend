@@ -88,6 +88,7 @@ const Sidebar = ({
     const handleGenderSelection = (gender) => {
         // setSelectedGender(gender);
         Cookies.set('selected_gender', gender, {expires: 2772});
+        handleClose()
     };
     const toggleContact = () => {
         setContactOpen(!contactOpen)

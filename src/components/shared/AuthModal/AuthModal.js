@@ -79,7 +79,6 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             const res = await registration(JSON.stringify(data))
             const selected_gender = data['gender'] === "male" ? "M": "F"
             Cookies.set('selected_gender', selected_gender, {expires: 2772});
-            // console.log(data)
             setEmailBusy(false)
             const cookieCart = Cookies.get('cart')
             let cartFromBack

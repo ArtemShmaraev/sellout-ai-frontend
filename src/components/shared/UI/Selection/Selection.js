@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import s from './Selection.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
@@ -7,7 +7,7 @@ import {desktopStore} from "@/store/DesktopStore";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 
-const Selection = ({el}) => {
+const Selection = forwardRef(({el, dataIndex="none"}, ref) => {
     const blockId = el.blockId;
 
     const router = useRouter()
@@ -57,7 +57,7 @@ const Selection = ({el}) => {
     })
 
     return (
-        <div className={`${s.collections} ${!el.moreButton ? s.limitedMargin : ''}`}>
+        <div className={`${s.collections} ${!el.moreButton ? s.limitedMargin : ''}`} data-index={dataIndex} ref={ref}>
             {el.titleBlock && (
                 <div className={'d-flex justify-content-between align-items-center ' + s.margins}
                      style={{marginBottom: '30px'}}>
@@ -100,6 +100,6 @@ const Selection = ({el}) => {
             )}
         </div>
     );
-};
+});
 
 export default Selection;

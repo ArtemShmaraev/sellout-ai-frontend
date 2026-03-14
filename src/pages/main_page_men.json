@@ -190,7 +190,7 @@
       "/products?line=burberry",
       "/products?line=vlone",
       "/products?line=cav_empt",
-      "/products?line=a_bathing_ape",
+      "/products?line=a_bathing_ape®",
       "/products?line=dickies",
       "/products?line=ami_paris",
       "/products?line=chanel",
@@ -438,12 +438,8 @@
     ]
   },
   {
-    "blockName": "aboutPromoModal",
+    "blockName": "О НАС МОДАЛКИ",
     "type": "aboutPromoModal"
-  },
-  {
-    "blockName": "НОВИНКИ",
-    "type": "multiSectionImages_"
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
@@ -740,7 +736,7 @@
     "products": []
   },
   {
-  "blockName": "giftsPromoModal",
+  "blockName": "БОНУСЫ МОДАЛКИ",
   "type": "giftsPromoModal"
 },
   {
@@ -827,7 +823,8 @@
     "moreButton": true,
     "productsAmount": 1320,
     "moreButtonName": "со скидками",
-    "products": []
+    "products": [],
+    "connectedBlock": "SALE IMAGE"
   },
   {
     "blockName": "ЗИМНЯЯ ОБУВЬ",
@@ -998,7 +995,8 @@
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
-    "products": []
+    "products": [],
+    "connectedBlock": "BEST SELLERS IMAGE"
   },
   {
     "blockName": "ВЕРХНЯЯ ОДЕЖДА",
@@ -1568,10 +1566,11 @@
     "moreButton": true,
     "productsAmount": 0,
     "moreButtonName": "ЦЕЛИКОМ Посмотреть все коллаборационные лоты",
-    "products": []
+    "products": [],
+    "connectedBlock": "КОЛЛЛАБОРАЦИИ IMAGE"
   },
   {
-    "blockName": "Аксессуары",
+    "blockName": "АКСЕССУАРЫ",
     "blockId": "13M",
     "type": "multiSectionRecs",
     "title": "Аксессуары",
@@ -1654,7 +1653,8 @@
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
-    "products": []
+    "products": [],
+    "connectedBlock": "UNDER RETAIL IMAGE"
   },
   {
     "blockName": "NIKE LINES",
@@ -1880,7 +1880,8 @@
     "productsAmount": 0,
     "moreButtonName": "выгоднейших лотов",
     "moreButtonNameNoModel": true,
-    "products": []
+    "products": [],
+    "connectedBlock": "MORE PROFIT IMAGE"
   },
   {
     "blockName": "JORDAN LINES",
@@ -2277,7 +2278,8 @@
     "productsAmount": 0,
     "moreButtonName": "редчайших лотов",
     "moreButtonNameNoModel": true,
-    "products": []
+    "products": [],
+    "connectedBlock": "TOP SHELF IMAGE"
   },
   {
     "blockName": "ADIDAS LINES",
@@ -2479,7 +2481,8 @@
     "productsAmount": 0,
     "moreButtonName": "подарков для нее",
     "moreButtonNameNoModel": true,
-    "products": []
+    "products": [],
+    "connectedBlock": "GIFTS FOR HER IMAGE"
   },
   {
     "blockName": "MORE SNEAKERS",

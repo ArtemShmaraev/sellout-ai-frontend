@@ -78,7 +78,6 @@ export const getServerSideProps = async (context) => {
     if (token) {
         const {user_id} = jwtDecode(token)
         const cart = await fetchCart(user_id, context.req.headers.cookie)
-        // console.log(cart)
         defaultPrice = cart.total_amount
         finalPrice = cart.final_amount
         sale = cart.sale
@@ -168,7 +167,6 @@ const Cart = ({
             let arr
             if (Cookies.get('last_seen')) {
                 arr = Cookies.get('last_seen').trim().split(' ')
-                console.log(arr)
                 if (arr[0] !== '') {
                     fetchProductsByArray(arr, token).then(res => setLastSeen(res))
                 }
@@ -240,11 +238,9 @@ const Cart = ({
     const checkPromo = async () => {
         const token = Cookies.get('access_token')
         let res
-        console.log(promo)
         if (promo) {
             if (userStore.isLogged) {
                 res = await promoAuth(promo, userStore.id, token)
-                console.log(res)
                 // router.push('/cart', undefined, {scroll: false})
                 setFinAmount(Math.max(res.final_amount, 1))
                 setTotalSaleAmount(Math.min(res.promo_sale + saleAmount + bonusSaleAmount, defAmount))
@@ -262,7 +258,6 @@ const Cart = ({
                 const cartArr = Cookies.get('cart').trim().split(' ')
                 res = await promoUnauth(promo, cartArr)
 
-                console.log(res)
                 setFinAmount(Math.max(res.final_amount, 1))
                 setTotalSaleAmount(Math.min(res.promo_sale + saleAmount + bonusSaleAmount, defAmount))
                 setPromoSaleAmount(res.promo_sale)
@@ -275,8 +270,6 @@ const Cart = ({
                 setPromoRes(res)
                 setBonusAmount(res.bonus)
                 setTotalBonus(promoBonusAmount + bonusAmount + firstOrderBonus)
-                console.log(bonusAmount)
-                console.log(totalBonus)
                 // router.push('/cart', undefined, {scroll: false})
                 // router.push('/cart', undefined, {scroll: false})
             }

@@ -381,6 +381,7 @@ const NavbarC = () => {
                                         height={28}
                                         src={desktopStore.mobileSideBar ? searchSelected : searchNotSelected}
                                         alt="Search Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -403,6 +404,7 @@ const NavbarC = () => {
                                         height={26}
                                         src={isCart && !desktopStore.mobileSideBar ? cartSelected : cartNotSelected}
                                         alt="Cart Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -420,6 +422,7 @@ const NavbarC = () => {
                                         height={38}
                                         src={isHome && !desktopStore.mobileSideBar ? homeSelected : homeNotSelected}
                                         alt="Catalog Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -436,6 +439,7 @@ const NavbarC = () => {
                                         height={25}
                                         src={isWishlist && !desktopStore.mobileSideBar ? favouriteSelected : favouriteNotSelected}
                                         alt="Favorites Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -454,6 +458,7 @@ const NavbarC = () => {
                                             height={26}
                                             src={isAccount && !desktopStore.mobileSideBar ? accountSelected : accountNotSelected}
                                             alt="Profile Icon"
+                                            loading={"eager"}
                                         />
                                     </div>
                                 </div>
