@@ -38,7 +38,7 @@ const MultiSectionRecs = forwardRef(({el, gender, arrangement, dataIndex="none"}
     const isReset = useRef(false)
 
     useLayoutEffect(() => {
-        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`) || 0);
+        const initialSelectedCircleIndex = Number(Cookies.get(`${blockId}-IndArr`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
         setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
@@ -193,25 +193,25 @@ const MultiSectionRecs = forwardRef(({el, gender, arrangement, dataIndex="none"}
         const saveSelectedSectionAndScrollPositions = () => {
             setSelectedCircleIndex((prevIndex) => {
                 Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][prevIndex], {expires: 0.25});
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`, prevIndex, {expires: 0.25});
+                Cookies.set(`${blockId}-IndArr`, prevIndex, {expires: 0.25});
                 return prevIndex;
             });
 
             if (scrollableContainerRef.current) {
-                const scrollLeft = scrollableContainerRef.current.scrollLeft;
-                Cookies.set(`multiSectionedBlock-${blockId}-SectionsContainerPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableContainerRef.current.scrollLeft);
+                Cookies.set(`${blockId}-SecPos`, scrollLeft, {expires: 0.25});
             }
 
             if (scrollableBlockRef.current) {
-                const scrollLeft = scrollableBlockRef.current.getScroll();
-                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableBlockRef.current.getScroll());
+                Cookies.set(`${blockId}-PrPos`, scrollLeft, {expires: 0.25});
             }
 
         };
 
         const restoreScrollPosition = () => {
-            const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
-            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+            const SectionsContainerPosition = Cookies.get(`${blockId}-SecPos`);
+            const ProductsBlockPosition = Cookies.get(`${blockId}-PrPos`);
 
             if (SectionsContainerPosition && scrollableContainerRef.current && selectedProducts.length && !isReset.current) {
                 scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
@@ -247,7 +247,7 @@ const MultiSectionRecs = forwardRef(({el, gender, arrangement, dataIndex="none"}
                 <ProductCard
                     product={product}
                     key={product.id}
-                    smallCard={true}
+                    bigCard={el.bigCard}
                 />
             );
         });

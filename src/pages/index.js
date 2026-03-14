@@ -1147,7 +1147,7 @@ const Home = ({data}) => {
                                 </div>
                                 <div ref={page8Ref} className={stylesMob.page47Wrapper}>
                                     <div className={stylesMob.page47}>
-                                        <Image src="/img/MainImg/гарантии 2 mob.png" alt="Img" width={6000}
+                                        <Image src="/img/MainImg/Гарантии 2 mob.png" alt="Img" width={6000}
                                                height={2000}
                                                className={stylesMob.page47Img}/>
                                     </div>

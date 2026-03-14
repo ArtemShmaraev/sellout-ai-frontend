@@ -1,34 +1,34 @@
-.refCont {
+.socialCont {
     margin: 50px 0;
     width: 100%;
     height: 70px;
-    background: linear-gradient(to bottom right, #51031D, #B70742);
+    background: linear-gradient(to bottom right, #050351, #B70742);
     border-radius: 2px;
     display: flex;
     position: relative;
 }
 
-.ref {
+.social {
     display: flex;
     align-items: center;
 }
 
-.ref {
+.social {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
-.refText {
-    font-size: 25px;
+.socialText {
+    font-size: 20px;
     color: white;
     margin-right: 40px;
     cursor: pointer;
     white-space: nowrap;
 }
 
-.refButton {
+.socialButton {
     padding: 5px 35px;
     border: 1px solid white;
     border-radius: 3px;
@@ -41,42 +41,39 @@
     margin-bottom: 0;
 }
 
-.refButton:hover {
+.socialButton:hover {
     background-color: white;
     color: black;
 }
 
 @media (min-width: 1800px) {
-    .refCont {
-        margin-right: calc(10vw);
-        margin-left: calc(10vw);
+    .socialCont {
     }
 }
 
-
-.refContMob {
+.socialContMob {
     margin: 10px 0;
     width: 100%;
-    height: 70px;
-    background: linear-gradient(to bottom right, #51031D, #65047D);
+    height: 120px;
+    background: linear-gradient(to bottom right, #050351, #B70742);
     border-radius: 2px;
     display: flex;
     position: relative;
     align-items: center;
     justify-content: space-evenly;
+    flex-direction: column;
 }
 
-.refTextMob {
-    font-size: 15px;
+.socialTextMob {
+    font-size: 16px;
     color: white;
     cursor: pointer;
-    padding-left: 5px;
-    max-width: calc(100vw - 20px - 115px);
+    text-align: center;
+    padding: 0 10px;
 }
 
-.refButtonMob {
+.socialButtonMob {
     padding: 5px 0;
-    margin-right: 5px;
     width: 100px;
     text-align: center;
     border: 1px solid white;
@@ -90,23 +87,19 @@
     margin-bottom: 0;
 }
 
-.refButtonMob:hover {
+.socialButtonMob:hover {
     background-color: white;
     color: black;
 }
 
-@media (max-width: 415px) {
-    .refTextMob {
+@media (max-width: 425px) {
+    .socialTextMob {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 389px) {
+    .socialTextMob {
         font-size: 14px;
-    }
-}
-@media (max-width: 400px) {
-    .refTextMob {
-        font-size: 13px;
-    }
-}
-@media (max-width: 380px) {
-    .refTextMob {
-        font-size: 12px;
     }
 }

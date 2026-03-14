@@ -16,14 +16,14 @@ const Selection = forwardRef(({el, dataIndex="none"}, ref) => {
         const saveScrollPositions = () => {
 
             if (scrollableBlockRef.current) {
-                const scrollLeft = scrollableBlockRef.current.getScroll();
-                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableBlockRef.current.getScroll());
+                Cookies.set(`${blockId}-PrPos`, scrollLeft, {expires: 0.25});
             }
 
         };
 
         const restoreScrollPosition = () => {
-            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+            const ProductsBlockPosition = Cookies.get(`${blockId}-PrPos`);
 
             if (ProductsBlockPosition && scrollableBlockRef.current) {
                 scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
@@ -51,7 +51,7 @@ const Selection = forwardRef(({el, dataIndex="none"}, ref) => {
             <ProductCard
                 product={product}
                 key={product.id}
-                smallCard={true}
+                bigCard={el.bigCard}
             />
         )
     })

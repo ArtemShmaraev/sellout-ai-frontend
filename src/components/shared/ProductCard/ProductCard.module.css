@@ -8,6 +8,16 @@
     text-decoration: none;
 }
 
+.bigCard {
+    width: calc(min(60vw, 260px));
+    height: calc(105px + min(60vw, 260px) + 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .empty_card {
     width: 200px;
     height: 350px;
@@ -105,6 +115,15 @@
     justify-content: flex-start;
     margin-top: 5px;
     min-height: 115px;
+    z-index: -1;
+}
+
+.text_block_big_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 5px;
+    min-height: 103px;
     z-index: -1;
 }
 
@@ -378,6 +397,11 @@
 
     .text_block {
         height: 40%;
+        min-height: 103px;
+    }
+
+    .text_block_big_card {
+        /*height: 30%;*/
         min-height: 103px;
     }
 

@@ -51,8 +51,19 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
         handleCloseSideBar()
     }
     const [suggs, setSuggs] = useState([])
+
+    // Функция для скролла наверх окна поиска
+    const scrollToTop = () => {
+        setTimeout(() => {
+            if (sideBarRef.current) {
+                sideBarRef.current.scrollTo({ top: 69, behavior: 'smooth' });
+            }
+        }, 0);
+    };
+
     const fetchSuggs = (str) => {
         setValue(str)
+        scrollToTop()
     }
 
     const selectedGender = Cookies.get('selected_gender')
@@ -1146,7 +1157,7 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
         setIsActive(true); // Активируем поле при нажатии
         setIsOpen(true)
         setIsOpenInSideBar(true)
-        sideBarRef.current.scrollTo(0, 0)
+        sideBarRef.current.scrollTo(0, 69)
     };
 
     const handleSearchClose = () => {
@@ -1173,6 +1184,7 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
 
     const handleClear = () => {
         setValue(''); // Очищаем поле поиска
+        scrollToTop()
         if (inputRef.current) {
             inputRef.current.focus(); // Возвращаем фокус на инпут, чтобы клавиатура не закрывалась
         }

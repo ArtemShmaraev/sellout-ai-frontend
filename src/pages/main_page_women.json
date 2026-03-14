@@ -115,7 +115,8 @@
     "blockName": "ПОПУЛЯРНЫЕ БРЕНДЫ",
     "blockId": "1F",
     "type": "popularBrands",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "brandsAmount": 64,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/PopularBrands/all.svg",
@@ -465,6 +466,7 @@
     "type": "multiSectionCircles",
     "title": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 24,
     "desktopImages": [
@@ -683,6 +685,7 @@
     "type": "multiSectionCircles",
     "title": "СУМКИ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 12,
     "desktopImages": [
@@ -807,7 +810,8 @@
     "blockName": "SALE PRODUCTS",
     "blockId": "5F",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?is_sale=is_sale",
     "moreButton": true,
     "productsAmount": 1320,
@@ -827,7 +831,8 @@
     "blockName": "TRENDY LOTS PRODUCTS",
     "blockId": "6F",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?collection=trendswomen&gender=F",
     "moreButton": true,
     "productsAmount": 1320,
@@ -841,7 +846,8 @@
     "blockId": "7F",
     "type": "multiSectionRecs",
     "title": "ОДЕЖДА",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -908,7 +914,8 @@
     "blockId": "8F",
     "type": "multiSectionImages",
     "title": "",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sets/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sets/2.png",
@@ -991,6 +998,7 @@
     "type": "multiSectionRecs",
     "title": "Аксессуары",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -1057,7 +1065,8 @@
     "blockId": "10F",
     "type": "multiSectionImages",
     "title": "ВЕРХНЯЯ ОДЕЖДА",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Outerwear/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Outerwear/2.png",
@@ -1224,6 +1233,7 @@
     "type": "multiSectionRecs",
     "title": "ОБУВЬ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -1291,6 +1301,7 @@
     "type": "multiSectionImages",
     "title": "Зимняя обувь",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Boots/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Boots/2.png",
@@ -1350,7 +1361,7 @@
       "/products?category=winter_sneakers",
       "/products?category=high_boots_and_jackboots",
       "/products?line=ugg&category=winter_sneakers&category=boots",
-      "",
+      "/products?tag=warm_sneakers_women",
       "/products?line=timberland&category=winter_sneakers&category=boots",
       "/products?line=bottega_veneta&category=winter_sneakers&category=boots",
       "/products?line=moon_boot&category=shoes_category",
@@ -1428,7 +1439,8 @@
     "blockId": "13F",
     "type": "multiSectionCircles",
     "title": "Премиальные кроссовки",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "rows": 2,
     "cols": 22,
     "desktopImages": [
@@ -1626,7 +1638,8 @@
     "blockId": "14F",
     "type": "multiSectionImages",
     "title": "Сумки",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Bags/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Bags/2.png",
@@ -1793,6 +1806,7 @@
     "type": "multiSectionImages",
     "title": "Кроссовки",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sneakers/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sneakers/2.png",
@@ -1965,7 +1979,8 @@
     "blockId": "16F",
     "type": "multiSectionImages",
     "title": "STREETWEAR: ",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Streetwear/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Streetwear/2.png",

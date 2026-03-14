@@ -63,8 +63,22 @@ const ElasticSearchModal = () => {
         closeModal()
     }
     const [suggs, setSuggs] = useState([])
+
+    const sugBlockRef = useRef(null);
+
+    // Функция для скролла наверх окна поиска
+    const scrollToTop = () => {
+        if (sugBlockRef.current) {
+            sugBlockRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth', // Для плавного скролла
+            });
+        }
+    };
+
     const fetchSuggs = (str) => {
         setValue(str)
+        scrollToTop()
         // if (str) {
         //     suggestSearch(str).then(res => setSuggs(res))
         // } else {
@@ -1132,6 +1146,7 @@ const ElasticSearchModal = () => {
     }, [value]);
     const clearInput = () => {
         setValue('')
+        scrollToTop()
     }
     const clickOnSugg = () => {
         closeModal()
@@ -1191,7 +1206,7 @@ const ElasticSearchModal = () => {
                                                  clearFunc={clearInput}
                                                  autoFocus={true}
                                     />
-                                    <div className={s.sug_block}>
+                                    <div className={s.sug_block} ref={sugBlockRef}>
                                         {
                                             suggs.map((el, index) => (
                                                 el.type === "product" ? (

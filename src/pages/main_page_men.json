@@ -97,7 +97,8 @@
     "blockName": "ПОПУЛЯРНЫЕ БРЕНДЫ",
     "blockId": "1M",
     "type": "popularBrands",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "brandsAmount": 64,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/PopularBrands/all.svg",
@@ -447,6 +448,7 @@
     "type": "multiSectionCircles",
     "title": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 34,
     "desktopImages": [
@@ -736,15 +738,16 @@
     "products": []
   },
   {
-  "blockName": "БОНУСЫ МОДАЛКИ",
-  "type": "giftsPromoModal"
-},
+    "blockName": "БОНУСЫ МОДАЛКИ",
+    "type": "giftsPromoModal"
+  },
   {
     "blockName": "ОДЕЖДА",
     "blockId": "4M",
     "type": "multiSectionRecs",
     "title": "ОДЕЖДА",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -818,7 +821,8 @@
     "blockName": "SALE PRODUCTS",
     "blockId": "5M",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?is_sale=is_sale",
     "moreButton": true,
     "productsAmount": 1320,
@@ -832,6 +836,7 @@
     "type": "multiSectionImages",
     "title": "ЗИМНЯЯ ОБУВЬ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/MultiSectionImages/WinterShoes/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/MultiSectionImages/WinterShoes/2.png",
@@ -893,7 +898,7 @@
       true
     ],
     "recsLinks": [
-      "",
+      "/products?tag=warm_sneakers_men",
       "/products?category=boots",
       "/products?category=winter_sneakers",
       "/products?line=timberland&category=winter_sneakers&category=boots",
@@ -990,8 +995,9 @@
     "blockName": "BEST SELLERS PRODUCTS",
     "blockId": "7M",
     "type": "selection",
-    "selectionRowsMobile": 2,
-    "url": "",
+    "selectionRowsMobile": 1,
+    "bigCard": true,
+    "url": "/products?tag=best_sellers_men",
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
@@ -1003,7 +1009,8 @@
     "blockId": "8M",
     "type": "multiSectionImages",
     "title": "ВЕРХНЯЯ ОДЕЖДА",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/MultiSectionImages/Outerwear/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/MultiSectionImages/Outerwear/2.png",
@@ -1184,6 +1191,7 @@
     "type": "multiSectionRecs",
     "title": "СУМКИ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -1251,6 +1259,7 @@
     "type": "multiSectionCircles",
     "title": "БАСКЕТБОЛЬНЫЕ ТОВАРЫ",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 9,
     "desktopImages": [
@@ -1345,6 +1354,7 @@
     "type": "multiSectionCircles",
     "title": "Премиальные кроссовки",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 22,
     "desktopImages": [
@@ -1561,7 +1571,8 @@
     "blockName": "КОЛЛЛАБОРАЦИИ PRODUCTS",
     "blockId": "12M",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?collab=all",
     "moreButton": true,
     "productsAmount": 0,
@@ -1575,6 +1586,7 @@
     "type": "multiSectionRecs",
     "title": "Аксессуары",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 1,
     "cols": 11,
     "desktopImages": [
@@ -1648,8 +1660,9 @@
     "blockName": "UNDER RETAIL PRODUCTS",
     "blockId": "14M",
     "type": "selection",
-    "selectionRowsMobile": 2,
-    "url": "",
+    "selectionRowsMobile": 1,
+    "bigCard": true,
+    "url": "/products?tag=under_retail_men",
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
@@ -1662,6 +1675,7 @@
     "type": "multiSectionCircles",
     "title": "Nike",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 23,
     "desktopImages": [
@@ -1874,7 +1888,8 @@
     "blockName": "MORE PROFIT PRODUCTS",
     "blockId": "16M",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?collection=bargainsmen",
     "moreButton": true,
     "productsAmount": 0,
@@ -1889,6 +1904,7 @@
     "type": "multiSectionCircles",
     "title": "Air Jordan",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 12,
     "desktopImages": [
@@ -2006,7 +2022,8 @@
     "blockId": "18M",
     "type": "multiSectionImages",
     "title": "STREETWEAR: ",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Streetwear/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Streetwear/2.png",
@@ -2180,6 +2197,7 @@
     "type": "multiSectionCircles",
     "title": "New Balance",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 8,
     "desktopImages": [
@@ -2272,7 +2290,8 @@
     "blockName": "TOP SHELF PRODUCTS",
     "blockId": "20M",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?collection=topshelfmen",
     "moreButton": true,
     "productsAmount": 0,
@@ -2287,6 +2306,7 @@
     "type": "multiSectionCircles",
     "title": "adidas",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "rows": 2,
     "cols": 20,
     "desktopImages": [
@@ -2475,7 +2495,8 @@
     "blockName": "GIFTS FOR HER PRODUCTS",
     "blockId": "22M",
     "type": "selection",
-    "selectionRowsMobile": 2,
+    "selectionRowsMobile": 1,
+    "bigCard": true,
     "url": "/products?collection=8march&gender=F",
     "moreButton": true,
     "productsAmount": 0,
@@ -2490,6 +2511,7 @@
     "type": "multiSectionImages",
     "title": "Кроссовки",
     "selectionRowsMobile": 2,
+    "bigCard": false,
     "desktopImages": [
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sneakers/1.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Women/MainPage/MultiSectionImages/Sneakers/2.png",

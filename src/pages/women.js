@@ -25,7 +25,7 @@ import Selection from "@/components/shared/UI/Selection/Selection";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
-    const page = cookies['index_page']
+    // const page = cookies['index_page']
     const token = cookies['access_token']
 
     const selected_gender = "F"; // Добавляем получение выбранного гендера из кук
@@ -67,11 +67,11 @@ export const getServerSideProps = async (context) => {
     });
 
     // Шаг 1: Если первая загрузка страницы (куки все еще пустые и нет расстановки), создаем базовую расстановку.
-    if (!('mainPageWomen-lastTimeUpdated' in cookies) || !cookies['mainPageWomen-lastTimeUpdated']) {
+    if (!('mpW-updTime' in cookies) || !cookies['mpW-updTime']) {
         arrangement = arrangementBase
 
         restoredData = true;
-    } else if ('mainPageWomen-lastTimeUpdated' in cookies && Date.now() - parseInt(cookies['mainPageWomen-lastTimeUpdated'], 10) > 10 * 60 * 1000) {
+    } else if ('mpW-updTime' in cookies && Date.now() - parseInt(cookies['mpW-updTime'], 10) > 10 * 60 * 1000) {
         // Если уже не первый раз заходим, но прошло более 10 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
         restoredData = true;
 
@@ -164,13 +164,13 @@ const Women = ({data, arrangement, restoredData}) => {
         //     Cookies.set('index_page', 1, {expires: tenMinutes});
         // }
 
-        Cookies.set('mainPageWomen-lastTimeUpdated', Date.now(), {expires: 2772})
+        Cookies.set('mpW-updTime', Date.now(), {expires: 2772})
         if (restoredData) {
             // Если обновили данные (первый заход или более 10 минут прошло), то сбрасываем на ноль все позиции, сохраняем новую расстановку
-            Cookies.set("homeScrollPositionWomen", JSON.stringify({}), {expires: 2772});
-            Cookies.set("mainPageWomen-AmountOfBlocksLoaded", 2, {expires: 2772});
-            Cookies.set("mainPageWomen-TopSeenBlock", encodeURIComponent('ПОПУЛЯРНЫЕ БРЕНДЫ'), {expires: 2772});
-            localStorage.setItem('mainPageWomen-Arrangement', JSON.stringify(arrangement));
+            Cookies.set("mpW-Pos", JSON.stringify({}), {expires: 2772});
+            Cookies.set("mpW-blocks", 2, {expires: 2772});
+            Cookies.set("mpW-topBlock", encodeURIComponent('ПОПУЛЯРНЫЕ БРЕНДЫ'), {expires: 2772});
+            localStorage.setItem('mpW-arr', JSON.stringify(arrangement));
 
             data.forEach(item => {
                 if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
@@ -178,11 +178,11 @@ const Women = ({data, arrangement, restoredData}) => {
 
                     // Формируем имена куков
                     const cookiesToCheck = item.type === "selection" ? [
-                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                        `${blockId}-PrPos`
                     ] : [
-                        `multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`,
-                        `multiSectionedBlock-${blockId}-SectionsContainerPosition`,
-                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                        `${blockId}-IndArr`,
+                        `${blockId}-SecPos`,
+                        `${blockId}-PrPos`
                     ];
 
                     // Проверяем наличие каждого кука и устанавливаем значение 0
@@ -198,7 +198,7 @@ const Women = ({data, arrangement, restoredData}) => {
         }
 
         // // Теперь необходимо восстановить корректную расстановку внутри data согласно нашей расстановке (новая или прежняя - в любом случае будет уже лежать в локал хранилище)
-        const storageArr = JSON.parse(localStorage.getItem('mainPageWomen-Arrangement'));
+        const storageArr = JSON.parse(localStorage.getItem('mpW-arr'));
         setArrangementFinal({...storageArr});
 
         const rearrangeData = (data, arrangement) => {
@@ -241,10 +241,10 @@ const Women = ({data, arrangement, restoredData}) => {
             });
         };
 
-        const arrangedData = rearrangeData(structuredClone(data), JSON.parse(localStorage.getItem('mainPageWomen-Arrangement')));
+        const arrangedData = rearrangeData(structuredClone(data), JSON.parse(localStorage.getItem('mpW-arr')));
         if (arrangedData) {
             setCurrentData(arrangedData)
-            const savedBlockName = Cookies.get('mainPageWomen-TopSeenBlock') ? decodeURIComponent(Cookies.get('mainPageWomen-TopSeenBlock')) : null;
+            const savedBlockName = Cookies.get('mpW-topBlock') ? decodeURIComponent(Cookies.get('mpW-topBlock')) : null;
             let startIndex = blockNames.indexOf(savedBlockName);
 
             const initialBlock = arrangedData[startIndex + 2];
@@ -270,8 +270,8 @@ const Women = ({data, arrangement, restoredData}) => {
                 }
             }
 
-            Cookies.set("mainPageWomen-AmountOfBlocksLoaded", 5, {expires: 2772});
-            Cookies.set("mainPageWomen-LastLoadedBlock", encodeURIComponent(initialContent[4].blockName), {expires: 2772});
+            Cookies.set("mpW-blocks", 5, {expires: 2772});
+            Cookies.set("mpW-lastBlock", encodeURIComponent(initialContent[4].blockName), {expires: 2772});
 
             setContent(initialContent); // Устанавливаем контент
         }
@@ -332,23 +332,23 @@ const Women = ({data, arrangement, restoredData}) => {
 
     useEffect(() => {
         const saveScrollPosition = () => {
-            const topSeenBlockName = Cookies.get('mainPageWomen-TopSeenBlock') ? decodeURIComponent(Cookies.get('mainPageWomen-TopSeenBlock')) : null;
+            const topSeenBlockName = Cookies.get('mpW-topBlock') ? decodeURIComponent(Cookies.get('mpW-topBlock')) : null;
             if (topSeenBlockName && blockRefs.current[topSeenBlockName]) {
                 const block = blockRefs.current[topSeenBlockName];
                 const blockRect = block.getBoundingClientRect();
                 const distanceFromBottom = blockRect.bottom; // Позиция нижнего края относительно экрана
 
-                Cookies.set("homeScrollPositionWomen", JSON.stringify({
+                Cookies.set("mpW-Pos", JSON.stringify({
                     blockName: encodeURIComponent(topSeenBlockName),
                     distanceFromBottom
                 }), {expires: 2772});
             }
 
-            Cookies.set('mainPageWomen-lastTimeUpdated', Date.now(), {expires: 2772})
+            Cookies.set('mpW-updTime', Date.now(), {expires: 2772})
         };
 
         const restoreScrollPosition = () => {
-            const savedPosition = JSON.parse(Cookies.get("homeScrollPositionWomen"));
+            const savedPosition = JSON.parse(Cookies.get("mpW-Pos"));
             if (savedPosition && typeof savedPosition === 'object' && Object.keys(savedPosition).length > 0) {
                 const {blockName, distanceFromBottom} = savedPosition;
                 const block = blockRefs.current[decodeURIComponent(blockName)];
@@ -747,7 +747,7 @@ const Women = ({data, arrangement, restoredData}) => {
                     if (topVisibleBlock) {
                         const {blockName} = topVisibleBlock;
                         // Обновляем куки с именем верхнего блока
-                        Cookies.set("mainPageWomen-TopSeenBlock", encodeURIComponent(blockName), {
+                        Cookies.set("mpW-topBlock", encodeURIComponent(blockName), {
                             expires: 2772,
                         });
                     }
@@ -806,8 +806,8 @@ const Women = ({data, arrangement, restoredData}) => {
     }, [content]); // Слушаем изменения в content
 
     const loadMore = () => {
-        const amountOfBlocksLoaded = Number(Cookies.get('mainPageWomen-AmountOfBlocksLoaded'))
-        const lastLoadedBlock = Cookies.get('mainPageWomen-LastLoadedBlock') ? decodeURIComponent(Cookies.get('mainPageWomen-LastLoadedBlock')) : null;
+        const amountOfBlocksLoaded = Number(Cookies.get('mpW-blocks'))
+        const lastLoadedBlock = Cookies.get('mpW-lastBlock') ? decodeURIComponent(Cookies.get('mpW-lastBlock')) : null;
         const lastIndex = blockNames.indexOf(lastLoadedBlock);
 
         if (amountOfBlocksLoaded < currentData.length) {
@@ -827,8 +827,8 @@ const Women = ({data, arrangement, restoredData}) => {
             // Обновляем состояние
             setContent((prevContent) => [...prevContent, ...newBlocks]);
 
-            Cookies.set("mainPageWomen-LastLoadedBlock", encodeURIComponent(newBlocks[newBlocks.length - 1].blockName), {expires: 2772});
-            Cookies.set("mainPageWomen-AmountOfBlocksLoaded", Math.min(amountOfBlocksLoaded + 3, currentData.length), {expires: 2772});
+            Cookies.set("mpW-lastBlock", encodeURIComponent(newBlocks[newBlocks.length - 1].blockName), {expires: 2772});
+            Cookies.set("mpW-blocks", Math.min(amountOfBlocksLoaded + 3, currentData.length), {expires: 2772});
         }
     }
 

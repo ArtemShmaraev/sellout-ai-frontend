@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css'
 import AppWrapper from "@/context/AppWrapper";
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {useRouter} from 'next/router';
 import NProgress from 'nprogress'; // Импортируем библиотеку
 import 'nprogress/nprogress.css';
@@ -40,6 +40,23 @@ export default function App({Component, pageProps}) {
             router.events.off('routeChangeStart', handleStart);
             router.events.off('routeChangeComplete', handleComplete);
             router.events.off('routeChangeError', handleComplete);
+        };
+    }, [router]);
+
+    useEffect(() => {
+        const handlePopstate = () => {
+            const url = window.location.pathname;
+            const isMainPage = url === '/men' || url === '/women';
+
+            if (isMainPage) {
+                router.push(url); // Корректируем путь
+            }
+        };
+
+        window.addEventListener('popstate', handlePopstate);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopstate);
         };
     }, [router]);
 

@@ -465,7 +465,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             ]
             setRecProducts((prev) => [...prev, ...loadingProductsData]);
             fetchProductsPage({...url, gender}, token).then(res => {
-                const shuffledProducts = res.results.sort(() => Math.random() - 0.5);
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
                 setRecProducts((prev) => {
                     // Удаляем заглушечные данные и добавляем новые
                     const filteredProducts = prev.filter(product => !loadingProductsData.includes(product));
@@ -654,7 +654,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             ]
             setRecProducts((prev) => [...prev, ...loadingProductsData]);
             fetchProductsPage(url, token).then(res => {
-                const shuffledProducts = res.results.sort(() => Math.random() - 0.5);
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
                 setRecProducts((prev) => {
                     // Удаляем заглушечные данные и добавляем новые
                     const filteredProducts = prev.filter(product => !loadingProductsData.includes(product));
@@ -869,7 +869,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             setRecProducts(loadingProductsData);
             fetchProductsPage({...url, gender}, token).then(res => {
                 // setRecProducts(res.results)
-                const shuffledProducts = res.results.sort(() => Math.random() - 0.5);
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
                 setRecProducts(shuffledProducts);
             })
         } else {
@@ -1055,7 +1055,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             setRecProducts(loadingProductsData);
             fetchProductsPage(url, token).then(res => {
                 // setRecProducts(res.results)
-                const shuffledProducts = res.results.sort(() => Math.random() - 0.5);
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
                 setRecProducts(shuffledProducts);
             });
         }
@@ -1072,7 +1072,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                     });
                 }
             },
-            { threshold: 0.5 }
+            {threshold: 0.5}
         );
 
         if (observerRef.current) {
@@ -1296,8 +1296,15 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
     }
     const hasOneTable = () => {
         let bool = false
+        console.log(product.size_table_platform)
+        console.log(Array.isArray(product.size_table_platform))
         if (Array.isArray(product.size_table_platform)) {
-            bool = product.size_table_platform.length > 0
+            bool = product.size_table_platform.some(
+                (item) =>
+                    item.table && // Убедимся, что ключ `table` существует
+                    typeof item.table === 'object' && // Проверяем, что `table` — объект
+                    Object.keys(item.table).length > 0 // Убедимся, что объект не пустой
+            );
         } else {
             Object.values(product.size_table_platform.tables).forEach(table => {
                 if (Object.keys(table).length > 0) {
@@ -1660,7 +1667,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                             <>
                                 {
                                     prices.length > 0 &&
-                                    <>
+                                    <div style={{marginBottom: '20px'}}>
                                         <span itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                               className={(product.price.start_price > product.price.final_price) ? s.price_sale : s.price_default}
                                         >
@@ -1719,7 +1726,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
                                             </div>
                                         }
-                                    </>
+                                    </div>
                                 }
                                 {
                                     prices.length > 0 &&
@@ -1727,7 +1734,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                         {
                                             hasOneTable() &&
                                             <SizeTable tables={product.size_table_platform}
-                                                       photo={product.bucket_link[0].url}/>
+                                                       photo={product.bucket_link[0].url} key={product.id}/>
                                         }
                                         {/*<SizeHelp model={`${brandsDisplay()} ${product.model}`}*/}
                                         {/*          imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}*/}
@@ -1915,7 +1922,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                                                                                target={'_blank'}>FAQ</Link>
                                     </h5>
                                 </TextModalDesktopProductPage>
-                                <hr style={{marginTop: '10px'}}/>
+                                <hr style={{marginTop: '10px', color: '#51031D', opacity: '1'}}/>
                                 {!receivedWelcomeGift &&
                                     <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
                                         <span className={s.promoText}>До 5000₽ в подарок</span>
@@ -2165,7 +2172,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                 </div>
                                 {
                                     prices.length > 0 &&
-                                    <>
+                                    <div style={{marginBottom: '30px'}}>
                                         {(product.price.start_price > product.price.final_price) &&
                                             <div className={s.price_default}
                                                  style={{textDecoration: 'line-through', fontSize: '17px'}}>
@@ -2220,7 +2227,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
                                             </div>
                                         }
-                                    </>
+                                    </div>
                                 }
                                 {
                                     prices.length > 0 &&
@@ -3939,7 +3946,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                 {!desktopStore.isDesktop && recProducts && recProducts.length > 0 &&
                     <div className={'custom_cont'}>
                         <h3 className={s.similar_title}>Рекомендации</h3>
-                        <ProductList products={recProducts} isAdmin={false}/>
+                        <ProductList products={recProducts} isAdmin={false} key={product.id}/>
                         <div ref={observerRef}/>
                     </div>
                 }
