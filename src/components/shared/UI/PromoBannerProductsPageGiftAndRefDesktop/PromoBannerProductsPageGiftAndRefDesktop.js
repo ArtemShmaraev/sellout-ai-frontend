@@ -7,6 +7,7 @@ import guaranteeImg from "@/static/icons/promoBannerGuaranteeImg.svg";
 import TextModalGuarantee from "@/components/shared/UI/TextModalGuarantee/TextModalGuarantee";
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
 
 const PromoBannerProductsPageGiftAndRefDesktop = () => {
@@ -55,15 +56,27 @@ const PromoBannerProductsPageGiftAndRefDesktop = () => {
         document.body.classList.remove('body-scroll-clip')
     };
 
+    const [giftsModalOpen, setGiftsModalOpen] = useState(false);
+
+    const toggleGifts = () => {
+        setGiftsModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleGiftsModalClose = () => {
+        setGiftsModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             {desktopStore.isDesktop ?
                 <div className={styles.giftRefCont}>
                     <div className={styles.gift}>
-                        <div className={styles.giftText} onClick={toggleHow}>
+                        <div className={styles.giftText} onClick={toggleGifts}>
                             До 5000₽ в подарок
                         </div>
-                        <div className={styles.giftButton} onClick={toggleHow}>
+                        <div className={styles.giftButton} onClick={toggleGifts}>
                             Получить
                         </div>
                     </div>
@@ -83,6 +96,7 @@ const PromoBannerProductsPageGiftAndRefDesktop = () => {
             }
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
             <ModalRef show={refModalOpen} onClose={handleRefModalOpen}/>
+            <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
         </>
     );
 };

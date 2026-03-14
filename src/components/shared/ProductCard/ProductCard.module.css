@@ -425,3 +425,10 @@
     }
 
 }
+
+@media (max-width: 410px) {
+    .card {
+        width: 161px;
+        height: 265px;
+    }
+}

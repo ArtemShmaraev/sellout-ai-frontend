@@ -13,8 +13,7 @@
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/2.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/3.png",
       "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/Main/4.png"
-    ],
-    "id": 1
+    ]
   },
   {
     "blockName": "ДОП КАТЕГОРИИ",
@@ -92,8 +91,7 @@
       "/products?category=jewelries",
       "/products?category=sunglasses&category=optical_glasses",
       "/products?category=other_sport_shoes&category=football_boots&category=basketball_sneakers&category=sport_clothes&category=sport_goods&category=sport_bags"
-    ],
-    "id": 2
+    ]
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ БРЕНДЫ",
@@ -437,23 +435,15 @@
       "Casio",
       "RayBan",
       "Swatch"
-    ],
-    "id": 3
+    ]
   },
   {
     "blockName": "aboutPromoModal",
-    "type": "aboutPromoModal",
-    "id": 4
+    "type": "aboutPromoModal"
   },
   {
     "blockName": "НОВИНКИ",
-    "type": "multiSectionImages_",
-    "id": 5
-  },
-  {
-    "blockName": "giftsPromoModal",
-    "type": "giftsPromoModal",
-    "id": 6
+    "type": "multiSectionImages_"
   },
   {
     "blockName": "ПОПУЛЯРНЫЕ ЛИНЕЙКИ",
@@ -747,9 +737,12 @@
       "adidas Ozweego",
       "adidas EQT"
     ],
-    "products": [],
-    "id": 7
+    "products": []
   },
+  {
+  "blockName": "giftsPromoModal",
+  "type": "giftsPromoModal"
+},
   {
     "blockName": "ОДЕЖДА",
     "blockId": "4M",
@@ -815,8 +808,7 @@
       "джинс",
       "брюк"
     ],
-    "products": [],
-    "id": 8
+    "products": []
   },
   {
     "blockName": "SALE IMAGE",
@@ -824,8 +816,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/sale.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/sale.png",
-    "imageLink": "/products?is_sale=is_sale",
-    "id": 9
+    "imageLink": "/products?is_sale=is_sale"
   },
   {
     "blockName": "SALE PRODUCTS",
@@ -836,8 +827,7 @@
     "moreButton": true,
     "productsAmount": 1320,
     "moreButtonName": "со скидками",
-    "products": [],
-    "id": 10
+    "products": []
   },
   {
     "blockName": "ЗИМНЯЯ ОБУВЬ",
@@ -989,8 +979,7 @@
       false,
       false
     ],
-    "products": [],
-    "id": 11
+    "products": []
   },
   {
     "blockName": "BEST SELLERS IMAGE",
@@ -998,8 +987,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/bestSellers.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/bestSellers.png",
-    "imageLink": "",
-    "id": 12
+    "imageLink": ""
   },
   {
     "blockName": "BEST SELLERS PRODUCTS",
@@ -1010,8 +998,7 @@
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
-    "products": [],
-    "id": 13
+    "products": []
   },
   {
     "blockName": "ВЕРХНЯЯ ОДЕЖДА",
@@ -1191,8 +1178,7 @@
       false,
       false
     ],
-    "products": [],
-    "id": 14
+    "products": []
   },
   {
     "blockName": "СУМКИ",
@@ -1259,8 +1245,7 @@
       "сумок Louis Vuitton",
       "сумок Nike"
     ],
-    "products": [],
-    "id": 15
+    "products": []
   },
   {
     "blockName": "БАСКЕТБОЛЬНЫЕ ТОВАРЫ",
@@ -1335,7 +1320,7 @@
       "1000"
     ],
     "moreButtonName": [
-      "ЦЕЛИКОМ Посмотреть все баскетбольные товары",
+      "ЦЕЛИКОМ Все баскетбольные товары",
       "баскетбольных кроссовок",
       "ЦЕЛИКОМ Посмотреть всю баскетбольную одежду",
       "баскетбольных мячей",
@@ -1354,8 +1339,7 @@
       "Li-Ning",
       "Under Armour"
     ],
-    "products": [],
-    "id": 16
+    "products": []
   },
   {
     "blockName": "ПРЕМИУМ КРОССОВКИ",
@@ -1553,8 +1537,7 @@
       "Hermes",
       "Represent"
     ],
-    "products": [],
-    "id": 17
+    "products": []
   },
   {
     "blockName": "КОЛЛЛАБОРАЦИИ IMAGE",
@@ -1574,8 +1557,7 @@
       "content": "Сотни знаковых коллабораций: \n<a href='/products?line=yeezy'>adidas Yeezy</a>, \n<a href='/products?collab=nike_x_off-white'>Nike x Off-White</a>, \n<a href='/products?collab=nike_x_travis_scott'>Nike x Travis Scott</a>, \n<a href='/products?collab=nike_x_supreme'>Nike x Supreme</a>, \n<a href='/products?collab=nike_x_union'>Nike x Union</a>, \n<a href='/products?collab=nike_x_clot'>Nike x Clot</a>, \n<a href='/products?collab=nike_x_sacai'>Nike x Sacai</a>, \n<a href='/products?collab=nike_x_st%C3%BCssy'>Nike x Stüssy</a>, \n<a href='/products?collab=nike_x_ambush'>Nike x Ambush</a>, \n<a href='/products?collab=nike_x_a_ma_maniére'>Nike x A Ma Maniére</a> и многие другие",
       "url": "collab=all",
       "button": "Все коллаборационные лоты"
-    },
-    "id": 18
+    }
   },
   {
     "blockName": "КОЛЛЛАБОРАЦИИ PRODUCTS",
@@ -1586,8 +1568,7 @@
     "moreButton": true,
     "productsAmount": 0,
     "moreButtonName": "ЦЕЛИКОМ Посмотреть все коллаборационные лоты",
-    "products": [],
-    "id": 19
+    "products": []
   },
   {
     "blockName": "Аксессуары",
@@ -1654,8 +1635,7 @@
       "шарфов",
       "перчаток"
     ],
-    "products": [],
-    "id": 20
+    "products": []
   },
   {
     "blockName": "UNDER RETAIL IMAGE",
@@ -1663,8 +1643,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/underRetail.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/underRetail.png",
-    "imageLink": "",
-    "id": 21
+    "imageLink": ""
   },
   {
     "blockName": "UNDER RETAIL PRODUCTS",
@@ -1675,8 +1654,7 @@
     "moreButton": false,
     "productsAmount": 0,
     "moreButtonName": "",
-    "products": [],
-    "id": 22
+    "products": []
   },
   {
     "blockName": "NIKE LINES",
@@ -1882,8 +1860,7 @@
       "Air Force 1 Mid",
       "Air Force 1 High"
     ],
-    "products": [],
-    "id": 23
+    "products": []
   },
   {
     "blockName": "MORE PROFIT IMAGE",
@@ -1891,8 +1868,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/moreProfit.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/moreProfit.png",
-    "imageLink": "/products?collection=bargainsmen",
-    "id": 24
+    "imageLink": "/products?collection=bargainsmen"
   },
   {
     "blockName": "MORE PROFIT PRODUCTS",
@@ -1904,8 +1880,7 @@
     "productsAmount": 0,
     "moreButtonName": "выгоднейших лотов",
     "moreButtonNameNoModel": true,
-    "products": [],
-    "id": 25
+    "products": []
   },
   {
     "blockName": "JORDAN LINES",
@@ -2023,8 +1998,7 @@
       "Jayson Tatum",
       "Why Not"
     ],
-    "products": [],
-    "id": 26
+    "products": []
   },
   {
     "blockName": "STREETWEAR",
@@ -2197,8 +2171,7 @@
       false,
       false
     ],
-    "products": [],
-    "id": 27
+    "products": []
   },
   {
     "blockName": "NEW BALANCE LINES",
@@ -2247,7 +2220,7 @@
     "moreButton": true,
     "circleLinks": [
       "/products?line=new_balance_237",
-      "/products?line=new_balance_2002R",
+      "/products?line=new_balance_2002r",
       "/products?line=new_balance_550",
       "/products?line=new_balance_530",
       "/products?line=new_balance_580",
@@ -2255,7 +2228,7 @@
       "/products?line=new_balance_991",
       "/products?line=new_balance_993",
       "/products?line=new_balance_327",
-      "/products?line=new_balance_1906R",
+      "/products?line=new_balance_1906r",
       "/products?line=new_balance_9060",
       "/products?line=new_balance_650",
       "/products?line=new_balance_574",
@@ -2284,8 +2257,7 @@
       "New Balance 992",
       "New Balance 997"
     ],
-    "products": [],
-    "id": 28
+    "products": []
   },
   {
     "blockName": "TOP SHELF IMAGE",
@@ -2293,8 +2265,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/topShelf.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/topShelf.png",
-    "imageLink": "/products?collection=topshelfmen",
-    "id": 29
+    "imageLink": "/products?collection=topshelfmen"
   },
   {
     "blockName": "TOP SHELF PRODUCTS",
@@ -2306,8 +2277,7 @@
     "productsAmount": 0,
     "moreButtonName": "редчайших лотов",
     "moreButtonNameNoModel": true,
-    "products": [],
-    "id": 30
+    "products": []
   },
   {
     "blockName": "ADIDAS LINES",
@@ -2489,8 +2459,7 @@
       "adidas D.O.N",
       "Yeezy 750"
     ],
-    "products": [],
-    "id": 31
+    "products": []
   },
   {
     "blockName": "GIFTS FOR HER IMAGE",
@@ -2498,8 +2467,7 @@
     "marginBottom": "30px",
     "imageUrlDesktop": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Desktop/Men/MainPage/fullWidthImages/giftsForHer.png",
     "imageUrlMobile": "https://storage.yandexcloud.net/sellout-bucket/Images%20New%20Frontend/Mobile/Men/MainPage/fullWidthImages/giftsForHer.png",
-    "imageLink": "/products?collection=8march&gender=F",
-    "id": 32
+    "imageLink": "/products?collection=8march&gender=F"
   },
   {
     "blockName": "GIFTS FOR HER PRODUCTS",
@@ -2511,8 +2479,7 @@
     "productsAmount": 0,
     "moreButtonName": "подарков для нее",
     "moreButtonNameNoModel": true,
-    "products": [],
-    "id": 33
+    "products": []
   },
   {
     "blockName": "MORE SNEAKERS",
@@ -2590,27 +2557,27 @@
       true
     ],
     "recsLinks": [
-      "/products?line=new_balance",
-      "/products?line=nike",
-      "/products?line=jordan",
-      "/products?line=vans",
-      "/products?line=adidas",
-      "/products?line=puma",
-      "/products?line=reebok",
-      "/products?line=converse",
-      "/products?line=asics",
-      "/products?line=saucony",
-      "/products?line=mizuno",
-      "/products?line=salomon",
-      "/products?line=on",
-      "/products?line=onitsuka_tiger",
-      "/products?line=li-ning",
-      "/products?line=anta",
-      "/products?line=hoka_one_one",
-      "/products?line=veja",
-      "/products?line=under_armour",
-      "/products?line=fila",
-      "/products?line=skechers"
+      "/products?category=sneakers&line=new_balance",
+      "/products?category=sneakers&line=nike",
+      "/products?category=sneakers&line=jordan",
+      "/products?category=sneakers&line=vans",
+      "/products?category=sneakers&line=adidas",
+      "/products?category=sneakers&line=puma",
+      "/products?category=sneakers&line=reebok",
+      "/products?category=sneakers&line=converse",
+      "/products?category=sneakers&line=asics",
+      "/products?category=sneakers&line=saucony",
+      "/products?category=sneakers&line=mizuno",
+      "/products?category=sneakers&line=salomon",
+      "/products?category=sneakers&line=on",
+      "/products?category=sneakers&line=onitsuka_tiger",
+      "/products?category=sneakers&line=li-ning",
+      "/products?category=sneakers&line=anta",
+      "/products?category=sneakers&line=hoka_one_one",
+      "/products?category=sneakers&line=veja",
+      "/products?category=sneakers&line=under_armour",
+      "/products?category=sneakers&line=fila",
+      "/products?category=sneakers&line=skechers"
     ],
     "productsAmount": [
       "1000",
@@ -2685,7 +2652,6 @@
       false,
       false
     ],
-    "products": [],
-    "id": 34
+    "products": []
   }
 ]

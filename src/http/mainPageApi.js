@@ -70,10 +70,10 @@ export async function fetchNavbarPhoto() {
 
 export async function fetchProductsForMainPage(block_id, n, gender, token = '') {
     if (!token) {
-        const {data} = await $host.get(`main_page2_get_block/${block_id}${gender ? `&gender=${gender}?n=${n}` : "&n=${n}"}`)
+        const {data} = await $host.get(`/product/main_page2_get_block/${block_id}${gender ? `?gender=${gender}&n=${n}` : `?n=${n}`}`)
         return data
     } else {
-        const {data} = await $host.get(`main_page2_get_block/${block_id}${gender ? `&gender=${gender}?n=${n}` : "&=${n}"}`, {
+        const {data} = await $host.get(`/product/main_page2_get_block/${block_id}${gender ? `?gender=${gender}&n=${n}` : `?n=${n}`}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
         return data

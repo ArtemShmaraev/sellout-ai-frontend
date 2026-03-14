@@ -46,6 +46,10 @@ const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
         }, 100)
     }, []);
 
+    useEffect(() => {
+        setSelectedProducts(el.products[selectedCircleIndex] || [])
+    }, [el.products, arrangement]);
+
     const router = useRouter()
 
     const loadingProductsData = [
@@ -311,7 +315,7 @@ const MultiSectionCirclesGrid = ({el, gender, arrangement}) => {
             setSelectedProducts(el.products[idx])
         } else {
             setSelectedProducts(loadingProductsData)
-            const data = await fetchProductsForMainPage(el.circleLinks[idx], gender)
+            const data = await fetchProductsForMainPage(blockId, arrangement[blockId][idx], gender)
             setSelectedProducts(data)
         }
     }

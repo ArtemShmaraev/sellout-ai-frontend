@@ -28,7 +28,7 @@
 
 .brandsGrid {
     display: grid;
-    grid-template-columns: repeat(32, 87px);
+    grid-template-columns: repeat(32, 91px);
     grid-template-rows: repeat(2, auto);
     gap: 17px;
 }
@@ -40,8 +40,8 @@
 }
 
 .circle {
-    width: 87px;
-    height: 87px;
+    width: 91px;
+    height: 91px;
     border-radius: 50%;
     border: 0.85px solid #C7C7C7;
     margin-bottom: 7px;
@@ -62,7 +62,7 @@
 }
 
 .circleImage {
-    width: 87px;
+    width: 91px;
     height: auto;
     position: absolute;
     top: 50%;
@@ -100,8 +100,8 @@
 }
 
 .circle1 {
-    width: 87px;
-    height: 87px;
+    width: 91px;
+    height: 91px;
     border-radius: 50%;
     border: 0.85px solid #C7C7C7;
     margin-bottom: 7px;

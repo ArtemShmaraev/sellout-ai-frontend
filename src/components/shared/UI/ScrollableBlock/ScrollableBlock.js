@@ -15,6 +15,7 @@ const ScrollableBlock = forwardRef(({
                                         moreButton = false,
                                         moreButtonText = "Посмотреть все",
                                         moreButtonUrl = "",
+                                        resetScrollToBeginning=false
                                     }, ref) => {
     const scrollableContainerRef = useRef(null);
     const scroll = 1100
@@ -83,6 +84,10 @@ const ScrollableBlock = forwardRef(({
                 }
             }
         };
+
+        if (resetScrollToBeginning) {
+            resetScroll()
+        }
 
         // Вызываем проверку при загрузке и при изменении размера окна
         handleResize();

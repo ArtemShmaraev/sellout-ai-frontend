@@ -37,6 +37,7 @@ import homeSelected from "@/static/icons/HomeMobileNavBarSelected.svg";
 import searchSelected from "@/static/icons/SearchMobileNavBarSelected.svg";
 import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
 // import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 
@@ -178,6 +179,18 @@ const NavbarC = () => {
         document.body.classList.remove('body-scroll-clip')
     };
 
+    const [giftsModalOpen, setGiftsModalOpen] = useState(false);
+
+    const toggleGifts = () => {
+        setGiftsModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleGiftsModalClose = () => {
+        setGiftsModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             <header className={
@@ -187,7 +200,7 @@ const NavbarC = () => {
             } id={'navbar'}>
                 {desktopStore.isDesktop &&
                     <>
-                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef} toggleGifts={toggleGifts}/>
                         <div className={'custom_cont'}>
                             <div className={s.row1}>
                                 <div className={s.block}>
@@ -354,7 +367,7 @@ const NavbarC = () => {
 
                 {!desktopStore.isDesktop &&
                     <>
-                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef} toggleGifts={toggleGifts}/>
                         <div className={s.bottom_nav}>
                             <div
                                 className={s.nav_item}
@@ -471,6 +484,7 @@ const NavbarC = () => {
             }
             <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
             <ModalRef show={refModalOpen} onClose={handleRefModalOpen}/>
+            <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
         </>
 
 

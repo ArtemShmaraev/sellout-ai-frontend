@@ -10,6 +10,8 @@ import TextModalGuarantee from "@/components/shared/UI/TextModalGuarantee/TextMo
 import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import Cookies from "js-cookie";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
 const PromoBannerMainPageOffers = () => {
     const [howOpen, setHowOpen] = useState(false);
@@ -69,28 +71,60 @@ const PromoBannerMainPageOffers = () => {
         document.body.classList.remove('body-scroll-clip')
     };
 
+    const [receivedWelcomeGift, setReceivedWelcomeGift] = useState('')
+
+    useEffect(() => {
+        setReceivedWelcomeGift(Cookies.get('receivedWelcomeGift'))
+    }, [])
+
+    const [giftsModalOpen, setGiftsModalOpen] = useState(false);
+
+    const toggleGifts = () => {
+        setGiftsModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleGiftsModalClose = () => {
+        setGiftsModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             {desktopStore.isDesktop ?
                 <div className={styles.aboutGuaranteeCont}>
-                    <div className={styles.aboutGuaranteeCont2}>
-                        <div className={styles.about}>
-                            <div className={styles.aboutText} onClick={toggleHow}>
-                                До 5000₽ в подарок
-                            </div>
-                            <div className={styles.aboutButton} onClick={toggleHow}>
-                                Получить
-                            </div>
-                        </div>
-                        <div className={styles.guarantee}>
-                            <div className={styles.aboutText} onClick={toggleRef}>
-                                До 7000₽ за приглашенного друга
-                            </div>
-                            <div className={styles.aboutButton} onClick={toggleRef}>
-                                Подробнее
+                    {receivedWelcomeGift ? (
+                        <div className={styles.aboutGuaranteeCont2}>
+                            <div className={styles.price}>
+                                <div className={styles.priceText} onClick={toggleRef}>
+                                    До 7000₽ за приглашенного друга
+                                </div>
+                                <div className={styles.aboutButton} onClick={toggleRef}>
+                                    Подробнее
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className={styles.aboutGuaranteeCont2}>
+                            <div className={styles.about}>
+                                <div className={styles.aboutText} onClick={toggleGifts}>
+                                    До 5000₽ в подарок
+                                </div>
+                                <div className={styles.aboutButton} onClick={toggleGifts}>
+                                    Получить
+                                </div>
+                            </div>
+                            <div className={styles.guarantee}>
+                                <div className={styles.aboutText} onClick={toggleRef}>
+                                    До 7000₽ за приглашенного друга
+                                </div>
+                                <div className={styles.aboutButton} onClick={toggleRef}>
+                                    Подробнее
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
 
                     <div className={styles.aboutGuaranteeCont2}>
                         <div className={styles.price}>
@@ -103,29 +137,45 @@ const PromoBannerMainPageOffers = () => {
                         </div>
                     </div>
 
-                    <div className={styles.separator}>
-                    </div>
+                    {!receivedWelcomeGift &&
+                        <div className={styles.separator}>
+                        </div>
+                    }
+
                 </div>
                 :
                 <div className={styles.aboutGuaranteeContMob}>
-                    <div className={styles.aboutGuaranteeCont2Mob}>
-                        <div className={styles.aboutMob}>
-                            <div className={styles.aboutTextMob} onClick={toggleHow}>
-                                До 5000₽ в подарок к первому заказу
-                            </div>
-                            <div className={styles.aboutButtonMob} onClick={toggleHow}>
-                                Получить
-                            </div>
-                        </div>
-                        <div className={styles.guaranteeMob}>
-                            <div className={styles.guaranteeTextMob} onClick={toggleRef}>
-                                До 7000₽ за приглашенного друга
-                            </div>
-                            <div className={styles.guaranteeButtonMob} onClick={toggleRef}>
-                                Подробнее
+                    {receivedWelcomeGift ? (
+                        <div className={styles.aboutGuaranteeCont2Mob}>
+                            <div className={styles.priceMob}>
+                                <div className={styles.priceTextMob} onClick={toggleRef}>
+                                    До 7000₽ за приглашенного друга
+                                </div>
+                                <div className={styles.priceButtonMob} onClick={toggleRef}>
+                                    Подробнее
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ):(
+                        <div className={styles.aboutGuaranteeCont2Mob}>
+                            <div className={styles.aboutMob}>
+                                <div className={styles.aboutTextMob} onClick={toggleGifts}>
+                                    До 5000₽ в подарок к первому заказу
+                                </div>
+                                <div className={styles.aboutButtonMob} onClick={toggleGifts}>
+                                    Получить
+                                </div>
+                            </div>
+                            <div className={styles.guaranteeMob}>
+                                <div className={styles.guaranteeTextMob} onClick={toggleRef}>
+                                    До 7000₽ за приглашенного друга
+                                </div>
+                                <div className={styles.guaranteeButtonMob} onClick={toggleRef}>
+                                    Подробнее
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     <div className={styles.aboutGuaranteeCont2Mob}>
                         <div className={styles.priceMob}>
@@ -142,6 +192,7 @@ const PromoBannerMainPageOffers = () => {
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
             <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
             <ModalRef show={refModalOpen} onClose={handleRefModalClose}/>
+            <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
         </>
     );
 };

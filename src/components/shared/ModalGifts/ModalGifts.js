@@ -1,9 +1,13 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import styles from './ModalGifts.module.css';
 import stylesMob from './ModalGiftsMob.module.css';
 import Image from "next/image";
 import {useRef} from 'react';
 import Cookies from "js-cookie";
+import {desktopStore} from "@/store/DesktopStore";
+import {Context} from "@/context/AppWrapper";
+import Link from "next/link";
+import AuthModal from "@/components/shared/AuthModal/AuthModal";
 
 export default function ModalGifts({show, onClose}) {
     const [isModalVisible, setModalVisible] = useState(show);
@@ -12,40 +16,12 @@ export default function ModalGifts({show, onClose}) {
         setModalVisible(show);
     }, [show]);
 
-
-    function changeBrowserColor(color) {
-        // Для Chrome, Firefox, Opera на Android
-        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-        if (themeColorMeta) {
-            themeColorMeta.setAttribute('content', color);
-        }
-
-        // Для Safari на iOS (к сожалению, не все цвета поддерживаются)
-        const statusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
-        if (statusBarMeta) {
-            // Изменение цвета status-bar на iOS
-            statusBarMeta.setAttribute('content', 'black-translucent'); // ограниченные возможности
-        }
-
-        // Для Microsoft Edge
-        const msNavbuttonMeta = document.querySelector('meta[name="msapplication-navbutton-color"]');
-        if (msNavbuttonMeta) {
-            msNavbuttonMeta.setAttribute('content', color);
-        }
-    }
-
-    const openModal = () => {
-        setModalVisible(true);
-
-        if (!isDesktop) {
-            changeBrowserColor("#000000")
-        }
-    };
+    const {userStore} = useContext(Context)
 
     const modalRef = useRef(null);
     const backdropRef = useRef(null);
     const closeModal = () => {
-        if (isDesktop && modalRef.current && backdropRef.current) {
+        if (desktopStore.isDesktop && modalRef.current && backdropRef.current) {
             // Добавляем классы для анимации закрытия
             modalRef.current.classList.add(styles.slideUp);
             backdropRef.current.classList.add(styles.fadeOut);
@@ -87,20 +63,25 @@ export default function ModalGifts({show, onClose}) {
         setIsRegistered(false);
     };
 
+    const takePrize = () => {
+        if (!userStore.isLogged) {
+            setIsRegisterPage(true)
+        } else {
+            setIsRegisterPage(true);
+            setIsRegistered(true);
+            Cookies.set('receivedWelcomeGift', true, {expires: 2772})
+        }
+    }
 
-    const [isDesktop, setIsDesktop] = useState(false)
+    const finishRegistration = () => {
+        setIsRegistered(true)
+        Cookies.set('receivedWelcomeGift', true, {expires: 2772})
+    }
 
     const [finalPositionsDesktop, setFinalPositionsDesktop] = useState([]); // Активный квадрат
     const [finalPositionsMob, setFinalPositionsMob] = useState([]); // Активный квадрат
 
-    const checkIsDesktop = () => {
-        const width = window.innerWidth
-        const height = window.innerHeight
-        if (width / height <= 0.77) {
-            setIsDesktop(false)
-        } else {
-            setIsDesktop(true)
-        }
+    useEffect(() => {
         setFinalPositionsDesktop([
             {
                 x: 0.16182572614 * (1205 / 650) * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)) + 0.01538461538 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)),
@@ -117,7 +98,7 @@ export default function ModalGifts({show, onClose}) {
             },
             {
                 x: 0,
-                y: -(0.15384615384 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)) - 0.04061538462 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)))
+                y: -(0.11 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)) - 0.04061538462 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)))
             },
             {
                 x: -(0.16182572614 * (1205 / 650) * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205)) + 0.01538461538 * Math.min(window.innerHeight * 0.92, window.innerWidth * 0.8 * (650 / 1205))),
@@ -174,14 +155,7 @@ export default function ModalGifts({show, onClose}) {
                 y: -0.1077 * window.innerHeight - 0.02 * window.innerWidth - 0.05 * window.innerHeight
             }
         ])
-    }
-    useEffect(() => {
-        window.addEventListener("resize", checkIsDesktop);
-        // Call handler right away so state gets updated with initial window size
-        checkIsDesktop();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", checkIsDesktop);
-    })
+    }, [])
 
     const [activeSquare, setActiveSquare] = useState(null); // Активный квадрат
     const [isAnimating, setIsAnimating] = useState(false); // Флаг анимации
@@ -189,7 +163,7 @@ export default function ModalGifts({show, onClose}) {
 
     const squares = Array.from({length: 9}, (_, i) => `Приз ${i + 1}`); // Призы
 
-    const winningSquare = 0;
+    const winningSquare = 4;
 
     // Функция для запуска анимации
     const startAnimation = () => {
@@ -247,13 +221,39 @@ export default function ModalGifts({show, onClose}) {
     // Надо сделать динамически фотку (в зависимости от гендера + если хотим кастомную например под какую-то маркетинговую активность.) Сейчас для унисекса фотка: modalGiftsWomenNoGenderDesktop и modalGiftsWomenNoGenderMob, а для мужского: modalGiftsMenDesktop и modalGiftsMenMob
     const mainImgSrc = selectedGender === "M" ? "/img/Modals/modalGiftsMenDesktop.png" : "/img/Modals/modalGiftsWomenNoGenderDesktop.png"
     const mainImgSrcMob = selectedGender === "M" ? "/img/Modals/modalGiftsWomenNoGenderMob.png" : "/img/Modals/modalGiftsWomenNoGenderMob.png"
-    const bloggerName = "Кристины"
+    const bloggerName = ""
     const text = bloggerName
         ? `Чтобы шопинг с нами стал еще выгоднее, успейте забрать один из сегодняшних подарков от нас и ${bloggerName}:`
         : 'Чтобы шопинг с нами стал еще выгоднее, успейте забрать один из сегодняшних подарков:';
 
     // Начальное время (допустим 23 часа, 12 минут и 36 секунд)
-    const initialTime = 10 * 60 * 60 + 0 * 60 + 10; // Переводим в секунды
+    const giftPromoTimeSet = Cookies.get('giftPromoTimeSet');
+    const giftPromoTimeDuration = Cookies.get('giftPromoTimeDuration');
+
+    let initialTime;
+
+    if (giftPromoTimeSet && giftPromoTimeDuration) {
+        const startTime = parseInt(giftPromoTimeSet, 10);
+        const duration = parseInt(giftPromoTimeDuration, 10);
+        const currentTime = Date.now() / 1000; // Приводим к секундам
+
+        if (currentTime - startTime > duration) {
+            // Прошло больше времени
+            const randomTime = Math.floor(Math.random() * (29 * 60)) + (1 * 60 * 60 + 30 * 60); // от 1:30 до 1:59 в секундах
+            Cookies.set('giftPromoTimeSet', `${Math.floor(Date.now() / 1000)}`, {expires: 2772})
+            Cookies.set('giftPromoTimeDuration', `${randomTime}`, {expires: 2772})
+            initialTime = randomTime;
+        } else {
+            // Оставшееся время
+            initialTime = Math.floor(duration - (currentTime - startTime));
+        }
+    } else {
+        // Устанавливаем новые значения
+        const randomTime = Math.floor(Math.random() * (29 * 60)) + (1 * 60 * 60 + 30 * 60); // от 1:30 до 1:59 в секундах
+        Cookies.set('giftPromoTimeSet', `${Math.floor(Date.now() / 1000)}`, {expires: 2772})
+        Cookies.set('giftPromoTimeDuration', `${randomTime}`, {expires: 2772})
+        initialTime = randomTime;
+    }
 
     const [remainingTime, setRemainingTime] = useState(initialTime);
 
@@ -281,7 +281,7 @@ export default function ModalGifts({show, onClose}) {
 
     let x = 0; // Объявляем переменные вне блока if-else
     let y = 0;
-    if (isDesktop) {
+    if (desktopStore.isDesktop) {
         ({x, y} = finalPositionsDesktop[winningSquare] || {x: 0, y: 0});
     } else {
         ({x, y} = finalPositionsMob[winningSquare] || {x: 0, y: 0});
@@ -295,12 +295,27 @@ export default function ModalGifts({show, onClose}) {
     const [isRegisterPage, setIsRegisterPage] = useState(false)
     const [isRegistered, setIsRegistered] = useState(false)
 
-    const promotext = "Ваш промокод на 5'000₽ бонусов к первому заказу:"
-    const promocode = "kris_kJa8J"
-    const promotime = "Промокод действует 1 неделю: До 16.10.2024 23:59:59"
+    const promotext = "Ваш промокод на 2'000₽ бонусов к первому заказу:"
+    const promocode = "s23lit"
+    const calculatePromoEndTime = () => {
+        const now = new Date();
+        now.setDate(now.getDate() + 7); // Добавляем 7 дней
+        now.setHours(23, 59, 59, 999);  // Устанавливаем конец дня
+        return now.toLocaleString('ru-RU', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    };
+
+    const promoEndTime = calculatePromoEndTime();
+    const promotime = `Промокод действует 1 неделю: До ${promoEndTime}`;
     const promotimeMob = (
         <>
-            Промокод действует 1 неделю:<br/>До 16.10.2024 23:59:59
+            Промокод действует 1 неделю:<br/>До {promoEndTime}
         </>
     );
     const [isCopied, setIsCopied] = useState(false);
@@ -313,7 +328,7 @@ export default function ModalGifts({show, onClose}) {
         });
     };
 
-    return (<>{isDesktop ? (
+    return (<>{desktopStore.isDesktop ? (
             <>
                 {/* Модальное окно */}
                 {isModalVisible && (
@@ -471,8 +486,8 @@ export default function ModalGifts({show, onClose}) {
                                                 style={winningSquare === 7 ? {'--x': `${x}px`, '--y': `${y}px`} : {}}
                                             >
                                                 <div className={styles["text-block"]}>
-                                                    <div className={styles.price}>10%</div>
-                                                    <div className={styles.bonus}>скидка на первый заказ</div>
+                                                    <div className={styles.price}>700₽</div>
+                                                    <div className={styles.bonus}>бонусов к первому заказу</div>
                                                 </div>
                                             </div>
                                             <div
@@ -495,26 +510,32 @@ export default function ModalGifts({show, onClose}) {
                                         </div>
                                     </div>
 
-                                    <div className={`${isAnimatingFinished ? styles.text3Visible : styles.text3}`}>
-                                        Перейдите в Телеграм Бота и в два клика заберите ваш подарок
-                                    </div>
+                                    {/*<div className={`${isAnimatingFinished ? styles.text3Visible : styles.text3}`}>*/}
+                                    {/*    Перейдите в Телеграм Бота и в два клика заберите ваш подарок*/}
+                                    {/*</div>*/}
 
                                     <div className={styles.buttonContainer}>
                                         {isAnimatingFinished ? (
-                                            <div
-                                                className={`${styles.twoButtons} ${isAnimatingFinished ? styles.animate : ''}`}>
-                                                <button className={styles.buttonLeft}
-                                                        onClick={() => {
-                                                            setIsRegisterPage(true);
-                                                            setIsTelegramReceived(true);
-                                                        }}
-                                                >Перейти в телеграм
-                                                </button>
-                                                <button className={styles.buttonRight}
-                                                        onClick={() => setIsRegisterPage(true)}
-                                                >Нет телеграма
-                                                </button>
-                                            </div>
+                                            // <div
+                                            //     className={`${styles.twoButtons} ${isAnimatingFinished ? styles.animate : ''}`}>
+                                            //     <button className={styles.buttonLeft}
+                                            //             onClick={() => {
+                                            //                 setIsRegisterPage(true);
+                                            //                 setIsTelegramReceived(true);
+                                            //             }}
+                                            //     >Перейти в телеграм
+                                            //     </button>
+                                            //     <button className={styles.buttonRight}
+                                            //             onClick={() => setIsRegisterPage(true)}
+                                            //     >Нет телеграма
+                                            //     </button>
+                                            // </div>
+                                            <button
+                                                className={`${styles.subscribeButton}`}
+                                                onClick={takePrize}
+                                            >
+                                                Забрать подарок
+                                            </button>
                                         ) : (
                                             <button
                                                 className={`${styles.subscribeButton} ${isAnimating || remainingTime === 0 || isAnimatingFinished ? styles.disabledButton : ''}`}
@@ -629,12 +650,15 @@ export default function ModalGifts({show, onClose}) {
                                     </div>
 
                                     <div className={`${!isRegistered ? styles.buttonContainer : styles.invisible}`}>
-                                        <button
-                                            className={`${styles.subscribeButton}`}
-                                            onClick={() => setIsRegistered(true)}
-                                        >
-                                            Завершить регистрацию
-                                        </button>
+                                        <AuthModal
+                                            text={'Войдите или зарегистрируйтесь и получите ваш приз'}
+                                            extraTasks={finishRegistration}>
+                                            <button
+                                                className={`${styles.subscribeButton}`}
+                                            >
+                                                Завершить регистрацию
+                                            </button>
+                                        </AuthModal>
                                     </div>
                                 </div>
                             ) : (
@@ -661,7 +685,7 @@ export default function ModalGifts({show, onClose}) {
                                     </div>
 
                                     <div className={styles.text11}>
-                                        Спасибо за регистрацию!
+                                        Благодарим за участие!
                                     </div>
 
                                     <div className={styles.text22}>
@@ -728,12 +752,23 @@ export default function ModalGifts({show, onClose}) {
                                         <Image
                                             src="/img/Modals/cross.svg" // Укажите путь к изображению
                                             alt="Social Networks"
-                                            className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            // className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            className={`${stylesMob.cross}`}
                                             width={1920}  // Исходная ширина изображения
                                             height={1080} // Исходная высота изображения (пропорции будут сохраняться)
                                             onClick={closeModal}
                                         />
                                     </div>
+
+                                    {/*<div>*/}
+                                    {/*    <Image*/}
+                                    {/*        src="/img/Modals/giftLogo.svg" // Укажите путь к изображению*/}
+                                    {/*        alt="Social Networks"*/}
+                                    {/*        className={stylesMob.logo}*/}
+                                    {/*        width={1920}  // Исходная ширина изображения*/}
+                                    {/*        height={1080} // Исходная высота изображения (пропорции будут сохраняться)*/}
+                                    {/*    />*/}
+                                    {/*</div>*/}
 
                                     <div className={stylesMob.title}>
                                         Добро пожаловать на платформу Sellout!
@@ -856,8 +891,8 @@ export default function ModalGifts({show, onClose}) {
                                                 style={winningSquare === 7 ? {'--x': `${x}px`, '--y': `${y}px`} : {}}
                                             >
                                                 <div className={stylesMob["text-block"]}>
-                                                    <div className={stylesMob.price}>10%</div>
-                                                    <div className={stylesMob.bonus}>скидка на первый заказ</div>
+                                                    <div className={stylesMob.price}>700₽</div>
+                                                    <div className={stylesMob.bonus}>бонусов к первому заказу</div>
                                                 </div>
                                             </div>
                                             <div
@@ -881,27 +916,33 @@ export default function ModalGifts({show, onClose}) {
                                         </div>
                                     </div>
 
-                                    <div
-                                        className={`${isAnimatingFinished ? stylesMob.text3Visible : stylesMob.text3}`}>
-                                        Перейдите в Телеграм Бота и в два клика заберите ваш подарок
-                                    </div>
+                                    {/*<div*/}
+                                    {/*    className={`${isAnimatingFinished ? stylesMob.text3Visible : stylesMob.text3}`}>*/}
+                                    {/*    Перейдите в Телеграм Бота и в два клика заберите ваш подарок*/}
+                                    {/*</div>*/}
 
                                     <div className={stylesMob.buttonContainer}>
                                         {isAnimatingFinished ? (
-                                            <div
-                                                className={`${stylesMob.twoButtons} ${isAnimatingFinished ? stylesMob.animate : ''}`}>
-                                                <button className={stylesMob.buttonLeft}
-                                                        onClick={() => {
-                                                            setIsRegisterPage(true);
-                                                            setIsTelegramReceived(true);
-                                                        }}
-                                                >Перейти в телеграм
-                                                </button>
-                                                <button className={stylesMob.buttonRight}
-                                                        onClick={() => setIsRegisterPage(true)}
-                                                >Нет телеграма
-                                                </button>
-                                            </div>
+                                            // <div
+                                            //     className={`${stylesMob.twoButtons} ${isAnimatingFinished ? stylesMob.animate : ''}`}>
+                                            //     <button className={stylesMob.buttonLeft}
+                                            //             onClick={() => {
+                                            //                 setIsRegisterPage(true);
+                                            //                 setIsTelegramReceived(true);
+                                            //             }}
+                                            //     >Перейти в телеграм
+                                            //     </button>
+                                            //     <button className={stylesMob.buttonRight}
+                                            //             onClick={() => setIsRegisterPage(true)}
+                                            //     >Нет телеграма
+                                            //     </button>
+                                            // </div>
+                                            <button
+                                                className={`${stylesMob.subscribeButton}`}
+                                                onClick={takePrize}
+                                            >
+                                                Забрать подарок
+                                            </button>
                                         ) : (
                                             <button
                                                 className={`${stylesMob.subscribeButton} ${isAnimating || remainingTime === 0 || isAnimatingFinished ? stylesMob.disabledButton : ''}`}
@@ -927,7 +968,8 @@ export default function ModalGifts({show, onClose}) {
                                         <Image
                                             src="/img/Modals/cross.svg" // Укажите путь к изображению
                                             alt="Social Networks"
-                                            className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            // className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            className={`${stylesMob.cross}`}
                                             width={1920}  // Исходная ширина изображения
                                             height={1080} // Исходная высота изображения (пропорции будут сохраняться)
                                             onClick={closeModal}
@@ -1003,12 +1045,15 @@ export default function ModalGifts({show, onClose}) {
 
                                     <div
                                         className={`${!isRegistered ? stylesMob.buttonContainer : stylesMob.invisible}`}>
-                                        <button
-                                            className={`${stylesMob.subscribeButton}`}
-                                            onClick={() => setIsRegistered(true)}
-                                        >
-                                            Завершить регистрацию
-                                        </button>
+                                        <AuthModal
+                                            text={'Войдите или зарегистрируйтесь и получите ваш приз'}
+                                            extraTasks={finishRegistration}>
+                                            <button
+                                                className={`${stylesMob.subscribeButton}`}
+                                            >
+                                                Завершить регистрацию
+                                            </button>
+                                        </AuthModal>
                                     </div>
                                 </>
                             ) : (
@@ -1017,7 +1062,8 @@ export default function ModalGifts({show, onClose}) {
                                         <Image
                                             src="/img/Modals/cross.svg" // Укажите путь к изображению
                                             alt="Social Networks"
-                                            className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            // className={`${isAnimatingFinished ? stylesMob.cross : stylesMob.invisible}`}
+                                            className={`${stylesMob.cross}`}
                                             width={1920}  // Исходная ширина изображения
                                             height={1080} // Исходная высота изображения (пропорции будут сохраняться)
                                             onClick={closeModal}
@@ -1025,7 +1071,7 @@ export default function ModalGifts({show, onClose}) {
                                     </div>
 
                                     <div className={stylesMob.text111}>
-                                        Спасибо за регистрацию!
+                                        Благодарим за участие!
                                     </div>
 
                                     <div className={stylesMob.text22}>
@@ -1049,7 +1095,7 @@ export default function ModalGifts({show, onClose}) {
                                         Желаем самых стильных и выгодных покупок вместе с платформой Sellout!
                                     </div>
 
-                                    <div className={stylesMob.buttonContainer}>
+                                    <div className={stylesMob.buttonContainer} style={{marginBottom: '100px'}}>
                                         <button
                                             className={`${stylesMob.subscribeButton}`}
                                             onClick={handleCopy}

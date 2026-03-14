@@ -13,7 +13,7 @@ import {useRouter} from "next/router";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {Context} from "@/context/AppWrapper";
-import tempManJson from "./temp_main_men_desktop.json"
+import tempManJson from "./main_page_men.json"
 import arrowNew from "@/static/icons/arrowSlider.svg";
 import PromoBannerMainPageAbout from "@/components/shared/UI/PromoBannerMainPageAbout/PromoBannerMainPageAbout";
 import PromoBannerMainPageOffers from "@/components/shared/UI/PromoBannerMainPageOffers/PromoBannerMainPageOffers";
@@ -34,7 +34,6 @@ export const getServerSideProps = async (context) => {
     let restoredData = false;
 
     emptyData = tempManJson
-
     // Шаг 0: Создание списков allComplexBlockIds и allBlockIds
     const allComplexBlockIds = {};
     const allBlockIds = [];
@@ -71,8 +70,8 @@ export const getServerSideProps = async (context) => {
         arrangement = arrangementBase
 
         restoredData = true;
-    } else if ('mainPageMen-lastTimeUpdated' in cookies && Date.now() - parseInt(cookies['mainPageMen-lastTimeUpdated'], 10) > 1 * 60 * 1000) {
-        // Если уже не первый раз заходим, но прошло более 15 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
+    } else if ('mainPageMen-lastTimeUpdated' in cookies && Date.now() - parseInt(cookies['mainPageMen-lastTimeUpdated'], 10) > 10 * 60 * 1000) {
+        // Если уже не первый раз заходим, но прошло более 10 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
         restoredData = true;
 
         // 1. Рандомизация расстановки
@@ -113,9 +112,8 @@ export const getServerSideProps = async (context) => {
 
     // Преобразуем объект в строку cookie
     const cookieString = cookiesToString(cookies);
-
-    // let data = await fetchMainPage2(cookieString, selected_gender)
-    let data = tempManJson;
+    let data = await fetchMainPage2(cookieString, selected_gender)
+    // let data = tempManJson;
 
     return {props: {data, arrangement, restoredData}};
 }
@@ -150,7 +148,8 @@ const Men = ({data, arrangement, restoredData}) => {
         };
     }, [])
 
-    const [arrangementFinal, setArrangementFinal] = useState({})
+    const [arrangementFinal, setArrangementFinal] = useState({});
+
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
         const savedGender = "M";
@@ -194,10 +193,11 @@ const Men = ({data, arrangement, restoredData}) => {
         }
 
         // Теперь необходимо восстановить корректную расстановку внутри data согласно нашей расстановке (новая или прежняя - в любом случае будет уже лежать в локал хранилище)
-        setArrangementFinal(JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
+        const storageArr = JSON.parse(localStorage.getItem('mainPageMen-Arrangement'));
+        setArrangementFinal(storageArr);
 
-        const rearrangeData = (data, arrangement) => {
-            return data.map(item => {
+        const rearrangeData = (dataToArrange, arrangement) => {
+            return dataToArrange.map(item => {
                 // Проверяем, есть ли blockId и если он есть, то ищем в расстановке для этого blockId
                 if (item.blockId && arrangement[item.blockId]) {
                     const blockArrangement = arrangement[item.blockId];
@@ -236,7 +236,10 @@ const Men = ({data, arrangement, restoredData}) => {
             });
         };
 
-        data = rearrangeData(data, JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
+        const dataNew = rearrangeData(structuredClone(data), JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
+        if (dataNew) {
+            setContent(dataNew)
+        }
     }, []);
 
 
