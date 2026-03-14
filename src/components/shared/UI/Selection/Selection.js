@@ -51,7 +51,7 @@ const Selection = forwardRef(({el, dataIndex="none"}, ref) => {
             <ProductCard
                 product={product}
                 key={product.id}
-                bigCard={el.bigCard}
+                bigCard={el.bigCard && !desktopStore.isDesktop}
             />
         )
     })

@@ -181,7 +181,7 @@ const PopularBrandsMainPage = forwardRef(({el, gender, arrangement, dataIndex = 
                 <ProductCard
                     product={product}
                     key={product.id}
-                    bigCard={el.bigCard}
+                    bigCard={el.bigCard && !desktopStore.isDesktop}
                 />
             );
         });

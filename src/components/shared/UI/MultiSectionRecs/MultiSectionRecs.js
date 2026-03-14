@@ -247,7 +247,7 @@ const MultiSectionRecs = forwardRef(({el, gender, arrangement, dataIndex="none"}
                 <ProductCard
                     product={product}
                     key={product.id}
-                    bigCard={el.bigCard}
+                    bigCard={el.bigCard && !desktopStore.isDesktop}
                 />
             );
         });

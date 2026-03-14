@@ -230,7 +230,7 @@ const MultiSectionImages = forwardRef(({el, gender, arrangement, heightImage = "
                 <ProductCard
                     product={product}
                     key={product.id}
-                    bigCard={el.bigCard}
+                    bigCard={el.bigCard && !desktopStore.isDesktop}
                 />
             );
         });
