@@ -26,7 +26,6 @@ const Token = () => {
         const {query} = router
         try {
             const res = await changePass(query.uidb64, query.token, newPass1)
-            console.log(res)
             setWrong(false)
             const cookieCart = Cookies.get('cart')
             let cartFromBack

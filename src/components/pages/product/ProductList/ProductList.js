@@ -13,16 +13,26 @@ import {desktopStore} from "@/store/DesktopStore";
 import PromoBannerProductsPageGiftMobile
     from "@/components/shared/UI/PromoBannerProductsPageGiftMobile/PromoBannerProductsPageGiftMobile";
 import PromoBannerProductsPageRef from "@/components/shared/UI/PromoBannerProductsPageRef/PromoBannerProductsPageRef";
+import Cookies from "js-cookie";
+import PromoBannerProductsPageAnyProduct
+    from "@/components/shared/UI/PromoBannerProductsPageAnyProduct/PromoBannerProductsPageAnyProduct";
 
-const ProductList = ({products, isAdmin, showPromos}) => {
+const ProductList = ({products, isAdmin, showPromos=false}) => {
     const calculateCardsPerRow = () => {
         const width = window.innerWidth;
         if (width < 650) return 2; // 2 карточки в ряду
         if (width < 1210) return 3; // 3 карточки в ряду
-        if (width < 1800) return 4; // 4 карточки в ряду
+        if (width < 1515) return 4; // 4 карточки в ряду
+        if (width < 2000) return Math.floor(0.94 * width / 356);
         if (width < 2500) return Math.floor(0.8 * width / 356);
         return Math.floor(0.7 * width / 356); // 4 карточки в ряду
     };
+
+    const [receivedWelcomeGift, setReceivedWelcomeGift] = useState('')
+
+    useEffect(() => {
+        setReceivedWelcomeGift(Cookies.get('receivedWelcomeGift'))
+    }, [])
 
     const modifiedProductsPage = () => {
         const result = [];
@@ -38,21 +48,44 @@ const ProductList = ({products, isAdmin, showPromos}) => {
             if (showPromos) {
                 if (desktopStore.isDesktop) {
                     if (row === 2 && (index + 1) % cardsPerRow === 0) {
-                        result.push(<PromoBannerProductsPageGiftAndRefDesktop/>);
+                        result.push(<PromoBannerProductsPageAnyProduct/>);
                     } else if (row === 4 && (index + 1) % cardsPerRow === 0) {
                         result.push(<PromoBannerProductsPageAboutAndGuarantee/>);
-                    } else if (row === 7 && (index + 1) % cardsPerRow === 0) {
+                    } else if (row === 6 && (index + 1) % cardsPerRow === 0) {
+                        if (receivedWelcomeGift) {
+                            result.push(<PromoBannerProductsPageRef/>);
+                        } else {
+                            result.push(<PromoBannerProductsPageGiftAndRefDesktop/>);
+                        }
+                    } else if (row === 9 && (index + 1) % cardsPerRow === 0) {
                         result.push(<PromoBannerProductsPageSocial/>);
                     }
                 } else {
                     if (row === 2 && (index + 1) % cardsPerRow === 0) {
-                        result.push(<PromoBannerProductsPageGiftMobile/>);
+                        result.push(<PromoBannerProductsPageAnyProduct/>);
                     } else if (row === 4 && (index + 1) % cardsPerRow === 0) {
-                        result.push(<PromoBannerProductsPageAboutAndGuarantee/>);
+                        if (receivedWelcomeGift) {
+                            result.push(<PromoBannerProductsPageAboutAndGuarantee/>);
+                        } else {
+                            result.push(<PromoBannerProductsPageGiftMobile/>);
+                        }
                     } else if (row === 7 && (index + 1) % cardsPerRow === 0) {
-                        result.push(<PromoBannerProductsPageRef/>);
+                        if (receivedWelcomeGift) {
+                            result.push(<PromoBannerProductsPageRef/>);
+                        } else {
+                            result.push(<PromoBannerProductsPageAboutAndGuarantee/>);
+                        }
                     } else if (row === 10 && (index + 1) % cardsPerRow === 0) {
-                        result.push(<PromoBannerProductsPageSocial/>);
+                        if (receivedWelcomeGift) {
+                            result.push(<PromoBannerProductsPageSocial/>);
+                        } else {
+                            result.push(<PromoBannerProductsPageRef/>);
+                        }
+                    } else if (row === 14 && (index + 1) % cardsPerRow === 0) {
+                        if (receivedWelcomeGift) {
+                        } else {
+                            result.push(<PromoBannerProductsPageSocial/>);
+                        }
                     }
                 }
             }

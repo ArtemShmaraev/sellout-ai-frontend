@@ -31,7 +31,7 @@ import {addToWishlist, removeFromWishlist} from "@/http/wishlistAPI";
 import {parse} from "cookie";
 import RenderBtns from "@/components/pages/oneProduct/RenderBtns/RenderBtns";
 import {addToCart} from "@/http/cartApi";
-import {addLastSeen, fetchLastSeen2, fetchLoyaltyInfo, fetchUserInfo} from "@/http/userApi";
+import {addLastSeen, fetchLastSeen2, fetchUserInfo} from "@/http/userApi";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import Compilation from "@/components/shared/Compilation/Compilation";
@@ -114,11 +114,11 @@ import imgUs11Mob from "@/static/img/Гарантии 8 mob.png";
 import arrow from "@/static/icons/chevron-right-grey.svg";
 import ProductPageMobileInfoModal from "@/components/shared/ProductPageMobileInfoModal/ProductPageMobileInfoModal";
 import ContactModal from "@/components/shared/ContactModal/ContactModal";
-import ModalRef from "@/components/shared/ModalRef/ModalRef";
-import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 import similarBrands from '@/static/jsons/similarBrands.json'
 import similarLines from '@/static/jsons/similarLines.json'
 import similarCategories from '@/static/jsons/similarCategories.json'
+import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '');
@@ -164,143 +164,8 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
     const [compilations, setCompilations] = useState([])
     const [lastSeen, setLastSeen] = useState([])
-    const loadingProductsData = {
-        "results": [
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            },
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            },
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            },
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            },
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            },
-            {
-                "id": 0,
-                "in_wishlist": false,
-                "price": {},
-                "model": "",
-                "colorway": "",
-                "slug": "",
-                "is_collab": false,
-                "isLoadingCard": true,
-                "collab": {},
-                "brands": [],
-                "bucket_link": [
-                    {
-                        "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
-                    }
-                ],
-                "is_sale": false,
-                "available_sizes": {
-                    "sizes": [],
-                    "filter_logo": ""
-                }
-            }
-        ]
-    }
-    const [recProducts, setRecProducts] = useState(loadingProductsData);
+    const [recProducts, setRecProducts] = useState([]);
+    const [isLoadingRecProducts, setIsLoadingRecProducts] = useState(false);
 
     const {productStore, userStore, cartStore, desktopStore} = useContext(Context)
 
@@ -311,6 +176,8 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             productStore.setSizeChosen(prices[0])
         }
     }, [router.asPath])
+
+    const observerRef = useRef(null);
 
     const generateQueryForRecommendations = (productFull) => {
         const query = {};
@@ -341,7 +208,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
             if (outcome === 'variant1') {
                 const lines = [...similarLines[currentLine], currentLine];
-                query.line = Array.from(new Set(getRandomElements(lines, 5 + Math.floor(Math.random() * 3))));
+                query.line = Array.from(new Set(getRandomElements(lines, 5 + Math.floor(Math.random() * 7))));
                 query.category = ['sneakers'];
             } else if (outcome === 'variant2') {
                 const categoryName = productFull.categories?.[productFull.categories.length - 1]?.eng_name;
@@ -357,7 +224,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                     const brandOutcome = getProbabilityOutcome([['brandSet', 80], ['randomBrands', 20]]);
                     if (brandOutcome === 'brandSet') {
                         const lines = [...similarBrands[brandName], brandName];
-                        query.line = Array.from(new Set(getRandomElements(lines, 4 + Math.floor(Math.random() * 4))));
+                        query.line = Array.from(new Set(getRandomElements(lines, 7 + Math.floor(Math.random() * 7))));
                     } else {
                         query.line = getRandomElements(Object.keys(similarBrands), 5);
                     }
@@ -380,7 +247,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                 const categoryName = productFull.categories?.[productFull.categories.length - 1]?.eng_name;
                 if (categoryName && similarCategories[categoryName]) {
                     const extendedCategories = similarCategories[categoryName].concat(Array(5).fill(categoryName));
-                    query.category = Array.from(new Set(getRandomElements(extendedCategories, 3 + Math.floor(Math.random() * 8))));
+                    query.category = Array.from(new Set(getRandomElements(extendedCategories, 5 + Math.floor(Math.random() * 8))));
                 } else {
                     query.category = [categoryName];
                 }
@@ -390,9 +257,9 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                     const brandOutcome = getProbabilityOutcome([['brandSet', 80], ['randomBrands', 20]]);
                     if (brandOutcome === 'brandSet') {
                         const lines = [...similarBrands[brandName], brandName];
-                        query.line = Array.from(new Set(getRandomElements(lines, 4 + Math.floor(Math.random() * 4))));
+                        query.line = Array.from(new Set(getRandomElements(lines, 7 + Math.floor(Math.random() * 7))));
                     } else {
-                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                        query.line = getRandomElements(Object.keys(similarBrands), 7);
                     }
                 } else {
                     // Если brandName отсутствует или его нет в similarBrands
@@ -400,7 +267,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                     if (brandFallbackOutcome === 'currentBrand' && brandName) {
                         query.line = [brandName];
                     } else {
-                        query.line = getRandomElements(Object.keys(similarBrands), 5);
+                        query.line = getRandomElements(Object.keys(similarBrands), 7);
                     }
                 }
             } else if (outcome === 'randomPage') {
@@ -408,9 +275,393 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             }
         }
 
-        console.log(query)
-
         return query;
+    };
+
+    const fetchMoreProducts = async () => {
+        const url = generateQueryForRecommendations(productFull);
+        const gender = Cookies.get('selected_gender');
+        const token = Cookies.get('access_token')
+
+        if (gender && !("gender" in url)) {
+            const loadingProductsData = desktopStore.isDesktop ? [
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ] : [
+                {
+                    "id": -1,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": -2,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ]
+            setRecProducts((prev) => [...prev, ...loadingProductsData]);
+            fetchProductsPage({...url, gender}, token).then(res => {
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
+                setRecProducts((prev) => {
+                    // Удаляем заглушечные данные и добавляем новые
+                    const filteredProducts = prev.filter(product => !loadingProductsData.includes(product));
+                    return [...filteredProducts, ...shuffledProducts];
+                });
+            })
+        } else {
+            const loadingProductsData = desktopStore.isDesktop ? [
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ] : [
+                {
+                    "id": -1,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": -2,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ]
+            setRecProducts((prev) => [...prev, ...loadingProductsData]);
+            fetchProductsPage(url, token).then(res => {
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
+                setRecProducts((prev) => {
+                    // Удаляем заглушечные данные и добавляем новые
+                    const filteredProducts = prev.filter(product => !loadingProductsData.includes(product));
+                    return [...filteredProducts, ...shuffledProducts];
+                });
+            });
+        }
     };
 
     useEffect(() => {
@@ -436,15 +687,402 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
         const url = generateQueryForRecommendations(productFull); // Формируем query
         const gender = Cookies.get('selected_gender');
         if (gender && !("gender" in url)) {
+            const loadingProductsData = desktopStore.isDesktop ? [
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ] : [
+                {
+                    "id": -1,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": -2,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ]
+            setRecProducts(loadingProductsData);
             fetchProductsPage({...url, gender}, token).then(res => {
-                setRecProducts(res)
+                // setRecProducts(res.results)
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
+                setRecProducts(shuffledProducts);
             })
         } else {
+            const loadingProductsData = desktopStore.isDesktop ? [
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": 0,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ] : [
+                {
+                    "id": -1,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                },
+                {
+                    "id": -2,
+                    "in_wishlist": false,
+                    "price": {},
+                    "model": "",
+                    "colorway": "",
+                    "slug": "",
+                    "is_collab": false,
+                    "isLoadingCard": true,
+                    "collab": {},
+                    "brands": [],
+                    "bucket_link": [
+                        {
+                            "url": "https://cdn.poizon.com/pro-img/origin-img/20220731/3172a4d75f3640359af53986920d284b.jpg"
+                        }
+                    ],
+                    "is_sale": false,
+                    "available_sizes": {
+                        "sizes": [],
+                        "filter_logo": ""
+                    }
+                }
+            ]
+            setRecProducts(loadingProductsData);
             fetchProductsPage(url, token).then(res => {
-                setRecProducts(res)
-            })
+                // setRecProducts(res.results)
+                const shuffledProducts = desktopStore.isDesktop ? res.results.sort(() => Math.random() - 0.5) : res.results.sort(() => Math.random() - 0.5).slice(0, 14);
+                setRecProducts(shuffledProducts);
+            });
         }
     }, [router.asPath])
+
+    useEffect(() => {
+        // Обзервер для отслеживания последнего элемента
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !isLoadingRecProducts) {
+                    setIsLoadingRecProducts(true);
+                    fetchMoreProducts().finally(() => {
+                        setIsLoadingRecProducts(false);
+                    });
+                }
+            },
+            {threshold: 0.5}
+        );
+
+        if (observerRef.current) {
+            observer.observe(observerRef.current);
+        }
+
+        return () => {
+            if (observerRef.current) observer.unobserve(observerRef.current);
+        };
+    }, [fetchMoreProducts, isLoadingRecProducts]);
 
 
     useEffect(() => {
@@ -658,8 +1296,15 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
     }
     const hasOneTable = () => {
         let bool = false
+        console.log(product.size_table_platform)
+        console.log(Array.isArray(product.size_table_platform))
         if (Array.isArray(product.size_table_platform)) {
-            bool = product.size_table_platform.length > 0
+            bool = product.size_table_platform.some(
+                (item) =>
+                    item.table && // Убедимся, что ключ `table` существует
+                    typeof item.table === 'object' && // Проверяем, что `table` — объект
+                    Object.keys(item.table).length > 0 // Убедимся, что объект не пустой
+            );
         } else {
             Object.values(product.size_table_platform.tables).forEach(table => {
                 if (Object.keys(table).length > 0) {
@@ -702,6 +1347,12 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
             setFadeOutInvisible(true);
         }
     }, [router.asPath])
+
+    const [receivedWelcomeGift, setReceivedWelcomeGift] = useState('')
+
+    useEffect(() => {
+        setReceivedWelcomeGift(Cookies.get('receivedWelcomeGift'))
+    }, [])
 
 
     // useEffect(() => {
@@ -917,7 +1568,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                 <meta name={'description'}
                       content={`Оригинал ${brandsDisplay()} ${product.model} ${product.colorway} можно заказать прямо сейчас. Выгодные цены и бонусы ждут вас. Сделайте свой шаг в мир моды.`}/>
             </Head>
-            <InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>
+            {/*<InvisibleCaptcha isValidToken={product.is_valid_captcha_token}/>*/}
             <div className={s.container}>
                 {notification && (
                     <Notification
@@ -1016,7 +1667,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                             <>
                                 {
                                     prices.length > 0 &&
-                                    <>
+                                    <div style={{marginBottom: '20px'}}>
                                         <span itemProp="offers" itemScope itemType="https://schema.org/Offer"
                                               className={(product.price.start_price > product.price.final_price) ? s.price_sale : s.price_default}
                                         >
@@ -1075,7 +1726,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
                                             </div>
                                         }
-                                    </>
+                                    </div>
                                 }
                                 {
                                     prices.length > 0 &&
@@ -1083,7 +1734,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                         {
                                             hasOneTable() &&
                                             <SizeTable tables={product.size_table_platform}
-                                                       photo={product.bucket_link[0].url}/>
+                                                       photo={product.bucket_link[0].url} key={product.id}/>
                                         }
                                         {/*<SizeHelp model={`${brandsDisplay()} ${product.model}`}*/}
                                         {/*          imgSrc={product.bucket_link[0].url} manySizes={product.has_many_sizes}*/}
@@ -1271,11 +1922,13 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                                                                                target={'_blank'}>FAQ</Link>
                                     </h5>
                                 </TextModalDesktopProductPage>
-                                <hr style={{marginTop: '10px'}}/>
-                                <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
-                                    <span className={s.promoText}>До 5000₽ в подарок</span>
-                                    <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
-                                </div>
+                                <hr style={{marginTop: '10px', color: '#51031D', opacity: '1'}}/>
+                                {!receivedWelcomeGift &&
+                                    <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
+                                        <span className={s.promoText}>До 5000₽ в подарок</span>
+                                        <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
+                                    </div>
+                                }
                                 <button
                                     className={s.how_btn}
                                     onClick={toggleHow}
@@ -1519,7 +2172,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                 </div>
                                 {
                                     prices.length > 0 &&
-                                    <>
+                                    <div style={{marginBottom: '30px'}}>
                                         {(product.price.start_price > product.price.final_price) &&
                                             <div className={s.price_default}
                                                  style={{textDecoration: 'line-through', fontSize: '17px'}}>
@@ -1574,7 +2227,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
 
                                             </div>
                                         }
-                                    </>
+                                    </div>
                                 }
                                 {
                                     prices.length > 0 &&
@@ -1765,11 +2418,13 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                                                                                target={'_blank'}>FAQ</Link>
                                     </h5>
                                 </TextModalDesktopProductPage>
-                                <hr className={'my-2'}/>
-                                <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
-                                    <span className={s.promoText}>До 5000₽ в подарок</span>
-                                    <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
-                                </div>
+                                <hr className={'my-2'} style={{color: '#51031D', opacity: '1'}}/>
+                                {!receivedWelcomeGift &&
+                                    <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
+                                        <span className={s.promoText}>До 5000₽ в подарок</span>
+                                        <button className={s.promoButton} onClick={toggleGifts}>Получить</button>
+                                    </div>
+                                }
                                 <button
                                     className={s.how_btn}
                                     onClick={toggleHow}
@@ -2306,10 +2961,22 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                             поэтому мы не способны предложить вам возврат товара после подтверждения
                                             заказа
                                             на
-                                            все позиции. Однако есть ряд моделей, которые вскоре будут подлежать
+                                            все позиции.
+                                        </p>
+                                        <p className={s.text} style={{color: '#057e48'}}>
+                                            Если вам необходимо посмотреть товар вживую, померить, определиться с
+                                            размером и так далее, обязательно <span onClick={toggleContact} style={{
+                                            textDecoration: 'underline',
+                                            cursor: 'pointer'
+                                        }}>напишите нам</span> и мы оперативно найдем решения: подберем индивидуально
+                                            для вас другие предложения с возможностью примерки/возврата, подскажем по
+                                            размеру или где можно посмотреть товар вживую :)
+                                        </p>
+                                        <p className={s.text}>
+                                            Вскоре некоторые позиции будут подлежать
                                             возврату, в
                                             том
-                                            числе даже некоторые эксклюзивные коллекции. Они будут помечены
+                                            числе даже эксклюзивные коллекции. Они будут помечены
                                             значком <Image src={returnImg} alt={''}/>. Обращаем внимание, что по
                                             правилам
                                             зарубежных продавцов, возврат
@@ -2331,7 +2998,6 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                             Мы
                                             постоянно стремимся увеличить ассортимент товаров, подлежащих возврату,
                                             чтобы ваши покупки с нами стали еще более удобными!
-
                                         </p>
                                         <div className={s.faq_block}>
                                             <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
@@ -3279,28 +3945,31 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                 {!desktopStore.isDesktop && compilations.map(el =>
                     <>
                         <Compilation arr={el.products} title={'Похожие товары'} paddings={'regular'}
-                                     rows={el.products.length > 5 ? 2 : 1}/>
+                                     rows={1} key={product.id}/>
                     </>
                 )}
                 {!desktopStore.isDesktop && lastSeen.length > 0 &&
                     <>
-                        <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
+                        <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}
+                                     key={product.id}/>
                     </>
                 }
-                {!desktopStore.isDesktop && recProducts.results && recProducts.results.length > 0 &&
+                {!desktopStore.isDesktop && recProducts && recProducts.length > 0 &&
                     <div className={'custom_cont'}>
                         <h3 className={s.similar_title}>Рекомендации</h3>
-                        <ProductList products={recProducts.results} isAdmin={false}/>
+                        <ProductList products={recProducts} isAdmin={false} key={product.id}/>
+                        <div ref={observerRef}/>
                     </div>
                 }
                 {desktopStore.isDesktop && compilations.map(el =>
-                    <Compilation arr={el.products} title={el.name} paddings={'regular'}/>
+                    <Compilation arr={el.products} title={el.name} paddings={'regular'} key={product.id}/>
                 )}
-                {desktopStore.isDesktop && lastSeen.length > 0 &&
-                    <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'}/>
+                {desktopStore.isDesktop && recProducts && recProducts.length > 0 &&
+                    <Compilation arr={recProducts} title={'Рекомендации'} paddings={'regular'}
+                                 resetScrollToBeginning={true}/>
                 }
-                {desktopStore.isDesktop && recProducts.results && recProducts.results.length > 0 &&
-                    <Compilation arr={recProducts.results} title={'Рекомендации'} paddings={'regular'}/>
+                {desktopStore.isDesktop && lastSeen.length > 0 &&
+                    <Compilation arr={lastSeen} title={'Ранее просмотренные'} paddings={'regular'} key={product.id}/>
                 }
             </div>
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>

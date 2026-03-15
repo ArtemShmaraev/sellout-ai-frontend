@@ -68,6 +68,15 @@
     animation: scroll 30s linear infinite; /* Добавление анимации прокрутки */
 }
 
+.promoText2 {
+    color: white; /* Цвет текста */
+    font-size: 14px; /* Размер шрифта */
+    font-family: inherit;
+    display: flex; /* Чтобы текст не переносился */
+    align-items: center;
+    animation: scroll 30s linear infinite; /* Добавление анимации прокрутки */
+}
+
 /* Анимация прокрутки */
 @keyframes scroll {
     from {

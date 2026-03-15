@@ -54,7 +54,7 @@
 .contentBlock {
     width: 77%;
 }
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .close_block {
         margin-right: 10vw;
     }

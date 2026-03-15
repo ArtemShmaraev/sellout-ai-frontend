@@ -135,7 +135,7 @@ export default function ModalReferral({show, onClose}) {
                                                 </Link>
                                             ) : (
                                                 <AuthModal
-                                                    text={'Войдите или зарегистрируйтесь и получите доступ к реферральной программе'}
+                                                    text={'Войдите или зарегистрируйтесь и получите доступ к реферальной программе'}
                                                     urlToGo={'/account/referral'} extraTasks={closeModal}>
                                                     <button className={styles.subscribeButton}>
                                                         Изучить условия
@@ -235,7 +235,7 @@ export default function ModalReferral({show, onClose}) {
                                             </Link>
                                         ) : (
                                             <AuthModal
-                                                text={'Войдите или зарегистрируйтесь и получите доступ к реферральной программе'}
+                                                text={'Войдите или зарегистрируйтесь и получите доступ к реферальной программе'}
                                                 urlToGo={'/account/referral'} extraTasks={closeModal} style={{justifyContent: 'center'}}>
                                                 <button className={stylesMob.button}>
                                                     Изучить условия

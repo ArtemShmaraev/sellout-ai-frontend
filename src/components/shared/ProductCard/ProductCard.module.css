@@ -8,6 +8,16 @@
     text-decoration: none;
 }
 
+.bigCard {
+    width: calc(min(60vw, 260px));
+    height: calc(105px + min(60vw, 260px) + 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .empty_card {
     width: 200px;
     height: 350px;
@@ -105,6 +115,15 @@
     justify-content: flex-start;
     margin-top: 5px;
     min-height: 115px;
+    z-index: -1;
+}
+
+.text_block_big_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 5px;
+    min-height: 103px;
     z-index: -1;
 }
 
@@ -381,6 +400,11 @@
         min-height: 103px;
     }
 
+    .text_block_big_card {
+        /*height: 30%;*/
+        min-height: 103px;
+    }
+
     .img {
         height: 85px;
         width: 120px;
@@ -424,4 +448,11 @@
         margin-top: -5px;
     }
 
+}
+
+@media (max-width: 410px) {
+    .card {
+        width: 161px;
+        height: 265px;
+    }
 }

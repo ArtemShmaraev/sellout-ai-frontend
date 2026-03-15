@@ -13,7 +13,7 @@ import {useRouter} from "next/router";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
 import {Context} from "@/context/AppWrapper";
-import tempManJson from "./temp_main_men_desktop.json"
+import tempManJson from "./main_page_men.json"
 import arrowNew from "@/static/icons/arrowSlider.svg";
 import PromoBannerMainPageAbout from "@/components/shared/UI/PromoBannerMainPageAbout/PromoBannerMainPageAbout";
 import PromoBannerMainPageOffers from "@/components/shared/UI/PromoBannerMainPageOffers/PromoBannerMainPageOffers";
@@ -22,6 +22,7 @@ import PopularBrandsMainPage from "@/components/shared/UI/PopularBrandsMainPage/
 import MultiSectionRecs from "@/components/shared/UI/MultiSectionRecs/MultiSectionRecs";
 import MultiSectionImages from "@/components/shared/UI/MultiSectionImages/MultiSectionImages";
 import Selection from "@/components/shared/UI/Selection/Selection";
+import logo from "@/static/img/sellout_logo_light_blood.svg";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -66,13 +67,44 @@ export const getServerSideProps = async (context) => {
         }
     });
 
+    const checkCookiesExist = (Cookies_, data_) => {
+        // Базовые куки
+        const requiredCookies = [
+            "mpM-Pos",
+            "mpM-blocks",
+            "mpM-topBlock",
+            "mpM-updTime"
+        ];
+
+        // Добавляем куки из `data`
+        data_.forEach(item => {
+            if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
+                const blockId = item.blockId;
+
+                const cookiesToCheck = item.type === "selection" ? [
+                    `${blockId}-PrPos`
+                ] : [
+                    `${blockId}-IndArr`,
+                    `${blockId}-SecPos`,
+                    `${blockId}-PrPos`,
+                    `${blockId}-Ind`
+                ];
+
+                requiredCookies.push(...cookiesToCheck);
+            }
+        });
+
+        // Проверка всех кук
+        return requiredCookies.every(cookieName => Cookies_[cookieName] !== undefined);
+    };
+
     // Шаг 1: Если первая загрузка страницы (куки все еще пустые и нет расстановки), создаем базовую расстановку.
-    if (!('mainPageMen-lastTimeUpdated' in cookies) || !cookies['mainPageMen-lastTimeUpdated']) {
+    if (!('mpM-updTime' in cookies) || !cookies['mpM-updTime'] || !checkCookiesExist(cookies, emptyData)) {
         arrangement = arrangementBase
 
         restoredData = true;
-    } else if ('mainPageMen-lastTimeUpdated' in cookies && Date.now() - parseInt(cookies['mainPageMen-lastTimeUpdated'], 10) > 1 * 60 * 1000) {
-        // Если уже не первый раз заходим, но прошло более 15 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
+    } else if ('mpM-updTime' in cookies && Date.now() - parseInt(cookies['mpM-updTime'], 10) > 10 * 60 * 1000) {
+        // Если уже не первый раз заходим, но прошло более 10 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
         restoredData = true;
 
         // 1. Рандомизация расстановки
@@ -100,7 +132,7 @@ export const getServerSideProps = async (context) => {
         Object.keys(arrangement).forEach(blockId => {
             const block = arrangement[blockId];
 
-            cookies[`multiSectionedBlock-${blockId}-SelectedSection`] = block[0];
+            cookies[`${blockId}-Ind`] = block[0];
         });
     }
 
@@ -113,16 +145,15 @@ export const getServerSideProps = async (context) => {
 
     // Преобразуем объект в строку cookie
     const cookieString = cookiesToString(cookies);
-
-    // let data = await fetchMainPage2(cookieString, selected_gender)
-    let data = tempManJson;
+    let data = await fetchMainPage2(cookieString, selected_gender)
+    // let data = tempManJson;
 
     return {props: {data, arrangement, restoredData}};
 }
 const Men = ({data, arrangement, restoredData}) => {
-    // const {desktopStore} = useContext(Context)
     const router = useRouter()
-    const [content, setContent] = useState(data)
+    const [currentData, setCurrentData] = useState(data)
+    const [content, setContent] = useState(data.slice(0, 5))
 
     const {desktopStore} = useContext(Context)
     const [viewVideo, setViewVideo] = useState(false)
@@ -150,23 +181,28 @@ const Men = ({data, arrangement, restoredData}) => {
         };
     }, [])
 
-    const [arrangementFinal, setArrangementFinal] = useState({})
+    const [arrangementFinal, setArrangementFinal] = useState({});
+
+    const blockNames = data
+        .filter((el) => !['ОСНОВНЫЕ КАТЕГОРИИ', 'ДОП КАТЕГОРИИ'].includes(el.blockName))
+        .map((el) => el.blockName);
+
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "M", {expires: 2772})
-        const savedGender = "M";
-        // setSelectedGender(savedGender);
 
         // Check if the user visited the page within the last 10 minutes
-        if (!Cookies.get('index_page')) {
-            const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
-            Cookies.set('index_page', 1, {expires: tenMinutes});
-        }
+        // if (!Cookies.get('index_page')) {
+        //     const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
+        //     Cookies.set('index_page', 1, {expires: tenMinutes});
+        // }
 
-        Cookies.set('mainPageMen-lastTimeUpdated', Date.now(), {expires: 2772})
+        Cookies.set('mpM-updTime', Date.now(), {expires: 2772})
         if (restoredData) {
-            // Если обновили данные (первый заход или более 15 минут прошло), то сбрасываем на ноль все позиции, сохраняем новую расстановку
-            Cookies.set("homeScrollPositionMen", 0, {expires: 0.25});
-            localStorage.setItem('mainPageMen-Arrangement', JSON.stringify(arrangement));
+            // Если обновили данные (первый заход или более 10 минут прошло), то сбрасываем на ноль все позиции, сохраняем новую расстановку
+            Cookies.set("mpM-Pos", JSON.stringify({}), {expires: 2772});
+            Cookies.set("mpM-blocks", 2, {expires: 2772});
+            Cookies.set("mpM-topBlock", encodeURIComponent('ПОПУЛЯРНЫЕ БРЕНДЫ'), {expires: 2772});
+            localStorage.setItem('mpM-arr', JSON.stringify(arrangement));
 
             data.forEach(item => {
                 if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
@@ -174,11 +210,11 @@ const Men = ({data, arrangement, restoredData}) => {
 
                     // Формируем имена куков
                     const cookiesToCheck = item.type === "selection" ? [
-                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                        `${blockId}-PrPos`
                     ] : [
-                        `multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`,
-                        `multiSectionedBlock-${blockId}-SectionsContainerPosition`,
-                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                        `${blockId}-IndArr`,
+                        `${blockId}-SecPos`,
+                        `${blockId}-PrPos`
                     ];
 
                     // Проверяем наличие каждого кука и устанавливаем значение 0
@@ -187,14 +223,15 @@ const Men = ({data, arrangement, restoredData}) => {
                     });
 
                     if (item.type !== "selection") {
-                        Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][0], {expires: 0.25});
+                        Cookies.set(`${blockId}-Ind`, arrangement[blockId][0], {expires: 0.25});
                     }
                 }
             })
         }
 
         // Теперь необходимо восстановить корректную расстановку внутри data согласно нашей расстановке (новая или прежняя - в любом случае будет уже лежать в локал хранилище)
-        setArrangementFinal(JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
+        const storageArr = JSON.parse(localStorage.getItem('mpM-arr'));
+        setArrangementFinal({...storageArr});
 
         const rearrangeData = (data, arrangement) => {
             return data.map(item => {
@@ -236,9 +273,41 @@ const Men = ({data, arrangement, restoredData}) => {
             });
         };
 
-        data = rearrangeData(data, JSON.parse(localStorage.getItem('mainPageMen-Arrangement')));
-    }, []);
+        const arrangedData = rearrangeData(structuredClone(data), JSON.parse(localStorage.getItem('mpM-arr')));
+        if (arrangedData) {
+            setCurrentData(arrangedData)
+            const savedBlockName = Cookies.get('mpM-topBlock') ? decodeURIComponent(Cookies.get('mpM-topBlock')) : null;
+            let startIndex = blockNames.indexOf(savedBlockName);
 
+            const initialBlock = arrangedData[startIndex + 2];
+            if (initialBlock.connectedBlock) {
+                const connectedIndex = blockNames.indexOf(initialBlock.connectedBlock);
+                if (connectedIndex !== -1) {
+                    startIndex = connectedIndex;
+                }
+            }
+
+            // Формируем начальный контент (Первые 2 блока (категории основные + доп) всегда есть)
+            const initialContent = [];
+            initialContent.push(arrangedData[0])
+            initialContent.push(arrangedData[1])
+            for (let i = 0; i < 3; i++) {
+                const adjustedIndex = (startIndex + i) % blockNames.length;
+                const blockName = blockNames[adjustedIndex];
+
+                // Ищем соответствующий блок в arrangedData по blockName
+                const block = arrangedData.find((el) => el.blockName === blockName);
+                if (block) {
+                    initialContent.push(block);
+                }
+            }
+
+            Cookies.set("mpM-blocks", 5, {expires: 2772});
+            Cookies.set("mpM-lastBlock", encodeURIComponent(initialContent[4].blockName), {expires: 2772});
+
+            setContent(initialContent); // Устанавливаем контент
+        }
+    }, []);
 
     const getMore = async () => {
         const token = Cookies.get('access_token')
@@ -277,15 +346,63 @@ const Men = ({data, arrangement, restoredData}) => {
     }, []);
 
     useEffect(() => {
+        // Отключаем автоматическое восстановление прокрутки браузером
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Очищаем scroll restoration перед загрузкой страницы
+        window.scrollTo(0, 0);
+
+        // Вернем scroll restoration в нормальное состояние, если нужно
+        return () => {
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'auto';
+            }
+        };
+    }, []);
+
+    useEffect(() => {
         const saveScrollPosition = () => {
-            // Сохраняем позицию прокрутки в cookie на 7 дней
-            Cookies.set("homeScrollPositionMen", window.scrollY.toString(), {expires: 0.25});
+            const topSeenBlockName = Cookies.get('mpM-topBlock') ? decodeURIComponent(Cookies.get('mpM-topBlock')) : null;
+            if (topSeenBlockName && blockRefs.current[topSeenBlockName]) {
+                const block = blockRefs.current[topSeenBlockName];
+                const blockRect = block.getBoundingClientRect();
+                const distanceFromBottom = blockRect.bottom; // Позиция нижнего края относительно экрана
+
+                Cookies.set("mpM-Pos", JSON.stringify({
+                    blockName: encodeURIComponent(topSeenBlockName),
+                    distanceFromBottom
+                }), {expires: 2772});
+            }
+
+            Cookies.set('mpM-updTime', Date.now(), {expires: 2772})
         };
 
         const restoreScrollPosition = () => {
-            const savedPosition = Cookies.get("homeScrollPositionMen");
-            if (savedPosition) {
-                window.scrollTo(0, parseInt(savedPosition, 10));
+            const savedPosition = JSON.parse(Cookies.get("mpM-Pos"));
+            if (savedPosition && typeof savedPosition === 'object' && Object.keys(savedPosition).length > 0) {
+                const {blockName, distanceFromBottom} = savedPosition;
+                const block = blockRefs.current[decodeURIComponent(blockName)];
+
+                if (block) {
+                    const interval = setInterval(() => {
+                        const blockRect = block.getBoundingClientRect();
+
+                        if (blockRect.height > 0) {
+                            // Скроллим страницу так, чтобы блок оказался на правильной позиции
+                            const scrollPosition = blockRect.bottom - distanceFromBottom;
+                            window.scrollTo(0, scrollPosition);
+                            clearInterval(interval);
+                        }
+                    }, 100);
+
+                    // Очистка таймера на случай, если компонент размонтируется
+                    return () => clearInterval(interval);
+                } else {
+                    // Если блока нет, ждем его появления и пытаемся снова
+                    setTimeout(restoreScrollPosition, 100); // Попробуем снова через 100мс
+                }
             }
         };
 
@@ -332,12 +449,20 @@ const Men = ({data, arrangement, restoredData}) => {
         desktopStore.setMobileSideBar(true); // Открываем сайдбар
     }
 
+    const blockRefs = useRef({});
+
     const renderPage = () => {
         const arr = []
         content.forEach(el => {
+            const blockRef = (ref) => {
+                if (ref) {
+                    blockRefs.current[el.blockName] = ref; // Сохраняем реф в общий массив
+                }
+            };
+
             if (el.type === "mainCategories") {
                 arr.push(
-                    <>
+                    <div>
                         {
                             desktopStore.isDesktop ? (
                                 <div style={{
@@ -408,7 +533,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                             alt="Brand Image"
                                             className={s.mainCat}
                                             width={642}
-                                            height={510}
+                                            height={660}
                                             quality={100}
                                             onClick={() => handleOpenSideBar(
                                                 "shoes",
@@ -421,7 +546,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                             alt="Brand Image"
                                             className={s.mainCat}
                                             width={642}
-                                            height={510}
+                                            height={660}
                                             quality={100}
                                             onClick={() => handleOpenSideBar(
                                                 "clothes",
@@ -461,7 +586,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                 </div>
                             )
                         }
-                    </>
+                    </div>
                 )
             } else if (el.type === "extraCategories") {
                 arr.push(
@@ -516,32 +641,38 @@ const Men = ({data, arrangement, restoredData}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el} gender={"M"} arrangement={arrangementFinal}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} gender={"M"} arrangement={arrangementFinal} key={el.blockName}
+                                           ref={blockRef} dataIndex={el.blockName}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
-                    <PromoBannerMainPageAbout></PromoBannerMainPageAbout>
+                    <PromoBannerMainPageAbout key={el.blockName} ref={blockRef}
+                                              dataIndex={el.blockName}></PromoBannerMainPageAbout>
                 )
             } else if (el.type === "giftsPromoModal") {
                 arr.push(
-                    <PromoBannerMainPageOffers></PromoBannerMainPageOffers>
+                    <PromoBannerMainPageOffers key={el.blockName} ref={blockRef}
+                                               dataIndex={el.blockName}></PromoBannerMainPageOffers>
                 )
             } else if (el.type === "multiSectionCircles") {
                 arr.push(
                     <MultiSectionCirclesGrid el={el} gender={"M"}
-                                             arrangement={arrangementFinal}></MultiSectionCirclesGrid>
+                                             arrangement={arrangementFinal} key={el.blockName} ref={blockRef}
+                                             dataIndex={el.blockName}></MultiSectionCirclesGrid>
                 )
             } else if (el.type === "multiSectionRecs") {
                 arr.push(
-                    <MultiSectionRecs el={el} gender={"M"} arrangement={arrangementFinal}></MultiSectionRecs>
+                    <MultiSectionRecs el={el} gender={"M"} arrangement={arrangementFinal} key={el.blockName}
+                                      ref={blockRef} dataIndex={el.blockName}></MultiSectionRecs>
                 )
             } else if (el.type === "multiSectionImages") {
                 arr.push(
-                    <MultiSectionImages el={el} gender={"M"} arrangement={arrangementFinal}></MultiSectionImages>
+                    <MultiSectionImages el={el} gender={"M"} arrangement={arrangementFinal} key={el.blockName}
+                                        ref={blockRef} dataIndex={el.blockName}></MultiSectionImages>
                 )
             } else if (el.type === "fullWidthImage") {
                 arr.push(
-                    <>
+                    <div key={el.blockName} ref={blockRef} data-index={el.blockName}>
                         {el.title &&
                             <div className={s.newProductsTitle}>{el.title}</div>
                         }
@@ -570,7 +701,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                 />
                             }
                         </div>
-                    </>
+                    </div>
                 )
             } else if (el.type === 'firstMainBlockSTOPPED' && viewVideo) {
                 arr.push(
@@ -593,23 +724,88 @@ const Men = ({data, arrangement, restoredData}) => {
                         "videosInRowAmount": el.videosInRowAmount,
                         "slidesInVideo": el.hasOwnProperty('slidesInVideo') ? el.slidesInVideo : 0,
                         "videosInRow": el.videosInRow
-                    }}/>
+                    }} key={el.blockName} ref={blockRef} dataIndex={el.blockName}/>
                 )
             } else if (el.type === 'photo') {
                 arr.push(
-                    <MainImgBlock obj={el.desktop} className={s.desktop}/>
+                    <MainImgBlock obj={el.desktop} className={s.desktop} key={el.blockName} ref={blockRef}
+                                  dataIndex={el.blockName}/>
                 )
                 arr.push(
-                    <MainImgBlock obj={el.mobile} className={s.mobile}/>
+                    <MainImgBlock obj={el.mobile} className={s.mobile} key={el.blockName} ref={blockRef}
+                                  dataIndex={el.blockName}/>
                 )
             } else if (el.type === 'selection') {
                 arr.push(
-                    <Selection el={el}></Selection>
+                    <Selection el={el} key={el.blockName} ref={blockRef} dataIndex={el.blockName}></Selection>
                 )
             }
         })
         return arr
     }
+
+    const observedBlocks = useRef([]); // Массив для всех блоков
+    useEffect(() => {
+        const visibilityMap = {};
+
+        // Создаем IntersectionObserver
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const blockName = entry.target.getAttribute("data-index");
+                    const isVisible = entry.isIntersecting;
+
+                    // Обновляем состояние видимости только если оно изменилось
+                    if (visibilityMap[blockName] !== isVisible) {
+                        visibilityMap[blockName] = isVisible;
+                    }
+                });
+
+                // Для отладки: полный словарь видимости
+                // console.log("Текущее состояние видимости:", visibilityMap);
+
+                // Находим самый верхний видимый блок
+                const visibleBlocks = Object.keys(visibilityMap).filter(
+                    (blockName) => visibilityMap[blockName] // Только видимые блоки
+                );
+                if (visibleBlocks.length > 0) {
+                    const topVisibleBlock = visibleBlocks
+                        .map((blockName) => ({
+                            blockName,
+                            top: blockRefs.current[blockName]?.getBoundingClientRect().top,
+                        }))
+                        .sort((a, b) => a.top - b.top)[0]; // Сортируем по позиции top
+
+                    if (topVisibleBlock) {
+                        const {blockName} = topVisibleBlock;
+                        // Обновляем куки с именем верхнего блока
+                        Cookies.set("mpM-topBlock", encodeURIComponent(blockName), {
+                            expires: 2772,
+                        });
+                    }
+                } else {
+                    // console.log("Нет видимых блоков")
+                }
+            },
+            {root: null, rootMargin: "0px", threshold: 0.07} // Считаем блок видимым, если хотя бы 1% его области виден
+        );
+
+        // Подключаем все блоки к наблюдению
+        Object.values(blockRefs.current).forEach((block) => {
+            if (block) {
+                const blockName = block.getAttribute("data-index");
+                visibilityMap[blockName] = false; // Изначально считаем все блоки невидимыми
+                observer.observe(block);
+            }
+        });
+
+        // Чистим observer при размонтировании
+        return () => {
+            observer.disconnect();
+            observedBlocks.current = [];
+        };
+    }, [content]);
+
     const [isSend, setIsSend] = useState(false)
     const [show, setShow] = useState(false);
     const handleClose = () => {
@@ -620,13 +816,61 @@ const Men = ({data, arrangement, restoredData}) => {
         setIsSend(false)
     };
 
+    const observerRef = useRef(null); // Реф для отслеживания конца списка
+    const endOfPageRef = useRef(null); // Реф для конца страницы (списка)
+
+    useEffect(() => {
+        if (!endOfPageRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            },
+            {root: null, rootMargin: '100px', threshold: 0.1} // Подгрузка немного заранее
+        );
+
+        observer.observe(endOfPageRef.current);
+        observerRef.current = observer;
+
+        return () => observer.disconnect(); // Убираем наблюдатель при размонтировании
+    }, [content]); // Слушаем изменения в content
+
+    const loadMore = () => {
+        const amountOfBlocksLoaded = Number(Cookies.get('mpM-blocks'))
+        const lastLoadedBlock = Cookies.get('mpM-lastBlock') ? decodeURIComponent(Cookies.get('mpM-lastBlock')) : null;
+        const lastIndex = blockNames.indexOf(lastLoadedBlock);
+
+        if (amountOfBlocksLoaded < currentData.length) {
+            // Формируем новые блоки
+            const newBlocks = [];
+            for (let i = 1; i <= Math.min(3, currentData.length - amountOfBlocksLoaded); i++) {
+                const adjustedIndex = (lastIndex + i) % blockNames.length;
+                const blockName = blockNames[adjustedIndex];
+
+                // Ищем блок в arrangedData
+                const block = currentData.find((el) => el.blockName === blockName);
+                if (block) {
+                    newBlocks.push(block);
+                }
+            }
+
+            // Обновляем состояние
+            setContent((prevContent) => [...prevContent, ...newBlocks]);
+
+            Cookies.set("mpM-lastBlock", encodeURIComponent(newBlocks[newBlocks.length - 1].blockName), {expires: 2772});
+            Cookies.set("mpM-blocks", Math.min(amountOfBlocksLoaded + 3, currentData.length), {expires: 2772});
+        }
+    }
+
     return (
         <MainLayout>
             <Head>
                 <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
                 <meta
                     name="description"
-                    content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                    content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                 />
                 <meta property="og:image"
                       content="https://sellout.su/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_sq.02469b83.png&w=640&q=75"/>
@@ -640,7 +884,21 @@ const Men = ({data, arrangement, restoredData}) => {
                     <div className={s.cont}>
                         <>
                             {/* Your existing code for rendering the main content */}
-                            {renderPage()}
+                            {!desktopStore.isDesktop &&
+                                <div className={s.headerM}>
+                                    {/* Первая часть: Логотип и крестик */}
+                                    <div className={s.headerTop}>
+                                        <div className={s.logoContainer}>
+                                            <Image src={logo} alt="Logo" className={s.logo} width={370}
+                                                   height={50}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            {renderPage()} {/* Рендерим страницы через функцию */}
+                            <div ref={endOfPageRef}></div>
+                            {/* Метка конца */}
                             {/*<div className={'d-flex justify-content-center my-5'}>*/}
                             {/*    <button onClick={getMore} className={s.more_btn}>*/}
                             {/*        Посмотреть ещё*/}

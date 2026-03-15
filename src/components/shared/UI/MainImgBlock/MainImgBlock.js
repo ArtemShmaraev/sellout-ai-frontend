@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './MainImgBlock.module.css'
 import parse from 'html-react-parser'
@@ -9,7 +9,7 @@ import mobile from "@/static/img/big_bg.jpg";
 import {Context} from "@/context/AppWrapper";
 import Arrow from "@/components/shared/UI/Arrow/Arrow";
 
-const MainImgBlock = ({obj, className}) => {
+const MainImgBlock = forwardRef(({obj, className, dataIndex="none"}, ref) => {
     const {desktopStore} = useContext(Context)
 
     const getDirection = () => {
@@ -50,7 +50,7 @@ const MainImgBlock = ({obj, className}) => {
     }
 
     return (
-        <div className={`${className} ${s.main_block} ${getDirection()} ${s.margins}`}>
+        <div className={`${className} ${s.main_block} ${getDirection()} ${s.margins}`} data-index={dataIndex} ref={ref}>
             <div className={s.text_block}>
                 <div className={s.text_cont}>
                     <div>
@@ -112,6 +112,6 @@ const MainImgBlock = ({obj, className}) => {
             </div>
         </div>
     );
-};
+});
 
 export default MainImgBlock;

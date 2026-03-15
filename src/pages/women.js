@@ -1,27 +1,20 @@
 import MainLayout from "@/layout/MainLayout";
-import ProductCard from "@/components/shared/ProductCard/ProductCard";
-import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import s from '@/styles/Home.module.css'
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import Head from "next/head";
-import {fetchMainPage, fetchMore} from "@/http/mainPageApi";
+import {fetchMainPage, fetchMainPage2, fetchMore} from "@/http/mainPageApi";
 import MainImgBlock from "@/components/shared/UI/MainImgBlock/MainImgBlock";
 import Link from "next/link";
 import Image from "next/image";
 import {parse} from "cookie";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
-import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 import FirstMainBlock from "@/components/shared/UI/FirstMainBlock/FirstMainBlock";
 import ComplexMainPageBlock from "@/components/shared/UI/ComplexMainPageBlock/ComplexMainPageBlock";
-import {observer} from "mobx-react-lite";
 import {Context} from "@/context/AppWrapper";
-import {desktopStore} from "@/store/DesktopStore";
-import tempWomenJson from "./temp_main_women_desktop.json"
+import tempWomenJson from "./main_page_women.json"
 import arrowNew from "@/static/icons/arrowSlider.svg";
-import styles from "@/styles/CatalogBrandsMobileMen.module.css";
-import more from "@/static/icons/moreIcon.svg";
 import PromoBannerMainPageAbout from "@/components/shared/UI/PromoBannerMainPageAbout/PromoBannerMainPageAbout";
 import PromoBannerMainPageOffers from "@/components/shared/UI/PromoBannerMainPageOffers/PromoBannerMainPageOffers";
 import MultiSectionCirclesGrid from "@/components/shared/UI/MultiSectionCirclesGrid/MultiSectionCirclesGrid";
@@ -29,25 +22,138 @@ import PopularBrandsMainPage from "@/components/shared/UI/PopularBrandsMainPage/
 import MultiSectionRecs from "@/components/shared/UI/MultiSectionRecs/MultiSectionRecs";
 import MultiSectionImages from "@/components/shared/UI/MultiSectionImages/MultiSectionImages";
 import Selection from "@/components/shared/UI/Selection/Selection";
+import logo from "@/static/img/sellout_logo_light_blood.svg";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
-    const page = cookies['index_page']
+    // const page = cookies['index_page']
     const token = cookies['access_token']
 
     const selected_gender = "F"; // Добавляем получение выбранного гендера из кук
 
-    let data;
-    const restoredData = false;
+    let emptyData;
+    let restoredData = false;
 
-    data = tempWomenJson
+    emptyData = tempWomenJson
 
-    return {props: {data, restoredData}};
+    // Шаг 0: Создание списков allComplexBlockIds и allBlockIds
+    const allComplexBlockIds = {};
+    const allBlockIds = [];
+
+    emptyData.forEach(item => {
+        if (item.blockId) {
+            allBlockIds.push(item.blockId);
+        }
+
+        if (['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages'].includes(item.type)) {
+            const key = 'brandsLinks' in item ? 'brandsLinks' :
+                'circleLinks' in item ? 'circleLinks' :
+                    'recsLinks' in item ? 'recsLinks' : null;
+            if (key) {
+                allComplexBlockIds[item.blockId] = item[key].length;
+            }
+        }
+    });
+
+    // Итоговая расстановка (может остаться пустой, если не в первый раз заходим на страницу и не происходит сброса положений (не прошло более 15 минут с последнего захода)
+    let arrangement = {};
+
+    // Базовая расстановка: 0:0, 1:1 итд
+    let arrangementBase = {};
+    Object.keys(allComplexBlockIds).forEach(blockId => {
+        arrangementBase[blockId] = {};
+        for (let i = 0; i < allComplexBlockIds[blockId]; i++) {
+            arrangementBase[blockId][i] = i;
+        }
+    });
+
+    const checkCookiesExist = (Cookies_, data_) => {
+        // Базовые куки
+        const requiredCookies = [
+            "mpW-Pos",
+            "mpW-blocks",
+            "mpW-topBlock",
+            "mpW-updTime"
+        ];
+
+        // Добавляем куки из `data`
+        data_.forEach(item => {
+            if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
+                const blockId = item.blockId;
+
+                const cookiesToCheck = item.type === "selection" ? [
+                    `${blockId}-PrPos`
+                ] : [
+                    `${blockId}-IndArr`,
+                    `${blockId}-SecPos`,
+                    `${blockId}-PrPos`,
+                    `${blockId}-Ind`
+                ];
+
+                requiredCookies.push(...cookiesToCheck);
+            }
+        });
+
+        // Проверка всех кук
+        return requiredCookies.every(cookieName => Cookies_[cookieName] !== undefined);
+    };
+
+    // Шаг 1: Если первая загрузка страницы (куки все еще пустые и нет расстановки), создаем базовую расстановку.
+    if (!('mpW-updTime' in cookies) || !cookies['mpW-updTime'] || !checkCookiesExist(cookies, emptyData)) {
+        arrangement = arrangementBase
+
+        restoredData = true;
+    } else if ('mpW-updTime' in cookies && Date.now() - parseInt(cookies['mpW-updTime'], 10) > 10 * 60 * 1000) {
+        // Если уже не первый раз заходим, но прошло более 10 минут с последнего захода на главную, то меняем расстановку и передаем флаг о сбросе значенийю
+        restoredData = true;
+
+        // 1. Рандомизация расстановки
+        Object.keys(arrangementBase).forEach(blockId => {
+            const block = arrangementBase[blockId];
+            const keys = Object.keys(block);
+            const values = keys.map(key => block[key]);
+
+            // Алгоритм Фишера-Йетса для перемешивания значений
+            for (let i = values.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [values[i], values[j]] = [values[j], values[i]]; // Перемешиваем значения
+            }
+
+            // Создаем новый объект с перемешанными значениями для каждого блока
+            const newBlock = {};
+            keys.forEach((key, index) => {
+                newBlock[key] = values[index]; // Создаем новый объект с перемешанными значениями
+            });
+
+            arrangement[blockId] = newBlock; // Сохраняем рандомизированные значения для текущего blockId
+        });
+
+        // 2. Обновление словаря cookies, заменяя значения для соответствующих блоков
+        Object.keys(arrangement).forEach(blockId => {
+            const block = arrangement[blockId];
+
+            cookies[`${blockId}-Ind`] = block[0];
+        });
+    }
+
+    // Функция для преобразования объекта в строку cookie
+    const cookiesToString = (cookies) => {
+        return Object.keys(cookies)
+            .map(key => `${key}=${cookies[key]}`) // создаем строку вида "ключ=значение"
+            .join('; '); // соединяем все пары ключ=значение через ";"
+    };
+
+    // Преобразуем объект в строку cookie
+    const cookieString = cookiesToString(cookies);
+    let data = await fetchMainPage2(cookieString, selected_gender)
+    // let data = tempWomenJson;
+
+    return {props: {data, arrangement, restoredData}};
 }
-const Women = ({data, restoredData}) => {
-    // const {desktopStore} = useContext(Context)
+const Women = ({data, arrangement, restoredData}) => {
     const router = useRouter()
-    const [content, setContent] = useState(data)
+    const [currentData, setCurrentData] = useState(data)
+    const [content, setContent] = useState(data.slice(0, 5))
 
     const {desktopStore} = useContext(Context)
     const [viewVideo, setViewVideo] = useState(false)
@@ -75,41 +181,133 @@ const Women = ({data, restoredData}) => {
         };
     }, [])
 
+    const [arrangementFinal, setArrangementFinal] = useState({});
+
+    const blockNames = data
+        .filter((el) => !['ОСНОВНЫЕ КАТЕГОРИИ', 'ДОП КАТЕГОРИИ'].includes(el.blockName))
+        .map((el) => el.blockName);
+
     useLayoutEffect(() => {
         Cookies.set('selected_gender', "F", {expires: 2772})
-        const savedGender = "F";
-        // setSelectedGender(savedGender);
 
         // Check if the user visited the page within the last 10 minutes
-        if (!Cookies.get('index_page')) {
-            const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
-            Cookies.set('index_page', 1, {expires: tenMinutes});
-        }
+        // if (!Cookies.get('index_page')) {
+        //     const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
+        //     Cookies.set('index_page', 1, {expires: tenMinutes});
+        // }
 
+        Cookies.set('mpW-updTime', Date.now(), {expires: 2772})
         if (restoredData) {
-            Cookies.set('mainPageMen-lastTimeUpdated', Date.now(), {expires: 2772})
-            Cookies.set("homeScrollPositionMen", 0, {expires: 0.25});
+            // Если обновили данные (первый заход или более 10 минут прошло), то сбрасываем на ноль все позиции, сохраняем новую расстановку
+            Cookies.set("mpW-Pos", JSON.stringify({}), {expires: 2772});
+            Cookies.set("mpW-blocks", 2, {expires: 2772});
+            Cookies.set("mpW-topBlock", encodeURIComponent('ПОПУЛЯРНЫЕ БРЕНДЫ'), {expires: 2772});
+            localStorage.setItem('mpW-arr', JSON.stringify(arrangement));
 
             data.forEach(item => {
                 if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
                     const blockId = item.blockId;
 
                     // Формируем имена куков
-                    const cookiesToCheck = [
-                        `multiSectionedBlock-${blockId}-SelectedSection`,
-                        `multiSectionedBlock-${blockId}-SectionsContainerPosition`,
-                        `multiSectionedBlock-${blockId}-ProductsBlockPosition`
+                    const cookiesToCheck = item.type === "selection" ? [
+                        `${blockId}-PrPos`
+                    ] : [
+                        `${blockId}-IndArr`,
+                        `${blockId}-SecPos`,
+                        `${blockId}-PrPos`
                     ];
 
                     // Проверяем наличие каждого кука и устанавливаем значение 0
                     cookiesToCheck.forEach(cookieName => {
-                        Cookies.set(cookieName, 0, {expires: 0.25});
+                        Cookies.set(cookieName, 0, {expires: 2772});
                     });
+
+                    if (item.type !== "selection") {
+                        Cookies.set(`${blockId}-Ind`, arrangement[blockId][0], {expires: 2772});
+                    }
                 }
             })
         }
-    }, []);
 
+        // // Теперь необходимо восстановить корректную расстановку внутри data согласно нашей расстановке (новая или прежняя - в любом случае будет уже лежать в локал хранилище)
+        const storageArr = JSON.parse(localStorage.getItem('mpW-arr'));
+        setArrangementFinal({...storageArr});
+
+        const rearrangeData = (data, arrangement) => {
+            return data.map(item => {
+                // Проверяем, есть ли blockId и если он есть, то ищем в расстановке для этого blockId
+                if (item.blockId && arrangement[item.blockId]) {
+                    const blockArrangement = arrangement[item.blockId];
+
+                    // Перемешиваем все ключи с массивами в соответствии с расстановкой
+                    const keysToRearrange = [
+                        'desktopImages',
+                        'mobileImages',
+                        'productsAmount',
+                        'brandsLinks',
+                        'brandsNamesDesktop',
+                        'brandsNamesMobile',
+                        'products',
+                        'moreButtonName',
+                        'circleNames',
+                        'circleLinks',
+                        'recsNames',
+                        'recsLinks',
+                        'moreButtons',
+                        'titleName',
+                        'moreButtonNameNoModel'
+                    ];
+
+                    // Перебираем все ключи и выполняем перестановку значений
+                    keysToRearrange.forEach(key => {
+                        if (Array.isArray(item[key])) {
+                            // Проверяем, что длина массива в item[key] совпадает с длиной в arrangement для данного blockId
+                            if (item[key].length === Object.keys(blockArrangement).length) {
+                                // Новый порядок элементов на основе расстановки
+                                item[key] = item[key].map((_, index) => item[key][blockArrangement[index]]);
+                            }
+                        }
+                    });
+                }
+                return item;
+            });
+        };
+
+        const arrangedData = rearrangeData(structuredClone(data), JSON.parse(localStorage.getItem('mpW-arr')));
+        if (arrangedData) {
+            setCurrentData(arrangedData)
+            const savedBlockName = Cookies.get('mpW-topBlock') ? decodeURIComponent(Cookies.get('mpW-topBlock')) : null;
+            let startIndex = blockNames.indexOf(savedBlockName);
+
+            const initialBlock = arrangedData[startIndex + 2];
+            if (initialBlock.connectedBlock) {
+                const connectedIndex = blockNames.indexOf(initialBlock.connectedBlock);
+                if (connectedIndex !== -1) {
+                    startIndex = connectedIndex;
+                }
+            }
+
+            // Формируем начальный контент (Первые 2 блока (категории основные + доп) всегда есть)
+            const initialContent = [];
+            initialContent.push(arrangedData[0])
+            initialContent.push(arrangedData[1])
+            for (let i = 0; i < 3; i++) {
+                const adjustedIndex = (startIndex + i) % blockNames.length;
+                const blockName = blockNames[adjustedIndex];
+
+                // Ищем соответствующий блок в arrangedData по blockName
+                const block = arrangedData.find((el) => el.blockName === blockName);
+                if (block) {
+                    initialContent.push(block);
+                }
+            }
+
+            Cookies.set("mpW-blocks", 5, {expires: 2772});
+            Cookies.set("mpW-lastBlock", encodeURIComponent(initialContent[4].blockName), {expires: 2772});
+
+            setContent(initialContent); // Устанавливаем контент
+        }
+    }, []);
 
     const getMore = async () => {
         const token = Cookies.get('access_token')
@@ -148,15 +346,63 @@ const Women = ({data, restoredData}) => {
     }, []);
 
     useEffect(() => {
+        // Отключаем автоматическое восстановление прокрутки браузером
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Очищаем scroll restoration перед загрузкой страницы
+        window.scrollTo(0, 0);
+
+        // Вернем scroll restoration в нормальное состояние, если нужно
+        return () => {
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'auto';
+            }
+        };
+    }, []);
+
+    useEffect(() => {
         const saveScrollPosition = () => {
-            // Сохраняем позицию прокрутки в cookie на 7 дней
-            Cookies.set("homeScrollPositionWomen", window.scrollY.toString(), { expires: 0.25 });
+            const topSeenBlockName = Cookies.get('mpW-topBlock') ? decodeURIComponent(Cookies.get('mpW-topBlock')) : null;
+            if (topSeenBlockName && blockRefs.current[topSeenBlockName]) {
+                const block = blockRefs.current[topSeenBlockName];
+                const blockRect = block.getBoundingClientRect();
+                const distanceFromBottom = blockRect.bottom; // Позиция нижнего края относительно экрана
+
+                Cookies.set("mpW-Pos", JSON.stringify({
+                    blockName: encodeURIComponent(topSeenBlockName),
+                    distanceFromBottom
+                }), {expires: 2772});
+            }
+
+            Cookies.set('mpW-updTime', Date.now(), {expires: 2772})
         };
 
         const restoreScrollPosition = () => {
-            const savedPosition = Cookies.get("homeScrollPositionWomen");
-            if (savedPosition) {
-                window.scrollTo(0, parseInt(savedPosition, 10));
+            const savedPosition = JSON.parse(Cookies.get("mpW-Pos"));
+            if (savedPosition && typeof savedPosition === 'object' && Object.keys(savedPosition).length > 0) {
+                const {blockName, distanceFromBottom} = savedPosition;
+                const block = blockRefs.current[decodeURIComponent(blockName)];
+
+                if (block) {
+                    const interval = setInterval(() => {
+                        const blockRect = block.getBoundingClientRect();
+
+                        if (blockRect.height > 0) {
+                            // Скроллим страницу так, чтобы блок оказался на правильной позиции
+                            const scrollPosition = blockRect.bottom - distanceFromBottom;
+                            window.scrollTo(0, scrollPosition);
+                            clearInterval(interval);
+                        }
+                    }, 100);
+
+                    // Очистка таймера на случай, если компонент размонтируется
+                    return () => clearInterval(interval);
+                } else {
+                    // Если блока нет, ждем его появления и пытаемся снова
+                    setTimeout(restoreScrollPosition, 100); // Попробуем снова через 100мс
+                }
             }
         };
 
@@ -203,13 +449,20 @@ const Women = ({data, restoredData}) => {
         desktopStore.setMobileSideBar(true); // Открываем сайдбар
     }
 
+    const blockRefs = useRef({});
+
     const renderPage = () => {
         const arr = []
-        console.log(content)
         content.forEach(el => {
+            const blockRef = (ref) => {
+                if (ref) {
+                    blockRefs.current[el.blockName] = ref; // Сохраняем реф в общий массив
+                }
+            };
+
             if (el.type === "mainCategories") {
                 arr.push(
-                    <>
+                    <div>
                         {
                             desktopStore.isDesktop ? (
                                 <div style={{
@@ -260,7 +513,8 @@ const Women = ({data, restoredData}) => {
                                         justifyContent: 'space-between'
                                     }}>
                                         <div style={{width: '100%'}}>
-                                            <Link href={'/catalog/accessories_desktop_women'} className={s.mainCategoriesCont}>
+                                            <Link href={'/catalog/accessories_desktop_women'}
+                                                  className={s.mainCategoriesCont}>
                                                 <Image
                                                     src={el.desktopImages[3]}
                                                     alt="Image 4" layout="responsive" width={393} height={500}/>
@@ -332,7 +586,7 @@ const Women = ({data, restoredData}) => {
                                 </div>
                             )
                         }
-                    </>
+                    </div>
                 )
             } else if (el.type === "extraCategories") {
                 arr.push(
@@ -341,7 +595,8 @@ const Women = ({data, restoredData}) => {
                             {(desktopStore.isDesktop ? el.desktopImages : el.mobileImages).map((src, index) => (
                                 <>
                                     {desktopStore.isDesktop || index !== 0 ? (
-                                        <Link href={desktopStore.isDesktop ? el.categoryLinksDesktop[index] : el.categoryLinksMobile[index]}>
+                                        <Link
+                                            href={desktopStore.isDesktop ? el.categoryLinksDesktop[index] : el.categoryLinksMobile[index]}>
                                             <Image
                                                 src={src}
                                                 alt={`Image ${index + 4}`}
@@ -386,31 +641,38 @@ const Women = ({data, restoredData}) => {
                 )
             } else if (el.type === "popularBrands") {
                 arr.push(
-                    <PopularBrandsMainPage el={el} gender={"F"}></PopularBrandsMainPage>
+                    <PopularBrandsMainPage el={el} gender={"F"} arrangement={arrangementFinal} key={el.blockName}
+                                           ref={blockRef} dataIndex={el.blockName}></PopularBrandsMainPage>
                 )
             } else if (el.type === "aboutPromoModal") {
                 arr.push(
-                    <PromoBannerMainPageAbout></PromoBannerMainPageAbout>
+                    <PromoBannerMainPageAbout key={el.blockName} ref={blockRef}
+                                              dataIndex={el.blockName}></PromoBannerMainPageAbout>
                 )
             } else if (el.type === "giftsPromoModal") {
                 arr.push(
-                    <PromoBannerMainPageOffers></PromoBannerMainPageOffers>
+                    <PromoBannerMainPageOffers key={el.blockName} ref={blockRef}
+                                               dataIndex={el.blockName}></PromoBannerMainPageOffers>
                 )
             } else if (el.type === "multiSectionCircles") {
                 arr.push(
-                    <MultiSectionCirclesGrid el={el} gender={"F"}></MultiSectionCirclesGrid>
+                    <MultiSectionCirclesGrid el={el} gender={"F"}
+                                             arrangement={arrangementFinal} key={el.blockName} ref={blockRef}
+                                             dataIndex={el.blockName}></MultiSectionCirclesGrid>
                 )
             } else if (el.type === "multiSectionRecs") {
                 arr.push(
-                    <MultiSectionRecs el={el} gender={"F"}></MultiSectionRecs>
+                    <MultiSectionRecs el={el} gender={"F"} arrangement={arrangementFinal} key={el.blockName}
+                                      ref={blockRef} dataIndex={el.blockName}></MultiSectionRecs>
                 )
             } else if (el.type === "multiSectionImages") {
                 arr.push(
-                    <MultiSectionImages el={el} gender={"F"}></MultiSectionImages>
+                    <MultiSectionImages el={el} gender={"F"} arrangement={arrangementFinal} key={el.blockName}
+                                        ref={blockRef} dataIndex={el.blockName}></MultiSectionImages>
                 )
             } else if (el.type === "fullWidthImage") {
                 arr.push(
-                    <>
+                    <div key={el.blockName} ref={blockRef} data-index={el.blockName}>
                         {el.title &&
                             <div className={s.newProductsTitle}>{el.title}</div>
                         }
@@ -439,7 +701,7 @@ const Women = ({data, restoredData}) => {
                                 />
                             }
                         </div>
-                    </>
+                    </div>
                 )
             } else if (el.type === 'firstMainBlockSTOPPED' && viewVideo) {
                 arr.push(
@@ -462,23 +724,88 @@ const Women = ({data, restoredData}) => {
                         "videosInRowAmount": el.videosInRowAmount,
                         "slidesInVideo": el.hasOwnProperty('slidesInVideo') ? el.slidesInVideo : 0,
                         "videosInRow": el.videosInRow
-                    }}/>
+                    }} key={el.blockName} ref={blockRef} dataIndex={el.blockName}/>
                 )
             } else if (el.type === 'photo') {
                 arr.push(
-                    <MainImgBlock obj={el.desktop} className={s.desktop}/>
+                    <MainImgBlock obj={el.desktop} className={s.desktop} key={el.blockName} ref={blockRef}
+                                  dataIndex={el.blockName}/>
                 )
                 arr.push(
-                    <MainImgBlock obj={el.mobile} className={s.mobile}/>
+                    <MainImgBlock obj={el.mobile} className={s.mobile} key={el.blockName} ref={blockRef}
+                                  dataIndex={el.blockName}/>
                 )
             } else if (el.type === 'selection') {
                 arr.push(
-                    <Selection el={el}></Selection>
+                    <Selection el={el} key={el.blockName} ref={blockRef} dataIndex={el.blockName}></Selection>
                 )
             }
         })
         return arr
     }
+
+    const observedBlocks = useRef([]); // Массив для всех блоков
+    useEffect(() => {
+        const visibilityMap = {};
+
+        // Создаем IntersectionObserver
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const blockName = entry.target.getAttribute("data-index");
+                    const isVisible = entry.isIntersecting;
+
+                    // Обновляем состояние видимости только если оно изменилось
+                    if (visibilityMap[blockName] !== isVisible) {
+                        visibilityMap[blockName] = isVisible;
+                    }
+                });
+
+                // Для отладки: полный словарь видимости
+                // console.log("Текущее состояние видимости:", visibilityMap);
+
+                // Находим самый верхний видимый блок
+                const visibleBlocks = Object.keys(visibilityMap).filter(
+                    (blockName) => visibilityMap[blockName] // Только видимые блоки
+                );
+                if (visibleBlocks.length > 0) {
+                    const topVisibleBlock = visibleBlocks
+                        .map((blockName) => ({
+                            blockName,
+                            top: blockRefs.current[blockName]?.getBoundingClientRect().top,
+                        }))
+                        .sort((a, b) => a.top - b.top)[0]; // Сортируем по позиции top
+
+                    if (topVisibleBlock) {
+                        const {blockName} = topVisibleBlock;
+                        // Обновляем куки с именем верхнего блока
+                        Cookies.set("mpW-topBlock", encodeURIComponent(blockName), {
+                            expires: 2772,
+                        });
+                    }
+                } else {
+                    // console.log("Нет видимых блоков")
+                }
+            },
+            {root: null, rootMargin: "0px", threshold: 0.07} // Считаем блок видимым, если хотя бы 1% его области виден
+        );
+
+        // Подключаем все блоки к наблюдению
+        Object.values(blockRefs.current).forEach((block) => {
+            if (block) {
+                const blockName = block.getAttribute("data-index");
+                visibilityMap[blockName] = false; // Изначально считаем все блоки невидимыми
+                observer.observe(block);
+            }
+        });
+
+        // Чистим observer при размонтировании
+        return () => {
+            observer.disconnect();
+            observedBlocks.current = [];
+        };
+    }, [content]);
+
     const [isSend, setIsSend] = useState(false)
     const [show, setShow] = useState(false);
     const handleClose = () => {
@@ -489,13 +816,61 @@ const Women = ({data, restoredData}) => {
         setIsSend(false)
     };
 
+    const observerRef = useRef(null); // Реф для отслеживания конца списка
+    const endOfPageRef = useRef(null); // Реф для конца страницы (списка)
+
+    useEffect(() => {
+        if (!endOfPageRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            },
+            {root: null, rootMargin: '100px', threshold: 0.1} // Подгрузка немного заранее
+        );
+
+        observer.observe(endOfPageRef.current);
+        observerRef.current = observer;
+
+        return () => observer.disconnect(); // Убираем наблюдатель при размонтировании
+    }, [content]); // Слушаем изменения в content
+
+    const loadMore = () => {
+        const amountOfBlocksLoaded = Number(Cookies.get('mpW-blocks'))
+        const lastLoadedBlock = Cookies.get('mpW-lastBlock') ? decodeURIComponent(Cookies.get('mpW-lastBlock')) : null;
+        const lastIndex = blockNames.indexOf(lastLoadedBlock);
+
+        if (amountOfBlocksLoaded < currentData.length) {
+            // Формируем новые блоки
+            const newBlocks = [];
+            for (let i = 1; i <= Math.min(3, currentData.length - amountOfBlocksLoaded); i++) {
+                const adjustedIndex = (lastIndex + i) % blockNames.length;
+                const blockName = blockNames[adjustedIndex];
+
+                // Ищем блок в arrangedData
+                const block = currentData.find((el) => el.blockName === blockName);
+                if (block) {
+                    newBlocks.push(block);
+                }
+            }
+
+            // Обновляем состояние
+            setContent((prevContent) => [...prevContent, ...newBlocks]);
+
+            Cookies.set("mpW-lastBlock", encodeURIComponent(newBlocks[newBlocks.length - 1].blockName), {expires: 2772});
+            Cookies.set("mpW-blocks", Math.min(amountOfBlocksLoaded + 3, currentData.length), {expires: 2772});
+        }
+    }
+
     return (
         <MainLayout>
             <Head>
                 <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
                 <meta
                     name="description"
-                    content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                    content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                 />
                 <meta property="og:image"
                       content="https://sellout.su/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_sq.02469b83.png&w=640&q=75"/>
@@ -509,7 +884,21 @@ const Women = ({data, restoredData}) => {
                     <div className={s.cont}>
                         <>
                             {/* Your existing code for rendering the main content */}
+                            {/*<div onClick={loadMoreAbove}>AAAAAAAA</div>*/}
+                            {!desktopStore.isDesktop &&
+                                <div className={s.headerW}>
+                                    {/* Первая часть: Логотип и крестик */}
+                                    <div className={s.headerTop}>
+                                        <div className={s.logoContainer}>
+                                            <Image src={logo} alt="Logo" className={s.logo} width={370}
+                                                   height={50}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             {renderPage()}
+                            <div ref={endOfPageRef}></div>
+                            {/* Метка конца */}
                             {/*<div className={'d-flex justify-content-center my-5'}>*/}
                             {/*    <button onClick={getMore} className={s.more_btn}>*/}
                             {/*        Посмотреть ещё*/}

@@ -101,7 +101,6 @@ const Brands = ({brandsArr}) => {
         }
         let res
         res = await searchBrands(value, token)
-        console.log(res)
         return res
     }
     useEffect(() => {
@@ -125,6 +124,7 @@ const Brands = ({brandsArr}) => {
             </Head>
             <div className={s.cont + ' custom_cont'}>
                 <div className={s.alphabet_block}
+                     style={desktopStore.navbarVisible ? {} : {top: 0}}
                 >
                     <div className={s.alphabet}>
                         {desktopStore.isDesktop
@@ -166,7 +166,7 @@ const Brands = ({brandsArr}) => {
                 <div className={s.main_block}>
                     <div>
                         <div className={s.search_block}
-                             style={desktopStore.navbarVisible ? {} : {top: 40}}
+                             style={desktopStore.navbarVisible ? {} : {top: 50}}
                         >
                             <SearchInput w100={true}
                                          value={query}

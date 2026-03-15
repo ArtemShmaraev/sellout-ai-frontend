@@ -87,18 +87,18 @@ const SizeChoice = ({prices, productId, config, manySizes, isDesktop}) => {
                                 {productStore.sizeChosen.is_fast_shipping && <Image src={truck} alt="" className={s.icons}/>}
                                 {productStore.sizeChosen.is_return && <Image src={refund} alt="" className={s.icons}/>}
                             </div>
-                            {
-                                (productStore.sizeChosen.min_price_without_sale > productStore.sizeChosen.min_price)
-                                    ?
-                                    <div className={s.price}>
-                                        <span className={s.crossed}>От {addSpacesToNumber(productStore.sizeChosen.min_price_without_sale)} ₽</span>
-                                        <span className={s.sale_price}>От {addSpacesToNumber(productStore.sizeChosen.min_price)} ₽</span>
-                                    </div>
-                                    :
-                                    <div className={s.price}>
-                                        От {addSpacesToNumber(productStore.sizeChosen.min_price)} ₽
-                                    </div>
-                            }
+                            {/*{*/}
+                            {/*    (productStore.sizeChosen.min_price_without_sale > productStore.sizeChosen.min_price)*/}
+                            {/*        ?*/}
+                            {/*        <div className={s.price}>*/}
+                            {/*            <span className={s.crossed}>От {addSpacesToNumber(productStore.sizeChosen.min_price_without_sale)} ₽</span>*/}
+                            {/*            <span className={s.sale_price}>От {addSpacesToNumber(productStore.sizeChosen.min_price)} ₽</span>*/}
+                            {/*        </div>*/}
+                            {/*        :*/}
+                            {/*        <div className={s.price}>*/}
+                            {/*            От {addSpacesToNumber(productStore.sizeChosen.min_price)} ₽*/}
+                            {/*        </div>*/}
+                            {/*}*/}
                         </>
                         :
                         `Выберите ${manySizes ? 'размер' : 'конфигурацию'} ${(config && config !== 'undefined') ? `- ${config}` : ''}`

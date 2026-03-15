@@ -4,7 +4,7 @@
 }
 .alphabet_block {
     position: sticky;
-    top: 135px;
+    top: 140px;
     background: white;
     padding: 20px 0;
     transition: 0.3s;
@@ -34,7 +34,7 @@
 }
 .search_block {
     position: sticky;
-    top: 175px;
+    top: 195px;
     width: 300px;
     padding-top: 10px;
     padding-right: 30px;

@@ -23,7 +23,7 @@ import 'swiper/css/zoom';
 import 'swiper/css/effect-fade';
 
 
-const ProductCard = ({cardList = false, product}) => {
+const ProductCard = ({cardList = false, bigCard = false, product}) => {
     const {id, model, slug, brands, collab, colorway, price, isLoadingCard} = product
     const isFastShip = product.is_fast_shipping
     const isReturn = product.is_return
@@ -171,8 +171,8 @@ const ProductCard = ({cardList = false, product}) => {
     return (
         <>
             {!isLoadingCard ? (
-                <Link className={cardList ? s.card_list : s.card}
-                      href={`/products/${slug}`}
+                <Link className={cardList ? s.card_list : bigCard ? s.bigCard : s.card}
+                      href={slug && slug !== "" ? `/products/${slug}` : '#'}
                       key={slug}
 
                 >
@@ -200,7 +200,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 e.preventDefault()
                                 e.stopPropagation()
                             }} className={s.like_block}>
-                                <AuthModal fromWishlist={true}>
+                                <AuthModal fromWishlist={true} style={{justifyContent: 'center'}}>
                                     <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
                                            width={20}
                                     />
@@ -292,7 +292,9 @@ const ProductCard = ({cardList = false, product}) => {
                                         // id={photosArr[0].id}
                                         loop={true}
                                         pagination={{
-                                            type: 'bullets'
+                                            type: 'bullets',
+                                            dynamicBullets: true, // Включение динамического отображения
+                                            dynamicMainBullets: 2 // Количество видимых буллетов вокруг активного
                                         }}
                                         // effect={"fade"}
 
@@ -300,7 +302,7 @@ const ProductCard = ({cardList = false, product}) => {
                                         // initialSlide={0}
                                         // navigation={true}
                                         modules={[Pagination, Navigation]}
-                                        pagination={!isLoading}
+                                        // pagination={!isLoading}
                                         // className={s.cont}
                                         style={{
                                             // "--swiper-pagination-bullet-size": "8px",
@@ -311,7 +313,7 @@ const ProductCard = ({cardList = false, product}) => {
                                             '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
                                             // '--swiper-pagination-left': '10px',
                                             // '--swiper-pagination-right': '10px',
-                                            '--swiper-pagination-bottom': '-4px',
+                                            '--swiper-pagination-bottom': '0',
                                             // '--swiper-pagination-top': '10px'
 
                                             // "--swiper-pagination-right": "0",
@@ -450,7 +452,7 @@ const ProductCard = ({cardList = false, product}) => {
                                 </div>
                         )
                     }
-                    <div className={s.text_block}
+                    <div className={bigCard ? s.text_block_big_card : s.text_block}
                          ref={sizesRef}
                     >
                         {
@@ -540,7 +542,7 @@ const ProductCard = ({cardList = false, product}) => {
                     </div>
                 </Link>
             ) : (
-                <div className={cardList ? s.card_list : s.card}
+                <div className={cardList ? s.card_list : bigCard ? s.bigCard : s.card}
                      key={slug}
                 >
                     {photosArr && photosArr.length > 0 &&

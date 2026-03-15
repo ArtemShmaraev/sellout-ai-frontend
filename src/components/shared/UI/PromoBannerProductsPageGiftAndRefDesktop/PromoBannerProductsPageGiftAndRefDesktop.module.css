@@ -6,25 +6,31 @@
     border-radius: 2px;
     display: flex;
     position: relative;
+    align-items: center;
+    justify-content: space-between;
+
 }
 
 .gift, .ref {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .ref {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(calc(23vw - 50%), -50%);
+    width: 50%;
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(calc(23vw - 50%), -50%);*/
 }
 
 .gift {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate(calc(23vw - 50%), -50%);
+    width: 50%;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 50%;*/
+    /*transform: translate(calc(23vw - 50%), -50%);*/
 }
 
 .giftText, .refText {
@@ -82,21 +88,5 @@
     }
 }
 
-@media (min-width: 1800px) {
-    .giftRefCont {
-    }
-
-    .ref {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(calc(20vw - 50%), -50%);
-    }
-
-    .gift {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translate(calc(20vw - 50%), -50%);
-    }
+@media (min-width: 2000px) {
 }

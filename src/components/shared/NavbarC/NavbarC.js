@@ -37,6 +37,7 @@ import homeSelected from "@/static/icons/HomeMobileNavBarSelected.svg";
 import searchSelected from "@/static/icons/SearchMobileNavBarSelected.svg";
 import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 import ModalRef from "@/components/shared/ModalRef/ModalRef";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
 // import {selectedGender, setSelectedGender} from "@/layout/MainLayout";
 
@@ -178,6 +179,18 @@ const NavbarC = () => {
         document.body.classList.remove('body-scroll-clip')
     };
 
+    const [giftsModalOpen, setGiftsModalOpen] = useState(false);
+
+    const toggleGifts = () => {
+        setGiftsModalOpen((prev) => !prev);
+        document.body.classList.add('body-scroll-clip')
+    };
+
+    const handleGiftsModalClose = () => {
+        setGiftsModalOpen(false); // Закрытие модалки извне
+        document.body.classList.remove('body-scroll-clip')
+    };
+
     return (
         <>
             <header className={
@@ -187,7 +200,7 @@ const NavbarC = () => {
             } id={'navbar'}>
                 {desktopStore.isDesktop &&
                     <>
-                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef} toggleGifts={toggleGifts}/>
                         <div className={'custom_cont'}>
                             <div className={s.row1}>
                                 <div className={s.block}>
@@ -354,7 +367,7 @@ const NavbarC = () => {
 
                 {!desktopStore.isDesktop &&
                     <>
-                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef}/>
+                        <SalesLine toggleSocials={toggleSocials} toggleRef={toggleRef} toggleGifts={toggleGifts}/>
                         <div className={s.bottom_nav}>
                             <div
                                 className={s.nav_item}
@@ -368,6 +381,7 @@ const NavbarC = () => {
                                         height={28}
                                         src={desktopStore.mobileSideBar ? searchSelected : searchNotSelected}
                                         alt="Search Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -390,6 +404,7 @@ const NavbarC = () => {
                                         height={26}
                                         src={isCart && !desktopStore.mobileSideBar ? cartSelected : cartNotSelected}
                                         alt="Cart Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -407,6 +422,7 @@ const NavbarC = () => {
                                         height={38}
                                         src={isHome && !desktopStore.mobileSideBar ? homeSelected : homeNotSelected}
                                         alt="Catalog Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -423,6 +439,7 @@ const NavbarC = () => {
                                         height={25}
                                         src={isWishlist && !desktopStore.mobileSideBar ? favouriteSelected : favouriteNotSelected}
                                         alt="Favorites Icon"
+                                        loading={"eager"}
                                     />
                                 </div>
                             </div>
@@ -441,6 +458,7 @@ const NavbarC = () => {
                                             height={26}
                                             src={isAccount && !desktopStore.mobileSideBar ? accountSelected : accountNotSelected}
                                             alt="Profile Icon"
+                                            loading={"eager"}
                                         />
                                     </div>
                                 </div>
@@ -471,6 +489,7 @@ const NavbarC = () => {
             }
             <ModalSocialNets show={socialsOpen} onClose={handleSocialsClose}/>
             <ModalRef show={refModalOpen} onClose={handleRefModalOpen}/>
+            <ModalGifts show={giftsModalOpen} onClose={handleGiftsModalClose}/>
         </>
 
 

@@ -268,7 +268,7 @@ export default function ModalSocialNets({show, onClose}) {
                             <div className={stylesMob.modalContent}>
                                 <div className={stylesMob.img}>
                                     <Image
-                                        src="/img/Modals/refImgMob.png"
+                                        src="/img/Modals/modalSocialNetsMob.png"
                                         alt="Image 1"
                                         layout="responsive"
                                         width={1920}

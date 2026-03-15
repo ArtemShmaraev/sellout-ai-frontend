@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useState} from 'react';
 import styles from './PromoBannerMainPageAbout.module.css'
 import Image from 'next/image'
 import {desktopStore} from "@/store/DesktopStore";
@@ -12,7 +12,7 @@ import OfferBetterPriceModal from "@/components/shared/OfferBetterPriceModal/Off
 import BuyoutModal from "@/components/shared/BuyoutModal/BuyoutModal";
 import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
 
-const PromoBannerMainPageAbout = () => {
+const PromoBannerMainPageAbout = forwardRef(({dataIndex="none"}, ref) => {
     const [howOpen, setHowOpen] = useState(false);
     const [offerOpen, setOfferOpen] = useState(false);
     const [deliverAnythingOpen, setDeliverAnythingOpen] = useState(false);
@@ -65,7 +65,7 @@ const PromoBannerMainPageAbout = () => {
     };
 
     return (
-        <>
+        <div data-index={dataIndex} ref={ref}>
             {desktopStore.isDesktop ?
                 <div className={styles.aboutGuaranteeCont}>
                     <div className={styles.aboutGuaranteeCont2}>
@@ -208,8 +208,8 @@ const PromoBannerMainPageAbout = () => {
             <HowWeWorkModal show={howOpen} onHide={closeHow}/>
             <OfferBetterPriceModal show={offerOpen} onHide={closeOffer}/>
             <BuyoutModal show={deliverAnythingOpen} handleClose={closeDeliver}/>
-        </>
+        </div>
     );
-};
+});
 
 export default PromoBannerMainPageAbout;

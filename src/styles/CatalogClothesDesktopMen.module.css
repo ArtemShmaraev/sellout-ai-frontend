@@ -196,7 +196,7 @@
 }
 
 
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .header, .categoriesSection, .categoriesSection3, .categoriesSection2 {
         margin-right: calc(10vw);
         margin-left: calc(10vw);

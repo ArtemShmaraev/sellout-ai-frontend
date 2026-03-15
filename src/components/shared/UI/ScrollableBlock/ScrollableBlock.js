@@ -15,6 +15,7 @@ const ScrollableBlock = forwardRef(({
                                         moreButton = false,
                                         moreButtonText = "Посмотреть все",
                                         moreButtonUrl = "",
+                                        resetScrollToBeginning = false
                                     }, ref) => {
     const scrollableContainerRef = useRef(null);
     const scroll = 1100
@@ -84,6 +85,10 @@ const ScrollableBlock = forwardRef(({
             }
         };
 
+        if (resetScrollToBeginning) {
+            resetScroll()
+        }
+
         // Вызываем проверку при загрузке и при изменении размера окна
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -149,7 +154,7 @@ const ScrollableBlock = forwardRef(({
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '10px',
-                        scrollSnapAlign: 'start',
+                        scrollSnapAlign: colIndex === 0 || desktopStore.isDesktop ? 'start' : 'center',
                         flexShrink: 0
                     }}>
                         {column.map((child, rowIndex) => (
@@ -160,19 +165,25 @@ const ScrollableBlock = forwardRef(({
                     </div>
                 ))}
                 {moreButton === true &&
-                    <Link href={`${moreButtonUrl}`} className={s.moreLines}>
-                        <div>
-                            <Image
-                                src={more} // Путь к изображению лупы
-                                alt="Search Icon"
-                                width={50}
-                                height={50}
-                            />
-                        </div>
-                        <div className={s.moreLinesText}>
-                            {moreButtonText}
-                        </div>
-                    </Link>
+                    <>
+                        <Link href={`${moreButtonUrl}`} className={s.moreLines}>
+                            <div>
+                                <Image
+                                    src={more} // Путь к изображению лупы
+                                    alt="Search Icon"
+                                    width={50}
+                                    height={50}
+                                />
+                            </div>
+                            <div className={s.moreLinesText}>
+                                {moreButtonText}
+                            </div>
+                        </Link>
+                        {!desktopStore.isDesktop &&
+                            <div style={{flexShrink: 0, width: '0px'}}/>
+                        }
+                        {/* Добавляем пустышку */}
+                    </>
                 }
             </div>
 

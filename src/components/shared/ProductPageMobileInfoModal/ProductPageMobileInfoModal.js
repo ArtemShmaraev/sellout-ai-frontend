@@ -46,6 +46,7 @@ import smile from "@/static/icons/emoji-smile 1.svg";
 import change from "@/static/icons/arrow-down-up.svg";
 import map from "@/static/img/map.jpg";
 import headphones from "@/static/icons/headphones-circle.svg";
+import ContactModal from "@/components/shared/ContactModal/ContactModal";
 const ProductPageMobileInfoModal = ({show, onHide, product}) => {
     const [isDesktop, setIsDesktop] = useState(true)
     useEffect(() => {
@@ -108,6 +109,15 @@ const ProductPageMobileInfoModal = ({show, onHide, product}) => {
         setHowOpen(false)
         changeBrowserColor("#ffffff")
     }
+
+    const [contactOpen, setContactOpen] = useState(false);
+    const toggleContact = () => {
+        setContactOpen(!contactOpen);
+    };
+
+    const closeContact = () => {
+        setContactOpen(false);
+    };
 
     return (<>
         <Modal
@@ -581,30 +591,50 @@ const ProductPageMobileInfoModal = ({show, onHide, product}) => {
                                 <Image src={refund} alt='' width={60}/>
                                 <h4 className={'my-3'}>Возврат</h4>
                                 <p className={s.text}>
-                                    Многие представленные на нашей платформе товары выкупаются специально под вас у
-                                    частных продавцов, коллекционеров или из разных иностранных бутиков и магазинов,
-                                    поэтому мы не способны предложить вам возврат товара после подтверждения заказа
+                                    Многие представленные на нашей платформе товары выкупаются специально под
+                                    вас у
+                                    частных продавцов, коллекционеров или из разных иностранных бутиков и
+                                    магазинов,
+                                    поэтому мы не способны предложить вам возврат товара после подтверждения
+                                    заказа
                                     на
-                                    все позиции. Однако есть ряд моделей, которые вскоре будут подлежать возврату, в
+                                    все позиции.
+                                </p>
+                                <p className={s.text} style={{color: '#057e48'}}>
+                                    Если вам необходимо посмотреть товар вживую, померить, определиться с
+                                    размером и так далее, обязательно <span onClick={toggleContact} style={{
+                                    textDecoration: 'underline',
+                                    cursor: 'pointer'
+                                }}>напишите нам</span> и мы оперативно найдем решения: подберем индивидуально
+                                    для вас другие предложения с возможностью примерки/возврата, подскажем по
+                                    размеру или где можно посмотреть товар вживую :)
+                                </p>
+                                <p className={s.text}>
+                                    Вскоре некоторые позиции будут подлежать
+                                    возврату, в
                                     том
-                                    числе даже некоторые эксклюзивные коллекции. Они будут помечены
-                                    значком <Image src={returnImg} alt={''}/>. Обращаем внимание, что по правилам
+                                    числе даже эксклюзивные коллекции. Они будут помечены
+                                    значком <Image src={returnImg} alt={''}/>. Обращаем внимание, что по
+                                    правилам
                                     зарубежных продавцов, возврат
                                     возможен в течение 7 - 30 календарных дней с момента поставки товара на
                                     зарубежный
                                     склад. Однако срок доставки
                                     заказов от склада за рубежом до получателя в РФ может быть больше в связи с
                                     ограничениями
-                                    и особенностями международной логистики. Кроме того, условия возврата могут быть
+                                    и особенностями международной логистики. Кроме того, условия возврата могут
+                                    быть
                                     связаны с
-                                    особенностями законов страны, из которой товар был для вас выкуплен. Несмотря на
+                                    особенностями законов страны, из которой товар был для вас выкуплен.
+                                    Несмотря на
                                     это, SELLOUT
-                                    всячески содействует по организации возврата товаров. В случае обнаружения брака
+                                    всячески содействует по организации возврата товаров. В случае обнаружения
+                                    брака
                                     или
-                                    ненадлежащего качества вам необходимо связаться с нами для решения проблемы. Мы
+                                    ненадлежащего качества вам необходимо связаться с нами для решения проблемы.
+                                    Мы
                                     постоянно стремимся увеличить ассортимент товаров, подлежащих возврату,
                                     чтобы ваши покупки с нами стали еще более удобными!
-
                                 </p>
                                 <div className={s.faq_block}>
                                     <h5 className={'text-center'}>Часто задаваемые вопросы</h5>
@@ -864,6 +894,7 @@ const ProductPageMobileInfoModal = ({show, onHide, product}) => {
                 </div>
 
                 <HowWeWorkModal show={howOpen} onHide={closeHow}/>
+                <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
             </Modal.Body>
         </Modal>
     </>);

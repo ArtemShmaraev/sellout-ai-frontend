@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import s from './MultiSectionImages.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 import {fetchProductsForMainPage} from "@/http/mainPageApi";
 
-const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) => {
+const MultiSectionImages = forwardRef(({el, gender, arrangement, heightImage = "250px", dataIndex="none"}, ref) => {
     const [centerContent, setCenterContent] = useState(false);
 
     const blockId = el.blockId;
@@ -21,13 +21,19 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
     const isReset = useRef(false)
 
     useLayoutEffect(() => {
-        const initialSelectedCircleIndex = Number(Cookies.get(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`) || 0);
+        const initialSelectedCircleIndex = Number(Cookies.get(`${blockId}-IndArr`) || 0);
         setSelectedCircleIndex(initialSelectedCircleIndex);
         setSelectedProducts(el.products[initialSelectedCircleIndex] || [])
         setTimeout(() => {
             setResetSelectedCircle(true);
         }, 100)
     }, []);
+
+    useEffect(() => {
+        if (el.products[selectedCircleIndex].length > 0) {
+            setSelectedProducts(el.products[selectedCircleIndex])
+        }
+    }, [el.products, arrangement]);
 
     const router = useRouter()
 
@@ -169,26 +175,26 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
     useEffect(() => {
         const saveSelectedSectionAndScrollPositions = () => {
             setSelectedCircleIndex((prevIndex) => {
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][prevIndex], {expires: 0.25});
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSectionCurrentArrangement`, prevIndex, {expires: 0.25});
+                Cookies.set(`${blockId}-Ind`, arrangement[blockId][prevIndex], {expires: 0.25});
+                Cookies.set(`${blockId}-IndArr`, prevIndex, {expires: 0.25});
                 return prevIndex;
             });
 
             if (scrollableContainerRef.current) {
-                const scrollLeft = scrollableContainerRef.current.scrollLeft;
-                Cookies.set(`multiSectionedBlock-${blockId}-SectionsContainerPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableContainerRef.current.scrollLeft);
+                Cookies.set(`${blockId}-SecPos`, scrollLeft, {expires: 0.25});
             }
 
             if (scrollableBlockRef.current) {
-                const scrollLeft = scrollableBlockRef.current.getScroll();
-                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableBlockRef.current.getScroll());
+                Cookies.set(`${blockId}-PrPos`, scrollLeft, {expires: 0.25});
             }
 
         };
 
         const restoreScrollPosition = () => {
-            const SectionsContainerPosition = Cookies.get(`multiSectionedBlock-${blockId}-SectionsContainerPosition`);
-            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+            const SectionsContainerPosition = Cookies.get(`${blockId}-SecPos`);
+            const ProductsBlockPosition = Cookies.get(`${blockId}-PrPos`);
 
             if (SectionsContainerPosition && scrollableContainerRef.current && selectedProducts.length && !isReset.current) {
                 scrollableContainerRef.current.scrollLeft = parseInt(SectionsContainerPosition, 10);
@@ -224,7 +230,7 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
                 <ProductCard
                     product={product}
                     key={product.id}
-                    smallCard={true}
+                    bigCard={el.bigCard && !desktopStore.isDesktop}
                 />
             );
         });
@@ -299,13 +305,13 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
             setSelectedProducts(el.products[idx])
         } else {
             setSelectedProducts(loadingProductsData)
-            const data = await fetchProductsForMainPage(el.recsLinks[idx], gender)
+            const data = await fetchProductsForMainPage(blockId, arrangement[blockId][idx], gender)
             setSelectedProducts(data)
         }
     }
 
     return (
-        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}}>
+        <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}} data-index={dataIndex} ref={ref}>
             <div className={s.multiSectionCirclesTitle}>{el.title} {el.titleName[selectedCircleIndex]}</div>
             <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
                 {(desktopStore.isDesktop ? el.desktopImages : el.mobileImages).map((_, idx) => (
@@ -348,6 +354,6 @@ const MultiSectionImages = ({el, gender, arrangement, heightImage = "250px"}) =>
             )}
         </div>
     );
-};
+});
 
 export default MultiSectionImages;

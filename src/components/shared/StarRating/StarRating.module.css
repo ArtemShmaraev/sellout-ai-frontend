@@ -10,12 +10,12 @@
 }
 
 .fullStar {
-    color: black;
+    color: #51031D;
 }
 
 .ninetyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 90%;
@@ -23,7 +23,7 @@
 
 .eightyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 80%;
@@ -31,7 +31,7 @@
 
 .seventyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 70%;
@@ -39,7 +39,7 @@
 
 .sixtyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 60%;
@@ -47,7 +47,7 @@
 
 .fiftyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 50%;
@@ -55,7 +55,7 @@
 
 .fortyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
     position: absolute;
     overflow: hidden;
     width: 40%;
@@ -63,7 +63,7 @@
 
 .thirtyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
 
     position: absolute;
     overflow: hidden;
@@ -72,7 +72,7 @@
 
 .twentyPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
 
     position: absolute;
     overflow: hidden;
@@ -81,7 +81,7 @@
 
 .tenPercentStar::before {
     content: '★';
-    color: black;
+    color: #51031D;
 
     position: absolute;
     overflow: hidden;
@@ -94,7 +94,7 @@
 
 .tooltip {
     visibility: visible;
-    background-color: black;
+    background-color: #51031D;
     color: #fff;
     text-align: center;
     border-radius: 5px;

@@ -27,7 +27,6 @@ const Stage1 = ({addresses, userData, cart}) => {
     const [boxberryAddress, setBoxberryAddress] = useState(null)
 
     useEffect(() => {
-        console.log(userData)
         orderStore.setName(userData.first_name)
         orderStore.setSurname(userData.last_name)
         orderStore.setPatronymic(userData.patronymic ?? '')
@@ -76,7 +75,6 @@ const Stage1 = ({addresses, userData, cart}) => {
             // Например, можно добавить вес каждого элемента к общему весу
             weight += unit.weight_kg * 1000
             price += unit.final_price
-            console.log(unit)
         }
 
         boxberry.open(boxberryCallback_function, '1$ed4d9abf8391dd8e8eb01f33f27e5b46', 'Москва', '', price * 1.4, weight, 0, 0, 0, 0)

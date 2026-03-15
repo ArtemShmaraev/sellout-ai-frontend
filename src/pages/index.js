@@ -331,7 +331,6 @@ const Home = ({data}) => {
             setIsSeen2ndPage(true)
             setIsContentPage2Visible(true)
         } else {
-            console.log('Уже на верхней позиции!');
         }
 
         const handleScrollNew = () => {
@@ -369,12 +368,12 @@ const Home = ({data}) => {
                     <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
                     <meta property="og:title" content="Sellout: онлайн-платформа брендовой одежды и обуви"/>
                     <meta property="og:description"
-                          content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                          content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                     />
 
                     <meta
                         name="description"
-                        content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+                        content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
                     />
                     <meta property="og:image"
                           content="https://sellout.su/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_sq.02469b83.png&w=640&q=75"/>
@@ -1148,7 +1147,7 @@ const Home = ({data}) => {
                                 </div>
                                 <div ref={page8Ref} className={stylesMob.page47Wrapper}>
                                     <div className={stylesMob.page47}>
-                                        <Image src="/img/MainImg/гарантии 2 mob.png" alt="Img" width={6000}
+                                        <Image src="/img/MainImg/Гарантии 2 mob.png" alt="Img" width={6000}
                                                height={2000}
                                                className={stylesMob.page47Img}/>
                                     </div>
@@ -1327,12 +1326,12 @@ const Home = ({data}) => {
 //             <Head>
 //                 <title>Sellout: онлайн-платформа брендовой одежды и обуви</title>
 //                 <meta property="og:title" content="Sellout: онлайн-платформа брендовой одежды и обуви"/>
-//                 <meta property="og:description" content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+//                 <meta property="og:description" content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
 //                 />
 //
 //                 <meta
 //                     name="description"
-//                     content="1 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
+//                     content="2 000 000+ лотов по лучшим ценам с гарантией оригинальности: от премиальных и лимитированных релизов до более доступных, но не менее желанных позиций"
 //                 />
 //                 <meta property="og:image" content="https://sellout.su/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_sq.02469b83.png&w=640&q=75"/>
 //                 <meta property="og:image:width" content="640px"/>

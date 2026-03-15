@@ -6,7 +6,7 @@
     font-size: 14px;
     color: #727272;
     transition: 0.3s;
-    margin-top: 30px;
+    margin-top: 0;
 }
 .toggle_btn:hover {
     color: #444444;
@@ -54,7 +54,6 @@
 }
 @media (max-width: 1000px) {
     .toggle_btn {
-        margin-top: 20px;
     }
     .text_block {
         margin: 0;

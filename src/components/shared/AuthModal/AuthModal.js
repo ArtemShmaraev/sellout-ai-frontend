@@ -79,7 +79,6 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
             const res = await registration(JSON.stringify(data))
             const selected_gender = data['gender'] === "male" ? "M": "F"
             Cookies.set('selected_gender', selected_gender, {expires: 2772});
-            // console.log(data)
             setEmailBusy(false)
             const cookieCart = Cookies.get('cart')
             let cartFromBack
@@ -261,6 +260,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <input type="text" className={s.input}
                                            value={firstName}
                                            placeholder={"Kanye*"}
+                                           name="firstName"
+                                           autoComplete="given-name"
                                            onChange={(e) => setFirstName(e.target.value)}
                                     />
                                 </div>
@@ -269,6 +270,8 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                     <input type="text" className={s.input}
                                            placeholder={"West*"}
                                            value={lastName}
+                                           name="lastName"
+                                           autoComplete="family-name"
                                            onChange={(e) => setLastName(e.target.value)}
                                     />
                                 </div>
@@ -300,7 +303,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} type="new-password"/>
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Ваш пол:</label>
@@ -340,7 +343,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                             <Container>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Почта:</label>
-                                    <input type="text" className={s.input}
+                                    <input type="email" className={s.input}
                                            value={email}
                                            onChange={(e) => setEmail(e.target.value)} name="email" autoComplete="email"
                                     />
@@ -350,7 +353,7 @@ const AuthModal = ({children, style = {}, fromWishlist = false, inline = false, 
                                 </div>
                                 <div className={s.input_block}>
                                     <label className={s.label}>Пароль:</label>
-                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} type="current-password"/>
                                 </div>
                                 <button className={s.reg_btn} type={"submit"}>Войти</button>
                                 {wrong &&

@@ -62,7 +62,6 @@ const Complete = ({order, userData}) => {
         const currentPath = window.location.pathname;
 
         // Добавляем логику для отслеживания откуда совершен переход
-        console.log(`Переход на страницу из: ${currentPath}`);
 
         // Другие действия, которые вы хотите выполнить при загрузке компонента
 

@@ -47,7 +47,7 @@ const TextModalDesktopProductPage = ({
                             <div className={s.label} style={title === "Нашли дешевле?" ? {
                                 fontWeight: 700,
                                 fontSize: "14px",
-                                color: 'black',
+                                color: '#51031D',
                                 textDecoration: 'underline',
                                 textAlign: 'center'
                             } : title === "Гарантии оригинальности и отзывы" ? {

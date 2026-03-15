@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import s from './Selection.module.css'
 import ScrollableBlock from "@/components/shared/UI/ScrollableBlock/ScrollableBlock";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
@@ -7,7 +7,7 @@ import {desktopStore} from "@/store/DesktopStore";
 import Cookies from "js-cookie";
 import {useRouter} from "next/router";
 
-const Selection = ({el}) => {
+const Selection = forwardRef(({el, dataIndex="none"}, ref) => {
     const blockId = el.blockId;
 
     const router = useRouter()
@@ -16,14 +16,14 @@ const Selection = ({el}) => {
         const saveScrollPositions = () => {
 
             if (scrollableBlockRef.current) {
-                const scrollLeft = scrollableBlockRef.current.getScroll();
-                Cookies.set(`multiSectionedBlock-${blockId}-ProductsBlockPosition`, scrollLeft, {expires: 0.25});
+                const scrollLeft = Math.floor(scrollableBlockRef.current.getScroll());
+                Cookies.set(`${blockId}-PrPos`, scrollLeft, {expires: 0.25});
             }
 
         };
 
         const restoreScrollPosition = () => {
-            const ProductsBlockPosition = Cookies.get(`multiSectionedBlock-${blockId}-ProductsBlockPosition`);
+            const ProductsBlockPosition = Cookies.get(`${blockId}-PrPos`);
 
             if (ProductsBlockPosition && scrollableBlockRef.current) {
                 scrollableBlockRef.current.setScroll(parseInt(ProductsBlockPosition, 10));
@@ -51,13 +51,13 @@ const Selection = ({el}) => {
             <ProductCard
                 product={product}
                 key={product.id}
-                smallCard={true}
+                bigCard={el.bigCard && !desktopStore.isDesktop}
             />
         )
     })
 
     return (
-        <div className={`${s.collections} ${!el.moreButton ? s.limitedMargin : ''}`}>
+        <div className={`${s.collections} ${!el.moreButton ? s.limitedMargin : ''}`} data-index={dataIndex} ref={ref}>
             {el.titleBlock && (
                 <div className={'d-flex justify-content-between align-items-center ' + s.margins}
                      style={{marginBottom: '30px'}}>
@@ -100,6 +100,6 @@ const Selection = ({el}) => {
             )}
         </div>
     );
-};
+});
 
 export default Selection;

@@ -6,25 +6,30 @@
     border-radius: 2px;
     display: flex;
     position: relative;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .about, .guarantee {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .guarantee {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(calc(23vw - 50%), -50%);
+    width: 50%;
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(calc(23vw - 50%), -50%);*/
 }
 
 .about {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate(calc(23vw - 50%), -50%);
+    width: 50%;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 50%;*/
+    /*transform: translate(calc(23vw - 50%), -50%);*/
 }
 
 .aboutImg, .guaranteeImg {
@@ -39,12 +44,12 @@
 }
 
 .aboutText {
-    max-width: calc(47vw - 177px);
+    max-width: calc(0.5*var(--available-width) - 177px);
 }
 
 .guaranteeText {
     margin-right: 70px;
-    max-width: calc(47vw - 340px);
+    max-width: calc(0.5*var(--available-width) - 340px);
     margin-bottom: 0;
 }
 
@@ -78,7 +83,7 @@
 
 
 
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .aboutGuaranteeCont {
     }
 

@@ -47,7 +47,6 @@ const SizeTable = ({tables, photo}) => {
         const sizeRowsArr = []
         let rowsNameTr = []
 
-        // console.log(tableObj)
         if (tableObj.rows_order) {
             tableObj.rows_order.forEach(tableKey => {
                 rowsNameTr.push(

@@ -43,49 +43,47 @@ const BreadItem = ({el, ind}) => {
                 )}
                 <div className={s.textContainer} style={{marginLeft: el.name in most_pop ? "8px" : "12px"}}>
                     <div itemProp="name" className={`${s.name}`}
-                    style={{fontSize: (el.name.length > 30 && desktopStore.isDesktop) ? '12px' : "14px"}}>{el.name}</div>
+                         style={{fontSize: (el.name.length > 30 && desktopStore.isDesktop) ? '12px' : "14px"}}>{el.name}</div>
 
                     {el.name in most_pop && (
                         <div className={s.count}>{most_pop[el.name].count}</div>
                     )}
                 </div>
                 {!desktopStore.isDesktop &&
-                    <Image src={arrow} alt='' className={s.arrow_mob} />
+                    <Image src={arrow} alt='' className={s.arrow_mob}/>
                 }
             </Link>
-            <meta itemProp="position" content={ind + 1} />
+            <meta itemProp="position" content={ind + 1}/>
         </div>
 
     )
 
 }
 
-const TreeLine = ({ list }) => {
+const TreeLine = ({list}) => {
     const {desktopStore} = useContext(Context)
 
     const renderComponent = () => {
         const arr = [];
         const length = list.length;
-        if (length === 4){
+        if (length === 4) {
             delete list[1]
         }
         const new_list = list
         new_list.forEach((el, ind) => {
             if (desktopStore.isDesktop) {
                 arr.push(
-                   <BreadItem el={el} ind={ind}/>
+                    <BreadItem el={el} ind={ind}/>
                 );
                 if (ind !== new_list.length - 1) {
-                    arr.push(<Image src={arrow} alt='' className={s.arrow} />);
+                    arr.push(<Image src={arrow} alt='' className={s.arrow}/>);
                 }
             } else {
                 arr.push(
                     <>
                         <BreadItem el={el} ind={ind}/>
-                        <hr className={s.hr}/>
-
-                        </>
-
+                        <hr className={s.hr} style={{marginTop: '7px', marginBottom: '7px'}}/>
+                    </>
                 );
             }
 

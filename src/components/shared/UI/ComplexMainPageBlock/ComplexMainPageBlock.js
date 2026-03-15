@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useLayoutEffect, useState} from 'react';
 import Image from "next/image";
 import s from './ComplexMainPageBlock.module.css'
 import Link from "next/link";
@@ -39,7 +39,7 @@ const ComplexMainPageScroll = ({obj}) => {
     )
 }
 
-const ComplexMainPageBlock = ({obj}) => {
+const ComplexMainPageBlock = forwardRef(({obj, dataIndex="none"}, ref) => {
     // const [isDesktop, setIsDesktop] = useState(true)
     const {desktopStore} = useContext(Context)
     const [imageWidth, setImageWidth] = useState('100%');
@@ -88,7 +88,7 @@ const ComplexMainPageBlock = ({obj}) => {
     }, []);
 
     return (
-        <div className={s.outerContainer}>
+        <div className={s.outerContainer} data-index={dataIndex} ref={ref}>
             {obj.title && (
                 <div className={s.blockTitle}>
                     {obj.title}
@@ -298,6 +298,6 @@ const ComplexMainPageBlock = ({obj}) => {
             )}
         </div>
     );
-};
+});
 
 export default ComplexMainPageBlock;

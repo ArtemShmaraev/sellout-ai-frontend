@@ -133,7 +133,6 @@ const PictureBlock = ({obj, className, type}) => {
         secondLine = ""
     } else {
         [firstLine, secondLine] = getGenderLine(genders, false, true)
-        console.log(obj)
     }
 
     return (

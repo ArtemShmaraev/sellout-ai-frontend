@@ -7,8 +7,10 @@ import {Context} from "@/context/AppWrapper";
 import AuthModal from "@/components/shared/AuthModal/AuthModal";
 import OfferBetterPriceModal from "@/components/shared/OfferBetterPriceModal/OfferBetterPriceModal";
 import ModalSocialNets from "@/components/shared/ModalSocialNets/ModalSocialNets";
+import Cookies from "js-cookie";
+import ModalGifts from "@/components/shared/ModalGifts/ModalGifts";
 
-const SalesLine = ({toggleSocials, toggleRef}) => {
+const SalesLine = ({toggleSocials, toggleRef, toggleGifts}) => {
     const {userStore, desktopStore} = useContext(Context)
     const [isDesktop, setIsDesktop] = useState(false)
     const checkIsDesktop = () => {
@@ -37,6 +39,12 @@ const SalesLine = ({toggleSocials, toggleRef}) => {
         setOfferOpen(false);
     };
 
+    const [receivedWelcomeGift, setReceivedWelcomeGift] = useState('')
+
+    useEffect(() => {
+        setReceivedWelcomeGift(Cookies.get('receivedWelcomeGift'))
+    }, [])
+
     return (
         <>
             {
@@ -56,10 +64,12 @@ const SalesLine = ({toggleSocials, toggleRef}) => {
                                     {/*<SplideSlide className={s.splide}>*/}
                                     {/*    Бесплатная доставка от 20000₽*/}
                                     {/*</SplideSlide>*/}
-                                    <SplideSlide className={s.splide}>
-                                        <div className={s.text}>До 5000₽ в подарок</div>
-                                        <button className={s.button}>Получить</button>
-                                    </SplideSlide>
+                                    {!receivedWelcomeGift &&
+                                        <SplideSlide className={s.splide}>
+                                            <div className={s.text}>До 5000₽ в подарок</div>
+                                            <button className={s.button} onClick={toggleGifts}>Получить</button>
+                                        </SplideSlide>
+                                    }
                                     <SplideSlide className={s.splide}>
                                         <div className={s.text}>Гарантируем лучшую цену</div>
                                         <button className={s.button} onClick={toggleOffer}>Изучить</button>
@@ -119,29 +129,39 @@ const SalesLine = ({toggleSocials, toggleRef}) => {
                     <div className={s.promoBar}>
                         <div className={s.scrollContainer}>
                             <div className={s.promoText}>
-                                До 5000₽ в подарок
-                                <button className={s.buttonMob}>Получить</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Гарантируем
-                                лучшую цену
+                                {!receivedWelcomeGift &&
+                                    <>
+                                        До 5000₽ в подарок
+                                        <button className={s.buttonMob} onClick={toggleGifts}>Получить</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </>
+                                }
+                                Гарантируем лучшую цену
                                 <button className={s.buttonMob} onClick={toggleOffer}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приглашай
                                 друзей и получай до 7000₽
                                 <button className={s.buttonMob} onClick={toggleRef}>Изучить</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все розыгрыши,
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все
+                                розыгрыши,
                                 скидки и новости
                                 <button className={s.buttonMob} onClick={toggleSocials}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
-                            <div className={s.promoText}>
-                                До 5000₽ в подарок
-                                <button className={s.buttonMob}>Получить</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Гарантируем
-                                лучшую цену
+                            <div className={s.promoText2}>
+                                {!receivedWelcomeGift &&
+                                    <>
+                                        До 5000₽ в подарок
+                                        <button className={s.buttonMob} onClick={toggleGifts}>Получить</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </>
+                                }
+                                Гарантируем лучшую цену
                                 <button className={s.buttonMob} onClick={toggleOffer}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Приглашай
                                 друзей и получай до 7000₽
                                 <button className={s.buttonMob} onClick={toggleRef}>Изучить</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все розыгрыши,
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Все
+                                розыгрыши,
                                 скидки и новости
                                 <button className={s.buttonMob} onClick={toggleSocials}>Изучить</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

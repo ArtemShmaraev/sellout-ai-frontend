@@ -10,6 +10,32 @@ import HowWeWorkModal from "@/components/shared/HowWeWorkModal/HowWeWorkModal";
 const PromoBannerProductsPageAboutAndGuarantee = () => {
     const [howOpen, setHowOpen] = useState(false);
 
+    useEffect(() => {
+        const container = document.querySelector(`.${styles.aboutGuaranteeCont}`);
+
+        if (container) {
+            const updateAvailableWidth = () => {
+                const availableWidth = container.offsetWidth;
+                document.documentElement.style.setProperty('--available-width', `${availableWidth}px`);
+            };
+
+            // Инициализация события resize
+            window.addEventListener('resize', updateAvailableWidth);
+            window.addEventListener('load', updateAvailableWidth);
+
+            // Инициализация ResizeObserver
+            const observer = new ResizeObserver(updateAvailableWidth);
+            observer.observe(container);
+
+            return () => {
+                // Очистка
+                window.removeEventListener('resize', updateAvailableWidth);
+                window.removeEventListener('load', updateAvailableWidth);
+                observer.disconnect();
+            };
+        }
+    }, []);
+
     function changeBrowserColor(color) {
         // Для Chrome, Firefox, Opera на Android
         const themeColorMeta = document.querySelector('meta[name="theme-color"]');

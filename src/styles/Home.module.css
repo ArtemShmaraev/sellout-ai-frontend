@@ -43,7 +43,6 @@
 }
 
 
-
 .blocks_container {
     /*display: flex;*/
     margin-top: 10px;
@@ -52,6 +51,7 @@
     font-weight: 600;
     margin: 0 auto;
 }
+
 .block img,
 .sub_block img {
     max-width: 100%;
@@ -61,6 +61,7 @@
     object-fit: cover; /* Обрезаем изображение */
     /*border: 3px solid #dedede;*/
 }
+
 .block {
     flex: 1;
     width: 100%; /* Изменено */
@@ -110,7 +111,6 @@
     /*margin-top: 10px;*/
     background-color: #dedede;
     border-radius: 10px;
-
 
 
 }
@@ -167,7 +167,8 @@
 .main {
     padding-top: 0;
 }
-.main:hover{
+
+.main:hover {
     filter: brightness(70%);
     transition: filter 0.3s;
 }
@@ -195,6 +196,7 @@
 .title_block {
     max-width: 50%;
 }
+
 .title_b {
     display: flex;
     justify-content: space-between;
@@ -327,7 +329,7 @@
 }
 
 @media (max-width: 1200px) {
-    .collections{
+    .collections {
         /*margin-top: 30px;*/
         margin-bottom: 50px;
     }
@@ -349,14 +351,61 @@
         margin: 0 auto;
         margin-bottom: 25px;
     }
+
     .cont {
         margin-top: 0;
     }
+
+    .headerW {
+        display: flex;
+        flex-direction: column;
+        /*align-items: center;*/
+        /*background: linear-gradient(90deg, black 0%, #2f0111 70%);*/
+        /*background: linear-gradient(0deg, #21022c 30%, #ffffff 900%);*/
+        width: 100%;
+        /*margin-bottom: 2px;*/
+    }
+
+    .headerM {
+        display: flex;
+        flex-direction: column;
+        /*align-items: center;*/
+        /*background: linear-gradient(90deg, black 0%, #2f0111 70%);*/
+        /*background: linear-gradient(0deg, #2f0111 20%, #ffffff 100%);*/
+        /*background-color: white;*/
+        width: 100%;
+    }
+
+    /* Стили для первой части: Логотип и крестик */
+    .headerTop {
+        display: flex;
+        align-items: center;
+        /*width: 100%;*/
+        position: relative;
+        margin-top: 15px;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        padding-left: 10px;
+        border-bottom: #51031D 1.5px solid;
+    }
+
+    /* Логотип по центру */
+    .logoContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 45vw; /* Размер логотипа */
+        height: auto;
+        /*display: none;*/
+    }
+
     .title_block {
         max-width: 100%;
     }
 
-    .cont_index{
+    .cont_index {
         margin-top: 105px;
     }
 
@@ -390,6 +439,7 @@
         font-weight: 500;
         padding: 0 10px;
     }
+
     .title_b {
         display: flex;
         justify-content: space-between;
@@ -412,24 +462,28 @@
     margin-right: 3vw;
     margin-left: 3vw;
 }
+
 @media (max-width: 1200px) {
     .margins {
         margin-right: 8px;
         margin-left: 8px;
     }
 }
-@media (min-width: 1800px) {
+
+@media (min-width: 2000px) {
     .margins {
         margin-right: 10vw;
         margin-left: 10vw;
     }
 }
+
 @media (min-width: 2500px) {
     .margins {
         margin-right: 15vw;
         margin-left: 15vw;
     }
 }
+
 @media (max-width: 650px) {
     .margins {
         margin-right: 8px;
@@ -442,45 +496,55 @@
     padding-right: 3vw;
     padding-left: 3vw;
 }
+
 @media (max-width: 1200px) {
     .paddings {
         padding-right: 8px;
         padding-left: 8px;
     }
 }
-@media (min-width: 1800px) {
+
+@media (min-width: 2000px) {
     .paddings {
         padding-right: 10vw;
         padding-left: 10vw;
     }
 }
+
 @media (min-width: 2500px) {
     .paddings {
         padding-right: 15vw;
         padding-left: 15vw;
     }
 }
+
 @media (max-width: 650px) {
     .paddings {
         padding-right: 8px;
         padding-left: 8px;
     }
 }
+
 .mainCategoriesContCont {
     margin-bottom: calc((10 / 1516) * 100vw);
 }
+
 .mainCategoriesCont {
     height: auto;
 }
-.mainCategoriesCont:hover{
+
+.mainCategoriesCont:hover {
     filter: brightness(80%);
     transition: filter 0.3s;
 }
+
 .mainCategoriesCont4 {
     height: calc((340 / 493) * (493 / 1516) * 100vw);
 }
+
 .mainCategoriesContImg {
 }
+
 .mainCategoriesButton {
     font-size: 16px;
     padding: 15px;
@@ -494,15 +558,18 @@
     text-decoration: none;
     text-align: center;
 }
+
 .mainCategoriesButton:hover {
     background-color: black;
     color: white;
 }
+
 @media (max-width: 1490px) {
     .mainCategoriesButton {
         font-size: 14px;
     }
 }
+
 @media (max-width: 1350px) {
     .mainCategoriesButton {
         font-size: 13px;
@@ -521,6 +588,7 @@
     -webkit-overflow-scrolling: touch; /* Для плавной прокрутки на iOS */
     -ms-overflow-style: none; /* Для Internet Explorer и Edge — скрытие скроллбара */
 }
+
 .extraCategories::-webkit-scrollbar {
     display: none;
 }
@@ -529,21 +597,24 @@
     height: 230px;
     width: auto;
 }
-.extraCategoriesImg:hover{
+
+.extraCategoriesImg:hover {
     filter: brightness(80%);
     transition: filter 0.3s;
 }
+
 @media (max-width: 1200px) {
     .extraCategoriesImg {
         height: 170px;
         width: auto;
     }
-    .extraCategoriesImg:hover{
+
+    .extraCategoriesImg:hover {
         filter: none;
     }
 }
 
-.fullWidthImg:hover{
+.fullWidthImg:hover {
     filter: brightness(80%);
     transition: filter 0.3s;
     cursor: pointer;
@@ -572,22 +643,27 @@
     .leftNew {
         right: calc(115px + 8px);
     }
+
     .rightNew {
         right: calc(50px + 8px);
     }
 }
-@media (min-width: 1800px) {
+
+@media (min-width: 2000px) {
     .leftNew {
         right: calc(115px + 10vw);
     }
+
     .rightNew {
         right: calc(50px + 10vw);
     }
 }
+
 @media (min-width: 2500px) {
     .leftNew {
         right: calc(115px + 15vw);
     }
+
     .rightNew {
         right: calc(50px + 15vw);
     }
@@ -629,7 +705,6 @@
     grid-template-rows: repeat(3, auto);
     gap: 17px;
 }
-
 
 
 .brandCircle {
@@ -685,10 +760,12 @@
     box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
     transition: border 0.3s ease, box-shadow 0.3s ease; /* Плавный переход для обводки и тени */
 }
+
 .moreLines:hover {
     border-color: black; /* Обводка становится чёрной */
     box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
 }
+
 .moreLinesText {
     font-size: 14px;
     padding-left: 5px;
@@ -728,6 +805,7 @@
 .multiSectionCirclesGridRow::-webkit-scrollbar {
     display: none;
 }
+
 .centerContent {
     justify-content: center;
 }
@@ -791,6 +869,7 @@
     .extraCategoriesCont {
         margin-bottom: 50px;
     }
+
     .newProductsTitle {
         font-size: 22px;
     }

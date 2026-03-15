@@ -39,7 +39,6 @@ export const getServerSideProps = async (context) => {
     const currBonuses = cart.bonus_sale
     const defaultPromo = cart.promo_code ? cart.promo_code.string_representation : ''
     const skipPayment = cart.promo_code ? cart.promo_code.skip_payment : false
-    console.log(cart.promo_code)
     const userData = await fetchUserInfo(context.req.headers.cookie, user_id)
     return {
         props: {
@@ -234,7 +233,6 @@ const Order = ({
         }
         setVerifyEmail(false)
         const checkout = await checkoutOrder(orderObj, id, token).catch()
-        console.log(checkout)
         Cookies.set('cart', '', {expires: 2772})
         Cookies.set('promo', '', {expires: 2772})
         const invoiceStr = JSON.stringify(checkout.invoice_data)
@@ -269,8 +267,6 @@ const Order = ({
         setContactOpen(false)
     }
     // console.log(order.final_amount)
-    console.log(order)
-
 
     return (
         <MainLayout>
