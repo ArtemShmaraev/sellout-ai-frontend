@@ -247,7 +247,7 @@ const PopularBrandsMainPage = forwardRef(({el, gender, arrangement, dataIndex = 
     useEffect(() => {
         const saveSelectedSectionAndScrollPositions = () => {
             setSelectedCircleIndex((prevIndex) => {
-                Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][prevIndex], {expires: 0.25});
+                Cookies.set(`${blockId}-Ind`, arrangement[blockId][prevIndex], {expires: 0.25});
                 Cookies.set(`${blockId}-IndArr`, prevIndex, {expires: 0.25});
                 return prevIndex;
             });

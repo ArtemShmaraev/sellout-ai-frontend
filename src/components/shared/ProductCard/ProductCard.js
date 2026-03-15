@@ -200,7 +200,7 @@ const ProductCard = ({cardList = false, bigCard = false, product}) => {
                                 e.preventDefault()
                                 e.stopPropagation()
                             }} className={s.like_block}>
-                                <AuthModal fromWishlist={true}>
+                                <AuthModal fromWishlist={true} style={{justifyContent: 'center'}}>
                                     <Image src={isInWishlist ? like_fill : like} alt="like" className={s.like}
                                            width={20}
                                     />

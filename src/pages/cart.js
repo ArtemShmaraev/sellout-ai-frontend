@@ -351,7 +351,7 @@ const Cart = ({
                     <div className={s.main_block}>
                         <div className={s.items_block}>
                             {
-                                productUnits.product_units.map((el, ind) =>
+                                productUnits.product_units.slice().reverse().map((el, ind) =>
                                     <CartItem model={el.product.model}
                                               colorway={el.product.colorway}
                                               brand={el.product.collab?.name ? el.product.collab.name : el.product.brands[0].name}

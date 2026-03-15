@@ -73,7 +73,7 @@ const ImgSlider = ({photos}) => {
                 className={s.cont}
                 // className={s.photo}
                 style={{
-                    '--swiper-pagination-color': 'rgba(0,0,0,0.9)',
+                    '--swiper-pagination-color': '#51031D',
                     '--swiper-pagination-bullet-inactive-color': 'radial-gradient(circle, #000000 35%, rgba(255, 255, 255, 0) 50%)',
                     '--swiper-pagination-top': 'auto', // Убираем верхний отступ
                     '--swiper-pagination-bottom': desktopStore.isDesktop ? '-5px' : "20px", // Задаем отступ от нижнего края

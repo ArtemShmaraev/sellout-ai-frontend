@@ -54,6 +54,7 @@
 .price_default {
     font-size: 19px;
     font-weight: 500;
+    color: #51031D;
 }
 
 .price_sale {
@@ -94,7 +95,7 @@
     /*background: linear-gradient(45deg, #51031D 0%, #83052F 42%, #B70742 100%);*/
     /*-webkit-background-clip: text;*/
     /*-webkit-text-fill-color: transparent;*/
-    color: #83052F;
+    color: #51031D;
     display: inline-block;
     align-items: center;
     font-weight: 500;
@@ -199,7 +200,7 @@
     border: none;
     outline: none;
     border-radius: 7px;
-    background: black;
+    background: #51031D;
     color: white;
     min-height: 48px;
     flex: 1; /* Растянуть на всё оставшееся пространство */
@@ -211,26 +212,29 @@
 }
 
 .cart_btn:disabled {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgb(81, 3, 29, 0.77);
 }
 
 .cart_btn2 {
-    transition: background-color 0.5s ease;
+    transition: background 0.5s ease;
     border: none;
     outline: none;
     border-radius: 7px;
-    background: black;
+    background: #51031D;
     color: white;
     min-height: 48px;
     width: 82%;
     /*transition: 0.3s;*/
     font-size: 13pt;
     font-weight: 500;
-
+    cursor: pointer;
 }
 
 .cart_btn2:disabled {
-    background: rgba(0, 0, 0, 0.25);
+    /*background: rgba(0, 0, 0, 0.25);*/
+    /*background: linear-gradient(0deg, rgb(81, 3, 29, 1) -60%, rgba(23, 0, 0, 0.25) 100%);*/
+    background: rgb(81, 3, 29, 0.77);
+    cursor: initial;
 }
 
 .fav_btn {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import eye from "@/static/icons/eye.svg";
 import eyeCrossed from "@/static/icons/eye-slash.svg";
 
-const PasswordInput = ({value, onChange}) => {
+const PasswordInput = ({value, onChange, type="current-password"}) => {
     const [passShown, setPassShown] = useState(false)
     const ref = useRef(null)
     const changeVisibility = (e) => {
@@ -18,7 +18,7 @@ const PasswordInput = ({value, onChange}) => {
                    value={value}
                    onChange={onChange}
                    ref={ref}
-                   name="new-password" autoComplete="new-password"
+                   name={type} autoComplete={type}
             />
             <Image src={passShown ? eye : eyeCrossed}
                    alt={'Показать/скрыть пароль'}

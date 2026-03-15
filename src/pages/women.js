@@ -100,7 +100,7 @@ export const getServerSideProps = async (context) => {
         Object.keys(arrangement).forEach(blockId => {
             const block = arrangement[blockId];
 
-            cookies[`multiSectionedBlock-${blockId}-SelectedSection`] = block[0];
+            cookies[`${blockId}-Ind`] = block[0];
         });
     }
 
@@ -191,7 +191,7 @@ const Women = ({data, arrangement, restoredData}) => {
                     });
 
                     if (item.type !== "selection") {
-                        Cookies.set(`multiSectionedBlock-${blockId}-SelectedSection`, arrangement[blockId][0], {expires: 2772});
+                        Cookies.set(`${blockId}-Ind`, arrangement[blockId][0], {expires: 2772});
                     }
                 }
             })

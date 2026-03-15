@@ -2418,7 +2418,7 @@ const OneProductPage = ({product, productFull, prices, ip, userData}) => {
                                                                                                target={'_blank'}>FAQ</Link>
                                     </h5>
                                 </TextModalDesktopProductPage>
-                                <hr className={'my-2'}/>
+                                <hr className={'my-2'} style={{color: '#51031D', opacity: '1'}}/>
                                 {!receivedWelcomeGift &&
                                     <div className={`${s.promoBanner} ${selectedGender === "F" ? s.womenBanner : ''}`}>
                                         <span className={s.promoText}>До 5000₽ в подарок</span>
