@@ -22,6 +22,7 @@ import PopularBrandsMainPage from "@/components/shared/UI/PopularBrandsMainPage/
 import MultiSectionRecs from "@/components/shared/UI/MultiSectionRecs/MultiSectionRecs";
 import MultiSectionImages from "@/components/shared/UI/MultiSectionImages/MultiSectionImages";
 import Selection from "@/components/shared/UI/Selection/Selection";
+import logo from "@/static/img/sellout_logo_light_blood.svg";
 
 export const getServerSideProps = async (context) => {
     const cookies = parse(context.req.headers.cookie || '')
@@ -66,8 +67,39 @@ export const getServerSideProps = async (context) => {
         }
     });
 
+    const checkCookiesExist = (Cookies_, data_) => {
+        // Базовые куки
+        const requiredCookies = [
+            "mpM-Pos",
+            "mpM-blocks",
+            "mpM-topBlock",
+            "mpM-updTime"
+        ];
+
+        // Добавляем куки из `data`
+        data_.forEach(item => {
+            if (item.blockId && ['multiSectionCircles', 'popularBrands', 'multiSectionRecs', 'multiSectionImages', 'selection'].includes(item.type)) {
+                const blockId = item.blockId;
+
+                const cookiesToCheck = item.type === "selection" ? [
+                    `${blockId}-PrPos`
+                ] : [
+                    `${blockId}-IndArr`,
+                    `${blockId}-SecPos`,
+                    `${blockId}-PrPos`,
+                    `${blockId}-Ind`
+                ];
+
+                requiredCookies.push(...cookiesToCheck);
+            }
+        });
+
+        // Проверка всех кук
+        return requiredCookies.every(cookieName => Cookies_[cookieName] !== undefined);
+    };
+
     // Шаг 1: Если первая загрузка страницы (куки все еще пустые и нет расстановки), создаем базовую расстановку.
-    if (!('mpM-updTime' in cookies) || !cookies['mpM-updTime']) {
+    if (!('mpM-updTime' in cookies) || !cookies['mpM-updTime'] || !checkCookiesExist(cookies, emptyData)) {
         arrangement = arrangementBase
 
         restoredData = true;
@@ -501,7 +533,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                             alt="Brand Image"
                                             className={s.mainCat}
                                             width={642}
-                                            height={510}
+                                            height={660}
                                             quality={100}
                                             onClick={() => handleOpenSideBar(
                                                 "shoes",
@@ -514,7 +546,7 @@ const Men = ({data, arrangement, restoredData}) => {
                                             alt="Brand Image"
                                             className={s.mainCat}
                                             width={642}
-                                            height={510}
+                                            height={660}
                                             quality={100}
                                             onClick={() => handleOpenSideBar(
                                                 "clothes",
@@ -852,6 +884,18 @@ const Men = ({data, arrangement, restoredData}) => {
                     <div className={s.cont}>
                         <>
                             {/* Your existing code for rendering the main content */}
+                            {!desktopStore.isDesktop &&
+                                <div className={s.headerM}>
+                                    {/* Первая часть: Логотип и крестик */}
+                                    <div className={s.headerTop}>
+                                        <div className={s.logoContainer}>
+                                            <Image src={logo} alt="Logo" className={s.logo} width={370}
+                                                   height={50}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
                             {renderPage()} {/* Рендерим страницы через функцию */}
                             <div ref={endOfPageRef}></div>
                             {/* Метка конца */}

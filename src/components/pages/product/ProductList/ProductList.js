@@ -22,7 +22,8 @@ const ProductList = ({products, isAdmin, showPromos=false}) => {
         const width = window.innerWidth;
         if (width < 650) return 2; // 2 карточки в ряду
         if (width < 1210) return 3; // 3 карточки в ряду
-        if (width < 1800) return 4; // 4 карточки в ряду
+        if (width < 1515) return 4; // 4 карточки в ряду
+        if (width < 2000) return Math.floor(0.94 * width / 356);
         if (width < 2500) return Math.floor(0.8 * width / 356);
         return Math.floor(0.7 * width / 356); // 4 карточки в ряду
     };

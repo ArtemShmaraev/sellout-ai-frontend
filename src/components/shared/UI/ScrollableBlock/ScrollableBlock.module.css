@@ -46,7 +46,7 @@
         margin-bottom: 40px;
     }
 }
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .paddingRegular {
         padding-right: 10vw;
         padding-left: 10vw;
@@ -84,6 +84,7 @@
     transition: border 0.3s ease, box-shadow 0.3s ease; /* Плавный переход для обводки и тени */
     text-decoration: none;
     color: #000;
+    scroll-snap-align: start;
 }
 .moreLines:hover {
     border-color: black; /* Обводка становится чёрной */
@@ -154,7 +155,7 @@
         right: calc(50px + 8px);
     }
 }
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .leftNew {
         right: calc(115px + 10vw);
     }

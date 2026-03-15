@@ -46,7 +46,7 @@
     color: black;
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .refCont {
         margin-right: calc(10vw);
         margin-left: calc(10vw);

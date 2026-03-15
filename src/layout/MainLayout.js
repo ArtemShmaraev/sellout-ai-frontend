@@ -203,7 +203,7 @@ const MainLayout = ({children, footerData}) => {
                 <Footer textData={footerData}/>
             </div>
             <ScrollUp/>
-            <CookieComponent isOpen={cookieOpen} close={closeCookie}/>
+            <CookieComponent isOpen={cookieOpen && router.pathname !== '/'} close={closeCookie}/>
             <YandexMetrica/>
         </>
     );

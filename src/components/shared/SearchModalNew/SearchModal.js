@@ -1183,8 +1183,8 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
     };
 
     const handleClear = () => {
-        setValue(''); // Очищаем поле поиска
         scrollToTop()
+        setValue(''); // Очищаем поле поиска
         if (inputRef.current) {
             inputRef.current.focus(); // Возвращаем фокус на инпут, чтобы клавиатура не закрывалась
         }

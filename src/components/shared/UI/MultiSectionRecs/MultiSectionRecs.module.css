@@ -9,7 +9,7 @@
 
 .categoriesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 112px); /* Каждая колонка будет 117px */
+    /*grid-template-columns: repeat(auto-fill, 112px); !* Каждая колонка будет 117px *!*/
     grid-auto-flow: column;
     gap: 10px; /* Отступы между прямоугольниками */
     white-space: nowrap;
@@ -37,18 +37,18 @@
 }
 
 .categoryItem:hover {
-    box-shadow: inset 0 0 7px 0.5px rgba(0, 0, 0, 0.25), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.25); /* Дополнительная внешняя тень для плавного эффекта */
+    box-shadow: inset 0 0 5px 2px rgba(81, 3, 29, 0.3), /* Внутренняя тень */ 0 0 3px rgba(255, 255, 255, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
     cursor: pointer;
 }
 
 .selectedItem {
-    border-color: black;
-    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.5), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
+    border-color: #51031D;
+    box-shadow: inset 0 0 5px 2px rgba(81, 3, 29, 1), /* Внутренняя тень */ 0 0 3px rgba(255, 255, 255, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
 }
 
 .selectedItem:hover {
-    border-color: black;
-    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.5), /* Внутренняя тень */ 0 0 3px rgba(0, 0, 0, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
+    border-color: #51031D;
+    box-shadow: inset 0 0 5px 2px rgba(81, 3, 29, 1), /* Внутренняя тень */ 0 0 3px rgba(255, 255, 255, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
     cursor: initial;
 }
 
@@ -110,7 +110,7 @@
         padding-left: 8px;
     }
 }
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .paddings {
         padding-right: 10vw;
         padding-left: 10vw;
@@ -139,4 +139,14 @@
     .customButton {
         margin-top: -20px;
     }
+
+    .categoryItem:hover {
+        box-shadow: none; /* Дополнительная внешняя тень для плавного эффекта */
+        cursor: pointer;
+    }
+    .selectedItem:hover {
+         border-color: #51031D;
+         box-shadow: inset 0 0 5px 2px rgba(81, 3, 29, 1), /* Внутренняя тень */ 0 0 3px rgba(255, 255, 255, 0.5); /* Дополнительная внешняя тень для плавного эффекта */
+         cursor: initial;
+     }
 }

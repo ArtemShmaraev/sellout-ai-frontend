@@ -172,7 +172,7 @@ const ProductCard = ({cardList = false, bigCard = false, product}) => {
         <>
             {!isLoadingCard ? (
                 <Link className={cardList ? s.card_list : bigCard ? s.bigCard : s.card}
-                      href={`/products/${slug}`}
+                      href={slug && slug !== "" ? `/products/${slug}` : '#'}
                       key={slug}
 
                 >

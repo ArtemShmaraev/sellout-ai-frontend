@@ -281,7 +281,11 @@ const MultiSectionRecs = forwardRef(({el, gender, arrangement, dataIndex="none"}
     return (
         <div style={{marginBottom: desktopStore.isDesktop ? '100px' : '50px'}} data-index={dataIndex} ref={ref}>
             <div className={s.multiSectionCirclesTitle}>{el.title}</div>
-            <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}>
+            <div className={`${s.categoriesGrid} ${s.paddings} ${centerContent ? s.centerContent : ''}`} ref={scrollableContainerRef}
+                 style={{
+                     gridTemplateColumns: `repeat(${el.recsNames.length}, 112px)`,
+                 }}
+            >
                 {el.recsNames.map((category, idx) => (
                     <div key={idx} className={`${s.categoryItem} ${selectedCircleIndex === idx ? s.selectedItem : ''}`}
                          onClick={() => chooseCircle(idx)}>

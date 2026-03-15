@@ -146,7 +146,7 @@ body.body-scroll-clip {
         overflow-y: hidden;
     }
 }
-@media (min-width: 1800px) {
+@media (min-width: 2000px) {
     .custom_cont {
         margin-right: 10vw;
         margin-left: 10vw;
