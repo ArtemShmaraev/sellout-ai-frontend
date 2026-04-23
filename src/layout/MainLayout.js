@@ -16,6 +16,7 @@ import tempMenu from "@/static/img/Все меню.png"
 import Image from 'next/image'
 import {parse} from "cookie";
 import PromoBanner from "@/components/shared/PromoBanner/PromoBanner";
+import AiSearchModal from "@/components/shared/AiSearchModal/AiSearchModal";
 // import BottomNav from "@/components/shared/BottomNav/BottomNav";
 
 const MainLayout = ({children, footerData}) => {
@@ -204,6 +205,7 @@ const MainLayout = ({children, footerData}) => {
             </div>
             <ScrollUp/>
             <CookieComponent isOpen={cookieOpen && router.pathname !== '/'} close={closeCookie}/>
+            <AiSearchModal/>
             <YandexMetrica/>
         </>
     );

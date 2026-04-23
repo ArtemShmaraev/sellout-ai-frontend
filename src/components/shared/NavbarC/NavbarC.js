@@ -9,6 +9,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import SidebarNew from "../SidebarNew/Sidebar";
 import SearchModal from "../SearchModal/SearchModal";
 import AuthModal from "..//AuthModal/AuthModal";
+import AiSearchTrigger from "@/components/shared/AiSearchModal/AiSearchTrigger";
 import Image from "next/image";
 import logo from '@/static/img/sellout_logo.svg'
 import {useRouter} from "next/router";
@@ -229,6 +230,7 @@ const NavbarC = () => {
                                     <div className={'mobile_d align-items-center'}>
                                         <Sidebar photos={photos}/>
                                         <SearchModal/>
+                                        <AiSearchTrigger variant="icon" label="AI-поиск"/>
                                     </div>
                                 </div>
                                 <div className={s.logo_block} style={{justifyContent: 'center'}}>
@@ -356,7 +358,8 @@ const NavbarC = () => {
                                         Скидки
                                     </Link>
                                 </div>
-                                <div>
+                                <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+                                    <AiSearchTrigger/>
                                     <ElasticSearchModal/>
                                     <ContactModal isOpen={contactOpen} handleClose={closeContact}/>
                                 </div>

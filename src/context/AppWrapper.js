@@ -9,6 +9,7 @@ import jwtDecode from "jwt-decode";
 import Cookies from 'js-cookie';
 import {cartStore} from "@/store/CartStore";
 import {orderStore} from "@/store/OrderStore";
+import {aiSearchStore} from "@/store/AiSearchStore";
 import {useRouter} from "next/router";
 import {fetchCart2, updateCartFromCookies} from "@/http/cartApi";
 
@@ -23,7 +24,8 @@ export default function AppWrapper({ children }) {
         adminStore,
         userStore,
         cartStore,
-        orderStore
+        orderStore,
+        aiSearchStore
     }
     const getGoogleToken = () => {
         const path = router.asPath
