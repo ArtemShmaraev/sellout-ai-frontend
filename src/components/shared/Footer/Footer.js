@@ -994,7 +994,7 @@ const Footer = ({textData}) => {
                 <div className={s.footer_bottom}>
                     <div>
                         <p className={s.footer_text}>&#9400; SELLOUT - Интернет-магазин обуви, одежды и аксессуаров,
-                            2024</p>
+                            2026</p>
                     </div>
                     <div className={s.footer_bottom}>
                         <a href="/docs/Агентский%20договор%20SELLOUT.pdf" target={"_blank"}
