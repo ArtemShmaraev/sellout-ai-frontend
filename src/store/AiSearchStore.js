@@ -90,6 +90,7 @@ class AiSearchStore {
                     content: res.explanation || '',
                     products: Array.isArray(res.products) ? res.products : [],
                     count: typeof res.count === 'number' ? res.count : 0,
+                    suggestions: Array.isArray(res.suggestions) ? res.suggestions : [],
                 })
                 this._loading = false
                 this._persist()

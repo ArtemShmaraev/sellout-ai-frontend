@@ -127,9 +127,14 @@ const ProductsScroll = ({products, onProductClick}) => {
     )
 }
 
-const AssistantMessage = ({message, onProductClick}) => {
+const AssistantMessage = ({message, onProductClick, onSuggest, isLast, loading}) => {
     const typed = useTypedText(message.content, 120)
     const fullyTyped = typed === message.content
+    const showSuggestions = fullyTyped
+        && isLast
+        && !loading
+        && Array.isArray(message.suggestions)
+        && message.suggestions.length > 0
     return (
         <div className={`${s.msgRow} ${s.assistant}`}>
             <div className={s.assistantText}>
@@ -141,6 +146,21 @@ const AssistantMessage = ({message, onProductClick}) => {
             )}
             {fullyTyped && message.count > 0 && message.products && message.products.length > 0 && (
                 <ProductsScroll products={message.products} onProductClick={onProductClick}/>
+            )}
+            {showSuggestions && (
+                <div className={s.suggestionRow}>
+                    {message.suggestions.map((sug, i) => (
+                        <button
+                            key={sug}
+                            type="button"
+                            className={s.suggestionChip}
+                            style={{'--i': i}}
+                            onClick={() => onSuggest(sug)}
+                        >
+                            {sug}
+                        </button>
+                    ))}
+                </div>
             )}
         </div>
     )
@@ -257,7 +277,14 @@ const AiSearchModal = () => {
                         {aiSearchStore.messages.map((m, i) => (
                             m.role === 'user'
                                 ? <UserMessage key={i} message={m}/>
-                                : <AssistantMessage key={i} message={m} onProductClick={handleProductClick}/>
+                                : <AssistantMessage
+                                    key={i}
+                                    message={m}
+                                    onProductClick={handleProductClick}
+                                    onSuggest={(text) => aiSearchStore.send(text)}
+                                    isLast={i === aiSearchStore.messages.length - 1}
+                                    loading={aiSearchStore.loading}
+                                />
                         ))}
                         {aiSearchStore.loading && (
                             <div className={`${s.msgRow} ${s.assistant}`}>
