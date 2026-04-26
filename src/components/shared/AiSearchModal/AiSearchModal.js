@@ -14,6 +14,12 @@ const CHIP_SUGGESTIONS = [
     'винтажные кеды',
 ]
 
+const PROCESSING_PHRASES = [
+    'Обрабатываю запрос',
+    'Выбираю лучшие товары',
+    'Смотрю, что вам подойдёт',
+]
+
 const SparkleIcon = () => (
     <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2l2.09 6.26L20 10l-5.91 2.09L12 18l-2.09-5.91L4 10l5.91-1.74L12 2zm6 12l1.17 3.35L22 18l-2.83.83L18 22l-1.17-3.17L14 18l2.83-.65L18 14zM5 14l.83 2.35L8 17l-2.17.83L5 20l-.83-2.17L2 17l2.17-.65L5 14z"/>
@@ -33,6 +39,41 @@ const SendIcon = () => (
         <polygon points="22 2 15 22 11 13 2 9 22 2"/>
     </svg>
 )
+
+function useRotatingIndex(length, active, intervalMs = 1700) {
+    const [idx, setIdx] = useState(0)
+    useEffect(() => {
+        if (!active || length <= 1) {
+            setIdx(0)
+            return
+        }
+        const id = setInterval(() => {
+            setIdx((i) => (i + 1) % length)
+        }, intervalMs)
+        return () => clearInterval(id)
+    }, [active, length, intervalMs])
+    return idx
+}
+
+function useTypedText(text, msPerWord = 30) {
+    const [shown, setShown] = useState(text || '')
+    useEffect(() => {
+        if (!text) {
+            setShown('')
+            return
+        }
+        setShown('')
+        const words = text.split(' ')
+        let i = 0
+        const id = setInterval(() => {
+            i++
+            setShown(words.slice(0, i).join(' '))
+            if (i >= words.length) clearInterval(id)
+        }, msPerWord)
+        return () => clearInterval(id)
+    }, [text, msPerWord])
+    return shown
+}
 
 const ProductsScroll = ({products, onProductClick}) => {
     const scrollRef = useRef(null)
@@ -68,8 +109,8 @@ const ProductsScroll = ({products, onProductClick}) => {
                 onWheel={handleWheel}
                 onClick={onProductClick}
             >
-                {products.map((p) => (
-                    <div key={p.id} className={s.productItem}>
+                {products.map((p, i) => (
+                    <div key={p.id} className={s.productItem} style={{'--i': i}}>
                         <ProductCard product={p}/>
                     </div>
                 ))}
@@ -86,17 +127,24 @@ const ProductsScroll = ({products, onProductClick}) => {
     )
 }
 
-const AssistantMessage = ({message, onProductClick}) => (
-    <div className={`${s.msgRow} ${s.assistant}`}>
-        <div className={s.assistantText}>{message.content}</div>
-        {message.count === 0 && (
-            <div className={s.emptyHit}>Товары не найдены</div>
-        )}
-        {message.count > 0 && message.products && message.products.length > 0 && (
-            <ProductsScroll products={message.products} onProductClick={onProductClick}/>
-        )}
-    </div>
-)
+const AssistantMessage = ({message, onProductClick}) => {
+    const typed = useTypedText(message.content, 120)
+    const fullyTyped = typed === message.content
+    return (
+        <div className={`${s.msgRow} ${s.assistant}`}>
+            <div className={s.assistantText}>
+                {typed}
+                {!fullyTyped && <span className={s.caret}>▍</span>}
+            </div>
+            {fullyTyped && message.count === 0 && (
+                <div className={s.emptyHit}>Товары не найдены</div>
+            )}
+            {fullyTyped && message.count > 0 && message.products && message.products.length > 0 && (
+                <ProductsScroll products={message.products} onProductClick={onProductClick}/>
+            )}
+        </div>
+    )
+}
 
 const UserMessage = ({message}) => (
     <div className={`${s.msgRow} ${s.user}`}>
@@ -109,6 +157,7 @@ const AiSearchModal = () => {
     const [draft, setDraft] = useState('')
     const scrollRef = useRef(null)
     const inputRef = useRef(null)
+    const processingIdx = useRotatingIndex(PROCESSING_PHRASES.length, aiSearchStore.loading, 1700)
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -157,14 +206,26 @@ const AiSearchModal = () => {
                         <SparkleIcon/>
                         AI-поиск
                     </div>
-                    <button
-                        type="button"
-                        className={s.closeBtn}
-                        onClick={() => aiSearchStore.close()}
-                        aria-label="Закрыть"
-                    >
-                        <CloseIcon/>
-                    </button>
+                    <div className={s.headerActions}>
+                        {!aiSearchStore.isEmpty && (
+                            <button
+                                type="button"
+                                className={s.resetBtn}
+                                onClick={() => aiSearchStore.resetChat()}
+                                aria-label="Новый чат"
+                            >
+                                Новый чат
+                            </button>
+                        )}
+                        <button
+                            type="button"
+                            className={s.closeBtn}
+                            onClick={() => aiSearchStore.close()}
+                            aria-label="Закрыть"
+                        >
+                            <CloseIcon/>
+                        </button>
+                    </div>
                 </div>
 
                 {aiSearchStore.isEmpty ? (
@@ -177,11 +238,12 @@ const AiSearchModal = () => {
                             Опишите товар своими словами — цвет, бренд, цену, повод. Я подберу подходящее из каталога.
                         </p>
                         <div className={s.chips}>
-                            {CHIP_SUGGESTIONS.map((chip) => (
+                            {CHIP_SUGGESTIONS.map((chip, i) => (
                                 <button
                                     key={chip}
                                     type="button"
                                     className={s.chip}
+                                    style={{'--i': i}}
                                     onClick={() => handleChipClick(chip)}
                                     disabled={aiSearchStore.loading}
                                 >
@@ -199,8 +261,13 @@ const AiSearchModal = () => {
                         ))}
                         {aiSearchStore.loading && (
                             <div className={`${s.msgRow} ${s.assistant}`}>
-                                <div className={s.typing}>
-                                    <span/><span/><span/>
+                                <div className={s.processing}>
+                                    <span key={processingIdx} className={s.processingPhrase}>
+                                        {PROCESSING_PHRASES[processingIdx]}
+                                    </span>
+                                    <span className={s.typing}>
+                                        <span/><span/><span/>
+                                    </span>
                                 </div>
                             </div>
                         )}

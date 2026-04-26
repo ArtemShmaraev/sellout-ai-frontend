@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import most_pop from "@/components/pages/oneProduct/TreeLines/most_pop.json";
 import styles from "@/styles/MobileMenuMen.module.css";
 import searchLogo from "@/static/icons/searchMob.svg";
+import AiSearchTrigger from "@/components/shared/AiSearchModal/AiSearchTrigger";
 
 const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
     const {filterStore, userStore} = useContext(Context)
@@ -1193,7 +1194,10 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
     return (
         <>
             <div className={styles.searchBlock}>
-                <div className={isActive ? `${styles.searchBar} ${styles.active}` : styles.searchBar}>
+                <div
+                    className={isActive ? `${styles.searchBar} ${styles.active}` : styles.searchBar}
+                    style={!isActive ? {width: 'calc(95% - 58px)'} : undefined}
+                >
                     <form className={styles.inputContainer}
                           onSubmit={(e) => {
                               e.preventDefault(); // Отключаем стандартное поведение перезагрузки страницы
@@ -1227,6 +1231,11 @@ const SearchModal = ({setIsOpenInSideBar, sideBarRef, handleCloseSideBar}) => {
                 {isActive && (
                     <div className={styles.closeButton2} onClick={handleSearchClose}>
                         Закрыть
+                    </div>
+                )}
+                {!isActive && (
+                    <div style={{position: 'absolute', right: '2.5%', display: 'flex', alignItems: 'center'}}>
+                        <AiSearchTrigger variant="icon" label="AI-поиск"/>
                     </div>
                 )}
             </div>

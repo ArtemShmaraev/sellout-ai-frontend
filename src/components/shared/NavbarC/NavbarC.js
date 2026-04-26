@@ -230,7 +230,6 @@ const NavbarC = () => {
                                     <div className={'mobile_d align-items-center'}>
                                         <Sidebar photos={photos}/>
                                         <SearchModal/>
-                                        <AiSearchTrigger variant="icon" label="AI-поиск"/>
                                     </div>
                                 </div>
                                 <div className={s.logo_block} style={{justifyContent: 'center'}}>

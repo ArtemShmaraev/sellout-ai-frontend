@@ -22,6 +22,7 @@ const AiSearchTrigger = ({variant = 'pill', label = 'AI-поиск'}) => {
                 aria-label={label}
             >
                 <SparkleIcon/>
+                <span className={s.betaBadge}>β</span>
             </button>
         )
     }
@@ -30,6 +31,7 @@ const AiSearchTrigger = ({variant = 'pill', label = 'AI-поиск'}) => {
         <button type="button" className={s.trigger} onClick={handleClick}>
             <SparkleIcon/>
             {label}
+            <span className={s.betaTag}>β</span>
         </button>
     )
 }

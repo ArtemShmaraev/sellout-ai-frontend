@@ -55,6 +55,31 @@
     height: 18px;
 }
 
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.resetBtn {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    color: #727272;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+.resetBtn:hover {
+    color: #000;
+    background: #eeeeee;
+}
+
 .closeBtn {
     background: transparent;
     border: none;
@@ -148,12 +173,26 @@
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    animation: fadeUp 900ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 150ms + 250ms);
 }
 
 .chip:hover {
     background: #000;
     color: #fff;
+    transform: translateY(-1px);
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.85);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .chip:disabled {
@@ -185,6 +224,8 @@
     line-height: 1.5;
     max-width: 80%;
     word-wrap: break-word;
+    animation: popIn 750ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom right;
 }
 
 .assistantText {
@@ -192,6 +233,35 @@
     font-size: 14px;
     line-height: 1.5;
     max-width: 90%;
+}
+
+.caret {
+    display: inline-block;
+    width: 6px;
+    margin-left: 2px;
+    color: #000;
+    animation: caretBlink 0.9s steps(2, end) infinite;
+    font-weight: 400;
+    transform: translateY(-1px);
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateX(40px);
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+@keyframes caretBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .emptyHit {
@@ -242,6 +312,59 @@
     position: relative;
     isolation: isolate;
     z-index: 0;
+    animation: slideInFromRight 1800ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 350ms);
+}
+
+.productItem::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 28%,
+        rgba(0, 0, 0, 0.12) 46%,
+        rgba(0, 0, 0, 0.28) 50%,
+        rgba(0, 0, 0, 0.12) 54%,
+        transparent 72%,
+        transparent 100%
+    );
+    background-size: 300% 100%;
+    background-position: 250% 0;
+    opacity: 0;
+    animation: shimmerSweep 2200ms ease-out forwards;
+    animation-delay: calc(var(--i, 0) * 350ms + 1400ms);
+    z-index: 3;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(420px) scale(0.85);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shimmerSweep {
+    0% {
+        background-position: 250% 0;
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    100% {
+        background-position: -100% 0;
+        opacity: 0;
+    }
 }
 
 .scrollBtn {
@@ -282,6 +405,34 @@
 @media (max-width: 768px) {
     .scrollBtn {
         display: none;
+    }
+}
+
+/* --- Processing (loading) --- */
+.processing {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #727272;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 4px 0;
+    min-height: 24px;
+}
+
+.processingPhrase {
+    display: inline-block;
+    animation: phraseFadeIn 500ms ease-out;
+}
+
+@keyframes phraseFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -387,7 +538,7 @@
     height: 16px;
 }
 
-/* --- Trigger button (navbar) --- */
+/* --- Trigger button (navbar, desktop pill) --- */
 .trigger {
     display: inline-flex;
     align-items: center;
@@ -404,6 +555,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    position: relative;
 }
 
 .trigger:hover {
@@ -416,23 +568,56 @@
     height: 14px;
 }
 
+.betaTag {
+    font-size: 9px;
+    font-weight: 500;
+    color: #8d8d8d;
+    margin-left: -4px;
+    align-self: flex-start;
+    margin-top: 2px;
+    line-height: 1;
+}
+
+.trigger:hover .betaTag {
+    color: #cbcbcb;
+}
+
+/* --- Trigger icon-only (mobile, inside search bar) --- */
 .triggerIconOnly {
-    background: transparent;
+    position: relative;
+    background: #000;
     border: none;
-    padding: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #000;
-    transition: opacity 0.3s ease;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.triggerIconOnly:hover {
-    opacity: 0.7;
+.triggerIconOnly:hover,
+.triggerIconOnly:active {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .triggerIconOnly svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
+}
+
+.betaBadge {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    font-size: 11px;
+    font-style: italic;
+    font-weight: 400;
+    color: #8d8d8d;
+    line-height: 1;
+    pointer-events: none;
 }
